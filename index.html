@@ -7,7 +7,7 @@
 <meta name="description" content="swallow·AGE — outils et créations partagés au fil du temps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#2B2230;
@@ -17,6 +17,9 @@
     --gold:#C9A85C;
     --rose:#B5677A;
     --rule: rgba(43,34,48,0.12);
+    --animus-bg:#14181C;
+    --animus-line:#8FE3C5;
+    --animus-dim:rgba(143,227,197,0.45);
   }
 
   *{box-sizing:border-box;}
@@ -56,25 +59,15 @@
   /* ---------- Hero ---------- */
 
   .hero{
-    padding:96px 0 72px;
+    padding:52px 0 40px;
     text-align:center;
   }
 
   .hero img{
-    width:150px;
+    width:108px;
     height:auto;
     opacity:0;
     animation: rise 1.1s ease-out forwards;
-  }
-
-  .hero .baseline{
-    margin-top:22px;
-    font-style:italic;
-    font-size:1.05rem;
-    color:var(--ink-soft);
-    letter-spacing:0.01em;
-    opacity:0;
-    animation: rise 1.1s ease-out 0.25s forwards;
   }
 
   @keyframes rise{
@@ -82,8 +75,108 @@
     to{opacity:1; transform:translateY(0);}
   }
 
+  /* ---------- Animus terminal ---------- */
+
+  .terminal{
+    margin:24px auto 0;
+    max-width:460px;
+    background:var(--animus-bg);
+    border-radius:6px;
+    text-align:left;
+    overflow:hidden;
+    opacity:0;
+    box-shadow:0 14px 34px -14px rgba(20,24,28,0.55);
+    animation: rise 1.1s ease-out 0.25s forwards;
+    position:relative;
+  }
+
+  .terminal::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.035) 0px,
+      rgba(255,255,255,0.035) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode:overlay;
+  }
+
+  .terminal-bar{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:9px 12px;
+    background:rgba(255,255,255,0.04);
+    border-bottom:1px solid rgba(143,227,197,0.15);
+  }
+
+  .terminal-bar .dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:rgba(143,227,197,0.35);
+  }
+
+  .terminal-bar .terminal-title{
+    margin-left:6px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    color:var(--animus-dim);
+    text-transform:uppercase;
+  }
+
+  .terminal-body{
+    padding:18px 18px 20px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.92rem;
+    color:var(--animus-line);
+    text-shadow:0 0 8px rgba(143,227,197,0.35);
+  }
+
+  .terminal-body .prompt{
+    color:var(--gold);
+    margin-right:8px;
+  }
+
+  .terminal-body .type{
+    display:inline-block;
+    overflow:hidden;
+    white-space:nowrap;
+    vertical-align:bottom;
+    width:0;
+    animation: type-in 1.6s steps(33, end) 1s forwards;
+  }
+
+  .terminal-body .cursor{
+    display:inline-block;
+    margin-left:2px;
+    color:var(--gold);
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes type-in{
+    from{ width:0; }
+    to{ width:33ch; }
+  }
+
+  @keyframes blink{
+    0%, 100%{ opacity:1; }
+    50%{ opacity:0; }
+  }
+
   @media (prefers-reduced-motion: reduce){
-    .hero img, .hero .baseline{ animation:none; opacity:1; }
+    .hero img, .terminal{ animation:none; opacity:1; }
+    .terminal-body .type{ width:33ch; animation:none; }
+    .terminal-body .cursor{ animation:none; }
+  }
+
+  @media (max-width:420px){
+    .terminal-body{ font-size:0.72rem; padding:16px 14px 18px; }
   }
 
   /* ---------- Sections ---------- */
@@ -226,7 +319,15 @@
 <header class="hero">
   <div class="wrap">
     <img src="logo.png" alt="swallow·AGE">
-    <p class="baseline">Tout arrive pour une bonne raison</p>
+    <div class="terminal" role="img" aria-label="Tout arrive pour une bonne raison">
+      <div class="terminal-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="terminal-title">animus // sync</span>
+      </div>
+      <div class="terminal-body" aria-hidden="true">
+        <span class="prompt">&gt;</span><span class="type">Tout arrive pour une bonne raison</span><span class="cursor">_</span>
+      </div>
+    </div>
   </div>
 </header>
 
