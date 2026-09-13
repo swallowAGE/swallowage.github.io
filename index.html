@@ -7,7 +7,7 @@
 <meta name="description" content="swallow·AGE — outils et créations partagés au fil du temps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#2B2230;
@@ -17,9 +17,9 @@
     --gold:#C9A85C;
     --rose:#B5677A;
     --rule: rgba(43,34,48,0.12);
-    --animus-bg:#14181C;
-    --animus-line:#8FE3C5;
-    --animus-dim:rgba(143,227,197,0.45);
+    --term-bg:#14181C;
+    --term-line:#8FE3C5;
+    --term-dim:rgba(143,227,197,0.45);
   }
 
   *{box-sizing:border-box;}
@@ -43,9 +43,13 @@
     outline-offset:3px;
   }
 
-  h1,h2{
-    font-family:'Cinzel', serif;
-    font-weight:600;
+  h1{
+    margin:0;
+  }
+
+  h2{
+    font-family:'Jost', sans-serif;
+    font-weight:500;
     letter-spacing:0.01em;
     margin:0;
   }
@@ -63,24 +67,45 @@
     text-align:center;
   }
 
-  .hero img{
-    width:108px;
+  .brand{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .brand-icon{
+    width:64px;
     height:auto;
     opacity:0;
     animation: rise 1.1s ease-out forwards;
   }
+
+  .brand-name{
+    font-family:'Quicksand', sans-serif;
+    font-weight:700;
+    font-size:clamp(1.9rem, 6vw, 2.6rem);
+    letter-spacing:0.01em;
+    color:var(--ink);
+    opacity:0;
+    animation: rise 1.1s ease-out 0.15s forwards;
+  }
+
+  .brand-name .brand-a{ color:var(--rose); }
+  .brand-name .brand-ge{ color:var(--gold); }
 
   @keyframes rise{
     from{opacity:0; transform:translateY(10px);}
     to{opacity:1; transform:translateY(0);}
   }
 
-  /* ---------- Animus terminal ---------- */
+  /* ---------- Terminal ---------- */
 
   .terminal{
     margin:24px auto 0;
     max-width:460px;
-    background:var(--animus-bg);
+    background:var(--term-bg);
     border-radius:6px;
     text-align:left;
     overflow:hidden;
@@ -126,7 +151,7 @@
     font-family:'JetBrains Mono', monospace;
     font-size:0.68rem;
     letter-spacing:0.08em;
-    color:var(--animus-dim);
+    color:var(--term-dim);
     text-transform:uppercase;
   }
 
@@ -134,7 +159,7 @@
     padding:18px 18px 20px;
     font-family:'JetBrains Mono', monospace;
     font-size:0.92rem;
-    color:var(--animus-line);
+    color:var(--term-line);
     text-shadow:0 0 8px rgba(143,227,197,0.35);
   }
 
@@ -170,7 +195,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .hero img, .terminal{ animation:none; opacity:1; }
+    .brand-icon, .brand-name, .terminal{ animation:none; opacity:1; }
     .terminal-body .type{ width:33ch; animation:none; }
     .terminal-body .cursor{ animation:none; }
   }
@@ -187,8 +212,19 @@
   }
 
   section h2{
-    font-size:1.5rem;
+    font-size:1.55rem;
     margin-bottom:22px;
+  }
+
+  .kicker{
+    display:block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    font-weight:500;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
   }
 
   section > .wrap > p{
@@ -307,9 +343,10 @@
 
   footer .motto{
     margin-top:34px;
-    font-family:'Cinzel', serif;
-    font-size:0.82rem;
-    letter-spacing:0.04em;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
     color:var(--gold);
   }
 </style>
@@ -318,11 +355,14 @@
 
 <header class="hero">
   <div class="wrap">
-    <img src="logo.png" alt="swallow·AGE">
+    <div class="brand">
+      <img class="brand-icon" src="logo-icon.png" alt="">
+      <h1 class="brand-name">swallow<span class="brand-dot">·</span><span class="brand-a">A</span><span class="brand-ge">GE</span></h1>
+    </div>
     <div class="terminal" role="img" aria-label="Tout arrive pour une bonne raison">
       <div class="terminal-bar">
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="terminal-title">animus // sync</span>
+        <span class="terminal-title">hirundo // sync</span>
       </div>
       <div class="terminal-body" aria-hidden="true">
         <span class="prompt">&gt;</span><span class="type">Tout arrive pour une bonne raison</span><span class="cursor">_</span>
@@ -333,7 +373,7 @@
 
 <section id="realisations">
   <div class="wrap">
-    <h2>Ce qui a déjà pris son envol</h2>
+    <h2><span class="kicker">// créations</span>Ce qui a déjà pris son envol</h2>
     <p class="lede">Des outils pensés et construits un à un, publiés librement.</p>
 
     <div class="creation">
@@ -351,7 +391,7 @@
 
 <section id="qui-suis-je" class="who">
   <div class="wrap">
-    <h2>Qui se cache derrière</h2>
+    <h2><span class="kicker">// origine</span>Qui se cache derrière</h2>
     <p>swallow·AGE n'est pas une entreprise ni une signature personnelle : c'est un espace où des outils sont partagés sans rien attendre en retour, dans la continuité d'un goût plus ancien pour le service et l'utilité collective.</p>
     <p>Le nom porte une hirondelle — un oiseau qui revient chaque année, qui parcourt de longues distances et qui, dans beaucoup de cultures, annonce simplement que quelque chose de bon commence. Trois initiales sont dissimulées dans le monogramme : une empreinte discrète de ce qui compte le plus, sans qu'il soit nécessaire de la rendre publique.</p>
     <p class="signature">Petit à petit, l'oiseau fait son nid.</p>
