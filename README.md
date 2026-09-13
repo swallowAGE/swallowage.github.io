@@ -1,3 +1,3 @@
 # swallow·AGE
-#> création du logo
-#> création du GitHub
+>_ création du logo
+>_ création du GitHub
