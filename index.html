@@ -1,1 +1,272 @@
-<h1>Hello swallow !</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>swallow·AGE</title>
+<meta name="description" content="swallow·AGE — outils et créations partagés au fil du temps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2B2230;
+    --ink-soft:#6B5F5A;
+    --paper:#FAF6F0;
+    --paper-raised:#F3ECE2;
+    --gold:#C9A85C;
+    --rose:#B5677A;
+    --rule: rgba(43,34,48,0.12);
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--rose);
+    outline-offset:3px;
+  }
+
+  h1,h2{
+    font-family:'Cinzel', serif;
+    font-weight:600;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero{
+    padding:96px 0 72px;
+    text-align:center;
+  }
+
+  .hero img{
+    width:150px;
+    height:auto;
+    opacity:0;
+    animation: rise 1.1s ease-out forwards;
+  }
+
+  .hero .baseline{
+    margin-top:22px;
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    letter-spacing:0.01em;
+    opacity:0;
+    animation: rise 1.1s ease-out 0.25s forwards;
+  }
+
+  @keyframes rise{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero img, .hero .baseline{ animation:none; opacity:1; }
+  }
+
+  /* ---------- Sections ---------- */
+
+  section{
+    padding:56px 0;
+    border-top:1px solid var(--rule);
+  }
+
+  section h2{
+    font-size:1.5rem;
+    margin-bottom:22px;
+  }
+
+  section > .wrap > p{
+    max-width:58ch;
+  }
+
+  .lede{
+    color:var(--ink-soft);
+    font-size:1.05rem;
+  }
+
+  /* ---------- Réalisation card ---------- */
+
+  .creation{
+    display:flex;
+    gap:22px;
+    align-items:flex-start;
+    background:var(--paper-raised);
+    border-radius:4px;
+    padding:26px 28px;
+    margin-top:8px;
+  }
+
+  .creation .mark{
+    flex:0 0 auto;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Cinzel', serif;
+    font-size:0.85rem;
+    color:var(--gold);
+    margin-top:4px;
+  }
+
+  .creation h3{
+    font-family:'Jost', sans-serif;
+    font-weight:500;
+    font-size:1.15rem;
+    margin:0 0 8px;
+  }
+
+  .creation p{
+    margin:0 0 14px;
+    color:var(--ink-soft);
+  }
+
+  .creation .link{
+    display:inline-block;
+    font-weight:500;
+    color:var(--rose);
+    text-decoration:none;
+    border-bottom:1px solid var(--rose);
+    padding-bottom:1px;
+  }
+
+  .creation .link:hover{
+    color:var(--gold);
+    border-color:var(--gold);
+  }
+
+  .coming-soon{
+    margin-top:18px;
+    font-size:0.92rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Qui suis-je ---------- */
+
+  .who p{
+    max-width:58ch;
+  }
+
+  .who .signature{
+    margin-top:24px;
+    font-style:italic;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer{
+    padding:48px 0 64px;
+    border-top:1px solid var(--rule);
+    text-align:center;
+  }
+
+  footer .contact{
+    font-size:1rem;
+  }
+
+  footer .contact a{
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+  }
+
+  footer .socials{
+    margin-top:16px;
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    font-size:0.9rem;
+  }
+
+  footer .socials a{
+    text-decoration:none;
+    color:var(--ink-soft);
+  }
+
+  footer .socials a:hover{
+    color:var(--rose);
+  }
+
+  footer .motto{
+    margin-top:34px;
+    font-family:'Cinzel', serif;
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    color:var(--gold);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img src="logo.png" alt="swallow·AGE">
+    <p class="baseline">Tout arrive pour une bonne raison</p>
+  </div>
+</header>
+
+<section id="realisations">
+  <div class="wrap">
+    <h2>Ce qui a déjà pris son envol</h2>
+    <p class="lede">Des outils pensés et construits un à un, publiés librement.</p>
+
+    <div class="creation">
+      <div class="mark">GB</div>
+      <div>
+        <h3>GéoBercé</h3>
+        <p>Un système d'information géographique local, pensé pour rendre les données d'un territoire lisibles et accessibles, sans complexité inutile.</p>
+        <a class="link" href="https://cl4ire.github.io/" target="_blank" rel="noopener">Découvrir GéoBercé</a>
+      </div>
+    </div>
+
+    <p class="coming-soon">D'autres créations viendront s'ajouter ici, au fil de l'eau.</p>
+  </div>
+</section>
+
+<section id="qui-suis-je" class="who">
+  <div class="wrap">
+    <h2>Qui se cache derrière</h2>
+    <p>swallow·AGE n'est pas une entreprise ni une signature personnelle : c'est un espace où des outils sont partagés sans rien attendre en retour, dans la continuité d'un goût plus ancien pour le service et l'utilité collective.</p>
+    <p>Le nom porte une hirondelle — un oiseau qui revient chaque année, qui parcourt de longues distances et qui, dans beaucoup de cultures, annonce simplement que quelque chose de bon commence. Trois initiales sont dissimulées dans le monogramme : une empreinte discrète de ce qui compte le plus, sans qu'il soit nécessaire de la rendre publique.</p>
+    <p class="signature">Petit à petit, l'oiseau fait son nid.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="contact">Une question, une idée à partager : <a href="mailto:swallowage@proton.me">swallowage@proton.me</a></p>
+    <div class="socials">
+      <a href="https://instagram.com/swallowage" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://facebook.com/swallowage" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <p class="motto">swallow · AGE</p>
+  </div>
+</footer>
+
+</body>
+</html>
