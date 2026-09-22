@@ -1,0 +1,86 @@
+name: Sync GéoBercé
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout swallowage.github.io
+        uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: Checkout cl4ire/cl4ire.github.io
+        uses: actions/checkout@v4
+        with:
+          repository: cl4ire/cl4ire.github.io
+          path: upstream
+
+      - name: Sync runtime files into geoberce/
+        run: |
+          set -euo pipefail
+
+          DEST="site/geoberce"
+          SRC="upstream"
+
+          # Directories: mirror exactly, replacing destination content.
+          for dir in couches css img js; do
+            rm -rf "$DEST/$dir"
+            if [ -d "$SRC/$dir" ]; then
+              cp -R "$SRC/$dir" "$DEST/$dir"
+            fi
+          done
+
+          # Files: copy as-is. geoberce/README.md is intentionally never touched.
+          for file in index.html manifest.json sw.js; do
+            if [ -f "$SRC/$file" ]; then
+              cp "$SRC/$file" "$DEST/$file"
+            fi
+          done
+
+      - name: Detect changes
+        id: diff
+        working-directory: site
+        run: |
+          git add geoberce
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create branch, commit and push
+        if: steps.diff.outputs.changed == 'true'
+        id: commit
+        working-directory: site
+        run: |
+          set -euo pipefail
+          BRANCH="sync-geoberce-$(date +%Y%m%d-%H%M%S)"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git commit -m "Sync geoberce/ depuis cl4ire/cl4ire.github.io"
+          git push origin "$BRANCH"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request
+        if: steps.diff.outputs.changed == 'true'
+        working-directory: site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr create \
+            --title "Sync geoberce/ depuis cl4ire/cl4ire.github.io" \
+            --body "Synchronisation automatique du contenu de \`geoberce/\` (index.html, css/, js/, couches/, img/, manifest.json, sw.js) depuis le dépôt de développement [cl4ire/cl4ire.github.io](https://github.com/cl4ire/cl4ire.github.io). \`geoberce/README.md\` n'est pas modifié par cette synchronisation.
+
+Ce PR a été généré automatiquement par le workflow \`sync-geoberce.yml\`." \
+            --base main \
+            --head "${{ steps.commit.outputs.branch }}"
