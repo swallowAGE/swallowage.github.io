@@ -1,0 +1,825 @@
+/* =========================================================
+   GÉOBERCÉ — FEUILLE DE STYLE
+   ========================================================= */
+
+:root {
+    --foret: #0F6E56;
+    --feuille: #1D9E75;
+    --terracotta: #D85A30;
+    --riviere: #378ADD;
+    --ardoise: #5F5E5A;
+
+    /* Couleur "chrome" de l'interface (boutons, focus, titres...) :
+       le bleu de la palette, pour ne pas tout teinter de vert. */
+    --primaire: var(--riviere);
+    --brume: #E9F1FA;
+    --fond: #FAFAF8;
+    --bordure: #E4E1DB;
+    --font-titre: 'Baloo 2', sans-serif;
+    --font-texte: 'Nunito', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; font-family: var(--font-texte); color: #2A2A28; }
+button { font-family: inherit; cursor: pointer; }
+
+#topbar { display: flex; align-items: center; gap: 20px; height: 62px; padding: 0 20px; background: #fff; border-bottom: 1px solid var(--bordure); position: relative; z-index: 1000; }
+#brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+#brand-title { font-family: var(--font-titre); font-size: 19px; font-weight: 700; color: var(--foret); line-height: 1.1; }
+#brand-subtitle { font-size: 11px; color: var(--ardoise); }
+.brand-logo { height: 34px; width: auto; display: block; }
+.brand-logo-large { height: 56px; width: auto; margin: 0 auto 14px; }
+#search-container { position: relative; flex: 1; min-width: 0; max-width: 480px; }
+#search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--primaire); font-size: 13px; }
+
+#search {
+    width: 100%;
+    padding: 10px 14px 10px 36px;
+    border: 1px solid var(--bordure);
+    border-radius: 999px;
+    background: var(--fond);
+    font-size: 14px;
+    font-family: inherit;
+}
+#search:focus { outline: 2px solid var(--primaire); background: #fff; }
+
+#suggestions {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    overflow: hidden;
+    max-height: 340px;
+    overflow-y: auto;
+}
+.suggestion { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--bordure); }
+.suggestion:last-child { border-bottom: none; }
+.suggestion:hover { background: var(--brume); cursor: pointer; }
+.suggestion-icon { width: 20px; text-align: center; }
+.suggestion-texte { display: flex; flex-direction: column; }
+.suggestion-titre { font-size: 13px; font-weight: 600; }
+.suggestion-sous { font-size: 11px; color: var(--ardoise); }
+.suggestion-vide { padding: 12px 14px; font-size: 13px; color: var(--ardoise); }
+#topbar-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+#home-button, #about-button, #actu-button {
+    border: 1px solid var(--bordure);
+    background: #fff;
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--ardoise);
+}
+#about-button { padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px; }
+#recherche-button {
+    border: none;
+    background: var(--primaire);
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px 16px 8px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex; align-items: center; gap: 7px;
+    flex-shrink: 0;
+}
+#home-button, #actu-button, #install-button {
+    width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--primaire);
+    font-size: 15px;
+}
+#install-button { border: 1px solid var(--bordure); background: #fff; border-radius: 999px; }
+/* Toujours visible (avant : caché sur grand écran, où le panneau était
+   fixe en permanence) - permet de fermer/rouvrir le panneau des couches
+   sur PC aussi, pas seulement sur mobile, retour direct de
+   l'utilisatrice. */
+#menu-button {
+    display: inline-flex; align-items: center; justify-content: center;
+    border: none;
+    background: var(--primaire);
+    color: #fff;
+    width: 38px; height: 38px;
+    border-radius: 999px;
+    font-size: 15px;
+}
+
+/* ---------- APPLICATION ---------- */
+#app { display: flex; height: calc(100% - 62px); position: relative; }
+#map { flex: 1; }
+/* Contrôles Leaflet (zoom +/-, géolocalisation) : z-index par défaut de
+   Leaflet (1000) au-dessus de TOUS nos propres calques plein écran
+   (#hero à 500, #commune-page à 600, #layers-panel replié sur mobile à
+   900) - visibles par-dessus l'accueil ou le panneau mobile, gênant au
+   toucher. Abaissé sous ces calques (400 : juste au-dessus des tuiles/
+   couches de la carte elle-même à 400 par défaut chez Leaflet, pour
+   rester cliquables en usage normal) plutôt que masqué/déplacé au cas
+   par cas pour chaque calque - un seul réglage couvre tous les cas
+   présents et futurs. Retour direct de l'utilisatrice. */
+.leaflet-top, .leaflet-bottom { z-index: 450; }
+/* 340px (contre 280px avant) : retour direct, la liste des couches et le
+   formulaire de recherche foncière se sentaient à l'étroit. */
+#layers-panel { width: 340px; background: #fff; border-right: 1px solid var(--bordure); overflow-y: auto; flex-shrink: 0; position: relative; }
+/* Repliée (bouton "Couches" ou croix de fermeture) : entièrement masqué
+   plutôt qu'une largeur à 0 animée - la carte reprend tout de suite
+   l'espace libéré (#map est flex:1, juste à côté), il suffit d'appeler
+   map.invalidateSize() après coup pour que Leaflet redessine les tuiles
+   sur la nouvelle largeur (voir js/map.js). */
+#layers-panel.layers-panel-hidden { display: none; }
+/* Poignée de redimensionnement (retour direct de l'utilisatrice) : bande
+   fine sur le bord droit du panneau, élargie visuellement seulement au
+   survol/pendant le glissement pour ne pas gêner la lecture au repos -
+   voir initRedimensionnementPanneau dans js/map.js pour la logique de
+   glissement (souris) et le stockage de la largeur choisie. Desktop
+   seulement : sur mobile le panneau est un panneau plein écran qui
+   glisse (position absolute, voir plus bas), le redimensionner n'aurait
+   pas de sens.
+   "right: 0" (entièrement DANS la boîte du panneau) plutôt qu'à cheval
+   sur le bord ("right: -3px") : #layers-panel a "overflow-y: auto", ce
+   qui bascule aussi overflow-x à "auto" (comportement standard CSS dès
+   qu'un seul axe n'est pas "visible") - tout ce qui dépasserait le bord
+   droit serait purement et simplement coupé (invisible ET impossible à
+   cliquer), constaté en testant. */
+#layers-resize-handle {
+    position: absolute; top: 0; right: 0; width: 6px; height: 100%;
+    cursor: col-resize; z-index: 5; background: transparent;
+}
+#layers-resize-handle:hover, #layers-resize-handle.en-cours { background: var(--primaire); opacity: 0.25; }
+.panel-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 10px; }
+.panel-title { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--primaire); }
+.panel-close { display: block; border: none; background: none; font-size: 20px; color: var(--ardoise); }
+#layers-search { display: flex; align-items: center; gap: 8px; margin: 0 18px 12px; padding: 8px 12px; background: var(--fond); border-radius: 999px; color: var(--ardoise); }
+#layers-search input { border: none; background: none; outline: none; font-size: 13px; width: 100%; font-family: inherit; }
+.layer-group { border-top: 1px solid var(--bordure); padding: 6px 18px; }
+.layer-group summary { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-weight: 700; font-size: 13.5px; cursor: pointer; list-style: none; }
+.layer-group summary::-webkit-details-marker { display: none; }
+.layer-group-icon { width: 18px; text-align: center; }
+.layer-item { display: flex; align-items: center; gap: 10px; padding: 7px 4px 7px 28px; font-size: 13.5px; cursor: pointer; border-radius: 8px; }
+.layer-item:hover { background: var(--fond); }
+.layer-item input { accent-color: var(--primaire); width: 16px; height: 16px; }
+.layer-lazy-badge { color: var(--terracotta); font-size: 8px; margin-left: 6px; vertical-align: middle; }
+.layer-zoom-badge { color: var(--primaire); font-size: 9px; margin-left: 6px; vertical-align: middle; }
+.layer-etat-badge { color: var(--primaire); font-size: 11px; margin-left: 6px; vertical-align: middle; }
+.layer-etat-badge-erreur { color: #C94338; }
+
+.layer-legend { margin: 0 0 4px 28px; }
+.layer-legend summary { cursor: pointer; list-style: none; font-size: 11.5px; font-weight: 700; color: var(--primaire); padding: 2px 0; }
+.layer-legend summary::-webkit-details-marker { display: none; }
+.layer-legend-items { display: flex; flex-direction: column; padding: 6px 0 4px; }
+.layer-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #454440; padding: 3px 2px; border-radius: 6px; cursor: pointer; }
+.layer-legend-item:hover { background: var(--fond); }
+.layer-legend-item input { width: 13px; height: 13px; flex-shrink: 0; accent-color: var(--primaire); }
+.layer-legend-pastille {
+    width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 8.5px;
+}
+
+/* ---------- PANNEAU "RÉSULTATS À PROXIMITÉ" ---------- */
+#results-view { padding-bottom: 12px; }
+.panel-back {
+    display: flex; align-items: center; gap: 8px;
+    border: none; background: none;
+    color: var(--primaire); font-weight: 700; font-size: 13px;
+    padding: 14px 18px 6px; width: 100%;
+}
+.results-title { padding: 2px 18px 10px; font-size: 12.5px; color: var(--ardoise); }
+
+/* [hidden] doit gagner sur ".results-filtre { display: flex }" ci-dessous
+   (même spécificité, cascade seule ne suffit pas de façon fiable) - sans
+   ce sélecteur plus spécifique, `element.hidden = true` en JS n'a aucun
+   effet visuel : la rangée de filtres reste affichée alors que l'attribut
+   HTML est bien positionné (constaté en testant le rendu réel, pas
+   seulement la propriété `hidden` en JavaScript). */
+.results-filtre[hidden] { display: none; }
+.results-filtre { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px 10px; }
+.results-filtre-btn {
+    border: 1px solid var(--bordure); background: #fff; color: var(--ardoise);
+    font-size: 11.5px; font-weight: 700; padding: 6px 12px;
+    border-radius: 999px; cursor: pointer;
+}
+.results-filtre-btn.actif { background: var(--primaire); border-color: var(--primaire); color: #fff; }
+.result-item-prix { font-size: 11px; font-weight: 700; color: var(--primaire); }
+
+#results-list { padding: 0 10px; }
+.result-item {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%; text-align: left;
+    padding: 9px 8px; border: none; background: none;
+    border-radius: 10px;
+}
+.result-item:hover { background: var(--fond); }
+.result-item-icon {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px;
+}
+.result-item-texte { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.result-item-titre { font-size: 13px; font-weight: 700; }
+.result-item-sous { font-size: 11px; color: var(--ardoise); }
+.result-item-distance { font-size: 11.5px; font-weight: 700; color: var(--primaire); flex-shrink: 0; }
+
+/* ---------- PANNEAU "RECHERCHE FONCIÈRE" ---------- */
+#recherche-view { padding-bottom: 16px; }
+.recherche-titre {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 18px 12px; font-weight: 700; font-size: 14px; color: #2A2A28;
+}
+#recherche-contenu { padding: 0 18px; }
+
+/* ---------- ILLIWAP (actualités territoire/commune) ---------- */
+/* Hauteur fixe avec défilement interne plutôt que 100% de la hauteur du
+   panneau : la page Illiwap embarquée est elle-même longue (plusieurs
+   actus qui s'enchaînent), une hauteur fixe évite qu'elle n'allonge tout
+   le panneau au-delà de l'écran. */
+.illiwap-embed { margin: 0 18px 4px; border: 1px solid var(--bordure); border-radius: 10px; overflow: hidden; }
+.illiwap-embed iframe { display: block; width: 100%; height: 480px; border: none; }
+
+/* ---------- MENU DÉROULANT "ACTUALITÉS" (barre du haut) ---------- */
+/* Ancré sous l'icône plutôt qu'ouvert dans le panneau des couches
+   (contrairement à la vue par commune, qui garde ce fonctionnement) -
+   retour direct de l'utilisatrice. */
+.actu-wrap { position: relative; }
+.actu-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 380px;
+    max-width: calc(100vw - 24px);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    overflow: hidden;
+    z-index: 1001;
+}
+.actu-dropdown-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 14px;
+    font-weight: 700; font-size: 13px; color: var(--primaire);
+}
+.actu-dropdown-header i { margin-right: 6px; }
+.actu-dropdown-header button { border: none; background: none; font-size: 18px; color: var(--ardoise); }
+.actu-dropdown .illiwap-embed { margin: 0 14px 14px; }
+.actu-dropdown .illiwap-embed iframe { height: 420px; }
+
+/* ---------- PAGE COMMUNE (dashboard plein écran) ---------- */
+/* Retour direct de l'utilisatrice : le dashboard commune (mairie,
+   chiffres clés, décompte d'entités, qualité de l'eau, actualités)
+   étroit dans la colonne du panneau des couches ne suffisait plus une
+   fois enrichi - passé en page plein écran, même principe que #hero
+   (position:absolute sur #app, au-dessus de la carte) mais son propre
+   habillage (en-tête avec retour, contenu centré et lisible plutôt que
+   le prompt centré de l'accueil). */
+#commune-page {
+    position: absolute; inset: 0; z-index: 600;
+    background: var(--fond); display: flex; flex-direction: column; overflow: hidden;
+}
+#commune-page[hidden] { display: none; }
+#commune-page-header {
+    display: flex; align-items: center; gap: 16px; flex-shrink: 0;
+    padding: 16px 24px; background: #fff; border-bottom: 1px solid var(--bordure);
+}
+.commune-page-back {
+    display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+    border: none; background: none; cursor: pointer;
+    color: var(--primaire); font-weight: 700; font-size: 13px; padding: 8px 4px;
+}
+#commune-titre { font-weight: 700; font-size: 18px; color: var(--primaire); display: flex; align-items: center; gap: 8px; }
+/* Badge Vigieau du dashboard (construireBadgeVigieau, js/communes.js) :
+   même motif pastille que .popup-fiche-badge, en <a> cliquable vers
+   l'arrêté quand un lien est disponible (curseur pointeur seulement dans
+   ce cas - un <span> sans lien ne doit pas paraître cliquable). Vide
+   (aucun badge) le temps que Vigieau se charge/si aucune zone ne
+   concerne la commune : ne réserve pas d'espace fixe. */
+.commune-badge-vigieau {
+    display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto;
+    border-radius: 999px; padding: 5px 10px; font-size: 11px; font-weight: 800;
+    white-space: nowrap; text-decoration: none;
+}
+.commune-badge-vigieau span { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+a.commune-badge-vigieau { cursor: pointer; }
+a.commune-badge-vigieau:hover { text-decoration: underline; }
+#commune-page-corps { flex: 1; overflow-y: auto; padding: 24px 24px 40px; }
+/* 1200px (pas 640px comme la 1ère version, une simple colonne de lecture
+   empilant tout à la verticale - "illisible, tout en longueur", retour
+   direct de l'utilisatrice) : la page exploite maintenant vraiment la
+   largeur disponible via .commune-grille ci-dessous. */
+#commune-page-corps #commune-contenu { max-width: 1200px; margin: 0 auto; }
+@media (max-width: 780px) {
+    #commune-page-header { padding: 12px 16px; }
+    #commune-page-corps { padding: 16px 16px 32px; }
+}
+
+/* ---------- GRILLE DE CARTES DU DASHBOARD COMMUNE ---------- */
+/* Retour direct de l'utilisatrice sur la 1ère version de la page plein
+   écran ("illisible, tout en longueur, exploite la place, fais de
+   jolies choses") : vraie grille de cartes (même motif que .hero-tile/
+   #hero-parcelle déjà établis ailleurs sur le site - fond blanc, bordure
+   fine, 14px de rayon - plutôt qu'une nouvelle esthétique à part) qui
+   se réorganise seule selon la largeur d'écran, au lieu d'empiler tout
+   le contenu de l'ancien panneau latéral verticalement. */
+.commune-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+.commune-carte {
+    background: #fff; border: 1px solid var(--bordure); border-radius: 14px;
+    padding: 20px; height: 100%;
+}
+/* Prend toute la largeur de la grille, quel que soit le nombre de
+   colonnes actuel (décompte, actualités - contenu naturellement plus
+   large que les cartes compactes mairie/démographie/eau). */
+.commune-carte-large { grid-column: 1 / -1; }
+/* #commune-qualite-eau est un simple <div> (pas .commune-carte) : la
+   vraie carte y est injectée après coup une fois Hub'Eau résolu, voir
+   ouvrirDashboardCommune - sans ces deux règles, la grille étire bien
+   ce <div> à la hauteur de la ligne (comportement par défaut de
+   CSS Grid), mais pas la carte injectée à l'intérieur, qui ne prend
+   que la hauteur de son propre contenu : d'où la carte "Qualité de
+   l'eau" plus courte que ses voisines - retour direct de l'utilisatrice. */
+#commune-qualite-eau, #commune-qualite-eau .commune-carte { height: 100%; }
+.commune-carte-titre {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 800; color: var(--ardoise);
+    text-transform: uppercase; letter-spacing: .05em; margin-bottom: 14px;
+}
+.commune-carte-titre i { color: var(--primaire); }
+.commune-carte-vide { color: var(--ardoise); font-size: 12px; }
+
+/* Lignes d'info (mairie, qualité eau) : même motif que .popup-fiche-ligne
+   mais sans l'habillage ".popup-fiche-section" (padding/bordure pensés
+   pour l'empilement dans une popup étroite, redondants ici où .commune-carte
+   porte déjà son propre padding). */
+.commune-carte-mairie-nom { font-family: var(--font-titre); font-weight: 700; font-size: 15px; color: #2A2A28; margin-bottom: 10px; }
+.commune-ligne { font-size: 12.5px; color: #2A2A28; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.commune-ligne i { color: var(--primaire); width: 14px; text-align: center; flex-shrink: 0; }
+.commune-ligne a { color: inherit; }
+.commune-ligne:last-child { margin-bottom: 0; }
+
+/* Carte "hero" démographie : gros chiffre population en avant-plan
+   plutôt qu'une liste de lignes égales entre elles - c'est le chiffre
+   qu'on cherche en premier en arrivant sur une commune. */
+.commune-carte-hero { background: linear-gradient(160deg, #fff, var(--fond)); }
+.commune-hero-nombre {
+    font-family: var(--font-titre); font-weight: 700; color: var(--primaire);
+    font-size: 40px; line-height: 1; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+}
+.commune-hero-nombre span { font-family: var(--font-texte); font-size: 13px; font-weight: 600; color: var(--ardoise); }
+.commune-hero-evolution { font-size: 11.5px; color: var(--feuille); font-weight: 700; margin-top: 6px; }
+.commune-stats-secondaires { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--bordure); }
+.commune-stat-mini { display: flex; flex-direction: column; }
+.commune-stat-mini strong { font-size: 16px; font-weight: 700; color: #2A2A28; }
+.commune-stat-mini span { font-size: 10.5px; color: var(--ardoise); }
+
+/* Carte qualité de l'eau : petit badge coloré (conforme/non conforme),
+   même motif pastille que .layer-legend-pastille/.popup-fiche-badge
+   ailleurs sur le site. */
+.commune-eau-badge { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 12.5px; margin-bottom: 10px; }
+.commune-eau-badge span { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+/* Carte "Ce qu'on trouve ici" : sous-sections groupées par thématique
+   (Commerces & services / Éducation & petite enfance / Sport & loisirs),
+   chacune une grille de tuiles icône+chiffre+libellé - remplace la
+   longue liste à plat de la 1ère version (retour direct : "illisible").
+   Même motif que .hero-tile déjà établi ailleurs (fond clair, coin
+   arrondi), en plus compact pour tenir plusieurs dizaines de tuiles
+   sans dominer la page. */
+.commune-decompte-groupe:not(:last-child) { margin-bottom: 20px; }
+.commune-decompte-groupe-titre { font-size: 12.5px; font-weight: 700; color: #2A2A28; margin-bottom: 10px; }
+.commune-tuiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+.commune-tuile {
+    background: var(--fond); border-radius: 12px; padding: 12px 8px; text-align: center;
+    cursor: pointer; transition: transform .15s, box-shadow .15s;
+}
+.commune-tuile:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+.commune-tuile-icone {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; margin: 0 auto 6px; border-radius: 50%; color: #fff; font-size: 12px;
+}
+.commune-tuile-nombre { font-weight: 700; font-size: 17px; color: #2A2A28; line-height: 1.2; }
+.commune-tuile-label { font-size: 10px; color: var(--ardoise); line-height: 1.25; margin-top: 2px; }
+
+.commune-carte .illiwap-embed { margin: 0; }
+
+@media (max-width: 600px) {
+    .commune-hero-nombre { font-size: 32px; }
+    .commune-tuiles { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+}
+
+.rf-groupe { border-top: 1px solid var(--bordure); padding: 14px 0; }
+.rf-groupe-titre { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--ardoise); margin-bottom: 10px; }
+.rf-groupe-titre small { text-transform: none; font-weight: 600; letter-spacing: 0; }
+
+.rf-champ { display: flex; flex-direction: column; gap: 5px; font-size: 12.5px; font-weight: 700; color: #2A2A28; margin-bottom: 10px; }
+.rf-champ:last-child { margin-bottom: 0; }
+.rf-champ select, .rf-champ input[type="number"], .rf-champ textarea {
+    font-family: inherit; font-size: 13px; font-weight: 400;
+    padding: 8px 10px; border: 1px solid var(--bordure); border-radius: 8px;
+    background: var(--fond); width: 100%;
+}
+.rf-champ textarea { resize: vertical; min-height: 70px; }
+.rf-champ-plage .rf-plage { display: flex; align-items: center; gap: 8px; font-weight: 400; color: var(--ardoise); font-size: 12px; }
+.rf-champ-plage .rf-plage input { flex: 1; min-width: 0; }
+.rf-champ-inline { flex-direction: row; align-items: center; gap: 8px; }
+.rf-champ-inline input { width: 15px; height: 15px; accent-color: var(--primaire); }
+
+.rf-dpe-liste { display: flex; gap: 6px; flex-wrap: wrap; }
+.rf-dpe-chip {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--bordure);
+    font-size: 12px; font-weight: 800; color: var(--ardoise); cursor: pointer;
+}
+.rf-dpe-chip input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+.rf-dpe-chip:has(input:checked) { background: var(--primaire); border-color: var(--primaire); color: #fff; }
+.rf-dpe-A:has(input:checked) { background: #2e8b57; border-color: #2e8b57; }
+.rf-dpe-B:has(input:checked) { background: #76a942; border-color: #76a942; }
+.rf-dpe-C:has(input:checked) { background: #b7c94a; border-color: #b7c94a; }
+.rf-dpe-D:has(input:checked) { background: #e0c83c; border-color: #e0c83c; }
+.rf-dpe-E:has(input:checked) { background: #eda832; border-color: #eda832; }
+.rf-dpe-F:has(input:checked) { background: #e47732; border-color: #e47732; }
+.rf-dpe-G:has(input:checked) { background: #c94338; border-color: #c94338; }
+
+.rf-statut { margin-top: 14px; padding: 10px 12px; background: var(--fond); border-radius: 10px; font-size: 12px; color: var(--ardoise); text-align: center; }
+.rf-statut-chargement { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--primaire); font-weight: 600; }
+.rf-actions { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.rf-bouton-principal {
+    border: none; background: var(--primaire); color: #fff; font-weight: 700; font-size: 13px;
+    padding: 11px; border-radius: 10px;
+}
+.rf-bouton-principal:disabled { background: #C7CCD4; cursor: not-allowed; }
+.rf-bouton-secondaire { border: 1px solid var(--bordure); background: #fff; color: var(--ardoise); font-size: 12.5px; padding: 9px; border-radius: 10px; }
+.rf-bouton-secondaire:disabled { color: #C7CCD4; border-color: #EDEBE6; cursor: not-allowed; }
+
+/* ---------- ÉCRAN D'ACCUEIL ---------- */
+/* align-items/justify-content: safe center (voir .modal plus bas pour
+   le détail du piège CSS corrigé) : retour direct de l'utilisatrice,
+   le haut de l'écran d'accueil restait inaccessible sur mobile quand
+   son contenu dépassait la hauteur de l'écran (logo, thématiques,
+   recherche de parcelle...) - "overflow-y:auto" seul ne suffisait pas
+   tant que le centrage piégeait la partie qui dépassait par le haut. */
+#hero {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(233,241,250,0.97), rgba(250,250,248,0.97));
+    display: flex;
+    align-items: safe center;
+    justify-content: safe center;
+    z-index: 500;
+    transition: opacity 0.35s ease;
+    overflow-y: auto;
+}
+.hero-hidden { opacity: 0; pointer-events: none; }
+
+#hero-inner { max-width: 560px; width: 90%; text-align: center; padding: 24px 0; }
+#hero-title { font-family: var(--font-titre); font-size: 28px; font-weight: 700; color: var(--primaire); margin: 0 0 6px; }
+#hero-subtitle { font-size: 14px; color: var(--ardoise); margin: 0 0 22px; }
+
+#hero-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 12px; margin-bottom: 18px; }
+/* Une seule ligne, défilement horizontal plutôt qu'une grille qui
+   s'étale sur plusieurs lignes - retour direct de l'utilisatrice,
+   l'accueil devenait trop long avec tous les raccourcis affichés
+   d'un coup. Les thématiques moins prioritaires restent accessibles
+   via "Voir plus de thématiques" (#hero-tiles, grille inchangée). */
+#hero-raccourcis-titre { font-size: 12.5px; color: var(--ardoise); margin-bottom: 8px; }
+#hero-raccourcis {
+    display: flex; gap: 12px; margin-bottom: 18px;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    padding-bottom: 4px;
+}
+#hero-raccourcis .hero-tile { flex: 0 0 128px; scroll-snap-align: start; }
+.hero-tile {
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    padding: 16px 10px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.hero-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+.hero-tile-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; margin: 0 auto 8px;
+    border-radius: 50%; color: #fff; font-size: 15px;
+}
+.hero-tile-label { font-size: 13px; font-weight: 700; color: #2A2A28; }
+
+#hero-communes { margin-bottom: 18px; }
+#hero-communes label { display: block; font-size: 12.5px; color: var(--ardoise); margin-bottom: 6px; }
+#hero-communes select {
+    font-family: inherit; font-size: 13px; font-weight: 700; color: #2A2A28;
+    padding: 10px 12px; border: 1px solid var(--bordure); border-radius: 10px;
+    background: #fff; width: 100%; max-width: 320px;
+}
+
+/* ---------- RECHERCHE RAPIDE DE PARCELLE (accueil) ---------- */
+#hero-parcelle {
+    margin-bottom: 18px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    padding: 18px;
+    text-align: left;
+}
+#hero-parcelle-titre { font-weight: 700; font-size: 14px; color: var(--primaire); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+#hero-parcelle-form { display: flex; flex-direction: column; gap: 10px; }
+#hero-parcelle-form select, #hero-parcelle-form input[type="number"] {
+    font-family: inherit; font-size: 13px;
+    padding: 9px 11px; border: 1px solid var(--bordure); border-radius: 10px;
+    background: var(--fond); width: 100%;
+}
+.hp-case { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #2A2A28; font-weight: 600; }
+.hp-case input { accent-color: var(--primaire); width: 16px; height: 16px; }
+#hero-parcelle-form button { margin-top: 4px; }
+
+#hero-plus { margin-bottom: 18px; }
+#hero-plus summary {
+    cursor: pointer; list-style: none;
+    font-size: 13px; font-weight: 700; color: var(--primaire);
+    padding: 4px 0 14px;
+}
+#hero-plus summary::-webkit-details-marker { display: none; }
+#hero-plus[open] summary { padding-bottom: 14px; }
+
+#hero-explore { background: none; border: none; text-decoration: underline; color: var(--ardoise); font-size: 13px; }
+.geo-marker { background: transparent; border: none; }
+.geo-marker-icon {
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    color: #fff;
+    font-size: 13px;
+}
+
+.marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
+    background: rgba(55,138,221,0.18);
+}
+.marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
+    background: var(--primaire);
+    color: #fff;
+    font-weight: 700;
+}
+
+/* ---------- POPUP CARBURANT — fiche détaillée ---------- */
+.leaflet-popup-content-wrapper:has(.popup-carburant) { border-radius: 18px; padding: 0; overflow: hidden; }
+/* Pas de largeur forcée ici (ni !important) : Leaflet mesure lui-même la
+   largeur réelle de .popup-carburant ci-dessous (via OPTIONS_POPUP,
+   js/layers.js) pour calculer correctement l'auto-pan quand la popup
+   s'ouvre près d'un bord de carte - un forçage CSS après coup créait un
+   décalage entre ce que Leaflet croyait afficher et ce qui s'affichait
+   réellement (popup mal positionnée/fermée près des bords, signalé en
+   conditions réelles). */
+.leaflet-popup-content:has(.popup-carburant) { margin: 0; }
+.popup-carburant { width: 390px; max-width: 100%; background: #fff; font-family: var(--font-texte); color: #2A2A28; }
+.popup-carburant-entete { display: flex; align-items: flex-start; gap: 11px; padding: 18px 18px 15px; border-bottom: 1px solid var(--bordure); }
+.popup-carburant-icon { width: 39px; height: 39px; flex: 0 0 39px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: var(--riviere); color: #fff; font-size: 17px; }
+.popup-carburant-titre-wrap { min-width: 0; flex: 1; }
+.popup-carburant-tag { color: var(--riviere); text-transform: uppercase; letter-spacing: .06em; font-size: 9px; font-weight: 800; }
+.popup-carburant-titre { margin-top: 1px; font-family: var(--font-titre); font-size: 18px; line-height: 1.05; font-weight: 700; }
+.popup-carburant-adresse { margin-top: 4px; color: var(--ardoise); font-size: 11px; line-height: 1.25; }
+.popup-carburant-badge { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto; border-radius: 999px; padding: 5px 8px; font-size: 9px; font-weight: 800; white-space: nowrap; }
+.popup-carburant-badge span { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.popup-carburant-badge.ouvert { color: var(--feuille); background: #E8F7F1; }
+.popup-carburant-badge.ferme { color: var(--terracotta); background: #FBEDE8; }
+.popup-carburant-badge.inconnu { color: var(--ardoise); background: #F0EFEC; }
+.popup-carburant-section { padding: 14px 18px; border-bottom: 1px solid var(--bordure); }
+.popup-carburant-section:last-child { border-bottom: 0; }
+.popup-carburant-section-titre { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; font-size: 11px; font-weight: 800; color: var(--ardoise); text-transform: uppercase; letter-spacing: .05em; }
+.popup-carburant-section-titre small { font-size: 9px; font-weight: 700; }
+.popup-carburant-prix { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 10px; padding: 8px 0; border-bottom: 1px solid #F0EFEC; }
+.popup-carburant-prix:last-child { border-bottom: 0; }
+.popup-carburant-nom { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; }
+.popup-carburant-pastille { width: 7px; height: 7px; border-radius: 50%; background: var(--feuille); }
+.popup-carburant-valeur { font-size: 16px; font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums; }
+.popup-carburant-statut { grid-column: 1 / 2; margin: -3px 0 0 14px; font-size: 9px; color: var(--ardoise); }
+.popup-carburant-prix.indisponible .popup-carburant-pastille, .popup-carburant-prix.rupture .popup-carburant-pastille { background: var(--terracotta); }
+.popup-carburant-prix.indisponible .popup-carburant-valeur, .popup-carburant-prix.rupture .popup-carburant-valeur { color: var(--ardoise); }
+.popup-carburant-source { margin-top: 7px; font-size: 8.5px; color: #8A8882; }
+.popup-carburant-aujourdhui { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 11px; border-radius: 10px; background: var(--fond); font-size: 11px; }
+.popup-carburant-aujourdhui i { margin-right: 5px; color: var(--ardoise); }
+.popup-carburant-aujourdhui strong { font-size: 10px; }
+.popup-carburant-aujourdhui.ouvert strong { color: var(--feuille); }
+.popup-carburant-aujourdhui.ferme strong { color: var(--terracotta); }
+.popup-carburant-horaires { margin-top: 7px; font-size: 10px; }
+.popup-carburant-horaires summary { display: flex; justify-content: space-between; gap: 10px; cursor: pointer; list-style: none; color: var(--ardoise); padding: 5px 1px; }
+.popup-carburant-horaires summary::-webkit-details-marker { display: none; }
+.popup-carburant-horaires-liste { margin-top: 3px; padding-top: 5px; border-top: 1px solid var(--bordure); }
+.popup-carburant-jour { display: flex; justify-content: space-between; padding: 3px 0; color: var(--ardoise); }
+.popup-carburant-jour strong { color: #2A2A28; font-weight: 700; }
+.popup-carburant-services { display: flex; flex-wrap: wrap; gap: 6px; }
+.popup-service { display: inline-flex; align-items: center; gap: 5px; padding: 6px 8px; border: 1px solid var(--bordure); border-radius: 8px; background: var(--fond); color: #454440; font-size: 9.5px; font-weight: 700; }
+.popup-service i { color: var(--foret); font-size: 9px; }
+.popup-carburant-vide { color: var(--ardoise); font-size: 11px; padding: 5px 0; }
+
+/* ---------- POPUP FICHE — base commune (commerces, banques, mairies, boîtes aux lettres) ---------- */
+.leaflet-popup-content-wrapper:has(.popup-fiche) { border-radius: 18px; padding: 0; overflow: hidden; }
+/* Pas de largeur forcée ici : voir le commentaire équivalent pour
+   .popup-carburant plus haut, même raison. */
+.leaflet-popup-content:has(.popup-fiche) { margin: 0; }
+.popup-fiche { width: 340px; max-width: 100%; background: #fff; font-family: var(--font-texte); color: #2A2A28; }
+.popup-fiche-entete { display: flex; align-items: flex-start; gap: 11px; padding: 16px 16px 14px; border-bottom: 1px solid var(--bordure); }
+.popup-fiche-icon { width: 36px; height: 36px; flex: 0 0 36px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #fff; font-size: 15px; }
+.popup-fiche-titre-wrap { min-width: 0; flex: 1; }
+.popup-fiche-tag { text-transform: uppercase; letter-spacing: .06em; font-size: 9px; font-weight: 800; }
+.popup-fiche-titre { margin-top: 1px; font-family: var(--font-titre); font-size: 16px; line-height: 1.1; font-weight: 700; }
+.popup-fiche-adresse { margin-top: 4px; color: var(--ardoise); font-size: 11px; line-height: 1.25; }
+.popup-fiche-puce { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 10.5px; font-weight: 700; }
+.popup-fiche-puce i { font-size: 10px; }
+.popup-fiche-badge { display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto; border-radius: 999px; padding: 5px 8px; font-size: 9px; font-weight: 800; white-space: nowrap; }
+.popup-fiche-badge span { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.popup-fiche-badge.ouvert { color: var(--feuille); background: #E8F7F1; }
+.popup-fiche-badge.ferme { color: var(--terracotta); background: #FBEDE8; }
+.popup-fiche-badge.info { color: var(--riviere); background: var(--brume); }
+/* Gris neutre, pas le rouge de .ferme (horaires du jour) : une fermeture
+   définitive n'est pas la même alerte qu'un commerce simplement fermé en
+   ce moment, le rouge d'alerte serait trompeur ici. */
+.popup-fiche-badge.ferme-def { color: var(--ardoise); background: var(--brume); }
+.popup-fiche-section { padding: 12px 16px; border-bottom: 1px solid var(--bordure); }
+.popup-fiche-section:last-child { border-bottom: 0; }
+.popup-fiche-section-titre { margin-bottom: 8px; font-size: 10.5px; font-weight: 800; color: var(--ardoise); text-transform: uppercase; letter-spacing: .05em; }
+.popup-fiche-contacts { display: flex; flex-direction: column; gap: 7px; }
+.popup-fiche-contact { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: #2A2A28; text-decoration: none; }
+.popup-fiche-contact:hover { color: var(--primaire); }
+.popup-fiche-contact i { width: 14px; text-align: center; color: var(--primaire); font-size: 11px; }
+.popup-fiche-jour { display: flex; justify-content: space-between; padding: 3px 0; font-size: 11.5px; color: var(--ardoise); }
+.popup-fiche-jour strong { color: #2A2A28; font-weight: 700; }
+.popup-fiche-jour.aujourdhui { color: var(--primaire); }
+.popup-fiche-jour.aujourdhui strong { color: var(--primaire); }
+/* Générique (pas seulement le conseil municipal, malgré le nom
+   d'origine) : tout <details> repliable dans une popup, ex. le détail
+   des restrictions Vigieau (construirePopupVigieau, js/popup.js). */
+.popup-fiche-repliable { font-size: 11.5px; }
+.popup-fiche-repliable summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; cursor: pointer; list-style: none; font-weight: 700; color: var(--feuille); padding: 2px 0; }
+.popup-fiche-repliable summary::-webkit-details-marker { display: none; }
+.popup-fiche-repliable summary i { transition: transform .15s ease; font-size: 9px; }
+.popup-fiche-repliable[open] summary i { transform: rotate(90deg); }
+.popup-fiche-repliable-liste { margin-top: 8px; max-height: 170px; overflow-y: auto; border-top: 1px solid var(--bordure); padding-top: 6px; }
+/* Regroupement par thématique des usages réglementés Vigieau
+   (construirePopupVigieau) : sous-titre distinct par groupe + séparateur
+   entre chaque usage individuel, plutôt qu'une liste plate où rien ne
+   distingue visuellement un usage du suivant - retour direct de
+   l'utilisatrice ("trop de texte, illisible"). */
+.popup-fiche-restriction-groupe { margin-bottom: 10px; }
+.popup-fiche-restriction-groupe:last-child { margin-bottom: 0; }
+.popup-fiche-restriction-theme {
+    font-size: 9.5px; font-weight: 800; color: var(--terracotta);
+    text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px;
+}
+.popup-fiche-restriction-item { padding: 3px 0; border-top: 1px solid #F0EFEC; }
+.popup-fiche-restriction-item:first-child { border-top: 0; }
+.popup-fiche-elu { display: flex; justify-content: space-between; gap: 8px; padding: 4px 0; color: var(--ardoise); }
+.popup-fiche-elu strong { color: #2A2A28; font-weight: 700; }
+.popup-fiche-elu span { flex: 0 0 auto; text-align: right; font-size: 10.5px; }
+
+/* ---------- POPUP PARCELLE (cadastre) — fiche "à la Parcellai.re" ---------- */
+.popup-fiche-section-titre i { margin-right: 5px; color: var(--ardoise); }
+.popup-fiche-chargement { display: flex; align-items: center; gap: 8px; color: var(--ardoise); font-size: 12px; padding: 16px; }
+.popup-fiche-vide { color: var(--ardoise); font-size: 11.5px; padding: 4px 0; }
+.popup-fiche-ligne { font-size: 12px; color: #2A2A28; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.popup-fiche-precision { color: var(--ardoise); font-size: 10.5px; }
+.popup-fiche-vente { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 8px; padding: 4px 0; font-size: 12px; }
+.popup-fiche-vente:not(:last-child) { border-bottom: 1px solid #F0EFEC; }
+.popup-fiche-vente span:first-child { color: var(--ardoise); font-weight: 700; }
+.popup-fiche-vente strong { justify-self: end; }
+.popup-fiche-vente-m2 { justify-self: end; color: var(--ardoise); font-size: 10.5px; }
+.popup-fiche-dpe-classe { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 6px; color: #fff; font-weight: 800; font-size: 12px; }
+
+/* Marqueur "camembert" (déchèteries/tri) : icône blanche avec une légère
+   ombre pour rester lisible sur les parts claires (jaune plastique). */
+.geo-marker-camembert i { text-shadow: 0 1px 3px rgba(0,0,0,0.55); }
+
+/* ---------- POPUP DÉCHÈTERIE / TRI ---------- */
+.popup-fiche-flux-liste { display: flex; flex-wrap: wrap; gap: 6px; }
+.popup-fiche-flux { display: inline-flex; align-items: center; gap: 6px; padding: 6px 9px; border: 1px solid var(--bordure); border-radius: 8px; background: var(--fond); color: #454440; font-size: 10.5px; font-weight: 700; }
+.popup-fiche-flux span { width: 9px; height: 9px; border-radius: 50%; background: currentColor; flex: 0 0 auto; }
+
+/* ---------- ITINÉRAIRE (Google Maps / Waze), en pied de fiche ---------- */
+/* Classe unique injectée par injecterItineraire (popup.js) dans toutes
+   les popups du site, quel que soit leur conteneur (.popup-fiche comme
+   .popup-carburant) — pas besoin de variante par type de popup. */
+.popup-fiche-itineraire { display: flex; gap: 8px; padding: 10px 16px; background: var(--fond); }
+.popup-fiche-itineraire a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; border-radius: 8px; background: #fff; border: 1px solid var(--bordure); color: #2A2A28; font-size: 11px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.popup-fiche-itineraire a:hover { border-color: var(--primaire); color: var(--primaire); }
+.popup-fiche-itineraire a i { font-size: 12px; }
+
+/* align-items/justify-content: SAFE center (pas juste "center") et
+   overflow-y: auto : retour direct de l'utilisatrice, le haut de la
+   modale (bouton fermer, logo) restait inaccessible sur mobile quand
+   le contenu (formulaire de contact inclus) dépassait la hauteur de
+   l'écran - "center" seul centre le contenu même s'il déborde des deux
+   côtés à parts égales, et rien ne permettait de faire défiler vers le
+   haut pour rattraper le débordement du dessus (piège CSS connu :
+   centrage + dépassement + aucun moyen d'atteindre la partie qui
+   dépasse "avant" le centre). "safe" indique au navigateur de revenir
+   à un alignement en haut plutôt que de centrer, dès que centrer
+   rendrait une partie du contenu inatteignable - mêmes correctifs sur
+   #hero (accueil), touché par exactement le même piège. */
+.modal { position: fixed; inset: 0; background: rgba(15,20,18,0.45); display: none; align-items: safe center; justify-content: safe center; overflow-y: auto; z-index: 2000; }
+.modal-open { display: flex; }
+.modal-content { background: #fff; border-radius: 16px; padding: 28px; max-width: 420px; width: 90%; position: relative; text-align: center; margin: 20px auto; }
+.modal-content h2 { font-family: var(--font-titre); color: var(--foret); }
+.about-source { font-size: 11.5px; color: var(--ardoise); }
+.info-close { position: absolute; top: 10px; right: 14px; background: none; border: none; font-size: 20px; color: var(--ardoise); }
+
+/* ---------- VISITE GUIDÉE (première visite) ---------- */
+#tour[hidden] { display: none; }
+#tour { position: fixed; inset: 0; z-index: 2000; }
+/* box-shadow géant plutôt qu'un vrai calque semi-transparent découpé :
+   une seule règle CSS suffit à assombrir tout l'écran SAUF le
+   rectangle de la cible, sans masque/clip-path à calculer. */
+#tour-spot {
+    position: fixed;
+    border-radius: 12px;
+    box-shadow: 0 0 0 9999px rgba(20, 30, 28, 0.6);
+    transition: top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease;
+    pointer-events: none;
+}
+#tour-bulle {
+    position: fixed;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    padding: 16px;
+    transition: top 0.3s ease, bottom 0.3s ease, left 0.3s ease;
+}
+#tour-texte { font-size: 13.5px; color: #2A2A28; margin-bottom: 14px; line-height: 1.5; }
+.tour-bas { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#tour-compteur { font-size: 11.5px; color: var(--ardoise); font-weight: 700; }
+.tour-boutons { display: flex; align-items: center; gap: 12px; }
+.tour-bouton-texte { border: none; background: none; color: var(--ardoise); font-size: 12.5px; }
+#tour-suivant { padding: 9px 16px; }
+
+.contact-form { text-align: left; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--bordure); }
+.contact-titre { font-weight: 700; font-size: 13.5px; color: #2A2A28; margin-bottom: 10px; }
+.contact-statut { margin-top: 10px; font-size: 12.5px; min-height: 15px; }
+.contact-statut-succes { color: var(--foret); font-weight: 700; }
+.contact-statut-erreur { color: #C94338; font-weight: 700; }
+
+@media (max-width: 780px) {
+    /* Icône seule pour ces deux-là aussi (comme Accueil/Couches/
+       Actualités, déjà en 38x38 fixe) plutôt qu'un texte qui peut
+       passer sur deux lignes selon la largeur exacte de l'écran -
+       constaté en conditions réelles : "À propos" repassait de 30px à
+       42px de haut entre 390px et 375px de large rien qu'à cause du
+       retour à la ligne, cassant l'alignement de toute la rangée de
+       boutons. Taille fixe = plus aucune variation possible. */
+    #recherche-button span, #about-button span { display: none; }
+    #recherche-button, #about-button {
+        width: 38px; height: 38px; padding: 0;
+        display: inline-flex; align-items: center; justify-content: center;
+    }
+    /* Hors champ par défaut (pas "display:none" comme sur PC) : c'est ce
+       qui permet l'animation de glissement au lieu d'une simple
+       apparition/disparition brute - layers-panel-hidden (PC) et
+       layers-panel-open (mobile) restent bien deux mécanismes séparés,
+       chacun adapté à son propre mode d'affichage (voir plus haut). */
+    #layers-panel { position: absolute; inset: 0 15% 0 0; transform: translateX(-100%); transition: transform 0.25s ease; z-index: 900; display: block; }
+    #layers-panel.layers-panel-open { transform: translateX(0); }
+    #layers-resize-handle { display: none; }
+    #hero-title { font-size: 22px; }
+    /* Pas de largeur forcée sur .leaflet-popup-content ici non plus (voir
+       le commentaire plus haut dans ce fichier) : la largeur responsive
+       vient uniquement de .popup-carburant/.popup-fiche ci-dessous, que
+       Leaflet mesure correctement pour son propre calcul d'auto-pan. */
+    .popup-carburant { width: min(390px, calc(100vw - 48px)); }
+    .popup-carburant-entete { padding: 15px; }
+    .popup-carburant-section { padding: 12px 15px; }
+    .popup-fiche { width: min(340px, calc(100vw - 48px)); }
+
+    /* position: fixed plutôt qu'absolute ancré sous le bouton : sur un
+       petit écran, le bouton "Actualités" n'est pas forcément au bord
+       droit de la barre du haut (d'autres boutons peuvent suivre), donc
+       "right: 0" relatif au bouton peut pousser le menu déroulant hors
+       de l'écran côté gauche - ancré à la barre du haut elle-même (62px
+       de hauteur, comme #app plus haut dans ce fichier) avec une marge
+       fixe des deux côtés, il reste toujours entièrement visible quelle
+       que soit la position du bouton qui l'ouvre. */
+    .actu-dropdown { position: fixed; top: 62px; left: 12px; right: 12px; width: auto; max-width: none; }
+}
+
+/* Écrans de téléphone étroits (< 420px environ, ex. iPhone SE, la plupart
+   des Android d'entrée de gamme) : même avec le panneau des couches déjà
+   passé en hors-champ ci-dessus, la barre du haut (logo + recherche +
+   boutons) restait plus large que l'écran - le bouton "Couches", le plus
+   à droite, se retrouvait poussé hors de la zone visible (constaté en
+   conditions réelles, nécessitait de dézoomer le navigateur pour le
+   faire réapparaître). Resserré ici plutôt que de le cacher/l'empiler
+   ailleurs : tout doit rester accessible sans scroll horizontal ni zoom. */
+@media (max-width: 420px) {
+    #topbar { padding: 0 8px; gap: 6px; }
+    #topbar-actions { gap: 4px; }
+    #brand-subtitle { display: none; }
+    .brand-logo { height: 26px; }
+    #brand-title { font-size: 15px; }
+    /* Cinq boutons désormais tous à taille fixe (38px, voir la règle à
+       780px) : à 320px de large (iPhone SE, bas de gamme Android), leur
+       simple somme + les espacements dépassait encore la largeur de
+       l'écran de ~27px même une fois la barre de recherche réduite à
+       rien - resserré encore ici plutôt que de laisser "À propos"
+       hors champ. Constaté en mesurant, pas une simple supposition. */
+    #home-button, #menu-button, #recherche-button, #actu-button, #about-button {
+        width: 34px; height: 34px;
+    }
+}

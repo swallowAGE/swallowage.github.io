@@ -1,0 +1,5 @@
+{
+  "_lisezmoi": "Casiers/points relais connus sur le terrain mais pas encore cartographiés dans OpenStreetMap (donc invisibles pour la couche 'lockers' en flux Overpass, quel que soit le tag interrogé) - voir la section dédiée du README pour le format attendu de chaque Feature et la marche à suivre. Ce fichier ne remplace pas OpenStreetMap, il comble juste des trous ponctuels en attendant que le point soit ajouté là-bas (ce qui reste la vraie solution durable, utile à tout le monde et pas seulement ce site) : dès qu'un point ajouté ici est mappé sur OSM, il doit être retiré d'ici pour éviter un doublon sur la carte.",
+  "type": "FeatureCollection",
+  "features": []
+}

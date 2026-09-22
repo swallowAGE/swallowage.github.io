@@ -1,0 +1,5 @@
+{
+  "_lisezmoi": "Sites emblématiques de la forêt de Bercé (arbres remarquables, sources, points d'intérêt documentés par l'ONF) connus sur le terrain mais pas encore cartographiés dans OpenStreetMap - voir la section dédiée du README pour le format attendu de chaque Feature. Ce fichier ne remplace pas OpenStreetMap, il comble juste des trous ponctuels en attendant que le point soit ajouté là-bas : dès qu'un point ajouté ici est mappé sur OSM, il doit être retiré d'ici pour éviter un doublon sur la carte. Exemples à ajouter dès que les coordonnées sont connues : Chêne Boppe (Futaie des Clos, Jupilles), Fontaine de la Coudre, Source de l'Hermitière.",
+  "type": "FeatureCollection",
+  "features": []
+}

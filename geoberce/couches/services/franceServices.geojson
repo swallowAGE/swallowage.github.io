@@ -1,0 +1,107 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.461265,
+          47.86691
+        ]
+      },
+      "properties": {
+        "id_fs": "663",
+        "insee_dep": "72",
+        "lib_fs": "France services Loir-Lucé-Bercé",
+        "adresse": "2 Rue de Belleville",
+        "complement_adresse": "",
+        "insee_com": "72143",
+        "code_postal": "72150",
+        "lib_com": "Le Grand-Lucé",
+        "mail": "loir-luce-berce@france-services.gouv.fr",
+        "telephone": "02 43 40 92 76",
+        "h_lundi": "09:00 - 12:30 / 14:00 - 17:30",
+        "h_mardi": "09:00 - 12:30 / 14:00 - 17:30",
+        "h_mercredi": "09:00 - 12:30 / 14:00 - 17:30",
+        "h_jeudi": "09:00 - 12:30 / 14:00 - 17:30",
+        "h_vendredi": "09:00 - 12:30 / 14:00 - 17:30",
+        "h_samedi": "",
+        "prise_rdv": "Oui",
+        "commentaire": "",
+        "type_fs": "Principal",
+        "format_fs": "Fixe",
+        "groupe_fs": "",
+        "labellisation_fs": "Espace labellisé 01/02/2020"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.573576,
+          47.729533
+        ]
+      },
+      "properties": {
+        "id_fs": "1565",
+        "insee_dep": "72",
+        "lib_fs": "France services La Poste de La Chartre-sur-le-Loir",
+        "adresse": "Place de l'Hôtel de Ville",
+        "complement_adresse": "Bureau de Poste",
+        "insee_com": "72068",
+        "code_postal": "72340",
+        "lib_com": "La Chartre-sur-le-Loir",
+        "mail": "chartre-sur-le-loir@france-services.gouv.fr",
+        "telephone": "02 43 38 01 22",
+        "h_lundi": "",
+        "h_mardi": "",
+        "h_mercredi": "",
+        "h_jeudi": "",
+        "h_vendredi": "",
+        "h_samedi": "",
+        "prise_rdv": "Oui",
+        "commentaire": "",
+        "type_fs": "Principal",
+        "format_fs": "Fixe",
+        "groupe_fs": "",
+        "labellisation_fs": "Espace labellisé 01/10/2021"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.461265,
+          47.86691
+        ]
+      },
+      "properties": {
+        "id_fs": "2254",
+        "insee_dep": "72",
+        "lib_fs": "Bus France services Centre Social Rural de Lucé",
+        "adresse": "2 Rue de Belleville",
+        "complement_adresse": "",
+        "insee_com": "72143",
+        "code_postal": "72150",
+        "lib_com": "Le Grand-Lucé",
+        "mail": "busfranceservicesloirluceberce@gmail.com",
+        "telephone": "07 56 22 15 36",
+        "h_lundi": "09:00 - 12:00 / 13:30 - 16:30",
+        "h_mardi": "09:00 - 12:00 / 13:30 - 16:30",
+        "h_mercredi": "09:00 - 12:00",
+        "h_jeudi": "09:00 - 12:00 / 13:30 - 16:30",
+        "h_vendredi": "09:00 - 12:00 / 13:30 - 16:30",
+        "h_samedi": "",
+        "prise_rdv": "Oui",
+        "commentaire": "Itinérance sur la Communauté de communes Loir Lucé Bercé ",
+        "type_fs": "Principal",
+        "format_fs": "Bus_équivalent",
+        "groupe_fs": "",
+        "labellisation_fs": "Espace labellisé 01/10/2021"
+      }
+    }
+  ]
+}

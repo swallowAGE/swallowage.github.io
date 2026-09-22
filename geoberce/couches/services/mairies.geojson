@@ -1,0 +1,701 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.6553152,
+          47.7618082
+        ]
+      },
+      "properties": {
+        "full_id": "n9609916000",
+        "osm_id": "9609916000",
+        "osm_type": "node",
+        "amenity": "Mairie déléguée",
+        "contact_website": "https://www.loirenvallee.fr",
+        "contact_phone": "02 43 44 45 32",
+        "contact_email": "poncesurleloir@loirenvallee.fr",
+        "opening_hours": "Le Mardi : de 09h00 à 12h00\nLe Vendredi : de 09h00 à 12h00\nLe Samedi : de 10h00 à 12h30",
+        "name": "Mairie déléguée de Poncé-sur-le-Loir",
+        "commune": "Loir-En-Vallée",
+        "elus": "SETTIER Patrick (Maire)\nCRINIERE Thierry (Maire délégué)\nAUBRY Xavier (Maire délégué)\nBELLAIR Olivier (Maire délégué)\nBORDIER Diégo (Maire délégué)\nSALMON Eric (1er adjoint au Maire)\nBUNEL Sonia (2ème adjoint au Maire)\nCOCHARD Alain (3ème adjoint au Maire)\nMARIE Elise (4ème adjoint au Maire)\nPATAUX Etienne (5ème adjoint au Maire)\nMICHAUX Élodie (6ème adjoint au Maire)\nCADRAN Sylvie (Conseillère municipale)\nCHASSANY Philippe (Conseiller municipal)\nDERRÉ Gwendoline (Conseillère municipale)\nESCARRA Bruno (Conseiller municipal)\nJARDIN Marine (Conseillère municipale)\nMASSON Clément (Conseiller municipal)\nMAYEUR Pascale (Conseillère municipale)\nMOUROT Isabelle (Conseillère municipale)\nPORCHERON Dominique (Conseillère municipale)\nPÉAN Nicole (Conseillère municipale)\nSEVAULT Christophe (Conseiller municipal)\nVALLON Sandra (Conseillère municipale)",
+        "marker-color": "rgba(130, 74, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.7024349,
+          47.7904668
+        ]
+      },
+      "properties": {
+        "full_id": "n9609938960",
+        "osm_id": "9609938960",
+        "osm_type": "node",
+        "amenity": "Mairie déléguée",
+        "contact_website": "https://www.loirenvallee.fr",
+        "contact_phone": "02 72 88 05 76",
+        "contact_email": "lavenay@loirenvallee.fr",
+        "opening_hours": "Lundi : de 14h00 à 18h00\nMardi : de 14h00 à 18h00\nLe Vendredi : de 14h00 à 18h00",
+        "name": "Mairie déléguée de Lavenay",
+        "commune": "Loir-En-Vallée",
+        "elus": "SETTIER Patrick (Maire)\nSALMON Eric (1er adjoint au Maire)\nBUNEL Sonia (2ème adjoint au Maire)\nCOCHARD Alain (3ème adjoint au Maire)\nMARIE Elise (4ème adjoint au Maire)\nPATAUX Etienne (5ème adjoint au Maire)\nMICHAUX Élodie (6ème adjoint au Maire)\nAUBRY Xavier (Maire délégué)\nBELLAIR Olivier (Maire délégué)\nBORDIER Diégo (Maire délégué)\nCADRAN Sylvie (Conseillère municipale)\nCHASSANY Philippe (Conseiller municipal)\nCRINIERE Thierry (Maire délégué)\nDERRÉ Gwendoline (Conseillère municipale)\nESCARRA Bruno (Conseiller municipal)\nJARDIN Marine (Conseillère municipale)\nMASSON Clément (Conseiller municipal)\nMAYEUR Pascale (Conseillère municipale)\nMOUROT Isabelle (Conseillère municipale)\nPORCHERON Dominique (Conseillère municipale)\nPÉAN Nicole (Conseillère municipale)\nSEVAULT Christophe (Conseiller municipal)\nVALLON Sandra (Conseillère SETTIER Patrick (Maire)\nCRINIERE Thierry (Maire délégué)\nAUBRY Xavier (Maire délégué)\nBELLAIR Olivier (Maire délégué)\nBORDIER Diégo (Maire délégué)\nSALMON Eric (1er adjoint au Maire)\nBUNEL Sonia (2ème adjoint au Maire)\nCOCHARD Alain (3ème adjoint au Maire)\nMARIE Elise (4ème adjoint au Maire)\nPATAUX Etienne (5ème adjoint au Maire)\nMICHAUX Élodie (6ème adjoint au Maire)\nCADRAN Sylvie (Conseillère municipale)\nCHASSANY Philippe (Conseiller municipal)\nDERRÉ Gwendoline (Conseillère municipale)\nESCARRA Bruno (Conseiller municipal)\nJARDIN Marine (Conseillère municipale)\nMASSON Clément (Conseiller municipal)\nMAYEUR Pascale (Conseillère municipale)\nMOUROT Isabelle (Conseillère municipale)\nPORCHERON Dominique (Conseillère municipale)\nPÉAN Nicole (Conseillère municipale)\nSEVAULT Christophe (Conseiller municipal)\nVALLON Sandra (Conseillère municipale))",
+        "marker-color": "rgba(130, 92, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.4877828,
+          47.8248226
+        ]
+      },
+      "properties": {
+        "full_id": "n1611895011",
+        "osm_id": "1611895011",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 44 84 04",
+        "contact_email": "accueil@saintvincentdulorouer.fr",
+        "opening_hours": "Lundi : de 09h00 à 12h00\nMardi : de 09h00 à 12h00\nMercredi : de 09h00 à 12h00\nLe Jeudi : de 09h00 à 12h00 de 14h00 à 17h00\nVendredi : de 09h00 à 12h00\nSamedi : de 09h00 à 12h00",
+        "name": "Mairie de Saint-Vincent-du-Lorouër",
+        "commune": "Saint-Vincent-Du-Lorouër",
+        "elus": "RENARD Patrick (Maire)\nDEBELLE Hervé (1er adjoint au Maire)\nGOUCHET Jocelyne (2ème adjoint au Maire)\nCARREAU Jérôme (3ème adjoint au Maire)\nCATHERINE Isabelle (4ème adjoint au Maire)\nBAJIAU Emilie (Conseillère municipale)\nBEAUCHAMPS Mickaël (Conseiller municipal)\nBEAUDOUX-MOITTE Catherine (Conseillère municipale)\nBOUTTIER Didier (Conseiller municipal)\nFROGER David (Conseiller municipal)\nGUÉRY Christophe (Conseiller municipal)\nHERRAULT Audrey (Conseillère municipale)\nJANVIER Christine (Conseillère municipale)\nMEDARD Sébastien (Conseiller municipal)\nPAPIN Geneviève (Conseillère municipale)",
+        "marker-color": "rgba(130, 97, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.467655033258709,
+          47.8656382708334
+        ]
+      },
+      "properties": {
+        "full_id": null,
+        "osm_id": "way/157020933",
+        "osm_type": null,
+        "amenity": "Mairie",
+        "contact_website": "https://www.mairie-legrandluce.fr/",
+        "contact_phone": "02 43 40 90 34",
+        "contact_email": "secretariat@legrandluce.fr",
+        "opening_hours": "Lundi : de 09h00 à 12h00 de 14h00 à 17h00\nMardi : de 09h00 à 12h00 de 14h00 à 17h00\nMercredi : de 09h00 à 12h00 de 14h00 à 17h00\nLe Jeudi : de 09h00 à 12h00 de 14h00 à 18h00\nLe Vendredi : de 09h00 à 12h00 de 14h00 à 17h00\nLe Samedi : de 09h00 à 12h00",
+        "name": "Mairie du Grand-Lucé",
+        "commune": "Le Grand-Lucé",
+        "elus": "DUPUIS Pascal (Maire)\nLEONARD Jérôme (1er adjoint au Maire)\nCISSE Clarisse (2ème adjoint au Maire)\nPLOUSEAU François (3ème adjoint au Maire)\nDUBRAY Noëline (4ème adjoint au Maire)\nLECLERC Jean-Yves (5ème adjoint au Maire)\nBENARD Olivier (Conseiller municipal)\nBRUTOUT Maryse (Conseillère municipale)\nDULUARD Emilie (Conseillère municipale)\nGALLOT Cécile (Conseillère municipale)\nGHOBRI Elodie (Conseillère municipale)\nGUET Patrick (Conseiller municipal)\nMARTINAUD Geoffroy (Conseiller municipal)\nOSTER Béatrice (Conseillère municipale)\nRICORDEAU Sébastien (Conseiller municipal)\nROBIL Jarno (Conseiller municipal)\nROLLAND Nelly (Conseillère municipale)\nTHIBOUS Françoise (Conseillère municipale)\nWEBER REGNIER Laëtitia (Conseillère municipale)",
+        "marker-color": "rgba(130, 97, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.3957653,
+          47.6694641
+        ]
+      },
+      "properties": {
+        "full_id": "n11195035051",
+        "osm_id": "11195035051",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 44 07 56",
+        "contact_email": "mairie@nogentsurloir.fr",
+        "opening_hours": "Lundi : de 09h00 à 12h00\nMardi : de 09h00 à 12h00\nLe Jeudi : de 14h00 à 17h00\nLe Vendredi : de 09h00 à 12h00",
+        "name": "Mairie de Nogent-sur-Loir",
+        "commune": "Nogent-Sur-Loir",
+        "elus": "ROBINEAU Guy (Maire)\nHATTON Angélique (1er adjoint au Maire)\nLECUYER Gilles (2ème adjoint au Maire)\nJUMEL Brigitte (3ème adjoint au Maire)\nALLAIRE Claude (Conseillère municipale)\nBEAUMARD Céline (Conseillère municipale)\nGAIGNARD Fabien (Conseiller municipal)\nLE NOUAILLE Fabrice (Conseiller municipal)\nLOISON David (Conseiller municipal)\nREFOUR Gaylord (Conseiller municipal)\nRIBOUILLEAULT-PELLEROT Florence (Conseillère municipale)",
+        "marker-color": "rgba(130, 99, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.5635531,
+          47.8147735
+        ]
+      },
+      "properties": {
+        "full_id": "n7350277121",
+        "osm_id": "7350277121",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://courdemanche72.fr/mairie",
+        "contact_phone": "02 43 44 80 19",
+        "contact_email": "mairie.courdemanche@gmail.com",
+        "opening_hours": "Lundi : de 09h00 à 12h00\nMardi : de 09h00 à 12h00\nJeudi : de 09h00 à 12h00\nVendredi : de 09h00 à 12h00\nLe Samedi : de 09h00 à 12h00",
+        "name": "Mairie de Courdemanche",
+        "commune": "Courdemanche",
+        "elus": "BOISSONEAU Elise (Conseillère municipale)\nBOUSSION Francis (Conseiller municipal)\nBRACQUEMOND Martine (Conseillère municipale)\nDAGUENET Katia (Conseillère municipale)\nDURR Philippe (Conseiller municipal)\nGROS Anne-Cécile (Conseillère municipale)\nHERTEREAU Claude (Conseiller municipal)\nJOLIVALT Jean-Benoît (Conseiller municipal)\nLE HENAFF Anne-Laure (Conseillère municipale)\nLEGEAY Arnaud (Conseiller municipal)\nLONGERAY Natacha (Conseillère municipale)\nMOREAU Michel (Conseiller municipal)\nPLOUZEAU Roselyne (Conseillère municipale)\nROBERT Julia (Conseillère municipale)\nVERDIER Emmanuel (Conseiller municipal)",
+        "marker-color": "rgba(130, 84, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.385852456502459,
+          47.6802393635245
+        ]
+      },
+      "properties": {
+        "full_id": null,
+        "osm_id": "way/179663146",
+        "osm_type": null,
+        "amenity": "Mairie déléguée",
+        "contact_website": "https://www.montvalsurloir.fr/",
+        "contact_phone": "02 43 44 07 17",
+        "contact_email": "accueil.montabon@montvalsurloir.fr",
+        "opening_hours": "Le Mardi : de 09h00 à 12h00\nLe Vendredi : de 08h30 à 12h00",
+        "name": "Mairie déléguée de Montabon",
+        "commune": "Montval-Sur-Loir",
+        "elus": "RONCIÈRE Hervé (Maire)\nDUCHESNE Sabrina (1er adjoint au Maire)\nOLIVIER François (2ème adjoint au Maire)\nBRUNEAU Jocelyne (3ème adjoint au Maire)\nTOURNADRE Philippe (4ème adjoint au Maire)\nCOULONNIER Claire (5ème adjoint au Maire)\nMÉAUDE Martial (6ème adjoint au Maire)\nBOISSIÈRE Véronique (Conseillère municipale)\nBOUSSION Pascale (Conseillère municipale)\nBROSSEAU Denis (Conseiller municipal)\nCLAVREUL Ludovic (Conseiller municipal)\nCOLET Sarah (Conseillère municipale)\nDELANOUE Sandrine (Conseillère municipale)\nDUPONT Lydie (Conseillère municipale)\nFAISANDEL Annie (Conseillère municipale)\nFONTAINE Alain (Conseiller municipal)\nFONTUGNE HAMOUR Véronique (Conseillère municipale)\nFOURMY Delphine (Conseillère municipale)\nHARMS Julika (Conseillère municipale)\nJUNIUS Jérôme (Conseiller municipal)\nLANGEVIN Dominique (Conseiller municipal)\nLETELLIER Sonia (Conseillère municipale)\nMICHAUD Bruno (Conseiller municipal)\nALLARD Gérard (Conseiller municipal)\nAUVILLE Sébastien (Conseiller municipal)\nPAUGOY Francis (Conseiller municipal)\nPILON Jérôme (Conseiller municipal)\nPORTRET Mathias (Conseiller municipal)\nRENAULT Richard (Conseiller municipal)\nRICHARD Églantine (Conseillère municipale)\nBEILLARD Jean-Claude (Conseiller municipal)\nBIGNON Laura (Conseillère municipale)\nVALAIS Fabienne (Conseillère municipale)",
+        "marker-color": "rgba(130, 69, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.6787906,
+          47.7987444
+        ]
+      },
+      "properties": {
+        "full_id": "n9609941298",
+        "osm_id": "9609941298",
+        "osm_type": "node",
+        "amenity": "Mairie déléguée",
+        "contact_website": "https://www.loirenvallee.fr",
+        "contact_phone": "02 43 35 35 17",
+        "contact_email": "lachapellegaugain@loirenvallee.fr",
+        "opening_hours": "Mardi : de 08h30 à 12h30\nMercredi : de 08h30 à 12h30\nJeudi : de 08h30 à 12h30\nVendredi : de 08h30 à 12h30\nLe Samedi : de 09h00 à 12h00",
+        "name": "Mairie déléguée de La Chapelle-Gaugain",
+        "commune": "Loir-En-Vallée",
+        "elus": "SETTIER Patrick (Maire)\nSALMON Eric (1er adjoint au Maire)\nBUNEL Sonia (2ème adjoint au Maire)\nCOCHARD Alain (3ème adjoint au Maire)\nMARIE Elise (4ème adjoint au Maire)\nPATAUX Etienne (5ème adjoint au Maire)\nMICHAUX Élodie (6ème adjoint au Maire)\nAUBRY Xavier (Maire délégué)\nBELLAIR Olivier (Maire délégué)\nBORDIER Diégo (Maire délégué)\nCADRAN Sylvie (Conseillère municipale)\nCHASSANY Philippe (Conseiller municipal)\nCRINIERE Thierry (Maire délégué)\nDERRÉ Gwendoline (Conseillère municipale)\nESCARRA Bruno (Conseiller municipal)\nJARDIN Marine (Conseillère municipale)\nMASSON Clément (Conseiller municipal)\nMAYEUR Pascale (Conseillère municipale)\nMOUROT Isabelle (Conseillère municipale)\nPORCHERON Dominique (Conseillère municipale)\nPÉAN Nicole (Conseillère municipale)\nSEVAULT Christophe (Conseiller municipal)\nVALLON Sandra (Conseillère SETTIER Patrick (Maire)\nCRINIERE Thierry (Maire délégué)\nAUBRY Xavier (Maire délégué)\nBELLAIR Olivier (Maire délégué)\nBORDIER Diégo (Maire délégué)\nSALMON Eric (1er adjoint au Maire)\nBUNEL Sonia (2ème adjoint au Maire)\nCOCHARD Alain (3ème adjoint au Maire)\nMARIE Elise (4ème adjoint au Maire)\nPATAUX Etienne (5ème adjoint au Maire)\nMICHAUX Élodie (6ème adjoint au Maire)\nCADRAN Sylvie (Conseillère municipale)\nCHASSANY Philippe (Conseiller municipal)\nDERRÉ Gwendoline (Conseillère municipale)\nESCARRA Bruno (Conseiller municipal)\nJARDIN Marine (Conseillère municipale)\nMASSON Clément (Conseiller municipal)\nMAYEUR Pascale (Conseillère municipale)\nMOUROT Isabelle (Conseillère municipale)\nPORCHERON Dominique (Conseillère municipale)\nPÉAN Nicole (Conseillère municipale)\nSEVAULT Christophe (Conseiller municipal)\nVALLON Sandra (Conseillère municipale))",
+        "marker-color": "rgba(130, 74, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.463273670745505,
+          47.6967104994148
+        ]
+      },
+      "properties": {
+        "full_id": null,
+        "osm_id": "way/180871756",
+        "osm_type": null,
+        "amenity": "Mairie déléguée",
+        "contact_website": "https://www.montvalsurloir.fr/",
+        "contact_phone": "02 43 44 14 15",
+        "contact_email": "accueil.vouvraysurloir@montvalsurloir.fr",
+        "opening_hours": "Lundi : de 09h00 à 12h00\nMardi : de 09h00 à 12h00\nMercredi : de 09h00 à 12h00\nJeudi : de 09h00 à 12h00\nVendredi : de 09h00 à 12h00",
+        "name": "Mairie déléguée de Vouvray-sur-Loir",
+        "commune": "Montval-Sur-Loir",
+        "elus": "RONCIÈRE Hervé (Maire)\nDUCHESNE Sabrina (1er adjoint au Maire)\nOLIVIER François (2ème adjoint au Maire)\nBRUNEAU Jocelyne (3ème adjoint au Maire)\nTOURNADRE Philippe (4ème adjoint au Maire)\nCOULONNIER Claire (5ème adjoint au Maire)\nMÉAUDE Martial (6ème adjoint au Maire)\nBOISSIÈRE Véronique (Conseillère municipale)\nBOUSSION Pascale (Conseillère municipale)\nBROSSEAU Denis (Conseiller municipal)\nCLAVREUL Ludovic (Conseiller municipal)\nCOLET Sarah (Conseillère municipale)\nDELANOUE Sandrine (Conseillère municipale)\nDUPONT Lydie (Conseillère municipale)\nFAISANDEL Annie (Conseillère municipale)\nFONTAINE Alain (Conseiller municipal)\nFONTUGNE HAMOUR Véronique (Conseillère municipale)\nFOURMY Delphine (Conseillère municipale)\nHARMS Julika (Conseillère municipale)\nJUNIUS Jérôme (Conseiller municipal)\nLANGEVIN Dominique (Conseiller municipal)\nLETELLIER Sonia (Conseillère municipale)\nMICHAUD Bruno (Conseiller municipal)\nALLARD Gérard (Conseiller municipal)\nAUVILLE Sébastien (Conseiller municipal)\nPAUGOY Francis (Conseiller municipal)\nPILON Jérôme (Conseiller municipal)\nPORTRET Mathias (Conseiller municipal)\nRENAULT Richard (Conseiller municipal)\nRICHARD Églantine (Conseillère municipale)\nBEILLARD Jean-Claude (Conseiller municipal)\nBIGNON Laura (Conseillère municipale)\nVALAIS Fabienne (Conseillère municipale)",
+        "marker-color": "rgba(130, 89, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.5576152,
+          47.7433655
+        ]
+      },
+      "properties": {
+        "full_id": "n9451384808",
+        "osm_id": "9451384808",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://www.lhomme-72.fr/",
+        "contact_phone": "02 43 44 43 62",
+        "contact_email": "secretariat@mairielhomme.fr",
+        "opening_hours": "Le Lundi : de 15h00 à 17h30\nLe Mardi : de 08h30 à 12h30 de 16h30 à 18h00\nMercredi : de 08h30 à 12h30\nJeudi : de 08h30 à 12h30\nLe Vendredi : de 08h30 à 12h30 de 16h30 à 18h00",
+        "name": "Mairie de Lhomme",
+        "commune": "Lhomme",
+        "elus": "DELAETER Philippe (Maire)\nBARRIER Philippe (1er adjoint au Maire)\nALLOUCHERY Martine (2ème adjoint au Maire)\nBUSSON Jacky (3ème adjoint au Maire)\nBOBET Romain (Conseiller municipal)\nBUSSON Alberic (Conseiller municipal)\nCIRET Gaëlle (Conseillère municipale)\nDUBREIL Jean-Marie (Conseiller municipal)\nGUETTIER Estelle (Conseillère municipale)\nHERTEREAU Thierry (Conseiller municipal)\nLAINAULT Adrien (Conseiller municipal)\nLOYAU Mélanie (Conseillère municipale)\nNICOLAS Christine (Conseillère municipale)\nSAINT OUEN Ingrid (Conseillère municipale)\nTRASSART Nathalie (Conseillère municipale)",
+        "marker-color": "rgba(130, 104, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.4476403,
+          47.753629
+        ]
+      },
+      "properties": {
+        "full_id": "n2714902917",
+        "osm_id": "2714902917",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "http://www.thoiresurdinan.fr",
+        "contact_phone": "02 43 44 10 32",
+        "contact_email": "mairie.thoiresurdinan@wanadoo.fr",
+        "opening_hours": "Le Lundi : de 09h30 à 12h00 de 13h00 à 16h30\nLe Mardi : de 09h30 à 13h30\nLe Jeudi : de 09h30 à 12h00 de 13h00 à 16h30\nLe Vendredi : de 13h00 à 17h30",
+        "name": "Mairie de Thoiré-sur-Dinan",
+        "commune": "Thoiré-Sur-Dinan",
+        "elus": "BOULAY Bruno (Maire)\nLENOIR Gérard (1er adjoint au Maire)\nPOILVILAIN Nadège (2ème adjoint au Maire)\nABRAHAM Michel (3ème adjoint au Maire)\nBOIVIN David (Conseiller municipal)\nCORSO Laurianne (Conseillère municipale)\nCOUREL Jean-Marc (Conseiller municipal)\nDELCHAMBRE Joy (Conseillère municipale)\nGIVRAN Lucet (Conseiller municipal)\nIMBERTY Claire (Conseillère municipale)\nMANCELLIER Aurélie (Conseillère municipale)",
+        "marker-color": "rgba(130, 84, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.431258688967149,
+          47.8363204334758
+        ]
+      },
+      "properties": {
+        "full_id": "n249609523",
+        "osm_id": "249609523",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 40 91 51",
+        "contact_email": "mairiepruilleleguille@outlook.com",
+        "opening_hours": "Lundi : 9h à 12h\nMardi : 9h à 12h\nJeudi : 9h à 12h\nVendredi : 9h à 12h\nSamedi : 9h à 12h",
+        "name": "Mairie de Pruillé-l'Eguillé",
+        "commune": "Pruillé-L'Eguillé",
+        "elus": "MARTINEAU Myriam (Maire)\nVERGNAUD Jean (1er adjoint au Maire)\nTOILLIEZ Stéphanie (2ème adjoint au Maire)\nLEGEAY Jacques (3ème adjoint au Maire)\nMULOWSKY Virginie (4ème adjoint au Maire)\nBLOT Thierry (Conseiller municipal)\nBOUCHEREAU Dominique (Conseiller municipal)\nBOUDIER Bernard (Conseiller municipal)\nCONCA Virginie (Conseillère municipale)\nDEROUIN Anne-Claire (Conseillère municipale)\nDETURCK Anthony (Conseiller municipal)\nMANIEZ Maryvonne (Conseillère municipale)\nTURPIN Jessica (Conseillère municipale)",
+        "marker-color": "rgba(130, 87, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.5687058,
+          47.6932519
+        ]
+      },
+      "properties": {
+        "full_id": "n3167171354",
+        "osm_id": "3167171354",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 44 43 17",
+        "contact_email": "mairie.beaumont-sur-deme@wanadoo.fr",
+        "opening_hours": "Lundi : de 09h00 à 12h00\nMardi : de 09h00 à 12h00\nLe Jeudi : de 09h00 à 12h00",
+        "name": "Mairie de Beaumont-sur-Dême",
+        "commune": "Beaumont-Sur-Dême",
+        "elus": "DUMONTET François Paul René (Maire)\nORIVÉ Nadia (1er adjoint au Maire)\nROTTIER François (2ème adjoint au Maire)\nDAVEAU Annick (Conseillère municipale)\nGRASELY Didier (Conseiller municipal)\nLEDRU Julien (Conseiller municipal)\nLIEVAL Catherine (Conseillère municipale)\nMILLET Nathalie Claire (Conseillère municipale)\nMONTY Frédéric Jean Vincent (Conseiller municipal)",
+        "marker-color": "rgba(130, 67, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.4119387,
+          47.7922742
+        ]
+      },
+      "properties": {
+        "full_id": "n1768485777",
+        "osm_id": "1768485777",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://www.jupilles.fr/",
+        "contact_phone": "02 43 44 11 15",
+        "contact_email": "mairie-jupilles@wanadoo.fr",
+        "opening_hours": "Le Lundi : de 15h00 à 17h45\nLe Mardi : de 09h00 à 11h45\nLe Jeudi : de 15h00 à 17h45\nLe Vendredi : de 09h00 à 11h45",
+        "name": "Mairie de Jupilles",
+        "commune": "Jupilles",
+        "elus": "GRUAU Vincent (Maire)\nMILLET Lynda (1er adjoint au Maire)\nDOMMÉE David (2ème adjoint au Maire)\nBALISSON Marie-Pierre (3ème adjoint au Maire)\nDARET Jean-Jacques (4ème adjoint au Maire)\nBOUCHER Frédéric (Conseiller municipal)\nBOULLET Hélène (Conseillère municipale)\nCOUDRAY Angéline (Conseillère municipale)\nDAGNEAU Bernard (Conseiller municipal)\nFRAYLON Julie (Conseillère municipale)\nLANGEVIN Tanguy (Conseiller municipal)\nLEPEL-COINTET Arthur (Conseiller municipal)\nLEWANDOWSKI Nastasia (Conseillère municipale)\nPÉAN Mélissa (Conseillère municipale)\nTARDIF Amandine (Conseillère municipale)",
+        "marker-color": "rgba(130, 87, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.401275783193739,
+          47.7596087222656
+        ]
+      },
+      "properties": {
+        "full_id": "n324741660",
+        "osm_id": "324741660",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 44 08 07",
+        "contact_email": "mairie@beaumontpieddeboeuf72.fr",
+        "opening_hours": "Lundi : de 09h00 à 11h30\nMardi : de 09h00 à 11h30\njeudi : de 09h00 à 11h30\nVendredi : de 09h00 à 11h30\nSamedi : de 09h00 à 11h30",
+        "name": "Mairie de Beaumont-Pied-de-Boeuf",
+        "commune": "Beaumont-Pied-De-Boeuf",
+        "elus": "TABAREAU Joël (Maire)\nHOUPEAU Martine (1er adjoint au Maire)\nSALMON Philippe (2ème adjoint au Maire)\nFRATRAS Catherine (3ème adjoint au Maire)\nALLARD David (Conseiller municipal)\nBLOSSIER Lara (Conseillère municipale)\nCORNILLEAU Arnaud (Conseiller municipal)\nFERRERO Rémy (Conseiller municipal)\nFLEURY Aurélie (Conseillère municipale)\nLERAT Armand (Conseiller municipal)\nMAILLET Clémentine (Conseillère municipale)",
+        "marker-color": "rgba(130, 77, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.5837667,
+          47.8412264
+        ]
+      },
+      "properties": {
+        "full_id": "n9374542952",
+        "osm_id": "9374542952",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://saintgeorgesdelacouee.com/",
+        "contact_phone": "02 43 44 80 32",
+        "contact_email": "contact@saintgeorgesdelacouee.com",
+        "opening_hours": "Le Lundi : de 09h15 à 12h00 de 12h45 à 17h00\nLe Vendredi : de 09h15 à 12h00 de 12h45 à 17h00",
+        "name": "Mairie de Saint-Georges-de-la-Couée",
+        "commune": "Saint-Georges-De-La-Couée",
+        "elus": "BIDIER Sylvain (Maire)\nCHEVALLIER Catherine (1er adjoint au Maire)\nBOURCIER Aurélien (2ème adjoint au Maire)\nAURIAU Céline (3ème adjoint au Maire)\nCHARDON Axel (Conseiller municipal)\nCOURANT Vincent (Conseiller municipal)\nLIARD Mathilde (Conseillère municipale)\nMIZZON Julie (Conseillère municipale)\nPAPET Olivier (Conseiller municipal)\nTEMAURI Roger (Conseiller municipal)\nVIGON-BEN ZAIED Saïda (Conseillère municipale)",
+        "marker-color": "rgba(130, 64, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.4801681,
+          47.865199
+        ]
+      },
+      "properties": {
+        "full_id": "n2909763136",
+        "osm_id": "2909763136",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 40 92 66",
+        "contact_email": "villaines-sous-luce@orange.fr",
+        "opening_hours": "Lundi : de 09h00 à 12h15 de 13h30 à 16h30\nMardi : de 09h00 à 12h15 de 13h30 à 16h30\nLe Mercredi : de 09h00 à 12h15\nLe Jeudi : de 09h00 à 12h15 de 13h30 à 16h30\nLe Vendredi : de 09h00 à 12h15\nLe Samedi : de 09h00 à 12h00",
+        "name": "Mairie de Villaines-sous-Lucé",
+        "commune": "Villaines-Sous-Lucé",
+        "elus": "VERDIER Agnès (Maire)\nLEHOUX Nicolas (1er adjoint au Maire)\nBOULIDARD Paméla (2ème adjoint au Maire)\nBOUTTIER David (3ème adjoint au Maire)\nBUCHOT Florence (Conseillère municipale)\nDELANDE Anthony (Conseiller municipal)\nDUCHATELET Bénédicte (Conseillère municipale)\nDUMUR Céline (Conseillère municipale)\nFOUQUERAY Martine (Conseillère municipale)\nGONSARD Julien (Conseiller municipal)\nLEGEAY Xavier (Conseiller municipal)\nMIROW Elodie (Conseillère municipale)\nROUSSEAU Jessica (Conseillère municipale)\nSURGET Pascal (Conseiller municipal)\nTRUDELLE Jérémy (Conseiller municipal)",
+        "marker-color": "rgba(130, 72, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.5091739,
+          47.7103074
+        ]
+      },
+      "properties": {
+        "full_id": "n2979412480",
+        "osm_id": "2979412480",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://www.mairie-marcon.fr/",
+        "contact_phone": "02 43 44 13 07",
+        "contact_email": "mairie@ville-marcon.fr",
+        "opening_hours": "Lundi : de 09h00 à 12h30\nMardi : de 09h00 à 12h30\nJeudi : de 09h00 à 12h30\nLundi : de 09h00 à 12h30\nVendredi : de 09h00 à 12h30\nLe Samedi : de 09h00 à 11h00",
+        "name": "Mairie de Marçon",
+        "commune": "Marçon",
+        "elus": "RICHARD Jean-Yves (Maire)\nGOURIOU Véronique (1er adjoint au Maire)\nGENDRON Bernard (2ème adjoint au Maire)\nDAMIEN Sandrine (3ème adjoint au Maire)\nDE MALHERBE Raymond (4ème adjoint au Maire)\nCHEREAU Jean-Pierre (Conseiller municipal)\nDESSERT Jean-Claude (Conseiller municipal)\nGAGNARD Sylvie (Conseillère municipale)\nGUILLE Laura (Conseillère municipale)\nLEHOUX Guillaume (Conseiller municipal)\nLEROY Audrey (Conseillère municipale)\nLIGNEUL Christelle (Conseillère municipale)\nNEVE Christopher (Conseiller municipal)\nSINNAEVE Émilie (Conseillère municipale)\nTROTIN Pascal (Conseiller municipal)",
+        "marker-color": "rgba(130, 69, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.566590502657748,
+          47.8671982593931
+        ]
+      },
+      "properties": {
+        "full_id": "n325567854",
+        "osm_id": "325567854",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://www.montreuillehenri.fr/",
+        "contact_phone": "02 43 44 82 07",
+        "contact_email": "mairie@montreuillehenri.fr",
+        "opening_hours": "Le Lundi : de 09h00 à 12h30\nLe Mardi : de 09h00 à 12h30 de 13h15 à 16h45\nJeudi : de 09h00 à 12h30 de 13h15 à 16h45\nVendredi : de 09h00 à 12h30 de 13h15 à 16h45",
+        "name": "Mairie de Montreuil-le-Henri",
+        "commune": "Montreuil-Le-Henri",
+        "elus": "COLAS Laurent (Maire)\nDUCREUX Nathalie (1er adjoint au Maire)\nTREMEAU Samuel (2ème adjoint au Maire)\nLE COZLEER Sylvie (3ème adjoint au Maire)\nBEN SALEM Agnes (Conseillère municipale)\nCANARIO Barbara (Conseillère municipale)\nCORNU Christèle (Conseillère municipale)\nGUÉRINEAU Laurent (Conseiller municipal)\nLUNEAU Sébastien (Conseiller municipal)\nSAIGNAT Olivier (Conseiller municipal)\nVAUDOUX Meryl (Conseillère municipale)",
+        "marker-color": "rgba(130, 99, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.514345794087856,
+          47.7418870372944
+        ]
+      },
+      "properties": {
+        "full_id": null,
+        "osm_id": "way/329516331",
+        "osm_type": null,
+        "amenity": "Mairie",
+        "contact_website": "https://www.chahaignes.fr",
+        "contact_phone": "02 43 38 11 45",
+        "contact_email": "mairie@chahaignes.fr",
+        "opening_hours": "Lundi : de 08h45 à 12h00\nMardi : de 08h45 à 12h00\nLe Mercredi : de 08h45 à 12h00 de 14h00 à 16h00\nJeudi : de 08h45 à 12h00\nVendredi : de 08h45 à 12h00\nLe Samedi : de 09h00 à 12h00",
+        "name": "Mairie de Chahaignes",
+        "commune": "Chahaignes",
+        "elus": "PETER Dominique (Maire)\nVANNIER Sylvie (1er adjoint au Maire)\nCHRISTIAN Raymond (2ème adjoint au Maire)\nBOUIN Amanda (3ème adjoint au Maire)\nBOURDET Marc (Conseiller municipal)\nBUSSON David (Conseiller municipal)\nCOMMON Christian (Conseiller municipal)\nD'ARCIMOLES Marie-Liesse (Conseillère municipale)\nGADOIS Aurore (Conseillère municipale)\nGAULTIER Mathieu (Conseiller municipal)\nHERILLARD Laura (Conseillère municipale)\nPELLETIER Dany (Conseiller municipal)\nPOSSON Céline (Conseillère municipale)\nRICHARD Nadège (Conseillère municipale)",
+        "marker-color": "rgba(130, 104, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.4529232,
+          47.7324342
+        ]
+      },
+      "properties": {
+        "full_id": "n9403484128",
+        "osm_id": "9403484128",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://fleeinfo.fr",
+        "contact_phone": "02 43 44 10 01",
+        "contact_email": "flee.mairie@outlook.fr",
+        "opening_hours": "Lundi : de 08h30 à 12h00 de 13h30 à 17h15\nMardi : de 08h30 à 12h00 de 13h30 à 17h15\nLe Jeudi : de 08h30 à 12h00 de 13h30 à 17h15",
+        "name": "Mairie de Flée",
+        "commune": "Flée",
+        "elus": "MANCEAU Dominique (Maire)\nHERISSON Aurélien (1er adjoint au Maire)\nHAMET Michèle (2ème adjoint au Maire)\nGUILLOT Loïc (3ème adjoint au Maire)\nEDDI Frédéri (Conseiller municipal)\nFERRE Yannick (Conseillère municipale)\nFRESNEAU Rémi (Conseiller municipal)\nGUILLARD Julie (Conseillère municipale)\nMALEVAL Laurent (Conseiller municipal)\nRENARD Mathieu (Conseiller municipal)\nRESPLANDY-BERNARD Alain (Conseiller municipal)\nROIG Lucie (Conseillère municipale)\nROIG Valérie (Conseillère municipale)\nSCHMIDT Mireille (Conseillère municipale)\nSIMON Chloe (Conseillère municipale)",
+        "marker-color": "rgba(130, 69, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.5224291,
+          47.8058413
+        ]
+      },
+      "properties": {
+        "full_id": "n1800752282",
+        "osm_id": "1800752282",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 44 83 11",
+        "contact_email": "secretariat@stpierredulorouer.fr",
+        "opening_hours": "Lundi : de 08h30 à 13h00\nMardi : de 08h30 à 13h00\nLe Jeudi : de 08h30 à 13h00\nLe Vendredi : de 08h30 à 13h00 de 14h00 à 17h00\nLe Samedi : de 08h30 à 12h30",
+        "name": "Mairie de Saint-Pierre-du-Lorouër",
+        "commune": "Saint-Pierre-Du-Lorouër",
+        "elus": "BRANCHU Evelyne (Maire)\nCARNE Joan (1er adjoint au Maire)\nDELJEHIER Elisabeth (2ème adjoint au Maire)\nPOSSON Nicolas (3ème adjoint au Maire)\nBOUHOURS Alexandre (Conseiller municipal)\nDEMUYNCK Isabelle (Conseillère municipale)\nGILLET Vincent (Conseiller municipal)\nGRANGER Stéphanie (Conseillère municipale)\nPINEAU Nathalie (Conseillère municipale)\nPOURAGEAUX Guillaume (Conseiller municipal)\nSEVAULT Olivia (Conseillère municipale)",
+        "marker-color": "rgba(130, 67, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.5732853,
+          47.729552
+        ]
+      },
+      "properties": {
+        "full_id": "n4304668972",
+        "osm_id": "4304668972",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "http://www.lachartresurleloir.fr",
+        "contact_phone": "02 43 38 16 16",
+        "contact_email": "mairie@lachartresurleloir.fr",
+        "opening_hours": "Le Lundi : de 15h00 à 18h00\nLe Mardi : de 09h00 à 12h30 de 15h00 à 18h00\nLe Mercredi : de 09h00 à 12h30\nLe Jeudi : de 09h00 à 12h30 de 15h00 à 18h00\nLe Vendredi : de 09h00 à 12h30\nLe Samedi : de 09h00 à 12h00",
+        "name": "Mairie de La Chartre-sur-le-Loir",
+        "commune": "La Chartre-Sur-Le-Loir",
+        "elus": "DUTHEIL Michel (Maire)\nDESILES Guy (1er adjoint au Maire)\nGILLE-AYBES Marie-Dominique (2ème adjoint au Maire)\nBORDIER Dominique (3ème adjoint au Maire)\nLAMBERT Emilie (4ème adjoint au Maire)\nAUBERT Jean-Luc (Conseiller municipal)\nFAGUET Sandrine (Conseillère municipale)\nFOURNIER Christian (Conseiller municipal)\nGRANGER Béatrice (Conseillère municipale)\nKISSOUM Sofiane (Conseiller municipal)\nLADURÉE Tony (Conseiller municipal)\nMENANT Anita (Conseillère municipale)\nMURSET Brigitte (Conseillère municipale)\nPUSCEDDU LUYEYE NSUNSAS Nathalie (Conseillère municipale)\nRETIF Christophe (Conseiller municipal)",
+        "marker-color": "rgba(130, 64, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.621902514223458,
+          47.7510241056019
+        ]
+      },
+      "properties": {
+        "full_id": null,
+        "osm_id": "way/339180196",
+        "osm_type": null,
+        "amenity": "Mairie",
+        "contact_website": "https://www.loirenvallee.fr",
+        "contact_phone": "02 52 22 72 98",
+        "contact_email": "direction@loirenvallee.fr",
+        "opening_hours": "Le Lundi : de 14h00 à 18h00\nLe Mardi : de 09h00 à 12h30\nLe Mercredi : de 09h00 à 12h00 de 15h30 à 18h00\nLe Jeudi : de 15h30 à 18h00\nLe Vendredi : de 09h00 à 12h30 de 15h30 à 18h00\nLe Samedi : de 09h00 à 12h00",
+        "name": "Mairie de Loir-en-Vallée",
+        "commune": "Loir-En-Vallée",
+        "elus": "SETTIER Patrick (Maire)\nCRINIERE Thierry (Maire délégué)\nAUBRY Xavier (Maire délégué)\nBELLAIR Olivier (Maire délégué)\nBORDIER Diégo (Maire délégué)\nSALMON Eric (1er adjoint au Maire)\nBUNEL Sonia (2ème adjoint au Maire)\nCOCHARD Alain (3ème adjoint au Maire)\nMARIE Elise (4ème adjoint au Maire)\nPATAUX Etienne (5ème adjoint au Maire)\nMICHAUX Élodie (6ème adjoint au Maire)\nCADRAN Sylvie (Conseillère municipale)\nCHASSANY Philippe (Conseiller municipal)\nDERRÉ Gwendoline (Conseillère municipale)\nESCARRA Bruno (Conseiller municipal)\nJARDIN Marine (Conseillère municipale)\nMASSON Clément (Conseiller municipal)\nMAYEUR Pascale (Conseillère municipale)\nMOUROT Isabelle (Conseillère municipale)\nPORCHERON Dominique (Conseillère municipale)\nPÉAN Nicole (Conseillère municipale)\nSEVAULT Christophe (Conseiller municipal)\nVALLON Sandra (Conseillère SETTIER Patrick (Maire)\nCRINIERE Thierry (Maire délégué)\nAUBRY Xavier (Maire délégué)\nBELLAIR Olivier (Maire délégué)\nBORDIER Diégo (Maire délégué)\nSALMON Eric (1er adjoint au Maire)\nBUNEL Sonia (2ème adjoint au Maire)\nCOCHARD Alain (3ème adjoint au Maire)\nMARIE Elise (4ème adjoint au Maire)\nPATAUX Etienne (5ème adjoint au Maire)\nMICHAUX Élodie (6ème adjoint au Maire)\nCADRAN Sylvie (Conseillère municipale)\nCHASSANY Philippe (Conseiller municipal)\nDERRÉ Gwendoline (Conseillère municipale)\nESCARRA Bruno (Conseiller municipal)\nJARDIN Marine (Conseillère municipale)\nMASSON Clément (Conseiller municipal)\nMAYEUR Pascale (Conseillère municipale)\nMOUROT Isabelle (Conseillère municipale)\nPORCHERON Dominique (Conseillère municipale)\nPÉAN Nicole (Conseillère municipale)\nSEVAULT Christophe (Conseiller municipal)\nVALLON Sandra (Conseillère municipale))",
+        "marker-color": "rgba(130, 57, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.332646733329929,
+          47.7181081523326
+        ]
+      },
+      "properties": {
+        "full_id": null,
+        "osm_id": "way/369744353",
+        "osm_type": null,
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 46 41 67",
+        "contact_email": "mairie-lavernat@wanadoo.fr",
+        "opening_hours": "Le Lundi : de 09h30 à 12h00 de 14h00 à 17h00\nLe Mardi : de 09h00 à 12h00\nLe Jeudi : de 09h00 à 12h00 de 14h00 à 17h00\nLe Vendredi : de 09h00 à 12h00\nLe Samedi : de 09h00 à 11h00",
+        "name": "Mairie de Lavernat",
+        "commune": "Lavernat",
+        "elus": "TOUET Laurent (Maire)\nBENARD-LEQUIPE Agnès (1er adjoint au Maire)\nPEILLON Eric (2ème adjoint au Maire)\nCHESNEAU Christophe (Conseiller municipal)\nGOETZ Melanie (Conseillère municipale)\nHEUZARD Jocelyne (Conseillère municipale)\nHUPENOIRE Fabien (Conseiller municipal)\nJOLLIVET Sonia (Conseillère municipale)\nJOUSSE Anne-Laure (Conseillère municipale)\nMEYFROOT Celine (Conseillère municipale)\nNORMAND Sebastien (Conseiller municipal)\nRABOT Pascal (Conseiller municipal)\nREID Christophe (Conseiller municipal)\nRICHARD Cathy (Conseillère municipale)\nRICHARD Nicolas (Conseiller municipal)",
+        "marker-color": "rgba(130, 79, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.438002125703688,
+          47.6460272025689
+        ]
+      },
+      "properties": {
+        "full_id": "n373337542",
+        "osm_id": "373337542",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": null,
+        "contact_phone": "02 43 44 09 63",
+        "contact_email": "mairie-st-pierre-cheville@wanadoo.fr",
+        "opening_hours": "Le Lundi : de 09h00 à 12h00\nLe Jeudi : de 14h00 à 17h00\nLe Vendredi : de 11h00 à 12h00\nLe Samedi : de 09h00 à 12h00",
+        "name": "Mairie de Saint-Pierre-de-Chevillé",
+        "commune": "Saint-Pierre-De-Chevillé",
+        "elus": "BOUSSARD Michelle (Maire)\nDURAND Jean-Paul (1er adjoint au Maire)\nREIFF Annie (2ème adjoint au Maire)\nBIGNON Benjamin (3ème adjoint au Maire)\nBOBET Véronique (Conseillère municipale)\nBORDE Sandrine (Conseillère municipale)\nBRYANS Henry (Conseiller municipal)\nDUPUIS Maximilien (Conseiller municipal)\nFERIAU Nelly (Conseillère municipale)\nHOUEL Cécile (Conseillère municipale)\nPETIT Jérôme (Conseiller municipal)",
+        "marker-color": "rgba(130, 104, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.474879050992117,
+          47.6646261381118
+        ]
+      },
+      "properties": {
+        "full_id": "n580839480",
+        "osm_id": "580839480",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://www.dissay-sous-courcillon.fr",
+        "contact_phone": "02 43 44 09 10",
+        "contact_email": "mairie@dissay72.fr",
+        "opening_hours": "Le Lundi : de 08h00 à 12h00 de 13h30 à 17h30\nLe Mardi : de 08h00 à 12h00 de 13h30 à 16h00\nLe Mercredi : de 09h00 à 12h00\nJeudi : de 08h00 à 12h00 de 13h30 à 16h00\nVendredi : de 08h00 à 12h00 de 13h30 à 16h00",
+        "name": "Mairie de Dissay-sous-Courcillon",
+        "commune": "Dissay-Sous-Courcillon",
+        "elus": "CHEVALLIER Evelyne (Maire)\nMETIVIER Thierry (1er adjoint au Maire)\nMANCEAU Jacqueline (2ème adjoint au Maire)\nCHALUMEAU Joël (3ème adjoint au Maire)\nALLARD Olivier (Conseiller municipal)\nBAUNE Nadège (Conseillère municipale)\nBOUGARD Céline (Conseillère municipale)\nDURFORT Pascale (Conseillère municipale)\nGASIOR David (Conseiller municipal)\nJOSEPH Dorothee (Conseillère municipale)\nMAUSSIBOT Anne (Conseillère municipale)\nMONTIGNY Philippe (Conseiller municipal)\nREGLAIN Florian (Conseiller municipal)\nROGER Didier (Conseiller municipal)\nVEILLE Gaëlle (Conseillère municipale)",
+        "marker-color": "rgba(130, 64, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.418584826493867,
+          47.6954595813967
+        ]
+      },
+      "properties": {
+        "full_id": "n72925847",
+        "osm_id": "72925847",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://www.montvalsurloir.fr/",
+        "contact_phone": "02 43 38 18 00",
+        "contact_email": "accueil@montvalsurloir.fr",
+        "opening_hours": "Lundi : de 08h00 à 12h00 de 13h30 à 17h30\nMardi : de 08h00 à 12h00 de 13h30 à 17h30\nMercredi : de 08h00 à 12h00 de 13h30 à 17h30\nLe Jeudi : de 08h00 à 12h00\nLe Vendredi : de 08h00 à 12h00 de 13h30 à 17h30",
+        "name": "Mairie de Montval-sur-Loir",
+        "commune": "Montval-Sur-Loir",
+        "elus": "RONCIÈRE Hervé (Maire)\nDUCHESNE Sabrina (1er adjoint au Maire)\nOLIVIER François (2ème adjoint au Maire)\nBRUNEAU Jocelyne (3ème adjoint au Maire)\nTOURNADRE Philippe (4ème adjoint au Maire)\nCOULONNIER Claire (5ème adjoint au Maire)\nMÉAUDE Martial (6ème adjoint au Maire)\nBOISSIÈRE Véronique (Conseillère municipale)\nBOUSSION Pascale (Conseillère municipale)\nBROSSEAU Denis (Conseiller municipal)\nCLAVREUL Ludovic (Conseiller municipal)\nCOLET Sarah (Conseillère municipale)\nDELANOUE Sandrine (Conseillère municipale)\nDUPONT Lydie (Conseillère municipale)\nFAISANDEL Annie (Conseillère municipale)\nFONTAINE Alain (Conseiller municipal)\nFONTUGNE HAMOUR Véronique (Conseillère municipale)\nFOURMY Delphine (Conseillère municipale)\nHARMS Julika (Conseillère municipale)\nJUNIUS Jérôme (Conseiller municipal)\nLANGEVIN Dominique (Conseiller municipal)\nLETELLIER Sonia (Conseillère municipale)\nMICHAUD Bruno (Conseiller municipal)\nALLARD Gérard (Conseiller municipal)\nAUVILLE Sébastien (Conseiller municipal)\nPAUGOY Francis (Conseiller municipal)\nPILON Jérôme (Conseiller municipal)\nPORTRET Mathias (Conseiller municipal)\nRENAULT Richard (Conseiller municipal)\nRICHARD Églantine (Conseillère municipale)\nBEILLARD Jean-Claude (Conseiller municipal)\nBIGNON Laura (Conseillère municipale)\nVALAIS Fabienne (Conseillère municipale)",
+        "marker-color": "rgba(130, 82, 47, 1)"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.397627997546854,
+          47.7117289245632
+        ]
+      },
+      "properties": {
+        "full_id": "n86655229",
+        "osm_id": "86655229",
+        "osm_type": "node",
+        "amenity": "Mairie",
+        "contact_website": "https://luceau.fr",
+        "contact_phone": "02 43 44 12 08",
+        "contact_email": "accueil@luceau.fr",
+        "opening_hours": "Lundi : de 13h30 à 17h30\nMardi : de 13h30 à 17h30\nJeudi : de 13h30 à 17h30\nVendredi : de 13h30 à 17h30",
+        "name": "Mairie de Luceau",
+        "commune": "Luceau",
+        "elus": "PINÇON Fabienne (Maire)\nPERROUX Arnaud (1er adjoint au Maire)\nFISSEAU-VERITE Alexa (2ème adjoint au Maire)\nDAGUZAN Claude (3ème adjoint au Maire)\nBINET Sylvie (Conseillère municipale)\nBOUVIER Benoit (Conseiller municipal)\nBRUNEAU Pascal (Conseiller municipal)\nCHASSAING Sophie (Conseillère municipale)\nCORMIER Barbara (Conseillère municipale)\nGUILLIER Pascal (Conseiller municipal)\nMANCEAU Sylvie (Conseillère municipale)\nMINGOT Michel (Conseiller municipal)\nPELTIER Sylvie (Conseillère municipale)\nPIRAULT Audrey (Conseillère municipale)\nRICHARD Jean-Michel (Conseiller municipal)",
+        "marker-color": "rgba(130, 49, 47, 1)"
+      }
+    }
+  ]
+}
