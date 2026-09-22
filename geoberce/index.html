@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GéoBercé — Le SIG local</title>
+
+<!-- DEBUT STYLES -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<!-- FIN STYLES -->
+
+<!-- DEBUT PWA (installation sur l'écran d'accueil) -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0F6E56">
+<!-- Safari iOS ignore le manifest pour l'icône d'écran d'accueil, lit
+     uniquement cette balise dédiée (voir js/installation.js pour la
+     limite de fond : pas de bouton "Installer" possible sur iOS, aucune
+     API ne l'y permet). -->
+<link rel="apple-touch-icon" href="img/icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="GéoBercé">
+<!-- FIN PWA -->
+</head>
+
+<body>
+
+<!-- DEBUT HEADER -->
+<header id="topbar">
+    <div id="brand">
+        <img src="img/geoberce.png" alt="Logo GéoBercé" class="brand-logo">
+        <div>
+            <div id="brand-title">GéoBercé</div>
+            <div id="brand-subtitle">Le SIG local</div>
+        </div>
+    </div>
+
+    <div id="search-container">
+        <span id="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input type="text" id="search" placeholder="Rechercher un lieu, une adresse, un service..." autocomplete="off">
+        <div id="suggestions"></div>
+    </div>
+
+    <div id="topbar-actions">
+        <button type="button" id="home-button" aria-label="Accueil"><i class="fa-solid fa-house"></i></button>
+        <button type="button" id="menu-button" aria-label="Couches"><i class="fa-solid fa-layer-group"></i></button>
+        <div class="actu-wrap">
+            <button type="button" id="actu-button" aria-label="Actualités"><i class="fa-solid fa-bullhorn"></i></button>
+            <div id="actu-dropdown" class="actu-dropdown" hidden>
+                <div class="actu-dropdown-header">
+                    <span><i class="fa-solid fa-bullhorn"></i> Actualités du territoire</span>
+                    <button type="button" id="actu-dropdown-close" aria-label="Fermer">×</button>
+                </div>
+                <div class="illiwap-embed">
+                    <iframe id="actu-iframe" title="Actualités Illiwap" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+        <button type="button" id="recherche-button" title="Recherche foncière"><i class="fa-solid fa-sliders"></i><span>Recherche foncière</span></button>
+        <!-- Masqué par défaut (hidden) : affiché par js/installation.js
+             seulement quand le navigateur confirme (événement
+             "beforeinstallprompt") que le site est réellement
+             installable et pas déjà installé - jamais un bouton mort
+             qui ne ferait rien au clic. -->
+        <button type="button" id="install-button" title="Installer l'application" hidden><i class="fa-solid fa-arrow-down-to-bracket"></i></button>
+        <button type="button" id="about-button" title="À propos"><i class="fa-solid fa-circle-info"></i><span>À propos</span></button>
+    </div>
+</header>
+<!-- FIN HEADER -->
+
+<!-- DEBUT APPLICATION -->
+<main id="app">
+
+    <aside id="layers-panel" aria-label="Couches cartographiques">
+        <div class="panel-header">
+            <div class="panel-title">
+                <span class="panel-icon"><i class="fa-solid fa-layer-group"></i></span>
+                <span>Couches</span>
+            </div>
+            <button type="button" class="panel-close" id="layers-close" aria-label="Fermer">×</button>
+        </div>
+
+        <div id="layers-normal-view">
+            <div id="layers-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="layers-filter" placeholder="Filtrer les couches..." autocomplete="off">
+            </div>
+
+            <div id="layers-tree"><!-- Généré par panel.js --></div>
+        </div>
+
+        <div id="results-view" hidden>
+            <button type="button" id="results-back" class="panel-back">
+                <i class="fa-solid fa-arrow-left"></i><span>Toutes les couches</span>
+            </button>
+            <div id="results-title" class="results-title"></div>
+            <div id="results-filtre" class="results-filtre" hidden>
+                <button type="button" class="results-filtre-btn actif" data-filtre="tous">Tous</button>
+                <button type="button" class="results-filtre-btn" data-filtre="ouverts">Ouvert maintenant</button>
+            </div>
+            <div id="results-filtre-carburant" class="results-filtre" hidden><!-- Généré par proximite.js (un bouton par carburant suivi) --></div>
+            <div id="results-tri-carburant" class="results-filtre" hidden>
+                <button type="button" class="results-filtre-btn actif" data-tri="distance">Plus proche</button>
+                <button type="button" class="results-filtre-btn" data-tri="prix">Moins cher</button>
+            </div>
+            <div id="results-list"><!-- Généré par proximite.js --></div>
+        </div>
+
+        <div id="recherche-view" hidden>
+            <button type="button" id="recherche-back" class="panel-back">
+                <i class="fa-solid fa-arrow-left"></i><span>Toutes les couches</span>
+            </button>
+            <div class="recherche-titre">
+                <i class="fa-solid fa-magnifying-glass-location"></i> Recherche foncière
+            </div>
+            <div id="recherche-contenu"><!-- Généré par recherche.js --></div>
+        </div>
+
+        <div id="layers-resize-handle" title="Faire glisser pour redimensionner le panneau"></div>
+    </aside>
+
+    <div id="map"></div>
+
+    <!-- DEBUT PAGE COMMUNE (dashboard plein écran) -->
+    <div id="commune-page" hidden>
+        <div id="commune-page-header">
+            <button type="button" id="commune-back" class="commune-page-back">
+                <i class="fa-solid fa-arrow-left"></i><span>Retour à la carte</span>
+            </button>
+            <div id="commune-titre"></div>
+        </div>
+        <div id="commune-page-corps">
+            <div id="commune-contenu"><!-- Généré par communes.js --></div>
+        </div>
+    </div>
+    <!-- FIN PAGE COMMUNE -->
+
+    <!-- DEBUT ÉCRAN D'ACCUEIL -->
+    <div id="hero">
+        <div id="hero-inner">
+            <p id="hero-title">Que recherchez-vous ?</p>
+            <p id="hero-subtitle">Tapez dans la barre de recherche en haut, choisissez votre commune, un raccourci ou une recherche de parcelle ci-dessous</p>
+
+            <div id="hero-communes">
+                <label for="hero-commune-select">Votre commune</label>
+                <select id="hero-commune-select">
+                    <option value="">Choisir une commune...</option>
+                    <!-- Options générées par communes.js -->
+                </select>
+            </div>
+
+            <div id="hero-raccourcis-titre">Ou un raccourci près de chez vous</div>
+            <div id="hero-raccourcis"><!-- Généré par proximite.js, défilement horizontal --></div>
+
+            <details id="hero-plus">
+                <summary>Voir plus de thématiques</summary>
+                <div id="hero-tiles"><!-- Généré par hero.js --></div>
+            </details>
+
+            <div id="hero-parcelle">
+                <div id="hero-parcelle-titre"><i class="fa-solid fa-magnifying-glass-location"></i> Rechercher une parcelle</div>
+                <form id="hero-parcelle-form">
+                    <select id="hp-commune" aria-label="Commune">
+                        <option value="">Toutes les communes</option>
+                        <!-- Options générées par recherche.js -->
+                    </select>
+                    <input type="number" id="hp-surface-min" min="0" placeholder="Surface min (m²)">
+                    <label class="hp-case"><input type="checkbox" id="hp-constructible">Constructible</label>
+                    <label class="hp-case"><input type="checkbox" id="hp-dpe-connu">DPE connu</label>
+                    <button type="submit" class="rf-bouton-principal">Rechercher</button>
+                </form>
+            </div>
+
+            <button type="button" id="hero-explore">Voir la carte complète</button>
+        </div>
+    </div>
+    <!-- FIN ÉCRAN D'ACCUEIL -->
+
+</main>
+<!-- FIN APPLICATION -->
+
+<!-- DEBUT MODALE À PROPOS -->
+<div id="about-modal" class="modal">
+    <div class="modal-content">
+        <button type="button" id="about-close" class="info-close" aria-label="Fermer">×</button>
+        <div id="about-logo">
+            <img src="img/geoberce.png" alt="Logo GéoBercé" class="brand-logo brand-logo-large">
+        </div>
+        <h2>GéoBercé</h2>
+        <p>Un SIG local, gratuit et ouvert, qui regroupe au même endroit les informations utiles du territoire Loir-Lucé-Bercé : services, famille, commerces, mobilité, nature et patrimoine.</p>
+        <p>Les couches marquées d'un point orange ● dans le panneau sont chargées à la demande, seulement quand vous les cochez : certaines interrogent des données en direct (OpenStreetMap, Géorisques...) plutôt qu'un fichier déjà présent sur le site, et peuvent donc prendre quelques secondes à s'afficher.</p>
+        <p class="about-source">Données : communes, EPCI, OpenStreetMap, data.gouv.fr, Vigieau, IGN Géoplateforme, Géoportail de l'Urbanisme, prix-carburants.gouv.fr, Géorisques, ANCT.</p>
+
+        <button type="button" id="tour-relancer" class="rf-bouton-secondaire">Revoir la visite guidée</button>
+
+        <div class="contact-form">
+            <div class="contact-titre">Un bug à signaler ? Une idée à proposer ?</div>
+            <div class="rf-champ">
+                <label for="contact-type">Type de message</label>
+                <select id="contact-type">
+                    <option value="bug">Signaler un bug</option>
+                    <option value="idee">Proposer une idée</option>
+                </select>
+            </div>
+            <div class="rf-champ">
+                <label for="contact-message">Votre message</label>
+                <textarea id="contact-message" rows="4" placeholder="Décrivez le bug (ce que vous avez fait, ce qui s'est passé) ou votre idée..."></textarea>
+            </div>
+            <button type="button" id="contact-envoyer" class="rf-bouton-principal">Envoyer</button>
+            <div id="contact-statut" class="contact-statut" role="status"></div>
+        </div>
+    </div>
+</div>
+<!-- FIN MODALE À PROPOS -->
+
+<!-- DEBUT VISITE GUIDÉE -->
+<div id="tour" hidden>
+    <div id="tour-spot"></div>
+    <div id="tour-bulle">
+        <div id="tour-texte"></div>
+        <div class="tour-bas">
+            <span id="tour-compteur"></span>
+            <div class="tour-boutons">
+                <button type="button" id="tour-passer" class="tour-bouton-texte">Passer</button>
+                <button type="button" id="tour-suivant" class="rf-bouton-principal">Suivant</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FIN VISITE GUIDÉE -->
+
+<!-- DEBUT SCRIPTS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/popup.js"></script>
+<script src="js/layers.js"></script>
+<script src="js/panel.js"></script>
+<script src="js/search.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/proximite.js"></script>
+<script src="js/recherche.js"></script>
+<script src="js/communes.js"></script>
+<script src="js/tour.js"></script>
+<script src="js/map.js"></script>
+<script src="js/installation.js"></script>
+<!-- FIN SCRIPTS -->
+
+</body>
+</html>
