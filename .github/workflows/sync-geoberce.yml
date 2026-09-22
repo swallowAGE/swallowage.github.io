@@ -77,10 +77,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          cat > /tmp/pr-body.md <<'EOF'
+          Synchronisation automatique du contenu de `geoberce/` (index.html, css/, js/, couches/, img/, manifest.json, sw.js) depuis le dépôt de développement [cl4ire/cl4ire.github.io](https://github.com/cl4ire/cl4ire.github.io). `geoberce/README.md` n'est pas modifié par cette synchronisation.
+
+          Ce PR a été généré automatiquement par le workflow `sync-geoberce.yml`.
+          EOF
           gh pr create \
             --title "Sync geoberce/ depuis cl4ire/cl4ire.github.io" \
-            --body "Synchronisation automatique du contenu de \`geoberce/\` (index.html, css/, js/, couches/, img/, manifest.json, sw.js) depuis le dépôt de développement [cl4ire/cl4ire.github.io](https://github.com/cl4ire/cl4ire.github.io). \`geoberce/README.md\` n'est pas modifié par cette synchronisation.
-
-Ce PR a été généré automatiquement par le workflow \`sync-geoberce.yml\`." \
+            --body-file /tmp/pr-body.md \
             --base main \
             --head "${{ steps.commit.outputs.branch }}"
