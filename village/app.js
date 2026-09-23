@@ -197,30 +197,39 @@ const ACCESSORIES = {
 // Niveaux du monde (selon la valeur de tout ce qui est construit)
 const LEVELS = [0, 25, 70, 150, 270, 440, 680, 1000];
 
-/* ---------- la carte (unités : 400 × 660) ---------- */
-const MAP_W = 400, MAP_H = 660;
-// Emplacements à construire, dans l'ordre où ils se débloquent
+/* ---------- la carte (unités = pixels de l'image de fond, 1448 × 1086) ---------- */
+// La carte est plus large que l'écran : on la fait glisser du doigt.
+const MAP_W = 1448, MAP_H = 1086;
+const START_X = 760; // point de la carte au centre de l'écran au démarrage
+// Emplacements à construire (sur les plaques de terre), dans l'ordre où ils se débloquent
 const PLOTS = [
-  { x: 100, y: 430 }, { x: 305, y: 430 }, { x: 100, y: 540 }, { x: 305, y: 540 },
-  { x: 95,  y: 318 }, { x: 200, y: 215 }, { x: 305, y: 632 }, { x: 95,  y: 205 },
-  { x: 100, y: 632 }, { x: 290, y: 150 },
+  { x: 612, y: 560 }, { x: 968, y: 772 }, { x: 855, y: 262 }, { x: 765, y: 925 },
+  { x: 438, y: 780 }, { x: 1080, y: 470 }, { x: 230, y: 455 }, { x: 1285, y: 615 },
+  { x: 480, y: 380 }, { x: 1140, y: 690 },
 ];
 const plotsForLevel = level => Math.min(PLOTS.length, 3 + level);
-// Arbres de la forêt autour de la prairie (décor fixe)
-const BORDER_TREES = [
-  [18, 80, "e"], [60, 64, "d"], [104, 70, "e"], [146, 58, "d"], [196, 66, "e"], [244, 56, "d"],
-  [288, 68, "e"], [332, 60, "d"], [378, 78, "e"],
-  [14, 170, "d"], [10, 260, "e"], [16, 360, "d"], [8, 450, "e"], [14, 540, "d"], [20, 640, "e"],
-  [388, 180, "e"], [392, 380, "d"], [386, 470, "e"], [392, 560, "d"], [382, 650, "e"],
+// Tailles des objets sur la carte (même unité)
+const SIZE = { house: 150, building: 150, production: 110, deco: 58, tree: 84, animal: 70 };
+// La prairie : on y pose les décorations et les animaux s'y promènent
+const MEADOW = [
+  [300, 300], [430, 245], [560, 215], [800, 210], [910, 225], [980, 260], [1080, 300],
+  [1210, 330], [1300, 390], [1320, 520], [1250, 600], [1240, 700], [1200, 800], [1110, 880],
+  [980, 950], [800, 975], [620, 960], [440, 880], [300, 830], [190, 780], [160, 620],
+  [170, 470], [250, 380],
 ];
-// Zones d'eau (on n'y pose rien et les animaux les évitent)
-function inWater(x, y) {
-  if (((x - 300) / 72) ** 2 + ((y - 252) / 48) ** 2 < 1) return true;
-  return x > 340 && y > 250 && y < 330 && Math.abs((y - 262) - (x - 354) * 0.9) < 26;
+// La rivière et la cascade (en haut à gauche)
+const WATER = [[0, 0], [420, 0], [420, 130], [300, 200], [270, 300], [200, 380], [0, 450]];
+
+function inPolygon(x, y, poly) {
+  let inside = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, yi] = poly[i], [xj, yj] = poly[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
 }
-function onGrass(x, y) {
-  return x > 36 && x < 364 && y > 118 && y < 640 && !inWater(x, y);
-}
+const inWater = (x, y) => inPolygon(x, y, WATER);
+const onGrass = (x, y) => inPolygon(x, y, MEADOW);
 
 /* =========================================================
    SAUVEGARDE
@@ -230,6 +239,7 @@ const SAVE_KEY = "petit-monde-v1";
 function freshState() {
   return {
     stars: 10, // petit cadeau pour construire tout de suite
+    mapVersion: 2, // 2 = carte avec l'image de fond
     plots: {},  // index -> { id, lvl, day }
     decos: [],  // { id, x, y }
     animals: [], // { id }
@@ -246,6 +256,16 @@ function load() {
     const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
     if (saved) {
       const s = freshState();
+      if (saved.mapVersion !== 2) {
+        // Ancienne carte (400 × 660) : on replace les décorations dans la nouvelle prairie
+        saved.decos = (saved.decos || []).map(d => {
+          let x = Math.round(250 + (d.x - 36) / 328 * 1000);
+          let y = Math.round(260 + (d.y - 118) / 522 * 700);
+          if (!onGrass(x, y)) ({ x, y } = randomSpot());
+          return { ...d, x, y };
+        });
+        saved.mapVersion = 2;
+      }
       return Object.assign(s, saved, {
         avatar: Object.assign(s.avatar, saved.avatar),
         settings: Object.assign(s.settings, saved.settings),
@@ -447,13 +467,34 @@ function afterChange(levelBefore) {
 let placing = null;       // { kind: "building" | "deco", id }
 let targetPlot = null;    // emplacement touché avant d'ouvrir « Construire »
 
+// La carte prend toute la hauteur ; si elle est plus large que l'écran,
+// on la fait glisser horizontalement (panX = décalage en pixels)
+let panX = null;
+
 function sizeMap() {
   const area = $("map-area");
   const map = $("map");
-  const w = Math.min(area.clientWidth, area.clientHeight * MAP_W / MAP_H);
+  const h = area.clientHeight;
+  if (!h) return; // écran pas encore affiché
+  const w = h * MAP_W / MAP_H;
   map.style.width = w + "px";
-  map.style.height = w * MAP_H / MAP_W + "px";
-  map.style.setProperty("--u", w / MAP_W + "px");
+  map.style.height = h + "px";
+  map.style.setProperty("--u", h / 660 + "px");
+  if (panX === null) panX = START_X / MAP_W * w - area.clientWidth / 2;
+  setPan(panX);
+}
+
+function setPan(x, smooth = false) {
+  const area = $("map-area");
+  const map = $("map");
+  const w = map.offsetWidth;
+  const max = Math.max(0, w - area.clientWidth);
+  panX = Math.min(max, Math.max(0, x));
+  map.classList.toggle("smooth", smooth);
+  // Écran plus large que la carte (tablette) : on la centre
+  map.style.transform = max ? `translateX(${-panX}px)` : `translateX(${(area.clientWidth - w) / 2}px)`;
+  $("pan-left").hidden = panX <= 2;
+  $("pan-right").hidden = panX >= max - 2;
 }
 
 // Place un élément sur la carte (x, y = point au sol ; w = largeur)
@@ -480,14 +521,6 @@ function renderMap(level) {
   const layer = $("layer");
   // On garde les animaux (ils se déplacent) et on redessine le reste
   layer.querySelectorAll(":scope > :not(.animal)").forEach(el => el.remove());
-
-  for (const [x, y, kind] of BORDER_TREES) {
-    const t = document.createElement("div");
-    t.className = "obj tree";
-    t.innerHTML = `<img src="${IMG(kind === "e" ? "evergreen_tree" : "deciduous_tree")}" alt="">`;
-    place(t, x, y, kind === "e" ? 44 : 52);
-    layer.appendChild(t);
-  }
 
   const open = plotsForLevel(level);
   PLOTS.forEach((pos, i) => {
@@ -523,7 +556,7 @@ function renderMap(level) {
     const el = document.createElement("button");
     el.className = "obj deco" + (def.cat === "fleurs" || def.cat === "arbres" ? " sway" : "");
     el.innerHTML = `<img src="${IMG(def.img)}" alt="${def.name}">`;
-    place(el, d.x, d.y, def.cat === "arbres" ? 46 : 32);
+    place(el, d.x, d.y, def.cat === "arbres" ? SIZE.tree : SIZE.deco);
     el.addEventListener("click", e => { e.stopPropagation(); onDeco(i, el); });
     layer.appendChild(el);
   });
@@ -542,7 +575,7 @@ function buildingEl(i, built, pos) {
   if (isHouse) html += `<span class="lvl-badge">${built.lvl}</span>`;
   if (canHarvest(built)) html += `<span class="harvest"><img src="${IMG("star")}" alt="Récolte prête"></span>`;
   el.innerHTML = html;
-  place(el, pos.x, pos.y + 16, production ? 60 : 84);
+  place(el, pos.x, pos.y + 26, production ? SIZE.production : SIZE.building);
   el.addEventListener("click", e => { e.stopPropagation(); onBuilding(i, el); });
   return el;
 }
@@ -741,6 +774,45 @@ $("map").addEventListener("click", e => {
   if (el) { el.classList.add("new"); puff(el); }
 });
 
+/* ---------- faire glisser la carte ---------- */
+{
+  const area = $("map-area");
+  let drag = null, dragged = false, dragEnd = 0;
+  area.addEventListener("pointerdown", e => {
+    dragged = false;
+    if (e.target.closest(".placing, .pan-arrow")) return;
+    drag = { x: e.clientX, pan: panX, id: e.pointerId };
+  });
+  area.addEventListener("pointermove", e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const dx = e.clientX - drag.x;
+    if (!dragged && Math.abs(dx) > 8) {
+      dragged = true;
+      area.classList.add("dragging");
+      try { area.setPointerCapture(drag.id); } catch (err) { /* ignoré */ }
+    }
+    if (dragged) setPan(drag.pan - dx);
+  });
+  const end = () => {
+    if (dragged) dragEnd = Date.now();
+    drag = null;
+    dragged = false;
+    area.classList.remove("dragging");
+  };
+  area.addEventListener("pointerup", end);
+  area.addEventListener("pointercancel", end);
+  // Un glissement ne doit pas compter comme un toucher (pas de construction par erreur)
+  area.addEventListener("click", e => {
+    if (Date.now() - dragEnd < 350) { e.stopPropagation(); e.preventDefault(); }
+  }, true);
+  area.addEventListener("wheel", e => {
+    e.preventDefault();
+    setPan(panX + (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY));
+  }, { passive: false });
+  $("pan-left").addEventListener("click", () => { SOUND.tap(); setPan(panX - area.clientWidth * 0.6, true); });
+  $("pan-right").addEventListener("click", () => { SOUND.tap(); setPan(panX + area.clientWidth * 0.6, true); });
+}
+
 $("placing-cancel").addEventListener("click", e => {
   e.stopPropagation();
   placing = null;
@@ -769,7 +841,7 @@ function syncAnimals() {
     el._x = start.x;
     el._y = start.y;
     el._next = Date.now() + rand(500, 3000);
-    place(el, start.x, start.y, 40);
+    place(el, start.x, start.y, SIZE.animal);
     el.addEventListener("click", e => {
       e.stopPropagation();
       el.classList.remove("jump");
@@ -784,10 +856,10 @@ function syncAnimals() {
 
 function randomSpot() {
   for (let i = 0; i < 40; i++) {
-    const x = rand(50, 350), y = rand(150, 630);
+    const x = rand(160, 1320), y = rand(210, 975);
     if (onGrass(x, y)) return { x, y };
   }
-  return { x: 200, y: 400 };
+  return { x: 760, y: 600 };
 }
 
 // Toutes les secondes, certains animaux partent se promener
@@ -797,11 +869,11 @@ setInterval(() => {
   document.querySelectorAll("#layer .animal").forEach(el => {
     if (now < el._next) return;
     const def = ANIMALS[el.dataset.id];
-    const speed = 22 * (def.speed || 1); // unités par seconde
+    const speed = 36 * (def.speed || 1); // unités par seconde
     let tx = el._x, ty = el._y;
     for (let i = 0; i < 20; i++) {
-      tx = el._x + rand(-90, 90);
-      ty = el._y + rand(-70, 70);
+      tx = el._x + rand(-150, 150);
+      ty = el._y + rand(-115, 115);
       if (onGrass(tx, ty)) break;
     }
     if (!onGrass(tx, ty)) ({ x: tx, y: ty } = randomSpot());

@@ -14,6 +14,8 @@ pour construire, décorer et peupler son petit monde.
 - **Étoiles** : 1 par bonne réponse du premier coup (2 pour les tables 5 à 9 et « jusqu'à 20 »),
   +2 toutes les 5 bonnes réponses d'affilée, +3 pour un sans-faute.
 - **Erreur** : deuxième chance avec des points à compter, puis la réponse s'affiche.
+- **Le monde** : une grande prairie illustrée (rivière, pont, cascade, forêt) plus large
+  que l'écran, que l'on fait glisser du doigt (ou avec les flèches ◀ ▶).
 - **Construire** : maisons améliorables en 3 niveaux, bâtiments (école, poste,
   hôpital, cirque, château…), production qui donne une récolte d'étoiles par jour.
 - **Décorations** : fleurs, arbres, rochers, objets, posés où l'on veut sur l'herbe.

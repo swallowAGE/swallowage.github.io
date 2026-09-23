@@ -5,7 +5,7 @@
    images sont mises en cache dès l'installation. La sauvegarde
    du monde est dans localStorage, elle n'est jamais touchée ici.
    ========================================================= */
-const CACHE = "petit-monde-v1";
+const CACHE = "petit-monde-v2";
 const FILES = [
   "./", "index.html", "style.css", "app.js", "manifest.json", "icons/icon-192.png",
   "img/baby_chick.png", "img/bank.png", "img/bear.png", "img/billed_cap.png", "img/blossom.png",
@@ -16,7 +16,7 @@ const FILES = [
   "img/chipmunk.png", "img/circus_tent.png", "img/convenience_store.png", "img/cow.png",
   "img/crown.png", "img/deciduous_tree.png", "img/dog.png", "img/duck.png", "img/ear_of_corn.png",
   "img/evergreen_tree.png", "img/ewe.png", "img/ferris_wheel.png", "img/fountain.png",
-  "img/four_leaf_clover.png", "img/fox.png", "img/gear.png", "img/girl_dark.png",
+  "img/four_leaf_clover.png", "img/fond-carte.webp", "img/fox.png", "img/gear.png", "img/girl_dark.png",
   "img/girl_default.png", "img/girl_light.png", "img/girl_medium.png", "img/girl_medium_dark.png",
   "img/girl_medium_light.png", "img/glasses.png", "img/glowing_star.png", "img/goat.png",
   "img/graduation_cap.png", "img/hammer.png", "img/hedgehog.png", "img/herb.png",

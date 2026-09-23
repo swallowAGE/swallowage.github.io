@@ -352,22 +352,44 @@ img { -webkit-user-drag: none; user-select: none; }
   position: relative;
   flex: 1;
   min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
+  touch-action: none; /* on gère nous-mêmes le glissement */
   background:
     radial-gradient(circle at 10% 20%, #6DAE50 0 40px, transparent 41px),
     radial-gradient(circle at 90% 70%, #6DAE50 0 50px, transparent 51px),
     var(--forest);
 }
 .map {
-  position: relative;
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
   isolation: isolate; /* les objets (z-index = profondeur) restent sous les fenêtres */
   --u: 1px; /* 1 unité de la carte, fixée en JS */
 }
-.map-bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.map.smooth { transition: transform .45s ease; }
+.map-bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.map-area.dragging { cursor: grabbing; }
+
+/* flèches pour faire défiler le monde */
+.pan-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  width: 30px; height: 52px;
+  margin-top: -26px;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  color: var(--wood-edge);
+  background: rgba(255, 248, 234, .75);
+  border: 3px solid var(--cream-edge);
+  box-shadow: 0 4px 0 rgba(107, 63, 29, .45);
+  animation: nudge 1.6s ease-in-out infinite;
+}
+.pan-arrow.left { left: 0; border-radius: 0 18px 18px 0; border-left: none; --dir: -1; }
+.pan-arrow.right { right: 0; border-radius: 18px 0 0 18px; border-right: none; --dir: 1; }
+@keyframes nudge { 50% { transform: translateX(calc(var(--dir) * 4px)); } }
 .layer { position: absolute; inset: 0; }
 
 /* objets posés sur la carte (ancrés par le bas, au centre) */
@@ -429,8 +451,8 @@ img { -webkit-user-drag: none; user-select: none; }
 .plot {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: calc(var(--u) * 78);
-  height: calc(var(--u) * 46);
+  width: calc(var(--u) * 70);
+  height: calc(var(--u) * 40);
   border-radius: 50%;
   background: rgba(214, 180, 110, .45);
   border: calc(var(--u) * 2.5) dashed rgba(120, 80, 30, .45);
