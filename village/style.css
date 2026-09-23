@@ -364,6 +364,17 @@ img { -webkit-user-drag: none; user-select: none; }
   flex-shrink: 0;
 }
 .avatar-btn .mini-avatar { width: 34px; height: 34px; }
+.hud-col { position: relative; flex-shrink: 0; }
+.water-pill {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  font-size: 1rem;
+  padding: 1px 10px 1px 3px;
+}
+.water-pill > img { width: 24px; height: 24px; }
+.won-water { display: flex; align-items: center; justify-content: center; gap: 4px; }
+.won-water img { width: 26px; }
 .level-pill { flex: 1; min-width: 0; font-size: .95rem; padding-right: 12px; white-space: nowrap; }
 .level-pill > div { flex: 1; display: flex; flex-direction: column; gap: 2px; }
 .level-pill .progress { height: 10px; }
@@ -465,6 +476,26 @@ img { -webkit-user-drag: none; user-select: none; }
 }
 .obj .harvest img { width: 75%; filter: none; }
 @keyframes float { 50% { transform: translate(-50%, -20%); } }
+
+/* cultures : la même image, plus petite et plus pâle tant qu'elle pousse */
+.obj.crop img { position: relative; transform-origin: 50% 95%; transition: scale .5s, filter .5s; }
+/* parcelle de terre labourée sous chaque culture */
+.obj.crop::before {
+  content: "";
+  position: absolute;
+  left: 6%; right: 6%;
+  bottom: 0;
+  height: 34%;
+  border-radius: 50%;
+  background: repeating-linear-gradient(160deg, #8B5A2B 0 calc(var(--u) * 4), #A87441 calc(var(--u) * 4) calc(var(--u) * 8));
+  box-shadow: inset 0 calc(var(--u) * 3) 0 rgba(0, 0, 0, .18), 0 0 0 calc(var(--u) * 2) rgba(120, 80, 40, .35);
+}
+.obj.crop.stage-empty > img { scale: .35; filter: grayscale(1) sepia(.7) brightness(.75); opacity: .75; }
+.obj.crop.stage-seed > img { scale: .5; filter: saturate(.35) brightness(1.05); }
+.obj.crop.stage-sprout > img { scale: .75; filter: saturate(.7); }
+.obj.crop.stage-ripe > img { scale: 1; }
+.obj .harvest.droplet { border-color: #4B92CC; box-shadow: 0 calc(var(--u) * 3) 0 #4B92CC; }
+.obj .harvest.seedling { border-color: var(--leaf-edge); box-shadow: 0 calc(var(--u) * 3) 0 var(--leaf-edge); }
 
 /* emplacement libre */
 .plot {
@@ -1045,6 +1076,8 @@ img { -webkit-user-drag: none; user-select: none; }
 .fx .fall { position: absolute; top: -50px; width: 34px; animation: fall 1.8s linear forwards; }
 @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
 .fx .fly { position: absolute; width: 34px; transition: left .7s ease-in, top .7s cubic-bezier(.5, -0.6, .7, 1), transform .7s; }
+.fx .drop { position: absolute; width: 22px; animation: drop .7s ease-in forwards; }
+@keyframes drop { from { opacity: 0; transform: translateY(-30px); } 30% { opacity: 1; } to { opacity: 0; transform: translateY(50px); } }
 .fx .heart { position: absolute; width: 26px; animation: rise 1s ease-out forwards; }
 @keyframes rise { to { transform: translateY(-50px) scale(1.3); opacity: 0; } }
 .fx .puff { position: absolute; width: 26px; animation: puff .6s ease-out forwards; }

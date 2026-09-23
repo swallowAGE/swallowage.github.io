@@ -115,16 +115,19 @@ const BUILDINGS = {
   wheel:    { cat: "batiments",  name: "Grande roue",   img: "ferris_wheel",      cost: 90,  level: 6 },
   stadium:  { cat: "batiments",  name: "Stade",         img: "stadium",           cost: 110, level: 7 },
   castle:   { cat: "batiments",  name: "Château",       img: "castle",            cost: 150, level: 8 },
-  // Production : donne une petite récolte d'étoiles chaque jour
-  wheat:    { cat: "production", name: "Champ de blé",  img: "sheaf_of_rice", cost: 8,  level: 1, harvest: 1 },
-  carrot:   { cat: "production", name: "Potager",       img: "carrot",        cost: 10, level: 1, harvest: 1 },
-  sunflower:{ cat: "production", name: "Tournesols",    img: "sunflower",     cost: 12, level: 2, harvest: 1 },
-  corn:     { cat: "production", name: "Maïs",          img: "ear_of_corn",   cost: 14, level: 2, harvest: 1 },
-  berry:    { cat: "production", name: "Fraises",       img: "strawberry",    cost: 18, level: 3, harvest: 2 },
-  apple:    { cat: "production", name: "Verger",        img: "red_apple",     cost: 22, level: 3, harvest: 2 },
-  bees:     { cat: "production", name: "Ruche",         img: "honeybee",      cost: 28, level: 4, harvest: 2 },
-  tractor:  { cat: "production", name: "Tracteur",      img: "tractor",       cost: 40, level: 5, harvest: 3 },
+  // Production : on plante, on arrose (gouttes gagnées en jouant), on récolte des étoiles
+  wheat:    { cat: "production", name: "Champ de blé",  img: "sheaf_of_rice", cost: 8,  level: 1, harvest: 2 },
+  carrot:   { cat: "production", name: "Potager",       img: "carrot",        cost: 10, level: 1, harvest: 2 },
+  sunflower:{ cat: "production", name: "Tournesols",    img: "sunflower",     cost: 12, level: 2, harvest: 3 },
+  corn:     { cat: "production", name: "Maïs",          img: "ear_of_corn",   cost: 14, level: 2, harvest: 3 },
+  berry:    { cat: "production", name: "Fraises",       img: "strawberry",    cost: 18, level: 3, harvest: 4 },
+  apple:    { cat: "production", name: "Verger",        img: "red_apple",     cost: 22, level: 3, harvest: 4 },
+  bees:     { cat: "production", name: "Ruche",         img: "honeybee",      cost: 28, level: 4, harvest: 5 },
+  tractor:  { cat: "production", name: "Tracteur",      img: "tractor",       cost: 40, level: 5, harvest: 6 },
 };
+// Étapes des cultures : EMPTY (terre vide) → 0 (graines) → 1 (pousses) → RIPE (mûr)
+const EMPTY = -1, RIPE = 2;
+
 const BUILD_TABS = [
   { id: "maisons",    label: "Maisons",    img: "house" },
   { id: "batiments",  label: "Bâtiments",  img: "school" },
@@ -210,7 +213,7 @@ const PLOTS = [
 ];
 const plotsForLevel = level => Math.min(PLOTS.length, 3 + level);
 // Tailles des objets sur la carte (même unité)
-const SIZE = { house: 150, building: 150, production: 110, deco: 58, tree: 84, animal: 90 };
+const SIZE = { house: 150, building: 150, production: 140, deco: 58, tree: 84, animal: 90 };
 // La prairie : on y pose les décorations et les animaux s'y promènent
 const MEADOW = [
   [300, 300], [430, 245], [560, 215], [800, 210], [910, 225], [980, 260], [1080, 300],
@@ -248,6 +251,7 @@ function freshState() {
     settings: { sound: true, length: 10, input: "choices" },
     stats: {},  // mode -> { played, good, total, best, bestOf }
     counters: { correct: 0, perfect: 0, harvest: 0 },
+    water: 3, // gouttes d'eau pour arroser les cultures (gagnées en jouant)
     claimed: [],
   };
 }
@@ -266,6 +270,10 @@ function load() {
           return { ...d, x, y };
         });
         saved.mapVersion = 2;
+      }
+      // Anciennes cultures (récolte quotidienne) : elles sont mûres tout de suite
+      for (const p of Object.values(saved.plots || {})) {
+        if (BUILDINGS[p.id]?.harvest && p.stage === undefined) p.stage = RIPE;
       }
       return Object.assign(s, saved, {
         avatar: Object.assign(s.avatar, saved.avatar),
@@ -441,7 +449,6 @@ function levelInfo() {
 const currentLevel = () => levelInfo().level;
 const countBuilt = id => Object.values(state.plots).filter(p => p.id === id).length;
 const maxHouseLevel = () => Math.max(0, ...Object.values(state.plots).filter(p => p.id === "house").map(p => p.lvl));
-const today = () => new Date().toLocaleDateString("fr-CA"); // AAAA-MM-JJ, heure locale
 
 function spend(n) {
   if (state.stars < n) return false;
@@ -515,6 +522,8 @@ function place(el, x, y, w) {
 
 function renderWorld() {
   $("stars").textContent = state.stars;
+  $("water").textContent = state.water;
+  $("water-pill").hidden = !Object.values(state.plots).some(isCrop);
   const { level, progress } = levelInfo();
   $("level-name").textContent = "Niveau " + level;
   $("level-progress").style.width = Math.round(progress * 100) + "%";
@@ -578,14 +587,17 @@ function buildingEl(i, built, pos) {
   const def = isHouse ? HOUSE[built.lvl - 1] : BUILDINGS[built.id];
   const production = BUILDINGS[built.id].cat === "production";
   const el = document.createElement("button");
-  el.className = "obj building" + (production ? " sway" : "");
+  el.className = "obj building" + (production ? " sway crop " + STAGE_CLASS[cropStage(built)] : "");
   el.dataset.plot = i;
   let html = `<img src="${IMG(def.img)}" alt="${def.name}">`;
   if (isHouse) html += `<span class="lvl-badge">${built.lvl}</span>`;
-  if (canHarvest(built)) html += `<span class="harvest"><img src="${IMG("star")}" alt="Récolte prête"></span>`;
+  if (production) {
+    const [icon, label] = cropBubble(built);
+    html += `<span class="harvest ${icon}"><img src="${IMG(icon)}" alt="${label}"></span>`;
+  }
   el.innerHTML = html;
   place(el, pos.x, pos.y + 26, (production ? SIZE.production : SIZE.building) * (def.scale || 1));
-  el.addEventListener("click", e => { e.stopPropagation(); onBuilding(i, el); });
+  el.addEventListener("click", e => { e.stopPropagation(); production ? onCrop(i, el) : onBuilding(i, el); });
   return el;
 }
 
@@ -622,7 +634,7 @@ function confirmBuild(id) {
     title: "Construire ici ?",
     img: def.img,
     name: def.name,
-    sub: id === "house" ? "Niveau 1" : (def.harvest ? `Récolte : +${def.harvest} ⭐ par jour` : ""),
+    sub: id === "house" ? "Niveau 1" : (def.harvest ? `Récolte : +${def.harvest} ⭐ · 2 gouttes 💧 pour pousser` : ""),
     cost: def.cost,
     buttons: [
       { label: "Annuler", cls: "btn-grey", value: false },
@@ -635,29 +647,19 @@ function build(i, id) {
   const def = BUILDINGS[id];
   if (!spend(def.cost)) return toast(`Il te manque ${def.cost - state.stars} ⭐<br>Joue pour en gagner !`);
   const before = currentLevel();
-  state.plots[i] = { id, lvl: 1, day: today() };
+  state.plots[i] = def.harvest ? { id, lvl: 1, stage: EMPTY } : { id, lvl: 1 };
   if (state.stars < def.cost) placing = null;
   SOUND.build();
   afterChange(before);
   const el = document.querySelector(`.building[data-plot="${i}"]`);
   if (el) { el.classList.add("new"); puff(el); }
+  if (def.harvest) setTimeout(() => toast("Touche la terre pour planter 🌱"), 700);
 }
 
 // Touche une construction existante
 async function onBuilding(i, el) {
   const built = state.plots[i];
   const def = BUILDINGS[built.id];
-
-  if (canHarvest(built)) {
-    built.day = today();
-    state.stars += def.harvest;
-    state.counters.harvest++;
-    save();
-    SOUND.coin();
-    flyStars(el, def.harvest);
-    renderWorld();
-    return;
-  }
 
   el.classList.remove("tap");
   void el.offsetWidth;
@@ -678,8 +680,6 @@ async function onBuilding(i, el) {
     } else {
       sub += " · niveau maximum !";
     }
-  } else if (def.harvest) {
-    sub = `Prochaine récolte demain (+${def.harvest} ⭐)`;
   }
   buttons.push({ label: "Démolir", cls: "btn-red", value: "remove" });
 
@@ -722,8 +722,93 @@ async function demolish(i) {
   renderWorld();
 }
 
-function canHarvest(built) {
-  return !!BUILDINGS[built.id].harvest && built.day !== today();
+/* ---------- cultures : planter, arroser, récolter ---------- */
+const STAGE_CLASS = { [-1]: "stage-empty", 0: "stage-seed", 1: "stage-sprout", 2: "stage-ripe" };
+const isCrop = built => !!BUILDINGS[built.id].harvest;
+const cropStage = built => built.stage ?? RIPE;
+
+function cropBubble(built) {
+  const stage = cropStage(built);
+  if (stage === EMPTY) return ["seedling", "Planter"];
+  if (stage === RIPE) return ["star", "Récolter"];
+  return ["droplet", "Arroser"];
+}
+
+async function onCrop(i, el) {
+  const built = state.plots[i];
+  const def = BUILDINGS[built.id];
+  const stage = cropStage(built);
+
+  if (stage === EMPTY) {
+    built.stage = 0;
+    save();
+    SOUND.pop();
+    fxAt(el, "seedling", "sprout");
+    renderWorld();
+    return toast("🌱 Planté ! Arrose-le avec une goutte 💧");
+  }
+
+  if (stage === RIPE) {
+    built.stage = EMPTY;
+    state.stars += def.harvest;
+    state.counters.harvest++;
+    save();
+    SOUND.coin();
+    flyStars(el, def.harvest);
+    renderWorld();
+    return toast(`Récolte : +${def.harvest} ⭐<br>Touche la terre pour replanter`);
+  }
+
+  // Graines ou pousses : il faut de l'eau
+  if (state.water > 0) {
+    state.water--;
+    built.stage++;
+    save();
+    SOUND.pop();
+    fxAt(el, "droplet", "rain");
+    renderWorld();
+    bump($("water-pill"));
+    if (built.stage === RIPE) toast(`${def.name} : c'est prêt ! Touche pour récolter ⭐`);
+    return;
+  }
+
+  SOUND.bad();
+  const choice = await ask({
+    title: "Plus d'eau !",
+    img: "droplet",
+    name: "Tes cultures ont soif.",
+    sub: "Fais des additions pour gagner des gouttes 💧",
+    buttons: [
+      { label: "Fermer", cls: "btn-grey", value: null },
+      { label: "Jouer", cls: "btn-green", value: "play" },
+      { label: "Démolir", cls: "btn-red", value: "remove" },
+    ],
+  });
+  if (choice === "play") openModes();
+  if (choice === "remove") demolish(i);
+}
+
+// Petites images qui tombent (pluie) ou qui jaillissent (pousse) sur un objet
+function fxAt(el, image, kind) {
+  const r = el.getBoundingClientRect();
+  for (let i = 0; i < 5; i++) {
+    const d = document.createElement("img");
+    d.className = kind === "rain" ? "drop" : "puff";
+    d.src = IMG(image);
+    if (kind === "rain") {
+      d.style.left = r.left + r.width * (0.25 + i * 0.12) + "px";
+      d.style.top = r.top + r.height * 0.1 + "px";
+      d.style.animationDelay = i * 0.08 + "s";
+    } else {
+      const angle = (i / 5) * Math.PI * 2;
+      d.style.left = r.left + r.width / 2 + "px";
+      d.style.top = r.top + r.height * 0.7 + "px";
+      d.style.setProperty("--dx", Math.cos(angle) * 40 + "px");
+      d.style.setProperty("--dy", Math.sin(angle) * 26 - 20 + "px");
+    }
+    $("fx").appendChild(d);
+    setTimeout(() => d.remove(), 900);
+  }
 }
 
 // Touche une décoration
@@ -1014,7 +1099,7 @@ function openBuild() {
     body.appendChild(grid);
     if (buildTab === "production") {
       body.insertAdjacentHTML("beforeend",
-        `<p class="note">Chaque jour, touche tes cultures pour récolter des étoiles ⭐</p>`);
+        `<p class="note">🌱 Plante, 💧 arrose avec les gouttes gagnées en jouant,<br>puis ⭐ récolte ! Chaque partie te donne des gouttes.</p>`);
     }
   });
 }
@@ -1533,6 +1618,10 @@ function finishQuiz() {
     state.stars += 3;
     state.counters.perfect++;
   }
+  // Gouttes d'eau pour arroser : une pour deux bonnes réponses (au moins une)
+  const drops = Math.max(1, Math.ceil(good / 2));
+  state.water += drops;
+  const hasCrops = Object.values(state.plots).some(isCrop);
   const st = state.stats[quiz.mode] || { played: 0, good: 0, total: 0, best: 0, bestOf: total };
   st.played++;
   st.good += good;
@@ -1557,6 +1646,7 @@ function finishQuiz() {
         <img src="${IMG(img)}" alt="">
         <p>${good} bonne${good > 1 ? "s" : ""} réponse${good > 1 ? "s" : ""} du premier coup sur ${total}${perfect ? "<br>Bonus sans-faute : +3 ⭐ !" : ""}</p>
         <div class="won">+${quiz.earned}<img src="${IMG("star")}" alt="étoiles"></div>
+        ${hasCrops ? `<p class="won-water">+${drops} <img src="${IMG("droplet")}" alt="gouttes"> pour arroser tes cultures</p>` : ""}
         <button class="btn btn-green" id="btn-again">🔁 Encore !</button>
         <button class="btn btn-cream" id="btn-build">🏡 Construire mon monde</button>
       </div>`;
