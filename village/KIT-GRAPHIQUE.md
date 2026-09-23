@@ -51,16 +51,13 @@ Subject:
 
 Avec ces images, l'allure du jeu change déjà beaucoup.
 
-### Le fond de la carte (1 image, spéciale)
+### Le fond de la carte — ✅ fait
 
-| Fichier | Format | Sujet |
-|---|---|---|
-| `fond-carte.png` | **Portrait 800 × 1320 px, fond opaque** (pas transparent) | `Top-down view of a cozy meadow clearing for a village-building game, soft grass, a winding dirt path from the bottom center to a small round dirt plaza in the middle, a small pond with lily pads upper right with a little stream and wooden bridge, wooden fences at the top, dense cute trees all around the edges, EMPTY grass areas left and right for buildings, no buildings, no characters` |
-
-> Ce fichier n'existe pas encore : le fond actuel est dessiné en code. Quand tu
-> l'as, je l'intègre et je recale les emplacements, l'étang et les zones où les
-> animaux se promènent sur ton image. Il n'a pas besoin de ressembler exactement
-> au fond actuel.
+`img/fond-carte.webp` (1448 × 1086, paysage) : la carte prend toute la hauteur de
+l'écran et on la fait glisser du doigt. Les emplacements sont posés sur les plaques
+de terre de l'image. Pour le remplacer par une version plus grande (plus nette),
+garder **exactement la même image** agrandie (« upscale ») : sinon les emplacements
+et la prairie ne tomberaient plus au bon endroit.
 
 ### Les maisons (le cœur du jeu)
 
