@@ -210,7 +210,7 @@ const PLOTS = [
 ];
 const plotsForLevel = level => Math.min(PLOTS.length, 3 + level);
 // Tailles des objets sur la carte (même unité)
-const SIZE = { house: 150, building: 150, production: 110, deco: 58, tree: 84, animal: 70 };
+const SIZE = { house: 150, building: 150, production: 110, deco: 58, tree: 84, animal: 90 };
 // La prairie : on y pose les décorations et les animaux s'y promènent
 const MEADOW = [
   [300, 300], [430, 245], [560, 215], [800, 210], [910, 225], [980, 260], [1080, 300],
@@ -468,34 +468,41 @@ function afterChange(levelBefore) {
 let placing = null;       // { kind: "building" | "deco", id }
 let targetPlot = null;    // emplacement touché avant d'ouvrir « Construire »
 
-// La carte prend toute la hauteur ; si elle est plus large que l'écran,
-// on la fait glisser horizontalement (panX = décalage en pixels)
-let panX = null;
+// La carte couvre tout l'écran (un peu agrandie) ; les boutons flottent
+// par-dessus. On la fait glisser dans tous les sens (panX / panY en pixels).
+const ZOOM = 1.12; // zoom sur les écrans en paysage (on peut aussi glisser en vertical)
+const START_Y = 600;
+let panX = null, panY = null;
 
 function sizeMap() {
   const area = $("map-area");
   const map = $("map");
-  const h = area.clientHeight;
-  if (!h) return; // écran pas encore affiché
-  const w = h * MAP_W / MAP_H;
+  const vw = area.clientWidth, vh = area.clientHeight;
+  if (!vh) return; // écran pas encore affiché
+  // En portrait (téléphone), la carte tient déjà en hauteur : pas de zoom en plus
+  const scale = Math.max(vw / MAP_W, vh / MAP_H) * (vh > vw ? 1 : ZOOM);
+  const w = MAP_W * scale, h = MAP_H * scale;
   map.style.width = w + "px";
   map.style.height = h + "px";
   map.style.setProperty("--u", h / 660 + "px");
-  if (panX === null) panX = START_X / MAP_W * w - area.clientWidth / 2;
-  setPan(panX);
+  if (panX === null) {
+    panX = START_X * scale - vw / 2;
+    panY = START_Y * scale - vh / 2;
+  }
+  setPan(panX, panY);
 }
 
-function setPan(x, smooth = false) {
+function setPan(x, y = panY, smooth = false) {
   const area = $("map-area");
   const map = $("map");
-  const w = map.offsetWidth;
-  const max = Math.max(0, w - area.clientWidth);
-  panX = Math.min(max, Math.max(0, x));
+  const maxX = Math.max(0, map.offsetWidth - area.clientWidth);
+  const maxY = Math.max(0, map.offsetHeight - area.clientHeight);
+  panX = Math.min(maxX, Math.max(0, x));
+  panY = Math.min(maxY, Math.max(0, y || 0));
   map.classList.toggle("smooth", smooth);
-  // Écran plus large que la carte (tablette) : on la centre
-  map.style.transform = max ? `translateX(${-panX}px)` : `translateX(${(area.clientWidth - w) / 2}px)`;
+  map.style.transform = `translate(${-panX}px, ${-panY}px)`;
   $("pan-left").hidden = panX <= 2;
-  $("pan-right").hidden = panX >= max - 2;
+  $("pan-right").hidden = panX >= maxX - 2;
 }
 
 // Place un élément sur la carte (x, y = point au sol ; w = largeur)
@@ -534,6 +541,7 @@ function renderMap(level) {
       p.textContent = "+";
       p.setAttribute("aria-label", "Emplacement libre");
       place(p, pos.x, pos.y);
+      p.style.zIndex = 2000; // toujours touchable, même si un animal passe dessus
       p.addEventListener("click", e => { e.stopPropagation(); onPlot(i); });
       layer.appendChild(p);
     } else if (i === open) {
@@ -782,17 +790,17 @@ $("map").addEventListener("click", e => {
   area.addEventListener("pointerdown", e => {
     dragged = false;
     if (e.target.closest(".placing, .pan-arrow")) return;
-    drag = { x: e.clientX, pan: panX, id: e.pointerId };
+    drag = { x: e.clientX, y: e.clientY, panX, panY, id: e.pointerId };
   });
   area.addEventListener("pointermove", e => {
     if (!drag || e.pointerId !== drag.id) return;
-    const dx = e.clientX - drag.x;
-    if (!dragged && Math.abs(dx) > 8) {
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!dragged && Math.hypot(dx, dy) > 8) {
       dragged = true;
       area.classList.add("dragging");
       try { area.setPointerCapture(drag.id); } catch (err) { /* ignoré */ }
     }
-    if (dragged) setPan(drag.pan - dx);
+    if (dragged) setPan(drag.panX - dx, drag.panY - dy);
   });
   const end = () => {
     if (dragged) dragEnd = Date.now();
@@ -808,10 +816,13 @@ $("map").addEventListener("click", e => {
   }, true);
   area.addEventListener("wheel", e => {
     e.preventDefault();
-    setPan(panX + (Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY));
+    // Molette : défile en vertical s'il y a de la place, sinon en horizontal
+    const roomY = $("map").offsetHeight > area.clientHeight + 2;
+    if (e.shiftKey || !roomY) setPan(panX + e.deltaX + (roomY ? 0 : e.deltaY), panY);
+    else setPan(panX + e.deltaX, panY + e.deltaY);
   }, { passive: false });
-  $("pan-left").addEventListener("click", () => { SOUND.tap(); setPan(panX - area.clientWidth * 0.6, true); });
-  $("pan-right").addEventListener("click", () => { SOUND.tap(); setPan(panX + area.clientWidth * 0.6, true); });
+  $("pan-left").addEventListener("click", () => { SOUND.tap(); setPan(panX - area.clientWidth * 0.6, panY, true); });
+  $("pan-right").addEventListener("click", () => { SOUND.tap(); setPan(panX + area.clientWidth * 0.6, panY, true); });
 }
 
 $("placing-cancel").addEventListener("click", e => {
@@ -1245,6 +1256,19 @@ function openSettings() {
     const wrap = document.createElement("div");
     wrap.className = "settings";
     wrap.appendChild(row("Son", seg([[true, "Oui"], [false, "Non"]], s.sound, v => { s.sound = v; })));
+    if (document.documentElement.requestFullscreen) {
+      const fs = document.createElement("button");
+      fs.className = "btn btn-cream btn-sm";
+      fs.textContent = document.fullscreenElement ? "Quitter" : "Activer";
+      fs.addEventListener("click", () => {
+        SOUND.tap();
+        const done = () => setTimeout(openSettings, 300);
+        if (document.fullscreenElement) document.exitFullscreen().then(done, done);
+        else document.documentElement.requestFullscreen({ navigationUI: "hide" })
+          .then(() => screen.orientation?.lock?.("portrait")).catch(() => {}).finally(done);
+      });
+      wrap.appendChild(row("Plein écran", fs));
+    }
     wrap.appendChild(row("Réponses", seg([["choices", "4 boutons"], ["keypad", "Clavier"]], s.input, v => { s.input = v; })));
     wrap.appendChild(row("Questions par partie", seg([[5, "5"], [10, "10"], [15, "15"]], s.length, v => { s.length = v; })));
 
