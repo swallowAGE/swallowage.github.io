@@ -75,7 +75,7 @@ jobs:
         if: steps.diff.outputs.changed == 'true'
         working-directory: site
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.SYNC_GEOBERCE_PAT }}
         run: |
           cat > /tmp/pr-body.md <<'EOF'
           Synchronisation automatique du contenu de `geoberce/` (index.html, css/, js/, couches/, img/, manifest.json, sw.js) depuis le dépôt de développement [cl4ire/cl4ire.github.io](https://github.com/cl4ire/cl4ire.github.io). `geoberce/README.md` n'est pas modifié par cette synchronisation.
