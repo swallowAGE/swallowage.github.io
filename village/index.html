@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>Mon Village des Calculs</title>
+<meta name="description" content="Construis ton village en réussissant des additions : table de 1, table de 2, additions jusqu'à 10 et jusqu'à 20.">
+<meta name="theme-color" content="#4CAF50">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ ÉCRAN VILLAGE ============ -->
+<main id="screen-village" class="screen active">
+  <header class="topbar">
+    <button class="village-name" id="village-name" aria-label="Renommer le village">Mon village</button>
+    <div class="stars-pill" aria-live="polite"><span>⭐</span><b id="stars">0</b></div>
+  </header>
+
+  <div class="level-bar">
+    <span id="level-name">Hameau</span>
+    <div class="progress"><div id="level-progress"></div></div>
+    <span class="pop">👥 <b id="population">0</b></span>
+  </div>
+
+  <div class="map-wrap">
+    <div id="map" class="map"></div>
+  </div>
+
+  <p id="hint" class="hint">Choisis une construction, puis touche un carré d'herbe.</p>
+
+  <nav class="shop" id="shop" aria-label="Constructions"></nav>
+
+  <div class="bottom-actions">
+    <button class="icon-btn" id="btn-settings" aria-label="Réglages">⚙️</button>
+    <button class="big-btn" id="btn-play">➕ Gagner des étoiles</button>
+    <button class="icon-btn" id="btn-sound" aria-label="Son">🔊</button>
+  </div>
+</main>
+
+<!-- ============ CHOIX DU JEU ============ -->
+<main id="screen-modes" class="screen">
+  <header class="topbar">
+    <button class="back" data-go="village" aria-label="Retour au village">⬅</button>
+    <h1>Quel entraînement ?</h1>
+    <span></span>
+  </header>
+  <div class="modes" id="modes"></div>
+</main>
+
+<!-- ============ QUESTIONS ============ -->
+<main id="screen-quiz" class="screen">
+  <header class="topbar">
+    <button class="back" id="quiz-quit" aria-label="Arrêter">✖</button>
+    <div class="dots" id="quiz-dots"></div>
+    <div class="stars-pill"><span>⭐</span><b id="quiz-stars">0</b></div>
+  </header>
+
+  <div class="question-card" id="question-card">
+    <div class="question" id="question">3 + 4 = <span class="answer" id="answer">?</span></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="helper" id="helper" hidden></div>
+  </div>
+
+  <button class="help-btn" id="btn-help">💡 Aide</button>
+
+  <div class="keypad" id="keypad">
+    <button>1</button><button>2</button><button>3</button>
+    <button>4</button><button>5</button><button>6</button>
+    <button>7</button><button>8</button><button>9</button>
+    <button class="del" data-k="del" aria-label="Effacer">⌫</button>
+    <button>0</button>
+    <button class="ok" data-k="ok" aria-label="Valider">✔</button>
+  </div>
+</main>
+
+<!-- ============ RÉSULTAT ============ -->
+<main id="screen-result" class="screen">
+  <div class="result">
+    <div class="result-emoji" id="result-emoji">🎉</div>
+    <h1 id="result-title">Bravo !</h1>
+    <p id="result-text"></p>
+    <div class="result-stars">+<b id="result-stars">0</b> ⭐</div>
+    <button class="big-btn" id="btn-again">🔁 Encore !</button>
+    <button class="big-btn secondary" data-go="village">🏡 Construire mon village</button>
+  </div>
+</main>
+
+<!-- ============ RÉGLAGES (parents) ============ -->
+<dialog id="settings">
+  <h2>Réglages</h2>
+  <p class="small">Espace parents</p>
+  <label class="row">Questions par partie
+    <select id="opt-length">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+    </select>
+  </label>
+  <div id="stats" class="stats"></div>
+  <button class="danger" id="btn-reset">Recommencer un nouveau village</button>
+  <button class="big-btn" id="btn-close-settings">Fermer</button>
+</dialog>
+
+<div id="toast" class="toast" role="status"></div>
+<div id="confetti" class="confetti" aria-hidden="true"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
