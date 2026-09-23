@@ -38,7 +38,6 @@ fetch("couches/epci.geojson")
     .then(r => r.json())
     .then(data => {
         L.geoJSON(data, { style: { color: PALETTE.riviere, weight: 2, fill: false, dashArray: "4 3" } }).addTo(map);
-        bboxTerritoire = bboxFeature(data.features[0]);
     })
     .catch(err => console.error("epci.geojson :", err));
 
