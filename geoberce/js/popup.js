@@ -1917,23 +1917,27 @@ function construirePopupRga(props) {
 
 /* =========================================================
    POPUP VIGIEAU (restrictions sécheresse)
-   Schéma confirmé en conditions réelles par l'utilisatrice (capture de
-   donneesBrutes["vigieau"][0].properties) - remplace le premier essai
-   qui passait par la popup générique (titleFields/subtitleFields
-   devinés) : celui-ci montrait bien le nom de zone et le niveau, mais
-   rien du détail des restrictions (le plus utile de cette couche),
-   `arreteRestriction` et `restrictions` étant des objets/tableaux
-   imbriqués que la popup générique ne sait pas afficher (voir
-   estValeurSimple plus haut).
-   Champs réels : nom, code, type ("AEP"/"SUP"/"SOU" - alimentation en
-   eau potable / eaux superficielles / eaux souterraines), niveauGravite
-   (chaîne, ex. "vigilance" - voir niveauVigieau dans config.js, partagé
-   avec la couleur du polygone pour que les deux ne puissent jamais
-   diverger), departement ({code, nom}), arreteRestriction ({numero,
-   dateDebut, dateFin, dateSignature, fichier} - fichier est un lien PDF
-   vers l'arrêté), restrictions (tableau d'usages : nom, thematique,
-   description, et un booléen concerneXxx par public concerné -
-   particulier/entreprise/collectivite/exploitation/eso/esu/aep).
+   Depuis la refonte vers l'API officielle par commune (voir le long
+   commentaire dans js/config.js au-dessus de fetchPersonnaliseVigieau) :
+   une feature = UNE COMMUNE (pas une zone unique comme avant), avec
+   `properties.zones` = le tableau brut renvoyé par l'API pour son
+   point de référence, une entrée par type d'eau concerné (SUP/AEP/SOU
+   simultanément possibles) - la popup affiche donc une section par
+   type plutôt qu'une seule zone, chacune avec son propre niveau (ils
+   peuvent différer d'un type à l'autre pour une même commune).
+   Champs réels par entrée de `zones` (vérifiés en conditions réelles
+   via l'utilisatrice sur l'API officielle - schéma différent de
+   l'ancien fichier national malgré un vocabulaire proche) : type
+   ("AEP"/"SUP"/"SOU"), niveauGravite (chaîne, ex. "alerte" - voir
+   niveauVigieau dans config.js, partagé avec la couleur du polygone
+   pour que les deux ne puissent jamais diverger), departement (chaîne,
+   ex. "72" - pas d'objet {code,nom} contrairement à l'ancien schéma),
+   arrete ({cheminFichier, dateDebutValidite, dateFinValidite,
+   cheminFichierArreteCadre} - cheminFichier est un lien PDF vers
+   l'arrêté, pas de champ "numero" contrairement à l'ancien schéma),
+   usages (tableau : nom, thematique, description, et un booléen
+   concerneXxx par public concerné - particulier/entreprise/
+   collectivite/exploitation).
    ========================================================= */
 const LABELS_TYPE_EAU_VIGIEAU = { AEP: "Eau potable", SUP: "Eaux superficielles", SOU: "Eaux souterraines" };
 
@@ -1962,55 +1966,61 @@ function grouperRestrictionsParThematique(restrictions) {
     return ordre.map(thematique => ({ thematique, items: groupes[thematique] }));
 }
 
+/* Une section par type d'eau (props.zones) plutôt qu'une popup unique :
+   une commune peut être en "alerte" pour les eaux superficielles mais
+   seulement en "vigilance" pour l'eau potable, par exemple - fusionner
+   les deux en un seul niveau ferait perdre cette nuance réelle. */
+function sectionZoneVigieau(zone) {
+    const niveau = niveauVigieau({ properties: zone });
+    const typeEau = LABELS_TYPE_EAU_VIGIEAU[zone.type] || zone.type;
+    const arrete = zone.arrete || {};
+    const usages = Array.isArray(zone.usages) ? zone.usages : [];
+    const usagesParticulier = usages.filter(u => u.concerneParticulier);
+    const groupesRestrictions = grouperRestrictionsParThematique(usagesParticulier);
+
+    const infosArrete = arrete.dateDebutValidite ? `en vigueur depuis le ${formaterDateSeule(arrete.dateDebutValidite)}` : "";
+    const lienArrete = arrete.cheminFichier
+        ? `<a class="popup-fiche-contact" href="${echapperHtml(arrete.cheminFichier)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i>Voir l'arrêté complet</a>`
+        : "";
+
+    return `<div class="popup-fiche-section">
+        <div class="popup-fiche-ligne"><strong style="color:${niveau.color}">${echapperHtml(typeEau)} — ${echapperHtml(niveau.label)}</strong>${infosArrete ? ` · ${echapperHtml(infosArrete)}` : ""}</div>
+        ${lienArrete ? `<div class="popup-fiche-contacts">${lienArrete}</div>` : ""}
+        ${usagesParticulier.length ? `<details class="popup-fiche-repliable">
+            <summary><span>${usagesParticulier.length} usage(s) réglementé(s) pour les particuliers</span><i class="fa-solid fa-chevron-right"></i></summary>
+            <div class="popup-fiche-repliable-liste">
+                ${groupesRestrictions.map(g => `
+                    <div class="popup-fiche-restriction-groupe">
+                        <div class="popup-fiche-restriction-theme">${echapperHtml(g.thematique)}</div>
+                        ${g.items.map(r => `
+                            <div class="popup-fiche-restriction-item">
+                                <div class="popup-fiche-jour"><span>${echapperHtml(r.nom)}</span></div>
+                                ${r.description ? `<div class="popup-fiche-precision">${echapperHtml(r.description.trim())}</div>` : ""}
+                            </div>
+                        `).join("")}
+                    </div>
+                `).join("")}
+            </div>
+        </details>` : ""}
+    </div>`;
+}
+
 function construirePopupVigieau(props) {
     const niveau = niveauVigieau({ properties: props });
-    const typeEau = LABELS_TYPE_EAU_VIGIEAU[props.type] || props.type;
-    const departement = props.departement && props.departement.nom;
-    const arrete = props.arreteRestriction || {};
-    const restrictions = Array.isArray(props.restrictions) ? props.restrictions : [];
-    const restrictionsParticulier = restrictions.filter(r => r.concerneParticulier);
-    const groupesRestrictions = grouperRestrictionsParThematique(restrictionsParticulier);
-
-    const infosArrete = [
-        arrete.numero ? `Arrêté n° ${arrete.numero}` : null,
-        arrete.dateDebut ? `en vigueur depuis le ${formaterDateSeule(arrete.dateDebut)}` : null
-    ].filter(Boolean).join(", ");
-    const lienArrete = arrete.fichier
-        ? `<a class="popup-fiche-contact" href="${echapperHtml(arrete.fichier)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i>Voir l'arrêté complet</a>`
-        : "";
+    const zones = Array.isArray(props.zones) ? props.zones : [];
+    const typesEau = zones.map(z => LABELS_TYPE_EAU_VIGIEAU[z.type] || z.type).filter(Boolean).join(" · ");
 
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
             <div class="popup-fiche-icon" style="background:${niveau.color}"><i class="fa-solid fa-droplet-slash"></i></div>
             <div class="popup-fiche-titre-wrap">
                 <div class="popup-fiche-tag" style="color:${niveau.color}">Restrictions sécheresse (Vigieau)</div>
-                <div class="popup-fiche-titre">${echapperHtml(props.nom || "Zone")}</div>
-                <div class="popup-fiche-adresse">${[typeEau, departement].filter(Boolean).map(echapperHtml).join(" · ")}</div>
+                <div class="popup-fiche-titre">${echapperHtml(props.nom || "Commune")}</div>
+                <div class="popup-fiche-adresse">${echapperHtml(typesEau)}</div>
             </div>
             <span class="popup-fiche-badge" style="background:${niveau.color}20;color:${niveau.color}">${echapperHtml(niveau.label)}</span>
         </div>
-        ${infosArrete || lienArrete ? `<div class="popup-fiche-section">
-            ${infosArrete ? `<div class="popup-fiche-ligne">${echapperHtml(infosArrete)}</div>` : ""}
-            ${lienArrete ? `<div class="popup-fiche-contacts">${lienArrete}</div>` : ""}
-        </div>` : ""}
-        ${restrictionsParticulier.length ? `<div class="popup-fiche-section">
-            <details class="popup-fiche-repliable">
-                <summary><span>${restrictionsParticulier.length} usage(s) réglementé(s) pour les particuliers</span><i class="fa-solid fa-chevron-right"></i></summary>
-                <div class="popup-fiche-repliable-liste">
-                    ${groupesRestrictions.map(g => `
-                        <div class="popup-fiche-restriction-groupe">
-                            <div class="popup-fiche-restriction-theme">${echapperHtml(g.thematique)}</div>
-                            ${g.items.map(r => `
-                                <div class="popup-fiche-restriction-item">
-                                    <div class="popup-fiche-jour"><span>${echapperHtml(r.nom)}</span></div>
-                                    ${r.description ? `<div class="popup-fiche-precision">${echapperHtml(r.description.trim())}</div>` : ""}
-                                </div>
-                            `).join("")}
-                        </div>
-                    `).join("")}
-                </div>
-            </details>
-        </div>` : ""}
+        ${zones.map(sectionZoneVigieau).join("")}
     </div>`;
 }
 

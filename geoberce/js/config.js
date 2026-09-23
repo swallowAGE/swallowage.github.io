@@ -37,62 +37,121 @@ const GROUPS = {
    qu'un nom de champ figé, pour rester robuste aux évolutions
    du fournisseur de données)
    ========================================================= */
-/* Retour direct de l'utilisatrice : le flux Vigieau (gros fichier
-   national, un seul objet S3 statique, aucun filtre géographique
-   possible côté serveur) peut ponctuellement dépasser le délai réseau
-   avant même d'avoir fini de télécharger ("ERR_TIMED_OUT" constaté en
-   conditions réelles) - un nouvel essai suffit généralement (aléa
-   réseau ponctuel plutôt qu'une vraie panne du service). Jusqu'à 3
-   tentatives avant d'abandonner pour de bon (affiche alors le badge
-   d'erreur normal du panneau, voir js/panel.js). */
-const URL_VIGIEAU = "https://regleau.s3.gra.perf.cloud.ovh.net/geojson/zones_arretes_en_vigueur.geojson";
-function fetchAvecReessai(url, tentativesRestantes) {
-    return fetch(url).then(r => {
-        if (!r.ok) throw new Error("Erreur HTTP " + r.status + " sur " + url);
-        return r.json();
-    }).catch(err => {
-        if (tentativesRestantes <= 1) throw err;
-        return fetchAvecReessai(url, tentativesRestantes - 1);
-    });
-}
-function fetchVigieau() {
-    return fetchAvecReessai(URL_VIGIEAU, 3);
+/* Historique : ce fichier a longtemps téléchargé le flux GeoJSON
+   national brut de Vigieau (un seul objet S3 statique de toutes les
+   zones sous arrêté sécheresse de France). Abandonné après retour
+   direct de l'utilisatrice ("la couche vigieau ne fonctionne pas") :
+   ce fichier avait grossi jusqu'à ~400 Mo (Content-Length observé :
+   420 046 159 octets dans les devtools), bien au-delà de ce qu'un
+   onglet mobile peut télécharger/parser sans geler - un premier
+   correctif (lecture en flux avec abandon à 30 Mo) rendait l'échec
+   propre, mais laissait la couche définitivement indisponible tant que
+   ce fichier restait aussi gros : pas une vraie solution ("ça ne peut
+   pas marcher que de temps en temps", retour direct de l'utilisatrice).
+
+   Remplacé par la vraie API officielle Vigieau
+   (https://api.vigieau.gouv.fr/api/zones, https://github.com/MTES-MCT/vigieau-api),
+   interrogée UNE FOIS PAR COMMUNE du territoire (24 communes, quelques
+   dizaines de Ko au total contre 400 Mo) plutôt qu'un unique fichier
+   national. Schéma de réponse vérifié en conditions réelles via
+   l'utilisatrice (pas une supposition) sur
+   `?lon=...&lat=...&profil=particulier` pour un point réellement sous
+   restriction : un tableau d'objets zone, un par type d'eau concerné à
+   ce point (`type` "SUP"/"AEP"/"SOU", `niveauGravite`, `departement`
+   en chaîne, `arrete` {cheminFichier, dateDebutValidite,
+   dateFinValidite, cheminFichierArreteCadre}, `usages` [{nom,
+   thematique, description, concerneParticulier/Entreprise/
+   Collectivite/Exploitation}]) - même vocabulaire que l'ancien fichier
+   (niveauGravite, usages~restrictions) mais noms de champs différents
+   par endroits (arrete.cheminFichier au lieu d'arreteRestriction.fichier,
+   departement en chaîne au lieu d'un objet {code,nom}, pas de champ
+   "numero" d'arrêté) - voir construirePopupVigieau (js/popup.js) pour
+   le détail de l'adaptation. Tableau vide [] : aucune restriction
+   active pour ce point actuellement (pas une erreur). Un code 409
+   ("plusieurs zones de même type") reste possible par point exact dans
+   de rares cas limites - traité comme une commune sans donnée
+   exploitable plutôt que de faire échouer toute la couche.
+
+   Interrogée au centre de la boîte englobante de chaque commune
+   (`couchesCommunesParInsee`, déjà peuplé par js/map.js au chargement
+   de la page - même approximation déjà utilisée par
+   alerteVigieauPourCommune dans js/communes.js avant cette refonte) :
+   avec des communes rurales de forme simple, un centre de boîte
+   englobante tombe pratiquement toujours dans la bonne zone. Une
+   commune sans restriction active (tableau vide) n'apparaît simplement
+   pas sur la carte, comme avant avec le fichier national. */
+const URL_API_VIGIEAU = "https://api.vigieau.gouv.fr/api/zones";
+
+function zonesVigieauPourPoint(lon, lat) {
+    return fetch(`${URL_API_VIGIEAU}?lon=${lon}&lat=${lat}&profil=particulier`)
+        .then(r => r.ok ? r.json() : [])
+        .then(data => Array.isArray(data) ? data : [])
+        .catch(() => []);
 }
 
-/* Retour direct de l'utilisatrice : le flux Vigieau couvre toute la
-   France (des centaines de zones), très long à charger/construire en
-   objets Leaflet pour un intérêt local seulement. Filtré à la boîte
-   englobante du territoire (bboxTerritoire, calculée une fois dans
-   js/map.js depuis couches/epci.geojson) avec une marge de 0,15° (environ
-   15 à 17km à cette latitude) plutôt qu'un filtre exact sur le polygone
-   précis de l'EPCI : les zones Vigieau sont souvent à l'échelle du
-   bassin versant ou du département, largement plus grandes que notre
-   territoire - un simple test d'intersection de boîtes englobantes
-   suffit à ne garder que celles qui le touchent réellement, sans jamais
-   risquer d'en exclure une par excès de précision. Si bboxTerritoire
-   n'est pas encore prêt (epci.geojson pas encore résolu), ne filtre rien
-   plutôt que de tout masquer. */
-function clipperAuTerritoire(geo) {
-    if (!bboxTerritoire) return geo;
-    const marge = 0.15;
-    const zone = [bboxTerritoire[0] - marge, bboxTerritoire[1] - marge, bboxTerritoire[2] + marge, bboxTerritoire[3] + marge];
-    const features = (geo.features || []).filter(f => {
-        const bbox = bboxFeature(f);
-        return bbox && bbox[0] <= zone[2] && bbox[2] >= zone[0] && bbox[1] <= zone[3] && bbox[3] >= zone[1];
+/* Parmi les zones renvoyées pour une commune (une par type d'eau), la
+   plus sévère détermine la couleur/le badge de la commune sur la carte
+   (couleurVigieau/niveauVigieau, inchangés - operent sur
+   properties.niveauGravite, même nom de champ que l'API) ; les autres
+   restent consultables dans properties.zones pour le détail complet
+   par type d'eau dans la popup. */
+function zonePireNiveau(zones) {
+    let pire = null, pireIndex = Infinity;
+    zones.forEach(z => {
+        const index = NIVEAUX_VIGIEAU.findIndex(n => String(z.niveauGravite || "").toLowerCase().includes(n.motCle));
+        if (index !== -1 && index < pireIndex) { pireIndex = index; pire = z; }
     });
-    return { type: "FeatureCollection", features };
+    return pire || zones[0] || null;
+}
+
+/* Séparée de fetchPersonnaliseVigieau (pure : aucune dépendance à
+   Leaflet/couchesCommunesParInsee) pour rester testable isolément -
+   prend directement une feature commune "brute" (geometry + properties
+   telles que dans couches/communes.geojson) plutôt qu'un layer
+   Leaflet. */
+function construireFeatureVigieauCommune(codeInsee, communeFeature, zones) {
+    const pire = zonePireNiveau(zones);
+    if (!pire) return null;
+    return {
+        type: "Feature",
+        geometry: communeFeature.geometry,
+        properties: {
+            nom: communeFeature.properties.nom_offici || communeFeature.properties.nom || "Commune",
+            comInsee: codeInsee,
+            departement: pire.departement || null,
+            niveauGravite: pire.niveauGravite,
+            lienArretePire: (pire.arrete && pire.arrete.cheminFichier) || null,
+            zones: zones
+        }
+    };
+}
+
+function fetchPersonnaliseVigieau() {
+    const communes = (typeof couchesCommunesParInsee !== "undefined") ? couchesCommunesParInsee : {};
+    const appels = Object.keys(communes).map(codeInsee => {
+        const layer = communes[codeInsee];
+        const centre = layer.getBounds().getCenter();
+        return zonesVigieauPourPoint(centre.lng, centre.lat).then(zones =>
+            zones.length ? construireFeatureVigieauCommune(codeInsee, layer.feature, zones) : null
+        );
+    });
+    return Promise.all(appels).then(features => ({
+        type: "FeatureCollection",
+        features: features.filter(Boolean)
+    }));
 }
 
 /* Niveau de gravité Vigieau : le vrai nom de champ est "niveauGravite"
-   (vérifié en conditions réelles, valeur observée "vigilance" - voir
-   construirePopupVigieau dans js/popup.js pour le détail complet du
-   schéma réel), mais reste comparé par mot-clé sur l'ensemble des
-   propriétés textuelles plutôt qu'une égalité stricte sur ce seul champ
-   - tolère une valeur composée ("alerte renforcée" contient aussi
-   "alerte", d'où l'ordre de vérification du plus sévère au moins
-   sévère) sans dépendre d'un format exact non garanti dans le temps.
-   Couleur ET libellé partagent cette même fonction (polygone ET popup)
-   pour qu'ils ne puissent jamais diverger l'un de l'autre. */
+   (vérifié en conditions réelles sur l'API officielle, valeurs
+   observées "alerte"/"vigilance" - voir construirePopupVigieau dans
+   js/popup.js pour le détail complet du schéma réel), mais reste
+   comparé par mot-clé sur l'ensemble des propriétés textuelles plutôt
+   qu'une égalité stricte sur ce seul champ - tolère une valeur composée
+   ("alerte renforcée" contient aussi "alerte", d'où l'ordre de
+   vérification du plus sévère au moins sévère) sans dépendre d'un
+   format exact non garanti dans le temps. Couleur ET libellé partagent
+   cette même fonction (polygone ET popup) pour qu'ils ne puissent
+   jamais diverger l'un de l'autre. */
 const NIVEAUX_VIGIEAU = [
     { motCle: "crise", label: "Crise", color: "#7A1F1F" },
     { motCle: "renforc", label: "Alerte renforcée", color: "#EB5757" },
@@ -1422,15 +1481,11 @@ const LAYERS = [
        tenues à jour par les fournisseurs et non copiées dans le dépôt) ---------- */
     {
         id: "vigieau", group: "risques", label: "Restrictions sécheresse (Vigieau)",
-        /* Flux GeoJSON public des zones sous arrêté sécheresse en vigueur,
-           publié par le Ministère (source du jeu de données data.gouv.fr
-           "VigiEau : Arrêtés sécheresse en vigueur"), mis à jour quotidiennement.
-           fetchPersonnalise (fetchVigieau, voir plus haut) plutôt que
-           "file" : nouvel essai automatique en cas de timeout réseau, un
-           gros fichier national sans filtre serveur possible y est plus
-           exposé que les autres couches du site. */
-        fetchPersonnalise: fetchVigieau,
-        transform: clipperAuTerritoire,
+        /* API officielle Vigieau (api.vigieau.gouv.fr), interrogée par
+           commune plutôt qu'un fichier national unique - voir le long
+           commentaire au-dessus de fetchPersonnaliseVigieau (plus haut
+           dans ce fichier) pour l'historique complet de ce choix. */
+        fetchPersonnalise: fetchPersonnaliseVigieau,
         type: "polygon", color: "#F2994A",
         styleFn: couleurVigieau,
         lazy: true, searchable: false, cluster: false

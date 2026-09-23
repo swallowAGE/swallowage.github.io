@@ -454,28 +454,26 @@ function initClicTuilesDecompte(map) {
 
 /* Retour direct de l'utilisatrice : rattacher le niveau d'alerte Vigieau
    à un petit badge sur le dashboard, plutôt que de devoir aller cocher
-   la couche carte et cliquer sur la bonne zone pour le savoir. Vigieau
-   est chargée en différé (lazy:true, voir config.js) - chargerCouche()
-   la charge ici indépendamment de sa case à cocher (même mécanisme que
-   les couches différées rouvertes depuis la fiche parcelle, voir
-   ouvrirPopupParcelle dans js/layers.js) : ne l'affiche jamais sur la
-   carte ni ne coche sa case, se contente de remplir donneesBrutes pour
-   qu'on puisse y chercher la zone concernée.
-   Une commune n'a pas de zone Vigieau dédiée (les zones sont à l'échelle
-   d'un bassin/département) : test point-dans-polygone du CENTRE DE LA
-   BOÎTE ENGLOBANTE de la commune (pas un vrai centroïde - approximation
-   suffisante ici, les zones Vigieau sont bien plus grandes qu'une seule
-   commune, un centre de boîte englobante tombe pratiquement toujours
-   dans la même zone qu'un vrai centroïde le ferait). */
+   la couche carte et cliquer sur la bonne commune pour le savoir.
+   Vigieau est chargée en différé (lazy:true, voir config.js) -
+   chargerCouche() la charge ici indépendamment de sa case à cocher
+   (même mécanisme que les couches différées rouvertes depuis la fiche
+   parcelle, voir ouvrirPopupParcelle dans js/layers.js) : ne l'affiche
+   jamais sur la carte ni ne coche sa case, se contente de remplir
+   donneesBrutes pour qu'on puisse y chercher la commune concernée.
+   Depuis la refonte vers l'API officielle par commune (voir
+   fetchPersonnaliseVigieau, js/config.js) : une feature = une commune,
+   properties.comInsee = son code INSEE - simple égalité plutôt que le
+   test point-dans-polygone d'avant (nécessaire seulement quand les
+   zones venaient d'un fichier national aux limites différentes des
+   nôtres ; nos propres features sont maintenant les polygones communaux
+   eux-mêmes). */
 function alerteVigieauPourCommune(codeInsee) {
     return new Promise(resolve => {
         const conf = (typeof LAYERS !== "undefined") ? LAYERS.find(l => l.id === "vigieau") : null;
         if (!conf) { resolve(null); return; }
         chargerCouche(conf, () => {
-            const communeLayer = (typeof couchesCommunesParInsee !== "undefined") ? couchesCommunesParInsee[codeInsee] : null;
-            if (!communeLayer) { resolve(null); return; }
-            const centre = communeLayer.getBounds().getCenter();
-            const zone = (donneesBrutes["vigieau"] || []).find(f => pointDansFeature([centre.lng, centre.lat], f));
+            const zone = (donneesBrutes["vigieau"] || []).find(f => f.properties.comInsee === codeInsee);
             resolve(zone || null);
         }, () => resolve(null));
     });
@@ -485,7 +483,7 @@ function construireBadgeVigieau(zone) {
     if (!zone) return "";
     const niveau = niveauVigieau(zone);
     const props = zone.properties || {};
-    const lien = props.arreteRestriction && props.arreteRestriction.fichier;
+    const lien = props.lienArretePire;
     const contenu = `<span></span>${echapperHtml(niveau.label)}`;
     const style = `style="color:${niveau.color};background:${niveau.color}20"`;
     if (lien) {

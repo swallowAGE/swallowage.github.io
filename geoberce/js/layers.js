@@ -23,16 +23,6 @@ const coucheChargee = {};       // id de couche -> bool (déjà fetchée ?)
 const donneesBrutes = {};       // id de couche -> tableau de Features GeoJSON brutes (croisements/recherches, ex : recherche foncière)
 window.indexRecherche = [];  // alimenté au fur et à mesure du chargement des couches
 
-/* Boîte englobante [minLon, minLat, maxLon, maxLat] du territoire (EPCI),
-   calculée une fois couches/epci.geojson chargé (voir le fetch dans
-   js/map.js). Sert à limiter les couches "flux" nationales (ex. Vigieau,
-   voir clipperAuTerritoire dans config.js) au territoire plutôt que de
-   construire des centaines de polygones inutiles pour le reste de la
-   France - null tant que epci.geojson n'est pas encore résolu, à tester
-   par l'appelant (ne rien filtrer plutôt que de risquer de tout
-   masquer). */
-let bboxTerritoire = null;
-
 function couleurPrix(prix) {
     if (prix === null || prix === undefined || isNaN(prix)) return "#b8c0bd";
     if (prix < 1000) return "#2e8b57";
