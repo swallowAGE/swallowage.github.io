@@ -116,7 +116,9 @@ const BUILDINGS = {
   stadium:  { cat: "batiments",  name: "Stade",         img: "stadium",           cost: 110, level: 7 },
   castle:   { cat: "batiments",  name: "Château",       img: "castle",            cost: 150, level: 8 },
   // Production : on plante, on arrose (gouttes gagnées en jouant), on récolte des étoiles
-  wheat:    { cat: "production", name: "Champ de blé",  img: "sheaf_of_rice", cost: 8,  level: 1, harvest: 2 },
+  // stages : une image par étape (terre vide, graines, pousses, mûr) ; sinon la même image est simulée
+  wheat:    { cat: "production", name: "Champ de blé",  img: "wheat_ripe",    cost: 8,  level: 1, harvest: 2,
+              stages: ["crop_empty", "crop_seed", "wheat_sprout", "wheat_ripe"] },
   carrot:   { cat: "production", name: "Potager",       img: "carrot",        cost: 10, level: 1, harvest: 2 },
   sunflower:{ cat: "production", name: "Tournesols",    img: "sunflower",     cost: 12, level: 2, harvest: 3 },
   corn:     { cat: "production", name: "Maïs",          img: "ear_of_corn",   cost: 14, level: 2, harvest: 3 },
@@ -166,9 +168,10 @@ const DECO_TABS = [
 
 // Animaux : ils se promènent tout seuls (right = l'image regarde à droite)
 const ANIMALS = {
-  chick:    { name: "Poussin",  img: "baby_chick", cost: 5,  level: 1 },
-  rooster:  { name: "Coq",      img: "rooster",    cost: 10, level: 1 },
-  rabbit:   { name: "Lapin",    img: "rabbit",     cost: 15, level: 1 },
+  // size : taille relative sur la carte (1 = taille normale)
+  chick:    { name: "Poussin",  img: "baby_chick", cost: 5,  level: 1, size: 0.6 },
+  rooster:  { name: "Coq",      img: "rooster",    cost: 10, level: 1, size: 0.95 },
+  rabbit:   { name: "Lapin",    img: "rabbit",     cost: 15, level: 1, size: 0.75 },
   snail:    { name: "Escargot", img: "snail",      cost: 8,  level: 1, speed: 0.25 },
   duck:     { name: "Canard",   img: "duck",       cost: 15, level: 2 },
   hedgehog: { name: "Hérisson", img: "hedgehog",   cost: 18, level: 2 },
@@ -586,10 +589,14 @@ function buildingEl(i, built, pos) {
   const isHouse = built.id === "house";
   const def = isHouse ? HOUSE[built.lvl - 1] : BUILDINGS[built.id];
   const production = BUILDINGS[built.id].cat === "production";
+  const stages = production && BUILDINGS[built.id].stages;
   const el = document.createElement("button");
-  el.className = "obj building" + (production ? " sway crop " + STAGE_CLASS[cropStage(built)] : "");
+  el.className = "obj building" + (production
+    ? " crop " + (stages ? "drawn" : "sway " + STAGE_CLASS[cropStage(built)])
+    : "");
   el.dataset.plot = i;
-  let html = `<img src="${IMG(def.img)}" alt="${def.name}">`;
+  const image = stages ? stages[cropStage(built) + 1] : def.img;
+  let html = `<img src="${IMG(image)}" alt="${def.name}">`;
   if (isHouse) html += `<span class="lvl-badge">${built.lvl}</span>`;
   if (production) {
     const [icon, label] = cropBubble(built);
@@ -938,7 +945,7 @@ function syncAnimals() {
     el._x = start.x;
     el._y = start.y;
     el._next = Date.now() + rand(500, 3000);
-    place(el, start.x, start.y, SIZE.animal);
+    place(el, start.x, start.y, SIZE.animal * (def.size || 1));
     el.addEventListener("click", e => {
       e.stopPropagation();
       el.classList.remove("jump");
