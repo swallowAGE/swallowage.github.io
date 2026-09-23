@@ -210,7 +210,7 @@ const PLOTS = [
 ];
 const plotsForLevel = level => Math.min(PLOTS.length, 3 + level);
 // Tailles des objets sur la carte (même unité)
-const SIZE = { house: 150, building: 150, production: 110, deco: 58, tree: 84, animal: 70 };
+const SIZE = { house: 150, building: 150, production: 110, deco: 58, tree: 84, animal: 90 };
 // La prairie : on y pose les décorations et les animaux s'y promènent
 const MEADOW = [
   [300, 300], [430, 245], [560, 215], [800, 210], [910, 225], [980, 260], [1080, 300],

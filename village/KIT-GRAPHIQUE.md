@@ -73,7 +73,7 @@ et la prairie ne tomberaient plus au bon endroit.
 
 | Fichier | Dans le jeu | Sujet |
 |---|---|---|
-| `baby_chick.png` | Poussin (et table de 1) | `fluffy yellow baby chick, full body, side view facing left` |
+| ✅ `baby_chick.png` | Poussin (et table de 1) | `fluffy yellow baby chick, full body, side view facing left` |
 | `rabbit.png` | Lapin | `cute grey-white rabbit sitting, full body, side view facing left` |
 | `cat.png` | Chat (et table de 5) | `cute orange tabby cat standing, full body, side view facing left` |
 | `dog.png` | Chien (et table de 6) | `cute light brown puppy standing, full body, side view facing left` |
@@ -92,9 +92,9 @@ et la prairie ne tomberaient plus au bon endroit.
 |---|---|---|
 | `hut.png` | Cabane | `small wooden hut with thatched roof` |
 | `camping.png` | Camping | `small camping tent with a tiny campfire` |
-| `fountain.png` | Fontaine | `round stone fountain with water` |
-| `convenience_store.png` | Épicerie | `small village grocery shop with striped awning and fruit crates` |
-| `school.png` | École | `small village school with a bell tower and clock` |
+| ✅ `fountain.png` | Fontaine | `round stone fountain with water` |
+| ✅ `convenience_store.png` | Épicerie | `small village grocery shop with striped awning and fruit crates` |
+| ✅ `school.png` | École | `small village school with a bell tower and clock` |
 | `post_office.png` | La Poste | `small yellow post office with a mailbox in front` |
 | `bank.png` | Banque | `small stone bank building with columns` |
 | `hospital.png` | Hôpital | `small friendly white hospital with a red cross` |
@@ -143,7 +143,7 @@ et la prairie ne tomberaient plus au bon endroit.
 
 | Fichier | Dans le jeu | Sujet |
 |---|---|---|
-| `rooster.png` | Coq | `proud rooster, full body` |
+| ✅ `rooster.png` | Coq | `proud rooster, full body` |
 | `snail.png` | Escargot | `cute snail with a brown shell` |
 | `duck.png` | Canard (et table de 4) | `cute mallard duck, full body` |
 | `hedgehog.png` | Hérisson (et table de 3) | `cute hedgehog, full body` |
