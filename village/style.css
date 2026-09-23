@@ -322,7 +322,27 @@ img { -webkit-user-drag: none; user-select: none; }
 /* =========================================================
    MON MONDE
    ========================================================= */
-#screen-world { padding-left: 0; padding-right: 0; gap: 0; background: var(--forest); max-width: none; overflow: hidden; }
+/* La carte remplit tout l'écran ; la barre du haut et le menu flottent dessus */
+#screen-world { position: relative; padding: 0; gap: 0; background: var(--forest); max-width: none; overflow: hidden; }
+#screen-world .hud, #screen-world .menu {
+  position: absolute;
+  left: 0; right: 0;
+  z-index: 6;
+  pointer-events: none; /* on peut glisser la carte entre les boutons */
+}
+#screen-world .hud > *, #screen-world .menu > * { pointer-events: auto; }
+#screen-world .hud { top: 0; padding-top: max(10px, env(safe-area-inset-top)); }
+#screen-world .menu { bottom: 0; padding-bottom: max(10px, env(safe-area-inset-bottom)); }
+/* léger voile en haut et en bas pour que les boutons se détachent du décor */
+#screen-world::before, #screen-world::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+#screen-world::before { top: 0; height: 90px; background: linear-gradient(rgba(40, 60, 20, .28), transparent); }
+#screen-world::after { bottom: 0; height: 110px; background: linear-gradient(transparent, rgba(40, 60, 20, .32)); }
 
 .hud {
   display: flex;
@@ -349,9 +369,8 @@ img { -webkit-user-drag: none; user-select: none; }
 .level-pill .progress { height: 10px; }
 
 .map-area {
-  position: relative;
-  flex: 1;
-  min-height: 0;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   touch-action: none; /* on gère nous-mêmes le glissement */
   background:
@@ -494,7 +513,7 @@ img { -webkit-user-drag: none; user-select: none; }
 /* bandeau « touche un emplacement » */
 .placing {
   position: absolute;
-  top: 8px; left: 50%;
+  top: calc(max(10px, env(safe-area-inset-top)) + 64px); left: 50%;
   transform: translateX(-50%);
   width: max-content;
   max-width: calc(100% - 20px);
