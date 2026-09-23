@@ -23,20 +23,45 @@ const starCost = n => `<span class="cost">${n}<img src="${IMG("star")}" alt="ét
 /* =========================================================
    ENTRAÎNEMENTS
    ========================================================= */
-const MODES = {
-  t1:  { label: "Table de 1", big: "+1",  example: "5 + 1", img: "baby_chick", reward: 1, max: 11, c: "#F2C14E", dark: "#C7951F" },
-  t2:  { label: "Table de 2", big: "+2",  example: "6 + 2", img: "rabbit_face", reward: 1, max: 12, c: "#E98FB0", dark: "#C0607F" },
-  s10: { label: "Jusqu'à 10", big: "≤10", example: "4 + 3", img: "fox",        reward: 1, max: 10, c: "#F0924A", dark: "#C4651F" },
-  s20: { label: "Jusqu'à 20", big: "≤20", example: "9 + 7", img: "bear",       reward: 2, max: 20, c: "#6FA8DC", dark: "#3F77AE" },
-};
+// Tables d'addition de 1 à 9 : la table de n, c'est n + 0, n + 1… n + 9
+const TABLE_LOOK = [
+  null,
+  { img: "baby_chick",  c: "#F2C14E", dark: "#C7951F" },
+  { img: "rabbit_face", c: "#E98FB0", dark: "#C0607F" },
+  { img: "hedgehog",    c: "#B98A5E", dark: "#8A5E37" },
+  { img: "duck",        c: "#5FB3A3", dark: "#357F71" },
+  { img: "cat",         c: "#F29E4C", dark: "#C4701F" },
+  { img: "dog",         c: "#C79A6B", dark: "#96693C" },
+  { img: "pig",         c: "#EF8FA8", dark: "#C25E7A" },
+  { img: "cow",         c: "#8C9BAB", dark: "#5E6D7D" },
+  { img: "horse",       c: "#A77B5A", dark: "#774E30" },
+];
+const MODES = {};
+for (let n = 1; n <= 9; n++) {
+  MODES["t" + n] = {
+    table: n,
+    label: `Table de ${n}`,
+    big: `+${n}`,
+    example: `${n} + 4`,
+    reward: n <= 4 ? 1 : 2, // les grandes tables rapportent plus
+    max: n + 11,
+    ...TABLE_LOOK[n],
+  };
+}
+Object.assign(MODES, {
+  s10: { label: "Jusqu'à 10", big: "≤10", example: "4 + 3", img: "fox",  reward: 1, max: 10, c: "#F0924A", dark: "#C4651F" },
+  s20: { label: "Jusqu'à 20", big: "≤20", example: "9 + 7", img: "bear", reward: 2, max: 20, c: "#6FA8DC", dark: "#3F77AE" },
+});
 
-function makeQuestion(mode) {
+function makeQuestion(mode, deck) {
   let a, b;
-  if (mode === "t1" || mode === "t2") {
-    const n = mode === "t1" ? 1 : 2;
-    const x = rand(0, 10);
-    // La table peut être posée dans les deux sens : 1 + 7 ou 7 + 1
-    [a, b] = Math.random() < 0.5 ? [x, n] : [n, x];
+  const n = MODES[mode].table;
+  if (n) {
+    // On pioche dans un paquet mélangé de 0 à 9 : chaque calcul
+    // de la table passe une fois avant qu'on en revoie un
+    if (!deck.length) deck.push(...shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
+    a = n;
+    b = deck.pop();
   } else if (mode === "s10") {
     a = rand(1, 9);
     b = rand(1, 10 - a);
@@ -1005,7 +1030,8 @@ const QUESTS = [
   { id: "field",    text: "Faire 3 récoltes",              goal: 3,  value: () => state.counters.harvest, reward: 5, img: "sheaf_of_rice" },
   { id: "upgrade",  text: "Améliorer une maison au niveau 2", goal: 1, value: () => maxHouseLevel() >= 2 ? 1 : 0, reward: 5, img: "house_with_garden" },
   { id: "perfect",  text: "Faire un sans-faute",           goal: 1,  value: () => state.counters.perfect, reward: 5, img: "trophy" },
-  { id: "modes",    text: "Essayer les 4 jeux",            goal: 4,  value: () => Object.keys(state.stats).length, reward: 8, img: "books" },
+  { id: "modes",    text: "Essayer 4 jeux différents",     goal: 4,  value: () => Object.keys(state.stats).length, reward: 8, img: "books" },
+  { id: "tables",   text: "Jouer aux 9 tables",            goal: 9,  value: () => Object.keys(state.stats).filter(id => MODES[id]?.table).length, reward: 15, img: "trophy" },
   { id: "add50",    text: "Réussir 50 additions",          goal: 50, value: () => state.counters.correct, reward: 10, img: "glowing_star" },
   { id: "animals3", text: "Avoir 3 animaux",               goal: 3,  value: () => state.animals.length,  reward: 8,  img: "cow" },
   { id: "level3",   text: "Atteindre le niveau 3",         goal: 3,  value: () => currentLevel(),        reward: 8,  img: "chart_increasing" },
@@ -1192,10 +1218,33 @@ function openSettings() {
    ========================================================= */
 function openModes() {
   openModal("Choisis ton jeu", body => {
+    const best = id => {
+      const st = state.stats[id];
+      return st ? `<span class="best">🏆 ${st.best}/${st.bestOf}</span>` : "";
+    };
+    const go = id => () => { SOUND.tap(); closeModal(); startQuiz(id); };
+
+    body.insertAdjacentHTML("beforeend", `<h3 class="modes-title">Les tables d'addition</h3>`);
+    const tables = document.createElement("div");
+    tables.className = "tables";
+    for (let n = 1; n <= 9; n++) {
+      const id = "t" + n, m = MODES[id];
+      const el = document.createElement("button");
+      el.className = "table-btn";
+      el.style.cssText = `--c:${m.c};--c-dark:${m.dark}`;
+      el.setAttribute("aria-label", m.label);
+      el.innerHTML = `<img src="${IMG(m.img)}" alt=""><span class="big">+${n}</span>
+        <span class="reward">+${m.reward} ⭐</span>${best(id)}`;
+      el.addEventListener("click", go(id));
+      tables.appendChild(el);
+    }
+    body.appendChild(tables);
+
+    body.insertAdjacentHTML("beforeend", `<h3 class="modes-title">Les additions mélangées</h3>`);
     const grid = document.createElement("div");
     grid.className = "modes";
-    for (const [id, m] of Object.entries(MODES)) {
-      const st = state.stats[id];
+    for (const id of ["s10", "s20"]) {
+      const m = MODES[id];
       const el = document.createElement("button");
       el.className = "mode";
       el.style.cssText = `--c:${m.c};--c-dark:${m.dark}`;
@@ -1204,9 +1253,9 @@ function openModes() {
         <span class="big">${m.big}</span>
         <span class="label">${m.label}</span>
         <span class="example">${m.example}</span>
-        <span class="reward">+${m.reward} ⭐ par réponse</span>
-        ${st ? `<span class="best">🏆 ${st.best}/${st.bestOf}</span>` : ""}`;
-      el.addEventListener("click", () => { SOUND.tap(); closeModal(); startQuiz(id); });
+        <span class="reward">+${m.reward} ⭐</span>
+        ${best(id)}`;
+      el.addEventListener("click", go(id));
       grid.appendChild(el);
     }
     body.appendChild(grid);
@@ -1230,6 +1279,7 @@ function startQuiz(mode) {
     tries: 0,
     input: "",
     last: null,
+    deck: [],
     busy: false,
   };
   $("mascot").src = IMG(MODES[mode].img);
@@ -1243,8 +1293,8 @@ function startQuiz(mode) {
 
 function nextQuestion() {
   let q;
-  do { q = makeQuestion(quiz.mode); }
-  while (quiz.last && q.a === quiz.last.a && q.b === quiz.last.b);
+  do { q = makeQuestion(quiz.mode, quiz.deck); }
+  while (quiz.last && q.a === quiz.last.a && q.b === quiz.last.b && !MODES[quiz.mode].table);
   quiz.q = quiz.last = q;
   quiz.input = "";
   quiz.tries = 0;
