@@ -8,6 +8,7 @@ qui servent à construire son village.
   +2 toutes les 5 bonnes réponses d'affilée, +3 pour un sans-faute.
 - **Erreur** : une deuxième chance avec une aide visuelle (points à compter),
   puis la bonne réponse s'affiche.
+- **Style** : décor illustré, panneaux en bois, animaux mascottes, plein écran.
 - **Village** : 16 constructions débloquées au fil des 8 niveaux du village,
   terrain agrandissable, outil 🧹 pour enlever (remboursé à moitié).
 - **Espace parents** (⚙️) : nombre de questions par partie, statistiques,

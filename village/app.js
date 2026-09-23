@@ -8,10 +8,14 @@
 
 /* ---------- entraînements ---------- */
 const MODES = {
-  t1:  { label: "Table de 1",   big: "+1",  example: "5 + 1", color: "#3A86FF", reward: 1 },
-  t2:  { label: "Table de 2",   big: "+2",  example: "6 + 2", color: "#8338EC", reward: 1 },
-  s10: { label: "Jusqu'à 10",   big: "≤10", example: "4 + 3", color: "#FF8C00", reward: 1 },
-  s20: { label: "Jusqu'à 20",   big: "≤20", example: "9 + 7", color: "#E63946", reward: 2 },
+  t1:  { label: "Table de 1", big: "+1",  example: "5 + 1", animal: "🐣", reward: 1,
+         colors: ["#F2C14E", "#C7951F", "#FFF1C2"] },
+  t2:  { label: "Table de 2", big: "+2",  example: "6 + 2", animal: "🐰", reward: 1,
+         colors: ["#E98FB0", "#C0607F", "#FFE3EC"] },
+  s10: { label: "Jusqu'à 10", big: "≤10", example: "4 + 3", animal: "🦊", reward: 1,
+         colors: ["#F0924A", "#C4651F", "#FFE5D1"] },
+  s20: { label: "Jusqu'à 20", big: "≤20", example: "9 + 7", animal: "🐻", reward: 2,
+         colors: ["#6FA8DC", "#3F77AE", "#DDEEFF"] },
 };
 
 const rand = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
@@ -57,6 +61,8 @@ const BUILDINGS = [
   { id: "castle",   emoji: "🏰", name: "Château",    cost: 150, level: 7, pop: 10 },
 ];
 const BY_ID = Object.fromEntries(BUILDINGS.map(b => [b.id, b]));
+// Ces constructions se balancent doucement dans le vent
+const SWAYS = new Set(["flower", "tree", "pine", "field"]);
 
 // Le niveau monte avec la valeur totale des constructions
 const LEVELS = [
@@ -201,31 +207,41 @@ function renderVillage() {
   $("level-name").textContent = `Niv. ${lvl.level} · ${lvl.name}`;
   $("level-progress").style.width = Math.round(lvl.progress * 100) + "%";
 
-  renderMap();
+  // Boutique et texte d'abord : l'île prend la place qui reste
   renderShop(lvl.level);
   updateHint();
+  renderMap();
 }
 
 function renderMap() {
   const map = $("map");
   map.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
-  // La carte ne doit jamais dépasser la hauteur disponible
+  // L'île doit tenir dans la place disponible (largeur et hauteur)
   const wrap = map.parentElement;
-  const rows = state.rows + (state.rows < MAX_ROWS ? 1 : 0);
-  map.style.maxWidth = Math.max(220, (wrap.clientHeight - 16) * COLS / rows) + "px";
+  const extra = 24 + 22 + (state.rows < MAX_ROWS ? 56 : 0); // marges, falaise, panneau
+  const tile = Math.min((wrap.clientWidth - 24) / COLS, (wrap.clientHeight - extra) / state.rows);
+  map.style.width = Math.max(200, tile * COLS + 24) + "px";
 
   map.innerHTML = "";
   for (let y = 0; y < state.rows; y++) {
     for (let x = 0; x < COLS; x++) {
       const key = x + "," + y;
       const tile = document.createElement("button");
-      tile.className = "tile";
+      tile.className = "tile" + (x % 2 ? " alt" : "");
       tile.dataset.key = key;
       const id = state.tiles[key];
       if (id) {
-        tile.textContent = BY_ID[id].emoji;
+        const b = document.createElement("span");
+        b.className = "b" + (SWAYS.has(id) ? " sway" : "");
+        b.textContent = BY_ID[id].emoji;
+        tile.appendChild(b);
         tile.setAttribute("aria-label", BY_ID[id].name);
       } else {
+        // Décor fixe (toujours au même endroit) : touffes d'herbe et cailloux
+        const h = (x * 7 + y * 13) % 9;
+        if (h === 0 || h === 4) tile.classList.add("tuft");
+        if (h === 4) tile.classList.add("t2");
+        if (h === 7) tile.classList.add("pebble");
         tile.setAttribute("aria-label", "Herbe");
       }
       if (selected === "remove") tile.classList.add("removable");
@@ -242,7 +258,7 @@ function renderMap() {
     btn.className = "tile expand";
     btn.style.gridColumn = `1 / span ${COLS}`;
     btn.style.aspectRatio = "auto";
-    btn.textContent = `🚜 Agrandir le terrain : ${cost} ⭐`;
+    btn.textContent = `🚜 Agrandir : ${cost} ⭐`;
     btn.addEventListener("click", () => expand(cost));
     map.appendChild(btn);
   }
@@ -333,13 +349,30 @@ function onTile(key, tileEl) {
   save();
   SOUND.build();
   renderVillage();
-  document.querySelector(`.tile[data-key="${key}"]`)?.classList.add("just-built");
+  const built = document.querySelector(`.tile[data-key="${key}"]`);
+  if (built) {
+    built.classList.add("just-built");
+    puff(built);
+  }
 
   const after = levelInfo();
   if (after.level > before) {
     SOUND.win();
     confetti(["🎉", "🏠", "⭐", "🌳"]);
     toast(`🎉 Ton village devient : ${after.name} !`);
+  }
+}
+
+function puff(tile) {
+  for (let i = 0; i < 5; i++) {
+    const p = document.createElement("span");
+    p.className = "puff";
+    p.textContent = i % 2 ? "✨" : "💨";
+    const angle = (i / 5) * Math.PI * 2;
+    p.style.setProperty("--dx", Math.cos(angle) * 40 + "px");
+    p.style.setProperty("--dy", Math.sin(angle) * 30 + "px");
+    tile.appendChild(p);
+    setTimeout(() => p.remove(), 700);
   }
 }
 
@@ -375,13 +408,15 @@ function renderModes() {
     const st = state.stats[id];
     const el = document.createElement("button");
     el.className = "mode";
-    el.style.background = m.color;
+    const [c, dark, light] = m.colors;
+    el.style.cssText = `--c:${c};--c-dark:${dark};--c-light:${light}`;
     el.innerHTML = `
+      <span class="animal">${m.animal}</span>
       <span class="big">${m.big}</span>
       <span class="label">${m.label}</span>
       <span class="example">${m.example}</span>
-      <span class="reward">${m.reward} ⭐ par bonne réponse</span>
-      ${st ? `<span class="best">Record : ${st.best} / ${st.bestOf}</span>` : ""}`;
+      <span class="reward">+${m.reward} ⭐</span>
+      ${st ? `<span class="best">🏆 ${st.best}/${st.bestOf}</span>` : ""}`;
     el.addEventListener("click", () => startQuiz(id));
     box.appendChild(el);
   }
@@ -405,6 +440,7 @@ function startQuiz(mode) {
     last: null,
     busy: false,
   };
+  $("mascot").textContent = MODES[mode].animal;
   show("quiz");
   nextQuestion();
 }
@@ -447,7 +483,7 @@ function renderDots() {
 function showHelper() {
   const { a, b } = quiz.q;
   const group = (n, cls) =>
-    `<div class="group ${cls}">${"<i></i>".repeat(n)}</div>`;
+    `<div class="group ${cls}" style="--n:${Math.min(Math.max(n, 1), 5)}">${"<i></i>".repeat(n)}</div>`;
   const h = $("helper");
   h.innerHTML = `${group(a, "a")}<span class="plus">+</span>${group(b, "b")}`;
   h.hidden = false;
@@ -646,9 +682,25 @@ window.addEventListener("resize", () => {
   if ($("screen-village").classList.contains("active")) renderMap();
 });
 
+/* ---------- plein écran ---------- */
+// Une fois installé, le manifeste ouvre déjà le jeu en plein écran.
+// Dans le navigateur, on le demande au premier toucher (il faut un geste).
+function goFullscreen() {
+  const installed = matchMedia("(display-mode: fullscreen), (display-mode: standalone)").matches;
+  const el = document.documentElement;
+  if (installed || document.fullscreenElement || !el.requestFullscreen) return;
+  el.requestFullscreen({ navigationUI: "hide" })
+    .then(() => screen.orientation?.lock?.("portrait"))
+    .catch(() => {});
+}
+document.addEventListener("pointerup", goFullscreen, { once: true });
+
 /* ---------- démarrage ---------- */
 renderSoundBtn();
 show("village");
+document.fonts?.ready.then(() => {
+  if ($("screen-village").classList.contains("active")) renderMap();
+});
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").catch(() => {});

@@ -4,10 +4,10 @@
   "description": "Construis ton village en réussissant des additions.",
   "start_url": "index.html",
   "scope": ".",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait",
-  "background_color": "#BEE7FF",
-  "theme_color": "#4CAF50",
+  "background_color": "#BFE6F5",
+  "theme_color": "#8FD3F4",
   "lang": "fr",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },

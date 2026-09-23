@@ -5,51 +5,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
 <title>Mon Village des Calculs</title>
 <meta name="description" content="Construis ton village en réussissant des additions : table de 1, table de 2, additions jusqu'à 10 et jusqu'à 20.">
-<meta name="theme-color" content="#4CAF50">
+<meta name="theme-color" content="#8FD3F4">
+<meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- ============ DÉCOR (commun à tous les écrans) ============ -->
+<div class="scene" aria-hidden="true">
+  <svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMax slice">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#7CCBF0"/>
+        <stop offset=".55" stop-color="#BFE6F5"/>
+        <stop offset="1" stop-color="#FCEBC6"/>
+      </linearGradient>
+      <radialGradient id="glow">
+        <stop offset="0" stop-color="#FFF3B0" stop-opacity=".9"/>
+        <stop offset="1" stop-color="#FFF3B0" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="400" height="800" fill="url(#sky)"/>
+    <circle cx="330" cy="120" r="110" fill="url(#glow)"/>
+    <circle cx="330" cy="120" r="34" fill="#FFD95A"/>
+    <path d="M0 470 Q70 400 150 440 T300 420 T400 430 V800 H0Z" fill="#A9D8A0"/>
+    <path d="M0 520 Q90 460 190 505 T400 480 V800 H0Z" fill="#8CCB76"/>
+    <g fill="#6FAE5A">
+      <circle cx="60" cy="478" r="14"/><rect x="58" y="484" width="4" height="12" fill="#8A5A34"/>
+      <circle cx="82" cy="485" r="10"/><rect x="80" y="490" width="4" height="10" fill="#8A5A34"/>
+      <circle cx="342" cy="468" r="13"/><rect x="340" y="474" width="4" height="12" fill="#8A5A34"/>
+    </g>
+    <path d="M0 600 Q110 545 220 590 T400 570 V800 H0Z" fill="#78BC5E"/>
+    <path d="M0 690 Q120 650 240 680 T400 670 V800 H0Z" fill="#65AA4C"/>
+  </svg>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+</div>
+
 <!-- ============ ÉCRAN VILLAGE ============ -->
 <main id="screen-village" class="screen active">
   <header class="topbar">
-    <button class="village-name" id="village-name" aria-label="Renommer le village">Mon village</button>
-    <div class="stars-pill" aria-live="polite"><span>⭐</span><b id="stars">0</b></div>
+    <button class="sign" id="village-name" aria-label="Renommer le village">Mon village</button>
+    <div class="pill" aria-live="polite"><span class="pill-icon">⭐</span><b id="stars">0</b></div>
   </header>
 
-  <div class="level-bar">
-    <span id="level-name">Hameau</span>
+  <div class="level-bar panel-cream">
+    <span class="lvl" id="level-name">Niv. 1</span>
     <div class="progress"><div id="level-progress"></div></div>
     <span class="pop">👥 <b id="population">0</b></span>
   </div>
 
   <div class="map-wrap">
     <div id="map" class="map"></div>
+    <span class="butterfly" aria-hidden="true">🦋</span>
   </div>
 
-  <p id="hint" class="hint">Choisis une construction, puis touche un carré d'herbe.</p>
+  <p id="hint" class="hint"></p>
 
-  <nav class="shop" id="shop" aria-label="Constructions"></nav>
+  <nav class="tray" aria-label="Constructions">
+    <div class="shop" id="shop"></div>
+  </nav>
 
   <div class="bottom-actions">
-    <button class="icon-btn" id="btn-settings" aria-label="Réglages">⚙️</button>
-    <button class="big-btn" id="btn-play">➕ Gagner des étoiles</button>
-    <button class="icon-btn" id="btn-sound" aria-label="Son">🔊</button>
+    <button class="round-btn" id="btn-settings" aria-label="Réglages">⚙️</button>
+    <button class="btn btn-green btn-play" id="btn-play">⭐ Jouer</button>
+    <button class="round-btn" id="btn-sound" aria-label="Son">🔊</button>
   </div>
 </main>
 
 <!-- ============ CHOIX DU JEU ============ -->
 <main id="screen-modes" class="screen">
   <header class="topbar">
-    <button class="back" data-go="village" aria-label="Retour au village">⬅</button>
-    <h1>Quel entraînement ?</h1>
-    <span></span>
+    <button class="round-btn" data-go="village" aria-label="Retour au village">🏡</button>
+    <h1 class="sign title-sign">Choisis ton jeu</h1>
+    <span class="spacer"></span>
   </header>
   <div class="modes" id="modes"></div>
 </main>
@@ -57,18 +93,19 @@
 <!-- ============ QUESTIONS ============ -->
 <main id="screen-quiz" class="screen">
   <header class="topbar">
-    <button class="back" id="quiz-quit" aria-label="Arrêter">✖</button>
+    <button class="round-btn" id="quiz-quit" aria-label="Arrêter">✖</button>
     <div class="dots" id="quiz-dots"></div>
-    <div class="stars-pill"><span>⭐</span><b id="quiz-stars">0</b></div>
+    <div class="pill"><span class="pill-icon">⭐</span><b id="quiz-stars">0</b></div>
   </header>
 
-  <div class="question-card" id="question-card">
+  <div class="board" id="question-card">
+    <span class="mascot" id="mascot">🦊</span>
     <div class="question" id="question">3 + 4 = <span class="answer" id="answer">?</span></div>
     <div class="feedback" id="feedback"></div>
     <div class="helper" id="helper" hidden></div>
   </div>
 
-  <button class="help-btn" id="btn-help">💡 Aide</button>
+  <button class="btn btn-cream help-btn" id="btn-help">💡 Aide</button>
 
   <div class="keypad" id="keypad">
     <button>1</button><button>2</button><button>3</button>
@@ -82,18 +119,18 @@
 
 <!-- ============ RÉSULTAT ============ -->
 <main id="screen-result" class="screen">
-  <div class="result">
+  <div class="parchment result">
     <div class="result-emoji" id="result-emoji">🎉</div>
     <h1 id="result-title">Bravo !</h1>
     <p id="result-text"></p>
     <div class="result-stars">+<b id="result-stars">0</b> ⭐</div>
-    <button class="big-btn" id="btn-again">🔁 Encore !</button>
-    <button class="big-btn secondary" data-go="village">🏡 Construire mon village</button>
+    <button class="btn btn-green" id="btn-again">🔁 Encore !</button>
+    <button class="btn btn-wood" data-go="village">🏡 Construire mon village</button>
   </div>
 </main>
 
 <!-- ============ RÉGLAGES (parents) ============ -->
-<dialog id="settings">
+<dialog id="settings" class="parchment">
   <h2>Réglages</h2>
   <p class="small">Espace parents</p>
   <label class="row">Questions par partie
@@ -105,7 +142,7 @@
   </label>
   <div id="stats" class="stats"></div>
   <button class="danger" id="btn-reset">Recommencer un nouveau village</button>
-  <button class="big-btn" id="btn-close-settings">Fermer</button>
+  <button class="btn btn-green" id="btn-close-settings">Fermer</button>
 </dialog>
 
 <div id="toast" class="toast" role="status"></div>

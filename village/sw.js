@@ -5,7 +5,7 @@
    ou en vacances. La sauvegarde du village est dans localStorage,
    elle n'est jamais touchée ici.
    ========================================================= */
-const CACHE = "village-calculs-v1";
+const CACHE = "village-calculs-v2";
 const FILES = ["./", "index.html", "style.css", "app.js", "manifest.json", "icons/icon-192.png"];
 
 self.addEventListener("install", event => {
