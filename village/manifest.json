@@ -1,13 +1,13 @@
 {
-  "name": "Mon Village des Calculs",
-  "short_name": "Mon Village",
-  "description": "Construis ton village en réussissant des additions.",
+  "name": "Mon Petit Monde",
+  "short_name": "Petit Monde",
+  "description": "Les maths construisent de grandes aventures ! Réussis des additions pour construire ton petit monde.",
   "start_url": "index.html",
   "scope": ".",
   "display": "fullscreen",
   "orientation": "portrait",
-  "background_color": "#BFE6F5",
-  "theme_color": "#8FD3F4",
+  "background_color": "#5E9E43",
+  "theme_color": "#5E9E43",
   "lang": "fr",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },

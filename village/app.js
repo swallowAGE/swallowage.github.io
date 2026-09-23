@@ -1,24 +1,34 @@
 /* =========================================================
-   MON VILLAGE DES CALCULS
-   Répondre à des additions rapporte des étoiles ⭐,
-   qui servent à construire son village.
+   MON PETIT MONDE
+   Réussir des additions rapporte des étoiles ⭐ qui servent à
+   construire, décorer et peupler son petit monde.
    Tout est enregistré sur l'appareil (localStorage).
+   Images : Fluent Emoji 3D de Microsoft (licence MIT).
    ========================================================= */
 "use strict";
 
-/* ---------- entraînements ---------- */
-const MODES = {
-  t1:  { label: "Table de 1", big: "+1",  example: "5 + 1", animal: "🐣", reward: 1,
-         colors: ["#F2C14E", "#C7951F", "#FFF1C2"] },
-  t2:  { label: "Table de 2", big: "+2",  example: "6 + 2", animal: "🐰", reward: 1,
-         colors: ["#E98FB0", "#C0607F", "#FFE3EC"] },
-  s10: { label: "Jusqu'à 10", big: "≤10", example: "4 + 3", animal: "🦊", reward: 1,
-         colors: ["#F0924A", "#C4651F", "#FFE5D1"] },
-  s20: { label: "Jusqu'à 20", big: "≤20", example: "9 + 7", animal: "🐻", reward: 2,
-         colors: ["#6FA8DC", "#3F77AE", "#DDEEFF"] },
-};
-
+const $ = id => document.getElementById(id);
+const IMG = name => `img/${name}.png`;
 const rand = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
+const pick = list => list[rand(0, list.length - 1)];
+const shuffle = list => {
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = rand(0, i);
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  return list;
+};
+const starCost = n => `<span class="cost">${n}<img src="${IMG("star")}" alt="étoiles"></span>`;
+
+/* =========================================================
+   ENTRAÎNEMENTS
+   ========================================================= */
+const MODES = {
+  t1:  { label: "Table de 1", big: "+1",  example: "5 + 1", img: "baby_chick", reward: 1, max: 11, c: "#F2C14E", dark: "#C7951F" },
+  t2:  { label: "Table de 2", big: "+2",  example: "6 + 2", img: "rabbit_face", reward: 1, max: 12, c: "#E98FB0", dark: "#C0607F" },
+  s10: { label: "Jusqu'à 10", big: "≤10", example: "4 + 3", img: "fox",        reward: 1, max: 10, c: "#F0924A", dark: "#C4651F" },
+  s20: { label: "Jusqu'à 20", big: "≤20", example: "9 + 7", img: "bear",       reward: 2, max: 20, c: "#6FA8DC", dark: "#3F77AE" },
+};
 
 function makeQuestion(mode) {
   let a, b;
@@ -40,66 +50,190 @@ function makeQuestion(mode) {
   return { a, b, result: a + b };
 }
 
-/* ---------- constructions ---------- */
-// level = niveau du village requis pour débloquer la construction
-const BUILDINGS = [
-  { id: "flower",   emoji: "🌷", name: "Fleurs",     cost: 2,   level: 1, pop: 0 },
-  { id: "tree",     emoji: "🌳", name: "Arbre",      cost: 3,   level: 1, pop: 0 },
-  { id: "house",    emoji: "🏠", name: "Maison",     cost: 8,   level: 1, pop: 3 },
-  { id: "field",    emoji: "🌾", name: "Champ",      cost: 6,   level: 2, pop: 0 },
-  { id: "pine",     emoji: "🌲", name: "Sapin",      cost: 4,   level: 2, pop: 0 },
-  { id: "cow",      emoji: "🐄", name: "Vache",      cost: 10,  level: 2, pop: 0 },
-  { id: "garden",   emoji: "🏡", name: "Jolie maison", cost: 15, level: 3, pop: 5 },
-  { id: "fountain", emoji: "⛲", name: "Fontaine",   cost: 12,  level: 3, pop: 0 },
-  { id: "shop",     emoji: "🏪", name: "Magasin",    cost: 25,  level: 4, pop: 2 },
-  { id: "school",   emoji: "🏫", name: "École",      cost: 40,  level: 4, pop: 4 },
-  { id: "tent",     emoji: "🎪", name: "Cirque",     cost: 50,  level: 5, pop: 2 },
-  { id: "hospital", emoji: "🏥", name: "Hôpital",    cost: 60,  level: 5, pop: 6 },
-  { id: "building", emoji: "🏢", name: "Immeuble",   cost: 70,  level: 6, pop: 15 },
-  { id: "wheel",    emoji: "🎡", name: "Grande roue", cost: 80, level: 6, pop: 0 },
-  { id: "stadium",  emoji: "🏟️", name: "Stade",      cost: 100, level: 7, pop: 5 },
-  { id: "castle",   emoji: "🏰", name: "Château",    cost: 150, level: 7, pop: 10 },
-];
-const BY_ID = Object.fromEntries(BUILDINGS.map(b => [b.id, b]));
-// Ces constructions se balancent doucement dans le vent
-const SWAYS = new Set(["flower", "tree", "pine", "field"]);
+// Trois mauvaises réponses plausibles (proches de la bonne)
+function makeChoices(q, mode) {
+  const max = MODES[mode].max;
+  const set = new Set([q.result]);
+  for (const d of shuffle([-1, 1, -2, 2, 3, -3])) {
+    const v = q.result + d;
+    if (v >= 0 && v <= max) set.add(v);
+    if (set.size === 4) break;
+  }
+  while (set.size < 4) set.add(rand(0, max));
+  return shuffle([...set]);
+}
 
-// Le niveau monte avec la valeur totale des constructions
-const LEVELS = [
-  { name: "Clairière",   min: 0 },
-  { name: "Hameau",      min: 20 },
-  { name: "Petit village", min: 60 },
-  { name: "Village",     min: 140 },
-  { name: "Gros village", min: 260 },
-  { name: "Bourg",       min: 450 },
-  { name: "Petite ville", min: 700 },
-  { name: "Grande ville", min: 1100 },
+/* =========================================================
+   CATALOGUE
+   ========================================================= */
+// Maisons : 3 niveaux, on améliore en touchant la maison
+const HOUSE = [
+  { img: "house",             name: "Maison",        cost: 10, pop: 3 },
+  { img: "house_with_garden", name: "Jolie maison",  cost: 30, pop: 6 },
+  { img: "houses",            name: "Grande maison", cost: 50, pop: 10 },
 ];
 
-const COLS = 5;
-const START_ROWS = 4;
-const MAX_ROWS = 10;
-const expandCost = rows => (rows - START_ROWS + 1) * 15;
+// Constructions posées sur un emplacement
+const BUILDINGS = {
+  house:    { cat: "maisons",    name: "Maison",        img: "house",             cost: 10,  level: 1 },
+  hut:      { cat: "batiments",  name: "Cabane",        img: "hut",               cost: 6,   level: 1 },
+  camping:  { cat: "batiments",  name: "Camping",       img: "camping",           cost: 12,  level: 1 },
+  fountain: { cat: "batiments",  name: "Fontaine",      img: "fountain",          cost: 15,  level: 2 },
+  shop:     { cat: "batiments",  name: "Épicerie",      img: "convenience_store", cost: 25,  level: 2 },
+  school:   { cat: "batiments",  name: "École",         img: "school",            cost: 40,  level: 3 },
+  post:     { cat: "batiments",  name: "La Poste",      img: "post_office",       cost: 45,  level: 3 },
+  bank:     { cat: "batiments",  name: "Banque",        img: "bank",              cost: 50,  level: 4 },
+  hospital: { cat: "batiments",  name: "Hôpital",       img: "hospital",          cost: 60,  level: 4 },
+  hotel:    { cat: "batiments",  name: "Hôtel",         img: "hotel",             cost: 70,  level: 5 },
+  circus:   { cat: "batiments",  name: "Cirque",        img: "circus_tent",       cost: 60,  level: 5 },
+  wheel:    { cat: "batiments",  name: "Grande roue",   img: "ferris_wheel",      cost: 90,  level: 6 },
+  stadium:  { cat: "batiments",  name: "Stade",         img: "stadium",           cost: 110, level: 7 },
+  castle:   { cat: "batiments",  name: "Château",       img: "castle",            cost: 150, level: 8 },
+  // Production : donne une petite récolte d'étoiles chaque jour
+  wheat:    { cat: "production", name: "Champ de blé",  img: "sheaf_of_rice", cost: 8,  level: 1, harvest: 1 },
+  carrot:   { cat: "production", name: "Potager",       img: "carrot",        cost: 10, level: 1, harvest: 1 },
+  sunflower:{ cat: "production", name: "Tournesols",    img: "sunflower",     cost: 12, level: 2, harvest: 1 },
+  corn:     { cat: "production", name: "Maïs",          img: "ear_of_corn",   cost: 14, level: 2, harvest: 1 },
+  berry:    { cat: "production", name: "Fraises",       img: "strawberry",    cost: 18, level: 3, harvest: 2 },
+  apple:    { cat: "production", name: "Verger",        img: "red_apple",     cost: 22, level: 3, harvest: 2 },
+  bees:     { cat: "production", name: "Ruche",         img: "honeybee",      cost: 28, level: 4, harvest: 2 },
+  tractor:  { cat: "production", name: "Tracteur",      img: "tractor",       cost: 40, level: 5, harvest: 3 },
+};
+const BUILD_TABS = [
+  { id: "maisons",    label: "Maisons",    img: "house" },
+  { id: "batiments",  label: "Bâtiments",  img: "school" },
+  { id: "production", label: "Production", img: "sheaf_of_rice" },
+];
 
-/* ---------- sauvegarde ---------- */
-const SAVE_KEY = "village-calculs-v1";
+// Décorations : posées librement sur l'herbe
+const DECOS = {
+  tulip:    { cat: "fleurs", name: "Tulipe",     img: "tulip",            cost: 2,  level: 1 },
+  blossom:  { cat: "fleurs", name: "Marguerite", img: "blossom",          cost: 2,  level: 1 },
+  rose:     { cat: "fleurs", name: "Rose",       img: "rose",             cost: 3,  level: 1 },
+  hibiscus: { cat: "fleurs", name: "Hibiscus",   img: "hibiscus",         cost: 3,  level: 2 },
+  sakura:   { cat: "fleurs", name: "Fleur rose", img: "cherry_blossom",   cost: 4,  level: 2 },
+  clover:   { cat: "fleurs", name: "Trèfle",     img: "four_leaf_clover", cost: 5,  level: 3 },
+  tree:     { cat: "arbres", name: "Arbre",      img: "deciduous_tree",   cost: 4,  level: 1 },
+  pine:     { cat: "arbres", name: "Sapin",      img: "evergreen_tree",   cost: 4,  level: 1 },
+  cactus:   { cat: "arbres", name: "Cactus",     img: "cactus",           cost: 6,  level: 2 },
+  palm:     { cat: "arbres", name: "Palmier",    img: "palm_tree",        cost: 8,  level: 3 },
+  rock:     { cat: "nature", name: "Rocher",     img: "rock",             cost: 2,  level: 1 },
+  log:      { cat: "nature", name: "Bûche",      img: "wood",             cost: 3,  level: 1 },
+  mushroom: { cat: "nature", name: "Champignon", img: "mushroom",         cost: 3,  level: 1 },
+  plant:    { cat: "objets", name: "Plante",     img: "potted_plant",     cost: 4,  level: 1 },
+  mailbox:  { cat: "objets", name: "Boîte aux lettres", img: "mailbox",   cost: 6,  level: 2 },
+  tent:     { cat: "objets", name: "Tente",      img: "tent",             cost: 8,  level: 2 },
+  carousel: { cat: "objets", name: "Manège",     img: "carousel_horse",   cost: 20, level: 4 },
+  rainbow:  { cat: "objets", name: "Arc-en-ciel", img: "rainbow",         cost: 25, level: 5 },
+  moai:     { cat: "objets", name: "Statue",     img: "moai",             cost: 30, level: 6 },
+};
+const DECO_TABS = [
+  { id: "all",    label: "Toutes" },
+  { id: "fleurs", label: "Fleurs" },
+  { id: "arbres", label: "Arbres" },
+  { id: "nature", label: "Nature" },
+  { id: "objets", label: "Objets" },
+];
+
+// Animaux : ils se promènent tout seuls (right = l'image regarde à droite)
+const ANIMALS = {
+  chick:    { name: "Poussin",  img: "baby_chick", cost: 5,  level: 1 },
+  rooster:  { name: "Coq",      img: "rooster",    cost: 10, level: 1 },
+  rabbit:   { name: "Lapin",    img: "rabbit",     cost: 15, level: 1 },
+  snail:    { name: "Escargot", img: "snail",      cost: 8,  level: 1, speed: 0.25 },
+  duck:     { name: "Canard",   img: "duck",       cost: 15, level: 2 },
+  hedgehog: { name: "Hérisson", img: "hedgehog",   cost: 18, level: 2 },
+  turtle:   { name: "Tortue",   img: "turtle",     cost: 18, level: 2, speed: 0.4 },
+  cat:      { name: "Chat",     img: "cat",        cost: 25, level: 2, right: true },
+  dog:      { name: "Chien",    img: "dog",        cost: 30, level: 3 },
+  squirrel: { name: "Écureuil", img: "chipmunk",   cost: 25, level: 3 },
+  sheep:    { name: "Mouton",   img: "ewe",        cost: 35, level: 3, right: true },
+  pig:      { name: "Cochon",   img: "pig",        cost: 35, level: 4, right: true },
+  goat:     { name: "Chèvre",   img: "goat",       cost: 40, level: 4 },
+  cow:      { name: "Vache",    img: "cow",        cost: 45, level: 5 },
+  swan:     { name: "Cygne",    img: "swan",       cost: 45, level: 5 },
+  horse:    { name: "Cheval",   img: "horse",      cost: 60, level: 6, right: true },
+  llama:    { name: "Lama",     img: "llama",      cost: 70, level: 7 },
+};
+const MAX_ANIMALS = 14;
+
+// Personnage
+const SKINS = ["default", "light", "medium_light", "medium", "medium_dark", "dark"];
+const ACCESSORIES = {
+  none:    { name: "Rien",      img: null },
+  cap:     { name: "Casquette", img: "billed_cap",     cls: "hat" },
+  ribbon:  { name: "Nœud",      img: "ribbon",         cls: "ribbon" },
+  glasses: { name: "Lunettes",  img: "glasses",        cls: "glasses" },
+  crown:   { name: "Couronne",  img: "crown",          cls: "crown" },
+  top:     { name: "Chapeau",   img: "top_hat",        cls: "top" },
+  grad:    { name: "Diplômé",   img: "graduation_cap", cls: "grad" },
+};
+
+// Niveaux du monde (selon la valeur de tout ce qui est construit)
+const LEVELS = [0, 25, 70, 150, 270, 440, 680, 1000];
+
+/* ---------- la carte (unités : 400 × 660) ---------- */
+const MAP_W = 400, MAP_H = 660;
+// Emplacements à construire, dans l'ordre où ils se débloquent
+const PLOTS = [
+  { x: 100, y: 430 }, { x: 305, y: 430 }, { x: 100, y: 540 }, { x: 305, y: 540 },
+  { x: 95,  y: 318 }, { x: 200, y: 215 }, { x: 305, y: 632 }, { x: 95,  y: 205 },
+  { x: 100, y: 632 }, { x: 290, y: 150 },
+];
+const plotsForLevel = level => Math.min(PLOTS.length, 3 + level);
+// Arbres de la forêt autour de la prairie (décor fixe)
+const BORDER_TREES = [
+  [18, 80, "e"], [60, 64, "d"], [104, 70, "e"], [146, 58, "d"], [196, 66, "e"], [244, 56, "d"],
+  [288, 68, "e"], [332, 60, "d"], [378, 78, "e"],
+  [14, 170, "d"], [10, 260, "e"], [16, 360, "d"], [8, 450, "e"], [14, 540, "d"], [20, 640, "e"],
+  [388, 180, "e"], [392, 380, "d"], [386, 470, "e"], [392, 560, "d"], [382, 650, "e"],
+];
+// Zones d'eau (on n'y pose rien et les animaux les évitent)
+function inWater(x, y) {
+  if (((x - 300) / 72) ** 2 + ((y - 252) / 48) ** 2 < 1) return true;
+  return x > 340 && y > 250 && y < 330 && Math.abs((y - 262) - (x - 354) * 0.9) < 26;
+}
+function onGrass(x, y) {
+  return x > 36 && x < 364 && y > 118 && y < 640 && !inWater(x, y);
+}
+
+/* =========================================================
+   SAUVEGARDE
+   ========================================================= */
+const SAVE_KEY = "petit-monde-v1";
 
 function freshState() {
   return {
-    name: "Mon village",
-    stars: 5, // petit cadeau pour construire tout de suite
-    rows: START_ROWS,
-    tiles: {},         // "x,y" -> id de construction
-    sound: true,
-    length: 10,
-    stats: {},         // mode -> { played, good, total, best }
+    stars: 10, // petit cadeau pour construire tout de suite
+    plots: {},  // index -> { id, lvl, day }
+    decos: [],  // { id, x, y }
+    animals: [], // { id }
+    avatar: { base: "girl", skin: "default", acc: "none", name: "" },
+    settings: { sound: true, length: 10, input: "choices" },
+    stats: {},  // mode -> { played, good, total, best, bestOf }
+    counters: { correct: 0, perfect: 0, harvest: 0 },
+    claimed: [],
   };
 }
 
 function load() {
   try {
     const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
-    if (saved) return Object.assign(freshState(), saved);
+    if (saved) {
+      const s = freshState();
+      return Object.assign(s, saved, {
+        avatar: Object.assign(s.avatar, saved.avatar),
+        settings: Object.assign(s.settings, saved.settings),
+        counters: Object.assign(s.counters, saved.counters),
+      });
+    }
+    // Ancienne version (« Mon Village des Calculs ») : on garde les étoiles
+    const old = JSON.parse(localStorage.getItem("village-calculs-v1"));
+    if (old) {
+      const s = freshState();
+      s.stars += old.stars || 0;
+      return s;
+    }
   } catch (e) { /* stockage indisponible : on repart de zéro */ }
   return freshState();
 }
@@ -110,34 +244,84 @@ function save() {
 
 let state = load();
 
-/* ---------- utilitaires d'interface ---------- */
-const $ = id => document.getElementById(id);
-
+/* =========================================================
+   OUTILS D'INTERFACE
+   ========================================================= */
 function show(name) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   $("screen-" + name).classList.add("active");
-  if (name === "village") renderVillage();
-  if (name === "modes") renderModes();
+  if (name === "world") renderWorld();
 }
+const isActive = name => $("screen-" + name).classList.contains("active");
 
 let toastTimer;
 function toast(text) {
   const t = $("toast");
-  t.textContent = text;
+  t.innerHTML = text;
   t.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2000);
 }
 
-function confetti(symbols = ["⭐", "🎉", "✨", "🌟"]) {
-  const box = $("confetti");
-  for (let i = 0; i < 24; i++) {
-    const s = document.createElement("span");
-    s.textContent = symbols[i % symbols.length];
+function confetti(images = ["star", "sparkles", "party_popper", "cherry_blossom"]) {
+  for (let i = 0; i < 26; i++) {
+    const s = document.createElement("img");
+    s.className = "fall";
+    s.src = IMG(images[i % images.length]);
     s.style.left = Math.random() * 100 + "vw";
-    s.style.animationDelay = Math.random() * 0.5 + "s";
-    box.appendChild(s);
-    setTimeout(() => s.remove(), 2300);
+    s.style.animationDelay = Math.random() * 0.6 + "s";
+    $("fx").appendChild(s);
+    setTimeout(() => s.remove(), 2600);
+  }
+}
+
+// Petites étoiles qui s'envolent vers le compteur
+function flyStars(fromEl, n) {
+  const from = fromEl.getBoundingClientRect();
+  const to = $("stars").closest(".pill").getBoundingClientRect();
+  for (let i = 0; i < Math.min(n, 6); i++) {
+    const s = document.createElement("img");
+    s.className = "fly";
+    s.src = IMG("star");
+    s.style.left = from.left + from.width / 2 - 17 + "px";
+    s.style.top = from.top + from.height / 2 - 17 + "px";
+    $("fx").appendChild(s);
+    setTimeout(() => {
+      s.style.left = to.left + 4 + "px";
+      s.style.top = to.top + 2 + "px";
+      s.style.transform = "scale(.7)";
+    }, 30 + i * 90);
+    setTimeout(() => s.remove(), 900 + i * 90);
+  }
+}
+
+function hearts(el) {
+  const r = el.getBoundingClientRect();
+  for (let i = 0; i < 3; i++) {
+    const h = document.createElement("img");
+    h.className = "heart";
+    h.src = IMG("red_heart");
+    h.style.left = r.left + r.width / 2 - 13 + (i - 1) * 18 + "px";
+    h.style.top = r.top + "px";
+    h.style.animationDelay = i * 0.12 + "s";
+    $("fx").appendChild(h);
+    setTimeout(() => h.remove(), 1400);
+  }
+}
+
+function puff(el) {
+  const r = el.getBoundingClientRect();
+  for (let i = 0; i < 6; i++) {
+    const p = document.createElement("img");
+    p.className = "puff";
+    p.src = IMG(i % 2 ? "sparkles" : "star");
+    const angle = (i / 6) * Math.PI * 2;
+    p.style.left = r.left + r.width / 2 + "px";
+    p.style.top = r.top + r.height * 0.6 + "px";
+    p.style.setProperty("--dx", Math.cos(angle) * 50 + "px");
+    p.style.setProperty("--dy", Math.sin(angle) * 36 + "px");
+    $("fx").appendChild(p);
+    setTimeout(() => p.remove(), 700);
   }
 }
 
@@ -147,19 +331,28 @@ function bump(el) {
   el.classList.add("bump");
 }
 
+function avatarHTML(av = state.avatar) {
+  const acc = ACCESSORIES[av.acc];
+  return `<img class="base" src="${IMG(av.base + "_" + av.skin)}" alt="">` +
+    (acc && acc.img ? `<img class="acc ${acc.cls}" src="${IMG(acc.img)}" alt="">` : "");
+}
+function renderAvatars() {
+  document.querySelectorAll("[data-avatar]").forEach(el => { el.innerHTML = avatarHTML(); });
+}
+
 /* ---------- sons (générés, sans fichiers) ---------- */
 let audio;
-function beep(notes) {
-  if (!state.sound) return;
+function beep(notes, type = "triangle") {
+  if (!state.settings.sound) return;
   try {
     audio = audio || new (window.AudioContext || window.webkitAudioContext)();
     let t = audio.currentTime;
     for (const [freq, dur] of notes) {
       const o = audio.createOscillator();
       const g = audio.createGain();
-      o.type = "triangle";
+      o.type = type;
       o.frequency.value = freq;
-      g.gain.setValueAtTime(0.18, t);
+      g.gain.setValueAtTime(0.16, t);
       g.gain.exponentialRampToValueAtTime(0.001, t + dur);
       o.connect(g).connect(audio.destination);
       o.start(t);
@@ -169,257 +362,855 @@ function beep(notes) {
   } catch (e) { /* pas de son, tant pis */ }
 }
 const SOUND = {
-  good:  () => beep([[660, .12], [880, .2]]),
-  bad:   () => beep([[300, .25]]),
-  build: () => beep([[523, .1], [659, .1], [784, .18]]),
-  win:   () => beep([[523, .12], [659, .12], [784, .12], [1047, .35]]),
-  tap:   () => beep([[500, .05]]),
+  good:  () => beep([[660, .12], [880, .22]]),
+  bad:   () => beep([[320, .22]]),
+  build: () => beep([[523, .1], [659, .1], [784, .2]]),
+  coin:  () => beep([[988, .08], [1319, .2]], "sine"),
+  win:   () => beep([[523, .12], [659, .12], [784, .12], [1047, .4]]),
+  tap:   () => beep([[520, .05]], "sine"),
+  pop:   () => beep([[700, .06], [900, .08]], "sine"),
 };
 
 /* =========================================================
-   VILLAGE
+   CALCULS SUR LE MONDE
    ========================================================= */
-let selected = null; // id de construction, "remove", ou null
-
-function villageValue() {
-  return Object.values(state.tiles).reduce((sum, id) => sum + (BY_ID[id]?.cost || 0), 0);
+function buildingValue(p) {
+  if (p.id === "house") return HOUSE.slice(0, p.lvl).reduce((s, h) => s + h.cost, 0);
+  return BUILDINGS[p.id].cost;
 }
-
+function worldValue() {
+  let v = 0;
+  for (const p of Object.values(state.plots)) v += buildingValue(p);
+  for (const d of state.decos) v += DECOS[d.id].cost;
+  for (const a of state.animals) v += ANIMALS[a.id].cost;
+  return v;
+}
 function levelInfo() {
-  const value = villageValue();
+  const v = worldValue();
   let i = 0;
-  while (i + 1 < LEVELS.length && value >= LEVELS[i + 1].min) i++;
+  while (i + 1 < LEVELS.length && v >= LEVELS[i + 1]) i++;
   const next = LEVELS[i + 1];
-  const progress = next ? (value - LEVELS[i].min) / (next.min - LEVELS[i].min) : 1;
-  return { level: i + 1, name: LEVELS[i].name, progress };
+  return { level: i + 1, progress: next ? (v - LEVELS[i]) / (next - LEVELS[i]) : 1 };
+}
+const currentLevel = () => levelInfo().level;
+const countBuilt = id => Object.values(state.plots).filter(p => p.id === id).length;
+const maxHouseLevel = () => Math.max(0, ...Object.values(state.plots).filter(p => p.id === "house").map(p => p.lvl));
+const today = () => new Date().toLocaleDateString("fr-CA"); // AAAA-MM-JJ, heure locale
+
+function spend(n) {
+  if (state.stars < n) return false;
+  state.stars -= n;
+  return true;
 }
 
-function population() {
-  return Object.values(state.tiles).reduce((sum, id) => sum + (BY_ID[id]?.pop || 0), 0);
+// Appelé après chaque achat : vérifie si le monde a changé de niveau
+function afterChange(levelBefore) {
+  save();
+  const after = currentLevel();
+  renderWorld();
+  if (after > levelBefore) {
+    SOUND.win();
+    confetti();
+    const newPlots = plotsForLevel(after) - plotsForLevel(levelBefore);
+    toast(`🎉 Niveau ${after} !` + (newPlots ? `<br>Un nouvel emplacement s'ouvre` : `<br>De nouvelles choses à découvrir`));
+  }
 }
 
-function renderVillage() {
-  $("village-name").textContent = state.name;
-  $("stars").textContent = state.stars;
-  $("population").textContent = population();
+/* =========================================================
+   MON MONDE : affichage
+   ========================================================= */
+let placing = null;       // { kind: "building" | "deco", id }
+let targetPlot = null;    // emplacement touché avant d'ouvrir « Construire »
 
-  const lvl = levelInfo();
-  $("level-name").textContent = `Niv. ${lvl.level} · ${lvl.name}`;
-  $("level-progress").style.width = Math.round(lvl.progress * 100) + "%";
-
-  // Boutique et texte d'abord : l'île prend la place qui reste
-  renderShop(lvl.level);
-  updateHint();
-  renderMap();
-}
-
-function renderMap() {
+function sizeMap() {
+  const area = $("map-area");
   const map = $("map");
-  map.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
-  // L'île doit tenir dans la place disponible (largeur et hauteur)
-  const wrap = map.parentElement;
-  const extra = 24 + 22 + (state.rows < MAX_ROWS ? 56 : 0); // marges, falaise, panneau
-  const tile = Math.min((wrap.clientWidth - 24) / COLS, (wrap.clientHeight - extra) / state.rows);
-  map.style.width = Math.max(200, tile * COLS + 24) + "px";
+  const w = Math.min(area.clientWidth, area.clientHeight * MAP_W / MAP_H);
+  map.style.width = w + "px";
+  map.style.height = w * MAP_H / MAP_W + "px";
+  map.style.setProperty("--u", w / MAP_W + "px");
+}
 
-  map.innerHTML = "";
-  for (let y = 0; y < state.rows; y++) {
-    for (let x = 0; x < COLS; x++) {
-      const key = x + "," + y;
-      const tile = document.createElement("button");
-      tile.className = "tile" + (x % 2 ? " alt" : "");
-      tile.dataset.key = key;
-      const id = state.tiles[key];
-      if (id) {
-        const b = document.createElement("span");
-        b.className = "b" + (SWAYS.has(id) ? " sway" : "");
-        b.textContent = BY_ID[id].emoji;
-        tile.appendChild(b);
-        tile.setAttribute("aria-label", BY_ID[id].name);
-      } else {
-        // Décor fixe (toujours au même endroit) : touffes d'herbe et cailloux
-        const h = (x * 7 + y * 13) % 9;
-        if (h === 0 || h === 4) tile.classList.add("tuft");
-        if (h === 4) tile.classList.add("t2");
-        if (h === 7) tile.classList.add("pebble");
-        tile.setAttribute("aria-label", "Herbe");
-      }
-      if (selected === "remove") tile.classList.add("removable");
-      else if (selected && !id) tile.classList.add("can-build");
-      tile.addEventListener("click", () => onTile(key, tile));
-      map.appendChild(tile);
+// Place un élément sur la carte (x, y = point au sol ; w = largeur)
+function place(el, x, y, w) {
+  el.style.left = (x / MAP_W) * 100 + "%";
+  el.style.top = (y / MAP_H) * 100 + "%";
+  if (w) el.style.width = (w / MAP_W) * 100 + "%";
+  el.style.zIndex = Math.round(y);
+}
+
+function renderWorld() {
+  $("stars").textContent = state.stars;
+  const { level, progress } = levelInfo();
+  $("level-name").textContent = "Niveau " + level;
+  $("level-progress").style.width = Math.round(progress * 100) + "%";
+  renderAvatars();
+  renderQuestBadge();
+  sizeMap();
+  renderMap(level);
+  renderPlacing();
+}
+
+function renderMap(level) {
+  const layer = $("layer");
+  // On garde les animaux (ils se déplacent) et on redessine le reste
+  layer.querySelectorAll(":scope > :not(.animal)").forEach(el => el.remove());
+
+  for (const [x, y, kind] of BORDER_TREES) {
+    const t = document.createElement("div");
+    t.className = "obj tree";
+    t.innerHTML = `<img src="${IMG(kind === "e" ? "evergreen_tree" : "deciduous_tree")}" alt="">`;
+    place(t, x, y, kind === "e" ? 44 : 52);
+    layer.appendChild(t);
+  }
+
+  const open = plotsForLevel(level);
+  PLOTS.forEach((pos, i) => {
+    const built = state.plots[i];
+    if (built) {
+      layer.appendChild(buildingEl(i, built, pos));
+    } else if (i < open) {
+      const p = document.createElement("button");
+      p.className = "plot";
+      p.textContent = "+";
+      p.setAttribute("aria-label", "Emplacement libre");
+      place(p, pos.x, pos.y);
+      p.addEventListener("click", e => { e.stopPropagation(); onPlot(i); });
+      layer.appendChild(p);
+    } else if (i === open) {
+      // Le prochain emplacement se voit, cadenassé
+      const p = document.createElement("button");
+      p.className = "plot locked";
+      p.innerHTML = `<img src="${IMG("locked")}" alt="">`;
+      p.setAttribute("aria-label", "Emplacement bloqué");
+      place(p, pos.x, pos.y);
+      p.addEventListener("click", e => {
+        e.stopPropagation();
+        SOUND.tap();
+        toast(`Cet emplacement s'ouvre au niveau ${level + 1} 🔒<br>Construis et décore pour y arriver !`);
+      });
+      layer.appendChild(p);
     }
-  }
-
-  // Dernière rangée : agrandir le terrain
-  if (state.rows < MAX_ROWS) {
-    const cost = expandCost(state.rows);
-    const btn = document.createElement("button");
-    btn.className = "tile expand";
-    btn.style.gridColumn = `1 / span ${COLS}`;
-    btn.style.aspectRatio = "auto";
-    btn.textContent = `🚜 Agrandir : ${cost} ⭐`;
-    btn.addEventListener("click", () => expand(cost));
-    map.appendChild(btn);
-  }
-}
-
-function renderShop(level) {
-  const shop = $("shop");
-  shop.innerHTML = "";
-
-  for (const b of BUILDINGS) {
-    const el = document.createElement("button");
-    el.className = "item";
-    const locked = b.level > level;
-    if (locked) el.classList.add("locked");
-    else if (b.cost > state.stars) el.classList.add("too-expensive");
-    if (selected === b.id) el.classList.add("selected");
-    el.innerHTML = locked
-      ? `<span class="emo">🔒</span><span class="name">Niveau ${b.level}</span><span class="cost">${b.cost} ⭐</span>`
-      : `<span class="emo">${b.emoji}</span><span class="name">${b.name}</span><span class="cost">${b.cost} ⭐</span>`;
-    el.addEventListener("click", () => {
-      SOUND.tap();
-      if (locked) return toast(`🔒 Fais grandir ton village jusqu'au niveau ${b.level} !`);
-      if (b.cost > state.stars) return toast(`Il te manque ${b.cost - state.stars} ⭐`);
-      selected = selected === b.id ? null : b.id;
-      renderVillage();
-    });
-    shop.appendChild(el);
-  }
-
-  const rm = document.createElement("button");
-  rm.className = "item tool" + (selected === "remove" ? " selected" : "");
-  rm.innerHTML = `<span class="emo">🧹</span><span class="name">Enlever</span><span class="cost">½ ⭐</span>`;
-  rm.addEventListener("click", () => {
-    SOUND.tap();
-    selected = selected === "remove" ? null : "remove";
-    renderVillage();
   });
-  shop.appendChild(rm);
+
+  state.decos.forEach((d, i) => {
+    const def = DECOS[d.id];
+    const el = document.createElement("button");
+    el.className = "obj deco" + (def.cat === "fleurs" || def.cat === "arbres" ? " sway" : "");
+    el.innerHTML = `<img src="${IMG(def.img)}" alt="${def.name}">`;
+    place(el, d.x, d.y, def.cat === "arbres" ? 46 : 32);
+    el.addEventListener("click", e => { e.stopPropagation(); onDeco(i, el); });
+    layer.appendChild(el);
+  });
+
+  syncAnimals();
 }
 
-function updateHint() {
-  const hint = $("hint");
-  if (selected === "remove") hint.textContent = "Touche une construction pour l'enlever (tu récupères la moitié des étoiles).";
-  else if (selected) hint.textContent = `Touche un carré d'herbe pour poser : ${BY_ID[selected].emoji} ${BY_ID[selected].name}`;
-  else if (Object.keys(state.tiles).length === 0) hint.textContent = "Choisis une construction en bas, puis touche un carré d'herbe.";
-  else hint.textContent = "Réponds à des additions pour gagner des étoiles ⭐";
+function buildingEl(i, built, pos) {
+  const isHouse = built.id === "house";
+  const def = isHouse ? HOUSE[built.lvl - 1] : BUILDINGS[built.id];
+  const production = BUILDINGS[built.id].cat === "production";
+  const el = document.createElement("button");
+  el.className = "obj building" + (production ? " sway" : "");
+  el.dataset.plot = i;
+  let html = `<img src="${IMG(def.img)}" alt="${def.name}">`;
+  if (isHouse) html += `<span class="lvl-badge">${built.lvl}</span>`;
+  if (canHarvest(built)) html += `<span class="harvest"><img src="${IMG("star")}" alt="Récolte prête"></span>`;
+  el.innerHTML = html;
+  place(el, pos.x, pos.y + 16, production ? 60 : 84);
+  el.addEventListener("click", e => { e.stopPropagation(); onBuilding(i, el); });
+  return el;
 }
 
-function onTile(key, tileEl) {
-  const current = state.tiles[key];
+function renderPlacing() {
+  const bar = $("placing");
+  $("map").classList.toggle("placing-building", placing?.kind === "building");
+  if (!placing) { bar.hidden = true; return; }
+  const def = placing.kind === "building" ? BUILDINGS[placing.id] : DECOS[placing.id];
+  bar.hidden = false;
+  $("placing-img").src = IMG(def.img);
+  $("placing-text").textContent = placing.kind === "building"
+    ? "Touche un emplacement ＋"
+    : "Touche l'herbe pour poser";
+}
 
-  if (selected === "remove") {
-    if (!current) return;
-    const refund = Math.floor(BY_ID[current].cost / 2);
-    delete state.tiles[key];
-    state.stars += refund;
+/* =========================================================
+   MON MONDE : actions
+   ========================================================= */
+// Touche un emplacement libre
+async function onPlot(i) {
+  SOUND.tap();
+  if (placing?.kind === "building") {
+    const id = placing.id;
+    if (await confirmBuild(id)) build(i, id);
+    return;
+  }
+  targetPlot = i;
+  openBuild();
+}
+
+function confirmBuild(id) {
+  const def = BUILDINGS[id];
+  return ask({
+    title: "Construire ici ?",
+    img: def.img,
+    name: def.name,
+    sub: id === "house" ? "Niveau 1" : (def.harvest ? `Récolte : +${def.harvest} ⭐ par jour` : ""),
+    cost: def.cost,
+    buttons: [
+      { label: "Annuler", cls: "btn-grey", value: false },
+      { label: "Construire", cls: "btn-green", value: true, disabled: state.stars < def.cost },
+    ],
+  });
+}
+
+function build(i, id) {
+  const def = BUILDINGS[id];
+  if (!spend(def.cost)) return toast(`Il te manque ${def.cost - state.stars} ⭐<br>Joue pour en gagner !`);
+  const before = currentLevel();
+  state.plots[i] = { id, lvl: 1, day: today() };
+  if (state.stars < def.cost) placing = null;
+  SOUND.build();
+  afterChange(before);
+  const el = document.querySelector(`.building[data-plot="${i}"]`);
+  if (el) { el.classList.add("new"); puff(el); }
+}
+
+// Touche une construction existante
+async function onBuilding(i, el) {
+  const built = state.plots[i];
+  const def = BUILDINGS[built.id];
+
+  if (canHarvest(built)) {
+    built.day = today();
+    state.stars += def.harvest;
+    state.counters.harvest++;
     save();
-    SOUND.tap();
-    toast(`🧹 +${refund} ⭐`);
-    renderVillage();
+    SOUND.coin();
+    flyStars(el, def.harvest);
+    renderWorld();
     return;
   }
 
-  if (current) {
-    // Toucher une construction la fait bouger
-    tileEl.classList.remove("wiggle");
-    void tileEl.offsetWidth;
-    tileEl.classList.add("wiggle");
-    SOUND.tap();
-    return toast(BY_ID[current].emoji + " " + BY_ID[current].name);
-  }
+  el.classList.remove("tap");
+  void el.offsetWidth;
+  el.classList.add("tap");
+  SOUND.tap();
 
-  if (!selected) {
-    return toast("Choisis d'abord une construction en bas 👇");
+  const buttons = [{ label: "Fermer", cls: "btn-grey", value: null }];
+  let sub = "", cost = null, name = def.name, img = def.img;
+  if (built.id === "house") {
+    const cur = HOUSE[built.lvl - 1];
+    name = cur.name;
+    img = cur.img;
+    sub = `Niveau ${built.lvl} · ${cur.pop} habitants`;
+    const next = HOUSE[built.lvl];
+    if (next) {
+      cost = next.cost;
+      buttons.push({ label: "Améliorer", cls: "btn-green", value: "up", disabled: state.stars < next.cost });
+    } else {
+      sub += " · niveau maximum !";
+    }
+  } else if (def.harvest) {
+    sub = `Prochaine récolte demain (+${def.harvest} ⭐)`;
   }
+  buttons.push({ label: "Démolir", cls: "btn-red", value: "remove" });
 
-  const b = BY_ID[selected];
-  if (b.cost > state.stars) {
-    selected = null;
-    renderVillage();
-    return toast(`Il te manque ${b.cost - state.stars} ⭐`);
-  }
+  const choice = await ask({ title: name, img, name: cost ? "Améliorer :" : "", sub, cost, buttons });
+  if (choice === "up") upgrade(i);
+  if (choice === "remove") demolish(i);
+}
 
-  const before = levelInfo().level;
-  state.stars -= b.cost;
-  state.tiles[key] = b.id;
-  if (b.cost > state.stars) selected = null; // plus assez pour en poser un autre
-  save();
+function upgrade(i) {
+  const built = state.plots[i];
+  const next = HOUSE[built.lvl];
+  if (!next || !spend(next.cost)) return;
+  const before = currentLevel();
+  built.lvl++;
   SOUND.build();
-  renderVillage();
-  const built = document.querySelector(`.tile[data-key="${key}"]`);
-  if (built) {
-    built.classList.add("just-built");
-    puff(built);
-  }
-
-  const after = levelInfo();
-  if (after.level > before) {
-    SOUND.win();
-    confetti(["🎉", "🏠", "⭐", "🌳"]);
-    toast(`🎉 Ton village devient : ${after.name} !`);
-  }
+  afterChange(before);
+  const el = document.querySelector(`.building[data-plot="${i}"]`);
+  if (el) { el.classList.add("new"); puff(el); }
+  toast(`✨ ${next.name} !`);
 }
 
-function puff(tile) {
-  for (let i = 0; i < 5; i++) {
-    const p = document.createElement("span");
-    p.className = "puff";
-    p.textContent = i % 2 ? "✨" : "💨";
-    const angle = (i / 5) * Math.PI * 2;
-    p.style.setProperty("--dx", Math.cos(angle) * 40 + "px");
-    p.style.setProperty("--dy", Math.sin(angle) * 30 + "px");
-    tile.appendChild(p);
-    setTimeout(() => p.remove(), 700);
-  }
-}
-
-function expand(cost) {
-  if (state.stars < cost) {
-    SOUND.tap();
-    return toast(`Il te faut ${cost} ⭐ pour agrandir (il en manque ${cost - state.stars})`);
-  }
-  state.stars -= cost;
-  state.rows++;
+async function demolish(i) {
+  const built = state.plots[i];
+  const refund = Math.floor(buildingValue(built) / 2);
+  const ok = await ask({
+    title: "Démolir ?",
+    img: built.id === "house" ? HOUSE[built.lvl - 1].img : BUILDINGS[built.id].img,
+    name: "Tu récupères",
+    cost: refund,
+    buttons: [
+      { label: "Non", cls: "btn-grey", value: false },
+      { label: "Démolir", cls: "btn-red", value: true },
+    ],
+  });
+  if (!ok) return;
+  delete state.plots[i];
+  state.stars += refund;
   save();
-  SOUND.build();
-  toast("🚜 Nouveau terrain !");
-  renderVillage();
+  SOUND.pop();
+  renderWorld();
 }
 
-$("village-name").addEventListener("click", () => {
-  const name = prompt("Comment s'appelle ton village ?", state.name);
-  if (name && name.trim()) {
-    state.name = name.trim().slice(0, 24);
-    save();
-    renderVillage();
+function canHarvest(built) {
+  return !!BUILDINGS[built.id].harvest && built.day !== today();
+}
+
+// Touche une décoration
+async function onDeco(i, el) {
+  if (placing) return; // en mode pose, on ne dérange pas
+  const d = state.decos[i];
+  const def = DECOS[d.id];
+  el.classList.remove("tap");
+  void el.offsetWidth;
+  el.classList.add("tap");
+  SOUND.tap();
+  const refund = Math.floor(def.cost / 2);
+  const ok = await ask({
+    title: def.name,
+    img: def.img,
+    name: "Ranger cette décoration ?",
+    sub: refund ? `Tu récupères ${refund} ⭐` : "",
+    buttons: [
+      { label: "Garder", cls: "btn-grey", value: false },
+      { label: "Ranger", cls: "btn-red", value: true },
+    ],
+  });
+  if (!ok) return;
+  state.decos.splice(i, 1);
+  state.stars += refund;
+  save();
+  SOUND.pop();
+  renderWorld();
+}
+
+// Touche la carte (pose d'une décoration)
+$("map").addEventListener("click", e => {
+  if (placing?.kind !== "deco") {
+    if (placing?.kind === "building") toast("Touche un emplacement ＋");
+    return;
   }
+  const r = $("map").getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width * MAP_W;
+  const y = (e.clientY - r.top) / r.height * MAP_H;
+  if (!onGrass(x, y)) {
+    SOUND.bad();
+    return toast(inWater(x, y) ? "Pas dans l'eau ! 💦" : "Pose-la sur l'herbe 🌱");
+  }
+  const def = DECOS[placing.id];
+  if (!spend(def.cost)) {
+    placing = null;
+    renderPlacing();
+    return toast(`Il te manque ${def.cost - state.stars} ⭐`);
+  }
+  const before = currentLevel();
+  state.decos.push({ id: placing.id, x: Math.round(x), y: Math.round(y) });
+  if (state.stars < def.cost) placing = null;
+  SOUND.pop();
+  afterChange(before);
+  const els = document.querySelectorAll(".obj.deco");
+  const el = els[els.length - 1];
+  if (el) { el.classList.add("new"); puff(el); }
 });
+
+$("placing-cancel").addEventListener("click", e => {
+  e.stopPropagation();
+  placing = null;
+  SOUND.tap();
+  renderPlacing();
+});
+
+/* =========================================================
+   ANIMAUX
+   ========================================================= */
+function syncAnimals() {
+  const layer = $("layer");
+  const els = [...layer.querySelectorAll(".animal")];
+  // Supprime les animaux en trop, ajoute les nouveaux
+  els.slice(state.animals.length).forEach(el => el.remove());
+  state.animals.forEach((a, i) => {
+    const existing = els[i];
+    if (existing && existing.dataset.id === a.id) return;
+    if (existing) existing.remove();
+    const def = ANIMALS[a.id];
+    const el = document.createElement("button");
+    el.className = "animal";
+    el.dataset.id = a.id;
+    el.innerHTML = `<span><img src="${IMG(def.img)}" alt="${def.name}"></span>`;
+    const start = randomSpot();
+    el._x = start.x;
+    el._y = start.y;
+    el._next = Date.now() + rand(500, 3000);
+    place(el, start.x, start.y, 40);
+    el.addEventListener("click", e => {
+      e.stopPropagation();
+      el.classList.remove("jump");
+      void el.offsetWidth;
+      el.classList.add("jump");
+      SOUND.pop();
+      hearts(el);
+    });
+    layer.appendChild(el);
+  });
+}
+
+function randomSpot() {
+  for (let i = 0; i < 40; i++) {
+    const x = rand(50, 350), y = rand(150, 630);
+    if (onGrass(x, y)) return { x, y };
+  }
+  return { x: 200, y: 400 };
+}
+
+// Toutes les secondes, certains animaux partent se promener
+setInterval(() => {
+  if (!isActive("world") || document.hidden) return;
+  const now = Date.now();
+  document.querySelectorAll("#layer .animal").forEach(el => {
+    if (now < el._next) return;
+    const def = ANIMALS[el.dataset.id];
+    const speed = 22 * (def.speed || 1); // unités par seconde
+    let tx = el._x, ty = el._y;
+    for (let i = 0; i < 20; i++) {
+      tx = el._x + rand(-90, 90);
+      ty = el._y + rand(-70, 70);
+      if (onGrass(tx, ty)) break;
+    }
+    if (!onGrass(tx, ty)) ({ x: tx, y: ty } = randomSpot());
+    const dur = Math.hypot(tx - el._x, ty - el._y) / speed;
+    el.classList.toggle("flip", (tx > el._x) !== !!def.right);
+    el.classList.add("walk");
+    el.style.transitionDuration = dur + "s";
+    place(el, tx, ty);
+    el._x = tx;
+    el._y = ty;
+    el._next = now + dur * 1000 + rand(1500, 5000);
+    setTimeout(() => el.classList.remove("walk"), dur * 1000);
+  });
+}, 1000);
+
+/* =========================================================
+   FENÊTRES
+   ========================================================= */
+let onModalClose = null;
+
+function openModal(title, render) {
+  $("modal-title").textContent = title;
+  const body = $("modal-body");
+  body.innerHTML = "";
+  render(body);
+  $("overlay").hidden = false;
+}
+function closeModal() {
+  $("overlay").hidden = true;
+  document.querySelectorAll(".menu-btn").forEach(b => b.classList.remove("active"));
+  if (onModalClose) { const f = onModalClose; onModalClose = null; f(); }
+}
+$("modal-close").addEventListener("click", () => { SOUND.tap(); targetPlot = null; closeModal(); });
+$("overlay").addEventListener("click", e => { if (e.target.id === "overlay") { targetPlot = null; closeModal(); } });
+
+// Petite fenêtre de confirmation, renvoie la valeur du bouton choisi
+function ask({ title, img, name = "", sub = "", cost = null, buttons }) {
+  return new Promise(resolve => {
+    $("confirm-title").textContent = title;
+    $("confirm-img").src = IMG(img);
+    $("confirm-name").textContent = name;
+    $("confirm-sub").textContent = sub;
+    $("confirm-cost").innerHTML = cost === null ? "" : `${cost}<img src="${IMG("star")}" alt="étoiles">`;
+    const box = $("confirm-actions");
+    box.innerHTML = "";
+    const done = value => { $("confirm").hidden = true; resolve(value); };
+    for (const b of buttons) {
+      const el = document.createElement("button");
+      el.className = "btn " + b.cls;
+      el.textContent = b.label;
+      el.disabled = !!b.disabled;
+      el.addEventListener("click", () => { SOUND.tap(); done(b.value); });
+      box.appendChild(el);
+    }
+    $("confirm").onclick = e => { if (e.target.id === "confirm") done(buttons[0].value); };
+    $("confirm").hidden = false;
+  });
+}
+
+function card({ img, name, cost, level, owned }) {
+  const locked = level > currentLevel();
+  const el = document.createElement("button");
+  el.className = "card" + (locked ? " locked" : cost > state.stars ? " poor" : "");
+  el.innerHTML = `<img src="${IMG(img)}" alt="">
+    <span class="name">${name}</span>
+    ${locked ? `<span class="cost">Niveau ${level}</span><img class="lock" src="${IMG("locked")}" alt="bloqué">` : starCost(cost)}
+    ${owned ? `<span class="owned">×${owned}</span>` : ""}`;
+  el._locked = locked;
+  return el;
+}
+
+function checkBuyable(el, cost, level) {
+  SOUND.tap();
+  if (el._locked) { toast(`🔒 Ton monde doit atteindre le niveau ${level}`); return false; }
+  if (cost > state.stars) { toast(`Il te manque ${cost - state.stars} ⭐<br>Joue pour en gagner !`); return false; }
+  return true;
+}
+
+function tabsEl(list, current, onPick) {
+  const tabs = document.createElement("div");
+  tabs.className = "tabs";
+  for (const t of list) {
+    const b = document.createElement("button");
+    b.className = "tab" + (t.id === current ? " active" : "");
+    b.innerHTML = (t.img ? `<img src="${IMG(t.img)}" alt="">` : "") + t.label;
+    b.addEventListener("click", () => { SOUND.tap(); onPick(t.id); });
+    tabs.appendChild(b);
+  }
+  return tabs;
+}
+
+/* ---------- Construire ---------- */
+let buildTab = "maisons";
+
+function openBuild() {
+  openModal("Construire", body => {
+    body.appendChild(tabsEl(BUILD_TABS, buildTab, id => { buildTab = id; openBuild(); }));
+
+    if (buildTab === "maisons") {
+      const chain = document.createElement("div");
+      chain.className = "chain";
+      HOUSE.forEach((h, i) => {
+        if (i) chain.insertAdjacentHTML("beforeend", `<span class="arrow">➜</span>`);
+        const c = card({ img: h.img, name: `Niveau ${i + 1}`, cost: h.cost, level: 1 });
+        c.addEventListener("click", () => {
+          if (i === 0) return chooseBuilding("house", c);
+          SOUND.tap();
+          toast("Construis une maison, puis touche-la<br>pour l'améliorer !");
+        });
+        chain.appendChild(c);
+      });
+      body.appendChild(chain);
+      body.insertAdjacentHTML("beforeend",
+        `<p class="note">Touche une maison de ton monde pour l'améliorer.<br>Plus elle est grande, plus il y a d'habitants !</p>`);
+      return;
+    }
+
+    const grid = document.createElement("div");
+    grid.className = "cards";
+    for (const [id, def] of Object.entries(BUILDINGS)) {
+      if (def.cat !== buildTab) continue;
+      const c = card({ ...def, owned: countBuilt(id) });
+      c.addEventListener("click", () => chooseBuilding(id, c));
+      grid.appendChild(c);
+    }
+    body.appendChild(grid);
+    if (buildTab === "production") {
+      body.insertAdjacentHTML("beforeend",
+        `<p class="note">Chaque jour, touche tes cultures pour récolter des étoiles ⭐</p>`);
+    }
+  });
+}
+
+async function chooseBuilding(id, cardEl) {
+  const def = BUILDINGS[id];
+  if (!checkBuyable(cardEl, def.cost, def.level)) return;
+  const open = plotsForLevel(currentLevel());
+  const free = PLOTS.map((_, i) => i).filter(i => i < open && !state.plots[i]);
+  if (!free.length) {
+    return toast("Plus d'emplacement libre !<br>Monte de niveau pour en ouvrir un.");
+  }
+  if (targetPlot !== null && !state.plots[targetPlot]) {
+    // On avait déjà touché un emplacement : on construit directement là
+    const i = targetPlot;
+    targetPlot = null;
+    closeModal();
+    if (await confirmBuild(id)) build(i, id);
+    return;
+  }
+  placing = { kind: "building", id };
+  closeModal();
+  renderPlacing();
+}
+
+/* ---------- Décorations ---------- */
+let decoTab = "all";
+
+function openDecos() {
+  openModal("Décorations", body => {
+    body.appendChild(tabsEl(DECO_TABS, decoTab, id => { decoTab = id; openDecos(); }));
+    const grid = document.createElement("div");
+    grid.className = "cards";
+    for (const [id, def] of Object.entries(DECOS)) {
+      if (decoTab !== "all" && def.cat !== decoTab) continue;
+      const c = card(def);
+      c.addEventListener("click", () => {
+        if (!checkBuyable(c, def.cost, def.level)) return;
+        placing = { kind: "deco", id };
+        closeModal();
+        renderPlacing();
+      });
+      grid.appendChild(c);
+    }
+    body.appendChild(grid);
+  });
+}
+
+/* ---------- Animaux ---------- */
+function openAnimals() {
+  openModal("Animaux", body => {
+    body.insertAdjacentHTML("beforeend",
+      `<p class="note">Tes animaux se promènent dans ton monde.<br>Touche-les pour un câlin !</p>`);
+    const grid = document.createElement("div");
+    grid.className = "cards";
+    for (const [id, def] of Object.entries(ANIMALS)) {
+      const owned = state.animals.filter(a => a.id === id).length;
+      const c = card({ ...def, owned });
+      c.addEventListener("click", async () => {
+        if (!checkBuyable(c, def.cost, def.level)) return;
+        if (state.animals.length >= MAX_ANIMALS) return toast("Ton monde est plein d'animaux ! 🐾");
+        const ok = await ask({
+          title: "Adopter ?",
+          img: def.img,
+          name: def.name,
+          cost: def.cost,
+          buttons: [
+            { label: "Annuler", cls: "btn-grey", value: false },
+            { label: "Adopter", cls: "btn-green", value: true },
+          ],
+        });
+        if (!ok || !spend(def.cost)) return;
+        const before = currentLevel();
+        state.animals.push({ id });
+        closeModal();
+        SOUND.build();
+        afterChange(before);
+        const els = document.querySelectorAll("#layer .animal");
+        const el = els[els.length - 1];
+        if (el) setTimeout(() => hearts(el), 200);
+        toast(`${def.name} arrive dans ton monde ! 💕`);
+      });
+      grid.appendChild(c);
+    }
+    body.appendChild(grid);
+  });
+}
+
+/* =========================================================
+   PROGRESSION (quêtes)
+   ========================================================= */
+const QUESTS = [
+  { id: "add10",    text: "Réussir 10 additions",          goal: 10, value: () => state.counters.correct, reward: 5,  img: "check_mark_button" },
+  { id: "house",    text: "Construire une maison",         goal: 1,  value: () => countBuilt("house"),   reward: 3,  img: "house" },
+  { id: "animal",   text: "Adopter un animal",             goal: 1,  value: () => state.animals.length,  reward: 3,  img: "paw_prints" },
+  { id: "deco3",    text: "Décorer avec 3 éléments",       goal: 3,  value: () => state.decos.length,    reward: 3,  img: "cherry_blossom" },
+  { id: "field",    text: "Faire 3 récoltes",              goal: 3,  value: () => state.counters.harvest, reward: 5, img: "sheaf_of_rice" },
+  { id: "upgrade",  text: "Améliorer une maison au niveau 2", goal: 1, value: () => maxHouseLevel() >= 2 ? 1 : 0, reward: 5, img: "house_with_garden" },
+  { id: "perfect",  text: "Faire un sans-faute",           goal: 1,  value: () => state.counters.perfect, reward: 5, img: "trophy" },
+  { id: "modes",    text: "Essayer les 4 jeux",            goal: 4,  value: () => Object.keys(state.stats).length, reward: 8, img: "books" },
+  { id: "add50",    text: "Réussir 50 additions",          goal: 50, value: () => state.counters.correct, reward: 10, img: "glowing_star" },
+  { id: "animals3", text: "Avoir 3 animaux",               goal: 3,  value: () => state.animals.length,  reward: 8,  img: "cow" },
+  { id: "level3",   text: "Atteindre le niveau 3",         goal: 3,  value: () => currentLevel(),        reward: 8,  img: "chart_increasing" },
+  { id: "school",   text: "Construire une école",          goal: 1,  value: () => countBuilt("school"),  reward: 10, img: "school" },
+  { id: "house3",   text: "Avoir une maison niveau 3",     goal: 1,  value: () => maxHouseLevel() >= 3 ? 1 : 0, reward: 12, img: "houses" },
+  { id: "add100",   text: "Réussir 100 additions",         goal: 100, value: () => state.counters.correct, reward: 15, img: "star" },
+  { id: "perfect5", text: "Faire 5 sans-fautes",           goal: 5,  value: () => state.counters.perfect, reward: 15, img: "crown" },
+  { id: "castle",   text: "Construire le château",         goal: 1,  value: () => countBuilt("castle"),  reward: 25, img: "castle" },
+];
+const questDone = q => q.value() >= q.goal;
+const claimable = () => QUESTS.filter(q => questDone(q) && !state.claimed.includes(q.id));
+
+function renderQuestBadge() {
+  const n = claimable().length;
+  const badge = $("quest-badge");
+  badge.hidden = !n;
+  badge.textContent = n;
+}
+
+function openQuests() {
+  openModal("Ma progression", body => {
+    const list = document.createElement("div");
+    list.className = "quests";
+    // À récupérer d'abord, puis en cours, puis terminées
+    const order = q => state.claimed.includes(q.id) ? 2 : questDone(q) ? 0 : 1;
+    for (const q of [...QUESTS].sort((a, b) => order(a) - order(b))) {
+      const v = Math.min(q.value(), q.goal);
+      const claimed = state.claimed.includes(q.id);
+      const row = document.createElement("div");
+      row.className = "quest" + (v >= q.goal ? " done" : "");
+      row.innerHTML = `
+        <img src="${IMG(q.img)}" alt="">
+        <div class="q-text">${q.text}
+          <div class="progress green"><div style="width:${(v / q.goal) * 100}%"></div><span>${v}/${q.goal}</span></div>
+        </div>`;
+      const right = document.createElement("div");
+      right.className = "reward";
+      if (claimed) {
+        right.innerHTML = `<img src="${IMG("check_mark_button")}" alt="Terminé">`;
+      } else if (v >= q.goal) {
+        const b = document.createElement("button");
+        b.className = "btn btn-gold";
+        b.innerHTML = `+${q.reward}<img src="${IMG("star")}" alt="étoiles">`;
+        b.addEventListener("click", () => {
+          state.claimed.push(q.id);
+          state.stars += q.reward;
+          save();
+          SOUND.coin();
+          flyStars(b, q.reward);
+          renderWorld();
+          setTimeout(openQuests, 350);
+        });
+        right.appendChild(b);
+      } else {
+        right.innerHTML = `${q.reward}<img src="${IMG("star")}" alt="étoiles">`;
+      }
+      row.appendChild(right);
+      list.appendChild(row);
+    }
+    body.appendChild(list);
+  });
+}
+
+/* =========================================================
+   MON PERSONNAGE
+   ========================================================= */
+let profileTab = "base";
+
+function openProfile() {
+  openModal("Mon personnage", body => {
+    const wrap = document.createElement("div");
+    wrap.className = "profile";
+    wrap.innerHTML = `<div class="stage"><span class="avatar" data-avatar></span></div>`;
+
+    const input = document.createElement("input");
+    input.className = "name-input";
+    input.placeholder = "Ton prénom";
+    input.maxLength = 16;
+    input.value = state.avatar.name;
+    input.addEventListener("input", () => { state.avatar.name = input.value.trim(); save(); });
+    wrap.appendChild(input);
+
+    wrap.appendChild(tabsEl(
+      [{ id: "base", label: "Personnage" }, { id: "skin", label: "Couleur" }, { id: "acc", label: "Accessoires" }],
+      profileTab, id => { profileTab = id; openProfile(); }));
+
+    const grid = document.createElement("div");
+    grid.className = "cards";
+    const av = state.avatar;
+    const option = (img, selected, onPick, label = "") => {
+      const c = document.createElement("button");
+      c.className = "card" + (selected ? " selected" : "");
+      c.innerHTML = img ? `<img src="${IMG(img)}" alt="${label}">` : `<span class="name">${label}</span>`;
+      c.addEventListener("click", () => { onPick(); save(); SOUND.pop(); renderAvatars(); openProfile(); });
+      grid.appendChild(c);
+    };
+    if (profileTab === "base") {
+      option(`girl_${av.skin}`, av.base === "girl", () => { av.base = "girl"; }, "Fille");
+      option(`boy_${av.skin}`, av.base === "boy", () => { av.base = "boy"; }, "Garçon");
+    } else if (profileTab === "skin") {
+      for (const skin of SKINS) option(`${av.base}_${skin}`, av.skin === skin, () => { av.skin = skin; });
+    } else {
+      for (const [id, acc] of Object.entries(ACCESSORIES)) {
+        option(acc.img, av.acc === id, () => { av.acc = id; }, acc.name);
+      }
+    }
+    wrap.appendChild(grid);
+    body.appendChild(wrap);
+    renderAvatars();
+  });
+}
+
+/* =========================================================
+   PARAMÈTRES
+   ========================================================= */
+function openSettings() {
+  openModal("Paramètres", body => {
+    const s = state.settings;
+    const seg = (options, current, onPick) => {
+      const box = document.createElement("div");
+      box.className = "seg";
+      for (const [value, label] of options) {
+        const b = document.createElement("button");
+        b.textContent = label;
+        if (value === current) b.className = "on";
+        b.addEventListener("click", () => { onPick(value); save(); SOUND.tap(); openSettings(); });
+        box.appendChild(b);
+      }
+      return box;
+    };
+    const row = (label, control) => {
+      const r = document.createElement("div");
+      r.className = "set-row";
+      r.innerHTML = `<span>${label}</span>`;
+      r.appendChild(control);
+      return r;
+    };
+    const wrap = document.createElement("div");
+    wrap.className = "settings";
+    wrap.appendChild(row("Son", seg([[true, "Oui"], [false, "Non"]], s.sound, v => { s.sound = v; })));
+    wrap.appendChild(row("Réponses", seg([["choices", "4 boutons"], ["keypad", "Clavier"]], s.input, v => { s.input = v; })));
+    wrap.appendChild(row("Questions par partie", seg([[5, "5"], [10, "10"], [15, "15"]], s.length, v => { s.length = v; })));
+
+    const rows = Object.entries(MODES).map(([id, m]) => {
+      const st = state.stats[id];
+      const pct = st ? Math.round(100 * st.good / st.total) + " %" : "—";
+      return `<tr><td>${m.label}</td><td>${st ? st.played + " partie" + (st.played > 1 ? "s" : "") : ""}</td><td>${pct}</td></tr>`;
+    }).join("");
+    wrap.insertAdjacentHTML("beforeend",
+      `<div><b>Espace parents</b> <small>(réussite du premier coup)</small><table class="stats">${rows}
+        <tr><td>Additions réussies</td><td></td><td>${state.counters.correct}</td></tr></table></div>`);
+
+    const reset = document.createElement("button");
+    reset.className = "btn btn-red btn-sm";
+    reset.textContent = "Recommencer un nouveau monde";
+    reset.addEventListener("click", async () => {
+      closeModal();
+      const ok = await ask({
+        title: "Tout effacer ?",
+        img: "house",
+        name: "Le monde, les étoiles et les progrès seront effacés.",
+        buttons: [
+          { label: "Non", cls: "btn-grey", value: false },
+          { label: "Effacer", cls: "btn-red", value: true },
+        ],
+      });
+      if (!ok) return;
+      const { settings, avatar } = state;
+      state = Object.assign(freshState(), { settings, avatar });
+      placing = null;
+      $("layer").innerHTML = "";
+      save();
+      show("world");
+    });
+    wrap.appendChild(reset);
+    wrap.insertAdjacentHTML("beforeend",
+      `<p class="small-print">Images : Fluent Emoji de Microsoft (licence MIT)</p>`);
+    body.appendChild(wrap);
+  });
+}
 
 /* =========================================================
    CHOIX DU JEU
    ========================================================= */
-function renderModes() {
-  const box = $("modes");
-  box.innerHTML = "";
-  for (const [id, m] of Object.entries(MODES)) {
-    const st = state.stats[id];
-    const el = document.createElement("button");
-    el.className = "mode";
-    const [c, dark, light] = m.colors;
-    el.style.cssText = `--c:${c};--c-dark:${dark};--c-light:${light}`;
-    el.innerHTML = `
-      <span class="animal">${m.animal}</span>
-      <span class="big">${m.big}</span>
-      <span class="label">${m.label}</span>
-      <span class="example">${m.example}</span>
-      <span class="reward">+${m.reward} ⭐</span>
-      ${st ? `<span class="best">🏆 ${st.best}/${st.bestOf}</span>` : ""}`;
-    el.addEventListener("click", () => startQuiz(id));
-    box.appendChild(el);
-  }
+function openModes() {
+  openModal("Choisis ton jeu", body => {
+    const grid = document.createElement("div");
+    grid.className = "modes";
+    for (const [id, m] of Object.entries(MODES)) {
+      const st = state.stats[id];
+      const el = document.createElement("button");
+      el.className = "mode";
+      el.style.cssText = `--c:${m.c};--c-dark:${m.dark}`;
+      el.innerHTML = `
+        <img src="${IMG(m.img)}" alt="">
+        <span class="big">${m.big}</span>
+        <span class="label">${m.label}</span>
+        <span class="example">${m.example}</span>
+        <span class="reward">+${m.reward} ⭐ par réponse</span>
+        ${st ? `<span class="best">🏆 ${st.best}/${st.bestOf}</span>` : ""}`;
+      el.addEventListener("click", () => { SOUND.tap(); closeModal(); startQuiz(id); });
+      grid.appendChild(el);
+    }
+    body.appendChild(grid);
+  });
 }
 
 /* =========================================================
@@ -428,11 +1219,12 @@ function renderModes() {
 let quiz = null;
 
 function startQuiz(mode) {
+  placing = null;
   quiz = {
     mode,
     index: 0,
-    length: state.length,
-    results: [],   // true / false par question
+    length: state.settings.length,
+    results: [],
     earned: 0,
     streak: 0,
     tries: 0,
@@ -440,7 +1232,11 @@ function startQuiz(mode) {
     last: null,
     busy: false,
   };
-  $("mascot").textContent = MODES[mode].animal;
+  $("mascot").src = IMG(MODES[mode].img);
+  const keypad = state.settings.input === "keypad";
+  $("keypad").hidden = !keypad;
+  $("answers").hidden = keypad;
+  renderAvatars();
   show("quiz");
   nextQuestion();
 }
@@ -454,30 +1250,41 @@ function nextQuestion() {
   quiz.tries = 0;
   quiz.busy = false;
 
-  $("question-card").classList.remove("right", "wrong");
+  $("board").classList.remove("right", "wrong");
   $("feedback").textContent = "";
   $("helper").hidden = true;
   $("btn-help").disabled = false;
+  $("bubble").classList.remove("show");
   $("keypad").classList.remove("locked");
-  renderQuestion();
-  renderDots();
-}
-
-function renderQuestion() {
-  const { a, b } = quiz.q;
-  $("question").innerHTML = `${a} + ${b} = <span class="answer" id="answer">${quiz.input || "?"}</span>`;
   $("quiz-stars").textContent = state.stars;
+  $("quiz-progress").style.width = (quiz.index / quiz.length) * 100 + "%";
+  renderQuestion();
+
+  const box = $("answers");
+  box.classList.remove("locked");
+  box.innerHTML = "";
+  for (const v of makeChoices(q, quiz.mode)) {
+    const b = document.createElement("button");
+    b.className = "choice";
+    b.textContent = v;
+    b.dataset.v = v;
+    b.addEventListener("click", () => answer(v, b));
+    box.appendChild(b);
+  }
 }
 
-function renderDots() {
-  const box = $("quiz-dots");
-  box.innerHTML = "";
-  for (let i = 0; i < quiz.length; i++) {
-    const d = document.createElement("span");
-    if (i < quiz.results.length) d.className = quiz.results[i] ? "good" : "bad";
-    else if (i === quiz.index) d.className = "current";
-    box.appendChild(d);
-  }
+function renderQuestion(shown) {
+  const { a, b } = quiz.q;
+  const value = shown ?? (quiz.input || "?");
+  $("question").innerHTML = `${a} + ${b} = <span class="answer">${value}</span>`;
+}
+
+function say(text) {
+  const b = $("bubble");
+  b.innerHTML = text;
+  b.classList.remove("show");
+  void b.offsetWidth;
+  b.classList.add("show");
 }
 
 function showHelper() {
@@ -490,30 +1297,19 @@ function showHelper() {
   $("btn-help").disabled = true;
 }
 
-function press(key) {
+function answer(value, btn) {
   if (!quiz || quiz.busy) return;
-  if (key === "del") {
-    quiz.input = quiz.input.slice(0, -1);
-  } else if (key === "ok") {
-    if (quiz.input !== "") check();
-    return;
-  } else if (quiz.input.length < 2) {
-    quiz.input = (quiz.input === "0" ? "" : quiz.input) + key;
-  }
-  SOUND.tap();
-  renderQuestion();
-}
-
-function check() {
-  const value = parseInt(quiz.input, 10);
-  const card = $("question-card");
   quiz.tries++;
+  const board = $("board");
 
   if (value === quiz.q.result) {
-    card.classList.remove("wrong");
-    card.classList.add("right");
     quiz.busy = true;
+    board.classList.remove("wrong");
+    board.classList.add("right");
+    $("answers").classList.add("locked");
     $("keypad").classList.add("locked");
+    if (btn) btn.classList.add("good");
+    renderQuestion(value);
 
     let gain = 0;
     if (quiz.tries === 1) {
@@ -525,68 +1321,71 @@ function check() {
     }
     quiz.earned += gain;
     state.stars += gain;
+    state.counters.correct++;
     save();
 
-    const praise = ["Bravo !", "Super !", "Génial !", "Parfait !", "Trop fort !", "Oui !"];
-    let msg = praise[rand(0, praise.length - 1)];
-    if (gain) msg += ` +${gain} ⭐`;
-    if (quiz.tries === 1 && quiz.streak % 5 === 0) msg += " 🔥 Série de " + quiz.streak + " !";
-    if (quiz.tries > 1) msg = "C'est ça ! 👍";
-    $("feedback").textContent = msg;
+    let msg = quiz.tries === 1 ? pick(["Bravo !", "Super !", "Génial !", "Parfait !", "Trop fort !", "Oui !"]) : "C'est ça ! 👍";
+    if (gain) msg += ` <b>+${gain}</b> ⭐`;
+    if (quiz.tries === 1 && quiz.streak % 5 === 0) msg += `<br>🔥 ${quiz.streak} d'affilée !`;
+    say(msg);
     $("quiz-stars").textContent = state.stars;
     if (gain) bump($("quiz-stars").parentElement);
     SOUND.good();
-
     quiz.results.push(quiz.tries === 1);
-    setTimeout(advance, 1100);
+    setTimeout(advance, 1200);
     return;
   }
 
   // Mauvaise réponse
   SOUND.bad();
-  card.classList.remove("wrong");
-  void card.offsetWidth;
-  card.classList.add("wrong");
+  board.classList.remove("wrong");
+  void board.offsetWidth;
+  board.classList.add("wrong");
   quiz.streak = 0;
+  if (btn) btn.classList.add("bad");
 
   if (quiz.tries === 1) {
-    $("feedback").textContent = "Presque ! Essaie encore 💪";
+    $("feedback").textContent = "Presque ! Compte les points 👇";
+    say("Essaie encore ! 💪");
     showHelper();
     quiz.busy = true;
     setTimeout(() => {
       quiz.busy = false;
       quiz.input = "";
-      card.classList.remove("wrong");
+      board.classList.remove("wrong");
       renderQuestion();
-    }, 700);
+    }, 600);
   } else {
-    // Deuxième erreur : on montre la réponse et on passe à la suite
     quiz.busy = true;
+    $("answers").classList.add("locked");
     $("keypad").classList.add("locked");
     showHelper();
-    quiz.input = String(quiz.q.result);
-    renderQuestion();
-    $("feedback").textContent = `La réponse était ${quiz.q.result}. Tu y arriveras la prochaine fois !`;
+    renderQuestion(quiz.q.result);
+    $("answers").querySelector(`[data-v="${quiz.q.result}"]`)?.classList.add("good");
+    $("feedback").textContent = `La réponse était ${quiz.q.result}.`;
+    say("Tu y arriveras la prochaine fois !");
     quiz.results.push(false);
     setTimeout(advance, 2600);
   }
 }
 
 function advance() {
+  if (!quiz) return; // partie arrêtée entre-temps
   quiz.index++;
   if (quiz.index >= quiz.length) finishQuiz();
   else nextQuestion();
 }
 
 function finishQuiz() {
+  $("quiz-progress").style.width = "100%";
   const good = quiz.results.filter(Boolean).length;
   const total = quiz.length;
   const perfect = good === total;
   if (perfect) {
     quiz.earned += 3;
     state.stars += 3;
+    state.counters.perfect++;
   }
-
   const st = state.stats[quiz.mode] || { played: 0, good: 0, total: 0, best: 0, bestOf: total };
   st.played++;
   st.good += good;
@@ -595,32 +1394,52 @@ function finishQuiz() {
   state.stats[quiz.mode] = st;
   save();
 
-  let emoji, title;
-  if (perfect) { emoji = "🏆"; title = "Parfait !"; }
-  else if (good >= total * 0.7) { emoji = "🎉"; title = "Bravo !"; }
-  else if (good >= total * 0.4) { emoji = "👍"; title = "Bien joué !"; }
-  else { emoji = "💪"; title = "Continue, tu progresses !"; }
+  let img, title;
+  if (perfect) { img = "trophy"; title = "Sans-faute !"; }
+  else if (good >= total * 0.7) { img = "party_popper"; title = "Bravo !"; }
+  else if (good >= total * 0.4) { img = "glowing_star"; title = "Bien joué !"; }
+  else { img = "seedling"; title = "Tu progresses !"; }
 
-  $("result-emoji").textContent = emoji;
-  $("result-title").textContent = title;
-  $("result-text").textContent =
-    `${good} bonne${good > 1 ? "s" : ""} réponse${good > 1 ? "s" : ""} du premier coup sur ${total}` +
-    (perfect ? " — bonus +3 ⭐ !" : "");
-  $("result-stars").textContent = quiz.earned;
-  show("result");
   SOUND.win();
   if (good >= total * 0.7) confetti();
+
+  const mode = quiz.mode;
+  openModal(title, body => {
+    body.innerHTML = `
+      <div class="result">
+        <img src="${IMG(img)}" alt="">
+        <p>${good} bonne${good > 1 ? "s" : ""} réponse${good > 1 ? "s" : ""} du premier coup sur ${total}${perfect ? "<br>Bonus sans-faute : +3 ⭐ !" : ""}</p>
+        <div class="won">+${quiz.earned}<img src="${IMG("star")}" alt="étoiles"></div>
+        <button class="btn btn-green" id="btn-again">🔁 Encore !</button>
+        <button class="btn btn-cream" id="btn-build">🏡 Construire mon monde</button>
+      </div>`;
+  });
+  // Fermer la fenêtre de résultat ramène au monde, sauf si on rejoue
+  onModalClose = () => show("world");
+  $("btn-again").addEventListener("click", () => { onModalClose = null; closeModal(); startQuiz(mode); });
+  $("btn-build").addEventListener("click", () => closeModal());
 }
 
 /* ---------- clavier ---------- */
+function press(key) {
+  if (!quiz || quiz.busy) return;
+  if (key === "del") {
+    quiz.input = quiz.input.slice(0, -1);
+  } else if (key === "ok") {
+    if (quiz.input !== "") answer(parseInt(quiz.input, 10), null);
+    return;
+  } else if (quiz.input.length < 2) {
+    quiz.input = (quiz.input === "0" ? "" : quiz.input) + key;
+  }
+  SOUND.tap();
+  renderQuestion();
+}
 $("keypad").addEventListener("click", e => {
   const btn = e.target.closest("button");
   if (btn) press(btn.dataset.k || btn.textContent);
 });
-
-// Clavier physique (pratique sur tablette ou ordinateur)
 document.addEventListener("keydown", e => {
-  if (!$("screen-quiz").classList.contains("active")) return;
+  if (!isActive("quiz") || !$("overlay").hidden || state.settings.input !== "keypad") return;
   if (/^[0-9]$/.test(e.key)) press(e.key);
   else if (e.key === "Backspace") press("del");
   else if (e.key === "Enter") press("ok");
@@ -628,59 +1447,49 @@ document.addEventListener("keydown", e => {
 
 $("btn-help").addEventListener("click", () => { SOUND.tap(); showHelper(); });
 
-$("quiz-quit").addEventListener("click", () => {
-  if (quiz && quiz.results.length > 0 && !confirm("Arrêter la partie ? Tu gardes les étoiles déjà gagnées.")) return;
+$("quiz-quit").addEventListener("click", async () => {
+  if (quiz && quiz.results.length > 0) {
+    const ok = await ask({
+      title: "Arrêter ?",
+      img: "star",
+      name: "Tu gardes les étoiles déjà gagnées.",
+      buttons: [
+        { label: "Continuer", cls: "btn-green", value: false },
+        { label: "Arrêter", cls: "btn-grey", value: true },
+      ],
+    });
+    if (!ok) return;
+  }
   quiz = null;
-  show("modes");
+  show("world");
 });
 
 /* =========================================================
-   NAVIGATION & RÉGLAGES
+   NAVIGATION
    ========================================================= */
-document.querySelectorAll("[data-go]").forEach(btn =>
-  btn.addEventListener("click", () => { selected = null; show(btn.dataset.go); }));
+const PANELS = { build: openBuild, decos: openDecos, animals: openAnimals, quests: openQuests };
+document.querySelectorAll(".menu-btn").forEach(btn => btn.addEventListener("click", () => {
+  SOUND.tap();
+  placing = null;
+  targetPlot = null;
+  renderPlacing();
+  btn.classList.add("active");
+  PANELS[btn.dataset.panel]();
+}));
 
-$("btn-play").addEventListener("click", () => { selected = null; show("modes"); });
-$("btn-again").addEventListener("click", () => startQuiz(quiz.mode));
-
-function renderSoundBtn() { $("btn-sound").textContent = state.sound ? "🔊" : "🔇"; }
-$("btn-sound").addEventListener("click", () => {
-  state.sound = !state.sound;
-  save();
-  renderSoundBtn();
+$("btn-play").addEventListener("click", () => {
+  SOUND.tap();
+  placing = null;
+  renderPlacing();
+  openModes();
 });
+$("btn-start").addEventListener("click", () => { SOUND.good(); show("world"); });
+$("btn-title-settings").addEventListener("click", () => { SOUND.tap(); openSettings(); });
+$("btn-title-profile").addEventListener("click", () => { SOUND.tap(); openProfile(); });
+$("btn-settings").addEventListener("click", () => { SOUND.tap(); openSettings(); });
+$("btn-profile").addEventListener("click", () => { SOUND.tap(); openProfile(); });
 
-$("btn-settings").addEventListener("click", () => {
-  $("opt-length").value = String(state.length);
-  const rows = Object.entries(MODES).map(([id, m]) => {
-    const st = state.stats[id];
-    const pct = st ? Math.round(100 * st.good / st.total) + " %" : "—";
-    return `<tr><td>${m.label}</td><td>${st ? st.played + " partie(s)" : ""}</td><td>${pct}</td></tr>`;
-  }).join("");
-  $("stats").innerHTML = `<table>${rows}</table>`;
-  $("settings").showModal();
-});
-
-$("opt-length").addEventListener("change", e => {
-  state.length = parseInt(e.target.value, 10);
-  save();
-});
-
-$("btn-close-settings").addEventListener("click", () => $("settings").close());
-
-$("btn-reset").addEventListener("click", () => {
-  if (!confirm("Effacer le village, les étoiles et les statistiques ?")) return;
-  const { sound, length } = state;
-  state = Object.assign(freshState(), { sound, length });
-  save();
-  $("settings").close();
-  selected = null;
-  show("village");
-});
-
-window.addEventListener("resize", () => {
-  if ($("screen-village").classList.contains("active")) renderMap();
-});
+window.addEventListener("resize", () => { if (isActive("world")) sizeMap(); });
 
 /* ---------- plein écran ---------- */
 // Une fois installé, le manifeste ouvre déjà le jeu en plein écran.
@@ -696,11 +1505,8 @@ function goFullscreen() {
 document.addEventListener("pointerup", goFullscreen, { once: true });
 
 /* ---------- démarrage ---------- */
-renderSoundBtn();
-show("village");
-document.fonts?.ready.then(() => {
-  if ($("screen-village").classList.contains("active")) renderMap();
-});
+renderAvatars();
+document.fonts?.ready.then(() => { if (isActive("world")) sizeMap(); });
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").catch(() => {});

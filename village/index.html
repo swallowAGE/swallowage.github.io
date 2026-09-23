@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<title>Mon Village des Calculs</title>
-<meta name="description" content="Construis ton village en réussissant des additions : table de 1, table de 2, additions jusqu'à 10 et jusqu'à 20.">
-<meta name="theme-color" content="#8FD3F4">
+<title>Mon Petit Monde</title>
+<meta name="description" content="Les maths construisent de grandes aventures ! Réussis des additions pour gagner des étoiles et construire ton petit monde.">
+<meta name="theme-color" content="#5E9E43">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
@@ -17,13 +17,13 @@
 </head>
 <body>
 
-<!-- ============ DÉCOR (commun à tous les écrans) ============ -->
+<!-- ============ DÉCOR (écran titre et questions) ============ -->
 <div class="scene" aria-hidden="true">
   <svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMax slice">
     <defs>
       <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#7CCBF0"/>
-        <stop offset=".55" stop-color="#BFE6F5"/>
+        <stop offset=".5" stop-color="#C4EAF7"/>
         <stop offset="1" stop-color="#FCEBC6"/>
       </linearGradient>
       <radialGradient id="glow">
@@ -32,82 +32,178 @@
       </radialGradient>
     </defs>
     <rect width="400" height="800" fill="url(#sky)"/>
-    <circle cx="330" cy="120" r="110" fill="url(#glow)"/>
-    <circle cx="330" cy="120" r="34" fill="#FFD95A"/>
-    <path d="M0 470 Q70 400 150 440 T300 420 T400 430 V800 H0Z" fill="#A9D8A0"/>
-    <path d="M0 520 Q90 460 190 505 T400 480 V800 H0Z" fill="#8CCB76"/>
-    <g fill="#6FAE5A">
-      <circle cx="60" cy="478" r="14"/><rect x="58" y="484" width="4" height="12" fill="#8A5A34"/>
-      <circle cx="82" cy="485" r="10"/><rect x="80" y="490" width="4" height="10" fill="#8A5A34"/>
-      <circle cx="342" cy="468" r="13"/><rect x="340" y="474" width="4" height="12" fill="#8A5A34"/>
-    </g>
-    <path d="M0 600 Q110 545 220 590 T400 570 V800 H0Z" fill="#78BC5E"/>
-    <path d="M0 690 Q120 650 240 680 T400 670 V800 H0Z" fill="#65AA4C"/>
+    <circle cx="330" cy="110" r="110" fill="url(#glow)"/>
+    <circle cx="330" cy="110" r="32" fill="#FFD95A"/>
+    <path d="M0 430 Q70 360 150 400 T300 380 T400 390 V800 H0Z" fill="#A9D8A0"/>
+    <path d="M0 480 Q90 420 190 465 T400 440 V800 H0Z" fill="#8CCB76"/>
+    <path d="M0 560 Q110 505 220 550 T400 530 V800 H0Z" fill="#78BC5E"/>
+    <path d="M0 650 Q120 610 240 640 T400 630 V800 H0Z" fill="#65AA4C"/>
   </svg>
   <div class="cloud c1"></div>
   <div class="cloud c2"></div>
   <div class="cloud c3"></div>
 </div>
 
-<!-- ============ ÉCRAN VILLAGE ============ -->
-<main id="screen-village" class="screen active">
-  <header class="topbar">
-    <button class="sign" id="village-name" aria-label="Renommer le village">Mon village</button>
-    <div class="pill" aria-live="polite"><span class="pill-icon">⭐</span><b id="stars">0</b></div>
-  </header>
+<!-- ============ ÉCRAN TITRE ============ -->
+<main id="screen-title" class="screen active">
+  <div class="logo">
+    <img class="logo-flower f1" src="img/cherry_blossom.png" alt="">
+    <img class="logo-flower f2" src="img/hibiscus.png" alt="">
+    <img class="logo-leaf l1" src="img/herb.png" alt="">
+    <img class="logo-leaf l2" src="img/seedling.png" alt="">
+    <h1><span>Mon Petit</span><span class="big">Monde</span></h1>
+  </div>
+  <p class="tagline">Les maths construisent<br>de grandes aventures !</p>
 
-  <div class="level-bar panel-cream">
-    <span class="lvl" id="level-name">Niv. 1</span>
-    <div class="progress"><div id="level-progress"></div></div>
-    <span class="pop">👥 <b id="population">0</b></span>
+  <div class="title-actions">
+    <button class="btn btn-green btn-xl" id="btn-start">Jouer</button>
+    <div class="row2">
+      <button class="btn btn-cream" id="btn-title-settings"><img src="img/gear.png" alt="">Paramètres</button>
+      <button class="btn btn-cream" id="btn-title-profile"><span class="mini-avatar" data-avatar></span>Mon profil</button>
+    </div>
   </div>
 
-  <div class="map-wrap">
-    <div id="map" class="map"></div>
-    <span class="butterfly" aria-hidden="true">🦋</span>
-  </div>
-
-  <p id="hint" class="hint"></p>
-
-  <nav class="tray" aria-label="Constructions">
-    <div class="shop" id="shop"></div>
-  </nav>
-
-  <div class="bottom-actions">
-    <button class="round-btn" id="btn-settings" aria-label="Réglages">⚙️</button>
-    <button class="btn btn-green btn-play" id="btn-play">⭐ Jouer</button>
-    <button class="round-btn" id="btn-sound" aria-label="Son">🔊</button>
+  <div class="title-ground" aria-hidden="true">
+    <img class="tg house" src="img/house_with_garden.png" alt="">
+    <img class="tg tree1" src="img/deciduous_tree.png" alt="">
+    <img class="tg tree2" src="img/evergreen_tree.png" alt="">
+    <img class="tg rabbit" src="img/rabbit.png" alt="">
+    <img class="tg flower1" src="img/tulip.png" alt="">
+    <img class="tg flower2" src="img/blossom.png" alt="">
+    <img class="tg flower3" src="img/sunflower.png" alt="">
+    <img class="tg rock" src="img/rock.png" alt="">
   </div>
 </main>
 
-<!-- ============ CHOIX DU JEU ============ -->
-<main id="screen-modes" class="screen">
-  <header class="topbar">
-    <button class="round-btn" data-go="village" aria-label="Retour au village">🏡</button>
-    <h1 class="sign title-sign">Choisis ton jeu</h1>
-    <span class="spacer"></span>
+<!-- ============ MON MONDE ============ -->
+<main id="screen-world" class="screen">
+  <header class="hud">
+    <div class="pill"><img src="img/star.png" alt="Étoiles"><b id="stars">0</b></div>
+    <button class="avatar-btn" id="btn-profile" aria-label="Mon personnage"><span class="mini-avatar" data-avatar></span></button>
+    <div class="pill level-pill">
+      <img src="img/glowing_star.png" alt="">
+      <div>
+        <span id="level-name">Niveau 1</span>
+        <div class="progress"><div id="level-progress"></div></div>
+      </div>
+    </div>
+    <button class="icon-btn" id="btn-settings" aria-label="Paramètres"><img src="img/gear.png" alt=""></button>
   </header>
-  <div class="modes" id="modes"></div>
+
+  <div class="map-area" id="map-area">
+    <div class="map" id="map">
+      <svg class="map-bg" viewBox="0 0 400 660" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <radialGradient id="g-grass" cx=".5" cy=".45" r=".75">
+            <stop offset="0" stop-color="#A6DE6E"/>
+            <stop offset="1" stop-color="#7EC655"/>
+          </radialGradient>
+          <linearGradient id="g-water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7AD7F2"/>
+            <stop offset="1" stop-color="#3FA7D6"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="660" fill="#5E9E43"/>
+        <!-- prairie -->
+        <path d="M34 92 Q200 58 366 92 Q394 330 374 612 Q200 664 26 612 Q6 330 34 92Z" fill="url(#g-grass)"/>
+        <g fill="#8FD05F" opacity=".7">
+          <ellipse cx="80" cy="360" rx="40" ry="16"/><ellipse cx="310" cy="470" rx="46" ry="15"/>
+          <ellipse cx="150" cy="140" rx="36" ry="12"/><ellipse cx="250" cy="590" rx="40" ry="14"/>
+          <ellipse cx="60" cy="580" rx="28" ry="11"/>
+        </g>
+        <g fill="#B8E785" opacity=".55">
+          <ellipse cx="130" cy="470" rx="30" ry="10"/><ellipse cx="270" cy="360" rx="34" ry="11"/>
+          <ellipse cx="260" cy="150" rx="26" ry="9"/>
+        </g>
+        <!-- chemin et placette -->
+        <g fill="none" stroke-linecap="round">
+          <path d="M200 668 C182 590 218 510 200 440 S196 392 200 370" stroke="#CFA56A" stroke-width="34"/>
+          <path d="M200 668 C182 590 218 510 200 440 S196 392 200 370" stroke="#E6C68F" stroke-width="25"/>
+        </g>
+        <ellipse cx="200" cy="336" rx="50" ry="36" fill="#CFA56A"/>
+        <ellipse cx="200" cy="335" rx="44" ry="31" fill="#E6C68F"/>
+        <g fill="#D4B07A"><circle cx="186" cy="325" r="3"/><circle cx="214" cy="344" r="2.5"/><circle cx="198" cy="480" r="3"/><circle cx="206" cy="560" r="2.5"/></g>
+        <!-- étang -->
+        <ellipse cx="300" cy="252" rx="68" ry="44" fill="#9B8761"/>
+        <ellipse cx="300" cy="249" rx="62" ry="38" fill="url(#g-water)"/>
+        <ellipse cx="282" cy="236" rx="30" ry="9" fill="#fff" opacity=".28"/>
+        <g fill="#5DB043">
+          <path d="M320 262 a10 6 0 1 0 8 -4 l-8 4z"/><path d="M272 262 a8 5 0 1 0 6 -3 l-6 3z"/>
+          <path d="M330 238 a7 4 0 1 0 5 -3 l-5 3z"/>
+        </g>
+        <circle cx="323" cy="258" r="3" fill="#F48FB1"/>
+        <!-- ruisseau -->
+        <g fill="none" stroke-linecap="round">
+          <path d="M354 262 C372 280 384 300 412 314" stroke="#9B8761" stroke-width="26"/>
+          <path d="M354 262 C372 280 384 300 412 314" stroke="#4FB6E2" stroke-width="18"/>
+          <path d="M360 268 C374 282 384 296 404 306" stroke="#fff" stroke-width="2.5" stroke-dasharray="6 9" opacity=".6"/>
+        </g>
+        <!-- pont -->
+        <g transform="translate(378 290) rotate(-58)">
+          <rect x="-20" y="-11" width="40" height="22" rx="4" fill="#B67A42"/>
+          <g stroke="#8A5528" stroke-width="2"><line x1="-12" y1="-11" x2="-12" y2="11"/><line x1="-4" y1="-11" x2="-4" y2="11"/><line x1="4" y1="-11" x2="4" y2="11"/><line x1="12" y1="-11" x2="12" y2="11"/></g>
+          <rect x="-22" y="-14" width="44" height="4" rx="2" fill="#8A5528"/>
+          <rect x="-22" y="10" width="44" height="4" rx="2" fill="#8A5528"/>
+        </g>
+        <!-- cailloux autour de l'étang -->
+        <g fill="#B9B6A8"><ellipse cx="236" cy="262" rx="8" ry="6"/><ellipse cx="246" cy="275" rx="5" ry="4"/><ellipse cx="352" cy="228" rx="7" ry="5"/></g>
+        <!-- barrière -->
+        <g fill="#A8703C">
+          <rect x="60" y="100" width="110" height="4" rx="2"/><rect x="60" y="110" width="110" height="4" rx="2"/>
+          <rect x="230" y="100" width="100" height="4" rx="2"/><rect x="230" y="110" width="100" height="4" rx="2"/>
+          <g fill="#8A5528">
+            <rect x="58" y="94" width="6" height="26" rx="2"/><rect x="92" y="94" width="6" height="26" rx="2"/>
+            <rect x="126" y="94" width="6" height="26" rx="2"/><rect x="164" y="94" width="6" height="26" rx="2"/>
+            <rect x="228" y="94" width="6" height="26" rx="2"/><rect x="262" y="94" width="6" height="26" rx="2"/>
+            <rect x="296" y="94" width="6" height="26" rx="2"/><rect x="326" y="94" width="6" height="26" rx="2"/>
+          </g>
+        </g>
+        <!-- petites fleurs -->
+        <g>
+          <g fill="#FFF"><circle cx="150" cy="400" r="2.5"/><circle cx="262" cy="410" r="2.5"/><circle cx="60" cy="250" r="2.5"/><circle cx="340" cy="580" r="2.5"/><circle cx="150" cy="620" r="2.5"/></g>
+          <g fill="#FFD54F"><circle cx="156" cy="404" r="2.5"/><circle cx="256" cy="414" r="2.5"/><circle cx="345" cy="360" r="2.5"/><circle cx="48" cy="470" r="2.5"/></g>
+          <g fill="#F48FB1"><circle cx="146" cy="408" r="2.5"/><circle cx="268" cy="404" r="2.5"/><circle cx="66" cy="256" r="2.5"/><circle cx="240" cy="130" r="2.5"/></g>
+        </g>
+      </svg>
+      <div class="layer" id="layer"></div>
+    </div>
+
+    <div class="placing" id="placing" hidden>
+      <img id="placing-img" src="" alt="">
+      <span id="placing-text"></span>
+      <button class="btn btn-cream btn-sm" id="placing-cancel">Terminé</button>
+    </div>
+  </div>
+
+  <nav class="menu">
+    <button class="menu-btn" data-panel="build"><img src="img/hammer.png" alt=""><span>Construire</span></button>
+    <button class="menu-btn" data-panel="decos"><img src="img/cherry_blossom.png" alt=""><span>Décors</span></button>
+    <button class="play-btn" id="btn-play" aria-label="Jouer aux additions"><img src="img/star.png" alt=""><span>Jouer</span></button>
+    <button class="menu-btn" data-panel="animals"><img src="img/paw_prints.png" alt=""><span>Animaux</span></button>
+    <button class="menu-btn" data-panel="quests"><img src="img/trophy.png" alt=""><span>Progrès</span><b class="badge" id="quest-badge" hidden></b></button>
+  </nav>
 </main>
 
 <!-- ============ QUESTIONS ============ -->
 <main id="screen-quiz" class="screen">
-  <header class="topbar">
-    <button class="round-btn" id="quiz-quit" aria-label="Arrêter">✖</button>
-    <div class="dots" id="quiz-dots"></div>
-    <div class="pill"><span class="pill-icon">⭐</span><b id="quiz-stars">0</b></div>
+  <header class="quiz-top">
+    <button class="icon-btn" id="quiz-quit" aria-label="Arrêter">✖</button>
+    <h1 class="banner">Résous l'addition !</h1>
+    <div class="pill"><img src="img/star.png" alt=""><b id="quiz-stars">0</b></div>
   </header>
 
-  <div class="board" id="question-card">
-    <span class="mascot" id="mascot">🦊</span>
-    <div class="question" id="question">3 + 4 = <span class="answer" id="answer">?</span></div>
+  <div class="board" id="board">
+    <img class="leaf-corner lc1" src="img/herb.png" alt="">
+    <img class="leaf-corner lc2" src="img/seedling.png" alt="">
+    <img class="mascot" id="mascot" src="img/fox.png" alt="">
+    <div class="question" id="question"></div>
     <div class="feedback" id="feedback"></div>
     <div class="helper" id="helper" hidden></div>
   </div>
 
-  <button class="btn btn-cream help-btn" id="btn-help">💡 Aide</button>
+  <div class="answers" id="answers"></div>
 
-  <div class="keypad" id="keypad">
+  <div class="keypad" id="keypad" hidden>
     <button>1</button><button>2</button><button>3</button>
     <button>4</button><button>5</button><button>6</button>
     <button>7</button><button>8</button><button>9</button>
@@ -115,38 +211,46 @@
     <button>0</button>
     <button class="ok" data-k="ok" aria-label="Valider">✔</button>
   </div>
-</main>
 
-<!-- ============ RÉSULTAT ============ -->
-<main id="screen-result" class="screen">
-  <div class="parchment result">
-    <div class="result-emoji" id="result-emoji">🎉</div>
-    <h1 id="result-title">Bravo !</h1>
-    <p id="result-text"></p>
-    <div class="result-stars">+<b id="result-stars">0</b> ⭐</div>
-    <button class="btn btn-green" id="btn-again">🔁 Encore !</button>
-    <button class="btn btn-wood" data-go="village">🏡 Construire mon village</button>
+  <div class="quiz-bottom">
+    <div class="quiz-progress">
+      <img src="img/star.png" alt="">
+      <div class="progress"><div id="quiz-progress"></div></div>
+      <button class="help-btn" id="btn-help" aria-label="Aide"><img src="img/light_bulb.png" alt=""></button>
+    </div>
+    <div class="buddy">
+      <div class="bubble" id="bubble"></div>
+      <span class="avatar" data-avatar></span>
+    </div>
   </div>
 </main>
 
-<!-- ============ RÉGLAGES (parents) ============ -->
-<dialog id="settings" class="parchment">
-  <h2>Réglages</h2>
-  <p class="small">Espace parents</p>
-  <label class="row">Questions par partie
-    <select id="opt-length">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="15">15</option>
-    </select>
-  </label>
-  <div id="stats" class="stats"></div>
-  <button class="danger" id="btn-reset">Recommencer un nouveau village</button>
-  <button class="btn btn-green" id="btn-close-settings">Fermer</button>
-</dialog>
+<!-- ============ FENÊTRES ============ -->
+<div class="overlay" id="overlay" hidden>
+  <section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <h2 class="banner" id="modal-title"></h2>
+    <button class="close-x" id="modal-close" aria-label="Fermer">✖</button>
+    <div class="modal-body" id="modal-body"></div>
+  </section>
+</div>
+
+<div class="overlay" id="confirm" hidden>
+  <section class="modal small" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+    <h2 class="banner" id="confirm-title"></h2>
+    <div class="confirm-body">
+      <img id="confirm-img" src="" alt="">
+      <div>
+        <p class="confirm-name" id="confirm-name"></p>
+        <p class="confirm-sub" id="confirm-sub"></p>
+        <p class="confirm-cost" id="confirm-cost"></p>
+      </div>
+    </div>
+    <div class="confirm-actions" id="confirm-actions"></div>
+  </section>
+</div>
 
 <div id="toast" class="toast" role="status"></div>
-<div id="confetti" class="confetti" aria-hidden="true"></div>
+<div id="fx" class="fx" aria-hidden="true"></div>
 
 <script src="app.js"></script>
 </body>
