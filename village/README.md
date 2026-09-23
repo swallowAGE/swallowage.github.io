@@ -40,4 +40,5 @@ et fonctionne hors connexion. La progression est enregistrée sur le téléphone
 
 Images : [Fluent Emoji](https://github.com/microsoft/fluentui-emoji) de Microsoft,
 sous licence MIT. Pour changer le style graphique, il suffit de remplacer les
-fichiers de `img/` par d'autres images portant le même nom.
+fichiers de `img/` par d'autres images portant le même nom :
+voir le [kit graphique](KIT-GRAPHIQUE.md) (liste des images, priorités et textes prêts à copier).
