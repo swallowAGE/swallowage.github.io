@@ -643,6 +643,72 @@ function categorieLockerPourFeature(feature) {
     return categorieLocker(feature.properties || {}).id;
 }
 
+/* =========================================================
+   ÉQUIPEMENTS SPORTIFS - icône/légende par type de sport
+   Retour direct de l'utilisatrice : "équipementSportif" différenciait
+   déjà ses tuiles par type de sport dans le décompte du dashboard
+   commune (js/communes.js), mais affichait un seul icône générique pour
+   toute la couche sur la CARTE, sans légende. Source unique ici
+   (réutilisée par communes.js pour le décompte, voir COUCHES_DECOMPTE_COMMUNE)
+   plutôt que deux listes d'icônes à maintenir en double.
+   Clé = valeur brute OSM du champ "sport" (vérifiée réelle sur les 102
+   équipements du territoire : 17 valeurs distinctes, toutes listées
+   ci-dessous). "sport1;sport2" (un seul cas réel sur ce territoire)
+   n'utilise que la première valeur pour le classement/l'icône - popup
+   et libellé de tuile continuent d'afficher la liste complète via
+   labelSport (js/popup.js). Couleur uniforme (comme le décompte
+   existant) : seule l'icône distingue les catégories, aucune nouvelle
+   couleur inventée. Icône générique (fa-medal) partagée par les sports
+   sans pictogramme Font Awesome adapté trouvé (tennis, handball,
+   billard, skateboard) plutôt qu'un icône approximatif/trompeur -
+   restent malgré tout des entrées de légende distinctes, avec leur
+   propre libellé et case à cocher. */
+const TYPES_SPORT = [
+    { id: "soccer", label: "Football", icon: "fa-solid fa-futbol" },
+    { id: "boules", label: "Boules / pétanque", icon: "fa-solid fa-bowling-ball" },
+    { id: "tennis", label: "Tennis", icon: "fa-solid fa-medal" },
+    { id: "multi", label: "Multisports", icon: "fa-solid fa-vector-square" },
+    { id: "swimming", label: "Natation", icon: "fa-solid fa-person-swimming" },
+    { id: "basketball", label: "Basketball", icon: "fa-solid fa-basketball" },
+    { id: "athletics", label: "Athlétisme", icon: "fa-solid fa-stopwatch" },
+    { id: "equestrian", label: "Équitation", icon: "fa-solid fa-horse" },
+    { id: "table_tennis", label: "Tennis de table", icon: "fa-solid fa-table-tennis-paddle-ball" },
+    { id: "running", label: "Course à pied", icon: "fa-solid fa-person-running" },
+    { id: "handball", label: "Handball", icon: "fa-solid fa-medal" },
+    { id: "billiards", label: "Billard", icon: "fa-solid fa-medal" },
+    { id: "skateboard", label: "Skateboard", icon: "fa-solid fa-medal" },
+    { id: "volleyball", label: "Volleyball", icon: "fa-solid fa-volleyball" },
+    { id: "cycling", label: "Cyclisme", icon: "fa-solid fa-person-biking" },
+    { id: "motocross", label: "Motocross", icon: "fa-solid fa-motorcycle" },
+    { id: "ultralight_aviation", label: "Aviation légère (ULM)", icon: "fa-solid fa-plane" }
+].map(t => ({ ...t, color: PALETTE.riviere }));
+const TYPE_SPORT_DEFAUT = { id: "autre", label: "Équipement sportif", icon: "fa-solid fa-medal", color: PALETTE.riviere };
+
+function categorieSport(props) {
+    const brut = props.sport ? String(props.sport).split(";")[0].trim() : null;
+    if (!brut) return TYPE_SPORT_DEFAUT;
+    return TYPES_SPORT.find(t => t.id === brut) || TYPE_SPORT_DEFAUT;
+}
+function iconeEquipementSportif(feature) {
+    const cat = categorieSport(feature.properties || {});
+    return { icon: cat.icon, color: cat.color };
+}
+function categorieEquipementSportifPourFeature(feature) {
+    return categorieSport(feature.properties || {}).id;
+}
+/* Même souci que sousTitreCommerce/sousTitreBanque (js/config.js, plus
+   haut) : subtitleFields affichait le champ "sport" brut ("soccer")
+   plutôt que traduit - corrigé au passage puisque déjà en train de
+   toucher cette couche. labelSport (js/popup.js) gère aussi les
+   combinaisons "sport1;sport2" pour l'affichage complet, contrairement
+   à categorieSport qui ne garde que la première valeur pour le
+   classement/l'icône. */
+function sousTitreEquipementSportif(feature) {
+    const props = feature.properties || {};
+    const sport = (typeof labelSport === "function") ? labelSport(props.sport) : null;
+    return [sport, props.com_nom].filter(Boolean).join(" · ");
+}
+
 function categoriePatrimoineRural(props) {
     if (props.historic === "wayside_cross") return { id: "croix", label: "Calvaire", icon: "fa-solid fa-cross", color: PALETTE.ardoise };
     if (props.man_made === "wash_house") return { id: "lavoir", label: "Lavoir", icon: "fa-solid fa-water", color: PALETTE.riviere };
@@ -958,9 +1024,10 @@ const LAYERS = [
         id: "equipementSportif", group: "services", label: "Équipements sportifs",
         file: "couches/services/equipementSportif.geojson", type: "point",
         icon: "fa-solid fa-futbol", color: PALETTE.riviere,
+        iconePourFeature: iconeEquipementSportif, sousTitrePourFeature: sousTitreEquipementSportif,
+        legend: TYPES_SPORT, legendDefaut: TYPE_SPORT_DEFAUT, categoriser: categorieEquipementSportifPourFeature,
         lazy: false, searchable: true, cluster: true,
-        titleFields: ["name", "sport", "com_nom"],
-        subtitleFields: ["sport", "com_nom"]
+        titleFields: ["name", "sport", "com_nom"]
     },
     {
         id: "bibliotheques", group: "services", label: "Bibliothèques & médiathèques",

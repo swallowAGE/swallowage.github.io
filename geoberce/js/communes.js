@@ -154,7 +154,11 @@ function construireCarteMairie(mairies) {
    toute leur couche). categorieCommerce (config.js) porte déjà une
    icône par catégorie de commerce, réutilisée telle quelle ; les
    autres couches n'en avaient pas, complétées ci-dessous
-   (ICONES_ECOLE/ICONES_PETITE_ENFANCE/ICONES_SPORT).
+   (ICONES_ECOLE/ICONES_PETITE_ENFANCE). Équipements sportifs : reprend
+   categorieSport (js/config.js, TYPES_SPORT), écrite pour la même
+   raison côté carte cette fois ("afficher les catégories dans la
+   légende") - une seule source d'icônes par sport pour le décompte ET
+   la couche carte plutôt que deux listes à maintenir en double.
    LABELS_TYPE_ECOLE : réutilise la constante déjà définie dans
    js/popup.js pour construirePopupEcole, pas de doublon. */
 const ICONES_ECOLE = {
@@ -165,14 +169,6 @@ const ICONES_ECOLE = {
 const ICONES_PETITE_ENFANCE = {
     "Assistant maternel": "fa-solid fa-baby", "Crèche": "fa-solid fa-house-chimney-window",
     "Relais Petite Enfance": "fa-solid fa-people-roof"
-};
-const ICONES_SPORT = {
-    "Football": "fa-solid fa-futbol", "Basketball": "fa-solid fa-basketball",
-    "Volleyball": "fa-solid fa-volleyball", "Tennis de table": "fa-solid fa-table-tennis-paddle-ball",
-    "Natation": "fa-solid fa-person-swimming", "Course à pied": "fa-solid fa-person-running",
-    "Cyclisme": "fa-solid fa-person-biking", "Équitation": "fa-solid fa-horse",
-    "Motocross": "fa-solid fa-motorcycle", "Aviation légère (ULM)": "fa-solid fa-plane",
-    "Boules / pétanque": "fa-solid fa-bowling-ball"
 };
 const COUCHES_DECOMPTE_COMMUNE = [
     {
@@ -195,7 +191,7 @@ const COUCHES_DECOMPTE_COMMUNE = [
     },
     {
         id: "equipementSportif", titreGroupe: "Sport & loisirs", color: PALETTE.riviere,
-        grouper: f => { const label = labelSport(f.properties.sport) || "Équipement sportif"; return { label, icon: ICONES_SPORT[label] || "fa-solid fa-medal" }; }
+        grouper: f => categorieSport(f.properties)
     },
     { id: "airesJeu", titreGroupe: "Sport & loisirs", icon: "fa-solid fa-child-reaching", color: PALETTE.riviere, label: "Aires de jeux" }
 ];
