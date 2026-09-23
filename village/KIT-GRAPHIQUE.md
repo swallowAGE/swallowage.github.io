@@ -74,7 +74,7 @@ et la prairie ne tomberaient plus au bon endroit.
 | Fichier | Dans le jeu | Sujet |
 |---|---|---|
 | ✅ `baby_chick.png` | Poussin (et table de 1) | `fluffy yellow baby chick, full body, side view facing left` |
-| `rabbit.png` | Lapin | `cute grey-white rabbit sitting, full body, side view facing left` |
+| ✅ `rabbit.png` | Lapin | `cute grey-white rabbit sitting, full body, side view facing left` |
 | `cat.png` | Chat (et table de 5) | `cute orange tabby cat standing, full body, side view facing left` |
 | `dog.png` | Chien (et table de 6) | `cute light brown puppy standing, full body, side view facing left` |
 | `cow.png` | Vache (et table de 8) | `cute black and white cow standing, full body, side view facing left` |
@@ -113,7 +113,7 @@ et la prairie ne tomberaient plus au bon endroit.
 
 | Fichier | Dans le jeu | Sujet |
 |---|---|---|
-| `sheaf_of_rice.png` | Champ de blé | `small square field of golden wheat` |
+| ✅ `wheat_*.png` (4 étapes, `crop_empty.png` / `crop_seed.png` réutilisables) | Champ de blé | `small square field of golden wheat` |
 | `carrot.png` | Potager | `small vegetable garden patch with carrots growing` |
 | `sunflower.png` | Tournesols | `small patch of sunflowers` |
 | `ear_of_corn.png` | Maïs | `small patch of corn plants` |

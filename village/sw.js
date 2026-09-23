@@ -5,7 +5,7 @@
    images sont mises en cache dès l'installation. La sauvegarde
    du monde est dans localStorage, elle n'est jamais touchée ici.
    ========================================================= */
-const CACHE = "petit-monde-v7";
+const CACHE = "petit-monde-v8";
 const FILES = [
   "./", "index.html", "style.css", "app.js", "manifest.json", "icons/icon-192.png",
   "img/baby_chick.png", "img/bank.png", "img/bear.png", "img/billed_cap.png", "img/blossom.png",
@@ -14,7 +14,7 @@ const FILES = [
   "img/camping.png", "img/carousel_horse.png", "img/carrot.png", "img/castle.png", "img/cat.png",
   "img/chart_increasing.png", "img/check_mark_button.png", "img/cherry_blossom.png",
   "img/chipmunk.png", "img/circus_tent.png", "img/convenience_store.png", "img/cow.png",
-  "img/crown.png", "img/deciduous_tree.png", "img/dog.png", "img/droplet.png", "img/duck.png", "img/ear_of_corn.png",
+  "img/crown.png", "img/deciduous_tree.png", "img/crop_empty.png", "img/crop_seed.png", "img/dog.png", "img/droplet.png", "img/duck.png", "img/ear_of_corn.png",
   "img/evergreen_tree.png", "img/ewe.png", "img/ferris_wheel.png", "img/fountain.png",
   "img/four_leaf_clover.png", "img/fond-carte.webp", "img/fox.png", "img/gear.png", "img/girl_dark.png",
   "img/girl_default.png", "img/girl_light.png", "img/girl_medium.png", "img/girl_medium_dark.png",
@@ -30,7 +30,7 @@ const FILES = [
   "img/school.png", "img/seedling.png", "img/sheaf_of_rice.png", "img/snail.png",
   "img/sparkles.png", "img/speaker_high_volume.png", "img/stadium.png", "img/star.png",
   "img/strawberry.png", "img/sunflower.png", "img/swan.png", "img/tent.png", "img/top_hat.png",
-  "img/tractor.png", "img/trophy.png", "img/tulip.png", "img/turtle.png", "img/wood.png",
+  "img/tractor.png", "img/trophy.png", "img/tulip.png", "img/turtle.png", "img/wheat_ripe.png", "img/wheat_sprout.png", "img/wood.png",
   "img/wrapped_gift.png"
 ];
 
