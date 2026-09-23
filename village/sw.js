@@ -1,11 +1,11 @@
 /* =========================================================
    MON PETIT MONDE — SERVICE WORKER
-   Réseau d'abord (pour recevoir les mises à jour), puis cache
+   Réseau d'abord (toujours revérifié auprès du serveur), puis cache
    en secours : le jeu reste jouable sans connexion. Toutes les
    images sont mises en cache dès l'installation. La sauvegarde
    du monde est dans localStorage, elle n'est jamais touchée ici.
    ========================================================= */
-const CACHE = "petit-monde-v6";
+const CACHE = "petit-monde-v7";
 const FILES = [
   "./", "index.html", "style.css", "app.js", "manifest.json", "icons/icon-192.png",
   "img/baby_chick.png", "img/bank.png", "img/bear.png", "img/billed_cap.png", "img/blossom.png",
@@ -35,7 +35,12 @@ const FILES = [
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
+  // cache: "reload" : on télécharge la vraie dernière version, pas celle du cache du navigateur
+  event.waitUntil(
+    caches.open(CACHE)
+      .then(c => c.addAll(FILES.map(f => new Request(f, { cache: "reload" }))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("activate", event => {
@@ -48,8 +53,13 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+  // En ligne, on redemande toujours au serveur si le fichier a changé (« no-cache ») :
+  // une image remplacée apparaît tout de suite, sans attendre l'expiration du cache.
+  const request = event.request.mode === "navigate"
+    ? event.request
+    : new Request(event.request, { cache: "no-cache" });
   event.respondWith(
-    fetch(event.request)
+    fetch(request)
       .then(response => {
         if (response.ok) {
           const copy = response.clone();
