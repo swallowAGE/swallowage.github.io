@@ -106,6 +106,11 @@ et la prairie ne tomberaient plus au bon endroit.
 
 ### Production (les cultures qui donnent une récolte)
 
+> Pour l'instant, les étapes de pousse (graines, pousses) sont simulées avec la même
+> image, plus petite et plus pâle, sur une parcelle de terre dessinée par le jeu.
+> Plus tard, on pourra ajouter une image par étape (par exemple `sheaf_of_rice_pousse.png`).
+> Pour ces images : **la culture seule, sans socle d'herbe** (la terre est déjà dessinée).
+
 | Fichier | Dans le jeu | Sujet |
 |---|---|---|
 | `sheaf_of_rice.png` | Champ de blé | `small square field of golden wheat` |

@@ -17,7 +17,10 @@ pour construire, décorer et peupler son petit monde.
 - **Le monde** : une grande prairie illustrée (rivière, pont, cascade, forêt) plus large
   que l'écran, que l'on fait glisser du doigt (ou avec les flèches ◀ ▶).
 - **Construire** : maisons améliorables en 3 niveaux, bâtiments (école, poste,
-  hôpital, cirque, château…), production qui donne une récolte d'étoiles par jour.
+  hôpital, cirque, château…) et cultures.
+- **Cultures** : 🌱 on plante en touchant la terre, 💧 on arrose (chaque arrosage fait
+  pousser d'une étape : graines → pousses → mûr), ⭐ on récolte des étoiles, puis on replante.
+  Les gouttes d'eau se gagnent en jouant : une pour deux bonnes réponses à chaque partie.
 - **Décorations** : fleurs, arbres, rochers, objets, posés où l'on veut sur l'herbe.
 - **Animaux** : 17 animaux qui se promènent dans le monde (un câlin quand on les touche).
 - **Niveaux** : le monde monte de niveau en grandissant, ce qui débloque
