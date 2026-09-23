@@ -59,7 +59,7 @@ de terre de l'image. Pour le remplacer par une version plus grande (plus nette),
 garder **exactement la même image** agrandie (« upscale ») : sinon les emplacements
 et la prairie ne tomberaient plus au bon endroit.
 
-### Les maisons (le cœur du jeu)
+### Les maisons (le cœur du jeu) — ✅ faites (Gemini)
 
 | Fichier | Dans le jeu | Sujet |
 |---|---|---|

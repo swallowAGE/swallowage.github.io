@@ -93,9 +93,10 @@ function makeChoices(q, mode) {
    ========================================================= */
 // Maisons : 3 niveaux, on améliore en touchant la maison
 const HOUSE = [
-  { img: "house",             name: "Maison",        cost: 10, pop: 3 },
-  { img: "house_with_garden", name: "Jolie maison",  cost: 30, pop: 6 },
-  { img: "houses",            name: "Grande maison", cost: 50, pop: 10 },
+  // scale : taille sur la carte, pour qu'on voie la maison grandir
+  { img: "house",             name: "Maison",        cost: 10, pop: 3,  scale: 1 },
+  { img: "house_with_garden", name: "Jolie maison",  cost: 30, pop: 6,  scale: 1.15 },
+  { img: "houses",            name: "Grande maison", cost: 50, pop: 10, scale: 1.35 },
 ];
 
 // Constructions posées sur un emplacement
@@ -575,7 +576,7 @@ function buildingEl(i, built, pos) {
   if (isHouse) html += `<span class="lvl-badge">${built.lvl}</span>`;
   if (canHarvest(built)) html += `<span class="harvest"><img src="${IMG("star")}" alt="Récolte prête"></span>`;
   el.innerHTML = html;
-  place(el, pos.x, pos.y + 26, production ? SIZE.production : SIZE.building);
+  place(el, pos.x, pos.y + 26, (production ? SIZE.production : SIZE.building) * (def.scale || 1));
   el.addEventListener("click", e => { e.stopPropagation(); onBuilding(i, el); });
   return el;
 }
