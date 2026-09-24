@@ -89,6 +89,34 @@ construireSelecteurCommunes(map);
 initHeroParcelle(map);
 demarrerVisiteSiPremiereFois();
 
+/* Lien direct vers une couche activée depuis l'URL (ex.
+   ?couche=vigieau), pour partager un lien qui ouvre directement une
+   couche précise (communication sur un arrêté sécheresse, une alerte
+   OLD...) sans que la personne ait à la chercher elle-même dans le
+   panneau. Générique sur n'importe quel id de LAYERS, pas câblé en dur
+   sur vigieau. */
+function activerCoucheDepuisUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const idCouche = params.get("couche");
+    if (!idCouche) return;
+    const conf = LAYERS.find(l => l.id === idCouche);
+    if (!conf) return;
+
+    fermerAccueil();
+
+    const checkbox = document.getElementById("layer-" + idCouche);
+    if (!checkbox) return;
+
+    const groupe = checkbox.closest(".layer-group");
+    if (groupe) groupe.open = true;
+
+    if (!checkbox.checked) {
+        checkbox.checked = true;
+        checkbox.dispatchEvent(new Event("change"));
+    }
+}
+activerCoucheDepuisUrl();
+
 initRecherche(map, {
     onResultat: () => {
         const hero = document.getElementById("hero");

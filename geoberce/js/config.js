@@ -216,7 +216,10 @@ const TYPES_COMMERCES = [
     },
     {
         id: "alimentation", label: "Alimentation", icon: "fa-solid fa-basket-shopping", color: PALETTE.feuille,
-        types: ["supermarket", "convenience", "butcher", "deli", "seafood", "greengrocer", "winery", "variety_store", "newsagent"]
+        /* "caterer" (traiteur) : préparation/vente de nourriture comme
+           les autres entrées de cette catégorie, plutôt que "restauration"
+           (repas sur place) où il ne correspond pas vraiment. */
+        types: ["supermarket", "convenience", "butcher", "deli", "seafood", "greengrocer", "winery", "variety_store", "newsagent", "caterer"]
     },
     {
         id: "restauration", label: "Restaurants & bars", icon: "fa-solid fa-utensils", color: PALETTE.terracotta,
@@ -256,15 +259,35 @@ const TYPES_COMMERCES = [
     },
     {
         id: "hightech", label: "High-tech & électronique", icon: "fa-solid fa-laptop", color: PALETTE.riviere,
-        types: ["computer", "electronics", "e-cigarette"]
+        types: ["computer", "electronics", "e-cigarette", "informatique"]
     },
     {
         id: "culture", label: "Culture & loisirs", icon: "fa-solid fa-palette", color: PALETTE.feuille,
-        types: ["books", "art", "cinema", "sports", "photo", "gift", "handicraft", "sewing"]
+        types: ["books", "art", "cinema", "sports", "photo", "gift", "handicraft", "sewing", "museum"]
     },
     {
         id: "brocante", label: "Brocante & antiquités", icon: "fa-solid fa-shop", color: "#7F7E7B",
         types: ["antiques", "second_hand", "wholesale"]
+    },
+    /* Artisans ajoutés par l'utilisatrice à la main (voir plus haut :
+       osm_id "0", com_insee/com_nom absents de sa source, déduits par
+       point-dans-polygone contre couches/communes.geojson lors de
+       l'import) - valeurs de "type" en français, pas de vocabulaire OSM
+       standard pour ces métiers. "artisan" (générique, un seul cas
+       réel : "Elec'Clim innovation", électricité/climatisation) inclus
+       ici plutôt que dans "Autres commerces" : plus proche d'un artisan
+       du bâtiment que d'un commerce classique. "couverture" et
+       "charpente" séparés (pas "couverture/charpente" tel quel dans la
+       donnée source) : categorieCommerce découpe le type brut sur
+       "/" en plus de ";" et "," (butcher;convenience, par exemple) -
+       un slash gardé dans l'entrée n'aurait donc jamais matché. */
+    {
+        id: "artisansBatiment", label: "Artisans du bâtiment", icon: "fa-solid fa-hammer", color: PALETTE.ardoise,
+        types: ["plombier", "menuisier", "couverture", "charpente", "clotures", "chaudronnerie", "artisan"]
+    },
+    {
+        id: "producteurLocal", label: "Producteurs locaux", icon: "fa-solid fa-carrot", color: PALETTE.foret,
+        types: ["producteur local"]
     }
 ];
 const TYPE_COMMERCE_DEFAUT = { id: "autre", label: "Autres commerces", icon: "fa-solid fa-store", color: PALETTE.ardoise };
@@ -1181,7 +1204,7 @@ const LAYERS = [
 
     /* ---------- COMMERCES ---------- */
     {
-        id: "commerces", group: "commerces", label: "Commerces",
+        id: "commerces", group: "commerces", label: "Commerces, artisans & services",
         file: "couches/commerces/commerces.geojson", type: "point",
         icon: "fa-solid fa-basket-shopping", color: PALETTE.feuille,
         iconePourFeature: iconeCommerce, sousTitrePourFeature: sousTitreCommerce,
