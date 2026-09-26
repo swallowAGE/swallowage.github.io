@@ -3,7 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GéoBercé — Le SIG local</title>
+<title>GéoBercé — Le SIG local du territoire Loir-Lucé-Bercé</title>
+<meta name="description" content="GéoBercé, le SIG local gratuit et ouvert du territoire Loir-Lucé-Bercé : services, famille, commerces, mobilité, nature et patrimoine, tout au même endroit sur une carte interactive.">
+<!-- Vérification de propriété Google Search Console, pour demander
+     l'indexation manuelle de la page (voir README) - propre à l'URL de
+     prod (swallowage.github.io/geoberce), sans effet sur cl4ire.github.io
+     où cette page est aussi servie, mais sans conséquence à laisser ici. -->
+<meta name="google-site-verification" content="z24Y8DdYPGfm8QoVRHKtwBAxQZRy91pVVTTlyy-tpKU" />
+<!-- DEBUT SEO
+     URL de prod fixe (https://swallowage.github.io/geoberce/), pas
+     l'URL relative au domaine qui sert réellement cette page à
+     l'instant T : ce fichier est copié tel quel à la fois sur ce
+     dépôt de développement (cl4ire.github.io) et sur la vraie prod
+     (swallowage.github.io/geoberce, voir js/analytics.js pour le même
+     principe déjà appliqué au suivi de visites) - canonical/og:url
+     pointent donc toujours vers la même URL, quel que soit le domaine
+     qui a effectivement chargé la page. Sur le dépôt de dev, ça évite
+     aussi à Google de risquer d'indexer deux fois le même contenu
+     (contenu dupliqué, mauvais pour le référencement) en indiquant
+     clairement laquelle des deux copies est la version de référence. -->
+<link rel="canonical" href="https://swallowage.github.io/geoberce/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swallowage.github.io/geoberce/">
+<meta property="og:title" content="GéoBercé — Le SIG local du territoire Loir-Lucé-Bercé">
+<meta property="og:description" content="Un SIG local, gratuit et ouvert, qui regroupe au même endroit les informations utiles du territoire Loir-Lucé-Bercé : services, famille, commerces, mobilité, nature et patrimoine.">
+<meta property="og:image" content="https://swallowage.github.io/geoberce/img/geoberce.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "GéoBercé",
+    "url": "https://swallowage.github.io/geoberce/",
+    "description": "Un SIG local, gratuit et ouvert, qui regroupe au même endroit les informations utiles du territoire Loir-Lucé-Bercé : services, famille, commerces, mobilité, nature et patrimoine.",
+    "inLanguage": "fr-FR"
+}
+</script>
+<!-- FIN SEO -->
 
 <!-- DEBUT STYLES -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
