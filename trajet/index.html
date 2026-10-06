@@ -191,7 +191,7 @@
             <input id="price" type="number" inputmode="decimal" min="0" step="any" value="2.03">
           </div>
         </div>
-        <button type="button" class="price" id="btn-price">Prix du jour en Sarthe</button>
+        <button type="button" class="price" id="btn-price" hidden>Réessayer</button>
         <p id="price-status" role="status"></p>
       </fieldset>
 
@@ -257,7 +257,7 @@
   <footer>
     <p>Le <strong>carburant seul</strong> est ce que vous dépensez à la pompe. Le <strong>coût complet</strong> suit le barème kilométrique fiscal 2026 (revenus 2025) : il inclut aussi l'amortissement du véhicule, l'entretien, les pneus et l'assurance. Pour une voiture 100&nbsp;% électrique, le barème est majoré de 20&nbsp;%.</p>
     <p>Les consommations par modèle viennent de la base <a href="https://data.ademe.fr/datasets/ademe-car-labelling">Car Labelling de l'ADEME</a> (voitures neuves, cycle WLTP). Ce sont des valeurs d'homologation : sur la route, on consomme souvent 15 à 20&nbsp;% de plus. Les hybrides rechargeables, le GPL et le superéthanol n'y figurent pas.</p>
-    <p>Il s'agit d'une estimation, pas d'un conseil fiscal. Rien n'est enregistré ni envoyé : les calculs se font sur votre appareil. Seul le bouton « Prix du jour » interroge le site data.economie.gouv.fr.</p>
+    <p>Il s'agit d'une estimation, pas d'un conseil fiscal. Rien n'est enregistré ni envoyé : les calculs se font sur votre appareil. Seul le prix du jour en Sarthe est demandé au site data.economie.gouv.fr, sans rien transmettre de vous.</p>
     <p>Swallow AGE</p>
   </footer>
 </div>
@@ -379,24 +379,59 @@
     $("results").innerHTML = "<table>" + head + body + "</table>" + insight;
   }
 
+  // Prix moyen du jour dans le département de la Sarthe (72), jeu de données ouvert de l'État.
+  // Chargé une fois à l'ouverture ; en cas d'échec, on garde le prix par défaut de FUELS.
+  // Si le nom d'un champ change, la saisie manuelle reste possible.
+  var sarthe = null;          // { e10: 1.79, gazole: 1.72 } une fois chargé
+  var priceSource = "defaut"; // "defaut", "sarthe" ou "manuel"
+
+  function showPrice() {
+    var key = $("fuel").value;
+    var f = FUELS[key];
+    var live = sarthe && sarthe[key];
+    if (live) {
+      $("price").value = (Math.round(live * 100) / 100).toString();
+      priceSource = "sarthe";
+    } else {
+      $("price").value = f.price;
+      priceSource = "defaut";
+    }
+    updatePriceStatus();
+  }
+
+  function updatePriceStatus() {
+    var key = $("fuel").value;
+    var status = $("price-status");
+    $("btn-price").hidden = true;
+    if (priceSource === "manuel") {
+      status.textContent = "Prix saisi à la main.";
+      $("btn-price").hidden = key === "elec" || !(sarthe && sarthe[key]);
+      $("btn-price").textContent = "Revenir au prix du jour en Sarthe";
+    } else if (priceSource === "sarthe") {
+      status.textContent = "Prix moyen du jour en Sarthe (stations du département 72).";
+    } else if (key === "elec") {
+      status.textContent = "Prix par défaut : ajustez selon votre contrat d'électricité.";
+    } else if (sarthe === null) {
+      status.textContent = "Prix par défaut, en attendant le prix du jour en Sarthe…";
+    } else {
+      status.textContent = "Prix du jour indisponible : prix par défaut, à ajuster si besoin.";
+      $("btn-price").hidden = false;
+      $("btn-price").textContent = "Réessayer";
+    }
+  }
+
   function onFuelChange() {
     var f = FUELS[$("fuel").value];
     $("conso").value = f.conso;
-    $("price").value = f.price;
     $("conso-label").textContent = "Consommation (" + f.unit + "/100\u00a0km)";
     $("price-label").textContent = "Prix (€/" + f.unit + ")";
-    $("btn-price").hidden = f.electric;
-    $("price-status").textContent = "";
+    showPrice();
     render();
   }
 
-  // Prix moyen du jour dans le département de la Sarthe (72), jeu de données ouvert de l'État.
-  // Si le nom d'un champ change, la saisie manuelle reste possible.
   function loadPrice() {
-    var key = $("fuel").value;
-    if (key === "elec") return;
-    var status = $("price-status");
-    status.textContent = "Chargement du prix du jour…";
+    sarthe = null;
+    updatePriceStatus();
     var url = "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/records" +
       "?select=" + encodeURIComponent("avg(e10_prix) as e10, avg(gazole_prix) as gazole") +
       "&where=" + encodeURIComponent('code_departement="72"') + "&limit=1";
@@ -404,14 +439,16 @@
       .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
       .then(function (j) {
         var r0 = j && j.results && j.results[0];
-        var v = r0 ? parseFloat(key === "e10" ? r0.e10 : r0.gazole) : NaN;
-        if (!isFinite(v) || v <= 0) throw new Error("vide");
-        $("price").value = (Math.round(v * 100) / 100).toString();
-        status.textContent = "Prix moyen du jour en Sarthe : " + v.toFixed(2).replace(".", ",") + " €/L.";
-        render();
+        var e10 = r0 ? parseFloat(r0.e10) : NaN;
+        var gazole = r0 ? parseFloat(r0.gazole) : NaN;
+        if (!(e10 > 0) && !(gazole > 0)) throw new Error("vide");
+        sarthe = { e10: e10 > 0 ? e10 : 0, gazole: gazole > 0 ? gazole : 0 };
       })
-      .catch(function () {
-        status.textContent = "Prix du jour indisponible : saisissez le prix à la main.";
+      .catch(function () { sarthe = {}; })
+      .then(function () {
+        // Ne pas écraser un prix que l'utilisateur a tapé entre-temps.
+        if (priceSource === "manuel") updatePriceStatus(); else showPrice();
+        render();
       });
   }
 
@@ -448,8 +485,10 @@
     var m = catalogue[$("marque").value];
     var v = m && m[$("modele").value] && m[$("modele").value][$("version").value];
     if (!v) return;
-    $("fuel").value = v[1];
-    onFuelChange();
+    if ($("fuel").value !== v[1]) {
+      $("fuel").value = v[1];
+      onFuelChange();
+    }
     $("cv").value = String(Math.min(7, Math.max(3, v[2])));
     $("conso").value = v[3];
     render();
@@ -477,8 +516,12 @@
   document.getElementById("form").addEventListener("input", render);
   document.getElementById("form").addEventListener("change", render);
   $("fuel").addEventListener("change", onFuelChange);
-  $("btn-price").addEventListener("click", loadPrice);
+  $("price").addEventListener("input", function () { priceSource = "manuel"; updatePriceStatus(); });
+  $("btn-price").addEventListener("click", function () {
+    if (priceSource === "manuel") { showPrice(); render(); } else { loadPrice(); }
+  });
   onFuelChange();
+  loadPrice();
 })();
 </script>
 <style>

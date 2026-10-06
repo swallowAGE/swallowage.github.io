@@ -2,6 +2,7 @@ name: Sync véhicules ADEME
 
 # La base Car Labelling de l'ADEME est mise à jour chaque trimestre
 # (janvier, avril, juillet, octobre) : on vérifie le 15 de chaque mois.
+# Les modèles déjà présents dans vehicules.json ne sont jamais supprimés.
 on:
   schedule:
     - cron: '0 6 15 * *'
