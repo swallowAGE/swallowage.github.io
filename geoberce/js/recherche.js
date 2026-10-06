@@ -54,6 +54,14 @@ const LIMITE_RESULTATS = 3000;
 
 let resultatsEnrichis = null;        // parcelles visibles à l'ouverture, enrichies une fois
 let coucheRechercheActuelle = null;  // couche Leaflet des résultats affichés
+/* true dès le premier clic sur "Afficher les parcelles correspondantes",
+   remis à false par "Vider la sélection" - détermine si un déplacement
+   de carte (moveend) doit réafficher les résultats pour la nouvelle vue
+   (retour direct de l'utilisatrice : "je veux que la recherche soit
+   liée au cadre de ma carte") : avant ce premier clic, rien n'est
+   encore affiché sur la carte, pas de raison d'y toucher juste parce
+   qu'elle se promène sur la carte avant d'avoir lancé une recherche. */
+let rechercheActive = false;
 
 function zoomMinCadastre() {
     const conf = LAYERS.find(l => l.id === "cadastre");
@@ -455,7 +463,13 @@ function filtrerParcelles(criteres) {
 
 /* ---------- Affichage des résultats sur la carte ---------- */
 
-function afficherResultatsRecherche(map, features) {
+/* recentrer:false pour les réaffichages déclenchés par un déplacement
+   de carte (voir le moveend branché dans ouvrirRecherche) - un
+   fitBounds à chaque déplacement annulerait le déplacement que
+   l'utilisatrice vient justement de faire. Resté à true (par défaut)
+   pour le premier affichage explicite (clic sur "Afficher les parcelles
+   correspondantes"), où zoomer sur les résultats reste utile. */
+function afficherResultatsRecherche(map, features, { recentrer = true } = {}) {
     if (coucheRechercheActuelle) {
         map.removeLayer(coucheRechercheActuelle);
         coucheRechercheActuelle = null;
@@ -480,7 +494,7 @@ function afficherResultatsRecherche(map, features) {
     if (boutonVider) boutonVider.disabled = false;
 
     const bounds = L.geoJSON({ type: "FeatureCollection", features }).getBounds();
-    if (bounds.isValid()) map.fitBounds(bounds, { maxZoom: 17, padding: [40, 40] });
+    if (bounds.isValid() && recentrer) map.fitBounds(bounds, { maxZoom: 17, padding: [40, 40] });
 }
 
 /* Retire uniquement les parcelles surlignées par la dernière recherche
@@ -494,6 +508,7 @@ function viderSelectionCarte(map) {
         map.removeLayer(coucheRechercheActuelle);
         coucheRechercheActuelle = null;
     }
+    rechercheActive = false;
     const boutonVider = document.getElementById("rf-vider");
     if (boutonVider) boutonVider.disabled = true;
 }
@@ -585,7 +600,6 @@ function construireFormulaire() {
                 </label>
             </div>
 
-            <button type="button" id="rf-ici" class="rf-bouton-secondaire" hidden>Rechercher ici</button>
             <div id="rf-statut" class="rf-statut rf-statut-chargement"><i class="fa-solid fa-circle-notch fa-spin"></i>Chargement des données foncières...</div>
 
             <div class="rf-actions">
@@ -625,25 +639,41 @@ function reinitialiserFormulaire() {
 
 /* Un seul écouteur "moveend" enregistré une fois pour toutes (pas à
    chaque ouverture du panneau, sinon ça s'empilerait à chaque
-   réouverture) : la recherche ne porte que sur les parcelles visibles au
-   moment de l'enrichissement (voir plus haut) - si l'utilisatrice déplace
-   la carte pendant que le panneau reste ouvert, ce résultat devient
-   silencieusement obsolète sans ce bouton. N'agit que si le panneau
-   recherche est actuellement affiché (vérifié à chaque déclenchement via
-   `hidden`, pas seulement à l'enregistrement) : un déplacement de carte
-   ailleurs dans le site n'a aucun rapport avec la recherche foncière. */
+   réouverture) - n'agit que si le panneau recherche est actuellement
+   affiché (vérifié à chaque déclenchement via `hidden`, pas seulement à
+   l'enregistrement) : un déplacement de carte ailleurs sur le site n'a
+   aucun rapport avec la recherche foncière.
+
+   Retour direct de l'utilisatrice ("je veux que la recherche soit liée
+   au cadre de ma carte", après avoir constaté qu'un déplacement de
+   carte n'était pas pris en compte) : la recherche se réenrichit et se
+   réaffiche automatiquement à chaque déplacement, plutôt que de
+   demander un clic sur un bouton "Rechercher ici" séparé (supprimé) -
+   `recentrer:false` pour ne jamais annuler le déplacement qu'elle vient
+   justement de faire (voir afficherResultatsRecherche). `rechercheActive`
+   évite de réafficher quoi que ce soit tant qu'elle n'a pas lancé une
+   première recherche (rien n'est encore affiché sur la carte). Ignoré
+   en mode "commune ciblée" (`modeCommuneCible`, recherche rapide de
+   l'écran d'accueil) : ce mode porte volontairement sur toute la
+   commune plutôt que sur la vue carte (voir la note en tête de fichier)
+   - un déplacement ne doit pas basculer silencieusement vers l'autre
+   logique de filtrage. */
 let ecouteurDeplacementRechercheBranche = false;
+let modeCommuneCible = null;
 
 function ouvrirRecherche(map, codeInseeCible) {
     fermerAccueil();
     basculerVuePanneau("recherche-view");
     togglerPanneauCouches(true);
     construireFormulaire();
+    modeCommuneCible = codeInseeCible || null;
+    rechercheActive = false;
 
     const form = document.getElementById("recherche-form");
     form.addEventListener("input", mettreAJourStatut);
     form.addEventListener("submit", event => {
         event.preventDefault();
+        rechercheActive = true;
         /* Le panneau reste ouvert sur cette même vue (contrairement à
            l'ancien comportement qui repassait sur l'arbre de couches) :
            sinon on perd ses critères de recherche à chaque affichage,
@@ -652,14 +682,15 @@ function ouvrirRecherche(map, codeInseeCible) {
     });
     document.getElementById("rf-vider").addEventListener("click", () => viderSelectionCarte(map));
     document.getElementById("rf-reset").addEventListener("click", reinitialiserFormulaire);
-    document.getElementById("rf-ici").addEventListener("click", () => rechercherIci(map));
 
     if (!ecouteurDeplacementRechercheBranche) {
         ecouteurDeplacementRechercheBranche = true;
         map.on("moveend", () => {
             const vue = document.getElementById("recherche-view");
-            const bouton = document.getElementById("rf-ici");
-            if (vue && !vue.hidden && bouton) bouton.hidden = false;
+            if (!vue || vue.hidden || modeCommuneCible) return;
+            chargerEtEnrichirVueActuelle(map).then(ok => {
+                if (ok && rechercheActive) afficherResultatsRecherche(map, filtrerParcelles(lireCriteres()), { recentrer: false });
+            });
         });
     }
 
@@ -667,14 +698,12 @@ function ouvrirRecherche(map, codeInseeCible) {
 }
 
 /* Charge (si besoin, chargerDonneesFoncieres est idempotente) et
-   enrichit les parcelles de la vue actuelle - factorisé entre l'ouverture
-   du panneau et le bouton "Rechercher ici", même logique dans les deux
-   cas. */
+   enrichit les parcelles de la vue actuelle - appelée à l'ouverture du
+   panneau et à chaque déplacement de carte (voir le moveend ci-dessus),
+   même logique dans les deux cas. */
 function chargerEtEnrichirVueActuelle(map) {
     const statut = document.getElementById("rf-statut");
-    const bouton = document.getElementById("rf-ici");
     const zoomMin = zoomMinCadastre();
-    if (bouton) bouton.hidden = true;
 
     if (map.getZoom() < zoomMin) {
         statut.classList.remove("rf-statut-chargement");
@@ -697,9 +726,6 @@ function chargerEtEnrichirVueActuelle(map) {
    donneesBrutes["cadastre"] (déjà chargé en entier) plutôt que de
    featuresDansVue (limité à la vue carte). */
 function chargerEtEnrichirCommune(codeInsee) {
-    const bouton = document.getElementById("rf-ici");
-    if (bouton) bouton.hidden = true;
-
     return chargerDonneesFoncieres().then(() => {
         const parcelles = (donneesBrutes["cadastre"] || []).filter(f => f.properties && f.properties.commune === codeInsee);
         enrichirParcelles(parcelles);
@@ -707,10 +733,6 @@ function chargerEtEnrichirCommune(codeInsee) {
         mettreAJourStatut();
         return true;
     });
-}
-
-function rechercherIci(map) {
-    chargerEtEnrichirVueActuelle(map);
 }
 
 /* =========================================================
@@ -758,6 +780,9 @@ function lancerRechercheRapide(map, criteres) {
            soit un souci de chargement - dans les deux cas les critères
            restent préremplis, à l'utilisatrice de zoomer/cliquer
            "Afficher les parcelles correspondantes" elle-même. */
-        if (succes) afficherResultatsRecherche(map, filtrerParcelles(lireCriteres()));
+        if (succes) {
+            rechercheActive = true;
+            afficherResultatsRecherche(map, filtrerParcelles(lireCriteres()));
+        }
     });
 }
