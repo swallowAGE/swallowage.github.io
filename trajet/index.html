@@ -73,8 +73,8 @@
     border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 44px;
   }
   .hint { margin: 6px 0 0; font-size: 13px; color: var(--soft); }
-  .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: end; }
+  .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: end; }
   .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; background: var(--seg); border-radius: 12px; padding: 4px; }
   .seg button { border: 0; border-radius: 9px; min-height: 40px; padding: 8px 10px; font: inherit; font-size: 15px; font-weight: 500; background: transparent; color: var(--soft); cursor: pointer; }
   .seg button[aria-pressed="true"] { background: var(--field); color: var(--ink); box-shadow: 0 1px 2px rgba(43, 34, 48, 0.15); }
