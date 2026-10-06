@@ -1,0 +1,72 @@
+name: Sync véhicules ADEME
+
+# La base Car Labelling de l'ADEME est mise à jour chaque trimestre
+# (janvier, avril, juillet, octobre) : on vérifie le 15 de chaque mois.
+# Les modèles déjà présents dans vehicules.json ne sont jamais supprimés.
+on:
+  schedule:
+    - cron: '0 6 15 * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout swallowage.github.io
+        uses: actions/checkout@v4
+
+      - name: Download ADEME Car Labelling
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 -o /tmp/ademe.csv \
+            "https://data.ademe.fr/data-fair/api/v1/datasets/ademe-car-labelling/raw"
+          head -c 300 /tmp/ademe.csv
+
+      - name: Build trajet/vehicules.json
+        run: python3 trajet/build_vehicules.py /tmp/ademe.csv trajet/vehicules.json
+
+      - name: Detect changes
+        id: diff
+        run: |
+          # Seul le libellé du mois change ? Pas de PR.
+          if git diff --quiet -- trajet/vehicules.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          elif python3 -c "import json,subprocess,sys; old=json.loads(subprocess.check_output(['git','show','HEAD:trajet/vehicules.json'])); new=json.load(open('trajet/vehicules.json')); sys.exit(0 if old['marques']==new['marques'] else 1)"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create branch, commit and push
+        if: steps.diff.outputs.changed == 'true'
+        id: commit
+        run: |
+          set -euo pipefail
+          BRANCH="sync-vehicules-$(date +%Y%m%d-%H%M%S)"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add trajet/vehicules.json
+          git commit -m "Mise à jour des véhicules ADEME Car Labelling"
+          git push origin "$BRANCH"
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > /tmp/pr-body.md <<'EOF'
+          Mise à jour automatique de `trajet/vehicules.json` (marques, modèles, puissance fiscale et consommation WLTP) depuis la base [ADEME Car Labelling](https://data.ademe.fr/datasets/ademe-car-labelling).
+
+          Ce PR a été généré automatiquement par le workflow `sync-vehicules.yml`.
+          EOF
+          gh pr create \
+            --title "Mise à jour des véhicules ADEME" \
+            --body-file /tmp/pr-body.md \
+            --base main \
+            --head "${{ steps.commit.outputs.branch }}"
