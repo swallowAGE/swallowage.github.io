@@ -1584,6 +1584,13 @@ function construirePopupDae(props) {
         </div>
         ${infos.length ? `<div class="popup-fiche-section"><div class="popup-fiche-ligne">${infos.map(echapperHtml).join(" · ")}</div></div>` : ""}
         ${maintenance ? `<div class="popup-fiche-section"><div class="popup-fiche-precision"><i class="fa-regular fa-clock"></i> Dernière maintenance le ${echapperHtml(maintenance)}</div></div>` : ""}
+        <div class="popup-fiche-urgence">
+            <div class="popup-fiche-urgence-titre">🚨 En cas d'arrêt cardiaque</div>
+            <div class="popup-fiche-urgence-etape"><span>📞</span><span>Appelez immédiatement les secours (15 ou 112).</span></div>
+            <div class="popup-fiche-urgence-etape"><span>❤️</span><span>Commencez un massage cardiaque.</span></div>
+            <div class="popup-fiche-urgence-etape"><span>⚡</span><span>Demandez à quelqu'un d'aller chercher ce défibrillateur.</span></div>
+            <div class="popup-fiche-urgence-etape"><span>🔊</span><span>Allumez-le et suivez ses instructions vocales.</span></div>
+        </div>
     </div>`;
 }
 

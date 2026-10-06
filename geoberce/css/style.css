@@ -673,6 +673,14 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
 .popup-fiche-elu strong { color: #2A2A28; font-weight: 700; }
 .popup-fiche-elu span { flex: 0 0 auto; text-align: right; font-size: 10.5px; }
 
+/* Encart "procédure d'urgence" (défibrillateurs, construirePopupDae) :
+   même ton que .popup-fiche-badge.ferme (fond #FBEDE8, texte terracotta)
+   plutôt qu'une nouvelle couleur rouge inventée pour l'occasion. */
+.popup-fiche-urgence { margin: 12px 16px 16px; padding: 12px; border-radius: 10px; background: #FBEDE8; }
+.popup-fiche-urgence-titre { margin-bottom: 8px; font-size: 11px; font-weight: 800; color: var(--terracotta); }
+.popup-fiche-urgence-etape { display: flex; align-items: flex-start; gap: 8px; padding: 3px 0; font-size: 11px; color: #2A2A28; line-height: 1.4; }
+.popup-fiche-urgence-etape > span:first-child { flex: 0 0 16px; font-size: 13px; }
+
 /* ---------- POPUP PARCELLE (cadastre) — fiche "à la Parcellai.re" ---------- */
 .popup-fiche-section-titre i { margin-right: 5px; color: var(--ardoise); }
 .popup-fiche-chargement { display: flex; align-items: center; gap: 8px; color: var(--ardoise); font-size: 12px; padding: 16px; }
