@@ -59,6 +59,9 @@ de terre de l'image. Pour le remplacer par une version plus grande (plus nette),
 garder **exactement la même image** agrandie (« upscale ») : sinon les emplacements
 et la prairie ne tomberaient plus au bon endroit.
 
+> Le jeu zoome jusqu'à 2×. Au-delà, le fond devient flou : pour un zoom plus profond, il faut
+> une version agrandie (« upscale » ×2 ou ×4) **de la même image**, au même cadrage.
+
 ### Les maisons (le cœur du jeu) — ✅ faites (Gemini)
 
 | Fichier | Dans le jeu | Sujet |

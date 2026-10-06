@@ -208,13 +208,14 @@ const LEVELS = [0, 25, 70, 150, 270, 440, 680, 1000];
 // La carte est plus large que l'écran : on la fait glisser du doigt.
 const MAP_W = 1448, MAP_H = 1086;
 const START_X = 760; // point de la carte au centre de l'écran au démarrage
-// Emplacements à construire (sur les plaques de terre), dans l'ordre où ils se débloquent
-const PLOTS = [
+// Anciens emplacements fixes : servent seulement à migrer les anciennes sauvegardes
+const LEGACY_PLOTS = [
   { x: 612, y: 560 }, { x: 968, y: 772 }, { x: 855, y: 262 }, { x: 765, y: 925 },
   { x: 438, y: 780 }, { x: 1080, y: 470 }, { x: 230, y: 455 }, { x: 1285, y: 615 },
   { x: 480, y: 380 }, { x: 1140, y: 690 },
 ];
-const plotsForLevel = level => Math.min(PLOTS.length, 3 + level);
+// Combien de constructions le monde peut accueillir (augmente avec le niveau)
+const buildingCapacity = level => Math.min(12, 3 + level);
 // Tailles des objets sur la carte (même unité)
 const SIZE = { house: 150, building: 150, production: 140, deco: 58, tree: 84, animal: 90 };
 // La prairie : on y pose les décorations et les animaux s'y promènent
@@ -246,7 +247,7 @@ const SAVE_KEY = "petit-monde-v1";
 function freshState() {
   return {
     stars: 10, // petit cadeau pour construire tout de suite
-    mapVersion: 2, // 2 = carte avec l'image de fond
+    mapVersion: 3, // 3 = constructions posées librement (x, y)
     plots: {},  // index -> { id, lvl, day }
     decos: [],  // { id, x, y }
     animals: [], // { id }
@@ -264,7 +265,7 @@ function load() {
     const saved = JSON.parse(localStorage.getItem(SAVE_KEY));
     if (saved) {
       const s = freshState();
-      if (saved.mapVersion !== 2) {
+      if (!saved.mapVersion || saved.mapVersion < 2) {
         // Ancienne carte (400 × 660) : on replace les décorations dans la nouvelle prairie
         saved.decos = (saved.decos || []).map(d => {
           let x = Math.round(250 + (d.x - 36) / 328 * 1000);
@@ -272,7 +273,14 @@ function load() {
           if (!onGrass(x, y)) ({ x, y } = randomSpot());
           return { ...d, x, y };
         });
-        saved.mapVersion = 2;
+      }
+      if (saved.mapVersion !== 3) {
+        // Anciens emplacements fixes : chaque construction garde sa place, désormais déplaçable
+        for (const [key, p] of Object.entries(saved.plots || {})) {
+          const pos = LEGACY_PLOTS[key];
+          if (p.x === undefined && pos) { p.x = pos.x; p.y = pos.y + 26; }
+        }
+        saved.mapVersion = 3;
       }
       // Anciennes cultures (récolte quotidienne) : elles sont mûres tout de suite
       for (const p of Object.values(saved.plots || {})) {
@@ -467,8 +475,8 @@ function afterChange(levelBefore) {
   if (after > levelBefore) {
     SOUND.win();
     confetti();
-    const newPlots = plotsForLevel(after) - plotsForLevel(levelBefore);
-    toast(`🎉 Niveau ${after} !` + (newPlots ? `<br>Un nouvel emplacement s'ouvre` : `<br>De nouvelles choses à découvrir`));
+    const more = buildingCapacity(after) - buildingCapacity(levelBefore);
+    toast(`🎉 Niveau ${after} !` + (more ? `<br>Tu peux construire un bâtiment de plus` : `<br>De nouvelles choses à découvrir`));
   }
 }
 
@@ -476,21 +484,33 @@ function afterChange(levelBefore) {
    MON MONDE : affichage
    ========================================================= */
 let placing = null;       // { kind: "building" | "deco", id }
-let targetPlot = null;    // emplacement touché avant d'ouvrir « Construire »
+let moveMode = false;     // mode « déplacer » (bouton ✋)
+let moving = null;        // élément soulevé : { type: "plot" | "deco", key }
 
-// La carte couvre tout l'écran (un peu agrandie) ; les boutons flottent
-// par-dessus. On la fait glisser dans tous les sens (panX / panY en pixels).
-const ZOOM = 1.12; // zoom sur les écrans en paysage (on peut aussi glisser en vertical)
+function cancelEditing() {
+  placing = null;
+  moveMode = false;
+  moving = null;
+}
+
+// La carte couvre tout l'écran ; les boutons flottent par-dessus.
+// On la fait glisser dans tous les sens, et on zoome (pincer, molette, boutons).
 const START_Y = 600;
+const ZOOM_MAX = 2; // au-delà, l'image de fond devient floue
 let panX = null, panY = null;
+let zoom = 1;       // 1 = la carte remplit l'écran ; 2 = deux fois plus grande
+let zoomAnim = 0;
+let zoomTarget = null; // zoom visé pendant une animation : des clics rapides s'additionnent
+
+const baseScale = area => Math.max(area.clientWidth / MAP_W, area.clientHeight / MAP_H);
 
 function sizeMap() {
   const area = $("map-area");
   const map = $("map");
   const vw = area.clientWidth, vh = area.clientHeight;
   if (!vh) return; // écran pas encore affiché
-  // En portrait (téléphone), la carte tient déjà en hauteur : pas de zoom en plus
-  const scale = Math.max(vw / MAP_W, vh / MAP_H) * (vh > vw ? 1 : ZOOM);
+  if (panX === null) zoom = vh > vw ? 1 : 1.2; // un peu rapproché sur ordinateur et tablette
+  const scale = baseScale(area) * zoom;
   const w = MAP_W * scale, h = MAP_H * scale;
   map.style.width = w + "px";
   map.style.height = h + "px";
@@ -513,6 +533,40 @@ function setPan(x, y = panY, smooth = false) {
   map.style.transform = `translate(${-panX}px, ${-panY}px)`;
   $("pan-left").hidden = panX <= 2;
   $("pan-right").hidden = panX >= maxX - 2;
+}
+
+// Zoome en gardant fixe le point (fx, fy) de l'écran (le doigt, le curseur, le centre)
+function setZoomAt(z, fx, fy) {
+  const area = $("map-area");
+  if (!area.clientHeight) return;
+  const base = baseScale(area);
+  const before = base * zoom;
+  const mx = (panX + fx) / before, my = (panY + fy) / before; // point de la carte sous (fx, fy)
+  zoom = Math.min(ZOOM_MAX, Math.max(1, z));
+  sizeMap();
+  const after = base * zoom;
+  setPan(mx * after - fx, my * after - fy);
+  $("zoom-in").disabled = zoom >= ZOOM_MAX - 0.01;
+  $("zoom-out").disabled = zoom <= 1.01;
+}
+
+function stopZoomAnim() {
+  cancelAnimationFrame(zoomAnim);
+  zoomTarget = null;
+}
+
+function animateZoom(target, fx, fy) {
+  cancelAnimationFrame(zoomAnim);
+  target = Math.min(ZOOM_MAX, Math.max(1, target));
+  zoomTarget = target;
+  const from = zoom, t0 = performance.now();
+  const step = now => {
+    const k = Math.min(1, (now - t0) / 220);
+    setZoomAt(from + (target - from) * (1 - (1 - k) ** 3), fx, fy);
+    if (k < 1) zoomAnim = requestAnimationFrame(step);
+    else zoomTarget = null;
+  };
+  zoomAnim = requestAnimationFrame(step);
 }
 
 // Place un élément sur la carte (x, y = point au sol ; w = largeur)
@@ -542,50 +596,28 @@ function renderMap(level) {
   // On garde les animaux (ils se déplacent) et on redessine le reste
   layer.querySelectorAll(":scope > :not(.animal)").forEach(el => el.remove());
 
-  const open = plotsForLevel(level);
-  PLOTS.forEach((pos, i) => {
-    const built = state.plots[i];
-    if (built) {
-      layer.appendChild(buildingEl(i, built, pos));
-    } else if (i < open) {
-      const p = document.createElement("button");
-      p.className = "plot";
-      p.textContent = "+";
-      p.setAttribute("aria-label", "Emplacement libre");
-      place(p, pos.x, pos.y);
-      p.style.zIndex = 2000; // toujours touchable, même si un animal passe dessus
-      p.addEventListener("click", e => { e.stopPropagation(); onPlot(i); });
-      layer.appendChild(p);
-    } else if (i === open) {
-      // Le prochain emplacement se voit, cadenassé
-      const p = document.createElement("button");
-      p.className = "plot locked";
-      p.innerHTML = `<img src="${IMG("locked")}" alt="">`;
-      p.setAttribute("aria-label", "Emplacement bloqué");
-      place(p, pos.x, pos.y);
-      p.addEventListener("click", e => {
-        e.stopPropagation();
-        SOUND.tap();
-        toast(`Cet emplacement s'ouvre au niveau ${level + 1} 🔒<br>Construis et décore pour y arriver !`);
-      });
-      layer.appendChild(p);
-    }
-  });
+  for (const [key, built] of Object.entries(state.plots)) layer.appendChild(buildingEl(key, built));
 
   state.decos.forEach((d, i) => {
     const def = DECOS[d.id];
     const el = document.createElement("button");
-    el.className = "obj deco" + (def.cat === "fleurs" || def.cat === "arbres" ? " sway" : "");
+    el.className = "obj deco" + (def.cat === "fleurs" || def.cat === "arbres" ? " sway" : "")
+      + (moving?.type === "deco" && moving.key === String(i) ? " lifted" : "");
+    el.dataset.deco = i;
     el.innerHTML = `<img src="${IMG(def.img)}" alt="${def.name}">`;
     place(el, d.x, d.y, def.cat === "arbres" ? SIZE.tree : SIZE.deco);
-    el.addEventListener("click", e => { e.stopPropagation(); onDeco(i, el); });
+    el.addEventListener("click", e => {
+      e.stopPropagation();
+      if (moveMode) return pickUp("deco", i);
+      onDeco(i, el);
+    });
     layer.appendChild(el);
   });
 
   syncAnimals();
 }
 
-function buildingEl(i, built, pos) {
+function buildingEl(i, built) {
   const isHouse = built.id === "house";
   const def = isHouse ? HOUSE[built.lvl - 1] : BUILDINGS[built.id];
   const production = BUILDINGS[built.id].cat === "production";
@@ -593,7 +625,7 @@ function buildingEl(i, built, pos) {
   const el = document.createElement("button");
   el.className = "obj building" + (production
     ? " crop " + (stages ? "drawn" : "sway " + STAGE_CLASS[cropStage(built)])
-    : "");
+    : "") + (moving?.type === "plot" && moving.key === String(i) ? " lifted" : "");
   el.dataset.plot = i;
   const image = stages ? stages[cropStage(built) + 1] : def.img;
   let html = `<img src="${IMG(image)}" alt="${def.name}">`;
@@ -603,37 +635,57 @@ function buildingEl(i, built, pos) {
     html += `<span class="harvest ${icon}"><img src="${IMG(icon)}" alt="${label}"></span>`;
   }
   el.innerHTML = html;
-  place(el, pos.x, pos.y + 26, (production ? SIZE.production : SIZE.building) * (def.scale || 1));
-  el.addEventListener("click", e => { e.stopPropagation(); production ? onCrop(i, el) : onBuilding(i, el); });
+  place(el, built.x, built.y, (production ? SIZE.production : SIZE.building) * (def.scale || 1));
+  el.addEventListener("click", e => {
+    e.stopPropagation();
+    if (moveMode) return pickUp("plot", i);
+    if (placing) return toast("Touche un endroit libre sur l'herbe 🌱");
+    production ? onCrop(i, el) : onBuilding(i, el);
+  });
   return el;
 }
 
 function renderPlacing() {
   const bar = $("placing");
+  const img = $("placing-img");
   $("map").classList.toggle("placing-building", placing?.kind === "building");
-  if (!placing) { bar.hidden = true; return; }
-  const def = placing.kind === "building" ? BUILDINGS[placing.id] : DECOS[placing.id];
+  $("btn-move").classList.toggle("active", moveMode);
+  if (!placing && !moveMode) { bar.hidden = true; return; }
   bar.hidden = false;
-  $("placing-img").src = IMG(def.img);
+  if (moveMode) {
+    const item = moving && (moving.type === "plot" ? state.plots[moving.key] : state.decos[moving.key]);
+    const def = item && (moving.type === "deco" ? DECOS[item.id]
+      : item.id === "house" ? HOUSE[item.lvl - 1] : BUILDINGS[item.id]);
+    img.hidden = !def;
+    if (def) img.src = IMG(def.img);
+    $("placing-text").textContent = def ? "Touche l'herbe pour le poser" : "Touche ce que tu veux déplacer";
+    return;
+  }
+  const def = placing.kind === "building" ? BUILDINGS[placing.id] : DECOS[placing.id];
+  img.hidden = false;
+  img.src = IMG(def.img);
   $("placing-text").textContent = placing.kind === "building"
-    ? "Touche un emplacement ＋"
+    ? "Touche l'herbe pour construire"
     : "Touche l'herbe pour poser";
 }
 
 /* =========================================================
    MON MONDE : actions
    ========================================================= */
-// Touche un emplacement libre
-async function onPlot(i) {
-  SOUND.tap();
-  if (placing?.kind === "building") {
-    const id = placing.id;
-    if (await confirmBuild(id)) build(i, id);
-    return;
+// Emplacement valide pour une construction ? Renvoie un message d'erreur, ou null si c'est bon
+function checkSpot(x, y, ignoreKey) {
+  if (inWater(x, y)) return "Pas dans l'eau ! 💦";
+  if (!onGrass(x, y)) return "Pose-le sur l'herbe 🌱";
+  for (const [key, b] of Object.entries(state.plots)) {
+    if (key === String(ignoreKey)) continue;
+    const dx = (x - b.x) / 130, dy = (y - b.y) / 70;
+    if (dx * dx + dy * dy < 1) return "Trop près d'une autre construction 🏠";
   }
-  targetPlot = i;
-  openBuild();
+  return null;
 }
+
+const nextKey = () => Math.max(-1, ...Object.keys(state.plots).map(Number)) + 1;
+const isFull = () => Object.keys(state.plots).length >= buildingCapacity(currentLevel());
 
 function confirmBuild(id) {
   const def = BUILDINGS[id];
@@ -650,15 +702,17 @@ function confirmBuild(id) {
   });
 }
 
-function build(i, id) {
+function buildAt(x, y, id) {
   const def = BUILDINGS[id];
   if (!spend(def.cost)) return toast(`Il te manque ${def.cost - state.stars} ⭐<br>Joue pour en gagner !`);
   const before = currentLevel();
-  state.plots[i] = def.harvest ? { id, lvl: 1, stage: EMPTY } : { id, lvl: 1 };
-  if (state.stars < def.cost) placing = null;
+  const key = nextKey();
+  const pos = { x: Math.round(x), y: Math.round(y) };
+  state.plots[key] = def.harvest ? { id, lvl: 1, stage: EMPTY, ...pos } : { id, lvl: 1, ...pos };
+  placing = null; // un bâtiment à la fois (les décorations, elles, se posent à la chaîne)
   SOUND.build();
   afterChange(before);
-  const el = document.querySelector(`.building[data-plot="${i}"]`);
+  const el = document.querySelector(`.building[data-plot="${key}"]`);
   if (el) { el.classList.add("new"); puff(el); }
   if (def.harvest) setTimeout(() => toast("Touche la terre pour planter 🌱"), 700);
 }
@@ -847,14 +901,27 @@ async function onDeco(i, el) {
 }
 
 // Touche la carte (pose d'une décoration)
-$("map").addEventListener("click", e => {
-  if (placing?.kind !== "deco") {
-    if (placing?.kind === "building") toast("Touche un emplacement ＋");
-    return;
-  }
+$("map").addEventListener("click", async e => {
   const r = $("map").getBoundingClientRect();
   const x = (e.clientX - r.left) / r.width * MAP_W;
   const y = (e.clientY - r.top) / r.height * MAP_H;
+
+  if (moveMode) return moving ? dropMoving(x, y) : toast("Touche d'abord ce que tu veux déplacer 👆");
+
+  if (placing?.kind === "building") {
+    if (isFull()) {
+      cancelEditing();
+      renderPlacing();
+      return toast("Ton monde est plein pour l'instant !<br>Monte de niveau pour construire plus.");
+    }
+    const error = checkSpot(x, y);
+    if (error) { SOUND.bad(); return toast(error); }
+    const id = placing.id;
+    if (await confirmBuild(id)) buildAt(x, y, id);
+    return;
+  }
+
+  if (placing?.kind !== "deco") return;
   if (!onGrass(x, y)) {
     SOUND.bad();
     return toast(inWater(x, y) ? "Pas dans l'eau ! 💦" : "Pose-la sur l'herbe 🌱");
@@ -875,18 +942,75 @@ $("map").addEventListener("click", e => {
   if (el) { el.classList.add("new"); puff(el); }
 });
 
-/* ---------- faire glisser la carte ---------- */
+/* ---------- déplacer des constructions et des décorations ---------- */
+function pickUp(type, key) {
+  moving = { type, key: String(key) };
+  SOUND.pop();
+  renderWorld();
+}
+
+function dropMoving(x, y) {
+  const item = moving.type === "plot" ? state.plots[moving.key] : state.decos[moving.key];
+  if (!item) { moving = null; return renderWorld(); }
+  const error = moving.type === "plot"
+    ? checkSpot(x, y, moving.key)
+    : (onGrass(x, y) ? null : (inWater(x, y) ? "Pas dans l'eau ! 💦" : "Pose-le sur l'herbe 🌱"));
+  if (error) { SOUND.bad(); return toast(error); }
+  item.x = Math.round(x);
+  item.y = Math.round(y);
+  const { type, key } = moving;
+  moving = null;
+  save();
+  SOUND.build();
+  renderWorld();
+  const el = document.querySelector(type === "plot" ? `.building[data-plot="${key}"]` : `.obj.deco[data-deco="${key}"]`);
+  if (el) { el.classList.add("new"); puff(el); }
+}
+
+$("btn-move").addEventListener("click", () => {
+  SOUND.tap();
+  const on = !moveMode;
+  cancelEditing();
+  moveMode = on;
+  renderPlacing();
+});
+
+/* ---------- faire glisser la carte, pincer pour zoomer ---------- */
 {
   const area = $("map-area");
-  let drag = null, dragged = false, dragEnd = 0;
+  const pointers = new Map(); // doigts (ou souris) posés sur la carte : id -> { x, y }
+  let drag = null, pinch = null, dragged = false, dragEnd = 0;
+  const rel = e => { const r = area.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  const startDrag = (id, p) => { drag = { x: p.x, y: p.y, panX, panY, id }; };
+  const pair = () => {
+    const [a, b] = [...pointers.values()];
+    return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2, d: Math.hypot(a.x - b.x, a.y - b.y) || 1 };
+  };
+
   area.addEventListener("pointerdown", e => {
-    dragged = false;
-    if (e.target.closest(".placing, .pan-arrow")) return;
-    drag = { x: e.clientX, y: e.clientY, panX, panY, id: e.pointerId };
+    if (e.target.closest(".placing, .pan-arrow, .map-tools")) return;
+    stopZoomAnim();
+    pointers.set(e.pointerId, rel(e));
+    if (pointers.size === 1) {
+      dragged = false;
+      startDrag(e.pointerId, rel(e));
+    } else if (pointers.size === 2) {
+      pinch = { d: pair().d, zoom }; // deux doigts : on zoome
+      drag = null;
+      dragged = true;
+      area.classList.add("dragging");
+    }
   });
   area.addEventListener("pointermove", e => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, rel(e));
+    if (pinch && pointers.size === 2) {
+      const m = pair();
+      setZoomAt(pinch.zoom * m.d / pinch.d, m.x, m.y);
+      return;
+    }
     if (!drag || e.pointerId !== drag.id) return;
-    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    const p = rel(e), dx = p.x - drag.x, dy = p.y - drag.y;
     if (!dragged && Math.hypot(dx, dy) > 8) {
       dragged = true;
       area.classList.add("dragging");
@@ -894,11 +1018,20 @@ $("map").addEventListener("click", e => {
     }
     if (dragged) setPan(drag.panX - dx, drag.panY - dy);
   });
-  const end = () => {
+  const end = e => {
+    if (!pointers.delete(e.pointerId)) return;
     if (dragged) dragEnd = Date.now();
-    drag = null;
-    dragged = false;
-    area.classList.remove("dragging");
+    if (pointers.size < 2) pinch = null;
+    if (pointers.size === 1) {
+      // Un doigt reste après un pincement : il continue de faire glisser, sans compter comme un toucher
+      const [[id, p]] = pointers;
+      startDrag(id, p);
+      dragged = true;
+    } else if (pointers.size === 0) {
+      drag = null;
+      dragged = false;
+      area.classList.remove("dragging");
+    }
   };
   area.addEventListener("pointerup", end);
   area.addEventListener("pointercancel", end);
@@ -906,20 +1039,23 @@ $("map").addEventListener("click", e => {
   area.addEventListener("click", e => {
     if (Date.now() - dragEnd < 350) { e.stopPropagation(); e.preventDefault(); }
   }, true);
+  // Molette (ordinateur) : zoom vers le curseur
   area.addEventListener("wheel", e => {
     e.preventDefault();
-    // Molette : défile en vertical s'il y a de la place, sinon en horizontal
-    const roomY = $("map").offsetHeight > area.clientHeight + 2;
-    if (e.shiftKey || !roomY) setPan(panX + e.deltaX + (roomY ? 0 : e.deltaY), panY);
-    else setPan(panX + e.deltaX, panY + e.deltaY);
+    stopZoomAnim();
+    const p = rel(e);
+    setZoomAt(zoom * Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0015)), p.x, p.y);
   }, { passive: false });
+  const centre = () => ({ x: area.clientWidth / 2, y: area.clientHeight / 2 });
+  $("zoom-in").addEventListener("click", () => { SOUND.tap(); const c = centre(); animateZoom((zoomTarget ?? zoom) * 1.5, c.x, c.y); });
+  $("zoom-out").addEventListener("click", () => { SOUND.tap(); const c = centre(); animateZoom((zoomTarget ?? zoom) / 1.5, c.x, c.y); });
   $("pan-left").addEventListener("click", () => { SOUND.tap(); setPan(panX - area.clientWidth * 0.6, panY, true); });
   $("pan-right").addEventListener("click", () => { SOUND.tap(); setPan(panX + area.clientWidth * 0.6, panY, true); });
 }
 
 $("placing-cancel").addEventListener("click", e => {
   e.stopPropagation();
-  placing = null;
+  cancelEditing();
   SOUND.tap();
   renderPlacing();
 });
@@ -1010,8 +1146,8 @@ function closeModal() {
   document.querySelectorAll(".menu-btn").forEach(b => b.classList.remove("active"));
   if (onModalClose) { const f = onModalClose; onModalClose = null; f(); }
 }
-$("modal-close").addEventListener("click", () => { SOUND.tap(); targetPlot = null; closeModal(); });
-$("overlay").addEventListener("click", e => { if (e.target.id === "overlay") { targetPlot = null; closeModal(); } });
+$("modal-close").addEventListener("click", () => { SOUND.tap(); closeModal(); });
+$("overlay").addEventListener("click", e => { if (e.target.id === "overlay") closeModal(); });
 
 // Petite fenêtre de confirmation, renvoie la valeur du bouton choisi
 function ask({ title, img, name = "", sub = "", cost = null, buttons }) {
@@ -1074,6 +1210,8 @@ let buildTab = "maisons";
 
 function openBuild() {
   openModal("Construire", body => {
+    body.insertAdjacentHTML("beforeend",
+      `<p class="note capacity">🏠 Constructions : <b>${Object.keys(state.plots).length}</b> / ${buildingCapacity(currentLevel())}</p>`);
     body.appendChild(tabsEl(BUILD_TABS, buildTab, id => { buildTab = id; openBuild(); }));
 
     if (buildTab === "maisons") {
@@ -1111,22 +1249,13 @@ function openBuild() {
   });
 }
 
-async function chooseBuilding(id, cardEl) {
+function chooseBuilding(id, cardEl) {
   const def = BUILDINGS[id];
   if (!checkBuyable(cardEl, def.cost, def.level)) return;
-  const open = plotsForLevel(currentLevel());
-  const free = PLOTS.map((_, i) => i).filter(i => i < open && !state.plots[i]);
-  if (!free.length) {
-    return toast("Plus d'emplacement libre !<br>Monte de niveau pour en ouvrir un.");
+  if (isFull()) {
+    return toast("Ton monde est plein pour l'instant !<br>Monte de niveau pour construire plus.");
   }
-  if (targetPlot !== null && !state.plots[targetPlot]) {
-    // On avait déjà touché un emplacement : on construit directement là
-    const i = targetPlot;
-    targetPlot = null;
-    closeModal();
-    if (await confirmBuild(id)) build(i, id);
-    return;
-  }
+  cancelEditing();
   placing = { kind: "building", id };
   closeModal();
   renderPlacing();
@@ -1390,7 +1519,7 @@ function openSettings() {
       if (!ok) return;
       const { settings, avatar } = state;
       state = Object.assign(freshState(), { settings, avatar });
-      placing = null;
+      cancelEditing();
       $("layer").innerHTML = "";
       save();
       show("world");
@@ -1457,7 +1586,7 @@ function openModes() {
 let quiz = null;
 
 function startQuiz(mode) {
-  placing = null;
+  cancelEditing();
   quiz = {
     mode,
     index: 0,
@@ -1714,8 +1843,7 @@ $("quiz-quit").addEventListener("click", async () => {
 const PANELS = { build: openBuild, decos: openDecos, animals: openAnimals, quests: openQuests };
 document.querySelectorAll(".menu-btn").forEach(btn => btn.addEventListener("click", () => {
   SOUND.tap();
-  placing = null;
-  targetPlot = null;
+  cancelEditing();
   renderPlacing();
   btn.classList.add("active");
   PANELS[btn.dataset.panel]();
@@ -1723,7 +1851,7 @@ document.querySelectorAll(".menu-btn").forEach(btn => btn.addEventListener("clic
 
 $("btn-play").addEventListener("click", () => {
   SOUND.tap();
-  placing = null;
+  cancelEditing();
   renderPlacing();
   openModes();
 });

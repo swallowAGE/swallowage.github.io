@@ -544,7 +544,7 @@ img { -webkit-user-drag: none; user-select: none; }
 /* bandeau « touche un emplacement » */
 .placing {
   position: absolute;
-  top: calc(max(10px, env(safe-area-inset-top)) + 64px); left: 50%;
+  top: calc(max(10px, env(safe-area-inset-top)) + 106px); /* sous les étoiles et les gouttes */ left: 50%;
   transform: translateX(-50%);
   width: max-content;
   max-width: calc(100% - 20px);
@@ -1109,3 +1109,45 @@ img { -webkit-user-drag: none; user-select: none; }
   .menu-btn img { width: 34px; height: 34px; }
   .question { font-size: clamp(2.6rem, 13vw, 4rem); }
 }
+
+/* =========================================================
+   OUTILS DE LA CARTE : zoom et déplacement
+   ========================================================= */
+.map-tools {
+  position: absolute;
+  right: 10px;
+  bottom: calc(118px + env(safe-area-inset-bottom));
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tool-btn {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #FFF4DE;
+  text-shadow: 0 2px 0 var(--wood-edge);
+  background: var(--wood-grain), linear-gradient(var(--wood-light), var(--wood));
+  border: 3px solid var(--wood-edge);
+  box-shadow: 0 5px 0 var(--wood-edge), inset 0 3px 0 rgba(255,255,255,.3);
+  transition: transform .08s, box-shadow .08s;
+}
+.tool-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--wood-edge); }
+.tool-btn[disabled] { opacity: .45; pointer-events: none; }
+.tool-btn.active {
+  background: linear-gradient(var(--leaf-light), var(--leaf));
+  border-color: var(--leaf-edge);
+  box-shadow: 0 5px 0 var(--leaf-edge), inset 0 3px 0 rgba(255,255,255,.4);
+}
+/* élément soulevé en mode déplacer */
+.obj.lifted > img {
+  filter: drop-shadow(0 0 calc(var(--u) * 5) #fff) brightness(1.12);
+  animation: lifted .7s ease-in-out infinite !important;
+}
+@keyframes lifted { 50% { transform: translateY(-8%) scale(1.04); } }
+.note.capacity { margin: 0 0 8px; }

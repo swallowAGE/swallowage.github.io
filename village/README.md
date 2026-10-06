@@ -14,8 +14,12 @@ pour construire, décorer et peupler son petit monde.
 - **Étoiles** : 1 par bonne réponse du premier coup (2 pour les tables 5 à 9 et « jusqu'à 20 »),
   +2 toutes les 5 bonnes réponses d'affilée, +3 pour un sans-faute.
 - **Erreur** : deuxième chance avec des points à compter, puis la réponse s'affiche.
-- **Le monde** : une grande prairie illustrée (rivière, pont, cascade, forêt) plus large
-  que l'écran, que l'on fait glisser du doigt (ou avec les flèches ◀ ▶).
+- **Le monde** : une grande prairie illustrée (rivière, pont, cascade, forêt) en plein écran.
+  On la fait glisser du doigt et on **zoome** en pinçant à deux doigts (molette sur ordinateur,
+  ou boutons ＋ －, jusqu'à 2×).
+- **Construire où l'on veut** : on choisit un bâtiment puis on touche l'herbe (pas dans l'eau,
+  pas sur une autre construction). Le nombre de constructions possibles grandit avec le niveau.
+- **Déplacer** (bouton ✋) : on soulève une construction ou une décoration, puis on la repose ailleurs.
 - **Construire** : maisons améliorables en 3 niveaux, bâtiments (école, poste,
   hôpital, cirque, château…) et cultures.
 - **Cultures** : 🌱 on plante en touchant la terre, 💧 on arrose (chaque arrosage fait
