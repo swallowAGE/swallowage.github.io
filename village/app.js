@@ -684,7 +684,9 @@ function buildingEl(i, built) {
   if (isHouse) html += `<span class="lvl-badge">${built.lvl}</span>`;
   if (production) {
     const [icon, label] = cropBubble(built);
-    html += `<span class="harvest ${icon}"><img src="${IMG(icon)}" alt="${label}"></span>`;
+    html += icon === "wait"
+      ? `<span class="harvest wait" title="${label}">⏳<small>${waitText(built)}</small></span>`
+      : `<span class="harvest ${icon}"><img src="${IMG(icon)}" alt="${label}"></span>`;
   }
   for (const [cx, cy] of SMOKE[def.img] || []) {
     html += `<span class="smoke" style="left:${cx * 100}%;top:${cy * 100}%"><i></i><i></i><i></i></span>`;
@@ -842,11 +844,32 @@ async function demolish(i) {
 const STAGE_CLASS = { [-1]: "stage-empty", 0: "stage-seed", 1: "stage-sprout", 2: "stage-ripe" };
 const isCrop = built => !!BUILDINGS[built.id].harvest;
 const cropStage = built => built.stage ?? RIPE;
+// Après chaque arrosage la plante pousse un moment (plus la récolte est grosse, plus c'est long)
+const growMs = built => (BUILDINGS[built.id].harvest || 2) * (+new URLSearchParams(location.search).get("pousse") || 45) * 1000;
+const growing = built => !!built.until && built.until > Date.now();
+const waitText = built => {
+  const s = Math.max(1, Math.ceil((built.until - Date.now()) / 1000));
+  return s >= 60 ? Math.ceil(s / 60) + " min" : s + " s";
+};
+
+// Fait avancer les cultures dont le temps de pousse est écoulé
+function growCrops() {
+  let changed = false;
+  for (const p of Object.values(state.plots)) {
+    if (p.until && p.until <= Date.now()) {
+      p.until = 0;
+      if (p.stage < RIPE) p.stage++;
+      changed = true;
+    }
+  }
+  if (changed) { save(); if (isActive("world")) renderWorld(); }
+}
 
 function cropBubble(built) {
   const stage = cropStage(built);
   if (stage === EMPTY) return ["seedling", "Planter"];
   if (stage === RIPE) return ["star", "Récolter"];
+  if (growing(built)) return ["wait", "Ça pousse"];
   return ["droplet", "Arroser"];
 }
 
@@ -875,16 +898,22 @@ async function onCrop(i, el) {
     return toast(`Récolte : +${def.harvest} ⭐<br>Touche la terre pour replanter`);
   }
 
-  // Graines ou pousses : il faut de l'eau
+  // Ça pousse : on patiente
+  if (growing(built)) {
+    SOUND.tap();
+    return toast(`🌱 Ça pousse… encore ${waitText(built)}`);
+  }
+
+  // Graines ou pousses : il faut de l'eau, puis un peu de patience
   if (state.water > 0) {
     state.water--;
-    built.stage++;
+    built.until = Date.now() + growMs(built);
     save();
     SOUND.pop();
     fxAt(el, "droplet", "rain");
     renderWorld();
     bump($("water-pill"));
-    if (built.stage === RIPE) toast(`${def.name} : c'est prêt ! Touche pour récolter ⭐`);
+    toast(`💧 Arrosé ! Reviens dans ${waitText(built)}`);
     return;
   }
 
@@ -1231,6 +1260,8 @@ function initLiving() {
   }
   applyDaylight();
   setInterval(applyDaylight, 60000);
+  setInterval(growCrops, 2000);
+  growCrops();
 }
 
 /* =========================================================

@@ -29,8 +29,9 @@ pour construire, décorer et peupler son village.
 - **Déplacer** (bouton ✋) : on soulève une construction ou une décoration, puis on la repose ailleurs.
 - **Construire** : maisons améliorables en 3 niveaux, bâtiments (école, poste,
   hôpital, cirque, château…) et cultures.
-- **Cultures** : 🌱 on plante en touchant la terre, 💧 on arrose (chaque arrosage fait
-  pousser d'une étape : graines → pousses → mûr), ⭐ on récolte des étoiles, puis on replante.
+- **Cultures** : 🌱 on plante en touchant la terre, 💧 on arrose (chaque arrosage lance une
+  pousse qui prend du temps, même appli fermée : graines → pousses → mûr ; 1 min 30 pour le blé,
+  plus long pour les récoltes plus grosses — `?pousse=1` pour tester en accéléré), ⭐ on récolte des étoiles, puis on replante.
   Les gouttes d'eau se gagnent en jouant : une pour deux bonnes réponses à chaque partie.
 - **Décorations** : fleurs, arbres, rochers, objets, posés où l'on veut sur l'herbe.
 - **Animaux** : 17 animaux qui se promènent dans le monde (un câlin quand on les touche).
