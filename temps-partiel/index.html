@@ -188,6 +188,20 @@
               <button type="button" data-rate="0.6" aria-pressed="false">60 %</button>
             </div>
           </div>
+          <div>
+            <span class="lbl" id="employer-title">Mon employeur</span>
+            <input type="hidden" id="employer" value="prive">
+            <div class="seg" role="group" aria-labelledby="employer-title">
+              <button type="button" data-employer="prive" aria-pressed="true">Privé</button>
+              <button type="button" data-employer="public" aria-pressed="false">Fonction publique</button>
+              <button type="button" data-employer="autre" aria-pressed="false">Autre</button>
+            </div>
+            <div id="paid-box" style="margin-top: 10px" hidden>
+              <label for="paid">Salaire versé (% du temps plein)</label>
+              <input id="paid" class="fld" type="number" inputmode="decimal" min="0" max="100" step="any" value="80">
+            </div>
+            <p class="hint" id="paid-hint"></p>
+          </div>
           <div class="stepper-row">
             <label for="hours">Heures par semaine à temps plein</label>
             <div class="stepper"><button type="button" data-for="hours" data-step="-1" aria-label="Une heure de moins">−</button><input id="hours" type="number" inputmode="numeric" min="1" max="60" step="1" value="35"><button type="button" data-for="hours" data-step="1" aria-label="Une heure de plus">+</button></div>
@@ -260,7 +274,7 @@
 
     <section class="result" id="result" aria-label="Résultat" aria-live="polite">
       <div class="res-head">
-        <span class="kicker">// à <span class="rate-label">80 %</span>, vous perdez vraiment</span>
+        <span class="kicker">// à <span class="rate-label">80 %</span>, <span id="verdict">vous perdez vraiment</span></span>
         <div class="pill" role="group" aria-label="Période" id="phase-pill">
           <button type="button" data-phase="prepare" aria-pressed="true">avec la PreParE</button>
           <button type="button" data-phase="after" aria-pressed="false">après</button>
@@ -304,7 +318,7 @@
     </div>
     <div>
       <span class="kicker">// à vérifier</span>
-      <p>C'est une estimation, qui ne compte ni la baisse d'impôt sur le revenu ni l'effet sur la retraite. Avant de décider, comparez avec le simulateur de <a href="https://www.caf.fr" target="_blank" rel="noopener">caf.fr</a>. Rien n'est enregistré ni envoyé : le calcul se fait sur votre appareil.</p>
+      <p>Salaire : au taux choisi dans le privé ; dans la fonction publique, 80 % est payé 6/7 et 90 % est payé 32/35. C'est une estimation, qui ne compte ni la baisse d'impôt sur le revenu ni l'effet sur la retraite. Avant de décider, comparez avec le simulateur de <a href="https://www.caf.fr" target="_blank" rel="noopener">caf.fr</a>. Rien n'est enregistré ni envoyé : le calcul se fait sur votre appareil.</p>
     </div>
   </footer>
 </div>
@@ -343,6 +357,15 @@
 
   function signed(x) { return (x < 0 ? "−" : "+") + eur.format(Math.abs(x)); }
 
+  // Part du salaire à temps plein versée selon l'employeur.
+  // Fonction publique : 80 % payé 6/7, 90 % payé 32/35, les autres quotités au prorata.
+  function paidShare(rate, employer) {
+    employer = employer || $("employer").value;
+    if (employer === "public") return rate === 0.8 ? 6 / 7 : rate === 0.9 ? 32 / 35 : rate;
+    if (employer === "autre") return Math.min(100, val("paid")) / 100;
+    return rate;
+  }
+
   // Coût mensuel de la nourrice, CMG et crédit d'impôt déduits.
   function nanny(hoursWeek, days, o) {
     var hours = hoursWeek * o.weeks / 12;
@@ -367,7 +390,8 @@
 
     var full = nanny(val("g-hours"), 5, o);
     var part = nanny(val("g-part"), 5 * rate, o);
-    var salary = o.net * (1 - rate);
+    var paid = paidShare(rate);
+    var salary = o.net * (1 - paid);
     var nannySave = full.net - part.net;
     var tripSave = o.trip * 5 * (1 - rate) * o.weeks / 12;
     var prepareOk = rate <= 0.8 && rate > 0.5;
@@ -395,7 +419,8 @@
     $("rows").innerHTML = rows;
 
     $("st-freed").textContent = Math.round(freed) + " h";
-    $("st-hour").textContent = freed ? eur2.format(Math.max(0, loss) / freed) : "–";
+    $("verdict").textContent = loss > 0 ? "vous perdez vraiment" : "vous y gagnez";
+    $("st-hour").textContent = !freed ? "–" : loss > 0 ? eur2.format(loss / freed) : "rien";
 
     var duration = o.kids === 1
       ? "pendant 6 mois au plus, avant le premier anniversaire de l'enfant"
@@ -416,7 +441,12 @@
       line("Crédit d'impôt (50 %, plafonné)", "−" + eur.format(full.credit), "−" + eur.format(part.credit)) +
       line("Reste à votre charge", eur.format(full.net), eur.format(part.net), true);
 
-    $("sum-pay").textContent = eur.format(o.net) + " net · je passe à " + pct;
+    $("sum-pay").textContent = eur.format(o.net) + " net · je passe à " + pct + " · payé " + num.format(paid * 100) + " %";
+    $("paid-hint").textContent = $("employer").value === "public"
+      ? "Dans la fonction publique, 80 % est payé 6/7 (85,7 %) et 90 % est payé 32/35 (91,4 %). Ici : " + num.format(paid * 100) + " %."
+      : $("employer").value === "prive"
+        ? "Dans le privé, on est payé au taux choisi, sauf accord d'entreprise plus favorable."
+        : "Le pourcentage du salaire à temps plein que votre employeur verse.";
     $("sum-nanny").textContent = num.format(val("g-hours")) + " h/sem · " + num.format(o.rateHour) + " €/h · " + num.format(o.perDay) + " €/jour";
     $("sum-home").textContent = eur.format(o.income) + "/mois · " + (o.kids === 4 ? "4 enfants et +" : o.kids + " enfant" + (o.kids > 1 ? "s" : ""));
     $("sum-trip").textContent = o.trip ? eur2.format(o.trip) + " par jour" : "non compté";
@@ -437,6 +467,11 @@
     });
   }
   pickGroup("rate", function (v) { $("rate").value = v; syncPartHours(); });
+  pickGroup("employer", function (v) {
+    $("employer").value = v;
+    $("paid-box").hidden = v !== "autre";
+    if (v === "autre") $("paid").value = Math.round(paidShare(parseFloat($("rate").value), "prive") * 1000) / 10;
+  });
   pickGroup("kids", function (v) { $("kids").value = v; });
   pickGroup("phase", function (v) { phase = v; });
 
