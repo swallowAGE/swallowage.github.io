@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combien coûte mon trajet ? – Swallow AGE</title>
+<meta name="description" content="Calculez le coût réel de votre trajet domicile-travail : carburant seul et coût complet au barème fiscal, télétravail compris. Comparez deux situations.">
+<style>
+  :root {
+    --ink: #3B2233;
+    --mist: #F4EEF0;
+    --paper: #FFFFFF;
+    --rose: #B5677A;
+    --rose-deep: #94495D;
+    --gold: #C9A85C;
+    --taupe: #6E5F58;
+    --line: #D9CCD0;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 17px; }
+  body {
+    margin: 0;
+    background: var(--mist);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+  header { display: flex; align-items: center; gap: 1.1rem; margin-bottom: 1.75rem; }
+  header svg { flex: none; }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .lede { margin: 0.35rem 0 0; color: var(--taupe); max-width: 46ch; }
+  .grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 900px) {
+    .grid { grid-template-columns: 1fr 1.1fr; align-items: start; }
+    .results-col { position: sticky; top: 1rem; }
+  }
+  fieldset {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    border-radius: 6px;
+    padding: 1rem 1.1rem 1.15rem;
+    margin: 0 0 1.1rem;
+  }
+  legend {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0 0.4rem;
+  }
+  .field { margin-top: 0.85rem; }
+  .field:first-of-type { margin-top: 0.4rem; }
+  label { display: block; font-size: 0.93rem; margin-bottom: 0.25rem; }
+  .hint { color: var(--taupe); font-size: 0.85rem; margin: 0.2rem 0 0; }
+  input[type="number"], select {
+    width: 100%;
+    font: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid #A99AA0;
+    border-radius: 4px;
+    padding: 0.5rem 0.6rem;
+  }
+  input:focus-visible, select:focus-visible, button:focus-visible {
+    outline: 3px solid var(--rose-deep);
+    outline-offset: 2px;
+  }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 0.8rem; align-items: end; }
+  .check { display: flex; gap: 0.6rem; align-items: center; margin: 0 0 1.1rem; }
+  .check input { width: 1.15rem; height: 1.15rem; accent-color: var(--rose-deep); }
+  .check label { margin: 0; font-size: 1rem; }
+  button.price {
+    font: inherit;
+    font-size: 0.9rem;
+    background: var(--rose-deep);
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+  }
+  button.price:hover { background: var(--ink); }
+  #price-status { font-size: 0.85rem; color: var(--taupe); margin: 0.35rem 0 0; min-height: 1.2em; }
+  .scenario-b[hidden] { display: none; }
+
+  .receipt {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--gold);
+    border-radius: 0 0 6px 6px;
+    padding: 1.2rem 1.2rem 1rem;
+  }
+  .receipt h2 { font-family: var(--serif); font-size: 1.25rem; margin: 0 0 0.6rem; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { padding: 0.5rem 0; border-bottom: 1px dotted #B9AAB0; vertical-align: baseline; }
+  thead th { font-weight: 600; font-size: 0.88rem; text-align: right; border-bottom: 1px solid var(--ink); padding-bottom: 0.4rem; }
+  thead th:first-child { text-align: left; }
+  tbody th { font-weight: 400; text-align: left; padding-right: 0.8rem; }
+  td { text-align: right; white-space: nowrap; padding-left: 0.5rem; }
+  tr.total th, tr.total td { font-weight: 700; border-bottom: 1px solid var(--ink); }
+  tr.total td { font-size: 1.15rem; }
+  .gap { color: var(--rose-deep); }
+  .insight { margin: 1rem 0 0; font-size: 0.95rem; }
+  .note { font-size: 0.85rem; color: var(--taupe); margin: 0.9rem 0 0; }
+  footer { margin-top: 2rem; font-size: 0.85rem; color: var(--taupe); max-width: 70ch; }
+  footer p { margin: 0 0 0.6rem; }
+  @media (max-width: 520px) {
+    .row2 { grid-template-columns: 1fr; }
+    td { white-space: normal; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <svg width="52" height="32" viewBox="0 0 52 32" role="img" aria-label="Soleil levant sur une ligne d'horizon">
+      <path d="M8 26a18 18 0 0 1 36 0z" fill="#C9A85C"/>
+      <rect x="0" y="26" width="52" height="2.5" fill="#3B2233"/>
+    </svg>
+    <div>
+      <h1>Combien coûte mon trajet&nbsp;?</h1>
+      <p class="lede">Le coût du carburant seul, et le coût complet de la voiture, jour de télétravail compris.</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <form id="form" autocomplete="off" onsubmit="return false">
+      <fieldset>
+        <legend>Mon véhicule</legend>
+        <div class="row2">
+          <div class="field">
+            <label for="cv">Puissance fiscale</label>
+            <select id="cv">
+              <option value="3">3 CV et moins</option>
+              <option value="4">4 CV</option>
+              <option value="5" selected>5 CV</option>
+              <option value="6">6 CV</option>
+              <option value="7">7 CV et plus</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fuel">Énergie</label>
+            <select id="fuel">
+              <option value="e10" selected>Essence (E10)</option>
+              <option value="gazole">Gazole</option>
+              <option value="elec">Électrique</option>
+            </select>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="conso" id="conso-label">Consommation (L/100&nbsp;km)</label>
+            <input id="conso" type="number" inputmode="decimal" min="0" step="any" value="6">
+          </div>
+          <div class="field">
+            <label for="price" id="price-label">Prix (€/L)</label>
+            <input id="price" type="number" inputmode="decimal" min="0" step="any" value="2.03">
+          </div>
+        </div>
+        <button type="button" class="price" id="btn-price">Prix du jour en Sarthe</button>
+        <p id="price-status" role="status"></p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ma situation</legend>
+        <div class="field">
+          <label for="dist-a">Distance domicile-travail, un aller (km)</label>
+          <input id="dist-a" type="number" inputmode="decimal" min="0" step="any" value="15">
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="days-a">Jours travaillés par semaine</label>
+            <input id="days-a" type="number" inputmode="numeric" min="0" max="7" step="1" value="5">
+          </div>
+          <div class="field">
+            <label for="weeks-a">Semaines travaillées par an</label>
+            <input id="weeks-a" type="number" inputmode="numeric" min="0" max="52" step="1" value="42">
+          </div>
+        </div>
+        <div class="field">
+          <label for="tele-a">Jours de télétravail par mois</label>
+          <input id="tele-a" type="number" inputmode="numeric" min="0" max="23" step="1" value="0">
+          <p class="hint">42 semaines de 5 jours donnent 210 jours : c'est une base prudente après congés et jours fériés.</p>
+        </div>
+      </fieldset>
+
+      <div class="check">
+        <input type="checkbox" id="compare">
+        <label for="compare">Comparer avec une autre situation</label>
+      </div>
+
+      <fieldset class="scenario-b" id="scenario-b" hidden>
+        <legend>Autre situation</legend>
+        <div class="field">
+          <label for="dist-b">Distance domicile-travail, un aller (km)</label>
+          <input id="dist-b" type="number" inputmode="decimal" min="0" step="any" value="30">
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="days-b">Jours travaillés par semaine</label>
+            <input id="days-b" type="number" inputmode="numeric" min="0" max="7" step="1" value="5">
+          </div>
+          <div class="field">
+            <label for="weeks-b">Semaines travaillées par an</label>
+            <input id="weeks-b" type="number" inputmode="numeric" min="0" max="52" step="1" value="42">
+          </div>
+        </div>
+        <div class="field">
+          <label for="tele-b">Jours de télétravail par mois</label>
+          <input id="tele-b" type="number" inputmode="numeric" min="0" max="23" step="1" value="4">
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="results-col">
+      <section class="receipt" aria-live="polite" aria-labelledby="res-title">
+        <h2 id="res-title">Mon coût de trajet</h2>
+        <div id="results"></div>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <p>Le <strong>carburant seul</strong> est ce que vous dépensez à la pompe. Le <strong>coût complet</strong> suit le barème kilométrique fiscal 2026 (revenus 2025) : il inclut aussi l'amortissement du véhicule, l'entretien, les pneus et l'assurance. Pour une voiture 100&nbsp;% électrique, le barème est majoré de 20&nbsp;%.</p>
+    <p>Il s'agit d'une estimation, pas d'un conseil fiscal. Rien n'est enregistré ni envoyé : les calculs se font sur votre appareil. Seul le bouton « Prix du jour » interroge le site data.economie.gouv.fr.</p>
+    <p>Swallow AGE</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Barème kilométrique fiscal 2026 (revenus 2025), voitures thermiques et hybrides.
+  // [jusqu'à 5 000 km : d × a ; de 5 001 à 20 000 km : d × b + c ; au-delà : d × e]
+  var BAREME = {
+    3: [0.529, 0.316, 1065, 0.370],
+    4: [0.606, 0.340, 1330, 0.407],
+    5: [0.636, 0.357, 1395, 0.427],
+    6: [0.665, 0.374, 1457, 0.447],
+    7: [0.697, 0.394, 1515, 0.470]
+  };
+
+  var FUELS = {
+    e10:    { conso: 6,   price: 2.03, unit: "L",   electric: false },
+    gazole: { conso: 5.5, price: 2.21, unit: "L",   electric: false },
+    elec:   { conso: 17,  price: 0.25, unit: "kWh", electric: true }
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var eur = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+  var num = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+
+  function val(id) {
+    var v = parseFloat(String($(id).value).replace(",", "."));
+    return isFinite(v) && v > 0 ? v : 0;
+  }
+
+  function bareme(km, cv, electric) {
+    var p = BAREME[cv];
+    var cost;
+    if (km <= 5000) cost = km * p[0];
+    else if (km <= 20000) cost = km * p[1] + p[2];
+    else cost = km * p[3];
+    return electric ? cost * 1.2 : cost;
+  }
+
+  function readScenario(s) {
+    return {
+      dist: val("dist-" + s),
+      daysWeek: val("days-" + s),
+      weeks: val("weeks-" + s),
+      tele: val("tele-" + s)
+    };
+  }
+
+  function compute(sc, vehicle) {
+    var days = Math.max(0, sc.daysWeek * sc.weeks - sc.tele * 12);
+    var km = 2 * sc.dist * days;
+    var fuel = km / 100 * vehicle.conso * vehicle.price;
+    var full = bareme(km, vehicle.cv, vehicle.electric);
+    return { days: days, km: km, fuel: fuel, full: full };
+  }
+
+  function render() {
+    var fuelKey = $("fuel").value;
+    var vehicle = {
+      cv: $("cv").value,
+      electric: FUELS[fuelKey].electric,
+      conso: val("conso"),
+      price: val("price")
+    };
+    var compare = $("compare").checked;
+    $("scenario-b").hidden = !compare;
+
+    var a = compute(readScenario("a"), vehicle);
+    var b = compare ? compute(readScenario("b"), vehicle) : null;
+
+    var rows = [
+      { label: "Jours sur site par an", get: function (r) { return r.days; }, fmt: function (x) { return num.format(x); }, gap: false },
+      { label: "Kilomètres par an", get: function (r) { return r.km; }, fmt: function (x) { return num.format(x) + " km"; }, gap: false },
+      { label: "Carburant seul, par mois", get: function (r) { return r.fuel / 12; }, fmt: eur.format, gap: true },
+      { label: "Carburant seul, par an", get: function (r) { return r.fuel; }, fmt: eur.format, gap: true },
+      { label: "Coût complet, par mois", get: function (r) { return r.full / 12; }, fmt: eur.format, gap: true, total: true },
+      { label: "Coût complet, par an", get: function (r) { return r.full; }, fmt: eur.format, gap: true },
+      { label: "Coût complet, par jour sur site", get: function (r) { return r.days ? r.full / r.days : 0; }, fmt: eur.format, gap: true }
+    ];
+
+    var head = "<thead><tr><th scope='col'><span class='sr-only'>Poste</span></th><th scope='col'>" + (compare ? "Situation A" : "Par an ou par mois") + "</th>";
+    if (compare) head += "<th scope='col'>Situation B</th><th scope='col'>Écart B − A</th>";
+    head += "</tr></thead>";
+
+    var body = "<tbody>";
+    rows.forEach(function (row) {
+      var va = row.get(a);
+      body += "<tr" + (row.total ? " class='total'" : "") + "><th scope='row'>" + row.label + "</th><td>" + row.fmt(va) + "</td>";
+      if (compare) {
+        var vb = row.get(b);
+        body += "<td>" + row.fmt(vb) + "</td>";
+        if (row.gap) {
+          var d = vb - va;
+          body += "<td class='gap'>" + (d > 0 ? "+" : d < 0 ? "−" : "") + row.fmt(Math.abs(d)) + "</td>";
+        } else {
+          body += "<td></td>";
+        }
+      }
+      body += "</tr>";
+    });
+    body += "</tbody>";
+
+    // Effet d'un jour de télétravail de plus par mois (situation A)
+    var scA = readScenario("a");
+    var scMore = { dist: scA.dist, daysWeek: scA.daysWeek, weeks: scA.weeks, tele: scA.tele + 1 };
+    var more = compute(scMore, vehicle);
+    var saveFuel = Math.max(0, a.fuel - more.fuel);
+    var saveFull = Math.max(0, a.full - more.full);
+    var insight = "";
+    if (a.days > 0 && (saveFuel > 0 || saveFull > 0)) {
+      insight = "<p class='insight'>Un jour de télétravail de plus par mois économise environ <strong>" +
+        eur.format(saveFuel) + " par an</strong> en carburant, et <strong>" + eur.format(saveFull) +
+        " par an</strong> au coût complet.</p>";
+    }
+
+    $("results").innerHTML = "<table>" + head + body + "</table>" + insight;
+  }
+
+  function onFuelChange() {
+    var f = FUELS[$("fuel").value];
+    $("conso").value = f.conso;
+    $("price").value = f.price;
+    $("conso-label").textContent = "Consommation (" + f.unit + "/100\u00a0km)";
+    $("price-label").textContent = "Prix (€/" + f.unit + ")";
+    $("btn-price").hidden = f.electric;
+    $("price-status").textContent = "";
+    render();
+  }
+
+  // Prix moyen du jour dans le département de la Sarthe (72), jeu de données ouvert de l'État.
+  // Si le nom d'un champ change, la saisie manuelle reste possible.
+  function loadPrice() {
+    var key = $("fuel").value;
+    if (key === "elec") return;
+    var status = $("price-status");
+    status.textContent = "Chargement du prix du jour…";
+    var url = "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/records" +
+      "?select=" + encodeURIComponent("avg(e10_prix) as e10, avg(gazole_prix) as gazole") +
+      "&where=" + encodeURIComponent('code_departement="72"') + "&limit=1";
+    fetch(url)
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (j) {
+        var r0 = j && j.results && j.results[0];
+        var v = r0 ? parseFloat(key === "e10" ? r0.e10 : r0.gazole) : NaN;
+        if (!isFinite(v) || v <= 0) throw new Error("vide");
+        $("price").value = (Math.round(v * 100) / 100).toString();
+        status.textContent = "Prix moyen du jour en Sarthe : " + v.toFixed(2).replace(".", ",") + " €/L.";
+        render();
+      })
+      .catch(function () {
+        status.textContent = "Prix du jour indisponible : saisissez le prix à la main.";
+      });
+  }
+
+  document.getElementById("form").addEventListener("input", render);
+  document.getElementById("form").addEventListener("change", render);
+  $("fuel").addEventListener("change", onFuelChange);
+  $("btn-price").addEventListener("click", loadPrice);
+  onFuelChange();
+})();
+</script>
+<style>
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</body>
+</html>
