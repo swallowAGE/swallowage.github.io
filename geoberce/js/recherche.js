@@ -228,6 +228,66 @@ function fetchSupPourParcelle(feature) {
         .catch(() => []);
 }
 
+/* =========================================================
+   OBLIGATION LÉGALE DE DÉBROUSSAILLEMENT (OLD)
+   Pas de couverture par l'API Carto de l'IGN (vérifié dans le code
+   source du module apicarto - IGNF/apicarto sur GitHub - la couche
+   débroussaillement n'apparaît pas dans sa liste blanche de flux WFS
+   proxyfiés). La couche existe en revanche en WMS sur la Géoplateforme
+   IGN et répond à une requête GetFeatureInfo classique - confirmé en
+   conditions réelles (retour de l'utilisatrice, une vraie parcelle du
+   territoire) une fois le paramètre FORMAT ajouté (étonnamment
+   obligatoire même pour une requête d'info, sinon
+   "MissingParameterValue: FORMAT query parameter missing"). Comme pour
+   les SUP, interrogée PAR PARCELLE (un seul point, le centroïde),
+   jamais préchargée pour tout le territoire. */
+const URL_OLD_WMS = "https://data.geopf.fr/wms-r/wms";
+
+/* Valeurs de l'attribut `zonage` confirmées en conditions réelles
+   (retour de l'utilisatrice) et par recherche complémentaire : 1 = dans
+   le massif boisé lui-même, 2 = dans la bande des 200 m autour d'un
+   massif boisé (le cas le plus fréquent en zone rurale). Une ancienne
+   valeur 3 ("données temporaires") existait dans des versions plus
+   anciennes de la couche, non reprise ici. */
+const LABELS_ZONAGE_OLD = {
+    1: "Dans un massif boisé soumis à l'obligation",
+    2: "Dans la bande des 200 m autour d'un massif boisé"
+};
+
+/* Récupère l'éventuelle obligation de débroussaillement au centroïde de
+   cette parcelle - un seul appel réseau, déclenché seulement à
+   l'ouverture d'une fiche parcelle (voir ouvrirPopupParcelle, popup.js).
+   Dégrade vers null en cas d'échec (réseau, parcelle hors couverture,
+   format de réponse inattendu) : une section "Débroussaillement"
+   absente plutôt qu'une fiche cassée - comme pour les SUP. */
+function fetchOldPourParcelle(feature) {
+    const centre = centroideFeature(feature);
+    if (!centre) return Promise.resolve(null);
+    const [lon, lat] = centre;
+    const marge = 0.001;
+    const params = new URLSearchParams({
+        SERVICE: "WMS", VERSION: "1.3.0", REQUEST: "GetFeatureInfo",
+        LAYERS: "DEBROUSSAILLEMENT", QUERY_LAYERS: "DEBROUSSAILLEMENT", STYLES: "",
+        FORMAT: "image/png", CRS: "EPSG:4326",
+        BBOX: `${lat - marge},${lon - marge},${lat + marge},${lon + marge}`,
+        WIDTH: "256", HEIGHT: "256", I: "128", J: "128",
+        INFO_FORMAT: "application/json"
+    });
+    return fetch(`${URL_OLD_WMS}?${params}`)
+        .then(r => r.ok ? r.json() : { features: [] })
+        .then(data => {
+            const f = (data.features || [])[0];
+            if (!f || !f.properties) return null;
+            const zonage = f.properties.zonage;
+            return {
+                zonage,
+                libelle: LABELS_ZONAGE_OLD[zonage] || "Zone soumise à l'obligation (détail non précisé)",
+                url: f.properties.url || null
+            };
+        })
+        .catch(() => null);
+}
+
 function chargerDonneesFoncieres() {
     return Promise.all([
         ...COUCHES_RECHERCHE.map(id => new Promise(resolve => {
@@ -386,7 +446,7 @@ function infosParcelle(feature, indices) {
         typezonePLUi,
         libellePLUi: plui ? (plui.properties.libelong || plui.properties.libelle) : null,
         niveauRGA: rga ? rga.properties.niveau : null,
-        ventes, nbBatiments,
+        ventes, nbBatiments, aUnBatiment,
         surfaceBatie: ventes[0] ? ventes[0].surfaceBatie : null,
         dpe: dpe ? {
             classe: dpe.properties.etiquette_dpe, conso: dpe.properties.consommation,
@@ -411,7 +471,7 @@ function enrichirParcelles(parcelles) {
             dvf: infos.ventes.length > 0,
             prixVente: derniereVente ? derniereVente.valeur : null,
             anneeVente: derniereVente ? derniereVente.annee : null,
-            nbBatiments: infos.nbBatiments, surfaceBatie: infos.surfaceBatie,
+            nbBatiments: infos.nbBatiments, aUnBatiment: infos.aUnBatiment, surfaceBatie: infos.surfaceBatie,
             etiquetteDpe: infos.dpe ? infos.dpe.classe : null
         };
     });
@@ -434,9 +494,26 @@ function lireCriteres() {
         aEuUneVente: document.getElementById("rf-vente").checked,
         prixMin: num("rf-prix-min"), prixMax: num("rf-prix-max"),
         anneeVenteMin: num("rf-annee-vente-min"), anneeVenteMax: num("rf-annee-vente-max"),
-        nbBatimentsMin: num("rf-batiments-min"), surfaceBatieMin: num("rf-surface-batie-min"),
+        nbBatimentsMin: num("rf-batiments-min"), nbBatimentsMax: num("rf-batiments-max"),
+        surfaceBatieMin: num("rf-surface-batie-min"),
         dpe: CLASSES_DPE.filter(c => document.getElementById("rf-dpe-" + c).checked)
     };
+}
+
+/* "Nombre de bâtiments" affiché (DVF - nbBatiments) ne couvre que les
+   parcelles déjà vendues (null sinon), ce qui exclurait à tort du
+   filtre "0 bâtiment" une parcelle réellement vide mais jamais vendue -
+   ou pire, laisserait passer une parcelle avec une vraie maison dessus
+   simplement parce qu'elle n'a jamais été revendue (retour direct de
+   l'utilisatrice : "si je mets 0 je vois les parcelles constructibles
+   et sans bâtiment... potentiellement à acheter" - une fausse parcelle
+   vide dans ce résultat serait trompeur). Complété par aUnBatiment (test
+   géométrique réel contre le cadastre, voir infosParcelle) quand nbBatiments
+   est inconnu : 0 si aucun bâtiment réel trouvé, 1 sinon (compte
+   minimal, "au moins un" - on ne sait pas combien exactement sans DVF). */
+function nbBatimentsEffectif(r) {
+    if (r.nbBatiments != null) return r.nbBatiments;
+    return r.aUnBatiment ? 1 : 0;
 }
 
 function correspond(r, c) {
@@ -451,7 +528,8 @@ function correspond(r, c) {
     if (c.prixMax != null && (r.prixVente == null || r.prixVente > c.prixMax)) return false;
     if (c.anneeVenteMin != null && (r.anneeVente == null || r.anneeVente < c.anneeVenteMin)) return false;
     if (c.anneeVenteMax != null && (r.anneeVente == null || r.anneeVente > c.anneeVenteMax)) return false;
-    if (c.nbBatimentsMin != null && (r.nbBatiments == null || r.nbBatiments < c.nbBatimentsMin)) return false;
+    if (c.nbBatimentsMin != null && nbBatimentsEffectif(r) < c.nbBatimentsMin) return false;
+    if (c.nbBatimentsMax != null && nbBatimentsEffectif(r) > c.nbBatimentsMax) return false;
     if (c.surfaceBatieMin != null && (r.surfaceBatie == null || r.surfaceBatie < c.surfaceBatieMin)) return false;
     if (c.dpe.length && (!r.etiquetteDpe || !c.dpe.includes(r.etiquetteDpe))) return false;
     return true;
@@ -564,9 +642,9 @@ function construireFormulaire() {
 
             <div class="rf-groupe">
                 <div class="rf-groupe-titre">Bâti <small>(estimé depuis la dernière vente connue)</small></div>
-                <label class="rf-champ">
-                    <span>Nombre de bâtiments (min)</span>
-                    <input type="number" id="rf-batiments-min" min="0">
+                <label class="rf-champ rf-champ-plage">
+                    <span>Nombre de bâtiments</span>
+                    <span class="rf-plage"><input type="number" id="rf-batiments-min" min="0" placeholder="min"> → <input type="number" id="rf-batiments-max" min="0" placeholder="max"></span>
                 </label>
                 <label class="rf-champ">
                     <span>Surface bâtie (min, m²)</span>

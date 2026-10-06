@@ -598,6 +598,18 @@ function construirePopupCadastre(props, infos) {
         ${sup.map(s => `<div class="popup-fiche-ligne"><span class="popup-fiche-badge info">🟠 ${echapperHtml(s.libelle)}</span></div>`).join("")}
     </div>` : "";
 
+    /* infos.old : rempli par fetchOldPourParcelle (recherche.js), appelé
+       en parallèle par ouvrirPopupParcelle comme pour les SUP - absent
+       (undefined) tant que l'appel réseau n'a pas répondu, null si la
+       parcelle n'est pas concernée ou si le service n'a pas répondu :
+       dans les deux cas, pas de section. */
+    const old = infos.old;
+    const oldSection = old ? `<div class="popup-fiche-section">
+        <div class="popup-fiche-section-titre"><i class="fa-solid fa-fire"></i>Obligation légale de débroussaillement</div>
+        <div class="popup-fiche-ligne"><span class="popup-fiche-badge info">🟠 ${echapperHtml(old.libelle)}</span></div>
+        ${old.url ? `<div class="popup-fiche-precision"><a href="${echapperHtml(old.url)}" target="_blank" rel="noopener">Obligations applicables (préfecture)</a></div>` : ""}
+    </div>` : "";
+
     /* infos.proximite n'est déjà rempli par infosParcelle (recherche.js)
        que pour un terrain à bâtir ou une parcelle qui porte déjà une
        maison — sur une parcelle agricole/naturelle sans bâti, la
@@ -608,12 +620,12 @@ function construirePopupCadastre(props, infos) {
         ${infos.proximite.map(p => `<div class="popup-fiche-jour"><span>${echapperHtml(p.titre)}</span><strong>${formaterDistance(p.distance)}</strong></div>`).join("")}
     </div>` : "";
 
-    const rien = !bati && !ventes && !dpe && !urbanisme && !supSection && !proximite
+    const rien = !bati && !ventes && !dpe && !urbanisme && !supSection && !oldSection && !proximite
         ? `<div class="popup-fiche-section"><div class="popup-fiche-vide">Aucune information supplémentaire disponible pour cette parcelle.</div></div>` : "";
 
     return `<div class="popup-fiche popup-fiche-parcelle">
         ${construirePopupCadastreEntete({ ...props, commune_nom: infos.adresse ? `${infos.adresse} · ${props.commune_nom}` : props.commune_nom })}
-        ${bati}${ventes}${dpe}${urbanisme}${supSection}${proximite}${rien}
+        ${bati}${ventes}${dpe}${urbanisme}${supSection}${oldSection}${proximite}${rien}
     </div>`;
 }
 
@@ -628,9 +640,10 @@ function ouvrirPopupParcelle(feature, layer) {
        de plus qui ne doit pas retarder l'affichage des infos déjà en
        local (DVF/DPE/PLUi/RGA/bâti) si le service SUP est lent ou
        injoignable - voir fetchSupPourParcelle (recherche.js). */
-    Promise.all([chargerDonneesFoncieres(), fetchSupPourParcelle(feature)]).then(([, sup]) => {
+    Promise.all([chargerDonneesFoncieres(), fetchSupPourParcelle(feature), fetchOldPourParcelle(feature)]).then(([, sup, old]) => {
         const infos = infosParcelle(feature);
         infos.sup = sup;
+        infos.old = old;
         const popup = layer.getPopup();
         if (popup) popup.setContent(injecterItineraire(construirePopupCadastre(feature.properties, infos), feature));
     });
