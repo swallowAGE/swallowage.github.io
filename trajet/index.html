@@ -350,7 +350,7 @@
             <button type="button" data-people="4" aria-pressed="false">4</button>
             <button type="button" data-people="5" aria-pressed="false">5</button>
           </div>
-          <p class="hint">Les frais sont partagés à parts égales, ou chacun prend sa voiture à tour de rôle.</p>
+          <p class="hint">Les frais de carburant sont partagés à parts égales.</p>
         </div>
         <div>
           <label for="bus-price">Abonnement Aléop, par mois (€)</label>
@@ -360,7 +360,7 @@
         <div class="near" id="near-share"></div>
       </div>
       <div class="card">
-        <div class="card-head"><h3>Coût complet, par an</h3><span>par personne</span></div>
+        <div class="card-head"><h3>Carburant, par an</h3><span>par personne</span></div>
         <div id="res-share"></div>
       </div>
     </div>
@@ -582,10 +582,10 @@
     // Effet d'un jour de télétravail de plus par mois
     var more = compute({ dist: scA.dist, daysWeek: scA.daysWeek, weeks: scA.weeks, tele: scA.tele + 1 }, vehicle);
     var saveFuel = Math.max(0, a.fuel - more.fuel);
-    var saveFull = Math.max(0, a.full - more.full);
-    $("tip").hidden = !(a.days > 0 && saveFull > 0);
-    $("tip-text").innerHTML = "Un jour de télétravail de plus par mois économise <strong>" + eur.format(saveFull) +
-      " par an</strong>, dont " + eur.format(saveFuel) + (f.electric ? " d'électricité." : " de carburant.");
+    // Seul le carburant baisse à coup sûr : l'assurance et l'achat de la voiture ne changent pas.
+    $("tip").hidden = !(a.days > 0 && saveFuel > 0);
+    $("tip-text").innerHTML = "Un jour de télétravail de plus par mois économise <strong>" + eur.format(saveFuel) +
+      (f.electric ? " d'électricité" : " de carburant") + " par an</strong>, et un peu d'usure. L'assurance et le prix de la voiture, eux, ne changent pas.";
 
     // Résumés des étapes (affichés quand une étape est repliée)
     $("sum-car").textContent = f.name + " · " + km1.format(vehicle.conso) + " " + f.unit + "/100 · " +
@@ -1000,17 +1000,20 @@
     var bus = val("bus-price");
     var months = Math.min(12, Math.ceil(sc.weeks / 52 * 12));
     var busYear = bus * months / 2;  // l'employeur prend en charge au moins 50 %
-    var max = Math.max(a.full, busYear, 1);
+    // On compare ce que chacun paie pour rouler. L'assurance et l'achat de la voiture
+    // restent dus tant qu'on la garde : ils ne comptent que si l'on peut s'en passer.
+    var max = Math.max(a.fuel, busYear, 1);
     var h = '<div style="display: flex; flex-direction: column; gap: 22px">';
-    h += barRow("Seul en voiture", eur.format(a.full), "dont " + eur.format(a.fuel) + " de carburant", a.full / max * 100, "#8E4458");
-    h += barRow("En covoiturage à " + n, eur.format(a.full / n), "dont " + eur.format(a.fuel / n) + " de carburant, en alternant les voitures", a.full / n / max * 100, "#C9A85C");
+    h += barRow("Seul en voiture", eur.format(a.fuel), "tout le carburant à votre charge", a.fuel / max * 100, "#8E4458");
+    h += barRow("En covoiturage à " + n, eur.format(a.fuel / n), "carburant partagé à " + n, a.fuel / n / max * 100, "#C9A85C");
     h += bus
       ? barRow("En car Aléop", eur.format(busYear), months + " mois à " + eur.format(bus) + ", moitié remboursée par l'employeur", busYear / max * 100, "#5E8C61")
       : barRow("En car Aléop", "–", "Indiquez le prix de l'abonnement pour comparer.", 0, "#5E8C61");
     h += "</div>";
-    if (a.full > 0) {
-      h += '<p class="callout" style="margin-top: 20px">À ' + n + ", chacun économise <strong>" + eur.format(a.full - a.full / n) +
-        " par an</strong>, dont " + eur.format(a.fuel - a.fuel / n) + " de carburant.</p>";
+    if (a.fuel > 0) {
+      h += '<p class="callout" style="margin-top: 20px">À ' + n + ", chacun économise <strong>" + eur.format(a.fuel - a.fuel / n) +
+        " de carburant par an</strong>. L'assurance et le prix de la voiture restent les mêmes : ils ne baissent que si " +
+        "le covoiturage ou le car vous permettent de vous passer d'une voiture (" + eur.format(a.full) + " par an au coût complet).</p>";
     }
     $("res-share").innerHTML = h;
 
@@ -1161,12 +1164,15 @@
         '<div class="v">' + eur.format(r.full / 12) + "<small> / mois</small></div><p>dont " + eur.format(r.fuel / 12) +
         " de " + (vehicle.electric ? "recharge" : "carburant") + "</p></div>";
     };
-    var d = b.full - a.full;
+    // L'écart affiché est celui du carburant : le coût complet compte aussi des frais fixes,
+    // comme l'assurance, qui ne changent pas d'une situation à l'autre.
+    var d = b.fuel - a.fuel;
+    var what = vehicle.electric ? "de recharge" : "de carburant";
     $("res-compare").innerHTML = card("", "// situation A · étapes 02 et 03", scA, a) +
       card("b", "// situation B", scB, b) +
       '<div class="ccard gap"><span class="kicker">// écart B − A</span><div class="v">' + signed(d / 12) +
-      '</div><p class="desc">par mois, soit ' + signed(d) + " par an, dont " + signed(b.fuel - a.fuel) +
-      " de " + (vehicle.electric ? "recharge" : "carburant") + ".</p></div>";
+      '<small> / mois</small></div><p class="desc">' + what + ", soit " + signed(d) + " par an. Plus ou moins d'usure aussi, " +
+      "mais l'assurance et le prix de la voiture ne changent pas.</p></div>";
   }
 
   // ---------- Commandes ----------
