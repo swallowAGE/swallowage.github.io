@@ -1151,3 +1151,97 @@ img { -webkit-user-drag: none; user-select: none; }
 }
 @keyframes lifted { 50% { transform: translateY(-8%) scale(1.04); } }
 .note.capacity { margin: 0 0 8px; }
+
+/* =========================================================
+   MONDE VIVANT : jour et nuit, fumée, scintillements, papillons, lucioles
+   ========================================================= */
+.map { --night: 0; }
+.sparkles, .daylight, .nightfx, .fireflies { position: absolute; inset: 0; pointer-events: none; }
+.sparkles { z-index: 4000; }
+.daylight { z-index: 5000; mix-blend-mode: multiply; opacity: 0; transition: opacity 2s, background-color 2s; }
+.nightfx { z-index: 5001; opacity: var(--night); }
+.fireflies { z-index: 5002; opacity: var(--night); }
+
+/* scintillements sur l'eau */
+.sparkle {
+  position: absolute;
+  width: calc(var(--u) * 9);
+  height: calc(var(--u) * 9);
+  background: #fff;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  transform: translate(-50%, -50%);
+  animation: twinkle-water 3s ease-in-out infinite;
+  opacity: 0;
+}
+@keyframes twinkle-water {
+  0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(.3) rotate(0deg); }
+  50% { opacity: .9; transform: translate(-50%, -50%) scale(1) rotate(35deg); }
+}
+
+/* papillons (le jour) */
+.butterfly {
+  position: absolute;
+  width: calc(var(--u) * 15);
+  opacity: calc(1 - var(--night) * 1.4);
+  animation: flutter1 40s linear infinite;
+}
+.butterfly svg { width: 100%; display: block; animation: flap .3s ease-in-out infinite alternate; filter: drop-shadow(0 2px 2px rgba(0,0,0,.2)); }
+@keyframes flap { from { transform: scaleX(1); } to { transform: scaleX(.45); } }
+@keyframes flutter1 {
+  0% { left: 22%; top: 40%; } 20% { left: 40%; top: 30%; } 45% { left: 62%; top: 48%; }
+  70% { left: 50%; top: 66%; } 100% { left: 22%; top: 40%; }
+}
+@keyframes flutter2 {
+  0% { left: 70%; top: 35%; } 25% { left: 82%; top: 55%; } 50% { left: 66%; top: 72%; }
+  75% { left: 48%; top: 52%; } 100% { left: 70%; top: 35%; }
+}
+@keyframes flutter3 {
+  0% { left: 35%; top: 70%; } 30% { left: 20%; top: 55%; } 60% { left: 38%; top: 38%; }
+  80% { left: 55%; top: 60%; } 100% { left: 35%; top: 70%; }
+}
+
+/* lucioles (la nuit) */
+.fireflies i {
+  position: absolute;
+  width: calc(var(--u) * 5);
+  height: calc(var(--u) * 5);
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFFBD0 0%, #F5F05A 40%, transparent 72%);
+  box-shadow: 0 0 calc(var(--u) * 8) calc(var(--u) * 2) rgba(250, 245, 120, .55);
+  animation: firefly-move 7s ease-in-out infinite alternate, firefly-blink 2.5s ease-in-out infinite;
+}
+@keyframes firefly-move { to { transform: translate(var(--dx), var(--dy)); } }
+@keyframes firefly-blink { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
+
+/* fenêtres allumées */
+.glow {
+  position: absolute;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 205, 120, .8) 0%, rgba(255, 170, 70, .3) 38%, transparent 68%);
+  mix-blend-mode: screen;
+  animation: glow-flicker 4s ease-in-out infinite;
+}
+@keyframes glow-flicker { 0%, 100% { opacity: .85; } 50% { opacity: 1; } 70% { opacity: .75; } }
+
+/* fumée des cheminées */
+.smoke { position: absolute; width: 0; height: 0; pointer-events: none; }
+.smoke i {
+  position: absolute;
+  left: calc(var(--u) * -10);
+  top: calc(var(--u) * -16);
+  width: calc(var(--u) * 20);
+  height: calc(var(--u) * 20);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, .95) 0%, rgba(240, 240, 240, .7) 50%, transparent 72%);
+  opacity: 0;
+  animation: smoke 4.8s ease-out infinite;
+}
+.smoke i:nth-child(2) { animation-delay: 1.6s; }
+.smoke i:nth-child(3) { animation-delay: 3.2s; }
+@keyframes smoke {
+  0% { opacity: 0; transform: translate(0, 0) scale(.4); }
+  15% { opacity: .85; }
+  100% { opacity: 0; transform: translate(calc(var(--u) * 20), calc(var(--u) * -62)) scale(1.7); }
+}

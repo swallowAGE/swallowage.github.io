@@ -91,6 +91,17 @@ function makeChoices(q, mode) {
 /* =========================================================
    CATALOGUE
    ========================================================= */
+// Cheminées qui fument : [x, y] en fraction de l'image (0 à 1)
+const SMOKE = {
+  house: [[0.66, 0.12]],
+  house_with_garden: [[0.70, 0.11]],
+  houses: [[0.41, 0.19], [0.67, 0.20]],
+  school: [[0.66, 0.22]],
+  convenience_store: [[0.66, 0.21]],
+};
+// Bâtiments dont les fenêtres s'allument la nuit
+const LIT = new Set(["house", "hut", "shop", "school", "post", "bank", "hospital", "hotel", "castle", "camping"]);
+
 // Maisons : 3 niveaux, on améliore en touchant la maison
 const HOUSE = [
   // scale : taille sur la carte, pour qu'on voie la maison grandir
@@ -252,7 +263,7 @@ function freshState() {
     decos: [],  // { id, x, y }
     animals: [], // { id }
     avatar: { base: "girl", skin: "default", acc: "none", name: "" },
-    settings: { sound: true, length: 10, input: "choices" },
+    settings: { sound: true, length: 10, input: "choices", daynight: "auto" },
     stats: {},  // mode -> { played, good, total, best, bestOf }
     counters: { correct: 0, perfect: 0, harvest: 0 },
     water: 3, // gouttes d'eau pour arroser les cultures (gagnées en jouant)
@@ -597,6 +608,7 @@ function renderMap(level) {
   layer.querySelectorAll(":scope > :not(.animal)").forEach(el => el.remove());
 
   for (const [key, built] of Object.entries(state.plots)) layer.appendChild(buildingEl(key, built));
+  renderLights();
 
   state.decos.forEach((d, i) => {
     const def = DECOS[d.id];
@@ -633,6 +645,9 @@ function buildingEl(i, built) {
   if (production) {
     const [icon, label] = cropBubble(built);
     html += `<span class="harvest ${icon}"><img src="${IMG(icon)}" alt="${label}"></span>`;
+  }
+  for (const [cx, cy] of SMOKE[def.img] || []) {
+    html += `<span class="smoke" style="left:${cx * 100}%;top:${cy * 100}%"><i></i><i></i><i></i></span>`;
   }
   el.innerHTML = html;
   place(el, built.x, built.y, (production ? SIZE.production : SIZE.building) * (def.scale || 1));
@@ -1059,6 +1074,124 @@ $("placing-cancel").addEventListener("click", e => {
   SOUND.tap();
   renderPlacing();
 });
+
+/* =========================================================
+   MONDE VIVANT : jour et nuit, lucioles, scintillements, papillons
+   ========================================================= */
+// Heure du téléphone (en heures décimales). Pour essayer : ajouter ?heure=21 à l'adresse.
+function currentHour() {
+  const test = parseFloat(new URLSearchParams(location.search).get("heure"));
+  if (!isNaN(test)) return ((test % 24) + 24) % 24;
+  const d = new Date();
+  return d.getHours() + d.getMinutes() / 60;
+}
+
+// Teinte posée sur le monde selon l'heure : [heure, r, g, b, opacité]
+const DAY_TINT = [
+  [0, 40, 50, 120, .74], [5, 50, 60, 130, .70], [6.2, 255, 170, 150, .40], [7.5, 255, 225, 190, .14],
+  [9, 255, 255, 255, 0], [17, 255, 255, 255, 0], [18.3, 255, 222, 160, .20], [19.5, 255, 150, 80, .42],
+  [20.5, 100, 90, 160, .60], [22, 40, 50, 120, .74], [24, 40, 50, 120, .74],
+];
+
+function tintAt(h) {
+  for (let i = 1; i < DAY_TINT.length; i++) {
+    if (h <= DAY_TINT[i][0]) {
+      const a = DAY_TINT[i - 1], b = DAY_TINT[i];
+      const k = (h - a[0]) / (b[0] - a[0]);
+      return a.slice(1).map((v, j) => v + (b[j + 1] - v) * k);
+    }
+  }
+  return DAY_TINT[DAY_TINT.length - 1].slice(1);
+}
+
+// 0 en plein jour, 1 en pleine nuit (pour les lumières et les lucioles)
+function nightLevel(h) {
+  const smooth = t => { t = Math.min(1, Math.max(0, t)); return t * t * (3 - 2 * t); };
+  if (h < 5.5) return 1;
+  if (h < 7.5) return 1 - smooth((h - 5.5) / 2);
+  if (h < 19) return 0;
+  if (h < 21) return smooth((h - 19) / 2);
+  return 1;
+}
+
+function applyDaylight() {
+  const map = $("map");
+  const auto = state.settings.daynight !== "day";
+  const h = currentHour();
+  const [r, g, b, a] = auto ? tintAt(h) : [255, 255, 255, 0];
+  const night = auto ? nightLevel(h) : 0;
+  const veil = $("daylight");
+  veil.style.backgroundColor = `rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`;
+  veil.style.opacity = a.toFixed(3);
+  map.style.setProperty("--night", night.toFixed(3));
+}
+
+// Fenêtres allumées : une lueur chaude sur chaque bâtiment éclairé
+function renderLights() {
+  const box = $("nightfx");
+  box.innerHTML = "";
+  for (const built of Object.values(state.plots)) {
+    if (!LIT.has(built.id)) continue;
+    const def = built.id === "house" ? HOUSE[built.lvl - 1] : BUILDINGS[built.id];
+    const size = SIZE.building * (def.scale || 1);
+    const glow = document.createElement("span");
+    glow.className = "glow";
+    glow.style.left = (built.x / MAP_W) * 100 + "%";
+    glow.style.top = ((built.y - size * 0.34) / MAP_H) * 100 + "%";
+    glow.style.width = ((size * 1.05) / MAP_W) * 100 + "%";
+    glow.style.animationDelay = -Math.random() * 4 + "s";
+    box.appendChild(glow);
+  }
+}
+
+// Éléments qui ne changent pas : scintillements sur l'eau, papillons, lucioles
+function initLiving() {
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const sp = $("sparkles");
+  for (let i = 0, n = 0; n < 16 && i < 400; i++) {
+    const x = rnd(10, 420), y = rnd(10, 450);
+    if (!inWater(x, y)) continue;
+    n++;
+    const el = document.createElement("span");
+    el.className = "sparkle";
+    el.style.left = (x / MAP_W) * 100 + "%";
+    el.style.top = (y / MAP_H) * 100 + "%";
+    el.style.animationDelay = -rnd(0, 3) + "s";
+    el.style.animationDuration = rnd(2, 4) + "s";
+    sp.appendChild(el);
+  }
+  // Papillons dessinés en code (jaune, blanc, bleu) : deux ailes qui battent
+  const wing = c => `<svg viewBox="0 0 40 30"><g fill="${c[0]}" stroke="${c[1]}" stroke-width="1.5" stroke-linejoin="round">
+    <path d="M20 14 C12 -2 0 2 3 12 C5 18 14 18 20 15Z"/><path d="M20 15 C13 16 6 20 9 27 C13 31 19 22 20 16Z"/>
+    <path d="M20 14 C28 -2 40 2 37 12 C35 18 26 18 20 15Z"/><path d="M20 15 C27 16 34 20 31 27 C27 31 21 22 20 16Z"/></g>
+    <ellipse cx="20" cy="15" rx="1.6" ry="7" fill="#5A3A22"/></svg>`;
+  const colors = [["#FFD95A", "#B8860B"], ["#FFFFFF", "#9AA7B8"], ["#8EC8FF", "#3F77AE"]];
+  for (let i = 0; i < 3; i++) {
+    const el = document.createElement("span");
+    el.className = "butterfly";
+    el.style.animationName = "flutter" + (i + 1);
+    el.style.animationDuration = rnd(34, 52) + "s";
+    el.style.animationDelay = -rnd(0, 40) + "s";
+    el.innerHTML = wing(colors[i]);
+    sp.appendChild(el);
+  }
+  const ff = $("fireflies");
+  for (let i = 0, n = 0; n < 22 && i < 400; i++) {
+    const x = rnd(160, 1320), y = rnd(210, 975);
+    if (!onGrass(x, y)) continue;
+    n++;
+    const el = document.createElement("i");
+    el.style.left = (x / MAP_W) * 100 + "%";
+    el.style.top = (y / MAP_H) * 100 + "%";
+    el.style.setProperty("--dx", rnd(-40, 40) + "px");
+    el.style.setProperty("--dy", rnd(-30, 30) + "px");
+    el.style.animationDuration = rnd(5, 9) + "s, " + rnd(1.5, 3.5) + "s";
+    el.style.animationDelay = -rnd(0, 8) + "s, " + -rnd(0, 3) + "s";
+    ff.appendChild(el);
+  }
+  applyDaylight();
+  setInterval(applyDaylight, 60000);
+}
 
 /* =========================================================
    ANIMAUX
@@ -1491,6 +1624,7 @@ function openSettings() {
       wrap.appendChild(row("Plein écran", fs));
     }
     wrap.appendChild(row("Réponses", seg([["choices", "4 boutons"], ["keypad", "Clavier"]], s.input, v => { s.input = v; })));
+    wrap.appendChild(row("Jour et nuit", seg([["auto", "Selon l'heure"], ["day", "Toujours le jour"]], s.daynight, v => { s.daynight = v; applyDaylight(); })));
     wrap.appendChild(row("Questions par partie", seg([[5, "5"], [10, "10"], [15, "15"]], s.length, v => { s.length = v; })));
 
     const rows = Object.entries(MODES).map(([id, m]) => {
@@ -1878,6 +2012,7 @@ document.addEventListener("pointerup", goFullscreen, { once: true });
 
 /* ---------- démarrage ---------- */
 renderAvatars();
+initLiving();
 document.fonts?.ready.then(() => { if (isActive("world")) sizeMap(); });
 
 if ("serviceWorker" in navigator) {

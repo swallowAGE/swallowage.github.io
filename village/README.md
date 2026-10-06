@@ -17,6 +17,10 @@ pour construire, décorer et peupler son petit monde.
 - **Le monde** : une grande prairie illustrée (rivière, pont, cascade, forêt) en plein écran.
   On la fait glisser du doigt et on **zoome** en pinçant à deux doigts (molette sur ordinateur,
   ou boutons ＋ －, jusqu'à 2×).
+- **Un monde vivant** : jour et nuit selon l'heure du téléphone (soleil levant, soirée orangée,
+  nuit bleue avec fenêtres allumées et lucioles), fumée aux cheminées, eau qui scintille,
+  papillons. Réglage « Toujours le jour » dans les paramètres. Pour essayer une heure :
+  ajouter `?heure=21` à l'adresse du jeu.
 - **Construire où l'on veut** : on choisit un bâtiment puis on touche l'herbe (pas dans l'eau,
   pas sur une autre construction). Le nombre de constructions possibles grandit avec le niveau.
 - **Déplacer** (bouton ✋) : on soulève une construction ou une décoration, puis on la repose ailleurs.
