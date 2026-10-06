@@ -131,45 +131,44 @@
 </main>
 
 <!-- ============ QUESTIONS ============ -->
-<main id="screen-quiz" class="screen">
-  <header class="quiz-top">
-    <button class="icon-btn" id="quiz-quit" aria-label="Arrêter">✖</button>
-    <h1 class="banner">Résous l'addition !</h1>
-    <div class="pill"><img src="img/star.png" alt=""><b id="quiz-stars">0</b></div>
-  </header>
+<div id="screen-quiz" class="quiz-overlay">
+  <section class="quiz-card" role="dialog" aria-modal="true" aria-labelledby="quiz-title">
+    <h1 class="banner" id="quiz-title">Résous l'addition !</h1>
+    <button class="close-x" id="quiz-quit" aria-label="Arrêter">✖</button>
+    <div class="quiz-body">
+      <div class="quiz-meta">
+        <div class="pill"><img src="img/star.png" alt="Étoiles"><b id="quiz-stars">0</b></div>
+        <div class="progress"><div id="quiz-progress"></div></div>
+        <button class="help-btn" id="btn-help" aria-label="Aide"><img src="img/light_bulb.png" alt=""></button>
+      </div>
 
-  <div class="board" id="board">
-    <img class="leaf-corner lc1" src="img/herb.png" alt="">
-    <img class="leaf-corner lc2" src="img/seedling.png" alt="">
-    <img class="mascot" id="mascot" src="img/fox.png" alt="">
-    <div class="question" id="question"></div>
-    <div class="feedback" id="feedback"></div>
-    <div class="helper" id="helper" hidden></div>
-  </div>
+      <div class="board" id="board">
+        <img class="leaf-corner lc1" src="img/herb.png" alt="">
+        <img class="leaf-corner lc2" src="img/seedling.png" alt="">
+        <img class="mascot" id="mascot" src="img/fox.png" alt="">
+        <div class="question" id="question"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="helper" id="helper" hidden></div>
+      </div>
 
-  <div class="answers" id="answers"></div>
+      <div class="answers" id="answers"></div>
 
-  <div class="keypad" id="keypad" hidden>
-    <button>1</button><button>2</button><button>3</button>
-    <button>4</button><button>5</button><button>6</button>
-    <button>7</button><button>8</button><button>9</button>
-    <button class="del" data-k="del" aria-label="Effacer">⌫</button>
-    <button>0</button>
-    <button class="ok" data-k="ok" aria-label="Valider">✔</button>
-  </div>
+      <div class="keypad" id="keypad" hidden>
+        <button>1</button><button>2</button><button>3</button>
+        <button>4</button><button>5</button><button>6</button>
+        <button>7</button><button>8</button><button>9</button>
+        <button class="del" data-k="del" aria-label="Effacer">⌫</button>
+        <button>0</button>
+        <button class="ok" data-k="ok" aria-label="Valider">✔</button>
+      </div>
 
-  <div class="quiz-bottom">
-    <div class="quiz-progress">
-      <img src="img/star.png" alt="">
-      <div class="progress"><div id="quiz-progress"></div></div>
-      <button class="help-btn" id="btn-help" aria-label="Aide"><img src="img/light_bulb.png" alt=""></button>
+      <div class="buddy">
+        <span class="avatar" data-avatar="bust"></span>
+        <div class="bubble" id="bubble"></div>
+      </div>
     </div>
-    <div class="buddy">
-      <div class="bubble" id="bubble"></div>
-      <span class="avatar" data-avatar="bust"></span>
-    </div>
-  </div>
-</main>
+  </section>
+</div>
 
 <!-- ============ FENÊTRES ============ -->
 <div class="overlay" id="overlay" hidden>

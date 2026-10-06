@@ -2,14 +2,17 @@
 
 *Les maths construisent de grandes aventures !*
 
-Jeu d'additions pour enfants : chaque bonne réponse rapporte des étoiles ⭐
+Jeu de calcul (additions, soustractions, multiplications) pour enfants : chaque bonne réponse rapporte des étoiles ⭐
 pour construire, décorer et peupler son village.
 
 ## Le jeu
 
-- **Les tables de 1 à 9** (la table de n : n + 0 … n + 9), chacune avec son animal ;
-  chaque calcul de la table passe une fois avant d'en revoir un.
-- **Additions mélangées** : jusqu'à 10 🦊 et jusqu'à 20 🐻.
+- **Trois opérations** (onglets dans « Jouer ») :
+  - ➕ **Additions** : tables de 1 à 9 (table n : n + 0 … n + 9), mélangées jusqu'à 10 🦊 et 20 🐻 ;
+  - ➖ **Soustractions** : tables −1 à −9 (table n : (n + 0 … n + 9) − n), mélangées jusqu'à 10 et 20 ;
+  - ✖️ **Multiplications** : tables ×1 à ×9 (n × 1 … n × 10) et « toutes les tables ».
+  Chaque calcul d'une table passe une fois avant d'en revoir un.
+- Les questions s'affichent dans une **fenêtre compacte** par-dessus le village (pas en plein écran).
   Réponses avec 4 boutons (par défaut) ou au clavier (réglage).
 - **Étoiles** : 1 par bonne réponse du premier coup (2 pour les tables 5 à 9 et « jusqu'à 20 »),
   +2 toutes les 5 bonnes réponses d'affilée, +3 pour un sans-faute.
