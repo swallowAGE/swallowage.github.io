@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mon vrai salaire horaire – Swallow AGE</title>
+<meta name="description" content="Ce que vous gagnez vraiment par heure, une fois compté le temps passé sur la route et ce que le trajet domicile-travail vous coûte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B2230;
+    --soft: #6B5F5A;
+    --paper: #FAF6F0;
+    --raised: #F3ECE2;
+    --field: #FFFDF9;
+    --seg: #E8DED0;
+    --gold: #C9A85C;
+    --gold-ink: #8A6D2B;
+    --gold-hi: #E2C47E;
+    --rose: #8E4458;
+    --mauve: #9C7D8A;
+    --green: #5E8C61;
+    --on-dark: #E5DCD6;
+    --on-dark-soft: #D3C8C2;
+    --rule: rgba(43, 34, 48, 0.12);
+    --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Jost", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 64px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+
+  /* ---------- En-tête ---------- */
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 18px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 12px 0 0; font-size: clamp(32px, 5vw, 46px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+  .lede { margin: 10px 0 0; font-size: 18px; font-weight: 300; color: var(--soft); max-width: 62ch; }
+
+  /* ---------- Réglages ---------- */
+  .main { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; margin-top: 28px; }
+  .settings { flex: 1 1 340px; min-width: 0; background: var(--raised); border-radius: 18px; padding: 4px 24px; }
+  .step { border-bottom: 1px solid var(--rule); }
+  .step:last-child { border-bottom: 0; }
+  .step summary { list-style: none; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 18px 0; cursor: pointer; min-height: 44px; }
+  .step summary::-webkit-details-marker { display: none; }
+  .step summary::after { content: "›"; color: var(--rose); font-size: 20px; line-height: 1; margin-left: auto; transform: rotate(90deg); transition: transform 0.15s; }
+  .step[open] summary::after { transform: rotate(-90deg); }
+  .num { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+  .step-title { font-size: 19px; font-weight: 500; }
+  .step-sum { order: 3; flex-basis: 100%; padding-left: 28px; font-size: 14px; color: var(--soft); }
+  .step[open] .step-sum { display: none; }
+  .step-body { display: flex; flex-direction: column; gap: 14px; padding: 0 0 22px; }
+  label, .lbl { display: block; font-size: 13px; font-weight: 500; color: var(--soft); margin: 0 0 6px; }
+  .fld {
+    width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--field);
+    border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 44px;
+  }
+  .hint { margin: 6px 0 0; font-size: 13px; color: var(--soft); }
+  .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; background: var(--seg); border-radius: 12px; padding: 4px; }
+  .seg button { border: 0; border-radius: 9px; min-height: 40px; padding: 8px 10px; font: inherit; font-size: 15px; font-weight: 500; background: transparent; color: var(--soft); cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--field); color: var(--ink); box-shadow: 0 1px 2px rgba(43, 34, 48, 0.15); }
+  .status { font-size: 13px; color: var(--soft); margin: 0; display: flex; align-items: center; gap: 6px; min-height: 1.2em; }
+  .status.live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }
+  .stepper-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .stepper-row label { margin: 0; font-size: 15px; font-weight: 400; color: var(--ink); }
+  .stepper { display: flex; align-items: center; background: var(--field); border-radius: 10px; padding: 2px; flex: none; }
+  .stepper button { width: 44px; height: 44px; border: 0; background: transparent; font: inherit; font-size: 22px; line-height: 1; color: var(--rose); cursor: pointer; border-radius: 8px; }
+  .stepper button:hover { background: var(--raised); }
+  .stepper input { width: 46px; border: 0; background: transparent; text-align: center; font: inherit; font-size: 16px; font-weight: 600; color: var(--ink); -moz-appearance: textfield; }
+  .stepper input::-webkit-inner-spin-button, .stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .from-trip { display: flex; gap: 12px; align-items: center; text-decoration: none; color: var(--ink); background: var(--field); border: 1px dashed var(--gold); border-radius: 12px; padding: 12px 14px; }
+  .from-trip:hover { color: var(--ink); border-style: solid; }
+  .from-trip svg { flex: none; }
+  .from-trip small { display: block; font-size: 14px; color: var(--soft); }
+  details.more summary { cursor: pointer; color: var(--rose); min-height: 44px; display: flex; align-items: center; font-size: 15px; }
+  details.more[open] summary { margin-bottom: 8px; }
+
+  /* ---------- Résultat ---------- */
+  .result { flex: 999 1 520px; min-width: 0; background: var(--ink); color: var(--paper); border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+  @media (min-width: 900px) { .result { position: sticky; top: 16px; } }
+  .result .kicker { color: var(--gold); }
+  .big { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .big strong { font-size: clamp(56px, 9vw, 96px); line-height: 1; font-weight: 500; color: var(--gold-hi); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .big span { font-size: 20px; font-weight: 300; }
+  .sub { margin: 12px 0 0; font-size: 17px; font-weight: 300; color: var(--on-dark); }
+  .sub strong { font-weight: 600; color: var(--paper); }
+  .bars { display: flex; flex-direction: column; gap: 12px; }
+  .bar { display: flex; flex-direction: column; gap: 6px; }
+  .bar .top { display: flex; justify-content: space-between; font-size: 14px; color: var(--on-dark); }
+  .bar .track { height: 12px; border-radius: 999px; background: rgba(250, 246, 240, 0.14); overflow: hidden; }
+  .bar .track div { height: 100%; border-radius: 999px; }
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .stat { background: rgba(250, 246, 240, 0.06); border-radius: 12px; padding: 14px 16px; }
+  .stat b { display: block; font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13px; color: var(--on-dark-soft); }
+  .tip { border-top: 1px dashed rgba(250, 246, 240, 0.25); padding-top: 18px; display: flex; gap: 14px; align-items: flex-start; margin: 0; font-size: 16px; font-weight: 300; }
+  .tip strong { color: var(--gold-hi); font-weight: 600; }
+  .tip svg { flex: none; margin-top: 2px; }
+
+  /* ---------- Et si… ---------- */
+  .ifs { margin-top: 56px; }
+  .ifs > h2 { margin: 6px 0 20px; font-size: 30px; font-weight: 500; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card { background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .card h3 { margin: 0; font-size: 16px; font-weight: 500; }
+  .card .v { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .card .v b { font-size: 36px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .card .v span { font-size: 15px; font-weight: 600; color: var(--rose); }
+  .card p { margin: 0; font-size: 14px; color: var(--soft); }
+
+  /* ---------- Pied de page ---------- */
+  .notes { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 6px 0 0; }
+
+  /* ---------- Téléphone ---------- */
+  .mobilebar { display: none; }
+  @media (max-width: 800px) {
+    .wrap { padding: 0 16px 96px; }
+    .result { order: -1; padding: 22px; gap: 18px; }
+    .settings { padding: 0 18px; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stat { padding: 10px 12px; }
+    .stat b { font-size: 18px; }
+    .stat span { font-size: 12px; }
+    .ifs > h2 { font-size: 24px; }
+    .mobilebar {
+      display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+      background: var(--ink); color: var(--paper); padding: 12px 16px;
+      justify-content: space-between; align-items: center; transition: transform 0.2s;
+    }
+    .mobilebar.off { transform: translateY(110%); }
+    .mobilebar span { font-size: 14px; color: var(--on-dark); }
+    .mobilebar strong { font-size: 22px; font-weight: 500; color: var(--gold-hi); }
+  }
+  @media (max-width: 420px) {
+    .row3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .row3 > :last-child { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../">← swallow·AGE</a>
+    <span class="kicker">// outil · salaire</span>
+  </div>
+  <header>
+    <h1>Mon vrai salaire horaire</h1>
+    <p class="lede">Ce que vous gagnez vraiment par heure, une fois compté le temps passé sur la route et ce que le trajet vous coûte.</p>
+  </header>
+
+  <div class="main">
+    <form id="form" class="settings" autocomplete="off" onsubmit="return false" aria-label="Réglages">
+
+      <details class="step" open>
+        <summary><span class="num">01</span><span class="step-title">Mon salaire</span><span class="step-sum" id="sum-pay"></span></summary>
+        <div class="step-body">
+          <div class="row2">
+            <div>
+              <label for="net">Net par mois (€)</label>
+              <input id="net" class="fld" type="number" inputmode="decimal" min="0" step="any" value="2000">
+            </div>
+            <div>
+              <span class="lbl" id="months-label">Mois par an</span>
+              <input type="hidden" id="months" value="12">
+              <div class="seg" role="group" aria-labelledby="months-label">
+                <button type="button" data-months="12" aria-pressed="true">12</button>
+                <button type="button" data-months="13" aria-pressed="false">13</button>
+              </div>
+            </div>
+          </div>
+          <p class="hint" style="margin-top: -6px">Le net avant impôt, en bas de votre fiche de paie.</p>
+          <div class="stepper-row">
+            <label for="hours">Heures par semaine</label>
+            <div class="stepper"><button type="button" data-for="hours" data-step="-1" aria-label="Une heure de moins">−</button><input id="hours" type="number" inputmode="numeric" min="1" max="70" step="1" value="35"><button type="button" data-for="hours" data-step="1" aria-label="Une heure de plus">+</button></div>
+          </div>
+          <div class="stepper-row">
+            <label for="weeks">Semaines travaillées par an</label>
+            <div class="stepper"><button type="button" data-for="weeks" data-step="-1" aria-label="Une semaine de moins">−</button><input id="weeks" type="number" inputmode="numeric" min="1" max="52" step="1" value="45"><button type="button" data-for="weeks" data-step="1" aria-label="Une semaine de plus">+</button></div>
+          </div>
+          <p class="hint">52 semaines, moins 5 semaines de congés payés et environ 8 jours fériés en semaine : 45 semaines.</p>
+        </div>
+      </details>
+
+      <details class="step" open>
+        <summary><span class="num">02</span><span class="step-title">Mon trajet</span><span class="step-sum" id="sum-trip"></span></summary>
+        <div class="step-body">
+          <a class="from-trip" id="from-trip" href="../trajet/">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8E4458" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h12"></path><path d="M12 6l6 6-6 6"></path><path d="M20 4v16"></path></svg>
+            <span id="from-trip-text"><strong>Calculer mon trajet d'abord</strong><small>avec « Combien coûte mon trajet ? », puis revenir ici</small></span>
+          </a>
+          <div class="row2">
+            <div>
+              <label for="km">Km par aller</label>
+              <input id="km" class="fld" type="number" inputmode="decimal" min="0" step="any" value="15">
+            </div>
+            <div>
+              <label for="min">Minutes par aller</label>
+              <input id="min" class="fld" type="number" inputmode="numeric" min="0" step="1" value="20">
+            </div>
+          </div>
+          <div class="stepper-row">
+            <label for="days">Jours sur site par semaine</label>
+            <div class="stepper"><button type="button" data-for="days" data-step="-1" aria-label="Un jour de moins">−</button><input id="days" type="number" inputmode="numeric" min="0" max="7" step="1" value="5"><button type="button" data-for="days" data-step="1" aria-label="Un jour de plus">+</button></div>
+          </div>
+          <div class="stepper-row">
+            <label for="tele">Télétravail, jours par mois</label>
+            <div class="stepper"><button type="button" data-for="tele" data-step="-1" aria-label="Un jour de moins">−</button><input id="tele" type="number" inputmode="numeric" min="0" max="23" step="1" value="0"><button type="button" data-for="tele" data-step="1" aria-label="Un jour de plus">+</button></div>
+          </div>
+          <div>
+            <span class="lbl" id="mode-label">Ce que coûte le trajet</span>
+            <input type="hidden" id="mode" value="fuel">
+            <div class="seg" role="group" aria-labelledby="mode-label">
+              <button type="button" data-mode="fuel" aria-pressed="true">Carburant seul</button>
+              <button type="button" data-mode="full" aria-pressed="false">Coût complet</button>
+            </div>
+            <p class="hint" id="mode-hint"></p>
+          </div>
+          <details class="more">
+            <summary>Ma voiture</summary>
+            <div class="step-body" style="padding: 0">
+              <input type="hidden" id="fuel" value="e10">
+              <div class="seg" role="group" aria-label="Énergie">
+                <button type="button" data-fuel="e10" aria-pressed="true">Essence</button>
+                <button type="button" data-fuel="gazole" aria-pressed="false">Gazole</button>
+                <button type="button" data-fuel="elec" aria-pressed="false">Électrique</button>
+              </div>
+              <div class="row3">
+                <div>
+                  <label for="conso" id="conso-label">L/100&nbsp;km</label>
+                  <input id="conso" class="fld" type="number" inputmode="decimal" min="0" step="any" value="6">
+                </div>
+                <div>
+                  <label for="cv">Puissance</label>
+                  <select id="cv" class="fld">
+                    <option value="3">3 CV ou -</option>
+                    <option value="4">4 CV</option>
+                    <option value="5" selected>5 CV</option>
+                    <option value="6">6 CV</option>
+                    <option value="7">7 CV ou +</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="price" id="price-label">€ le litre</label>
+                  <input id="price" class="fld" type="number" inputmode="decimal" min="0" step="any" value="2.03">
+                </div>
+              </div>
+              <p id="price-status" class="status" role="status"></p>
+            </div>
+          </details>
+        </div>
+      </details>
+
+      <details class="step">
+        <summary><span class="num">03</span><span class="step-title">Autres frais</span><span class="step-sum" id="sum-other">facultatif</span></summary>
+        <div class="step-body">
+          <div>
+            <label for="other">Frais liés au travail, par mois (€)</label>
+            <input id="other" class="fld" type="number" inputmode="decimal" min="0" step="any" placeholder="Repas, garde d'enfant…">
+          </div>
+          <div>
+            <label for="refund">Remboursés par l'employeur, par mois (€)</label>
+            <input id="refund" class="fld" type="number" inputmode="decimal" min="0" step="any" placeholder="Forfait mobilités, prime transport…">
+          </div>
+          <p class="hint">Ne comptez que ce que vous ne paieriez pas sans ce travail.</p>
+        </div>
+      </details>
+    </form>
+
+    <section class="result" id="result" aria-label="Résultat" aria-live="polite">
+      <span class="kicker">// votre vrai salaire horaire</span>
+      <div>
+        <div class="big"><strong id="real">–</strong><span>de l'heure</span></div>
+        <p class="sub">au lieu de <strong id="paper">–</strong> sur le papier, soit <strong id="loss">–</strong>.</p>
+      </div>
+      <div class="bars" aria-hidden="true">
+        <div class="bar"><div class="top"><span>Sur le papier</span><span id="bar-paper-v"></span></div><div class="track"><div style="width: 100%; background: var(--mauve)"></div></div></div>
+        <div class="bar"><div class="top"><span>En vrai, trajet compris</span><span id="bar-real-v"></span></div><div class="track"><div id="bar-real" style="background: var(--gold-hi)"></div></div></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="st-road">–</b><span id="st-road-l">sur la route par an</span></div>
+        <div class="stat"><b id="st-cost">–</b><span id="st-cost-l">de trajet par an</span></div>
+        <div class="stat"><b id="st-day">–</b><span>de trajet par jour sur site</span></div>
+      </div>
+      <p class="tip" id="tip" hidden>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2C47E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        <span id="tip-text"></span>
+      </p>
+    </section>
+  </div>
+
+  <section class="ifs" aria-labelledby="ifs-title">
+    <span class="kicker">// et si…</span>
+    <h2 id="ifs-title">Ce qui ferait remonter votre salaire horaire</h2>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <footer class="notes">
+    <div>
+      <span class="kicker">// méthode</span>
+      <p>Salaire net de l'année, moins le coût du trajet et les autres frais, divisé par les heures de travail plus les heures passées sur la route (aller et retour).</p>
+    </div>
+    <div>
+      <span class="kicker">// le coût du trajet</span>
+      <p><strong>Carburant seul</strong> : ce que vous payez à la pompe. <strong>Coût complet</strong> : barème kilométrique fiscal 2026 (amortissement, entretien, pneus, assurance), à retenir si la voiture ne vous sert que pour le travail. Les pistes « et si… » ne comptent que le carburant économisé : l'assurance et l'achat de la voiture ne changent pas.</p>
+    </div>
+    <div>
+      <span class="kicker">// vie privée</span>
+      <p>Rien n'est enregistré : le calcul se fait sur votre appareil. Seul le prix du jour en Sarthe est demandé au site data.economie.gouv.fr, sans rien transmettre de vous.</p>
+    </div>
+  </footer>
+</div>
+
+<div class="mobilebar off" id="mobilebar" aria-hidden="true">
+  <span>Mon vrai salaire</span>
+  <span><strong id="mb-total">–</strong> <span>/ heure</span></span>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Barème kilométrique fiscal 2026 (revenus 2025), le même que « Combien coûte mon trajet ? ».
+  var BAREME = {
+    3: [0.529, 0.316, 1065, 0.370],
+    4: [0.606, 0.340, 1330, 0.407],
+    5: [0.636, 0.357, 1395, 0.427],
+    6: [0.665, 0.374, 1457, 0.447],
+    7: [0.697, 0.394, 1515, 0.470]
+  };
+
+  var FUELS = {
+    e10:    { conso: 6,   price: 2.03, unit: "L",   electric: false, name: "Essence" },
+    gazole: { conso: 5.5, price: 2.21, unit: "L",   electric: false, name: "Gazole" },
+    elec:   { conso: 17,  price: 0.25, unit: "kWh", electric: true,  name: "Électrique" }
+  };
+
+  var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
+    "septembre", "octobre", "novembre", "décembre"];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var all = function (sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); };
+  var eur = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+  var eur2 = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var num = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+  var dec1 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
+
+  function val(id) {
+    var v = parseFloat(String($(id).value).replace(",", "."));
+    return isFinite(v) && v > 0 ? v : 0;
+  }
+
+  function bareme(km, cv, electric) {
+    var p = BAREME[cv];
+    var cost;
+    if (km <= 5000) cost = km * p[0];
+    else if (km <= 20000) cost = km * p[1] + p[2];
+    else cost = km * p[3];
+    return electric ? cost * 1.2 : cost;
+  }
+
+  function read() {
+    var f = FUELS[$("fuel").value];
+    return {
+      net: val("net") * val("months"), hours: val("hours"), weeks: val("weeks"),
+      km: val("km"), min: val("min"), days: val("days"), tele: val("tele"),
+      mode: $("mode").value, cv: $("cv").value, electric: f.electric,
+      conso: val("conso"), price: val("price"),
+      other: val("other") * 12, refund: val("refund") * 12
+    };
+  }
+
+  // fuelShare : part du carburant payée (1 seul, 0,5 en covoiturage à deux).
+  function compute(o, fuelShare) {
+    var work = o.hours * o.weeks;
+    var daysYear = Math.max(0, o.days * o.weeks - o.tele * 12);
+    var kmYear = 2 * o.km * daysYear;
+    var road = 2 * o.min / 60 * daysYear;
+    var fuel = kmYear / 100 * o.conso * o.price;
+    var trip = o.mode === "full" ? bareme(kmYear, o.cv, o.electric) : fuel;
+    trip -= fuel * (1 - (fuelShare || 1));
+    var costs = trip + o.other - o.refund;
+    return {
+      work: work, road: road, daysYear: daysYear, trip: trip, fuel: fuel, costs: costs,
+      paper: work ? o.net / work : 0,
+      real: work + road ? (o.net - costs) / (work + road) : 0
+    };
+  }
+
+  // Une piste « et si » : seul le carburant économisé baisse le coût, pas l'assurance ni l'achat.
+  function variant(o, base, change, fuelShare) {
+    var x = Object.assign({}, o, change);
+    var r = compute(x, fuelShare);
+    var saved = base.fuel - r.fuel * (fuelShare || 1);
+    var costs = base.costs - saved;
+    return (o.net - costs) / (r.work + r.road);
+  }
+
+  function render() {
+    var o = read();
+    var r = compute(o);
+    $("real").textContent = eur2.format(r.real);
+    $("paper").textContent = eur2.format(r.paper);
+    $("mb-total").textContent = eur2.format(r.real);
+    var drop = r.paper > 0 ? Math.round((1 - r.real / r.paper) * 100) : 0;
+    $("loss").textContent = (drop > 0 ? "−" : "+") + Math.abs(drop) + " %";
+    $("bar-paper-v").textContent = eur2.format(r.paper);
+    $("bar-real-v").textContent = eur2.format(r.real);
+    $("bar-real").style.width = Math.max(0, Math.min(100, r.paper > 0 ? r.real / r.paper * 100 : 0)).toFixed(1) + "%";
+
+    $("st-road").textContent = num.format(r.road) + " h";
+    $("st-road-l").textContent = "sur la route par an, soit " + dec1.format(o.hours ? r.road / o.hours : 0) + " semaines de travail";
+    $("st-cost").textContent = eur.format(r.trip);
+    $("st-cost-l").textContent = "de trajet par an, soit " + dec1.format(o.net ? r.trip / (o.net / 12) : 0) + " mois de salaire";
+    $("st-day").textContent = r.daysYear ? eur2.format(r.trip / r.daysYear) : "–";
+
+    // Jusqu'à quelle date de l'année on travaille pour payer le trajet et les frais.
+    var share = o.net > 0 ? r.costs / o.net : 0;
+    $("tip").hidden = !(share > 0 && share < 1);
+    if (share > 0 && share < 1) {
+      var d = new Date(new Date().getFullYear(), 0, 1 + Math.round(share * 365));
+      $("tip-text").innerHTML = "Chaque année, vous travaillez <strong>jusqu'au " + d.getDate() + (d.getDate() === 1 ? "er" : "") + " " +
+        MOIS[d.getMonth()] + "</strong> rien que pour payer votre trajet" + (o.other ? " et vos frais" : "") + ".";
+    }
+
+    $("mode-hint").textContent = o.mode === "full"
+      ? "Barème fiscal : à retenir si la voiture ne vous sert que pour le travail."
+      : "Ce que vous payez à la pompe (ou à la prise).";
+
+    // Pistes « et si… »
+    var cards = [];
+    var add = function (title, value, note) {
+      var gain = value - r.real;
+      cards.push('<div class="card"><h3>' + title + '</h3><div class="v"><b>' + eur2.format(value) + "</b><span>" +
+        (gain >= 0 ? "+" : "−") + eur2.format(Math.abs(gain)) + "</span></div><p>" + note + "</p></div>");
+    };
+    if (o.days > 1) add("Un jour de télétravail par semaine en plus", variant(o, r, { days: o.days - 1 }), "Une journée de route en moins chaque semaine.");
+    if (o.km) add("Covoiturer à deux", variant(o, r, {}, 0.5), "Carburant partagé, même temps de trajet.");
+    if (o.km) add("Un emploi deux fois plus près", variant(o, r, { km: o.km / 2, min: o.min / 2 }),
+      "Même salaire, " + dec1.format(o.km / 2) + " km et " + num.format(o.min / 2) + " minutes par trajet.");
+    $("cards").innerHTML = cards.join("");
+
+    // Résumés des étapes repliées
+    $("sum-pay").textContent = num.format(val("net")) + " € net · " + val("months") + " mois · " + num.format(o.hours) + " h/sem";
+    $("sum-trip").textContent = dec1.format(o.km) + " km · " + num.format(o.min) + " min · " + num.format(o.days) + " j/sem · " +
+      (o.mode === "full" ? "coût complet" : "carburant");
+    $("sum-other").textContent = o.other || o.refund
+      ? eur.format((o.other - o.refund) / 12) + " par mois" : "facultatif";
+  }
+
+  // ---------- Énergie et prix du jour ----------
+  var sarthe = null;
+  var priceSource = "defaut"; // "defaut", "sarthe", "trajet" ou "manuel"
+
+  function showPrice() {
+    var key = $("fuel").value;
+    var live = sarthe && sarthe[key];
+    if (priceSource === "trajet" || priceSource === "manuel") return updatePriceStatus();
+    if (live) {
+      $("price").value = (Math.round(live * 100) / 100).toString();
+      priceSource = "sarthe";
+    } else {
+      $("price").value = FUELS[key].price;
+      priceSource = "defaut";
+    }
+    updatePriceStatus();
+  }
+
+  function updatePriceStatus() {
+    var status = $("price-status");
+    status.classList.toggle("live", priceSource === "sarthe");
+    status.textContent = {
+      sarthe: "Prix moyen du jour en Sarthe",
+      trajet: "Prix repris de votre calcul de trajet.",
+      manuel: "Prix saisi à la main."
+    }[priceSource] || ($("fuel").value === "elec" ? "Prix par défaut : ajustez selon votre contrat d'électricité."
+      : sarthe === null ? "Prix par défaut, en attendant le prix du jour en Sarthe…" : "Prix par défaut, à ajuster si besoin.");
+  }
+
+  function setFuel(key, keepValues) {
+    $("fuel").value = key;
+    all("[data-fuel]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.fuel === key)); });
+    var f = FUELS[key];
+    $("conso-label").textContent = f.unit + "/100 km";
+    $("price-label").textContent = f.electric ? "€ le kWh" : "€ le litre";
+    if (!keepValues) {
+      $("conso").value = f.conso;
+      if (priceSource === "trajet") priceSource = "defaut";
+      showPrice();
+    }
+    render();
+  }
+
+  function loadPrice() {
+    var url = "https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/records" +
+      "?select=" + encodeURIComponent("avg(e10_prix) as e10, avg(gazole_prix) as gazole") +
+      "&where=" + encodeURIComponent('code_departement="72"') + "&limit=1";
+    fetch(url)
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (j) {
+        var r0 = j && j.results && j.results[0];
+        var e10 = r0 ? parseFloat(r0.e10) : NaN;
+        var gazole = r0 ? parseFloat(r0.gazole) : NaN;
+        if (!(e10 > 0) && !(gazole > 0)) throw new Error("vide");
+        sarthe = { e10: e10 > 0 ? e10 : 0, gazole: gazole > 0 ? gazole : 0 };
+      })
+      .catch(function () { sarthe = {}; })
+      .then(function () { showPrice(); render(); });
+  }
+
+  // ---------- Trajet repris de « Combien coûte mon trajet ? » (paramètres de l'adresse) ----------
+  function fromTrip() {
+    var q = new URLSearchParams(location.search);
+    if (!q.has("km")) return false;
+    var set = function (id, key) {
+      var v = parseFloat(q.get(key));
+      if (isFinite(v) && v >= 0) $(id).value = v;
+    };
+    if (FUELS[q.get("energie")]) setFuel(q.get("energie"), true);
+    set("km", "km"); set("min", "min"); set("days", "jours"); set("weeks", "semaines"); set("tele", "tele");
+    set("conso", "conso"); set("price", "prix");
+    if (BAREME[q.get("cv")]) $("cv").value = q.get("cv");
+    if (q.has("prix")) priceSource = "trajet";
+    $("from-trip-text").innerHTML = "<strong>Trajet repris de votre calcul</strong><small>" +
+      (q.has("min") ? "" : "Indiquez la durée d'un aller ci-dessous. ") + "Modifier mon trajet</small>";
+    $("from-trip").href = "../trajet/";
+    if (!q.has("min")) $("min").focus();
+    return true;
+  }
+
+  // ---------- Commandes ----------
+  function pickGroup(attr, id) {
+    all("[data-" + attr + "]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        $(id).value = b.dataset[attr];
+        all("[data-" + attr + "]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        render();
+      });
+    });
+  }
+  pickGroup("months", "months");
+  pickGroup("mode", "mode");
+  all("[data-fuel]").forEach(function (b) {
+    b.addEventListener("click", function () { if ($("fuel").value !== b.dataset.fuel) setFuel(b.dataset.fuel); });
+  });
+  all(".stepper button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var input = $(b.dataset.for);
+      var v = (parseFloat(input.value) || 0) + parseFloat(b.dataset.step);
+      input.value = Math.max(+input.min, Math.min(+input.max, v));
+      render();
+    });
+  });
+
+  if (window.matchMedia("(max-width: 800px)").matches) {
+    all("details.step").forEach(function (d) { d.open = false; });
+  }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      $("mobilebar").classList.toggle("off", entries[0].isIntersecting);
+    }).observe($("result"));
+  }
+
+  document.addEventListener("input", function (e) {
+    if (e.target.id === "price") { priceSource = "manuel"; updatePriceStatus(); }
+    render();
+  });
+  document.addEventListener("change", render);
+
+  var trip = fromTrip();
+  if (!trip) setFuel("e10");
+  else { updatePriceStatus(); render(); }
+  loadPrice();
+})();
+</script>
+</body>
+</html>
