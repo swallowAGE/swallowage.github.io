@@ -36,52 +36,95 @@ const TABLE_LOOK = [
   { img: "cow",         c: "#8C9BAB", dark: "#5E6D7D" },
   { img: "horse",       c: "#A77B5A", dark: "#774E30" },
 ];
+// Les trois opérations : addition, soustraction, multiplication
+const OPS = {
+  add: { sym: "+", plural: "additions",       title: "Résous l'addition !",       tab: "➕ Additions",
+         tables: "Les tables d'addition",       mixed: "Les additions mélangées",      prefix: "t", mix: ["s10", "s20"] },
+  sub: { sym: "−", plural: "soustractions",    title: "Résous la soustraction !",  tab: "➖ Soustractions",
+         tables: "Les tables de soustraction",  mixed: "Les soustractions mélangées",  prefix: "m", mix: ["ms10", "ms20"] },
+  mul: { sym: "×", plural: "multiplications",  title: "Résous la multiplication !", tab: "✖️ Multiplications",
+         tables: "Les tables de multiplication", mixed: "Toutes les tables mélangées", prefix: "x", mix: ["xmix"] },
+};
+
 const MODES = {};
 for (let n = 1; n <= 9; n++) {
-  MODES["t" + n] = {
-    table: n,
-    label: `Table de ${n}`,
-    big: `+${n}`,
-    example: `${n} + 4`,
-    reward: n <= 4 ? 1 : 2, // les grandes tables rapportent plus
-    max: n + 11,
-    ...TABLE_LOOK[n],
-  };
+  const reward = n <= 4 ? 1 : 2; // les grandes tables rapportent plus
+  // Table d'addition : n + 0 … n + 9
+  MODES["t" + n] = { op: "add", table: n, label: `Table de ${n}`, big: `+${n}`, example: `${n} + 4`, reward, max: n + 11, ...TABLE_LOOK[n] };
+  // Table de soustraction : (n + 0) − n … (n + 9) − n, on enlève toujours n
+  MODES["m" + n] = { op: "sub", table: n, label: `Moins ${n}`, big: `−${n}`, example: `${n + 4} − ${n}`, reward, max: n + 11, ...TABLE_LOOK[n] };
+  // Table de multiplication : n × 1 … n × 10
+  MODES["x" + n] = { op: "mul", table: n, label: `Table de ${n}`, big: `×${n}`, example: `${n} × 4`, reward, max: n * 10, ...TABLE_LOOK[n] };
 }
 Object.assign(MODES, {
-  s10: { label: "Jusqu'à 10", big: "≤10", example: "4 + 3", img: "fox",  reward: 1, max: 10, c: "#F0924A", dark: "#C4651F" },
-  s20: { label: "Jusqu'à 20", big: "≤20", example: "9 + 7", img: "bear", reward: 2, max: 20, c: "#6FA8DC", dark: "#3F77AE" },
+  s10:  { op: "add", label: "Jusqu'à 10", big: "≤10", example: "4 + 3",  img: "fox",   reward: 1, max: 10, c: "#F0924A", dark: "#C4651F" },
+  s20:  { op: "add", label: "Jusqu'à 20", big: "≤20", example: "9 + 7",  img: "bear",  reward: 2, max: 20, c: "#6FA8DC", dark: "#3F77AE" },
+  ms10: { op: "sub", label: "Jusqu'à 10", big: "≤10", example: "9 − 4",  img: "llama", reward: 1, max: 10, c: "#3FA9A0", dark: "#2A7F78" },
+  ms20: { op: "sub", label: "Jusqu'à 20", big: "≤20", example: "15 − 8", img: "swan",  reward: 2, max: 20, c: "#E0707A", dark: "#B24A55" },
+  xmix: { op: "mul", label: "Toutes les tables", big: "×?", example: "7 × 8", img: "goat", reward: 2, max: 81, c: "#9B6BD8", dark: "#6F45A8" },
 });
 
 function makeQuestion(mode, deck) {
+  const m = MODES[mode], n = m.table;
   let a, b;
-  const n = MODES[mode].table;
+  if (m.op === "add") {
+    if (n) {
+      // On pioche dans un paquet mélangé : chaque calcul de la table
+      // passe une fois avant qu'on en revoie un
+      if (!deck.length) deck.push(...shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
+      a = n;
+      b = deck.pop();
+    } else if (mode === "s10") {
+      a = rand(1, 9);
+      b = rand(1, 10 - a);
+    } else {
+      // Jusqu'à 20 : on favorise les résultats au-dessus de 10
+      const sum = Math.random() < 0.75 ? rand(11, 20) : rand(5, 10);
+      a = rand(Math.max(1, sum - 10), Math.min(sum - 1, 10));
+      b = sum - a;
+      if (Math.random() < 0.5) [a, b] = [b, a];
+    }
+    return { a, b, op: "add", result: a + b };
+  }
+  if (m.op === "sub") {
+    if (n) {
+      // (n + 0) − n … (n + 9) − n : le résultat va de 0 à 9
+      if (!deck.length) deck.push(...shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => n + i)));
+      a = deck.pop();
+      b = n;
+    } else if (mode === "ms10") {
+      a = rand(2, 10);
+      b = rand(1, a);
+    } else if (Math.random() < 0.75) {
+      // Jusqu'à 20 : on traverse souvent la dizaine (15 − 8)
+      a = rand(11, 18);
+      b = rand(a - 9, 9);
+    } else {
+      a = rand(11, 20);
+      b = rand(1, 9);
+    }
+    return { a, b, op: "sub", result: a - b };
+  }
   if (n) {
-    // On pioche dans un paquet mélangé de 0 à 9 : chaque calcul
-    // de la table passe une fois avant qu'on en revoie un
-    if (!deck.length) deck.push(...shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
+    if (!deck.length) deck.push(...shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
     a = n;
     b = deck.pop();
-  } else if (mode === "s10") {
-    a = rand(1, 9);
-    b = rand(1, 10 - a);
   } else {
-    // Jusqu'à 20 : on favorise les résultats au-dessus de 10
-    const sum = Math.random() < 0.75 ? rand(11, 20) : rand(5, 10);
-    a = rand(Math.max(1, sum - 10), Math.min(sum - 1, 10));
-    b = sum - a;
-    if (Math.random() < 0.5) [a, b] = [b, a];
+    a = rand(2, 9);
+    b = rand(2, 9);
   }
-  return { a, b, result: a + b };
+  return { a, b, op: "mul", result: a * b };
 }
 
 // Trois mauvaises réponses plausibles (proches de la bonne)
 function makeChoices(q, mode) {
   const max = MODES[mode].max;
   const set = new Set([q.result]);
-  for (const d of shuffle([-1, 1, -2, 2, 3, -3])) {
+  // Multiplication : les voisins dans la table (r ± a) sont les pièges classiques
+  const near = q.op === "mul" ? [q.a, -q.a, 1, -1, 2, -2, 10, -10] : [-1, 1, -2, 2, 3, -3];
+  for (const d of shuffle(near)) {
     const v = q.result + d;
-    if (v >= 0 && v <= max) set.add(v);
+    if (v >= 0 && v <= max + 3) set.add(v);
     if (set.size === 4) break;
   }
   while (set.size < 4) set.add(rand(0, max));
@@ -318,6 +361,7 @@ let state = load();
    OUTILS D'INTERFACE
    ========================================================= */
 function show(name) {
+  $("screen-quiz").classList.remove("active");
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   $("screen-" + name).classList.add("active");
   if (name === "world") renderWorld();
@@ -1215,14 +1259,20 @@ function ensureVillagers() {
 }
 
 /* ---------- commandes : un habitant demande quelque chose, on gagne des étoiles ---------- */
-const mathsLabel = id => MODES[id].table ? `de la table de ${MODES[id].table}` : MODES[id].label.toLowerCase();
+function mathsLabel(id) {
+  const m = MODES[id];
+  if (m.op === "sub" && m.table) return `qui enlèvent ${m.table}`;
+  if (m.table) return `de la table de ${m.table}`;
+  if (id === "xmix") return "avec toutes les tables";
+  return m.label.toLowerCase();
+}
 
 function orderText(o) {
   switch (o.kind) {
     case "build":  return { line: `Construis : ${BUILDINGS[o.key].name}`, icon: BUILDINGS[o.key].img };
     case "animal": return { line: `Adopte : ${ANIMALS[o.key].name}`, icon: ANIMALS[o.key].img };
     case "deco":   return { line: `Pose ${o.goal} décorations dans le village`, icon: "cherry_blossom" };
-    default:       return { line: `Réussis ${o.goal} additions ${mathsLabel(o.key)}`, icon: "books" };
+    default:       return { line: `Réussis ${o.goal} ${OPS[MODES[o.key].op].plural} ${mathsLabel(o.key)}`, icon: "books" };
   }
 }
 
@@ -1644,6 +1694,7 @@ function openAnimals() {
 /* =========================================================
    PROGRESSION (quêtes)
    ========================================================= */
+const playedTables = op => Object.keys(state.stats).filter(id => MODES[id]?.op === op && MODES[id].table).length;
 const QUESTS = [
   { id: "add10",    text: "Réussir 10 additions",          goal: 10, value: () => state.counters.correct, reward: 5,  img: "check_mark_button" },
   { id: "house",    text: "Construire une maison",         goal: 1,  value: () => countBuilt("house"),   reward: 3,  img: "house" },
@@ -1653,7 +1704,10 @@ const QUESTS = [
   { id: "upgrade",  text: "Améliorer une maison au niveau 2", goal: 1, value: () => maxHouseLevel() >= 2 ? 1 : 0, reward: 5, img: "house_with_garden" },
   { id: "perfect",  text: "Faire un sans-faute",           goal: 1,  value: () => state.counters.perfect, reward: 5, img: "trophy" },
   { id: "modes",    text: "Essayer 4 jeux différents",     goal: 4,  value: () => Object.keys(state.stats).length, reward: 8, img: "books" },
-  { id: "tables",   text: "Jouer aux 9 tables",            goal: 9,  value: () => Object.keys(state.stats).filter(id => MODES[id]?.table).length, reward: 15, img: "trophy" },
+  { id: "tables",   text: "Jouer aux 9 tables d'addition",  goal: 9,  value: () => playedTables("add"), reward: 15, img: "trophy" },
+  { id: "tables-s", text: "Jouer aux 9 tables de soustraction", goal: 9, value: () => playedTables("sub"), reward: 15, img: "trophy" },
+  { id: "tables-m", text: "Jouer aux 9 tables de multiplication", goal: 9, value: () => playedTables("mul"), reward: 20, img: "trophy" },
+  { id: "ops",      text: "Essayer addition, soustraction et multiplication", goal: 3, value: () => new Set(Object.keys(state.stats).map(id => MODES[id]?.op).filter(Boolean)).size, reward: 10, img: "books" },
   { id: "add50",    text: "Réussir 50 additions",          goal: 50, value: () => state.counters.correct, reward: 10, img: "glowing_star" },
   { id: "animals3", text: "Avoir 3 animaux",               goal: 3,  value: () => state.animals.length,  reward: 8,  img: "cow" },
   { id: "level3",   text: "Atteindre le niveau 3",         goal: 3,  value: () => currentLevel(),        reward: 8,  img: "chart_increasing" },
@@ -1853,14 +1907,25 @@ function openSettings() {
     wrap.appendChild(row("Jour et nuit", seg([["auto", "Selon l'heure"], ["day", "Toujours le jour"]], s.daynight, v => { s.daynight = v; applyDaylight(); })));
     wrap.appendChild(row("Questions par partie", seg([[5, "5"], [10, "10"], [15, "15"]], s.length, v => { s.length = v; })));
 
-    const rows = Object.entries(MODES).map(([id, m]) => {
-      const st = state.stats[id];
-      const pct = st ? Math.round(100 * st.good / st.total) + " %" : "—";
-      return `<tr><td>${m.label}</td><td>${st ? st.played + " partie" + (st.played > 1 ? "s" : "") : ""}</td><td>${pct}</td></tr>`;
+    const pct = (good, total) => total ? Math.round(100 * good / total) + " %" : "—";
+    const rows = Object.entries(OPS).map(([op, d]) => {
+      let played = 0, good = 0, total = 0;
+      for (const [id, m] of Object.entries(MODES)) {
+        const st = m.op === op && state.stats[id];
+        if (st) { played += st.played; good += st.good; total += st.total; }
+      }
+      return `<tr><td>${d.tab}</td><td>${played ? played + " partie" + (played > 1 ? "s" : "") : ""}</td><td>${pct(good, total)}</td></tr>`;
     }).join("");
+    // Les jeux les moins bien réussis (au moins une partie, moins de 80 %)
+    const weak = Object.entries(state.stats)
+      .filter(([id, st]) => MODES[id] && st.total && st.good / st.total < 0.8)
+      .sort((x, y) => x[1].good / x[1].total - y[1].good / y[1].total)
+      .slice(0, 3)
+      .map(([id, st]) => `${OPS[MODES[id].op].sym} ${MODES[id].label} (${pct(st.good, st.total)})`);
     wrap.insertAdjacentHTML("beforeend",
       `<div><b>Espace parents</b> <small>(réussite du premier coup)</small><table class="stats">${rows}
-        <tr><td>Additions réussies</td><td></td><td>${state.counters.correct}</td></tr></table></div>`);
+        <tr><td>Calculs réussis</td><td></td><td>${state.counters.correct}</td></tr>
+        ${weak.length ? `<tr><td colspan="3">À revoir : ${weak.join(", ")}</td></tr>` : ""}</table></div>`);
 
     const reset = document.createElement("button");
     reset.className = "btn btn-red btn-sm";
@@ -1894,34 +1959,39 @@ function openSettings() {
 /* =========================================================
    CHOIX DU JEU
    ========================================================= */
+let modeOp = "add";
+
 function openModes() {
   openModal("Choisis ton jeu", body => {
+    const op = OPS[modeOp];
     const best = id => {
       const st = state.stats[id];
       return st ? `<span class="best">🏆 ${st.best}/${st.bestOf}</span>` : "";
     };
     const go = id => () => { SOUND.tap(); closeModal(); startQuiz(id); };
 
-    body.insertAdjacentHTML("beforeend", `<h3 class="modes-title">Les tables d'addition</h3>`);
+    body.appendChild(tabsEl(Object.entries(OPS).map(([id, d]) => ({ id, label: d.tab })), modeOp, id => { modeOp = id; openModes(); }));
+
+    body.insertAdjacentHTML("beforeend", `<h3 class="modes-title">${op.tables}</h3>`);
     const tables = document.createElement("div");
     tables.className = "tables";
     for (let n = 1; n <= 9; n++) {
-      const id = "t" + n, m = MODES[id];
+      const id = op.prefix + n, m = MODES[id];
       const el = document.createElement("button");
       el.className = "table-btn";
       el.style.cssText = `--c:${m.c};--c-dark:${m.dark}`;
-      el.setAttribute("aria-label", m.label);
-      el.innerHTML = `<img src="${IMG(m.img)}" alt=""><span class="big">+${n}</span>
+      el.setAttribute("aria-label", `${op.plural} : ${m.label}`);
+      el.innerHTML = `<img src="${IMG(m.img)}" alt=""><span class="big">${m.big}</span>
         <span class="reward">+${m.reward} ⭐</span>${best(id)}`;
       el.addEventListener("click", go(id));
       tables.appendChild(el);
     }
     body.appendChild(tables);
 
-    body.insertAdjacentHTML("beforeend", `<h3 class="modes-title">Les additions mélangées</h3>`);
+    body.insertAdjacentHTML("beforeend", `<h3 class="modes-title">${op.mixed}</h3>`);
     const grid = document.createElement("div");
-    grid.className = "modes";
-    for (const id of ["s10", "s20"]) {
+    grid.className = "modes" + (op.mix.length === 1 ? " single" : "");
+    for (const id of op.mix) {
       const m = MODES[id];
       const el = document.createElement("button");
       el.className = "mode";
@@ -1961,12 +2031,23 @@ function startQuiz(mode) {
     busy: false,
   };
   $("mascot").src = IMG(MODES[mode].img);
+  $("quiz-title").textContent = OPS[MODES[mode].op].title;
+  modeOp = MODES[mode].op; // le sélecteur de jeux rouvrira sur la même opération
   const keypad = state.settings.input === "keypad";
   $("keypad").hidden = !keypad;
   $("answers").hidden = keypad;
   renderAvatars();
-  show("quiz");
+  // Une fenêtre par-dessus le village, pas un écran entier
+  if (!isActive("world")) show("world");
+  $("screen-quiz").classList.add("active");
   nextQuestion();
+}
+
+// Referme la fenêtre de calcul et revient au village
+function endQuiz() {
+  quiz = null;
+  $("screen-quiz").classList.remove("active");
+  if (isActive("world")) renderWorld(); else show("world");
 }
 
 function nextQuestion() {
@@ -2002,9 +2083,9 @@ function nextQuestion() {
 }
 
 function renderQuestion(shown) {
-  const { a, b } = quiz.q;
+  const { a, b, op } = quiz.q;
   const value = shown ?? (quiz.input || "?");
-  $("question").innerHTML = `${a} + ${b} = <span class="answer">${value}</span>`;
+  $("question").innerHTML = `${a} ${OPS[op].sym} ${b} = <span class="answer">${value}</span>`;
 }
 
 function say(text) {
@@ -2016,11 +2097,19 @@ function say(text) {
 }
 
 function showHelper() {
-  const { a, b } = quiz.q;
-  const group = (n, cls) =>
-    `<div class="group ${cls}" style="--n:${Math.min(Math.max(n, 1), 5)}">${"<i></i>".repeat(n)}</div>`;
+  const { a, b, op } = quiz.q;
+  const dots = (n, cls = "", cols = 5) =>
+    `<div class="group ${cls}" style="--n:${cols}">${"<i></i>".repeat(n)}</div>`;
   const h = $("helper");
-  h.innerHTML = `${group(a, "a")}<span class="plus">+</span>${group(b, "b")}`;
+  if (op === "add") {
+    h.innerHTML = `${dots(a, "a", Math.min(Math.max(a, 1), 5))}<span class="plus">+</span>${dots(b, "b", Math.min(Math.max(b, 1), 5))}`;
+  } else if (op === "sub") {
+    // a points, dont b en pointillés : ceux qu'on enlève
+    h.innerHTML = `<div class="group sub" style="--n:${Math.min(a, 10)}">${"<i></i>".repeat(a - b)}${"<i class='gone'></i>".repeat(b)}</div>`;
+  } else {
+    // a lignes de b points
+    h.innerHTML = dots(a * b, "mul", b);
+  }
   h.hidden = false;
   $("btn-help").disabled = true;
 }
@@ -2148,8 +2237,8 @@ function finishQuiz() {
         <button class="btn btn-cream" id="btn-build">🏡 Construire mon monde</button>
       </div>`;
   });
-  // Fermer la fenêtre de résultat ramène au monde, sauf si on rejoue
-  onModalClose = () => show("world");
+  // Fermer la fenêtre de résultat ramène au village, sauf si on rejoue
+  onModalClose = () => endQuiz();
   $("btn-again").addEventListener("click", () => { onModalClose = null; closeModal(); startQuiz(mode); });
   $("btn-build").addEventListener("click", () => closeModal());
 }
@@ -2194,8 +2283,7 @@ $("quiz-quit").addEventListener("click", async () => {
     });
     if (!ok) return;
   }
-  quiz = null;
-  show("world");
+  endQuiz();
 });
 
 /* =========================================================

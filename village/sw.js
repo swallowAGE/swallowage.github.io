@@ -5,7 +5,7 @@
    images sont mises en cache dès l'installation. La sauvegarde
    du monde est dans localStorage, elle n'est jamais touchée ici.
    ========================================================= */
-const CACHE = "petit-monde-v11";
+const CACHE = "petit-monde-v12";
 const FILES = [
   "./", "index.html", "style.css", "personnage.js", "app.js", "manifest.json", "icons/icon-192.png",
   "img/baby_chick.png", "img/bank.png", "img/bear.png", "img/blossom.png",
