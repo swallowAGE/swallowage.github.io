@@ -4,402 +4,473 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Combien coûte mon trajet ? – Swallow AGE</title>
-<meta name="description" content="Calculez le coût réel de votre trajet domicile-travail : carburant seul et coût complet au barème fiscal, télétravail compris. Comparez deux situations.">
+<meta name="description" content="Calculez le coût réel de votre trajet domicile-travail : carburant au prix du jour et coût complet au barème fiscal, télétravail, covoiturage, car Aléop et passage à l'électrique.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #3B2233;
-    --mist: #F4EEF0;
-    --paper: #FFFFFF;
-    --rose: #B5677A;
-    --rose-deep: #94495D;
+    --ink: #2B2230;
+    --soft: #6B5F5A;
+    --paper: #FAF6F0;
+    --raised: #F3ECE2;
+    --field: #FFFDF9;
+    --seg: #E8DED0;
     --gold: #C9A85C;
-    --taupe: #6E5F58;
-    --line: #D9CCD0;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --gold-ink: #8A6D2B;
+    --gold-hi: #E2C47E;
+    --rose: #8E4458;
+    --mauve: #9C7D8A;
+    --green: #5E8C61;
+    --on-dark: #E5DCD6;
+    --on-dark-soft: #D3C8C2;
+    --rule: rgba(43, 34, 48, 0.12);
+    --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
   }
   * { box-sizing: border-box; }
-  html { font-size: 17px; }
+  [hidden] { display: none !important; }
   body {
     margin: 0;
-    background: var(--mist);
-    color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.5;
-  }
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
-  header { display: flex; align-items: center; gap: 1.1rem; margin-bottom: 1.75rem; }
-  header svg { flex: none; }
-  h1 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(1.7rem, 4.5vw, 2.5rem);
-    line-height: 1.1;
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
-  .lede { margin: 0.35rem 0 0; color: var(--taupe); max-width: 46ch; }
-  .grid { display: grid; gap: 1.5rem; }
-  @media (min-width: 900px) {
-    .grid { grid-template-columns: 1fr 1.1fr; align-items: start; }
-    .results-col { position: sticky; top: 1rem; }
-  }
-  fieldset {
-    border: 1px solid var(--line);
     background: var(--paper);
-    border-radius: 6px;
-    padding: 1rem 1.1rem 1.15rem;
-    margin: 0 0 1.1rem;
-  }
-  legend {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 0 0.4rem;
-  }
-  .field { margin-top: 0.85rem; }
-  .field:first-of-type { margin-top: 0.4rem; }
-  label { display: block; font-size: 0.93rem; margin-bottom: 0.25rem; }
-  .hint { color: var(--taupe); font-size: 0.85rem; margin: 0.2rem 0 0; }
-  input[type="number"], input[type="text"], select {
-    width: 100%;
-    font: inherit;
     color: var(--ink);
-    background: var(--paper);
-    border: 1px solid #A99AA0;
-    border-radius: 4px;
-    padding: 0.5rem 0.6rem;
+    font-family: "Jost", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
   }
-  input:focus-visible, select:focus-visible, button:focus-visible {
-    outline: 3px solid var(--rose-deep);
-    outline-offset: 2px;
-  }
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 0.8rem; align-items: end; }
-  .check { display: flex; gap: 0.6rem; align-items: center; margin: 0 0 1.1rem; }
-  .check input { width: 1.15rem; height: 1.15rem; accent-color: var(--rose-deep); }
-  .check label { margin: 0; font-size: 1rem; }
-  button.price {
-    font: inherit;
-    font-size: 0.9rem;
-    background: var(--rose-deep);
-    color: #fff;
-    border: 0;
-    border-radius: 4px;
-    padding: 0.5rem 0.8rem;
-    cursor: pointer;
-    margin-top: 0.5rem;
-  }
-  button.price:hover { background: var(--ink); }
-  #price-status { font-size: 0.85rem; color: var(--taupe); margin: 0.35rem 0 0; min-height: 1.2em; }
-  .scenario-b[hidden], #catalogue[hidden], [hidden] { display: none !important; }
-  details.route { margin-top: 0.85rem; border-top: 1px dotted #B9AAB0; padding-top: 0.6rem; }
-  details.route summary { cursor: pointer; color: var(--rose-deep); font-size: 0.93rem; }
-  .status { font-size: 0.85rem; color: var(--taupe); margin: 0.35rem 0 0; min-height: 1.2em; }
-  .extra { margin-top: 2.25rem; }
-  .extra > h2 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(1.35rem, 3.5vw, 1.8rem);
-    margin: 0 0 0.3rem;
-  }
-  .extra > .lede { margin: 0 0 1.1rem; }
-  .places { margin: 0.9rem 0 0; padding: 0; list-style: none; font-size: 0.93rem; }
-  .places li { margin: 0 0 0.45rem; padding-left: 1.1rem; position: relative; }
-  .places li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--gold); }
-  a { color: var(--rose-deep); }
-  select:disabled { color: var(--taupe); background: var(--mist); }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 64px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
 
-  .receipt {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-top: 4px solid var(--gold);
-    border-radius: 0 0 6px 6px;
-    padding: 1.2rem 1.2rem 1rem;
+  /* ---------- En-tête ---------- */
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 18px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 12px 0 0; font-size: clamp(32px, 5vw, 46px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+  .lede { margin: 10px 0 0; font-size: 18px; font-weight: 300; color: var(--soft); max-width: 60ch; }
+
+  /* ---------- Réglages ---------- */
+  .main { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; margin-top: 28px; }
+  .settings { flex: 1 1 340px; min-width: 0; background: var(--raised); border-radius: 18px; padding: 4px 24px; }
+  .step { border-bottom: 1px solid var(--rule); }
+  .step:last-child { border-bottom: 0; }
+  .step summary { list-style: none; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 18px 0; cursor: pointer; min-height: 44px; }
+  .step summary::-webkit-details-marker { display: none; }
+  .step summary::after { content: "›"; color: var(--rose); font-size: 20px; line-height: 1; margin-left: auto; transform: rotate(90deg); transition: transform 0.15s; }
+  .step[open] summary::after { transform: rotate(-90deg); }
+  .num { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+  .step-title { font-size: 19px; font-weight: 500; }
+  .step-sum { order: 3; flex-basis: 100%; padding-left: 28px; font-size: 14px; color: var(--soft); }
+  .step[open] .step-sum { display: none; }
+  .step-body { display: flex; flex-direction: column; gap: 14px; padding: 0 0 22px; }
+  label, .lbl { display: block; font-size: 13px; font-weight: 500; color: var(--soft); margin: 0 0 6px; }
+  .fld {
+    width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--field);
+    border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 44px;
   }
-  .receipt h2 { font-family: var(--serif); font-size: 1.25rem; margin: 0 0 0.6rem; font-weight: 600; }
-  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-  th, td { padding: 0.5rem 0; border-bottom: 1px dotted #B9AAB0; vertical-align: baseline; }
-  thead th { font-weight: 600; font-size: 0.88rem; text-align: right; border-bottom: 1px solid var(--ink); padding-bottom: 0.4rem; }
-  thead th:first-child { text-align: left; }
-  tbody th { font-weight: 400; text-align: left; padding-right: 0.8rem; }
-  td { text-align: right; white-space: nowrap; padding-left: 0.5rem; }
-  tr.total th, tr.total td { font-weight: 700; border-bottom: 1px solid var(--ink); }
-  tr.total td { font-size: 1.15rem; }
-  .gap { color: var(--rose-deep); }
-  .insight { margin: 1rem 0 0; font-size: 0.95rem; }
-  .note { font-size: 0.85rem; color: var(--taupe); margin: 0.9rem 0 0; }
-  footer { margin-top: 2rem; font-size: 0.85rem; color: var(--taupe); max-width: 70ch; }
-  footer p { margin: 0 0 0.6rem; }
-  @media (max-width: 520px) {
-    .row2 { grid-template-columns: 1fr; }
-    td { white-space: normal; }
+  .hint { margin: 6px 0 0; font-size: 13px; color: var(--soft); }
+  .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; background: var(--seg); border-radius: 12px; padding: 4px; }
+  .seg button { border: 0; border-radius: 9px; min-height: 40px; padding: 8px 10px; font: inherit; font-size: 15px; font-weight: 500; background: transparent; color: var(--soft); cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--field); color: var(--ink); box-shadow: 0 1px 2px rgba(43, 34, 48, 0.15); }
+  .search-list { list-style: none; margin: 6px 0 0; padding: 4px; background: var(--field); border: 1px solid var(--line); border-radius: 10px; max-height: 320px; overflow: auto; }
+  .search-list button { display: block; width: 100%; text-align: left; border: 0; background: transparent; font: inherit; font-size: 15px; color: var(--ink); padding: 9px 10px; border-radius: 8px; cursor: pointer; }
+  .search-list button:hover, .search-list button:focus-visible { background: var(--raised); }
+  .search-list small { display: block; font-size: 13px; color: var(--soft); }
+  .status { font-size: 13px; color: var(--soft); margin: 0; display: flex; align-items: center; gap: 6px; min-height: 1.2em; }
+  .status.live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex: none; }
+  .link-btn { border: 0; background: none; padding: 0; font: inherit; font-size: 14px; color: var(--rose); text-decoration: underline; cursor: pointer; min-height: 32px; align-self: flex-start; }
+  .btn { border: 0; border-radius: 10px; background: var(--ink); color: var(--paper); font: inherit; font-weight: 500; padding: 10px 16px; min-height: 44px; cursor: pointer; align-self: flex-start; }
+  .btn:hover { background: var(--rose); }
+  .dist-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--field); border-radius: 10px; padding: 6px 12px; }
+  .dist-row label { margin: 0; font-size: 15px; font-weight: 400; color: var(--ink); }
+  .dist-row input { width: 90px; font: inherit; font-size: 16px; font-weight: 600; color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px; min-height: 40px; background: var(--paper); }
+  .stepper-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .stepper-row label { margin: 0; font-size: 15px; font-weight: 400; color: var(--ink); }
+  .stepper { display: flex; align-items: center; background: var(--field); border-radius: 10px; padding: 2px; flex: none; }
+  .stepper button { width: 44px; height: 44px; border: 0; background: transparent; font: inherit; font-size: 22px; line-height: 1; color: var(--rose); cursor: pointer; border-radius: 8px; }
+  .stepper button:hover { background: var(--raised); }
+  .stepper input { width: 46px; border: 0; background: transparent; text-align: center; font: inherit; font-size: 16px; font-weight: 600; color: var(--ink); -moz-appearance: textfield; }
+  .stepper input::-webkit-inner-spin-button, .stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+  /* ---------- Résultat ---------- */
+  .result { flex: 999 1 520px; min-width: 0; background: var(--ink); color: var(--paper); border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+  @media (min-width: 900px) { .result { position: sticky; top: 16px; } }
+  .result .kicker { color: var(--gold); }
+  .res-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .pill { display: flex; gap: 4px; background: rgba(250, 246, 240, 0.08); border-radius: 999px; padding: 4px; }
+  .pill button { border: 0; border-radius: 999px; min-height: 36px; padding: 6px 14px; font: inherit; font-size: 15px; font-weight: 500; background: transparent; color: var(--on-dark); cursor: pointer; }
+  .pill button[aria-pressed="true"] { background: var(--gold-hi); color: var(--ink); }
+  .big { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .big strong { font-size: clamp(56px, 9vw, 96px); line-height: 1; font-weight: 500; color: var(--gold-hi); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .big span { font-size: 20px; font-weight: 300; }
+  .sub { margin: 12px 0 0; font-size: 17px; font-weight: 300; color: var(--on-dark); }
+  .sub strong { font-weight: 600; color: var(--paper); }
+  .split { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: rgba(250, 246, 240, 0.14); }
+  .split .fuel { background: var(--gold); }
+  .split .rest { background: var(--mauve); flex: 1; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; color: var(--on-dark); margin-top: 10px; }
+  .legend span { display: flex; align-items: center; gap: 8px; }
+  .legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .stat { background: rgba(250, 246, 240, 0.06); border-radius: 12px; padding: 14px 16px; }
+  .stat b { display: block; font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13px; color: var(--on-dark-soft); }
+  .tip { border-top: 1px dashed rgba(250, 246, 240, 0.25); padding-top: 18px; display: flex; gap: 14px; align-items: flex-start; margin: 0; font-size: 16px; font-weight: 300; }
+  .tip strong { color: var(--gold-hi); font-weight: 600; }
+  .tip svg { flex: none; margin-top: 2px; }
+
+  /* ---------- Explorer ---------- */
+  .explore { margin-top: 56px; }
+  .explore > h2 { margin: 6px 0 0; font-size: 30px; font-weight: 500; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid var(--rule); margin: 20px 0 24px; }
+  .tabs button { border: 0; background: transparent; min-height: 48px; padding: 10px 16px; font: inherit; font-size: 16px; color: var(--soft); border-bottom: 3px solid transparent; margin-bottom: -1px; cursor: pointer; }
+  .tabs button[aria-selected="true"] { color: var(--ink); font-weight: 600; border-bottom-color: var(--gold); }
+  .panel { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
+  .panel-side { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 18px; }
+  .card { flex: 999 1 480px; min-width: 0; background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 20px; }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+  .card h3 { margin: 0; font-size: 20px; font-weight: 500; }
+  .card-head span { font-size: 14px; color: var(--soft); }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chips button { width: 52px; height: 48px; border-radius: 12px; font: inherit; font-size: 17px; font-weight: 600; background: var(--field); color: var(--ink); border: 1px solid var(--line); cursor: pointer; }
+  .chips button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .near { background: var(--raised); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+  .near p { margin: 0; display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
+  .near svg { flex: none; margin-top: 2px; }
+  .barrow { display: flex; flex-direction: column; gap: 8px; }
+  .barrow .top { display: flex; justify-content: space-between; gap: 12px; }
+  .barrow .top span { font-weight: 500; }
+  .barrow .top b { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .track { height: 12px; border-radius: 999px; background: #F0E8DC; overflow: hidden; }
+  .track div { height: 100%; border-radius: 999px; min-width: 4px; }
+  .barrow small { font-size: 13px; color: var(--soft); }
+  .callout { margin: 0; padding: 14px 16px; background: var(--raised); border-radius: 12px; font-size: 15px; }
+  .keys { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .keys b { display: block; font-size: 34px; line-height: 1.2; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .keys b.good { color: var(--rose); }
+  .keys span { font-size: 14px; color: var(--soft); }
+  figure { margin: 0; }
+  .chart-legend { display: flex; gap: 8px 20px; flex-wrap: wrap; font-size: 14px; margin-top: 8px; }
+  .chart-legend span { display: flex; align-items: center; gap: 8px; }
+  .chart-legend i { width: 18px; height: 3px; display: inline-block; }
+  details.more summary { cursor: pointer; color: var(--rose); min-height: 44px; display: flex; align-items: center; font-size: 15px; }
+  details.more[open] summary { margin-bottom: 8px; }
+  details.more .row2 + .row2 { margin-top: 10px; }
+  .ccards { flex: 999 1 480px; min-width: 0; display: flex; flex-wrap: wrap; gap: 16px; }
+  .ccard { flex: 1 1 220px; background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .ccard.b { border: 2px solid var(--gold); }
+  .ccard.gap { background: var(--ink); color: var(--paper); justify-content: center; }
+  .ccard.gap .kicker { color: var(--gold); }
+  .ccard .v { font-size: 40px; line-height: 1.15; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .ccard .v small { font-size: 16px; font-weight: 300; }
+  .ccard.gap .v { color: var(--gold-hi); }
+  .ccard p { margin: 0; font-size: 15px; }
+  .ccard .desc { color: var(--soft); }
+  .ccard.gap .desc { color: var(--on-dark); }
+
+  /* ---------- Pied de page ---------- */
+  .notes { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 6px 0 0; }
+
+  /* ---------- Téléphone ---------- */
+  .mobilebar { display: none; }
+  @media (max-width: 800px) {
+    .wrap { padding: 0 16px 96px; }
+    .result { order: -1; padding: 22px; gap: 18px; }
+    .settings { padding: 0 18px; }
+    .stat { padding: 10px 12px; }
+    .stat b { font-size: 18px; }
+    .stat span { font-size: 12px; }
+    .card { padding: 20px; }
+    .explore > h2 { font-size: 24px; }
+    .mobilebar {
+      display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+      background: var(--ink); color: var(--paper); padding: 12px 16px;
+      justify-content: space-between; align-items: center; transition: transform 0.2s;
+    }
+    .mobilebar.off { transform: translateY(110%); }
+    .mobilebar span { font-size: 14px; color: var(--on-dark); }
+    .mobilebar strong { font-size: 22px; font-weight: 500; color: var(--gold-hi); }
+  }
+  @media (max-width: 420px) {
+    .row3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .row3 > :last-child { grid-column: 1 / -1; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="topbar">
+    <a href="../">← swallow·AGE</a>
+    <span class="kicker">// outil · trajet domicile-travail</span>
+  </div>
   <header>
-    <svg width="52" height="32" viewBox="0 0 52 32" role="img" aria-label="Soleil levant sur une ligne d'horizon">
-      <path d="M8 26a18 18 0 0 1 36 0z" fill="#C9A85C"/>
-      <rect x="0" y="26" width="52" height="2.5" fill="#3B2233"/>
-    </svg>
-    <div>
-      <h1>Combien coûte mon trajet&nbsp;?</h1>
-      <p class="lede">Le coût du carburant seul, et le coût complet de la voiture, jour de télétravail compris.</p>
-    </div>
+    <h1>Combien coûte mon trajet&nbsp;?</h1>
+    <p class="lede">Le carburant à la pompe, et ce que la voiture vous coûte vraiment. Télétravail, covoiturage et électrique compris.</p>
   </header>
 
-  <div class="grid">
-    <form id="form" autocomplete="off" onsubmit="return false">
-      <fieldset>
-        <legend>Mon véhicule</legend>
-        <div id="catalogue" hidden>
-          <div class="row2">
-            <div class="field">
-              <label for="marque">Marque</label>
-              <select id="marque">
-                <option value="">Saisie manuelle</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="modele">Modèle</label>
-              <select id="modele" disabled>
-                <option value="">Choisissez une marque</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="version">Version</label>
-            <select id="version" disabled>
-              <option value="">Choisissez un modèle</option>
-            </select>
-            <p class="hint" id="catalogue-hint">Les champs ci-dessous se remplissent seuls et restent modifiables.</p>
-          </div>
-        </div>
-        <div class="row2">
-          <div class="field">
-            <label for="cv">Puissance fiscale</label>
-            <select id="cv">
-              <option value="3">3 CV et moins</option>
-              <option value="4">4 CV</option>
-              <option value="5" selected>5 CV</option>
-              <option value="6">6 CV</option>
-              <option value="7">7 CV et plus</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="fuel">Énergie</label>
-            <select id="fuel">
-              <option value="e10" selected>Essence (E10)</option>
-              <option value="gazole">Gazole</option>
-              <option value="elec">Électrique</option>
-            </select>
-          </div>
-        </div>
-        <div class="row2">
-          <div class="field">
-            <label for="conso" id="conso-label">Consommation (L/100&nbsp;km)</label>
-            <input id="conso" type="number" inputmode="decimal" min="0" step="any" value="6">
-          </div>
-          <div class="field">
-            <label for="price" id="price-label">Prix (€/L)</label>
-            <input id="price" type="number" inputmode="decimal" min="0" step="any" value="2.03">
-          </div>
-        </div>
-        <button type="button" class="price" id="btn-price" hidden>Réessayer</button>
-        <p id="price-status" role="status"></p>
-      </fieldset>
+  <div class="main">
+    <form id="form" class="settings" autocomplete="off" onsubmit="return false" aria-label="Réglages">
 
-      <fieldset>
-        <legend>Ma situation</legend>
-        <div class="field">
-          <label for="dist-a">Distance domicile-travail, un aller (km)</label>
-          <input id="dist-a" type="number" inputmode="decimal" min="0" step="any" value="15">
-        <details class="route" id="route-a">
-          <summary>Calculer la distance depuis mes adresses</summary>
-          <div class="field">
+      <details class="step" open>
+        <summary><span class="num">01</span><span class="step-title">Ma voiture</span><span class="step-sum" id="sum-car"></span></summary>
+        <div class="step-body">
+          <div id="catalogue" hidden>
+            <label for="search">Rechercher mon modèle</label>
+            <input id="search" class="fld" type="search" placeholder="Ex. Peugeot 208, Clio, Yaris…" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-list">
+            <ul id="search-list" class="search-list" role="listbox" aria-label="Modèles trouvés" hidden></ul>
+            <p class="hint" id="catalogue-hint">Ou remplissez à la main ci-dessous.</p>
+          </div>
+          <input type="hidden" id="fuel" value="e10">
+          <div class="seg" role="group" aria-label="Énergie">
+            <button type="button" data-fuel="e10" aria-pressed="true">Essence</button>
+            <button type="button" data-fuel="gazole" aria-pressed="false">Gazole</button>
+            <button type="button" data-fuel="elec" aria-pressed="false">Électrique</button>
+          </div>
+          <div class="row3">
+            <div>
+              <label for="conso" id="conso-label">L/100&nbsp;km</label>
+              <input id="conso" class="fld" type="number" inputmode="decimal" min="0" step="any" value="6">
+            </div>
+            <div>
+              <label for="cv">Puissance</label>
+              <select id="cv" class="fld">
+                <option value="3">3 CV ou -</option>
+                <option value="4">4 CV</option>
+                <option value="5" selected>5 CV</option>
+                <option value="6">6 CV</option>
+                <option value="7">7 CV ou +</option>
+              </select>
+            </div>
+            <div>
+              <label for="price" id="price-label">€ le litre</label>
+              <input id="price" class="fld" type="number" inputmode="decimal" min="0" step="any" value="2.03">
+            </div>
+          </div>
+          <p id="price-status" class="status" role="status"></p>
+          <button type="button" class="link-btn" id="btn-price" hidden>Réessayer</button>
+        </div>
+      </details>
+
+      <details class="step" open>
+        <summary><span class="num">02</span><span class="step-title">Mon trajet</span><span class="step-sum" id="sum-trip"></span></summary>
+        <div class="step-body">
+          <div>
             <label for="from-a">Départ (adresse ou commune)</label>
-            <input id="from-a" class="place" type="text" autocomplete="off" placeholder="Ex. Montval-sur-Loir">
+            <input id="from-a" class="fld place" type="text" placeholder="Ex. Montval-sur-Loir">
           </div>
-          <div class="field">
+          <div>
             <label for="to-a">Arrivée (adresse ou commune)</label>
-            <input id="to-a" class="place" type="text" autocomplete="off" placeholder="Ex. Le Mans">
+            <input id="to-a" class="fld place" type="text" placeholder="Ex. Le Mans">
           </div>
-          <button type="button" class="price" id="go-a">Calculer la distance par la route</button>
-          <p class="status" id="route-status-a" role="status"></p>
-        </details>
+          <button type="button" class="btn" id="go-a">Calculer la distance</button>
+          <div class="dist-row">
+            <label for="dist-a">Distance d'un aller</label>
+            <input id="dist-a" type="number" inputmode="decimal" min="0" step="any" value="15">
+            <span>km</span>
+          </div>
+          <p class="status" id="route-status-a" role="status">Ou saisissez la distance à la main.</p>
         </div>
-        <div class="row2">
-          <div class="field">
+      </details>
+
+      <details class="step" open>
+        <summary><span class="num">03</span><span class="step-title">Mon rythme</span><span class="step-sum" id="sum-rhythm"></span></summary>
+        <div class="step-body">
+          <div class="stepper-row">
             <label for="days-a">Jours travaillés par semaine</label>
-            <input id="days-a" type="number" inputmode="numeric" min="0" max="7" step="1" value="5">
+            <div class="stepper"><button type="button" data-for="days-a" data-step="-1" aria-label="Un jour de moins">−</button><input id="days-a" type="number" inputmode="numeric" min="0" max="7" step="1" value="5"><button type="button" data-for="days-a" data-step="1" aria-label="Un jour de plus">+</button></div>
           </div>
-          <div class="field">
+          <div class="stepper-row">
+            <label for="tele-a">Télétravail, jours par mois</label>
+            <div class="stepper"><button type="button" data-for="tele-a" data-step="-1" aria-label="Un jour de moins">−</button><input id="tele-a" type="number" inputmode="numeric" min="0" max="23" step="1" value="0"><button type="button" data-for="tele-a" data-step="1" aria-label="Un jour de plus">+</button></div>
+          </div>
+          <div class="stepper-row">
             <label for="weeks-a">Semaines travaillées par an</label>
-            <input id="weeks-a" type="number" inputmode="numeric" min="0" max="52" step="1" value="42">
+            <div class="stepper"><button type="button" data-for="weeks-a" data-step="-1" aria-label="Une semaine de moins">−</button><input id="weeks-a" type="number" inputmode="numeric" min="0" max="52" step="1" value="42"><button type="button" data-for="weeks-a" data-step="1" aria-label="Une semaine de plus">+</button></div>
           </div>
+          <p class="hint">42 semaines de 5 jours donnent 210 jours : une base prudente après congés et jours fériés.</p>
         </div>
-        <div class="field">
-          <label for="tele-a">Jours de télétravail par mois</label>
-          <input id="tele-a" type="number" inputmode="numeric" min="0" max="23" step="1" value="0">
-          <p class="hint">42 semaines de 5 jours donnent 210 jours : c'est une base prudente après congés et jours fériés.</p>
-        </div>
-      </fieldset>
-
-      <div class="check">
-        <input type="checkbox" id="compare">
-        <label for="compare">Comparer avec une autre situation</label>
-      </div>
-
-      <fieldset class="scenario-b" id="scenario-b" hidden>
-        <legend>Autre situation</legend>
-        <div class="field">
-          <label for="dist-b">Distance domicile-travail, un aller (km)</label>
-          <input id="dist-b" type="number" inputmode="decimal" min="0" step="any" value="30">
-        <details class="route" id="route-b">
-          <summary>Calculer la distance depuis mes adresses</summary>
-          <div class="field">
-            <label for="from-b">Départ (adresse ou commune)</label>
-            <input id="from-b" class="place" type="text" autocomplete="off" placeholder="Ex. Montval-sur-Loir">
-          </div>
-          <div class="field">
-            <label for="to-b">Arrivée (adresse ou commune)</label>
-            <input id="to-b" class="place" type="text" autocomplete="off" placeholder="Ex. Le Mans">
-          </div>
-          <button type="button" class="price" id="go-b">Calculer la distance par la route</button>
-          <p class="status" id="route-status-b" role="status"></p>
-        </details>
-        </div>
-        <div class="row2">
-          <div class="field">
-            <label for="days-b">Jours travaillés par semaine</label>
-            <input id="days-b" type="number" inputmode="numeric" min="0" max="7" step="1" value="5">
-          </div>
-          <div class="field">
-            <label for="weeks-b">Semaines travaillées par an</label>
-            <input id="weeks-b" type="number" inputmode="numeric" min="0" max="52" step="1" value="42">
-          </div>
-        </div>
-        <div class="field">
-          <label for="tele-b">Jours de télétravail par mois</label>
-          <input id="tele-b" type="number" inputmode="numeric" min="0" max="23" step="1" value="4">
-        </div>
-      </fieldset>
+      </details>
     </form>
 
-    <div class="results-col">
-      <section class="receipt" aria-live="polite" aria-labelledby="res-title">
-        <h2 id="res-title">Mon coût de trajet</h2>
-        <div id="results"></div>
-      </section>
-    </div>
+    <section class="result" id="result" aria-label="Résultat" aria-live="polite">
+      <div class="res-head">
+        <span class="kicker">// votre trajet vous coûte</span>
+        <div class="pill" role="group" aria-label="Période">
+          <button type="button" data-unit="mois" aria-pressed="true">par mois</button>
+          <button type="button" data-unit="an" aria-pressed="false">par an</button>
+        </div>
+      </div>
+      <div>
+        <div class="big"><strong id="big">–</strong><span id="big-unit">par mois</span></div>
+        <p class="sub">au coût complet, dont <strong id="res-fuel">–</strong> <span id="res-fuel-label">de carburant à la pompe</span>.</p>
+      </div>
+      <div>
+        <div class="split" aria-hidden="true"><div class="fuel" id="split-fuel"></div><div class="rest"></div></div>
+        <div class="legend">
+          <span><i style="background: var(--gold)"></i><span id="leg-fuel">Carburant</span></span>
+          <span><i style="background: var(--mauve)"></i><span id="leg-rest">Usure, entretien, assurance</span></span>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="st-days">–</b><span>jours sur site par an</span></div>
+        <div class="stat"><b id="st-km">–</b><span>parcourus par an</span></div>
+        <div class="stat"><b id="st-day">–</b><span>par jour sur site</span></div>
+      </div>
+      <p class="tip" id="tip" hidden>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2C47E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg>
+        <span id="tip-text"></span>
+      </p>
+    </section>
   </div>
 
-  <section class="extra" aria-labelledby="partage-title">
-    <h2 id="partage-title">Et si je partageais le trajet&nbsp;?</h2>
-    <p class="lede">Covoiturage ou car Aléop, pour la situation de départ.</p>
-    <div class="grid">
-      <div class="extra-form">
-        <fieldset>
-          <legend>Covoiturage</legend>
-          <div class="field">
-            <label for="people">Personnes dans la voiture, vous compris</label>
-            <select id="people">
-              <option value="2" selected>2 personnes</option>
-              <option value="3">3 personnes</option>
-              <option value="4">4 personnes</option>
-              <option value="5">5 personnes</option>
-            </select>
-            <p class="hint">Les frais sont partagés à parts égales, ou chacun prend sa voiture à tour de rôle.</p>
+  <section class="explore" aria-labelledby="explore-title">
+    <span class="kicker">// et si…</span>
+    <h2 id="explore-title">Explorer d'autres façons de faire</h2>
+    <div class="tabs" role="tablist" aria-label="Pistes">
+      <button type="button" role="tab" id="tab-share" aria-controls="panel-share" aria-selected="true">Partager le trajet</button>
+      <button type="button" role="tab" id="tab-elec" aria-controls="panel-elec" aria-selected="false" tabindex="-1">Passer à l'électrique</button>
+      <button type="button" role="tab" id="tab-compare" aria-controls="panel-compare" aria-selected="false" tabindex="-1">Comparer deux situations</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-share" aria-labelledby="tab-share">
+      <div class="panel-side">
+        <div>
+          <span class="lbl" id="people-label">Personnes dans la voiture, vous compris</span>
+          <input type="hidden" id="people" value="2">
+          <div class="chips" role="group" aria-labelledby="people-label">
+            <button type="button" data-people="2" aria-pressed="true">2</button>
+            <button type="button" data-people="3" aria-pressed="false">3</button>
+            <button type="button" data-people="4" aria-pressed="false">4</button>
+            <button type="button" data-people="5" aria-pressed="false">5</button>
           </div>
-        </fieldset>
-        <fieldset>
-          <legend>Car Aléop</legend>
-          <div class="field">
-            <label for="bus-price">Abonnement mensuel (€)</label>
-            <input id="bus-price" type="number" inputmode="decimal" min="0" step="any" placeholder="Prix de votre abonnement">
-            <p class="hint">Tarifs sur <a href="https://aleop.paysdelaloire.fr" target="_blank" rel="noopener">aleop.paysdelaloire.fr</a>. Votre employeur doit en rembourser au moins la moitié.</p>
-          </div>
-        </fieldset>
+          <p class="hint">Les frais sont partagés à parts égales, ou chacun prend sa voiture à tour de rôle.</p>
+        </div>
+        <div>
+          <label for="bus-price">Abonnement Aléop, par mois (€)</label>
+          <input id="bus-price" class="fld" type="number" inputmode="decimal" min="0" step="any" placeholder="Prix de votre abonnement">
+          <p class="hint">Tarifs sur <a href="https://aleop.paysdelaloire.fr" target="_blank" rel="noopener">aleop.paysdelaloire.fr</a>. Votre employeur doit en rembourser au moins la moitié.</p>
+        </div>
+        <div class="near" id="near-share"></div>
       </div>
-      <div class="receipt">
-        <h2>Seul, à plusieurs ou en car</h2>
-        <div id="res-partage" aria-live="polite"></div>
+      <div class="card">
+        <div class="card-head"><h3>Coût complet, par an</h3><span>par personne</span></div>
+        <div id="res-share"></div>
       </div>
     </div>
-  </section>
 
-  <section class="extra" aria-labelledby="elec-title">
-    <h2 id="elec-title">Passer à l'électrique, ça vaut le coup&nbsp;?</h2>
-    <p class="lede">Votre voiture actuelle face à une électrique, sur 5 ans.</p>
-    <div class="grid">
-      <div class="extra-form">
-        <fieldset>
-          <legend>La voiture électrique envisagée</legend>
-          <div class="row2">
-            <div class="field">
-              <label for="ev-conso">Consommation (kWh/100&nbsp;km)</label>
-              <input id="ev-conso" type="number" inputmode="decimal" min="0" step="any" value="17">
-            </div>
-            <div class="field">
-              <label for="ev-home">Recharge à domicile (%)</label>
-              <input id="ev-home" type="number" inputmode="numeric" min="0" max="100" step="5" value="80">
-            </div>
+    <div class="panel" role="tabpanel" id="panel-elec" aria-labelledby="tab-elec" hidden>
+      <div class="panel-side">
+        <div class="row2">
+          <div>
+            <label for="ev-conso">kWh/100 km</label>
+            <input id="ev-conso" class="fld" type="number" inputmode="decimal" min="0" step="any" value="17">
           </div>
-          <div class="row2">
-            <div class="field">
-              <label for="ev-price-home">Prix à domicile (€/kWh)</label>
-              <input id="ev-price-home" type="number" inputmode="decimal" min="0" step="any" value="0.20">
-            </div>
-            <div class="field">
-              <label for="ev-price-public">Prix sur borne publique (€/kWh)</label>
-              <input id="ev-price-public" type="number" inputmode="decimal" min="0" step="any" value="0.45">
-            </div>
+          <div>
+            <label for="ev-home">Recharge à domicile (%)</label>
+            <input id="ev-home" class="fld" type="number" inputmode="numeric" min="0" max="100" step="5" value="80">
           </div>
-        </fieldset>
-        <fieldset>
-          <legend>Sur 5 ans</legend>
-          <div class="field">
-            <label for="other-km">Autres kilomètres par an (week-ends, vacances)</label>
-            <input id="other-km" type="number" inputmode="numeric" min="0" step="500" value="0">
+          <div>
+            <label for="ev-price-home">€/kWh à domicile</label>
+            <input id="ev-price-home" class="fld" type="number" inputmode="decimal" min="0" step="any" value="0.20">
           </div>
+          <div>
+            <label for="ev-price-public">€/kWh sur borne</label>
+            <input id="ev-price-public" class="fld" type="number" inputmode="decimal" min="0" step="any" value="0.45">
+          </div>
+          <div>
+            <label for="buy-th">Prix d'une thermique neuve (€)</label>
+            <input id="buy-th" class="fld" type="number" inputmode="decimal" min="0" step="any" placeholder="Facultatif">
+          </div>
+          <div>
+            <label for="buy-ev">Prix de l'électrique, aides déduites (€)</label>
+            <input id="buy-ev" class="fld" type="number" inputmode="decimal" min="0" step="any" placeholder="Facultatif">
+          </div>
+        </div>
+        <details class="more">
+          <summary>Entretien et autres kilomètres</summary>
           <div class="row2">
-            <div class="field">
+            <div>
               <label for="maint-th">Entretien actuel (€/an)</label>
-              <input id="maint-th" type="number" inputmode="decimal" min="0" step="any" value="700">
+              <input id="maint-th" class="fld" type="number" inputmode="decimal" min="0" step="any" value="700">
             </div>
-            <div class="field">
+            <div>
               <label for="maint-ev">Entretien électrique (€/an)</label>
-              <input id="maint-ev" type="number" inputmode="decimal" min="0" step="any" value="450">
+              <input id="maint-ev" class="fld" type="number" inputmode="decimal" min="0" step="any" value="450">
             </div>
           </div>
-          <div class="row2">
-            <div class="field">
-              <label for="buy-th">Prix d'une thermique neuve (€)</label>
-              <input id="buy-th" type="number" inputmode="decimal" min="0" step="any" placeholder="Facultatif">
-            </div>
-            <div class="field">
-              <label for="buy-ev">Prix de l'électrique, aides déduites (€)</label>
-              <input id="buy-ev" type="number" inputmode="decimal" min="0" step="any" placeholder="Facultatif">
-            </div>
+          <div style="margin-top: 10px">
+            <label for="other-km">Autres kilomètres par an (week-ends, vacances)</label>
+            <input id="other-km" class="fld" type="number" inputmode="numeric" min="0" step="500" value="0">
           </div>
-          <p class="hint">L'entretien d'une électrique coûte en général moins cher (pas de vidange, freins moins sollicités). Les valeurs proposées sont indicatives.</p>
-        </fieldset>
+          <p class="hint">Une électrique coûte en général moins cher à entretenir (pas de vidange, freins moins sollicités). Valeurs indicatives.</p>
+        </details>
+        <div class="near" id="near-elec"></div>
       </div>
-      <div class="receipt">
-        <h2>Thermique ou électrique</h2>
-        <div id="res-elec" aria-live="polite"></div>
+      <div class="card" id="res-elec"></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="panel-compare" aria-labelledby="tab-compare" hidden>
+      <div class="panel-side">
+        <span class="kicker">// situation B</span>
+        <div>
+          <label for="from-b">Départ (adresse ou commune)</label>
+          <input id="from-b" class="fld place" type="text" placeholder="Ex. Montval-sur-Loir">
+        </div>
+        <div>
+          <label for="to-b">Arrivée (adresse ou commune)</label>
+          <input id="to-b" class="fld place" type="text" placeholder="Ex. Château-du-Loir">
+        </div>
+        <button type="button" class="btn" id="go-b">Calculer la distance</button>
+        <div class="dist-row">
+          <label for="dist-b">Distance d'un aller</label>
+          <input id="dist-b" type="number" inputmode="decimal" min="0" step="any" value="15">
+          <span>km</span>
+        </div>
+        <p class="status" id="route-status-b" role="status"></p>
+        <div class="stepper-row">
+          <label for="days-b">Jours travaillés par semaine</label>
+          <div class="stepper"><button type="button" data-for="days-b" data-step="-1" aria-label="Un jour de moins">−</button><input id="days-b" type="number" inputmode="numeric" min="0" max="7" step="1" value="5"><button type="button" data-for="days-b" data-step="1" aria-label="Un jour de plus">+</button></div>
+        </div>
+        <div class="stepper-row">
+          <label for="tele-b">Télétravail, jours par mois</label>
+          <div class="stepper"><button type="button" data-for="tele-b" data-step="-1" aria-label="Un jour de moins">−</button><input id="tele-b" type="number" inputmode="numeric" min="0" max="23" step="1" value="4"><button type="button" data-for="tele-b" data-step="1" aria-label="Un jour de plus">+</button></div>
+        </div>
+        <div class="stepper-row">
+          <label for="weeks-b">Semaines travaillées par an</label>
+          <div class="stepper"><button type="button" data-for="weeks-b" data-step="-1" aria-label="Une semaine de moins">−</button><input id="weeks-b" type="number" inputmode="numeric" min="0" max="52" step="1" value="42"><button type="button" data-for="weeks-b" data-step="1" aria-label="Une semaine de plus">+</button></div>
+        </div>
+        <p class="hint">Même voiture que la situation A. Changez la distance, le rythme ou le télétravail.</p>
       </div>
+      <div class="ccards" id="res-compare"></div>
     </div>
   </section>
 
-  <footer>
-    <p>Le <strong>carburant seul</strong> est ce que vous dépensez à la pompe. Le <strong>coût complet</strong> suit le barème kilométrique fiscal 2026 (revenus 2025) : il inclut aussi l'amortissement du véhicule, l'entretien, les pneus et l'assurance. Pour une voiture 100&nbsp;% électrique, le barème est majoré de 20&nbsp;%.</p>
-    <p>Les consommations par modèle viennent de la base <a href="https://data.ademe.fr/datasets/ademe-car-labelling">Car Labelling de l'ADEME</a> (voitures neuves, cycle WLTP). Ce sont des valeurs d'homologation : sur la route, on consomme souvent 15 à 20&nbsp;% de plus. Les hybrides rechargeables, le GPL et le superéthanol n'y figurent pas.</p>
-    <p>Il s'agit d'une estimation, pas d'un conseil fiscal. Rien n'est enregistré : les calculs se font sur votre appareil. Le prix du jour en Sarthe est demandé au site data.economie.gouv.fr, sans rien transmettre de vous. Les adresses tapées pour calculer une distance sont envoyées à la Géoplateforme de l'IGN (data.geopf.fr), qui trouve les lieux et l'itinéraire.</p>
-    <p>Les lignes Aléop, l'aire de covoiturage et les bornes de recharge viennent de <a href="../geoberce/">GéoBercé</a> : elles couvrent le territoire de Loir-Lucé-Bercé.</p>
-    <p>Swallow AGE</p>
+  <footer class="notes">
+    <div>
+      <span class="kicker">// méthode</span>
+      <p>Le <strong>carburant seul</strong> est ce que vous payez à la pompe. Le <strong>coût complet</strong> suit le barème kilométrique fiscal 2026 (revenus 2025) : amortissement, entretien, pneus et assurance compris, majoré de 20&nbsp;% pour une voiture 100&nbsp;% électrique. C'est une estimation, pas un conseil fiscal.</p>
+    </div>
+    <div>
+      <span class="kicker">// données</span>
+      <p>Modèles : base <a href="https://data.ademe.fr/datasets/ademe-car-labelling">Car Labelling de l'ADEME</a>, valeurs d'homologation WLTP (sur la route, comptez souvent 15 à 20&nbsp;% de plus ; sans hybrides rechargeables, GPL ni superéthanol). Prix du jour : data.economie.gouv.fr. Itinéraires : Géoplateforme de l'IGN. Lignes Aléop, aire de covoiturage et bornes : <a href="../geoberce/">GéoBercé</a>, territoire de Loir-Lucé-Bercé.</p>
+    </div>
+    <div>
+      <span class="kicker">// vie privée</span>
+      <p>Rien n'est enregistré : les calculs se font sur votre appareil. Le prix du jour en Sarthe est demandé sans rien transmettre de vous. Seules les adresses tapées partent à l'IGN (data.geopf.fr) pour trouver les lieux et l'itinéraire.</p>
+    </div>
   </footer>
+</div>
+
+<div class="mobilebar off" id="mobilebar" aria-hidden="true">
+  <span>Mon trajet</span>
+  <span><strong id="mb-total">–</strong> <span id="mb-unit">/ mois</span></span>
 </div>
 
 <script>
@@ -417,19 +488,32 @@
   };
 
   var FUELS = {
-    e10:    { conso: 6,   price: 2.03, unit: "L",   electric: false },
-    gazole: { conso: 5.5, price: 2.21, unit: "L",   electric: false },
-    elec:   { conso: 17,  price: 0.25, unit: "kWh", electric: true }
+    e10:    { conso: 6,   price: 2.03, unit: "L",   electric: false, name: "Essence" },
+    gazole: { conso: 5.5, price: 2.21, unit: "L",   electric: false, name: "Gazole" },
+    elec:   { conso: 17,  price: 0.25, unit: "kWh", electric: true,  name: "Électrique" }
   };
 
   var $ = function (id) { return document.getElementById(id); };
+  var all = function (sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); };
   var eur = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
   var num = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+  var km1 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
+  var unit = "mois"; // affichage du grand chiffre : "mois" ou "an"
 
   function val(id) {
     var v = parseFloat(String($(id).value).replace(",", "."));
     return isFinite(v) && v > 0 ? v : 0;
   }
+
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function near(d) { return d < 0.5 ? "moins de 500 m" : km1.format(d) + " km"; }
+
+  function signed(x) { return (x > 0 ? "+" : x < 0 ? "−" : "") + eur.format(Math.abs(x)); }
 
   function bareme(km, cv, electric) {
     var p = BAREME[cv];
@@ -457,85 +541,78 @@
     return { days: days, km: km, fuel: fuel, full: full };
   }
 
-  function render() {
-    var fuelKey = $("fuel").value;
-    var vehicle = {
-      cv: $("cv").value,
-      electric: FUELS[fuelKey].electric,
-      conso: val("conso"),
-      price: val("price")
-    };
-    var compare = $("compare").checked;
-    $("scenario-b").hidden = !compare;
-
-    var a = compute(readScenario("a"), vehicle);
-    var b = compare ? compute(readScenario("b"), vehicle) : null;
-
-    var rows = [
-      { label: "Jours sur site par an", get: function (r) { return r.days; }, fmt: function (x) { return num.format(x); }, gap: false },
-      { label: "Kilomètres par an", get: function (r) { return r.km; }, fmt: function (x) { return num.format(x) + " km"; }, gap: false },
-      { label: "Carburant seul, par mois", get: function (r) { return r.fuel / 12; }, fmt: eur.format, gap: true },
-      { label: "Carburant seul, par an", get: function (r) { return r.fuel; }, fmt: eur.format, gap: true },
-      { label: "Coût complet, par mois", get: function (r) { return r.full / 12; }, fmt: eur.format, gap: true, total: true },
-      { label: "Coût complet, par an", get: function (r) { return r.full; }, fmt: eur.format, gap: true },
-      { label: "Coût complet, par jour sur site", get: function (r) { return r.days ? r.full / r.days : 0; }, fmt: eur.format, gap: true }
-    ];
-
-    var head = "<thead><tr><th scope='col'><span class='sr-only'>Poste</span></th><th scope='col'>" + (compare ? "Situation A" : "Par an ou par mois") + "</th>";
-    if (compare) head += "<th scope='col'>Situation B</th><th scope='col'>Écart B − A</th>";
-    head += "</tr></thead>";
-
-    var body = "<tbody>";
-    rows.forEach(function (row) {
-      var va = row.get(a);
-      body += "<tr" + (row.total ? " class='total'" : "") + "><th scope='row'>" + row.label + "</th><td>" + row.fmt(va) + "</td>";
-      if (compare) {
-        var vb = row.get(b);
-        body += "<td>" + row.fmt(vb) + "</td>";
-        if (row.gap) {
-          var d = vb - va;
-          body += "<td class='gap'>" + (d > 0 ? "+" : d < 0 ? "−" : "") + row.fmt(Math.abs(d)) + "</td>";
-        } else {
-          body += "<td></td>";
-        }
-      }
-      body += "</tr>";
-    });
-    body += "</tbody>";
-
-    // Effet d'un jour de télétravail de plus par mois (situation A)
-    var scA = readScenario("a");
-    var scMore = { dist: scA.dist, daysWeek: scA.daysWeek, weeks: scA.weeks, tele: scA.tele + 1 };
-    var more = compute(scMore, vehicle);
-    var saveFuel = Math.max(0, a.fuel - more.fuel);
-    var saveFull = Math.max(0, a.full - more.full);
-    var insight = "";
-    if (a.days > 0 && (saveFuel > 0 || saveFull > 0)) {
-      insight = "<p class='insight'>Un jour de télétravail de plus par mois économise environ <strong>" +
-        eur.format(saveFuel) + " par an</strong> en carburant, et <strong>" + eur.format(saveFull) +
-        " par an</strong> au coût complet.</p>";
-    }
-
-    $("results").innerHTML = "<table>" + head + body + "</table>" + insight;
-    renderPartage(a, scA);
-    renderElec(a, vehicle, fuelKey);
+  // Icônes au trait, reprises dans les encadrés « près de chez vous ».
+  var ICONS = {
+    bus: '<rect x="4" y="3" width="16" height="15" rx="3"></rect><path d="M4 11h16"></path><path d="M8 18v3M16 18v3"></path>',
+    pin: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle>',
+    bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"></path>',
+    info: '<circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path>'
+  };
+  function item(icon, html) {
+    return '<p><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8E4458" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      ICONS[icon] + "</svg><span>" + html + "</span></p>";
+  }
+  function nearBox(title, items) {
+    return '<span class="kicker">// ' + title + "</span>" + items.join("");
   }
 
+  // ---------- Résultat principal ----------
+  function render() {
+    var fuelKey = $("fuel").value;
+    var f = FUELS[fuelKey];
+    var vehicle = { cv: $("cv").value, electric: f.electric, conso: val("conso"), price: val("price") };
+    var scA = readScenario("a");
+    var a = compute(scA, vehicle);
+    var div = unit === "mois" ? 12 : 1;
+
+    $("big").textContent = eur.format(a.full / div);
+    $("big-unit").textContent = "par " + unit;
+    $("res-fuel").textContent = eur.format(a.fuel / div);
+    $("res-fuel-label").textContent = f.electric ? "d'électricité" : "de carburant à la pompe";
+    var share = a.full > 0 ? Math.min(100, Math.round(a.fuel / a.full * 100)) : 0;
+    $("split-fuel").style.width = share + "%";
+    $("leg-fuel").textContent = (f.electric ? "Électricité" : "Carburant") + " · " + share + " %";
+    $("leg-rest").textContent = "Usure, entretien, assurance · " + (100 - share) + " %";
+    $("st-days").textContent = num.format(a.days);
+    $("st-km").textContent = num.format(a.km) + " km";
+    $("st-day").textContent = a.days ? eur.format(a.full / a.days) : "–";
+    $("mb-total").textContent = eur.format(a.full / div);
+    $("mb-unit").textContent = "/ " + unit;
+
+    // Effet d'un jour de télétravail de plus par mois
+    var more = compute({ dist: scA.dist, daysWeek: scA.daysWeek, weeks: scA.weeks, tele: scA.tele + 1 }, vehicle);
+    var saveFuel = Math.max(0, a.fuel - more.fuel);
+    var saveFull = Math.max(0, a.full - more.full);
+    $("tip").hidden = !(a.days > 0 && saveFull > 0);
+    $("tip-text").innerHTML = "Un jour de télétravail de plus par mois économise <strong>" + eur.format(saveFull) +
+      " par an</strong>, dont " + eur.format(saveFuel) + (f.electric ? " d'électricité." : " de carburant.");
+
+    // Résumés des étapes (affichés quand une étape est repliée)
+    $("sum-car").textContent = f.name + " · " + km1.format(vehicle.conso) + " " + f.unit + "/100 · " +
+      $("cv").selectedOptions[0].textContent + " · " + km1.format(vehicle.price) + " €/" + f.unit;
+    $("sum-trip").textContent = km1.format(scA.dist) + " km par aller";
+    $("sum-rhythm").textContent = num.format(scA.daysWeek) + " j/sem · " + num.format(scA.weeks) + " sem · " +
+      num.format(scA.tele) + " télétravail";
+
+    renderShare(a, scA);
+    renderElec(a, vehicle, fuelKey);
+    renderCompare(a, vehicle, scA);
+  }
+
+  // ---------- Énergie et prix du jour ----------
   // Prix moyen du jour dans le département de la Sarthe (72), jeu de données ouvert de l'État.
   // Chargé une fois à l'ouverture ; en cas d'échec, on garde le prix par défaut de FUELS.
-  // Si le nom d'un champ change, la saisie manuelle reste possible.
   var sarthe = null;          // { e10: 1.79, gazole: 1.72 } une fois chargé
   var priceSource = "defaut"; // "defaut", "sarthe" ou "manuel"
 
   function showPrice() {
     var key = $("fuel").value;
-    var f = FUELS[key];
     var live = sarthe && sarthe[key];
     if (live) {
       $("price").value = (Math.round(live * 100) / 100).toString();
       priceSource = "sarthe";
     } else {
-      $("price").value = f.price;
+      $("price").value = FUELS[key].price;
       priceSource = "defaut";
     }
     updatePriceStatus();
@@ -544,29 +621,33 @@
   function updatePriceStatus() {
     var key = $("fuel").value;
     var status = $("price-status");
-    $("btn-price").hidden = true;
+    var btn = $("btn-price");
+    btn.hidden = true;
+    status.classList.toggle("live", priceSource === "sarthe");
     if (priceSource === "manuel") {
       status.textContent = "Prix saisi à la main.";
-      $("btn-price").hidden = key === "elec" || !(sarthe && sarthe[key]);
-      $("btn-price").textContent = "Revenir au prix du jour en Sarthe";
+      btn.hidden = key === "elec" || !(sarthe && sarthe[key]);
+      btn.textContent = "Revenir au prix du jour en Sarthe";
     } else if (priceSource === "sarthe") {
-      status.textContent = "Prix moyen du jour en Sarthe (stations du département 72).";
+      status.textContent = "Prix moyen du jour en Sarthe";
     } else if (key === "elec") {
       status.textContent = "Prix par défaut : ajustez selon votre contrat d'électricité.";
     } else if (sarthe === null) {
       status.textContent = "Prix par défaut, en attendant le prix du jour en Sarthe…";
     } else {
       status.textContent = "Prix du jour indisponible : prix par défaut, à ajuster si besoin.";
-      $("btn-price").hidden = false;
-      $("btn-price").textContent = "Réessayer";
+      btn.hidden = false;
+      btn.textContent = "Réessayer";
     }
   }
 
-  function onFuelChange() {
-    var f = FUELS[$("fuel").value];
+  function setFuel(key) {
+    $("fuel").value = key;
+    all("[data-fuel]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.fuel === key)); });
+    var f = FUELS[key];
     $("conso").value = f.conso;
-    $("conso-label").textContent = "Consommation (" + f.unit + "/100\u00a0km)";
-    $("price-label").textContent = "Prix (€/" + f.unit + ")";
+    $("conso-label").textContent = f.unit + "/100 km";
+    $("price-label").textContent = f.electric ? "€ le kWh" : "€ le litre";
     showPrice();
     render();
   }
@@ -594,25 +675,84 @@
       });
   }
 
-  function esc(t) {
-    return String(t).replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-    });
-  }
-  var km1 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
-  function near(d) { return d < 0.5 ? "moins de 500 m" : km1.format(d) + " km"; }
+  // ---------- Recherche d'un modèle (base ADEME, trajet/vehicules.json) ----------
+  // Chaque version : [libellé, énergie, puissance fiscale, consommation /100 km].
+  var models = [];
 
-  function table(cols, rows) {
-    var h = "<table><thead><tr><th scope='col'><span class='sr-only'>Poste</span></th>";
-    cols.forEach(function (c) { h += "<th scope='col'>" + c + "</th>"; });
-    h += "</tr></thead><tbody>";
-    rows.forEach(function (r) {
-      h += "<tr" + (r.total ? " class='total'" : "") + "><th scope='row'>" + r.label + "</th>";
-      r.values.forEach(function (v) { h += "<td>" + v + "</td>"; });
-      h += "</tr>";
-    });
-    return h + "</tbody></table>";
+  function norm(t) {
+    return String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
   }
+
+  function loadCatalogue() {
+    fetch("vehicules.json")
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (j) {
+        Object.keys(j.marques).forEach(function (marque) {
+          Object.keys(j.marques[marque]).forEach(function (modele) {
+            j.marques[marque][modele].forEach(function (v) {
+              models.push({ marque: marque, modele: modele, v: v, key: norm(marque + " " + modele + " " + v[0]) });
+            });
+          });
+        });
+        if (j.version) $("catalogue-hint").textContent = "Données ADEME, " + j.version + ". Ou remplissez à la main ci-dessous.";
+        $("catalogue").hidden = false;
+      })
+      .catch(function () { /* sans catalogue, la saisie manuelle suffit */ });
+  }
+
+  function closeSearch() {
+    $("search-list").hidden = true;
+    $("search").setAttribute("aria-expanded", "false");
+  }
+
+  function searchModels() {
+    var words = norm($("search").value).split(/\s+/).filter(Boolean);
+    var list = $("search-list");
+    if (!words.length || $("search").value.trim().length < 2) { closeSearch(); return; }
+    var found = models.filter(function (m) {
+      return words.every(function (w) { return m.key.indexOf(w) !== -1; });
+    }).slice(0, 12);
+    list.innerHTML = found.length ? found.map(function (m, i) {
+      var f = FUELS[m.v[1]];
+      return '<li role="option"><button type="button" data-i="' + models.indexOf(m) + '">' + esc(m.marque + " " + m.modele) +
+        "<small>" + esc(m.v[0]) + " · " + m.v[2] + " CV · " + km1.format(m.v[3]) + " " + f.unit + "/100 km</small></button></li>";
+    }).join("") : '<li class="hint" style="padding: 8px 10px">Aucun modèle trouvé : remplissez à la main.</li>';
+    list.hidden = false;
+    $("search").setAttribute("aria-expanded", "true");
+  }
+
+  function pickModel(m) {
+    $("search").value = m.marque + " " + m.modele + " — " + m.v[0];
+    closeSearch();
+    if ($("fuel").value !== m.v[1]) setFuel(m.v[1]);
+    $("cv").value = String(Math.min(7, Math.max(3, m.v[2])));
+    $("conso").value = m.v[3];
+    $("catalogue-hint").textContent = m.v[2] + " CV, " + km1.format(m.v[3]) + " " + FUELS[m.v[1]].unit +
+      "/100 km : valeur officielle WLTP, souvent dépassée de 15 à 20 % sur la route.";
+    render();
+  }
+
+  $("search").addEventListener("input", searchModels);
+  $("search").addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown") {
+      var first = $("search-list").querySelector("button");
+      if (first) { e.preventDefault(); first.focus(); }
+    } else if (e.key === "Escape") closeSearch();
+  });
+  $("search-list").addEventListener("keydown", function (e) {
+    var btns = all("#search-list button");
+    var i = btns.indexOf(document.activeElement);
+    if (e.key === "ArrowDown" && i < btns.length - 1) { e.preventDefault(); btns[i + 1].focus(); }
+    if (e.key === "ArrowUp") { e.preventDefault(); (i > 0 ? btns[i - 1] : $("search")).focus(); }
+    if (e.key === "Escape") { closeSearch(); $("search").focus(); }
+  });
+  $("search-list").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (b) pickModel(models[+b.dataset.i]);
+  });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("#catalogue")) closeSearch();
+  });
 
   // ---------- Distance par la route (Géoplateforme de l'IGN, sans clé) ----------
   // Recherche : https://data.geopf.fr/geocodage/search (même format que l'API Adresse)
@@ -686,7 +826,7 @@
         $("dist-" + s).value = (Math.round(r.km * 10) / 10).toString();
         status.textContent = r.estimate
           ? "Itinéraire indisponible : environ " + km1.format(r.km) + " km, estimés à vol d'oiseau plus 30 %."
-          : km1.format(r.km) + " km par la route" + (r.min > 0 ? ", environ " + Math.round(r.min) + " min" : "") + ".";
+          : km1.format(r.km) + " km par la route" + (r.min > 0 ? " · " + Math.round(r.min) + " min" : "") + ".";
         if (s === "a") loadGeo();
         render();
       })
@@ -700,7 +840,7 @@
   }
 
   // Suggestions pendant la saisie, dans une liste propre à chaque champ.
-  Array.prototype.forEach.call(document.querySelectorAll("input.place"), function (input) {
+  all("input.place").forEach(function (input) {
     var list = document.createElement("datalist");
     list.id = input.id + "-list";
     input.setAttribute("list", list.id);
@@ -716,6 +856,9 @@
           found.forEach(function (p) { list.appendChild(new Option(p.label, p.label)); });
         }).catch(function () { /* la saisie libre reste possible */ });
       }, 300);
+    });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); computeRoute(input.id.slice(-1)); }
     });
   });
   $("go-a").addEventListener("click", function () { computeRoute("a"); });
@@ -763,9 +906,8 @@
         var c = f.geometry.coordinates;
         var key = p.id_station_itinerance || c.join(",");
         if (!stations[key]) {
-          stations[key] = { adresse: (p.adresse_station || "").trim(), puissance: 0, points: 0, lon: c[0], lat: c[1] };
+          stations[key] = { adresse: (p.adresse_station || "").trim(), puissance: 0, lon: c[0], lat: c[1] };
         }
-        stations[key].points += 1;
         stations[key].puissance = Math.max(stations[key].puissance, parseFloat(p.puissance_nominale) || 0);
       });
       geo = { lignes: Object.keys(lignes).map(function (k) { return lignes[k]; }), aires: aires,
@@ -794,65 +936,108 @@
     return Math.min.apply(null, ligne.traces.map(function (t) { return distToTrace(p, t); }));
   }
 
-  // ---------- Covoiturage et car Aléop ----------
-  function renderPartage(a, sc) {
+  // ---------- Partager le trajet : covoiturage et car Aléop ----------
+  function barRow(label, value, sub, width, color) {
+    return '<div class="barrow"><div class="top"><span>' + label + "</span><b>" + value + "</b></div>" +
+      '<div class="track" aria-hidden="true"><div style="width: ' + width.toFixed(1) + "%; background: " + color + '"></div></div>' +
+      "<small>" + sub + "</small></div>";
+  }
+
+  function renderShare(a, sc) {
     var n = parseInt($("people").value, 10) || 2;
     var bus = val("bus-price");
     var months = Math.min(12, Math.ceil(sc.weeks / 52 * 12));
     var busYear = bus * months / 2;  // l'employeur prend en charge au moins 50 %
-    var rows = [
-      { label: "Seul en voiture", values: [eur.format(a.fuel), eur.format(a.full)] },
-      { label: "En covoiturage à " + n, values: [eur.format(a.fuel / n), eur.format(a.full / n)], total: true },
-      { label: "En car Aléop", values: bus ? [eur.format(busYear), eur.format(busYear)] : ["–", "–"] }
-    ];
-    var h = table(["Carburant seul, par an", "Coût complet, par an"], rows);
-    var notes = [];
-    if (a.fuel > 0) {
-      notes.push("À " + n + ", chacun économise environ <strong>" + eur.format(a.fuel - a.fuel / n) +
-        " par an</strong> de carburant, et <strong>" + eur.format(a.full - a.full / n) + "</strong> au coût complet en alternant les voitures.");
+    var max = Math.max(a.full, busYear, 1);
+    var h = '<div style="display: flex; flex-direction: column; gap: 22px">';
+    h += barRow("Seul en voiture", eur.format(a.full), "dont " + eur.format(a.fuel) + " de carburant", a.full / max * 100, "#8E4458");
+    h += barRow("En covoiturage à " + n, eur.format(a.full / n), "dont " + eur.format(a.fuel / n) + " de carburant, en alternant les voitures", a.full / n / max * 100, "#C9A85C");
+    h += bus
+      ? barRow("En car Aléop", eur.format(busYear), months + " mois à " + eur.format(bus) + ", moitié remboursée par l'employeur", busYear / max * 100, "#5E8C61")
+      : barRow("En car Aléop", "–", "Indiquez le prix de l'abonnement pour comparer.", 0, "#5E8C61");
+    h += "</div>";
+    if (a.full > 0) {
+      h += '<p class="callout" style="margin-top: 20px">À ' + n + ", chacun économise <strong>" + eur.format(a.full - a.full / n) +
+        " par an</strong>, dont " + eur.format(a.fuel - a.fuel / n) + " de carburant.</p>";
     }
-    if (bus) {
-      notes.push("Car : " + months + " mois d'abonnement à " + eur.format(bus) + ", dont la moitié remboursée par l'employeur.");
-    } else {
-      notes.push("Indiquez le prix de l'abonnement Aléop pour comparer avec le car.");
-    }
-    h += "<p class='insight'>" + notes.join(" ") + "</p>";
+    $("res-share").innerHTML = h;
 
     var pl = places.a;
+    var items = [];
     if (!pl.from) {
-      h += "<p class='note'>Calculez la distance depuis vos adresses (situation de départ) pour voir les lignes Aléop et l'aire de covoiturage proches.</p>";
+      items.push(item("info", "Calculez la distance depuis vos adresses (étape 02) pour voir les lignes Aléop et l'aire de covoiturage proches."));
     } else if (!geo) {
-      h += "<p class='note'>Recherche des lignes et des aires proches…</p>";
+      items.push(item("info", "Recherche des lignes et des aires proches…"));
     } else {
-      var items = [];
       geo.lignes.forEach(function (l) {
         var dFrom = distToLine(pl.from, l), dTo = distToLine(pl.to, l);
         if (dFrom <= 2 && dTo <= 3) {
-          items.push("Ligne Aléop <strong>" + esc(l.nom) + "</strong> (" + esc(l.trajet) + ") : à " +
-            near(dFrom) + " du départ et à " + near(dTo) + " de l'arrivée.");
+          items.push(item("bus", "Ligne Aléop <strong>" + esc(l.nom) + "</strong> (" + esc(l.trajet) + ") : à " +
+            near(dFrom) + " du départ et à " + near(dTo) + " de l'arrivée."));
         }
       });
-      if (!items.length) items.push("Aucune ligne Aléop du territoire ne passe à la fois près de votre départ et de votre arrivée.");
+      if (!items.length) items.push(item("bus", "Aucune ligne Aléop du territoire ne passe à la fois près de votre départ et de votre arrivée."));
       var aires = geo.aires.map(function (x) { return { x: x, d: haversine(pl.from, x) }; })
         .filter(function (o) { return o.d <= 15; })
         .sort(function (u, v) { return u.d - v.d; });
       if (aires.length) {
         var o = aires[0];
-        items.push("Aire de covoiturage la plus proche : <strong>" + esc(o.x.nom) + "</strong>" +
-          (o.x.commune ? " (" + esc(o.x.commune) + ")" : "") + ", à " + near(o.d) +
-          (o.x.places ? ", " + o.x.places + " places" : "") + ".");
+        items.push(item("pin", "Aire de covoiturage <strong>" + esc(o.x.nom) + "</strong>" +
+          (o.x.commune ? " (" + esc(o.x.commune) + ")" : "") + (o.x.places ? ", " + o.x.places + " places" : "") +
+          ", à " + near(o.d) + "."));
       } else {
-        items.push("Pas d'aire de covoiturage recensée à moins de 15 km de votre départ.");
+        items.push(item("pin", "Pas d'aire de covoiturage recensée à moins de 15 km de votre départ."));
       }
-      h += "<ul class='places'><li>" + items.join("</li><li>") + "</li></ul>";
     }
-    $("res-partage").innerHTML = h;
+    $("near-share").innerHTML = nearBox("près de chez vous", items);
   }
 
-  // ---------- Thermique ou électrique ----------
+  // ---------- Passer à l'électrique ----------
+  function chart(th, ev, withBuy) {
+    // Coût cumulé sur 5 ans, achat compris quand les deux prix sont connus.
+    var th0 = withBuy ? th.buy : 0, ev0 = withBuy ? ev.buy : 0;
+    var th5 = th0 + th.year * 5, ev5 = ev0 + ev.year * 5;
+    var lo = Math.min(th0, ev0), hi = Math.max(th5, ev5, lo + 1);
+    var stepK = [100, 200, 500, 1000, 2000, 5000, 10000, 20000].find(function (s) { return (hi - lo) / s <= 4; }) || 50000;
+    lo = Math.floor(lo / stepK) * stepK;
+    hi = Math.ceil(hi / stepK) * stepK;
+    var X = function (t) { return 64 + t * 89; };                 // 0..5 ans -> 64..509
+    var Y = function (v) { return 180 - (v - lo) / (hi - lo) * 150; };
+    var fmtK = function (v) { return v >= 1000 ? km1.format(v / 1000) + " k€" : num.format(v) + " €"; };
+    var s = '<svg viewBox="0 0 540 230" width="100%" role="img" aria-label="Coût cumulé sur 5 ans : voiture actuelle ' +
+      eur.format(th5) + ", électrique " + eur.format(ev5) + '." style="display: block; font-family: inherit">';
+    for (var v = lo; v <= hi + 1e-6; v += stepK) {
+      s += '<line x1="64" x2="509" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="rgba(43,34,48,.1)"></line>' +
+        '<text x="56" y="' + (Y(v) + 4) + '" text-anchor="end" font-size="12" fill="#6B5F5A">' + fmtK(v) + "</text>";
+    }
+    for (var t = 0; t <= 5; t++) {
+      s += '<text x="' + X(t) + '" y="205" text-anchor="middle" font-size="12" fill="#6B5F5A">' +
+        (t === 0 ? (withBuy ? "achat" : "départ") : t + (t > 1 ? " ans" : " an")) + "</text>";
+    }
+    s += '<line x1="' + X(0) + '" y1="' + Y(th0) + '" x2="' + X(5) + '" y2="' + Y(th5) + '" stroke="#8E4458" stroke-width="3" stroke-linecap="round"></line>';
+    s += '<line x1="' + X(0) + '" y1="' + Y(ev0) + '" x2="' + X(5) + '" y2="' + Y(ev5) + '" stroke="#C9A85C" stroke-width="3" stroke-linecap="round"></line>';
+    var save = th.year - ev.year;
+    if (withBuy && save > 0 && ev0 > th0) {
+      var tc = (ev0 - th0) / save;
+      if (tc <= 5) {
+        var yc = Y(th0 + th.year * tc);
+        s += '<line x1="' + X(tc) + '" x2="' + X(tc) + '" y1="30" y2="180" stroke="#2B2230" stroke-dasharray="3 4"></line>' +
+          '<circle cx="' + X(tc) + '" cy="' + yc + '" r="6" fill="#2B2230"></circle>' +
+          '<text x="' + (X(tc) + (tc > 3.5 ? -8 : 8)) + '" y="44" text-anchor="' + (tc > 3.5 ? "end" : "start") +
+          '" font-size="13" font-weight="500" fill="#2B2230">équilibre à ' + km1.format(tc) + " ans</text>";
+      }
+    }
+    s += "</svg>";
+    return '<figure>' + s + '<figcaption class="chart-legend">' +
+      '<span><i style="background: #8E4458"></i>Voiture actuelle : ' + eur.format(th5) + " en 5 ans</span>" +
+      '<span><i style="background: #C9A85C"></i>Électrique : ' + eur.format(ev5) + " en 5 ans</span></figcaption></figure>";
+  }
+
   function renderElec(a, vehicle, fuelKey) {
+    var box = $("res-elec");
     if (FUELS[fuelKey].electric) {
-      $("res-elec").innerHTML = "<p>Votre voiture est déjà électrique : rien à comparer ici.</p>";
+      box.innerHTML = "<h3>Votre voiture est déjà électrique</h3><p class='callout'>Rien à comparer ici : choisissez Essence ou Gazole à l'étape 01 pour comparer avec une électrique.</p>";
+      $("near-elec").hidden = true;
       return;
     }
     var km = a.km + val("other-km");
@@ -861,141 +1046,146 @@
     var th = { energy: km / 100 * vehicle.conso * vehicle.price, maint: val("maint-th"), buy: val("buy-th") };
     var ev = { energy: km / 100 * val("ev-conso") * kwhPrice, maint: val("maint-ev"), buy: val("buy-ev") };
     var withBuy = th.buy > 0 && ev.buy > 0;
-    [th, ev].forEach(function (c) {
-      c.year = c.energy + c.maint;
-      c.five = c.year * 5 + (withBuy ? c.buy : 0);
-    });
-    var rows = [
-      { label: "Énergie, par an", values: [eur.format(th.energy), eur.format(ev.energy)] },
-      { label: "Entretien, par an", values: [eur.format(th.maint), eur.format(ev.maint)] },
-      { label: "Total, par an", values: [eur.format(th.year), eur.format(ev.year)] }
-    ];
-    if (withBuy) rows.push({ label: "Achat", values: [eur.format(th.buy), eur.format(ev.buy)] });
-    rows.push({ label: withBuy ? "Total sur 5 ans, achat compris" : "Total sur 5 ans", values: [eur.format(th.five), eur.format(ev.five)], total: true });
-    var h = "<p class='note' style='margin-top:0'>" + num.format(km) + " km par an.</p>" +
-      table(["Voiture actuelle", "Électrique"], rows);
-
+    th.year = th.energy + th.maint;
+    ev.year = ev.energy + ev.maint;
     var save = th.year - ev.year;
-    var msg;
+
+    var k1, k2;
     if (km <= 0) {
-      msg = "Indiquez une distance pour lancer la comparaison.";
-    } else if (save <= 0) {
-      msg = "Avec ces valeurs, l'électrique ne coûte pas moins cher à l'usage.";
+      box.innerHTML = "<h3>Thermique ou électrique</h3><p class='callout'>Indiquez une distance pour lancer la comparaison.</p>";
     } else {
-      msg = "L'électrique économise environ <strong>" + eur.format(save) + " par an</strong> à l'usage.";
-      if (withBuy) {
+      k1 = '<div><b class="' + (save > 0 ? "good" : "") + '">' + signed(-save) + "</b><span>par an à l'usage avec l'électrique (" +
+        num.format(km) + " km par an)</span></div>";
+      if (!withBuy) {
+        k2 = "<div><b>?</b><span>Indiquez les prix d'achat pour savoir en combien de temps l'écart est remboursé.</span></div>";
+      } else {
         var gap = ev.buy - th.buy;
-        if (gap <= 0) msg += " Elle est aussi moins chère à l'achat.";
+        if (gap <= 0) k2 = "<div><b>0 an</b><span>l'électrique est aussi moins chère à l'achat</span></div>";
+        else if (save <= 0) k2 = "<div><b>jamais</b><span>pour rembourser les " + eur.format(gap) + " d'écart à l'achat</span></div>";
         else {
           var years = gap / save;
-          msg += " L'écart de prix d'achat (" + eur.format(gap) + ") est remboursé en <strong>" +
-            (years > 30 ? "plus de 30 ans" : km1.format(years) + " ans") + "</strong>.";
+          k2 = "<div><b>" + (years > 30 ? "+ de 30 ans" : km1.format(years) + " ans") + "</b><span>pour rembourser les " +
+            eur.format(gap) + " d'écart à l'achat</span></div>";
         }
-      } else {
-        msg += " Indiquez les prix d'achat pour savoir en combien de temps l'écart est remboursé.";
       }
+      box.innerHTML = '<div class="keys">' + k1 + k2 + "</div>" + chart(th, ev, withBuy) +
+        '<p class="callout">Par an : énergie ' + eur.format(th.energy) + " contre " + eur.format(ev.energy) +
+        ", entretien " + eur.format(th.maint) + " contre " + eur.format(ev.maint) + ".</p>";
     }
-    h += "<p class='insight'>" + msg + "</p>";
 
     var from = places.a.from;
-    if (from && geo) {
-      var near = geo.bornes.map(function (b) { return { b: b, d: haversine(from, b) }; })
+    var items = [];
+    if (!from) {
+      items.push(item("info", "Calculez la distance depuis vos adresses (étape 02) pour voir les bornes de recharge proches."));
+    } else if (!geo) {
+      items.push(item("info", "Recherche des bornes proches…"));
+    } else {
+      var close = geo.bornes.map(function (b) { return { b: b, d: haversine(from, b) }; })
         .filter(function (o) { return o.d <= 10; })
         .sort(function (u, v) { return u.d - v.d; });
-      if (near.length) {
-        var o = near[0];
-        h += "<ul class='places'><li><strong>" + near.length + " station" + (near.length > 1 ? "s" : "") +
-          " de recharge publique" + (near.length > 1 ? "s" : "") + "</strong> à moins de 10 km de votre départ. " +
-          "La plus proche : " + esc(o.b.adresse || "adresse non renseignée") + ", à " + near(o.d) +
-          (o.b.puissance ? " (" + num.format(o.b.puissance) + " kW)" : "") + ".</li></ul>";
+      if (close.length) {
+        var o = close[0];
+        items.push(item("bolt", "<strong>" + close.length + " station" + (close.length > 1 ? "s" : "") + " de recharge publique" +
+          (close.length > 1 ? "s" : "") + "</strong> à moins de 10 km. La plus proche : " +
+          esc(o.b.adresse || "adresse non renseignée") + ", à " + near(o.d) +
+          (o.b.puissance ? " (" + num.format(o.b.puissance) + " kW)" : "") + "."));
       } else {
-        h += "<ul class='places'><li>Pas de borne de recharge publique recensée à moins de 10 km de votre départ.</li></ul>";
+        items.push(item("bolt", "Pas de borne de recharge publique recensée à moins de 10 km de votre départ."));
       }
-    } else if (!from) {
-      h += "<p class='note'>Calculez la distance depuis vos adresses pour voir les bornes de recharge proches.</p>";
     }
-    $("res-elec").innerHTML = h;
+    $("near-elec").hidden = false;
+    $("near-elec").innerHTML = nearBox("près de chez vous", items);
   }
 
-  Array.prototype.forEach.call(document.querySelectorAll(".extra"), function (el) {
-    el.addEventListener("input", render);
-    el.addEventListener("change", render);
+  // ---------- Comparer deux situations ----------
+  function renderCompare(a, vehicle, scA) {
+    var scB = readScenario("b");
+    var b = compute(scB, vehicle);
+    var desc = function (sc) {
+      return km1.format(sc.dist) + " km · " + num.format(sc.daysWeek) + " j/sem · " + num.format(sc.tele) + " j de télétravail/mois";
+    };
+    var card = function (cls, kick, sc, r) {
+      return '<div class="ccard ' + cls + '"><span class="kicker">' + kick + '</span><p class="desc">' + desc(sc) + "</p>" +
+        '<div class="v">' + eur.format(r.full / 12) + "<small> / mois</small></div><p>dont " + eur.format(r.fuel / 12) +
+        " de " + (vehicle.electric ? "recharge" : "carburant") + "</p></div>";
+    };
+    var d = b.full - a.full;
+    $("res-compare").innerHTML = card("", "// situation A · étapes 02 et 03", scA, a) +
+      card("b", "// situation B", scB, b) +
+      '<div class="ccard gap"><span class="kicker">// écart B − A</span><div class="v">' + signed(d / 12) +
+      '</div><p class="desc">par mois, soit ' + signed(d) + " par an, dont " + signed(b.fuel - a.fuel) +
+      " de " + (vehicle.electric ? "recharge" : "carburant") + ".</p></div>";
+  }
+
+  // ---------- Commandes ----------
+  all("[data-fuel]").forEach(function (b) {
+    b.addEventListener("click", function () { if ($("fuel").value !== b.dataset.fuel) setFuel(b.dataset.fuel); });
+  });
+  all("[data-unit]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      unit = b.dataset.unit;
+      all("[data-unit]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      render();
+    });
+  });
+  all("[data-people]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      $("people").value = b.dataset.people;
+      all("[data-people]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      render();
+    });
+  });
+  all(".stepper button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var input = $(b.dataset.for);
+      var v = (parseFloat(input.value) || 0) + parseFloat(b.dataset.step);
+      input.value = Math.max(+input.min, Math.min(+input.max, v));
+      render();
+    });
   });
 
-  // Catalogue ADEME Car Labelling (trajet/vehicules.json, généré par build_vehicules.py).
-  // Chaque version : [libellé, énergie, puissance fiscale, consommation /100 km].
-  var catalogue = null;
+  // Onglets (flèches gauche et droite pour passer de l'un à l'autre)
+  var tabs = all("[role=tab]");
+  function selectTab(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", String(on));
+      t.tabIndex = on ? 0 : -1;
+      $(t.getAttribute("aria-controls")).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { selectTab(t); });
+    t.addEventListener("keydown", function (e) {
+      var j = e.key === "ArrowRight" ? (i + 1) % tabs.length : e.key === "ArrowLeft" ? (i + tabs.length - 1) % tabs.length : -1;
+      if (j >= 0) { e.preventDefault(); selectTab(tabs[j]); tabs[j].focus(); }
+    });
+  });
 
-  function fillSelect(sel, placeholder, items) {
-    sel.innerHTML = "";
-    sel.appendChild(new Option(placeholder, ""));
-    items.forEach(function (it) { sel.appendChild(new Option(it[0], it[1])); });
-    sel.disabled = items.length === 0;
+  // Sur téléphone : étapes repliées, et barre du total quand le résultat n'est plus visible.
+  if (window.matchMedia("(max-width: 800px)").matches) {
+    all("details.step").forEach(function (d) { d.open = false; });
+  }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      $("mobilebar").classList.toggle("off", entries[0].isIntersecting);
+    }).observe($("result"));
   }
 
-  function onMarqueChange() {
-    var m = catalogue[$("marque").value];
-    fillSelect($("modele"), m ? "Choisissez un modèle" : "Choisissez une marque",
-      m ? Object.keys(m).map(function (k) { return [k, k]; }) : []);
-    onModeleChange();
-  }
-
-  function onModeleChange() {
-    var m = catalogue[$("marque").value];
-    var versions = (m && m[$("modele").value]) || [];
-    var unit = { e10: "L", gazole: "L", elec: "kWh" };
-    fillSelect($("version"), versions.length ? "Choisissez une version" : "Choisissez un modèle",
-      versions.map(function (v, i) {
-        return [v[0] + " · " + v[2] + " CV · " + String(v[3]).replace(".", ",") + " " + unit[v[1]] + "/100 km", String(i)];
-      }));
-    if (versions.length === 1) { $("version").value = "0"; onVersionChange(); }
-  }
-
-  function onVersionChange() {
-    var m = catalogue[$("marque").value];
-    var v = m && m[$("modele").value] && m[$("modele").value][$("version").value];
-    if (!v) return;
-    if ($("fuel").value !== v[1]) {
-      $("fuel").value = v[1];
-      onFuelChange();
-    }
-    $("cv").value = String(Math.min(7, Math.max(3, v[2])));
-    $("conso").value = v[3];
+  document.addEventListener("input", function (e) {
+    if (e.target.id === "search") return;
+    if (e.target.id === "price") { priceSource = "manuel"; updatePriceStatus(); }
     render();
-  }
-
-  function loadCatalogue() {
-    fetch("vehicules.json")
-      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
-      .then(function (j) {
-        catalogue = j.marques;
-        fillSelect($("marque"), "Saisie manuelle", Object.keys(catalogue).map(function (k) { return [k, k]; }));
-        if (j.version) {
-          $("catalogue-hint").textContent = "Données ADEME, " + j.version + ". Les champs ci-dessous se remplissent seuls et restent modifiables.";
-        }
-        $("catalogue").hidden = false;
-      })
-      .catch(function () { /* sans catalogue, la saisie manuelle suffit */ });
-  }
-
-  $("marque").addEventListener("change", onMarqueChange);
-  $("modele").addEventListener("change", onModeleChange);
-  $("version").addEventListener("change", onVersionChange);
-  loadCatalogue();
-
-  document.getElementById("form").addEventListener("input", render);
-  document.getElementById("form").addEventListener("change", render);
-  $("fuel").addEventListener("change", onFuelChange);
-  $("price").addEventListener("input", function () { priceSource = "manuel"; updatePriceStatus(); });
+  });
+  document.addEventListener("change", function (e) { if (e.target.id !== "search") render(); });
   $("btn-price").addEventListener("click", function () {
     if (priceSource === "manuel") { showPrice(); render(); } else { loadPrice(); }
   });
-  onFuelChange();
+
+  loadCatalogue();
+  setFuel("e10");
   loadPrice();
 })();
 </script>
-<style>
-  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-</style>
 </body>
 </html>
