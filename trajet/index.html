@@ -91,7 +91,8 @@
   }
   button.price:hover { background: var(--ink); }
   #price-status { font-size: 0.85rem; color: var(--taupe); margin: 0.35rem 0 0; min-height: 1.2em; }
-  .scenario-b[hidden] { display: none; }
+  .scenario-b[hidden], #catalogue[hidden] { display: none; }
+  select:disabled { color: var(--taupe); background: var(--mist); }
 
   .receipt {
     background: var(--paper);
@@ -137,6 +138,29 @@
     <form id="form" autocomplete="off" onsubmit="return false">
       <fieldset>
         <legend>Mon véhicule</legend>
+        <div id="catalogue" hidden>
+          <div class="row2">
+            <div class="field">
+              <label for="marque">Marque</label>
+              <select id="marque">
+                <option value="">Saisie manuelle</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="modele">Modèle</label>
+              <select id="modele" disabled>
+                <option value="">Choisissez une marque</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="version">Version</label>
+            <select id="version" disabled>
+              <option value="">Choisissez un modèle</option>
+            </select>
+            <p class="hint" id="catalogue-hint">Les champs ci-dessous se remplissent seuls et restent modifiables.</p>
+          </div>
+        </div>
         <div class="row2">
           <div class="field">
             <label for="cv">Puissance fiscale</label>
@@ -232,6 +256,7 @@
 
   <footer>
     <p>Le <strong>carburant seul</strong> est ce que vous dépensez à la pompe. Le <strong>coût complet</strong> suit le barème kilométrique fiscal 2026 (revenus 2025) : il inclut aussi l'amortissement du véhicule, l'entretien, les pneus et l'assurance. Pour une voiture 100&nbsp;% électrique, le barème est majoré de 20&nbsp;%.</p>
+    <p>Les consommations par modèle viennent de la base <a href="https://data.ademe.fr/datasets/ademe-car-labelling">Car Labelling de l'ADEME</a> (voitures neuves, cycle WLTP). Ce sont des valeurs d'homologation : sur la route, on consomme souvent 15 à 20&nbsp;% de plus. Les hybrides rechargeables, le GPL et le superéthanol n'y figurent pas.</p>
     <p>Il s'agit d'une estimation, pas d'un conseil fiscal. Rien n'est enregistré ni envoyé : les calculs se font sur votre appareil. Seul le bouton « Prix du jour » interroge le site data.economie.gouv.fr.</p>
     <p>Swallow AGE</p>
   </footer>
@@ -389,6 +414,65 @@
         status.textContent = "Prix du jour indisponible : saisissez le prix à la main.";
       });
   }
+
+  // Catalogue ADEME Car Labelling (trajet/vehicules.json, généré par build_vehicules.py).
+  // Chaque version : [libellé, énergie, puissance fiscale, consommation /100 km].
+  var catalogue = null;
+
+  function fillSelect(sel, placeholder, items) {
+    sel.innerHTML = "";
+    sel.appendChild(new Option(placeholder, ""));
+    items.forEach(function (it) { sel.appendChild(new Option(it[0], it[1])); });
+    sel.disabled = items.length === 0;
+  }
+
+  function onMarqueChange() {
+    var m = catalogue[$("marque").value];
+    fillSelect($("modele"), m ? "Choisissez un modèle" : "Choisissez une marque",
+      m ? Object.keys(m).map(function (k) { return [k, k]; }) : []);
+    onModeleChange();
+  }
+
+  function onModeleChange() {
+    var m = catalogue[$("marque").value];
+    var versions = (m && m[$("modele").value]) || [];
+    var unit = { e10: "L", gazole: "L", elec: "kWh" };
+    fillSelect($("version"), versions.length ? "Choisissez une version" : "Choisissez un modèle",
+      versions.map(function (v, i) {
+        return [v[0] + " · " + v[2] + " CV · " + String(v[3]).replace(".", ",") + " " + unit[v[1]] + "/100 km", String(i)];
+      }));
+    if (versions.length === 1) { $("version").value = "0"; onVersionChange(); }
+  }
+
+  function onVersionChange() {
+    var m = catalogue[$("marque").value];
+    var v = m && m[$("modele").value] && m[$("modele").value][$("version").value];
+    if (!v) return;
+    $("fuel").value = v[1];
+    onFuelChange();
+    $("cv").value = String(Math.min(7, Math.max(3, v[2])));
+    $("conso").value = v[3];
+    render();
+  }
+
+  function loadCatalogue() {
+    fetch("vehicules.json")
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (j) {
+        catalogue = j.marques;
+        fillSelect($("marque"), "Saisie manuelle", Object.keys(catalogue).map(function (k) { return [k, k]; }));
+        if (j.version) {
+          $("catalogue-hint").textContent = "Données ADEME, " + j.version + ". Les champs ci-dessous se remplissent seuls et restent modifiables.";
+        }
+        $("catalogue").hidden = false;
+      })
+      .catch(function () { /* sans catalogue, la saisie manuelle suffit */ });
+  }
+
+  $("marque").addEventListener("change", onMarqueChange);
+  $("modele").addEventListener("change", onModeleChange);
+  $("version").addEventListener("change", onVersionChange);
+  loadCatalogue();
 
   document.getElementById("form").addEventListener("input", render);
   document.getElementById("form").addEventListener("change", render);
