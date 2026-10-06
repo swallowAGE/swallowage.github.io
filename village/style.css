@@ -1428,3 +1428,14 @@ img { -webkit-user-drag: none; user-select: none; }
   .quiz-card .buddy { min-height: 64px; }
   .quiz-card .buddy .avatar { width: 50px; height: 62px; }
 }
+
+/* culture en train de pousser : sablier + temps restant */
+.obj .harvest.wait {
+  width: auto; height: auto; min-width: calc(var(--u) * 28);
+  padding: calc(var(--u) * 3) calc(var(--u) * 7);
+  border-radius: calc(var(--u) * 20);
+  display: flex; align-items: center; gap: calc(var(--u) * 3);
+  border-color: #C9A24A; box-shadow: 0 calc(var(--u) * 3) 0 #C9A24A;
+  font-size: calc(var(--u) * 13); line-height: 1; white-space: nowrap;
+}
+.obj .harvest.wait small { font: 700 calc(var(--u) * 11) "Fredoka", sans-serif; color: #7A5A2E; }
