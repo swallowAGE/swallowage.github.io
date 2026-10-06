@@ -61,7 +61,7 @@
   .field:first-of-type { margin-top: 0.4rem; }
   label { display: block; font-size: 0.93rem; margin-bottom: 0.25rem; }
   .hint { color: var(--taupe); font-size: 0.85rem; margin: 0.2rem 0 0; }
-  input[type="number"], select {
+  input[type="number"], input[type="text"], select {
     width: 100%;
     font: inherit;
     color: var(--ink);
@@ -91,7 +91,22 @@
   }
   button.price:hover { background: var(--ink); }
   #price-status { font-size: 0.85rem; color: var(--taupe); margin: 0.35rem 0 0; min-height: 1.2em; }
-  .scenario-b[hidden], #catalogue[hidden] { display: none; }
+  .scenario-b[hidden], #catalogue[hidden], [hidden] { display: none !important; }
+  details.route { margin-top: 0.85rem; border-top: 1px dotted #B9AAB0; padding-top: 0.6rem; }
+  details.route summary { cursor: pointer; color: var(--rose-deep); font-size: 0.93rem; }
+  .status { font-size: 0.85rem; color: var(--taupe); margin: 0.35rem 0 0; min-height: 1.2em; }
+  .extra { margin-top: 2.25rem; }
+  .extra > h2 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.35rem, 3.5vw, 1.8rem);
+    margin: 0 0 0.3rem;
+  }
+  .extra > .lede { margin: 0 0 1.1rem; }
+  .places { margin: 0.9rem 0 0; padding: 0; list-style: none; font-size: 0.93rem; }
+  .places li { margin: 0 0 0.45rem; padding-left: 1.1rem; position: relative; }
+  .places li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--gold); }
+  a { color: var(--rose-deep); }
   select:disabled { color: var(--taupe); background: var(--mist); }
 
   .receipt {
@@ -200,6 +215,19 @@
         <div class="field">
           <label for="dist-a">Distance domicile-travail, un aller (km)</label>
           <input id="dist-a" type="number" inputmode="decimal" min="0" step="any" value="15">
+        <details class="route" id="route-a">
+          <summary>Calculer la distance depuis mes adresses</summary>
+          <div class="field">
+            <label for="from-a">Départ (adresse ou commune)</label>
+            <input id="from-a" class="place" type="text" autocomplete="off" placeholder="Ex. Montval-sur-Loir">
+          </div>
+          <div class="field">
+            <label for="to-a">Arrivée (adresse ou commune)</label>
+            <input id="to-a" class="place" type="text" autocomplete="off" placeholder="Ex. Le Mans">
+          </div>
+          <button type="button" class="price" id="go-a">Calculer la distance par la route</button>
+          <p class="status" id="route-status-a" role="status"></p>
+        </details>
         </div>
         <div class="row2">
           <div class="field">
@@ -228,6 +256,19 @@
         <div class="field">
           <label for="dist-b">Distance domicile-travail, un aller (km)</label>
           <input id="dist-b" type="number" inputmode="decimal" min="0" step="any" value="30">
+        <details class="route" id="route-b">
+          <summary>Calculer la distance depuis mes adresses</summary>
+          <div class="field">
+            <label for="from-b">Départ (adresse ou commune)</label>
+            <input id="from-b" class="place" type="text" autocomplete="off" placeholder="Ex. Montval-sur-Loir">
+          </div>
+          <div class="field">
+            <label for="to-b">Arrivée (adresse ou commune)</label>
+            <input id="to-b" class="place" type="text" autocomplete="off" placeholder="Ex. Le Mans">
+          </div>
+          <button type="button" class="price" id="go-b">Calculer la distance par la route</button>
+          <p class="status" id="route-status-b" role="status"></p>
+        </details>
         </div>
         <div class="row2">
           <div class="field">
@@ -254,10 +295,109 @@
     </div>
   </div>
 
+  <section class="extra" aria-labelledby="partage-title">
+    <h2 id="partage-title">Et si je partageais le trajet&nbsp;?</h2>
+    <p class="lede">Covoiturage ou car Aléop, pour la situation de départ.</p>
+    <div class="grid">
+      <div class="extra-form">
+        <fieldset>
+          <legend>Covoiturage</legend>
+          <div class="field">
+            <label for="people">Personnes dans la voiture, vous compris</label>
+            <select id="people">
+              <option value="2" selected>2 personnes</option>
+              <option value="3">3 personnes</option>
+              <option value="4">4 personnes</option>
+              <option value="5">5 personnes</option>
+            </select>
+            <p class="hint">Les frais sont partagés à parts égales, ou chacun prend sa voiture à tour de rôle.</p>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Car Aléop</legend>
+          <div class="field">
+            <label for="bus-price">Abonnement mensuel (€)</label>
+            <input id="bus-price" type="number" inputmode="decimal" min="0" step="any" placeholder="Prix de votre abonnement">
+            <p class="hint">Tarifs sur <a href="https://aleop.paysdelaloire.fr" target="_blank" rel="noopener">aleop.paysdelaloire.fr</a>. Votre employeur doit en rembourser au moins la moitié.</p>
+          </div>
+        </fieldset>
+      </div>
+      <div class="receipt">
+        <h2>Seul, à plusieurs ou en car</h2>
+        <div id="res-partage" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="extra" aria-labelledby="elec-title">
+    <h2 id="elec-title">Passer à l'électrique, ça vaut le coup&nbsp;?</h2>
+    <p class="lede">Votre voiture actuelle face à une électrique, sur 5 ans.</p>
+    <div class="grid">
+      <div class="extra-form">
+        <fieldset>
+          <legend>La voiture électrique envisagée</legend>
+          <div class="row2">
+            <div class="field">
+              <label for="ev-conso">Consommation (kWh/100&nbsp;km)</label>
+              <input id="ev-conso" type="number" inputmode="decimal" min="0" step="any" value="17">
+            </div>
+            <div class="field">
+              <label for="ev-home">Recharge à domicile (%)</label>
+              <input id="ev-home" type="number" inputmode="numeric" min="0" max="100" step="5" value="80">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="ev-price-home">Prix à domicile (€/kWh)</label>
+              <input id="ev-price-home" type="number" inputmode="decimal" min="0" step="any" value="0.20">
+            </div>
+            <div class="field">
+              <label for="ev-price-public">Prix sur borne publique (€/kWh)</label>
+              <input id="ev-price-public" type="number" inputmode="decimal" min="0" step="any" value="0.45">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Sur 5 ans</legend>
+          <div class="field">
+            <label for="other-km">Autres kilomètres par an (week-ends, vacances)</label>
+            <input id="other-km" type="number" inputmode="numeric" min="0" step="500" value="0">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="maint-th">Entretien actuel (€/an)</label>
+              <input id="maint-th" type="number" inputmode="decimal" min="0" step="any" value="700">
+            </div>
+            <div class="field">
+              <label for="maint-ev">Entretien électrique (€/an)</label>
+              <input id="maint-ev" type="number" inputmode="decimal" min="0" step="any" value="450">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="buy-th">Prix d'une thermique neuve (€)</label>
+              <input id="buy-th" type="number" inputmode="decimal" min="0" step="any" placeholder="Facultatif">
+            </div>
+            <div class="field">
+              <label for="buy-ev">Prix de l'électrique, aides déduites (€)</label>
+              <input id="buy-ev" type="number" inputmode="decimal" min="0" step="any" placeholder="Facultatif">
+            </div>
+          </div>
+          <p class="hint">L'entretien d'une électrique coûte en général moins cher (pas de vidange, freins moins sollicités). Les valeurs proposées sont indicatives.</p>
+        </fieldset>
+      </div>
+      <div class="receipt">
+        <h2>Thermique ou électrique</h2>
+        <div id="res-elec" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>Le <strong>carburant seul</strong> est ce que vous dépensez à la pompe. Le <strong>coût complet</strong> suit le barème kilométrique fiscal 2026 (revenus 2025) : il inclut aussi l'amortissement du véhicule, l'entretien, les pneus et l'assurance. Pour une voiture 100&nbsp;% électrique, le barème est majoré de 20&nbsp;%.</p>
     <p>Les consommations par modèle viennent de la base <a href="https://data.ademe.fr/datasets/ademe-car-labelling">Car Labelling de l'ADEME</a> (voitures neuves, cycle WLTP). Ce sont des valeurs d'homologation : sur la route, on consomme souvent 15 à 20&nbsp;% de plus. Les hybrides rechargeables, le GPL et le superéthanol n'y figurent pas.</p>
-    <p>Il s'agit d'une estimation, pas d'un conseil fiscal. Rien n'est enregistré ni envoyé : les calculs se font sur votre appareil. Seul le prix du jour en Sarthe est demandé au site data.economie.gouv.fr, sans rien transmettre de vous.</p>
+    <p>Il s'agit d'une estimation, pas d'un conseil fiscal. Rien n'est enregistré : les calculs se font sur votre appareil. Le prix du jour en Sarthe est demandé au site data.economie.gouv.fr, sans rien transmettre de vous. Les adresses tapées pour calculer une distance sont envoyées à la Géoplateforme de l'IGN (data.geopf.fr), qui trouve les lieux et l'itinéraire.</p>
+    <p>Les lignes Aléop, l'aire de covoiturage et les bornes de recharge viennent de <a href="../geoberce/">GéoBercé</a> : elles couvrent le territoire de Loir-Lucé-Bercé.</p>
     <p>Swallow AGE</p>
   </footer>
 </div>
@@ -377,6 +517,8 @@
     }
 
     $("results").innerHTML = "<table>" + head + body + "</table>" + insight;
+    renderPartage(a, scA);
+    renderElec(a, vehicle, fuelKey);
   }
 
   // Prix moyen du jour dans le département de la Sarthe (72), jeu de données ouvert de l'État.
@@ -451,6 +593,334 @@
         render();
       });
   }
+
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  var km1 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
+  function near(d) { return d < 0.5 ? "moins de 500 m" : km1.format(d) + " km"; }
+
+  function table(cols, rows) {
+    var h = "<table><thead><tr><th scope='col'><span class='sr-only'>Poste</span></th>";
+    cols.forEach(function (c) { h += "<th scope='col'>" + c + "</th>"; });
+    h += "</tr></thead><tbody>";
+    rows.forEach(function (r) {
+      h += "<tr" + (r.total ? " class='total'" : "") + "><th scope='row'>" + r.label + "</th>";
+      r.values.forEach(function (v) { h += "<td>" + v + "</td>"; });
+      h += "</tr>";
+    });
+    return h + "</tbody></table>";
+  }
+
+  // ---------- Distance par la route (Géoplateforme de l'IGN, sans clé) ----------
+  // Recherche : https://data.geopf.fr/geocodage/search (même format que l'API Adresse)
+  // Itinéraire : https://data.geopf.fr/navigation/itineraire (moteur OSRM sur la BD TOPO)
+  var GEOCODE = "https://data.geopf.fr/geocodage/search";
+  var ROUTE = "https://data.geopf.fr/navigation/itineraire";
+  var places = { a: {}, b: {} };   // places.a.from = { label, lon, lat }
+  var known = {};                   // libellé proposé -> lieu
+
+  function geocode(text, limit) {
+    // Priorité aux lieux proches de Loir-Lucé-Bercé.
+    var url = GEOCODE + "?q=" + encodeURIComponent(text) + "&limit=" + limit + "&lat=47.8&lon=0.45";
+    return fetch(url)
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (j) {
+        return (j.features || []).map(function (f) {
+          var place = { label: f.properties.label, lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] };
+          known[place.label] = place;
+          return place;
+        });
+      });
+  }
+
+  function resolve(input) {
+    var text = input.value.trim();
+    if (!text) return Promise.reject(new Error("vide"));
+    if (known[text]) return Promise.resolve(known[text]);
+    return geocode(text, 1).then(function (list) {
+      if (!list.length) throw new Error("introuvable");
+      input.value = list[0].label;
+      return list[0];
+    });
+  }
+
+  function haversine(p, q) {
+    var R = 6371, rad = Math.PI / 180;
+    var dLat = (q.lat - p.lat) * rad, dLon = (q.lon - p.lon) * rad;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(p.lat * rad) * Math.cos(q.lat * rad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
+  function route(from, to) {
+    var url = ROUTE + "?resource=bdtopo-osrm&profile=car&optimization=fastest" +
+      "&start=" + from.lon + "," + from.lat + "&end=" + to.lon + "," + to.lat +
+      "&getSteps=false&getBbox=false&distanceUnit=kilometer&timeUnit=minute";
+    return fetch(url)
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (j) {
+        var d = parseFloat(j.distance);
+        if (!(d > 0)) throw new Error("vide");
+        return { km: d, min: parseFloat(j.duration) };
+      });
+  }
+
+  function computeRoute(s) {
+    var status = $("route-status-" + s);
+    var from, to;
+    status.textContent = "Recherche des adresses…";
+    Promise.all([resolve($("from-" + s)), resolve($("to-" + s))])
+      .then(function (pts) {
+        from = pts[0]; to = pts[1];
+        status.textContent = "Calcul de l'itinéraire…";
+        return route(from, to).catch(function () {
+          // Sans itinéraire : distance à vol d'oiseau, majorée de 30 % pour les détours de la route.
+          return { km: haversine(from, to) * 1.3, min: NaN, estimate: true };
+        });
+      })
+      .then(function (r) {
+        places[s] = { from: from, to: to };
+        $("dist-" + s).value = (Math.round(r.km * 10) / 10).toString();
+        status.textContent = r.estimate
+          ? "Itinéraire indisponible : environ " + km1.format(r.km) + " km, estimés à vol d'oiseau plus 30 %."
+          : km1.format(r.km) + " km par la route" + (r.min > 0 ? ", environ " + Math.round(r.min) + " min" : "") + ".";
+        if (s === "a") loadGeo();
+        render();
+      })
+      .catch(function (e) {
+        status.textContent = e.message === "vide"
+          ? "Indiquez un départ et une arrivée."
+          : e.message === "introuvable"
+            ? "Adresse introuvable : précisez la commune."
+            : "Service de calcul indisponible : saisissez la distance à la main.";
+      });
+  }
+
+  // Suggestions pendant la saisie, dans une liste propre à chaque champ.
+  Array.prototype.forEach.call(document.querySelectorAll("input.place"), function (input) {
+    var list = document.createElement("datalist");
+    list.id = input.id + "-list";
+    input.setAttribute("list", list.id);
+    input.parentNode.appendChild(list);
+    var timer = null;
+    input.addEventListener("input", function () {
+      clearTimeout(timer);
+      var text = input.value.trim();
+      if (text.length < 3 || known[text]) return;
+      timer = setTimeout(function () {
+        geocode(text, 5).then(function (found) {
+          list.innerHTML = "";
+          found.forEach(function (p) { list.appendChild(new Option(p.label, p.label)); });
+        }).catch(function () { /* la saisie libre reste possible */ });
+      }, 300);
+    });
+  });
+  $("go-a").addEventListener("click", function () { computeRoute("a"); });
+  $("go-b").addEventListener("click", function () { computeRoute("b"); });
+
+  // ---------- Données GéoBercé : lignes Aléop, aires de covoiturage, bornes ----------
+  var geo = null; // { lignes: [...], aires: [...], bornes: [...] } une fois chargé
+  var geoLoading = false;
+
+  function getJSON(url) {
+    return fetch(url).then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .catch(function () { return { features: [] }; });
+  }
+
+  function loadGeo() {
+    if (geo || geoLoading) return;
+    geoLoading = true;
+    var base = "../geoberce/couches/";
+    Promise.all([
+      getJSON(base + "mobilite/reseauALEOP.geojson"),
+      getJSON(base + "mobilite/airecovoiturage.geojson"),
+      getJSON(base + "services/irve.geojson")
+    ]).then(function (r) {
+      var lignes = {};
+      r[0].features.forEach(function (f) {
+        var p = f.properties || {};
+        var g = f.geometry;
+        if (!g || !p.route_short_name) return;
+        var key = p.route_short_name;
+        if (!lignes[key]) lignes[key] = { nom: p.route_short_name, trajet: p.route_long_name || "", traces: [] };
+        if (g.type === "LineString") lignes[key].traces.push(g.coordinates);
+        if (g.type === "MultiLineString") lignes[key].traces = lignes[key].traces.concat(g.coordinates);
+      });
+      var aires = r[1].features.filter(function (f) { return f.geometry && f.geometry.type === "Point"; })
+        .map(function (f) {
+          var p = f.properties || {};
+          return { nom: p.nom_lieu || "Aire de covoiturage", commune: p.com_lieu || "", places: p.nbre_pl,
+            lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] };
+        });
+      // Le fichier des bornes a une ligne par point de charge : on regroupe par station.
+      var stations = {};
+      r[2].features.forEach(function (f) {
+        if (!f.geometry || f.geometry.type !== "Point") return;
+        var p = f.properties || {};
+        var c = f.geometry.coordinates;
+        var key = p.id_station_itinerance || c.join(",");
+        if (!stations[key]) {
+          stations[key] = { adresse: (p.adresse_station || "").trim(), puissance: 0, points: 0, lon: c[0], lat: c[1] };
+        }
+        stations[key].points += 1;
+        stations[key].puissance = Math.max(stations[key].puissance, parseFloat(p.puissance_nominale) || 0);
+      });
+      geo = { lignes: Object.keys(lignes).map(function (k) { return lignes[k]; }), aires: aires,
+        bornes: Object.keys(stations).map(function (k) { return stations[k]; }) };
+      render();
+    });
+  }
+
+  // Distance (km) d'un point à une ligne, en projetant localement en mètres.
+  function distToTrace(p, coords) {
+    var kx = 111.32 * Math.cos(p.lat * Math.PI / 180), ky = 110.57;
+    var best = Infinity;
+    for (var i = 1; i < coords.length; i++) {
+      var ax = (coords[i - 1][0] - p.lon) * kx, ay = (coords[i - 1][1] - p.lat) * ky;
+      var bx = (coords[i][0] - p.lon) * kx, by = (coords[i][1] - p.lat) * ky;
+      var dx = bx - ax, dy = by - ay;
+      var len = dx * dx + dy * dy;
+      var t = len ? Math.max(0, Math.min(1, -(ax * dx + ay * dy) / len)) : 0;
+      var x = ax + t * dx, y = ay + t * dy;
+      best = Math.min(best, Math.sqrt(x * x + y * y));
+    }
+    return best;
+  }
+
+  function distToLine(p, ligne) {
+    return Math.min.apply(null, ligne.traces.map(function (t) { return distToTrace(p, t); }));
+  }
+
+  // ---------- Covoiturage et car Aléop ----------
+  function renderPartage(a, sc) {
+    var n = parseInt($("people").value, 10) || 2;
+    var bus = val("bus-price");
+    var months = Math.min(12, Math.ceil(sc.weeks / 52 * 12));
+    var busYear = bus * months / 2;  // l'employeur prend en charge au moins 50 %
+    var rows = [
+      { label: "Seul en voiture", values: [eur.format(a.fuel), eur.format(a.full)] },
+      { label: "En covoiturage à " + n, values: [eur.format(a.fuel / n), eur.format(a.full / n)], total: true },
+      { label: "En car Aléop", values: bus ? [eur.format(busYear), eur.format(busYear)] : ["–", "–"] }
+    ];
+    var h = table(["Carburant seul, par an", "Coût complet, par an"], rows);
+    var notes = [];
+    if (a.fuel > 0) {
+      notes.push("À " + n + ", chacun économise environ <strong>" + eur.format(a.fuel - a.fuel / n) +
+        " par an</strong> de carburant, et <strong>" + eur.format(a.full - a.full / n) + "</strong> au coût complet en alternant les voitures.");
+    }
+    if (bus) {
+      notes.push("Car : " + months + " mois d'abonnement à " + eur.format(bus) + ", dont la moitié remboursée par l'employeur.");
+    } else {
+      notes.push("Indiquez le prix de l'abonnement Aléop pour comparer avec le car.");
+    }
+    h += "<p class='insight'>" + notes.join(" ") + "</p>";
+
+    var pl = places.a;
+    if (!pl.from) {
+      h += "<p class='note'>Calculez la distance depuis vos adresses (situation de départ) pour voir les lignes Aléop et l'aire de covoiturage proches.</p>";
+    } else if (!geo) {
+      h += "<p class='note'>Recherche des lignes et des aires proches…</p>";
+    } else {
+      var items = [];
+      geo.lignes.forEach(function (l) {
+        var dFrom = distToLine(pl.from, l), dTo = distToLine(pl.to, l);
+        if (dFrom <= 2 && dTo <= 3) {
+          items.push("Ligne Aléop <strong>" + esc(l.nom) + "</strong> (" + esc(l.trajet) + ") : à " +
+            near(dFrom) + " du départ et à " + near(dTo) + " de l'arrivée.");
+        }
+      });
+      if (!items.length) items.push("Aucune ligne Aléop du territoire ne passe à la fois près de votre départ et de votre arrivée.");
+      var aires = geo.aires.map(function (x) { return { x: x, d: haversine(pl.from, x) }; })
+        .filter(function (o) { return o.d <= 15; })
+        .sort(function (u, v) { return u.d - v.d; });
+      if (aires.length) {
+        var o = aires[0];
+        items.push("Aire de covoiturage la plus proche : <strong>" + esc(o.x.nom) + "</strong>" +
+          (o.x.commune ? " (" + esc(o.x.commune) + ")" : "") + ", à " + near(o.d) +
+          (o.x.places ? ", " + o.x.places + " places" : "") + ".");
+      } else {
+        items.push("Pas d'aire de covoiturage recensée à moins de 15 km de votre départ.");
+      }
+      h += "<ul class='places'><li>" + items.join("</li><li>") + "</li></ul>";
+    }
+    $("res-partage").innerHTML = h;
+  }
+
+  // ---------- Thermique ou électrique ----------
+  function renderElec(a, vehicle, fuelKey) {
+    if (FUELS[fuelKey].electric) {
+      $("res-elec").innerHTML = "<p>Votre voiture est déjà électrique : rien à comparer ici.</p>";
+      return;
+    }
+    var km = a.km + val("other-km");
+    var share = Math.min(100, val("ev-home")) / 100;
+    var kwhPrice = share * val("ev-price-home") + (1 - share) * val("ev-price-public");
+    var th = { energy: km / 100 * vehicle.conso * vehicle.price, maint: val("maint-th"), buy: val("buy-th") };
+    var ev = { energy: km / 100 * val("ev-conso") * kwhPrice, maint: val("maint-ev"), buy: val("buy-ev") };
+    var withBuy = th.buy > 0 && ev.buy > 0;
+    [th, ev].forEach(function (c) {
+      c.year = c.energy + c.maint;
+      c.five = c.year * 5 + (withBuy ? c.buy : 0);
+    });
+    var rows = [
+      { label: "Énergie, par an", values: [eur.format(th.energy), eur.format(ev.energy)] },
+      { label: "Entretien, par an", values: [eur.format(th.maint), eur.format(ev.maint)] },
+      { label: "Total, par an", values: [eur.format(th.year), eur.format(ev.year)] }
+    ];
+    if (withBuy) rows.push({ label: "Achat", values: [eur.format(th.buy), eur.format(ev.buy)] });
+    rows.push({ label: withBuy ? "Total sur 5 ans, achat compris" : "Total sur 5 ans", values: [eur.format(th.five), eur.format(ev.five)], total: true });
+    var h = "<p class='note' style='margin-top:0'>" + num.format(km) + " km par an.</p>" +
+      table(["Voiture actuelle", "Électrique"], rows);
+
+    var save = th.year - ev.year;
+    var msg;
+    if (km <= 0) {
+      msg = "Indiquez une distance pour lancer la comparaison.";
+    } else if (save <= 0) {
+      msg = "Avec ces valeurs, l'électrique ne coûte pas moins cher à l'usage.";
+    } else {
+      msg = "L'électrique économise environ <strong>" + eur.format(save) + " par an</strong> à l'usage.";
+      if (withBuy) {
+        var gap = ev.buy - th.buy;
+        if (gap <= 0) msg += " Elle est aussi moins chère à l'achat.";
+        else {
+          var years = gap / save;
+          msg += " L'écart de prix d'achat (" + eur.format(gap) + ") est remboursé en <strong>" +
+            (years > 30 ? "plus de 30 ans" : km1.format(years) + " ans") + "</strong>.";
+        }
+      } else {
+        msg += " Indiquez les prix d'achat pour savoir en combien de temps l'écart est remboursé.";
+      }
+    }
+    h += "<p class='insight'>" + msg + "</p>";
+
+    var from = places.a.from;
+    if (from && geo) {
+      var near = geo.bornes.map(function (b) { return { b: b, d: haversine(from, b) }; })
+        .filter(function (o) { return o.d <= 10; })
+        .sort(function (u, v) { return u.d - v.d; });
+      if (near.length) {
+        var o = near[0];
+        h += "<ul class='places'><li><strong>" + near.length + " station" + (near.length > 1 ? "s" : "") +
+          " de recharge publique" + (near.length > 1 ? "s" : "") + "</strong> à moins de 10 km de votre départ. " +
+          "La plus proche : " + esc(o.b.adresse || "adresse non renseignée") + ", à " + near(o.d) +
+          (o.b.puissance ? " (" + num.format(o.b.puissance) + " kW)" : "") + ".</li></ul>";
+      } else {
+        h += "<ul class='places'><li>Pas de borne de recharge publique recensée à moins de 10 km de votre départ.</li></ul>";
+      }
+    } else if (!from) {
+      h += "<p class='note'>Calculez la distance depuis vos adresses pour voir les bornes de recharge proches.</p>";
+    }
+    $("res-elec").innerHTML = h;
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".extra"), function (el) {
+    el.addEventListener("input", render);
+    el.addEventListener("change", render);
+  });
 
   // Catalogue ADEME Car Labelling (trajet/vehicules.json, généré par build_vehicules.py).
   // Chaque version : [libellé, énergie, puissance fiscale, consommation /100 km].
