@@ -126,6 +126,7 @@
   .tip svg { flex: none; margin-top: 2px; }
   .next { color: var(--gold-hi); font-weight: 500; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; align-self: flex-start; border-bottom: 1px solid rgba(226, 196, 126, 0.4); }
   .next:hover { color: var(--paper); border-bottom-color: var(--paper); }
+  .next-links { display: flex; flex-wrap: wrap; gap: 4px 24px; }
 
   /* ---------- Explorer ---------- */
   .explore { margin-top: 56px; }
@@ -329,7 +330,10 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2C47E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg>
         <span id="tip-text"></span>
       </p>
-      <a class="next" id="to-salary" href="../salaire/">Et mon vrai salaire horaire, avec ce trajet&nbsp;? <span aria-hidden="true">→</span></a>
+      <div class="next-links">
+        <a class="next" id="to-salary" href="../salaire/">Et mon vrai salaire horaire, avec ce trajet&nbsp;? <span aria-hidden="true">→</span></a>
+        <a class="next" id="to-part" href="../temps-partiel/">Et si je passais à 80&nbsp;%&nbsp;? <span aria-hidden="true">→</span></a>
+      </div>
     </section>
   </div>
 
@@ -602,6 +606,7 @@
       conso: vehicle.conso, prix: vehicle.price, cv: vehicle.cv };
     if (places.a.min) q.min = places.a.min;
     $("to-salary").href = "../salaire/?" + Object.keys(q).map(function (k) { return k + "=" + encodeURIComponent(q[k]); }).join("&");
+    $("to-part").href = "../temps-partiel/" + (a.days ? "?jour=" + (Math.round(a.fuel / a.days * 100) / 100) : "");
 
     renderShare(a, scA);
     renderElec(a, vehicle, fuelKey);
