@@ -186,6 +186,7 @@
               <button type="button" data-rate="0.8" aria-pressed="true">80 %</button>
               <button type="button" data-rate="0.7" aria-pressed="false">70 %</button>
               <button type="button" data-rate="0.6" aria-pressed="false">60 %</button>
+              <button type="button" data-rate="0.5" aria-pressed="false">50 %</button>
             </div>
           </div>
           <div>
@@ -314,7 +315,7 @@
     </div>
     <div>
       <span class="kicker">// la prepare</span>
-      <p>171,42 € par mois pour une activité entre 50 et 80 %, si vous avez cotisé 8 trimestres. Pendant 6 mois au plus par parent avant le premier anniversaire avec 1 enfant ; jusqu'à 24 mois par parent avant les 3 ans du plus jeune à partir de 2 enfants. À 80 %, le CMG reste versé en entier. Elle ne se cumule pas avec le congé de naissance.</p>
+      <p>171,42 € par mois pour une activité entre 50 et 80 %, 297,17 € à 50 % ou moins (le CMG est alors divisé par deux), si vous avez cotisé 8 trimestres. Pendant 6 mois au plus par parent avant le premier anniversaire avec 1 enfant ; jusqu'à 24 mois par parent avant les 3 ans du plus jeune à partir de 2 enfants. À 80 %, le CMG reste versé en entier. Elle ne se cumule pas avec le congé de naissance.</p>
     </div>
     <div>
       <span class="kicker">// à vérifier</span>
@@ -341,7 +342,8 @@
     incomeMax: 8500       // …et plafond (€)
   };
   var TAX_CREDIT = { rate: 0.5, cap: 3500 };  // frais de garde d'un enfant de moins de 6 ans, par an
-  var PREPARE_PARTIAL = 171.42;               // PreParE, activité entre 50 et 80 % (€ par mois)
+  // PreParE à taux partiel (€ par mois). À 50 % ou moins, le CMG est divisé par deux tant qu'elle est versée.
+  var PREPARE = { upTo50: 297.17, upTo80: 171.42 };
 
   var $ = function (id) { return document.getElementById(id); };
   var all = function (sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); };
@@ -367,12 +369,12 @@
   }
 
   // Coût mensuel de la nourrice, CMG et crédit d'impôt déduits.
-  function nanny(hoursWeek, days, o) {
+  function nanny(hoursWeek, days, o, cmgFactor) {
     var hours = hoursWeek * o.weeks / 12;
     var cost = hours * o.rateHour + days * o.weeks / 12 * o.perDay;
     var income = Math.min(CMG.incomeMax, Math.max(CMG.incomeMin, o.income));
     var share = Math.max(0, 1 - income * CMG.effort[o.kids] / CMG.reference);
-    var cmg = Math.min(cost, hours * CMG.hourCap) * share;
+    var cmg = Math.min(cost, hours * CMG.hourCap) * share * (cmgFactor || 1);
     var rest = cost - cmg;
     var credit = Math.min(rest * 12, TAX_CREDIT.cap) * TAX_CREDIT.rate / 12;
     return { cost: cost, cmg: cmg, credit: credit, net: rest - credit };
@@ -389,15 +391,18 @@
     all(".rate-label").forEach(function (el) { el.textContent = pct; });
 
     var full = nanny(val("g-hours"), 5, o);
-    var part = nanny(val("g-part"), 5 * rate, o);
+    var prepareOk = rate <= 0.8;
+    var prepareAmount = rate <= 0.5 ? PREPARE.upTo50 : PREPARE.upTo80;
+    var during = prepareOk && phase === "prepare";
+    var partAfter = nanny(val("g-part"), 5 * rate, o);
+    var part = during && rate <= 0.5 ? nanny(val("g-part"), 5 * rate, o, 0.5) : partAfter;
     var paid = paidShare(rate);
     var salary = o.net * (1 - paid);
     var nannySave = full.net - part.net;
     var tripSave = o.trip * 5 * (1 - rate) * o.weeks / 12;
-    var prepareOk = rate <= 0.8 && rate > 0.5;
-    var prepare = prepareOk && phase === "prepare" ? PREPARE_PARTIAL : 0;
+    var prepare = during ? prepareAmount : 0;
     var loss = salary - nannySave - tripSave - prepare;
-    var lossAfter = salary - nannySave - tripSave;
+    var lossAfter = salary - (full.net - partAfter.net) - tripSave;
     var freed = o.hours * (1 - rate) * o.weeks / 12;
 
     $("phase-pill").hidden = !prepareOk;
@@ -426,18 +431,18 @@
       ? "pendant 6 mois au plus, avant le premier anniversaire de l'enfant"
       : "jusqu'à 24 mois, avant les 3 ans du plus jeune";
     $("tip-text").innerHTML = prepareOk
-      ? "La PreParE à taux partiel (171,42 € par mois) est versée " + duration +
-        ", si vous avez cotisé 8 trimestres. Ensuite, la perte passe à <strong>" + eur.format(lossAfter) + " par mois</strong>."
-      : rate > 0.8
-        ? "À " + pct + ", pas de PreParE : elle demande de travailler à 80 % ou moins."
-        : "Sous 50 %, la PreParE et le CMG changent : ce cas n'est pas calculé ici.";
+      ? "La PreParE à taux partiel (" + eur2.format(prepareAmount) + " par mois) est versée " + duration +
+        ", si vous avez cotisé 8 trimestres" + (rate <= 0.5 ? " ; pendant ce temps, le CMG est divisé par deux" : "") +
+        ". Ensuite, la perte passe à <strong>" + eur.format(lossAfter) + " par mois</strong>."
+      : "À " + pct + ", pas de PreParE : elle demande de travailler à 80 % ou moins.";
 
     var line = function (label, a, b, total) {
       return "<tr" + (total ? ' class="total"' : "") + '><th scope="row">' + label + "</th><td>" + a + "</td><td>" + b + "</td></tr>";
     };
     $("detail").innerHTML =
       line("Salaire et entretien de la nourrice", eur.format(full.cost), eur.format(part.cost)) +
-      line("CMG versé par la CAF", "−" + eur.format(full.cmg), "−" + eur.format(part.cmg)) +
+      line("CMG versé par la CAF" + (part !== partAfter ? " (divisé par deux avec la PreParE)" : ""),
+        "−" + eur.format(full.cmg), "−" + eur.format(part.cmg)) +
       line("Crédit d'impôt (50 %, plafonné)", "−" + eur.format(full.credit), "−" + eur.format(part.credit)) +
       line("Reste à votre charge", eur.format(full.net), eur.format(part.net), true);
 
