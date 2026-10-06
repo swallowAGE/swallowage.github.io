@@ -769,7 +769,8 @@
       .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
       .then(function (j) {
         return (j.features || []).map(function (f) {
-          var place = { label: f.properties.label, lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] };
+          var place = { label: f.properties.label, context: f.properties.context || "",
+            lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1] };
           known[place.label] = place;
           return place;
         });
@@ -839,26 +840,77 @@
       });
   }
 
-  // Suggestions pendant la saisie, dans une liste propre à chaque champ.
+  // Suggestions pendant la saisie : une liste sous chaque champ d'adresse.
+  // Choisir une suggestion calcule la distance dès que l'autre adresse est remplie.
   all("input.place").forEach(function (input) {
-    var list = document.createElement("datalist");
+    var s = input.id.slice(-1);            // "a" ou "b"
+    var other = $((input.id.indexOf("from") === 0 ? "to-" : "from-") + s);
+    var list = document.createElement("ul");
+    list.className = "search-list";
     list.id = input.id + "-list";
-    input.setAttribute("list", list.id);
+    list.setAttribute("role", "listbox");
+    list.setAttribute("aria-label", "Adresses proposées");
+    list.hidden = true;
     input.parentNode.appendChild(list);
-    var timer = null;
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-controls", list.id);
+    input.setAttribute("aria-expanded", "false");
+    input.setAttribute("autocomplete", "off");
+    var timer = null, asked = 0, found = [];
+
+    function close() {
+      list.hidden = true;
+      input.setAttribute("aria-expanded", "false");
+    }
+    function pick(place) {
+      input.value = place.label;
+      close();
+      if (other.value.trim()) computeRoute(s); else other.focus();
+    }
     input.addEventListener("input", function () {
       clearTimeout(timer);
       var text = input.value.trim();
-      if (text.length < 3 || known[text]) return;
+      if (text.length < 3) { close(); return; }
       timer = setTimeout(function () {
-        geocode(text, 5).then(function (found) {
-          list.innerHTML = "";
-          found.forEach(function (p) { list.appendChild(new Option(p.label, p.label)); });
-        }).catch(function () { /* la saisie libre reste possible */ });
-      }, 300);
+        var n = ++asked;
+        geocode(text, 6).then(function (res) {
+          if (n !== asked) return;         // une réponse plus récente est déjà là
+          found = res;
+          if (!res.length) { close(); return; }
+          list.innerHTML = res.map(function (p, i) {
+            return '<li role="option"><button type="button" data-i="' + i + '">' + esc(p.label) +
+              (p.context ? "<small>" + esc(p.context) + "</small>" : "") + "</button></li>";
+          }).join("");
+          list.hidden = false;
+          input.setAttribute("aria-expanded", "true");
+        }).catch(function () { close(); /* la saisie libre reste possible */ });
+      }, 250);
     });
     input.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") { e.preventDefault(); computeRoute(input.id.slice(-1)); }
+      if (e.key === "ArrowDown" && !list.hidden) {
+        e.preventDefault();
+        list.querySelector("button").focus();
+      } else if (e.key === "Escape") {
+        close();
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (!list.hidden && found.length) pick(found[0]); else computeRoute(s);
+      }
+    });
+    list.addEventListener("keydown", function (e) {
+      var btns = Array.prototype.slice.call(list.querySelectorAll("button"));
+      var i = btns.indexOf(document.activeElement);
+      if (e.key === "ArrowDown" && i < btns.length - 1) { e.preventDefault(); btns[i + 1].focus(); }
+      if (e.key === "ArrowUp") { e.preventDefault(); (i > 0 ? btns[i - 1] : input).focus(); }
+      if (e.key === "Escape") { close(); input.focus(); }
+    });
+    list.addEventListener("click", function (e) {
+      var b = e.target.closest("button");
+      if (b) pick(found[+b.dataset.i]);
+    });
+    document.addEventListener("click", function (e) {
+      if (e.target !== input && !list.contains(e.target)) close();
     });
   });
   $("go-a").addEventListener("click", function () { computeRoute("a"); });
