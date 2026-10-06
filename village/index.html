@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<title>Mon Petit Monde</title>
-<meta name="description" content="Les maths construisent de grandes aventures ! Réussis des additions pour gagner des étoiles et construire ton petit monde.">
+<title>Mon Village des Maths</title>
+<meta name="description" content="Les maths construisent de grandes aventures ! Réussis des additions pour gagner des étoiles et construire ton village.">
 <meta name="theme-color" content="#5E9E43">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.json">
@@ -51,7 +51,7 @@
     <img class="logo-flower f2" src="img/hibiscus.png" alt="">
     <img class="logo-leaf l1" src="img/herb.png" alt="">
     <img class="logo-leaf l2" src="img/seedling.png" alt="">
-    <h1><span>Mon Petit</span><span class="big">Monde</span></h1>
+    <h1><span>Mon Village</span><span class="big">des Maths</span></h1>
   </div>
   <p class="tagline">Les maths construisent<br>de grandes aventures !</p>
 
@@ -59,7 +59,7 @@
     <button class="btn btn-green btn-xl" id="btn-start">Jouer</button>
     <div class="row2">
       <button class="btn btn-cream" id="btn-title-settings"><img src="img/gear.png" alt="">Paramètres</button>
-      <button class="btn btn-cream" id="btn-title-profile"><span class="mini-avatar" data-avatar></span>Mon profil</button>
+      <button class="btn btn-cream" id="btn-title-profile"><span class="mini-avatar" data-avatar="head"></span>Mon profil</button>
     </div>
   </div>
 
@@ -82,7 +82,7 @@
       <div class="pill"><img src="img/star.png" alt="Étoiles"><b id="stars">0</b></div>
       <div class="pill water-pill" id="water-pill" hidden><img src="img/droplet.png" alt="Gouttes d'eau"><b id="water">0</b></div>
     </div>
-    <button class="avatar-btn" id="btn-profile" aria-label="Mon personnage"><span class="mini-avatar" data-avatar></span></button>
+    <button class="avatar-btn" id="btn-profile" aria-label="Mon personnage"><span class="mini-avatar" data-avatar="head"></span></button>
     <div class="pill level-pill">
       <img src="img/glowing_star.png" alt="">
       <div>
@@ -93,10 +93,16 @@
     <button class="icon-btn" id="btn-settings" aria-label="Paramètres"><img src="img/gear.png" alt=""></button>
   </header>
 
+  <button class="gift-btn" id="btn-gift" aria-label="Cadeau du jour" hidden><img src="img/wrapped_gift.png" alt=""></button>
+
   <div class="map-area" id="map-area">
     <div class="map" id="map">
       <img class="map-bg" src="img/fond-carte.webp" alt="" draggable="false">
       <div class="layer" id="layer"></div>
+      <div class="sparkles" id="sparkles"></div>
+      <div class="daylight" id="daylight"></div>
+      <div class="nightfx" id="nightfx"></div>
+      <div class="fireflies" id="fireflies"></div>
     </div>
 
     <div class="map-tools">
@@ -160,7 +166,7 @@
     </div>
     <div class="buddy">
       <div class="bubble" id="bubble"></div>
-      <span class="avatar" data-avatar></span>
+      <span class="avatar" data-avatar="bust"></span>
     </div>
   </div>
 </main>
@@ -178,6 +184,7 @@
   <section class="modal small" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
     <h2 class="banner" id="confirm-title"></h2>
     <div class="confirm-body">
+      <span id="confirm-portrait" hidden></span>
       <img id="confirm-img" src="" alt="">
       <div>
         <p class="confirm-name" id="confirm-name"></p>
@@ -192,6 +199,7 @@
 <div id="toast" class="toast" role="status"></div>
 <div id="fx" class="fx" aria-hidden="true"></div>
 
+<script src="personnage.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

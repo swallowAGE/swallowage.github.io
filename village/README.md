@@ -1,9 +1,9 @@
-# Mon Petit Monde
+# Mon Village des Maths
 
 *Les maths construisent de grandes aventures !*
 
 Jeu d'additions pour enfants : chaque bonne réponse rapporte des étoiles ⭐
-pour construire, décorer et peupler son petit monde.
+pour construire, décorer et peupler son village.
 
 ## Le jeu
 
@@ -17,6 +17,10 @@ pour construire, décorer et peupler son petit monde.
 - **Le monde** : une grande prairie illustrée (rivière, pont, cascade, forêt) en plein écran.
   On la fait glisser du doigt et on **zoome** en pinçant à deux doigts (molette sur ordinateur,
   ou boutons ＋ －, jusqu'à 2×).
+- **Un monde vivant** : jour et nuit selon l'heure du téléphone (soleil levant, soirée orangée,
+  nuit bleue avec fenêtres allumées et lucioles), fumée aux cheminées, eau qui scintille,
+  papillons. Réglage « Toujours le jour » dans les paramètres. Pour essayer une heure :
+  ajouter `?heure=21` à l'adresse du jeu.
 - **Construire où l'on veut** : on choisit un bâtiment puis on touche l'herbe (pas dans l'eau,
   pas sur une autre construction). Le nombre de constructions possibles grandit avec le niveau.
 - **Déplacer** (bouton ✋) : on soulève une construction ou une décoration, puis on la repose ailleurs.
@@ -30,7 +34,15 @@ pour construire, décorer et peupler son petit monde.
 - **Niveaux** : le monde monte de niveau en grandissant, ce qui débloque
   des emplacements et de nouvelles constructions.
 - **Progrès** : 17 défis qui rapportent des étoiles bonus.
-- **Mon personnage** : fille ou garçon, 6 couleurs de peau, accessoires.
+- **Mon personnage** : dessiné en code (`personnage.js`), entièrement personnalisable avec aperçu :
+  8 couleurs de peau, 9 coiffures sur 10 couleurs, yeux, 6 tenues sur 10 couleurs, 8 accessoires,
+  bouton « Au hasard ».
+- **Habitants** : ils arrivent avec les maisons (un pour trois places), avec un prénom et un look
+  au hasard, et se promènent dans le village.
+- **Commandes** : un habitant demande quelque chose (construire un bâtiment, adopter un animal,
+  poser des décorations, ou **réussir des additions** d'une table). Une bulle l'indique au-dessus de
+  sa tête ; on récupère les étoiles en le touchant une fois la commande terminée.
+- **Cadeau du jour** : un cadeau à ouvrir chaque jour (étoiles et gouttes d'eau).
 - **Paramètres (espace parents)** : son, mode de réponse, nombre de questions,
   statistiques par entraînement, remise à zéro.
 

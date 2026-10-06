@@ -1,7 +1,7 @@
 {
-  "name": "Mon Petit Monde",
-  "short_name": "Petit Monde",
-  "description": "Les maths construisent de grandes aventures ! Réussis des additions pour construire ton petit monde.",
+  "name": "Mon Village des Maths",
+  "short_name": "Mon Village",
+  "description": "Les maths construisent de grandes aventures ! Réussis des additions pour construire ton village.",
   "start_url": "index.html",
   "scope": ".",
   "display": "fullscreen",
