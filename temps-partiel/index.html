@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passer à temps partiel – Swallow AGE</title>
+<meta name="description" content="Passer à 80 % : le salaire en moins, face à la nourrice en moins (CMG et crédit d'impôt compris), à la PreParE de la CAF et au trajet en moins.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B2230;
+    --soft: #6B5F5A;
+    --paper: #FAF6F0;
+    --raised: #F3ECE2;
+    --field: #FFFDF9;
+    --seg: #E8DED0;
+    --gold: #C9A85C;
+    --gold-ink: #8A6D2B;
+    --gold-hi: #E2C47E;
+    --rose: #8E4458;
+    --mauve: #9C7D8A;
+    --on-dark: #E5DCD6;
+    --on-dark-soft: #D3C8C2;
+    --rule: rgba(43, 34, 48, 0.12);
+    --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Jost", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 64px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+
+  /* ---------- En-tête ---------- */
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 18px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 12px 0 0; font-size: clamp(32px, 5vw, 46px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+  .lede { margin: 10px 0 0; font-size: 18px; font-weight: 300; color: var(--soft); max-width: 64ch; }
+
+  /* ---------- Réglages ---------- */
+  .main { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; margin-top: 28px; }
+  .settings { flex: 1 1 340px; min-width: 0; background: var(--raised); border-radius: 18px; padding: 4px 24px; }
+  .step { border-bottom: 1px solid var(--rule); }
+  .step:last-child { border-bottom: 0; }
+  .step summary { list-style: none; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 18px 0; cursor: pointer; min-height: 44px; }
+  .step summary::-webkit-details-marker { display: none; }
+  .step summary::after { content: "›"; color: var(--rose); font-size: 20px; line-height: 1; margin-left: auto; transform: rotate(90deg); transition: transform 0.15s; }
+  .step[open] summary::after { transform: rotate(-90deg); }
+  .num { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+  .step-title { font-size: 19px; font-weight: 500; }
+  .step-sum { order: 3; flex-basis: 100%; padding-left: 28px; font-size: 14px; color: var(--soft); }
+  .step[open] .step-sum { display: none; }
+  .step-body { display: flex; flex-direction: column; gap: 14px; padding: 0 0 22px; }
+  label, .lbl { display: block; font-size: 13px; font-weight: 500; color: var(--soft); margin: 0 0 6px; }
+  .fld {
+    width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--field);
+    border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 44px;
+  }
+  .hint { margin: 6px 0 0; font-size: 13px; color: var(--soft); }
+  .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; background: var(--seg); border-radius: 12px; padding: 4px; }
+  .seg button { border: 0; border-radius: 9px; min-height: 40px; padding: 8px 6px; font: inherit; font-size: 15px; font-weight: 500; background: transparent; color: var(--soft); cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--field); color: var(--ink); box-shadow: 0 1px 2px rgba(43, 34, 48, 0.15); }
+  .stepper-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .stepper-row label { margin: 0; font-size: 15px; font-weight: 400; color: var(--ink); }
+  .stepper { display: flex; align-items: center; background: var(--field); border-radius: 10px; padding: 2px; flex: none; }
+  .stepper button { width: 44px; height: 44px; border: 0; background: transparent; font: inherit; font-size: 22px; line-height: 1; color: var(--rose); cursor: pointer; border-radius: 8px; }
+  .stepper button:hover { background: var(--raised); }
+  .stepper input { width: 46px; border: 0; background: transparent; text-align: center; font: inherit; font-size: 16px; font-weight: 600; color: var(--ink); -moz-appearance: textfield; }
+  .stepper input::-webkit-inner-spin-button, .stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+  /* ---------- Résultat ---------- */
+  .result { flex: 999 1 520px; min-width: 0; background: var(--ink); color: var(--paper); border-radius: 18px; padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+  @media (min-width: 900px) { .result { position: sticky; top: 16px; } }
+  .result .kicker { color: var(--gold); }
+  .res-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .pill { display: flex; gap: 4px; background: rgba(250, 246, 240, 0.08); border-radius: 999px; padding: 4px; }
+  .pill button { border: 0; border-radius: 999px; min-height: 36px; padding: 6px 14px; font: inherit; font-size: 15px; font-weight: 500; background: transparent; color: var(--on-dark); cursor: pointer; }
+  .pill button[aria-pressed="true"] { background: var(--gold-hi); color: var(--ink); }
+  .big { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .big strong { font-size: clamp(56px, 9vw, 96px); line-height: 1; font-weight: 500; color: var(--gold-hi); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .big span { font-size: 20px; font-weight: 300; }
+  .sub { margin: 12px 0 0; font-size: 17px; font-weight: 300; color: var(--on-dark); }
+  .sub strong { font-weight: 600; color: var(--paper); }
+  .rows { display: flex; flex-direction: column; gap: 12px; }
+  .wrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) 90px; gap: 14px; align-items: center; }
+  .wrow span { font-size: 15px; color: var(--on-dark); }
+  .wrow .track { height: 12px; border-radius: 999px; background: rgba(250, 246, 240, 0.08); overflow: hidden; }
+  .wrow .track div { height: 100%; border-radius: 999px; }
+  .wrow b { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .stat { background: rgba(250, 246, 240, 0.06); border-radius: 12px; padding: 14px 16px; }
+  .stat b { display: block; font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13px; color: var(--on-dark-soft); }
+  .tip { border-top: 1px dashed rgba(250, 246, 240, 0.25); padding-top: 18px; display: flex; gap: 14px; align-items: flex-start; margin: 0; font-size: 16px; font-weight: 300; }
+  .tip strong { color: var(--gold-hi); font-weight: 600; }
+  .tip svg { flex: none; margin-top: 2px; }
+
+  /* ---------- Détail de la nourrice ---------- */
+  .detail { margin-top: 56px; }
+  .detail > h2 { margin: 6px 0 20px; font-size: 30px; font-weight: 500; }
+  .table-box { background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 18px; padding: 8px 26px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 480px; }
+  th, td { padding: 12px 0; border-bottom: 1px dotted #B9AAB0; }
+  thead th { font-size: 14px; font-weight: 500; text-align: right; border-bottom: 1px solid var(--ink); }
+  thead th:first-child { text-align: left; color: var(--soft); }
+  tbody th { text-align: left; font-weight: 400; }
+  td { text-align: right; padding-left: 12px; }
+  tr.total th, tr.total td { font-weight: 700; border-bottom: 1px solid var(--ink); }
+
+  /* ---------- Pied de page ---------- */
+  .notes { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 6px 0 0; }
+
+  /* ---------- Téléphone ---------- */
+  .mobilebar { display: none; }
+  @media (max-width: 800px) {
+    .wrap { padding: 0 16px 96px; }
+    .result { order: -1; padding: 22px; gap: 18px; }
+    .settings { padding: 0 18px; }
+    .wrow { grid-template-columns: minmax(0, 1fr) 80px; }
+    .wrow .track { display: none; }
+    .stat { padding: 10px 12px; }
+    .stat b { font-size: 18px; }
+    .stat span { font-size: 12px; }
+    .detail > h2 { font-size: 24px; }
+    .table-box { padding: 6px 16px; }
+    table { min-width: 0; font-size: 14px; }
+    td { white-space: nowrap; }
+    .mobilebar {
+      display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+      background: var(--ink); color: var(--paper); padding: 12px 16px;
+      justify-content: space-between; align-items: center; transition: transform 0.2s;
+    }
+    .mobilebar.off { transform: translateY(110%); }
+    .mobilebar span { font-size: 14px; color: var(--on-dark); }
+    .mobilebar strong { font-size: 22px; font-weight: 500; color: var(--gold-hi); }
+  }
+  @media (max-width: 420px) {
+    .row3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .row3 > :last-child { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../">← swallow·AGE</a>
+    <span class="kicker">// outil · temps partiel</span>
+  </div>
+  <header>
+    <h1>Passer à <span class="rate-label">80 %</span>, combien je perds vraiment&nbsp;?</h1>
+    <p class="lede">Le salaire en moins, face à la nourrice en moins (CMG compris), à la PreParE de la CAF et au trajet en moins.</p>
+  </header>
+
+  <div class="main">
+    <form id="form" class="settings" autocomplete="off" onsubmit="return false" aria-label="Réglages">
+
+      <details class="step" open>
+        <summary><span class="num">01</span><span class="step-title">Mon salaire</span><span class="step-sum" id="sum-pay"></span></summary>
+        <div class="step-body">
+          <div>
+            <label for="net">Net par mois à temps plein (€)</label>
+            <input id="net" class="fld" type="number" inputmode="decimal" min="0" step="any" value="2000">
+          </div>
+          <div>
+            <span class="lbl" id="rate-title">Je passe à</span>
+            <input type="hidden" id="rate" value="0.8">
+            <div class="seg" role="group" aria-labelledby="rate-title">
+              <button type="button" data-rate="0.9" aria-pressed="false">90 %</button>
+              <button type="button" data-rate="0.8" aria-pressed="true">80 %</button>
+              <button type="button" data-rate="0.7" aria-pressed="false">70 %</button>
+              <button type="button" data-rate="0.6" aria-pressed="false">60 %</button>
+            </div>
+          </div>
+          <div class="stepper-row">
+            <label for="hours">Heures par semaine à temps plein</label>
+            <div class="stepper"><button type="button" data-for="hours" data-step="-1" aria-label="Une heure de moins">−</button><input id="hours" type="number" inputmode="numeric" min="1" max="60" step="1" value="35"><button type="button" data-for="hours" data-step="1" aria-label="Une heure de plus">+</button></div>
+          </div>
+          <div class="stepper-row">
+            <label for="weeks">Semaines travaillées par an</label>
+            <div class="stepper"><button type="button" data-for="weeks" data-step="-1" aria-label="Une semaine de moins">−</button><input id="weeks" type="number" inputmode="numeric" min="1" max="52" step="1" value="45"><button type="button" data-for="weeks" data-step="1" aria-label="Une semaine de plus">+</button></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="step" open>
+        <summary><span class="num">02</span><span class="step-title">Ma nourrice</span><span class="step-sum" id="sum-nanny"></span></summary>
+        <div class="step-body">
+          <div class="row3">
+            <div>
+              <label for="g-hours">Heures/sem.</label>
+              <input id="g-hours" class="fld" type="number" inputmode="decimal" min="0" step="any" value="45">
+            </div>
+            <div>
+              <label for="g-rate">€ net/heure</label>
+              <input id="g-rate" class="fld" type="number" inputmode="decimal" min="0" step="any" value="4.50">
+            </div>
+            <div>
+              <label for="g-day">Entretien €/jour</label>
+              <input id="g-day" class="fld" type="number" inputmode="decimal" min="0" step="any" value="4">
+            </div>
+          </div>
+          <p class="hint" style="margin-top: -6px">Heures de garde à temps plein, sur 5 jours. Ajoutez les repas aux frais d'entretien si vous les payez.</p>
+          <div class="stepper-row">
+            <label for="g-part">Heures de garde par semaine à <span class="rate-label">80 %</span></label>
+            <div class="stepper"><button type="button" data-for="g-part" data-step="-1" aria-label="Une heure de moins">−</button><input id="g-part" type="number" inputmode="numeric" min="0" max="80" step="1" value="36"><button type="button" data-for="g-part" data-step="1" aria-label="Une heure de plus">+</button></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="step" open>
+        <summary><span class="num">03</span><span class="step-title">Mon foyer</span><span class="step-sum" id="sum-home"></span></summary>
+        <div class="step-body">
+          <div>
+            <label for="income">Revenus du foyer, par mois (€)</label>
+            <input id="income" class="fld" type="number" inputmode="decimal" min="0" step="any" value="5000">
+            <p class="hint">Ceux d'il y a deux ans (revenu net imposable ÷ 12), que la CAF retient pour le CMG.</p>
+          </div>
+          <div>
+            <span class="lbl" id="kids-title">Enfants à charge</span>
+            <input type="hidden" id="kids" value="1">
+            <div class="seg" role="group" aria-labelledby="kids-title">
+              <button type="button" data-kids="1" aria-pressed="true">1</button>
+              <button type="button" data-kids="2" aria-pressed="false">2</button>
+              <button type="button" data-kids="3" aria-pressed="false">3</button>
+              <button type="button" data-kids="4" aria-pressed="false">4 et +</button>
+            </div>
+            <p class="hint">Un seul enfant gardé par la nourrice.</p>
+          </div>
+        </div>
+      </details>
+
+      <details class="step" open>
+        <summary><span class="num">04</span><span class="step-title">Mon trajet</span><span class="step-sum" id="sum-trip"></span></summary>
+        <div class="step-body">
+          <div>
+            <label for="trip">Coût d'un jour de trajet, aller-retour (€)</label>
+            <input id="trip" class="fld" type="number" inputmode="decimal" min="0" step="any" value="0">
+            <p class="hint" id="trip-hint"><a href="../trajet/">Le calculer avec « Combien coûte mon trajet ? »</a></p>
+          </div>
+        </div>
+      </details>
+    </form>
+
+    <section class="result" id="result" aria-label="Résultat" aria-live="polite">
+      <div class="res-head">
+        <span class="kicker">// à <span class="rate-label">80 %</span>, vous perdez vraiment</span>
+        <div class="pill" role="group" aria-label="Période" id="phase-pill">
+          <button type="button" data-phase="prepare" aria-pressed="true">avec la PreParE</button>
+          <button type="button" data-phase="after" aria-pressed="false">après</button>
+        </div>
+      </div>
+      <div>
+        <div class="big"><strong id="loss">–</strong><span>par mois</span></div>
+        <p class="sub" id="loss-sub"></p>
+      </div>
+      <div class="rows" id="rows"></div>
+      <div class="stats">
+        <div class="stat"><b id="st-freed">–</b><span>de temps libre en plus par mois</span></div>
+        <div class="stat"><b id="st-hour">–</b><span>ce que coûte chaque heure libérée</span></div>
+      </div>
+      <p class="tip">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2C47E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        <span id="tip-text"></span>
+      </p>
+    </section>
+  </div>
+
+  <section class="detail" aria-labelledby="detail-title">
+    <span class="kicker">// le détail de la nourrice</span>
+    <h2 id="detail-title">Ce que la garde vous coûte, aides déduites</h2>
+    <div class="table-box">
+      <table>
+        <thead><tr><th scope="col">Par mois</th><th scope="col">À temps plein</th><th scope="col">À <span class="rate-label">80 %</span></th></tr></thead>
+        <tbody id="detail"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="notes">
+    <div>
+      <span class="kicker">// le cmg</span>
+      <p>Calcul de la réforme de septembre 2025 : coût de la garde × (1 − revenus × taux d'effort ÷ 4,91 €). Taux d'effort de 0,0619 % pour 1 enfant à charge, 0,0516 % pour 2, 0,0413 % pour 3, 0,0310 % au-delà ; revenus retenus entre 814,02 € et 8 500 € par mois ; heure plafonnée à 8,09 €. Les cotisations de la nourrice restent prises en charge à 100 %. Crédit d'impôt : 50 % du reste à charge, dans la limite de 1 750 € par an.</p>
+    </div>
+    <div>
+      <span class="kicker">// la prepare</span>
+      <p>171,42 € par mois pour une activité entre 50 et 80 %, si vous avez cotisé 8 trimestres. Pendant 6 mois au plus par parent avant le premier anniversaire avec 1 enfant ; jusqu'à 24 mois par parent avant les 3 ans du plus jeune à partir de 2 enfants. À 80 %, le CMG reste versé en entier. Elle ne se cumule pas avec le congé de naissance.</p>
+    </div>
+    <div>
+      <span class="kicker">// à vérifier</span>
+      <p>C'est une estimation, qui ne compte ni la baisse d'impôt sur le revenu ni l'effet sur la retraite. Avant de décider, comparez avec le simulateur de <a href="https://www.caf.fr" target="_blank" rel="noopener">caf.fr</a>. Rien n'est enregistré ni envoyé : le calcul se fait sur votre appareil.</p>
+    </div>
+  </footer>
+</div>
+
+<div class="mobilebar off" id="mobilebar" aria-hidden="true">
+  <span>Je perds vraiment</span>
+  <span><strong id="mb-total">–</strong> <span>/ mois</span></span>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Paramètres officiels (CAF, Urssaf), en vigueur au 1er avril 2026.
+  var CMG = {
+    effort: { 1: 0.000619, 2: 0.000516, 3: 0.000413, 4: 0.00031 }, // taux d'effort, assistante maternelle
+    reference: 4.91,      // coût horaire de référence (€)
+    hourCap: 8.09,        // coût horaire maximal pris en compte (€)
+    incomeMin: 814.02,    // ressources mensuelles retenues : plancher…
+    incomeMax: 8500       // …et plafond (€)
+  };
+  var TAX_CREDIT = { rate: 0.5, cap: 3500 };  // frais de garde d'un enfant de moins de 6 ans, par an
+  var PREPARE_PARTIAL = 171.42;               // PreParE, activité entre 50 et 80 % (€ par mois)
+
+  var $ = function (id) { return document.getElementById(id); };
+  var all = function (sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); };
+  var eur = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+  var eur2 = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var num = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
+  var phase = "prepare";
+
+  function val(id) {
+    var v = parseFloat(String($(id).value).replace(",", "."));
+    return isFinite(v) && v > 0 ? v : 0;
+  }
+
+  function signed(x) { return (x < 0 ? "−" : "+") + eur.format(Math.abs(x)); }
+
+  // Coût mensuel de la nourrice, CMG et crédit d'impôt déduits.
+  function nanny(hoursWeek, days, o) {
+    var hours = hoursWeek * o.weeks / 12;
+    var cost = hours * o.rateHour + days * o.weeks / 12 * o.perDay;
+    var income = Math.min(CMG.incomeMax, Math.max(CMG.incomeMin, o.income));
+    var share = Math.max(0, 1 - income * CMG.effort[o.kids] / CMG.reference);
+    var cmg = Math.min(cost, hours * CMG.hourCap) * share;
+    var rest = cost - cmg;
+    var credit = Math.min(rest * 12, TAX_CREDIT.cap) * TAX_CREDIT.rate / 12;
+    return { cost: cost, cmg: cmg, credit: credit, net: rest - credit };
+  }
+
+  function render() {
+    var rate = parseFloat($("rate").value);
+    var o = {
+      net: val("net"), hours: val("hours"), weeks: val("weeks"),
+      rateHour: val("g-rate"), perDay: val("g-day"), income: val("income"),
+      kids: parseInt($("kids").value, 10), trip: val("trip")
+    };
+    var pct = Math.round(rate * 100) + " %";
+    all(".rate-label").forEach(function (el) { el.textContent = pct; });
+
+    var full = nanny(val("g-hours"), 5, o);
+    var part = nanny(val("g-part"), 5 * rate, o);
+    var salary = o.net * (1 - rate);
+    var nannySave = full.net - part.net;
+    var tripSave = o.trip * 5 * (1 - rate) * o.weeks / 12;
+    var prepareOk = rate <= 0.8 && rate > 0.5;
+    var prepare = prepareOk && phase === "prepare" ? PREPARE_PARTIAL : 0;
+    var loss = salary - nannySave - tripSave - prepare;
+    var lossAfter = salary - nannySave - tripSave;
+    var freed = o.hours * (1 - rate) * o.weeks / 12;
+
+    $("phase-pill").hidden = !prepareOk;
+    $("loss").textContent = loss > 0 ? "−" + eur.format(loss) : "+" + eur.format(-loss);
+    $("mb-total").textContent = $("loss").textContent;
+    $("loss-sub").innerHTML = loss > 0
+      ? "au lieu de <strong>" + eur.format(salary) + "</strong> de salaire en moins."
+      : "Vous y gagnez : les aides et les économies dépassent les <strong>" + eur.format(salary) + "</strong> de salaire en moins.";
+
+    var max = Math.max(salary, nannySave, tripSave, prepare, 1);
+    var row = function (label, value, width, color) {
+      return '<div class="wrow"><span>' + label + '</span><div class="track" aria-hidden="true"><div style="width: ' +
+        Math.max(1, width / max * 100).toFixed(1) + "%; background: " + color + '"></div></div><b>' + value + "</b></div>";
+    };
+    var rows = row("Salaire en moins", signed(-salary), salary, "var(--mauve)") +
+      row("Nourrice en moins", signed(nannySave), nannySave, "var(--gold-hi)") +
+      (o.trip ? row("Trajet en moins", signed(tripSave), tripSave, "var(--gold-hi)") : "");
+    if (prepareOk) rows += row("PreParE (CAF)", prepare ? signed(prepare) : "0 €", prepare, "var(--gold-hi)");
+    $("rows").innerHTML = rows;
+
+    $("st-freed").textContent = Math.round(freed) + " h";
+    $("st-hour").textContent = freed ? eur2.format(Math.max(0, loss) / freed) : "–";
+
+    var duration = o.kids === 1
+      ? "pendant 6 mois au plus, avant le premier anniversaire de l'enfant"
+      : "jusqu'à 24 mois, avant les 3 ans du plus jeune";
+    $("tip-text").innerHTML = prepareOk
+      ? "La PreParE à taux partiel (171,42 € par mois) est versée " + duration +
+        ", si vous avez cotisé 8 trimestres. Ensuite, la perte passe à <strong>" + eur.format(lossAfter) + " par mois</strong>."
+      : rate > 0.8
+        ? "À " + pct + ", pas de PreParE : elle demande de travailler à 80 % ou moins."
+        : "Sous 50 %, la PreParE et le CMG changent : ce cas n'est pas calculé ici.";
+
+    var line = function (label, a, b, total) {
+      return "<tr" + (total ? ' class="total"' : "") + '><th scope="row">' + label + "</th><td>" + a + "</td><td>" + b + "</td></tr>";
+    };
+    $("detail").innerHTML =
+      line("Salaire et entretien de la nourrice", eur.format(full.cost), eur.format(part.cost)) +
+      line("CMG versé par la CAF", "−" + eur.format(full.cmg), "−" + eur.format(part.cmg)) +
+      line("Crédit d'impôt (50 %, plafonné)", "−" + eur.format(full.credit), "−" + eur.format(part.credit)) +
+      line("Reste à votre charge", eur.format(full.net), eur.format(part.net), true);
+
+    $("sum-pay").textContent = eur.format(o.net) + " net · je passe à " + pct;
+    $("sum-nanny").textContent = num.format(val("g-hours")) + " h/sem · " + num.format(o.rateHour) + " €/h · " + num.format(o.perDay) + " €/jour";
+    $("sum-home").textContent = eur.format(o.income) + "/mois · " + (o.kids === 4 ? "4 enfants et +" : o.kids + " enfant" + (o.kids > 1 ? "s" : ""));
+    $("sum-trip").textContent = o.trip ? eur2.format(o.trip) + " par jour" : "non compté";
+  }
+
+  // Les heures de garde à temps partiel suivent le taux choisi, puis restent modifiables.
+  function syncPartHours() {
+    $("g-part").value = Math.round(val("g-hours") * parseFloat($("rate").value));
+  }
+
+  function pickGroup(attr, after) {
+    all("[data-" + attr + "]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        all("[data-" + attr + "]").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        after(b.dataset[attr]);
+        render();
+      });
+    });
+  }
+  pickGroup("rate", function (v) { $("rate").value = v; syncPartHours(); });
+  pickGroup("kids", function (v) { $("kids").value = v; });
+  pickGroup("phase", function (v) { phase = v; });
+
+  all(".stepper button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var input = $(b.dataset.for);
+      var v = (parseFloat(input.value) || 0) + parseFloat(b.dataset.step);
+      input.value = Math.max(+input.min, Math.min(+input.max, v));
+      render();
+    });
+  });
+  $("g-hours").addEventListener("input", syncPartHours);
+
+  // Coût d'un jour de trajet repris de « Combien coûte mon trajet ? » (?jour=…), rien n'est enregistré.
+  var q = new URLSearchParams(location.search);
+  var day = parseFloat(q.get("jour"));
+  if (isFinite(day) && day > 0) {
+    $("trip").value = Math.round(day * 100) / 100;
+    $("trip-hint").innerHTML = 'Repris de votre calcul de trajet. <a href="../trajet/">Modifier mon trajet</a>';
+  }
+
+  if (window.matchMedia("(max-width: 800px)").matches) {
+    all("details.step").forEach(function (d) { d.open = false; });
+  }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      $("mobilebar").classList.toggle("off", entries[0].isIntersecting);
+    }).observe($("result"));
+  }
+
+  document.addEventListener("input", render);
+  document.addEventListener("change", render);
+  render();
+})();
+</script>
+</body>
+</html>
