@@ -1,4 +1,4 @@
-# Kit graphique — Mon Petit Monde
+# Kit graphique — Mon Village des Maths
 
 Ce kit sert à remplacer les images actuelles (Fluent Emoji, style « emoji 3D »)
 par des illustrations **3D cartoon cosy, façon dessin peint**, comme la maquette.
@@ -168,24 +168,13 @@ et la prairie ne tomberaient plus au bon endroit.
 
 ## 5. Priorité 3 — personnages, mascottes et icônes
 
-### Le personnage de l'enfant
+### Le personnage de l'enfant et les habitants — ✅ dessinés en code (plus d'images à faire)
 
-12 images : fille et garçon, 6 couleurs de peau. **Buste (tête et épaules), de face, souriant.**
-Faire d'abord une fille et un garçon qui plaisent, puis demander les 5 autres
-couleurs de peau « exactement le même personnage, seule la couleur de peau change ».
-
-| Fichiers | Sujet |
-|---|---|
-| `girl_default.png`, `girl_light.png`, `girl_medium_light.png`, `girl_medium.png`, `girl_medium_dark.png`, `girl_dark.png` | `cute little girl character, head and shoulders, facing the viewer, big friendly eyes, brown hair in two small pigtails, overalls` (+ la couleur de peau) |
-| `boy_default.png`, `boy_light.png`, `boy_medium_light.png`, `boy_medium.png`, `boy_medium_dark.png`, `boy_dark.png` | `cute little boy character, head and shoulders, facing the viewer, big friendly eyes, short messy hair, t-shirt` (+ la couleur de peau) |
-
-> `default` = la teinte « neutre » de ton choix, montrée par défaut.
-> Les accessoires se posent par-dessus : je recalerai leur position sur les nouveaux visages.
-
-### Accessoires du personnage (objet seul, de face)
-
-`billed_cap.png` (casquette), `ribbon.png` (nœud), `glasses.png` (lunettes),
-`crown.png` (couronne), `top_hat.png` (chapeau haut-de-forme), `graduation_cap.png` (toque de diplômé).
+Le personnage est maintenant **dessiné par le jeu** (`personnage.js`) : 8 couleurs de peau,
+9 coiffures, 10 couleurs de cheveux, 6 couleurs d'yeux, 6 tenues, 8 accessoires. Les habitants
+du village utilisent le même système. Les images de personnages (`girl_*`, `boy_*`) et
+d'accessoires ne servent plus. Plus tard, si tu veux un personnage peint, il suffira de
+remplacer la fonction `Perso.svg` ; en attendant, rien à générer ici.
 
 ### Mascottes des jeux (têtes d'animaux, de face)
 

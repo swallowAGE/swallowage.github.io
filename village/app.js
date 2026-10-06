@@ -1,7 +1,7 @@
 /* =========================================================
-   MON PETIT MONDE
+   MON VILLAGE DES MATHS
    Réussir des additions rapporte des étoiles ⭐ qui servent à
-   construire, décorer et peupler son petit monde.
+   construire, décorer et peupler son village.
    Tout est enregistré sur l'appareil (localStorage).
    Images : Fluent Emoji 3D de Microsoft (licence MIT).
    ========================================================= */
@@ -200,18 +200,6 @@ const ANIMALS = {
 };
 const MAX_ANIMALS = 14;
 
-// Personnage
-const SKINS = ["default", "light", "medium_light", "medium", "medium_dark", "dark"];
-const ACCESSORIES = {
-  none:    { name: "Rien",      img: null },
-  cap:     { name: "Casquette", img: "billed_cap",     cls: "hat" },
-  ribbon:  { name: "Nœud",      img: "ribbon",         cls: "ribbon" },
-  glasses: { name: "Lunettes",  img: "glasses",        cls: "glasses" },
-  crown:   { name: "Couronne",  img: "crown",          cls: "crown" },
-  top:     { name: "Chapeau",   img: "top_hat",        cls: "top" },
-  grad:    { name: "Diplômé",   img: "graduation_cap", cls: "grad" },
-};
-
 // Niveaux du monde (selon la valeur de tout ce qui est construit)
 const LEVELS = [0, 25, 70, 150, 270, 440, 680, 1000];
 
@@ -228,7 +216,7 @@ const LEGACY_PLOTS = [
 // Combien de constructions le monde peut accueillir (augmente avec le niveau)
 const buildingCapacity = level => Math.min(12, 3 + level);
 // Tailles des objets sur la carte (même unité)
-const SIZE = { house: 150, building: 150, production: 140, deco: 58, tree: 84, animal: 90 };
+const SIZE = { house: 150, building: 150, production: 140, deco: 58, tree: 84, animal: 90, villager: 62 };
 // La prairie : on y pose les décorations et les animaux s'y promènent
 const MEADOW = [
   [300, 300], [430, 245], [560, 215], [800, 210], [910, 225], [980, 260], [1080, 300],
@@ -262,10 +250,14 @@ function freshState() {
     plots: {},  // index -> { id, lvl, day }
     decos: [],  // { id, x, y }
     animals: [], // { id }
-    avatar: { base: "girl", skin: "default", acc: "none", name: "" },
+    avatar: { name: "", ...Perso.DEFAULT_LOOK }, // le personnage de l'enfant
+    villagers: [], // habitants : { look, name }
+    orders: [],    // commandes des habitants
+    orderCooldown: 0,
+    lastGift: "",  // date du dernier cadeau du jour
     settings: { sound: true, length: 10, input: "choices", daynight: "auto" },
     stats: {},  // mode -> { played, good, total, best, bestOf }
-    counters: { correct: 0, perfect: 0, harvest: 0 },
+    counters: { correct: 0, perfect: 0, harvest: 0, byMode: {} },
     water: 3, // gouttes d'eau pour arroser les cultures (gagnées en jouant)
     claimed: [],
   };
@@ -297,6 +289,8 @@ function load() {
       for (const p of Object.values(saved.plots || {})) {
         if (BUILDINGS[p.id]?.harvest && p.stage === undefined) p.stage = RIPE;
       }
+      // Ancien personnage (images) : on le convertit en personnage dessiné
+      if (saved.avatar && saved.avatar.base) saved.avatar = { name: saved.avatar.name || "", ...Perso.migrate(saved.avatar) };
       return Object.assign(s, saved, {
         avatar: Object.assign(s.avatar, saved.avatar),
         settings: Object.assign(s.settings, saved.settings),
@@ -407,13 +401,11 @@ function bump(el) {
   el.classList.add("bump");
 }
 
-function avatarHTML(av = state.avatar) {
-  const acc = ACCESSORIES[av.acc];
-  return `<img class="base" src="${IMG(av.base + "_" + av.skin)}" alt="">` +
-    (acc && acc.img ? `<img class="acc ${acc.cls}" src="${IMG(acc.img)}" alt="">` : "");
-}
+// Dessine le personnage de l'enfant partout où il apparaît (data-avatar = head | bust | full)
 function renderAvatars() {
-  document.querySelectorAll("[data-avatar]").forEach(el => { el.innerHTML = avatarHTML(); });
+  document.querySelectorAll("[data-avatar]").forEach(el => {
+    el.innerHTML = Perso.svg(state.avatar, el.dataset.avatar || "bust");
+  });
 }
 
 /* ---------- sons (générés, sans fichiers) ---------- */
@@ -589,6 +581,9 @@ function place(el, x, y, w) {
 }
 
 function renderWorld() {
+  ensureVillagers();
+  ensureOrders();
+  renderGift();
   $("stars").textContent = state.stars;
   $("water").textContent = state.water;
   $("water-pill").hidden = !Object.values(state.plots).some(isCrop);
@@ -627,6 +622,7 @@ function renderMap(level) {
   });
 
   syncAnimals();
+  syncVillagers();
 }
 
 function buildingEl(i, built) {
@@ -1194,11 +1190,196 @@ function initLiving() {
 }
 
 /* =========================================================
+   HABITANTS, COMMANDES ET CADEAU DU JOUR
+   ========================================================= */
+const GREETINGS = ["Bonjour !", "Quel beau village !", "J'adore me promener ici.", "Tu as vu les papillons ?",
+  "Les maths, c'est super !", "Merci de m'accueillir !", "Il fait bon vivre ici !", "Tu es le meilleur maire !"];
+const todayKey = () => new Date().toLocaleDateString("fr-CA"); // AAAA-MM-JJ, heure locale
+
+// Les habitants arrivent avec les maisons : un pour trois places
+function villagerTarget() {
+  const places = Object.values(state.plots).filter(p => p.id === "house").reduce((n, p) => n + HOUSE[p.lvl - 1].pop, 0);
+  return Math.min(8, Math.ceil(places / 3));
+}
+
+function ensureVillagers() {
+  const want = villagerTarget();
+  let added = false;
+  while (state.villagers.length < want) {
+    const taken = new Set([state.avatar.name, ...state.villagers.map(v => v.name)]);
+    const free = Perso.NAMES.filter(n => !taken.has(n));
+    state.villagers.push({ look: Perso.random(), name: free.length ? pick(free) : "Habitant " + (state.villagers.length + 1) });
+    added = true;
+  }
+  if (added) save();
+}
+
+/* ---------- commandes : un habitant demande quelque chose, on gagne des étoiles ---------- */
+const mathsLabel = id => MODES[id].table ? `de la table de ${MODES[id].table}` : MODES[id].label.toLowerCase();
+
+function orderText(o) {
+  switch (o.kind) {
+    case "build":  return { line: `Construis : ${BUILDINGS[o.key].name}`, icon: BUILDINGS[o.key].img };
+    case "animal": return { line: `Adopte : ${ANIMALS[o.key].name}`, icon: ANIMALS[o.key].img };
+    case "deco":   return { line: `Pose ${o.goal} décorations dans le village`, icon: "cherry_blossom" };
+    default:       return { line: `Réussis ${o.goal} additions ${mathsLabel(o.key)}`, icon: "books" };
+  }
+}
+
+function orderProgress(o) {
+  switch (o.kind) {
+    case "build":  return Math.min(o.goal, countBuilt(o.key));
+    case "animal": return Math.min(o.goal, state.animals.filter(a => a.id === o.key).length);
+    case "deco":   return Math.min(o.goal, Math.max(0, state.decos.length - o.base));
+    default:       return Math.min(o.goal, Math.max(0, (state.counters.byMode[o.key] || 0) - o.base));
+  }
+}
+const orderDone = o => orderProgress(o) >= o.goal;
+
+function makeOrder(vi, forceKind) {
+  const level = currentLevel();
+  const used = new Set(state.orders.map(o => o.kind + ":" + o.key));
+  const byKind = { build: [], animal: [], deco: [], maths: [] };
+  for (const [id, d] of Object.entries(BUILDINGS)) {
+    if (id !== "house" && d.level <= level && countBuilt(id) === 0)
+      byKind.build.push({ key: id, goal: 1, base: 0, reward: Math.max(6, Math.round(d.cost / 2)) });
+  }
+  for (const [id, d] of Object.entries(ANIMALS)) {
+    if (d.level <= level && !state.animals.some(a => a.id === id))
+      byKind.animal.push({ key: id, goal: 1, base: 0, reward: Math.max(5, Math.round(d.cost / 2)) });
+  }
+  byKind.deco.push({ key: "any", goal: 3, base: state.decos.length, reward: 6 });
+  for (const id of Object.keys(MODES)) {
+    byKind.maths.push({ key: id, goal: 8, base: state.counters.byMode[id] || 0, reward: 8, water: 2 });
+  }
+  // plus de commandes de maths que le reste : c'est le but du jeu
+  const weights = { maths: 4, build: 3, animal: 2, deco: 1 };
+  const kinds = Object.keys(byKind).filter(k => byKind[k].some(o => !used.has(k + ":" + o.key)));
+  if (!kinds.length) return null;
+  const bag = kinds.flatMap(k => Array(weights[k]).fill(k));
+  const kind = forceKind && kinds.includes(forceKind) ? forceKind : pick(bag);
+  const choice = pick(byKind[kind].filter(o => !used.has(kind + ":" + o.key)));
+  return { id: Date.now() + "-" + rand(0, 9999), vi, kind, ...choice };
+}
+
+function ensureOrders() {
+  if (!state.villagers.length) return;
+  const target = Math.min(3, state.villagers.length);
+  let changed = false;
+  while (state.orders.length < target && Date.now() >= state.orderCooldown) {
+    const free = state.villagers.map((_, i) => i).filter(i => !state.orders.some(o => o.vi === i));
+    if (!free.length) break;
+    // il y a toujours au moins une commande de maths : c'est le but du jeu
+    const order = makeOrder(pick(free), state.orders.some(o => o.kind === "maths") ? undefined : "maths");
+    if (!order) break;
+    state.orders.push(order);
+    changed = true;
+  }
+  if (changed) save();
+}
+
+function claimOrder(o, el) {
+  state.stars += o.reward;
+  state.water += o.water || 0;
+  state.orders = state.orders.filter(x => x.id !== o.id);
+  state.orderCooldown = Date.now() + 60000; // la prochaine commande arrive dans une minute
+  save();
+  SOUND.coin();
+  flyStars(el, o.reward);
+  hearts(el);
+  renderWorld();
+  toast(`Merci ! +${o.reward} ⭐` + (o.water ? ` +${o.water} 💧` : ""));
+}
+
+async function onVillager(i, el) {
+  const v = state.villagers[i];
+  el.classList.remove("jump");
+  void el.offsetWidth;
+  el.classList.add("jump");
+  SOUND.pop();
+  const o = state.orders.find(x => x.vi === i);
+  if (!o) return toast(`<b>${v.name}</b> : « ${pick(GREETINGS)} »`);
+  const { line } = orderText(o);
+  const done = orderDone(o);
+  const buttons = [{ label: "Fermer", cls: "btn-grey", value: null }];
+  if (done) buttons.push({ label: "Récupérer", cls: "btn-gold", value: "claim" });
+  else if (o.kind === "maths") buttons.push({ label: "Jouer", cls: "btn-green", value: "play" });
+  else if (o.kind === "build") buttons.push({ label: "Construire", cls: "btn-green", value: "build" });
+  else if (o.kind === "animal") buttons.push({ label: "Animaux", cls: "btn-green", value: "animals" });
+  else buttons.push({ label: "Décors", cls: "btn-green", value: "decos" });
+  const choice = await ask({
+    title: v.name,
+    portrait: Perso.svg(v.look, "head"),
+    name: line,
+    sub: done ? "C'est fait, merci !" : `${orderProgress(o)} / ${o.goal}`,
+    cost: o.reward,
+    buttons,
+  });
+  if (choice === "claim") claimOrder(o, el);
+  else if (choice === "play") startQuiz(o.key);
+  else if (choice === "build") { buildTab = BUILDINGS[o.key].cat; openBuild(); }
+  else if (choice === "animals") openAnimals();
+  else if (choice === "decos") openDecos();
+}
+
+// Les habitants se promènent comme les animaux ; une bulle indique leur commande
+function syncVillagers() {
+  const layer = $("layer");
+  const els = new Map([...layer.querySelectorAll(".villager")].map(el => [+el.dataset.vi, el]));
+  state.villagers.forEach((v, i) => {
+    let el = els.get(i);
+    if (!el) {
+      el = document.createElement("button");
+      el.className = "animal villager";
+      el.dataset.vi = i;
+      el.setAttribute("aria-label", v.name);
+      el.innerHTML = `<span class="body">${Perso.svg(v.look, "full")}</span><b class="order-bubble" hidden></b>`;
+      const start = randomSpot();
+      el._x = start.x;
+      el._y = start.y;
+      el._next = Date.now() + rand(500, 4000);
+      place(el, start.x, start.y, SIZE.villager);
+      el.addEventListener("click", e => {
+        e.stopPropagation();
+        if (moveMode) return;
+        onVillager(i, el);
+      });
+      layer.appendChild(el);
+    }
+    const o = state.orders.find(x => x.vi === i);
+    const bubble = el.querySelector(".order-bubble");
+    bubble.hidden = !o;
+    if (o) {
+      const done = orderDone(o);
+      bubble.className = "order-bubble" + (done ? " done" : "");
+      bubble.innerHTML = `<img src="${IMG(done ? "star" : orderText(o).icon)}" alt="">`;
+    }
+  });
+}
+
+/* ---------- cadeau du jour ---------- */
+function renderGift() {
+  $("btn-gift").hidden = state.lastGift === todayKey();
+}
+$("btn-gift").addEventListener("click", () => {
+  const stars = rand(3, 6), drops = rand(1, 2);
+  state.lastGift = todayKey();
+  state.stars += stars;
+  state.water += drops;
+  save();
+  SOUND.win();
+  confetti();
+  flyStars($("btn-gift"), stars);
+  renderWorld();
+  toast(`🎁 Cadeau du jour !<br>+${stars} ⭐ et +${drops} 💧`);
+});
+
+/* =========================================================
    ANIMAUX
    ========================================================= */
 function syncAnimals() {
   const layer = $("layer");
-  const els = [...layer.querySelectorAll(".animal")];
+  const els = [...layer.querySelectorAll(".animal:not(.villager)")];
   // Supprime les animaux en trop, ajoute les nouveaux
   els.slice(state.animals.length).forEach(el => el.remove());
   state.animals.forEach((a, i) => {
@@ -1241,7 +1422,7 @@ setInterval(() => {
   const now = Date.now();
   document.querySelectorAll("#layer .animal").forEach(el => {
     if (now < el._next) return;
-    const def = ANIMALS[el.dataset.id];
+    const def = ANIMALS[el.dataset.id] || { speed: 0.7 }; // les habitants marchent doucement
     const speed = 36 * (def.speed || 1); // unités par seconde
     let tx = el._x, ty = el._y;
     for (let i = 0; i < 20; i++) {
@@ -1283,10 +1464,13 @@ $("modal-close").addEventListener("click", () => { SOUND.tap(); closeModal(); })
 $("overlay").addEventListener("click", e => { if (e.target.id === "overlay") closeModal(); });
 
 // Petite fenêtre de confirmation, renvoie la valeur du bouton choisi
-function ask({ title, img, name = "", sub = "", cost = null, buttons }) {
+function ask({ title, img, portrait = null, name = "", sub = "", cost = null, buttons }) {
   return new Promise(resolve => {
     $("confirm-title").textContent = title;
-    $("confirm-img").src = IMG(img);
+    $("confirm-portrait").innerHTML = portrait || "";
+    $("confirm-portrait").hidden = !portrait;
+    $("confirm-img").hidden = !!portrait;
+    if (img) $("confirm-img").src = IMG(img);
     $("confirm-name").textContent = name;
     $("confirm-sub").textContent = sub;
     $("confirm-cost").innerHTML = cost === null ? "" : `${cost}<img src="${IMG("star")}" alt="étoiles">`;
@@ -1446,7 +1630,7 @@ function openAnimals() {
         closeModal();
         SOUND.build();
         afterChange(before);
-        const els = document.querySelectorAll("#layer .animal");
+        const els = document.querySelectorAll("#layer .animal:not(.villager)");
         const el = els[els.length - 1];
         if (el) setTimeout(() => hearts(el), 200);
         toast(`${def.name} arrive dans ton monde ! 💕`);
@@ -1536,50 +1720,92 @@ function openQuests() {
 /* =========================================================
    MON PERSONNAGE
    ========================================================= */
-let profileTab = "base";
+let profileTab = "face";
 
 function openProfile() {
+  const keep = document.querySelector(".profile .options")?.scrollTop || 0;
   openModal("Mon personnage", body => {
+    const av = state.avatar;
     const wrap = document.createElement("div");
     wrap.className = "profile";
-    wrap.innerHTML = `<div class="stage"><span class="avatar" data-avatar></span></div>`;
+    wrap.innerHTML = `<div class="stage"><span class="avatar" data-avatar="full"></span></div>`;
 
+    const line = document.createElement("div");
+    line.className = "name-line";
     const input = document.createElement("input");
     input.className = "name-input";
     input.placeholder = "Ton prénom";
     input.maxLength = 16;
-    input.value = state.avatar.name;
-    input.addEventListener("input", () => { state.avatar.name = input.value.trim(); save(); });
-    wrap.appendChild(input);
+    input.value = av.name;
+    input.addEventListener("input", () => { av.name = input.value.trim(); save(); });
+    const dice = document.createElement("button");
+    dice.className = "btn btn-cream btn-sm";
+    dice.textContent = "🎲 Au hasard";
+    dice.addEventListener("click", () => { Object.assign(av, Perso.random()); save(); SOUND.pop(); renderAvatars(); openProfile(); });
+    line.append(input, dice);
+    wrap.appendChild(line);
 
     wrap.appendChild(tabsEl(
-      [{ id: "base", label: "Personnage" }, { id: "skin", label: "Couleur" }, { id: "acc", label: "Accessoires" }],
+      [{ id: "face", label: "Visage" }, { id: "cheveux", label: "Cheveux" }, { id: "tenue", label: "Tenue" }, { id: "acc", label: "Accessoires" }],
       profileTab, id => { profileTab = id; openProfile(); }));
 
-    const grid = document.createElement("div");
-    grid.className = "cards";
-    const av = state.avatar;
-    const option = (img, selected, onPick, label = "") => {
-      const c = document.createElement("button");
-      c.className = "card" + (selected ? " selected" : "");
-      c.innerHTML = img ? `<img src="${IMG(img)}" alt="${label}">` : `<span class="name">${label}</span>`;
-      c.addEventListener("click", () => { onPick(); save(); SOUND.pop(); renderAvatars(); openProfile(); });
-      grid.appendChild(c);
+    const set = patch => { Object.assign(av, patch); save(); SOUND.pop(); renderAvatars(); openProfile(); };
+    const options = document.createElement("div");
+    options.className = "options";
+    const section = title => { const h = document.createElement("h3"); h.textContent = title; options.appendChild(h); };
+    const swatches = (colors, current, key) => {
+      const box = document.createElement("div");
+      box.className = "swatches";
+      colors.forEach((c, i) => {
+        const b = document.createElement("button");
+        b.className = "swatch" + (i === current ? " selected" : "");
+        b.style.background = c;
+        b.setAttribute("aria-label", "Couleur " + (i + 1));
+        b.addEventListener("click", () => set({ [key]: i }));
+        box.appendChild(b);
+      });
+      options.appendChild(box);
     };
-    if (profileTab === "base") {
-      option(`girl_${av.skin}`, av.base === "girl", () => { av.base = "girl"; }, "Fille");
-      option(`boy_${av.skin}`, av.base === "boy", () => { av.base = "boy"; }, "Garçon");
-    } else if (profileTab === "skin") {
-      for (const skin of SKINS) option(`${av.base}_${skin}`, av.skin === skin, () => { av.skin = skin; });
-    } else {
-      for (const [id, acc] of Object.entries(ACCESSORIES)) {
-        option(acc.img, av.acc === id, () => { av.acc = id; }, acc.name);
+    const looks = (list, current, key, view) => {
+      const grid = document.createElement("div");
+      grid.className = "look-grid";
+      for (const [id, label] of list) {
+        const c = document.createElement("button");
+        c.className = "look-card" + (id === current ? " selected" : "");
+        c.innerHTML = Perso.svg({ ...av, [key]: id }, view) + `<span>${label}</span>`;
+        c.addEventListener("click", () => set({ [key]: id }));
+        grid.appendChild(c);
       }
+      options.appendChild(grid);
+    };
+
+    if (profileTab === "face") {
+      section("Couleur de peau");
+      swatches(Perso.SKINS, av.skin, "skin");
+      section("Couleur des yeux");
+      swatches(Perso.EYE_COLORS, av.eyes, "eyes");
+    } else if (profileTab === "cheveux") {
+      section("Coiffure");
+      looks(Perso.HAIR_STYLES, av.hair, "hair", "head");
+      section("Couleur des cheveux");
+      swatches(Perso.HAIR_COLORS, av.hairColor, "hairColor");
+    } else if (profileTab === "tenue") {
+      section("Tenue");
+      looks(Perso.OUTFITS, av.outfit, "outfit", "bust");
+      section("Couleur principale");
+      swatches(Perso.OUTFIT_COLORS, av.top, "top");
+      section("Seconde couleur");
+      swatches(Perso.OUTFIT_COLORS, av.bottom, "bottom");
+    } else {
+      section("Accessoire");
+      looks(Perso.ACCESSORIES, av.accessory, "accessory", "bust");
     }
-    wrap.appendChild(grid);
+    wrap.appendChild(options);
     body.appendChild(wrap);
     renderAvatars();
   });
+  const opts = document.querySelector(".profile .options");
+  if (opts) opts.scrollTop = keep;
 }
 
 /* =========================================================
@@ -1824,6 +2050,7 @@ function answer(value, btn) {
     quiz.earned += gain;
     state.stars += gain;
     state.counters.correct++;
+    state.counters.byMode[quiz.mode] = (state.counters.byMode[quiz.mode] || 0) + 1;
     save();
 
     let msg = quiz.tries === 1 ? pick(["Bravo !", "Super !", "Génial !", "Parfait !", "Trop fort !", "Oui !"]) : "C'est ça ! 👍";

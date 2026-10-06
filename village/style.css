@@ -224,15 +224,6 @@ img { -webkit-user-drag: none; user-select: none; }
   display: inline-block;
   flex-shrink: 0;
 }
-.avatar img, .mini-avatar img { position: absolute; }
-.avatar .base, .mini-avatar .base { inset: 0; width: 100%; height: 100%; }
-.acc { pointer-events: none; }
-.acc.hat   { width: 72%; left: 14%; top: -30%; }
-.acc.crown { width: 58%; left: 21%; top: -26%; }
-.acc.grad  { width: 76%; left: 12%; top: -30%; }
-.acc.top   { width: 62%; left: 19%; top: -40%; }
-.acc.ribbon { width: 44%; left: 52%; top: -6%; transform: rotate(18deg); }
-.acc.glasses { width: 64%; left: 18%; top: 34%; }
 .mini-avatar { width: 32px; height: 32px; }
 
 /* =========================================================
@@ -255,14 +246,14 @@ img { -webkit-user-drag: none; user-select: none; }
   transform: rotate(-3deg);
 }
 .logo h1 span {
-  font-size: 2.6rem;
+  font-size: clamp(1.9rem, 10vw, 2.6rem);
   color: #FFF4DC;
   -webkit-text-stroke: 2px var(--wood-edge);
   paint-order: stroke fill;
   text-shadow: 0 4px 0 var(--wood-edge);
 }
 .logo h1 .big {
-  font-size: 4.1rem;
+  font-size: clamp(2.6rem, 14.5vw, 4.1rem);
   color: #FFD54A;
   -webkit-text-stroke: 3px var(--wood-edge);
 }
@@ -1101,8 +1092,8 @@ img { -webkit-user-drag: none; user-select: none; }
 }
 
 @media (max-height: 700px) {
-  .logo h1 span { font-size: 2.1rem; }
-  .logo h1 .big { font-size: 3.3rem; }
+  .logo h1 span { font-size: clamp(1.7rem, 9vw, 2.1rem); }
+  .logo h1 .big { font-size: clamp(2.3rem, 12.5vw, 3.3rem); }
   .title-actions { margin-top: 3vh; }
   .choice { font-size: 2.1rem; padding: 4px 0; }
   .buddy .avatar { width: 76px; height: 76px; }
@@ -1245,3 +1236,97 @@ img { -webkit-user-drag: none; user-select: none; }
   15% { opacity: .85; }
   100% { opacity: 0; transform: translate(calc(var(--u) * 20), calc(var(--u) * -62)) scale(1.7); }
 }
+
+/* =========================================================
+   PERSONNAGE DESSINÉ EN CODE, HABITANTS, COMMANDES, CADEAU
+   ========================================================= */
+.avatar svg, .mini-avatar svg { width: 100%; height: 100%; display: block; }
+.buddy .avatar { width: 84px; height: 106px; }
+.profile .stage {
+  width: 112px; height: 164px;
+  border-radius: 28px;
+  background: linear-gradient(#CFEFFF, #A9DB84 70%);
+  padding: 6px 4px 2px;
+}
+.profile .stage .avatar { width: 100%; height: 100%; }
+.profile h3 { margin: 8px 0 0; font-size: .95rem; color: var(--ink-soft); align-self: flex-start; }
+.name-line { display: flex; gap: 8px; align-items: center; width: 100%; justify-content: center; }
+.name-line .name-input { flex: 1; min-width: 0; max-width: 200px; }
+
+.swatches { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; width: 100%; padding: 4px 2px; }
+.swatch {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--cream-edge), 0 3px 0 rgba(0, 0, 0, .2);
+}
+.swatch.selected { box-shadow: 0 0 0 4px var(--blue-edge), 0 3px 0 rgba(0, 0, 0, .2); transform: scale(1.14); }
+
+.look-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; width: 100%; }
+.look-card {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 4px 2px 3px;
+  background: #fff;
+  border: 3px solid var(--cream-edge);
+  border-radius: 16px;
+  box-shadow: 0 4px 0 var(--cream-edge);
+}
+.look-card svg { width: 60px; height: 60px; }
+.look-card span { font-size: .72rem; line-height: 1.1; }
+.look-card.selected { border-color: var(--blue-edge); background: #E8F5FF; box-shadow: 0 4px 0 var(--blue-edge); }
+.look-card:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--cream-edge); }
+
+/* habitants */
+.animal svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 calc(var(--u) * 3) calc(var(--u) * 1.5) rgba(40, 70, 20, .35)); }
+.animal.villager > .body { display: block; }
+.order-bubble {
+  position: absolute;
+  left: 50%; top: -12%;
+  transform: translateX(-50%);
+  width: calc(var(--u) * 30); height: calc(var(--u) * 30);
+  display: grid; place-items: center;
+  background: #fff;
+  border: calc(var(--u) * 2.5) solid var(--wood-edge);
+  border-radius: 50%;
+  box-shadow: 0 calc(var(--u) * 3) 0 var(--wood-edge);
+  animation: float 1.4s ease-in-out infinite;
+  pointer-events: none;
+}
+.order-bubble img { width: 72%; filter: none; }
+.order-bubble.done { border-color: var(--sun-dark); box-shadow: 0 calc(var(--u) * 3) 0 var(--sun-dark); }
+#confirm-portrait { width: 110px; height: 110px; flex-shrink: 0; }
+#confirm-portrait svg { width: 100%; height: 100%; display: block; }
+
+/* cadeau du jour */
+.gift-btn {
+  position: absolute;
+  right: 12px;
+  top: calc(max(10px, env(safe-area-inset-top)) + 64px);
+  z-index: 6;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: linear-gradient(#FFFDF6, var(--cream-2));
+  border: 3px solid var(--sun-dark);
+  box-shadow: 0 4px 0 var(--sun-dark);
+  animation: gift 1.6s ease-in-out infinite;
+}
+.gift-btn img { width: 36px; height: 36px; }
+@keyframes gift { 0%, 100% { transform: rotate(0); } 15% { transform: rotate(-10deg); } 30% { transform: rotate(10deg); } 45% { transform: rotate(0); } }
+@media (max-height: 700px) { .buddy .avatar { width: 70px; height: 88px; } }
+
+.profile { min-height: 0; }
+.profile .options {
+  width: 100%;
+  max-height: max(160px, calc(100dvh - 440px));
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 2px 4px;
+}
+
+/* titre : jamais de retour à la ligne dans « des Maths » */
+.logo h1 span { white-space: nowrap; }
+.logo h1 .big { font-size: clamp(2.2rem, 12vw, 3.8rem); }
+.quiz-top .banner { font-size: clamp(.85rem, 4.2vw, 1.15rem); padding: 7px 4px; }
