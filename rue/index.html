@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ma rue il y a 70 ans – Swallow AGE</title>
+<meta name="description" content="Votre maison, votre village ou votre champ vus du ciel dans les années 1950, puis aujourd'hui : un curseur pour comparer les photos aériennes de l'IGN.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root {
+    --ink: #2B2230;
+    --soft: #6B5F5A;
+    --paper: #FAF6F0;
+    --raised: #F3ECE2;
+    --field: #FFFDF9;
+    --gold-ink: #8A6D2B;
+    --rose: #8E4458;
+    --rule: rgba(43, 34, 48, 0.12);
+    --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Jost", system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 56px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 18px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 12px 0 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+  .lede { margin: 10px 0 0; font-size: 18px; font-weight: 300; color: var(--soft); max-width: 62ch; }
+
+  /* ---------- Recherche ---------- */
+  .search { margin-top: 24px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .search .box { flex: 1 1 180px; min-width: 0; position: relative; }
+  .fld { width: 100%; font: inherit; font-size: 17px; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-height: 50px; }
+  .btn { border: 0; border-radius: 12px; background: var(--ink); color: var(--paper); font: inherit; font-weight: 500; font-size: 16px; padding: 0 22px; min-height: 50px; cursor: pointer; }
+  .btn:hover { background: var(--rose); }
+  .btn.icon { width: 50px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+  .suggest { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 1000; list-style: none; margin: 0; padding: 4px; background: var(--field); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 6px 20px rgba(43, 34, 48, 0.12); }
+  .suggest button { display: block; width: 100%; text-align: left; border: 0; background: transparent; font: inherit; font-size: 15px; color: var(--ink); padding: 9px 10px; border-radius: 8px; cursor: pointer; }
+  .suggest button:hover, .suggest button:focus-visible { background: var(--raised); }
+  .suggest small { display: block; font-size: 13px; color: var(--soft); }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
+  .chips span { font-size: 14px; color: var(--soft); }
+  .chips button { border: 1px solid var(--line); background: var(--field); border-radius: 999px; padding: 6px 14px; min-height: 36px; font: inherit; font-size: 14px; color: var(--ink); cursor: pointer; }
+  .chips button:hover { border-color: var(--rose); }
+  .status { font-size: 14px; color: var(--soft); margin: 8px 0 0; min-height: 1.3em; }
+
+  /* ---------- Comparaison ---------- */
+  .viewer { position: relative; margin-top: 18px; height: min(62vh, 600px); min-height: 360px; border-radius: 18px; overflow: hidden; background: #B5A88E; }
+  #map { position: absolute; inset: 0; background: #B5A88E; }
+  .leaflet-container { font-family: inherit; }
+  .divider { position: absolute; top: 0; bottom: 0; width: 3px; margin-left: -1.5px; background: var(--field); z-index: 500; pointer-events: none; }
+  .knob { position: absolute; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; background: var(--field); box-shadow: 0 2px 8px rgba(43, 34, 48, 0.35); z-index: 600; display: flex; align-items: center; justify-content: center; cursor: ew-resize; touch-action: none; border: 0; }
+  .tag { position: absolute; top: 14px; z-index: 600; background: rgba(43, 34, 48, 0.85); color: var(--paper); border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 500; pointer-events: none; }
+  .tag.old { left: 14px; }
+  .tag.now { right: 14px; }
+  .range { display: flex; align-items: center; gap: 14px; margin-top: 12px; }
+  .range span { font-size: 14px; color: var(--soft); white-space: nowrap; }
+  .range input { flex: 1; accent-color: var(--rose); min-height: 44px; }
+  .below { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  .below p { margin: 0; font-size: 15px; color: var(--soft); }
+  .share { border: 1px solid var(--line); background: var(--field); border-radius: 10px; padding: 8px 16px; min-height: 44px; font: inherit; font-size: 15px; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+  .share:hover { border-color: var(--rose); }
+
+  .notes { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 6px 0 0; }
+
+  @media (max-width: 700px) {
+    .wrap { padding: 0 16px 40px; }
+    .lede { font-size: 16px; }
+    .viewer { height: 64vh; border-radius: 14px; margin-left: -16px; margin-right: -16px; border-radius: 0; }
+    .tag { font-size: 13px; padding: 5px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../">← swallow·AGE</a>
+    <span class="kicker">// outil · photos aériennes</span>
+  </div>
+  <header>
+    <h1>Ma rue il y a 70 ans</h1>
+    <p class="lede">Votre maison, votre village ou votre champ, vus du ciel dans les années 1950, puis aujourd'hui. Faites glisser le curseur.</p>
+  </header>
+
+  <form class="search" id="search-form" autocomplete="off" role="search">
+    <div class="box">
+      <label for="addr" class="sr-only">Adresse ou commune</label>
+      <input id="addr" class="fld" type="text" placeholder="Une adresse ou une commune" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggest">
+      <ul id="suggest" class="suggest" role="listbox" aria-label="Lieux proposés" hidden></ul>
+    </div>
+    <button type="submit" class="btn">Voir</button>
+    <button type="button" class="btn icon" id="locate" aria-label="Ma position">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>
+    </button>
+  </form>
+  <div class="chips">
+    <span>Ou partez de&nbsp;:</span>
+    <button type="button" data-place="47.6950,0.4183,17" data-label="Château-du-Loir, centre">Château-du-Loir</button>
+    <button type="button" data-place="47.7313,0.5775,17" data-label="La Chartre-sur-le-Loir, centre">La Chartre-sur-le-Loir</button>
+    <button type="button" data-place="47.8618,0.4708,17" data-label="Le Grand-Lucé, centre">Le Grand-Lucé</button>
+  </div>
+  <p class="status" id="status" role="status"></p>
+
+  <div class="viewer" id="viewer">
+    <div id="map" aria-label="Photo aérienne : années 1950 à gauche du curseur, aujourd'hui à droite"></div>
+    <div class="divider" id="divider"></div>
+    <button type="button" class="knob" id="knob" aria-label="Faire glisser pour comparer" tabindex="-1">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B2230" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"></path></svg>
+    </button>
+    <span class="tag old">1950-1965</span>
+    <span class="tag now">Aujourd'hui</span>
+  </div>
+  <div class="range">
+    <span aria-hidden="true">1950</span>
+    <input id="pos" type="range" min="0" max="100" step="1" value="50" aria-label="Position du curseur entre les années 1950 et aujourd'hui">
+    <span aria-hidden="true">aujourd'hui</span>
+  </div>
+  <div class="below">
+    <p id="place-label">Château-du-Loir, centre</p>
+    <button type="button" class="share" id="share">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E4458" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>
+      <span id="share-text">Partager ce lieu</span>
+    </button>
+  </div>
+
+  <footer class="notes">
+    <div>
+      <span class="kicker">// les photos</span>
+      <p>Photographies aériennes historiques 1950-1965 et photographies actuelles de l'IGN (Géoplateforme), redressées pour se superposer. La date exacte des anciennes photos varie selon les endroits, et certaines zones ne sont pas couvertes.</p>
+    </div>
+    <div>
+      <span class="kicker">// partout en France</span>
+      <p>Ça marche pour n'importe quelle adresse en France métropolitaine, pas seulement en Sarthe. Zoomez avec la molette, les boutons + et −, ou deux doigts.</p>
+    </div>
+    <div>
+      <span class="kicker">// vie privée</span>
+      <p>Rien n'est enregistré. Seule l'adresse tapée part à l'IGN (data.geopf.fr) pour trouver le lieu ; votre position n'est utilisée que si vous la demandez.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  // Photos de l'IGN servies par la Géoplateforme (WMTS, sans clé).
+  function ign(layer, style, format) {
+    return "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=" + layer +
+      "&STYLE=" + style + "&TILEMATRIXSET=PM&FORMAT=" + format + "&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}";
+  }
+  var attribution = '<a href="https://www.ign.fr" target="_blank" rel="noopener">IGN</a>';
+
+  // Lieu de départ : celui du lien partagé (#lat,lon,zoom,curseur), sinon Château-du-Loir.
+  var start = { lat: 47.6950, lon: 0.4183, zoom: 17, pos: 50 };
+  var hash = location.hash.slice(1).split(",").map(parseFloat);
+  if (hash.length >= 3 && hash.every(isFinite)) {
+    start = { lat: hash[0], lon: hash[1], zoom: hash[2], pos: isFinite(hash[3]) ? hash[3] : 50 };
+    $("place-label").textContent = "Lieu partagé";
+  }
+
+  var map = L.map("map", { zoomControl: false, minZoom: 6, maxZoom: 19 }).setView([start.lat, start.lon], start.zoom);
+  L.control.zoom({ position: "bottomright", zoomInTitle: "Zoomer", zoomOutTitle: "Dézoomer" }).addTo(map);
+  map.attributionControl.setPrefix(false);
+
+  L.tileLayer(ign("ORTHOIMAGERY.ORTHOPHOTOS", "normal", "image/jpeg"), {
+    maxZoom: 19, maxNativeZoom: 19, attribution: "Photos " + attribution
+  }).addTo(map);
+
+  // Les photos anciennes vont dans leur propre calque, découpé à gauche du curseur.
+  map.createPane("old");
+  map.getPane("old").style.zIndex = 250;
+  L.tileLayer(ign("ORTHOIMAGERY.ORTHOPHOTOS.1950-1965", "BDORTHOHISTORIQUE", "image/png"), {
+    pane: "old", maxZoom: 19, maxNativeZoom: 18, attribution: "1950-1965 " + attribution
+  }).addTo(map);
+
+  // ---------- Curseur ----------
+  var pos = Math.max(0, Math.min(100, start.pos));
+
+  function clip() {
+    var size = map.getSize();
+    var nw = map.containerPointToLayerPoint([0, 0]);
+    var se = map.containerPointToLayerPoint(size);
+    var x = nw.x + size.x * pos / 100;
+    map.getPane("old").style.clip = "rect(" + nw.y + "px, " + x + "px, " + se.y + "px, " + nw.x + "px)";
+    $("divider").style.left = pos + "%";
+    $("knob").style.left = pos + "%";
+    $("pos").value = pos;
+  }
+
+  function setPos(p) {
+    pos = Math.max(0, Math.min(100, p));
+    clip();
+    updateHash();
+  }
+
+  map.on("move zoom resize", clip);
+  $("pos").addEventListener("input", function () { setPos(+this.value); });
+
+  // Glisser la poignée (souris ou doigt) sans déplacer la carte.
+  var knob = $("knob");
+  L.DomEvent.disableClickPropagation(knob);
+  var dragging = false;
+  function follow(e) {
+    var rect = $("viewer").getBoundingClientRect();
+    setPos((e.clientX - rect.left) / rect.width * 100);
+  }
+  knob.addEventListener("pointerdown", function (e) {
+    dragging = true;
+    knob.setPointerCapture(e.pointerId);
+    map.dragging.disable();
+    e.preventDefault();
+  });
+  knob.addEventListener("pointermove", function (e) { if (dragging) follow(e); });
+  knob.addEventListener("pointerup", function () { dragging = false; map.dragging.enable(); });
+  knob.addEventListener("pointercancel", function () { dragging = false; map.dragging.enable(); });
+
+  // ---------- Lien à partager ----------
+  var hashTimer = null;
+  function updateHash() {
+    clearTimeout(hashTimer);
+    hashTimer = setTimeout(function () {
+      var c = map.getCenter();
+      history.replaceState(null, "", "#" + c.lat.toFixed(5) + "," + c.lng.toFixed(5) + "," + map.getZoom() + "," + Math.round(pos));
+    }, 300);
+  }
+  map.on("moveend", updateHash);
+
+  $("share").addEventListener("click", function () {
+    updateHash();
+    setTimeout(function () {
+      var url = location.href;
+      var title = "Ma rue il y a 70 ans – " + $("place-label").textContent;
+      if (navigator.share) {
+        navigator.share({ title: title, url: url }).catch(function () {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(function () {
+          $("share-text").textContent = "Lien copié";
+          setTimeout(function () { $("share-text").textContent = "Partager ce lieu"; }, 2000);
+        });
+      }
+    }, 320);
+  });
+
+  // ---------- Aller à un lieu ----------
+  function goTo(lat, lon, zoom, label) {
+    map.setView([lat, lon], zoom || 17);
+    if (label) $("place-label").textContent = label;
+    $("status").textContent = "";
+  }
+
+  document.querySelectorAll("[data-place]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var p = b.dataset.place.split(",").map(parseFloat);
+      goTo(p[0], p[1], p[2], b.dataset.label);
+    });
+  });
+
+  $("locate").addEventListener("click", function () {
+    if (!navigator.geolocation) { $("status").textContent = "Votre appareil ne donne pas sa position."; return; }
+    $("status").textContent = "Recherche de votre position…";
+    navigator.geolocation.getCurrentPosition(function (p) {
+      goTo(p.coords.latitude, p.coords.longitude, 18, "Ma position");
+    }, function () {
+      $("status").textContent = "Position indisponible : tapez une adresse.";
+    }, { enableHighAccuracy: true, timeout: 10000 });
+  });
+
+  // Recherche d'adresse : Géoplateforme de l'IGN, priorité aux lieux proches de Loir-Lucé-Bercé.
+  var GEOCODE = "https://data.geopf.fr/geocodage/search";
+  var found = [], asked = 0, timer = null;
+  var input = $("addr"), list = $("suggest");
+
+  function geocode(text, limit) {
+    return fetch(GEOCODE + "?q=" + encodeURIComponent(text) + "&limit=" + limit + "&lat=47.8&lon=0.45")
+      .then(function (r) { if (!r.ok) throw new Error("http"); return r.json(); })
+      .then(function (j) {
+        return (j.features || []).map(function (f) {
+          var t = f.properties.type;
+          return {
+            label: f.properties.label, context: f.properties.context || "",
+            lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0],
+            zoom: t === "municipality" ? 15 : t === "street" ? 17 : 18
+          };
+        });
+      });
+  }
+
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function close() { list.hidden = true; input.setAttribute("aria-expanded", "false"); }
+
+  function pick(p) {
+    input.value = p.label;
+    close();
+    goTo(p.lat, p.lon, p.zoom, p.label);
+  }
+
+  input.addEventListener("input", function () {
+    clearTimeout(timer);
+    var text = input.value.trim();
+    if (text.length < 3) { close(); return; }
+    timer = setTimeout(function () {
+      var n = ++asked;
+      geocode(text, 6).then(function (res) {
+        if (n !== asked) return;
+        found = res;
+        if (!res.length) { close(); return; }
+        list.innerHTML = res.map(function (p, i) {
+          return '<li role="option"><button type="button" data-i="' + i + '">' + esc(p.label) +
+            (p.context ? "<small>" + esc(p.context) + "</small>" : "") + "</button></li>";
+        }).join("");
+        list.hidden = false;
+        input.setAttribute("aria-expanded", "true");
+      }).catch(close);
+    }, 250);
+  });
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown" && !list.hidden) { e.preventDefault(); list.querySelector("button").focus(); }
+    if (e.key === "Escape") close();
+  });
+  list.addEventListener("keydown", function (e) {
+    var btns = Array.prototype.slice.call(list.querySelectorAll("button"));
+    var i = btns.indexOf(document.activeElement);
+    if (e.key === "ArrowDown" && i < btns.length - 1) { e.preventDefault(); btns[i + 1].focus(); }
+    if (e.key === "ArrowUp") { e.preventDefault(); (i > 0 ? btns[i - 1] : input).focus(); }
+    if (e.key === "Escape") { close(); input.focus(); }
+  });
+  list.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (b) pick(found[+b.dataset.i]);
+  });
+  document.addEventListener("click", function (e) {
+    if (e.target !== input && !list.contains(e.target)) close();
+  });
+
+  $("search-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var text = input.value.trim();
+    if (!text) return;
+    if (!list.hidden && found.length) { pick(found[0]); return; }
+    $("status").textContent = "Recherche…";
+    geocode(text, 1).then(function (res) {
+      if (res.length) pick(res[0]);
+      else $("status").textContent = "Lieu introuvable : précisez la commune.";
+    }).catch(function () {
+      $("status").textContent = "Recherche indisponible pour le moment : réessayez, ou déplacez la carte à la main.";
+    });
+  });
+
+  clip();
+})();
+</script>
+</body>
+</html>
