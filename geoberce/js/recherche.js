@@ -63,6 +63,20 @@ let coucheRechercheActuelle = null;  // couche Leaflet des résultats affichés
    qu'elle se promène sur la carte avant d'avoir lancé une recherche. */
 let rechercheActive = false;
 
+/* Retour direct de l'utilisatrice : "mes popups se ferment quand elles
+   touchent le bord de l'écran". Cause réelle : l'autoPan de Leaflet, qui
+   repositionne la carte pour garder une popup ouverte visible près du
+   bord, déclenche lui aussi "moveend" - sans ce garde-fou, ce
+   moveend-là relançait gererDeplacementCarteRecherche (voir plus bas),
+   qui DÉTRUIT et RECONSTRUIT toute la couche de résultats affichés (donc
+   le marqueur dont la popup vient tout juste de s'ouvrir), fermant la
+   popup avant même qu'elle ait fini de s'afficher. Positionné via
+   l'évènement "autopanstart", que Leaflet ne déclenche QUE lorsqu'un
+   panoramique est réellement nécessaire (voir son enregistrement plus
+   bas) - un déplacement normal de la carte par l'utilisatrice n'y touche
+   pas. */
+let ignorerProchainMoveend = false;
+
 function zoomMinCadastre() {
     const conf = LAYERS.find(l => l.id === "cadastre");
     return (conf && conf.zoomMin) || 0;
@@ -739,6 +753,22 @@ function reinitialiserFormulaire() {
 let ecouteurDeplacementRechercheBranche = false;
 let modeCommuneCible = null;
 
+/* Extraite en fonction nommée (plutôt que gardée en callback anonyme
+   dans l'écouteur "moveend" ci-dessous) pour rester testable
+   indépendamment de l'enregistrement de l'écouteur Leaflet lui-même -
+   voir ignorerProchainMoveend plus haut pour le garde-fou anti-autoPan. */
+function gererDeplacementCarteRecherche(map) {
+    if (ignorerProchainMoveend) {
+        ignorerProchainMoveend = false;
+        return;
+    }
+    const vue = document.getElementById("recherche-view");
+    if (!vue || vue.hidden || modeCommuneCible) return;
+    chargerEtEnrichirVueActuelle(map).then(ok => {
+        if (ok && rechercheActive) afficherResultatsRecherche(map, filtrerParcelles(lireCriteres()), { recentrer: false });
+    });
+}
+
 function ouvrirRecherche(map, codeInseeCible) {
     fermerAccueil();
     basculerVuePanneau("recherche-view");
@@ -763,13 +793,8 @@ function ouvrirRecherche(map, codeInseeCible) {
 
     if (!ecouteurDeplacementRechercheBranche) {
         ecouteurDeplacementRechercheBranche = true;
-        map.on("moveend", () => {
-            const vue = document.getElementById("recherche-view");
-            if (!vue || vue.hidden || modeCommuneCible) return;
-            chargerEtEnrichirVueActuelle(map).then(ok => {
-                if (ok && rechercheActive) afficherResultatsRecherche(map, filtrerParcelles(lireCriteres()), { recentrer: false });
-            });
-        });
+        map.on("autopanstart", () => { ignorerProchainMoveend = true; });
+        map.on("moveend", () => gererDeplacementCarteRecherche(map));
     }
 
     return codeInseeCible ? chargerEtEnrichirCommune(codeInseeCible) : chargerEtEnrichirVueActuelle(map);
