@@ -288,6 +288,20 @@ const TYPES_COMMERCES = [
     {
         id: "producteurLocal", label: "Producteurs locaux", icon: "fa-solid fa-carrot", color: PALETTE.foret,
         types: ["producteur local"]
+    },
+    /* Ajouté par l'utilisatrice à la main, même logique que "producteur
+       local" ci-dessus : un casier en libre-service (légumes, viande...)
+       mis à disposition dans un village, sans vendeur sur place - assez
+       différent dans l'usage d'un vrai commerce de producteur pour
+       mériter sa propre icône plutôt que d'être noyé dans
+       "Producteurs locaux" (une étagère en libre-service 24h/24 n'a pas
+       les mêmes horaires/contact qu'une ferme). Icône "casiers empilés"
+       (la plupart de ces distributeurs sont littéralement un meuble à
+       casiers) et couleur ambrée distincte du reste de la palette
+       plutôt qu'une des 5 couleurs déjà très utilisées. */
+    {
+        id: "distributeur", label: "Distributeurs de producteurs locaux", icon: "fa-solid fa-boxes-stacked", color: "#B8793A",
+        types: ["distributeur"]
     }
 ];
 const TYPE_COMMERCE_DEFAUT = { id: "autre", label: "Autres commerces", icon: "fa-solid fa-store", color: PALETTE.ardoise };
