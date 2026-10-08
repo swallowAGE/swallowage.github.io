@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quelle poubelle ce soir ? – Swallow AGE</title>
+<meta name="description" content="Quelle poubelle sortir ce soir dans votre commune de Loir-Lucé-Bercé, les prochaines collectes et un rappel dans votre agenda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B2230;
+    --soft: #6B5F5A;
+    --paper: #FAF6F0;
+    --raised: #F3ECE2;
+    --field: #FFFDF9;
+    --gold: #C9A85C;
+    --gold-ink: #8A6D2B;
+    --gold-hi: #E2C47E;
+    --rose: #8E4458;
+    --on-dark: #E5DCD6;
+    --on-dark-soft: #D3C8C2;
+    --rule: rgba(43, 34, 48, 0.12);
+    --line: rgba(43, 34, 48, 0.22);
+    --gray-lid: #8C8389;
+    --gray-body: #5E565B;
+    --yellow-lid: #E2C47E;
+    --yellow-body: #C9A85C;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Jost", system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .wrap { max-width: 560px; margin: 0 auto; padding: 0 16px 48px; display: flex; flex-direction: column; gap: 16px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 14px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 0; font-size: clamp(30px, 7vw, 40px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+
+  label, .lbl { display: block; font-size: 13px; font-weight: 500; color: var(--soft); margin: 0 0 6px; }
+  .fld { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 46px; }
+
+  .card { background: var(--ink); color: var(--paper); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .card .kicker { color: var(--gold); }
+  .card h2 { margin: 0; font-size: 22px; font-weight: 500; }
+  .bins { display: flex; flex-direction: column; gap: 10px; }
+  .bin { display: flex; align-items: center; gap: 14px; background: rgba(250, 246, 240, 0.06); border-radius: 12px; padding: 12px 14px; }
+  .bin svg { flex: none; }
+  .bin b { display: block; font-size: 18px; font-weight: 600; }
+  .bin span { font-size: 14px; color: var(--on-dark-soft); }
+  .none { font-size: 40px; line-height: 1.1; font-weight: 500; color: var(--gold-hi); }
+  .card p { margin: 0; font-size: 16px; font-weight: 300; color: var(--on-dark); }
+  .card p strong { font-weight: 600; color: var(--paper); }
+  .shift { font-size: 14px !important; color: var(--gold-hi) !important; }
+  .card a { color: var(--gold-hi); }
+
+  .days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+  .days button { border: 0; border-radius: 12px; min-height: 66px; padding: 6px 0; display: flex; flex-direction: column; align-items: center; gap: 2px; background: var(--raised); color: var(--ink); font: inherit; cursor: pointer; }
+  .days button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .days small { font-size: 12px; }
+  .days b { font-size: 17px; font-weight: 600; }
+  .dots { display: flex; gap: 3px; height: 8px; justify-content: center; }
+  .dots i { width: 8px; height: 8px; border-radius: 50%; display: block; }
+
+  .btn { border: 0; border-radius: 12px; background: var(--rose); color: var(--field); font: inherit; font-weight: 500; font-size: 16px; min-height: 50px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; width: 100%; }
+  .btn:hover { background: var(--ink); }
+  .hint { margin: -8px 0 0; font-size: 13px; color: var(--soft); text-align: center; }
+
+  .notes { margin-top: 16px; padding-top: 18px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 14px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 4px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../">← swallow·AGE</a>
+    <span class="kicker">// outil · déchets</span>
+  </div>
+  <h1>Quelle poubelle ce soir&nbsp;?</h1>
+
+  <div>
+    <label for="commune">Ma commune</label>
+    <select id="commune" class="fld"></select>
+  </div>
+
+  <section class="card" id="card" aria-live="polite">
+    <span class="kicker" id="card-title"></span>
+    <div id="card-body"></div>
+  </section>
+
+  <div id="week-box">
+    <span class="lbl" id="days-title">Les 7 prochains soirs</span>
+    <div class="days" id="days" role="group" aria-labelledby="days-title"></div>
+  </div>
+
+  <button type="button" class="btn" id="ics">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"></path></svg>
+    Ajouter les collectes à mon agenda
+  </button>
+  <p class="hint" id="ics-hint">Un rappel la veille à 19 h, jours fériés compris, jusqu'à fin 2027.</p>
+
+  <footer class="notes">
+    <div>
+      <span class="kicker">// les collectes</span>
+      <p>Dans les communes du SYVALORM, les ordures ménagères et les emballages sont collectés le même jour, une semaine sur deux. Sortez les bacs la veille au soir. Après un jour férié, les collectes de la semaine sont décalées au lendemain, sauf le jeudi 6 mai 2027.</p>
+    </div>
+    <div>
+      <span class="kicker">// les sources</span>
+      <p>Calendriers 2026 et 2027 du <a href="https://www.syvalorm.fr" target="_blank" rel="noopener">SYVALORM</a>. Pour Montval-sur-Loir et les autres communes du <a href="https://www.syndicatvaldeloir.fr" target="_blank" rel="noopener">Syndicat Mixte du Val de Loir</a>, les jours seront ajoutés plus tard. En cas de doute, le calendrier de votre syndicat fait foi.</p>
+    </div>
+    <div>
+      <span class="kicker">// vie privée</span>
+      <p>Rien n'est envoyé. Votre commune est seulement retenue sur cet appareil, pour la prochaine visite.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  // ---------- Calendriers ----------
+  // SYVALORM : ordures ménagères et emballages le même jour, toutes les deux semaines.
+  // Groupe A : semaine du lundi 5 janvier 2026, puis une semaine sur deux (B : les autres).
+  // Jours : 1 = lundi … 5 = vendredi. Relevé sur les calendriers 2026 et 2027 du SYVALORM.
+  var ANCHOR_A = Date.UTC(2026, 0, 5);
+  var DATA_START = "2026-01-01", DATA_END = "2027-12-31";
+  var SYV = "SYVALORM", SMVL = "Syndicat Mixte du Val de Loir";
+  function always(group, day) { return [{ from: DATA_START, to: DATA_END, group: group, day: day }]; }
+  var COMMUNES = [
+    { name: "Beaumont-Pied-de-Bœuf", syndicat: SMVL },
+    { name: "Beaumont-sur-Dême", syndicat: SYV, plan: always("B", 3) },
+    { name: "Chahaignes", syndicat: SYV, plan: always("B", 5) },
+    { name: "Courdemanche", syndicat: SYV, plan: always("B", 5) },
+    { name: "Dissay-sous-Courcillon", syndicat: SMVL },
+    { name: "Flée", syndicat: SMVL },
+    { name: "Jupilles", syndicat: SMVL },
+    { name: "La Chartre-sur-le-Loir", syndicat: SYV, plan: always("B", 5) },
+    { name: "Lavernat", syndicat: SMVL },
+    { name: "Le Grand-Lucé", syndicat: SYV, plan: always("B", 5) },
+    { name: "Lhomme", syndicat: SYV, plan: always("A", 5) },
+    { name: "Loir en Vallée", syndicat: SYV, plan: always("A", 3) },
+    { name: "Luceau", syndicat: SMVL },
+    { name: "Marçon", syndicat: SYV, plan: always("B", 3) },
+    { name: "Montreuil-le-Henri", syndicat: SYV, plan: always("B", 5) },
+    { name: "Montval-sur-Loir", syndicat: SMVL },
+    { name: "Nogent-sur-Loir", syndicat: SMVL },
+    { name: "Pruillé-l'Éguillé", syndicat: SYV, plan: [
+      { from: "2026-01-01", to: "2026-12-31", group: "A", day: 2 },
+      { from: "2027-01-01", to: DATA_END, group: "A", day: 5 }] },
+    { name: "Saint-Georges-de-la-Couée", syndicat: SYV, plan: always("B", 5) },
+    { name: "Saint-Pierre-de-Chevillé", syndicat: SMVL },
+    { name: "Saint-Pierre-du-Lorouër", syndicat: SYV, plan: [
+      { from: "2026-01-01", to: "2026-12-31", group: "A", day: 1 },
+      { from: "2027-01-01", to: DATA_END, group: "B", day: 5 }] },
+    { name: "Saint-Vincent-du-Lorouër", syndicat: SYV, plan: [
+      { from: "2026-01-01", to: "2026-12-31", group: "A", day: 2 },
+      { from: "2027-01-01", to: DATA_END, group: "A", day: 5 }] },
+    { name: "Thoiré-sur-Dinan", syndicat: SMVL },
+    { name: "Villaines-sous-Lucé", syndicat: SYV, plan: always("A", 5) }
+  ];
+  // Jours fériés sans décalage des collectes (annoncés par le syndicat).
+  var NO_SHIFT = { "2027-05-06": true };
+
+  // ---------- Dates (en UTC pour éviter les surprises d'heure d'été) ----------
+  var DAY = 86400000;
+  var JOURS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+  var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+  function utc(y, m, d) { return Date.UTC(y, m, d); }
+  function iso(t) { return new Date(t).toISOString().slice(0, 10); }
+  function dow(t) { return new Date(t).getUTCDay(); }
+  function longDate(t) { var d = new Date(t); return JOURS[d.getUTCDay()] + " " + d.getUTCDate() + (d.getUTCDate() === 1 ? "er" : "") + " " + MOIS[d.getUTCMonth()]; }
+  function today() { var n = new Date(); return utc(n.getFullYear(), n.getMonth(), n.getDate()); }
+
+  // Jours fériés (Pâques par l'algorithme de Meeus).
+  var holidayCache = {};
+  function holidays(y) {
+    if (holidayCache[y]) return holidayCache[y];
+    var a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4;
+    var f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var month = Math.floor((h + l - 7 * m + 114) / 31) - 1, day = ((h + l - 7 * m + 114) % 31) + 1;
+    var easter = utc(y, month, day);
+    var list = {};
+    [[utc(y, 0, 1), "jour de l'an"], [easter + DAY, "lundi de Pâques"], [utc(y, 4, 1), "1er mai"], [utc(y, 4, 8), "8 mai"],
+     [easter + 39 * DAY, "Ascension"], [easter + 50 * DAY, "lundi de Pentecôte"], [utc(y, 6, 14), "14 juillet"],
+     [utc(y, 7, 15), "15 août"], [utc(y, 10, 1), "Toussaint"], [utc(y, 10, 11), "11 novembre"], [utc(y, 11, 25), "Noël"]]
+      .forEach(function (h) { list[iso(h[0])] = h[1]; });
+    holidayCache[y] = list;
+    return list;
+  }
+  function holidayName(t) { return holidays(new Date(t).getUTCFullYear())[iso(t)]; }
+
+  // Collectes d'une commune entre deux dates : [{ date, shiftedBy }]
+  function collections(commune, from, to) {
+    var out = [];
+    if (!commune.plan) return out;
+    var monday = from - ((dow(from) + 6) % 7) * DAY;
+    for (var w = monday - 7 * DAY; w <= to; w += 7 * DAY) {
+      var even = Math.round((w - ANCHOR_A) / (7 * DAY)) % 2 === 0;
+      var base = null, entry = null;
+      commune.plan.forEach(function (p) {
+        var t = w + (p.day - 1) * DAY;
+        if (iso(t) >= p.from && iso(t) <= p.to && (p.group === "A") === even) { base = t; entry = p; }
+      });
+      if (base === null) continue;
+      // Un jour férié en semaine, avant ou le jour de la collecte, la décale au lendemain.
+      var cause = null;
+      for (var t = w; t <= base; t += DAY) {
+        var hn = holidayName(t);
+        if (hn && !NO_SHIFT[iso(t)]) cause = { name: hn, date: t };
+      }
+      var date = cause ? base + DAY : base;
+      if (date >= from && date <= to) out.push({ date: date, cause: cause });
+    }
+    return out;
+  }
+
+  // ---------- Affichage ----------
+  var BINS = [
+    { name: "Ordures ménagères", what: "le bac des déchets non recyclables", lid: "var(--gray-lid)", body: "var(--gray-body)", dot: "#B9AFB4" },
+    { name: "Emballages", what: "le bac ou les sacs du tri, en vrac", lid: "var(--yellow-lid)", body: "var(--yellow-body)", dot: "#E2C47E" }
+  ];
+  function binHtml(b) {
+    return '<div class="bin"><svg width="34" height="40" viewBox="0 0 34 40" aria-hidden="true"><rect x="3" y="2" width="28" height="6" rx="2" style="fill: ' +
+      b.lid + '"></rect><path d="M6 10h22l-2.5 26a3 3 0 0 1-3 2.6H11.5a3 3 0 0 1-3-2.6z" style="fill: ' + b.body + '"></path></svg><div><b>' +
+      b.name + "</b><span>" + b.what + "</span></div></div>";
+  }
+
+  var picked = 0; // soir choisi dans la bande des 7 prochains soirs
+  function currentCommune() { return COMMUNES[+$("commune").value]; }
+
+  function render() {
+    var c = currentCommune();
+    var t0 = today();
+    var lastData = Date.parse(DATA_END + "T00:00:00Z");
+    var weekBox = $("week-box"), body = $("card-body"), title = $("card-title");
+
+    if (!c.plan) {
+      weekBox.hidden = true;
+      $("ics").hidden = true; $("ics-hint").hidden = true;
+      title.textContent = "// " + c.name;
+      body.innerHTML = "<h2>Calendrier à venir</h2><p>" + c.name + " dépend du " + SMVL +
+        ". Ses jours de collecte seront ajoutés ici bientôt. En attendant, consultez <a href=\"https://www.syndicatvaldeloir.fr/calendrier-de-collecte-2026/\" target=\"_blank\" rel=\"noopener\">le calendrier du syndicat</a>.</p>";
+      return;
+    }
+    if (t0 > lastData) {
+      weekBox.hidden = true;
+      $("ics").hidden = true; $("ics-hint").hidden = true;
+      title.textContent = "// " + c.name;
+      body.innerHTML = "<h2>Calendrier à mettre à jour</h2><p>Les collectes ne sont connues que jusqu'à fin 2027. Consultez <a href=\"https://www.syvalorm.fr\" target=\"_blank\" rel=\"noopener\">le site du SYVALORM</a>.</p>";
+      return;
+    }
+    weekBox.hidden = false;
+    $("ics").hidden = false; $("ics-hint").hidden = false;
+
+    // Les bacs se sortent la veille au soir : le soir J correspond à la collecte de J + 1.
+    var list = collections(c, t0 + DAY, t0 + 60 * DAY);
+    var byEvening = {};
+    list.forEach(function (x) { byEvening[iso(x.date - DAY)] = x; });
+
+    var evenings = [];
+    for (var i = 0; i < 7; i++) evenings.push(t0 + i * DAY);
+    $("days").innerHTML = evenings.map(function (t, i) {
+      var has = !!byEvening[iso(t)];
+      var d = new Date(t);
+      return '<button type="button" data-i="' + i + '" aria-pressed="' + (i === picked) + '" aria-label="' + longDate(t) + " au soir : " +
+        (has ? "ordures ménagères et emballages" : "rien") + '"><small>' + JOURS[d.getUTCDay()].slice(0, 3) + "</small><b>" + d.getUTCDate() +
+        '</b><span class="dots">' + (has ? BINS.map(function (b) { return '<i style="background: ' + (i === picked ? b.dot : b.body) + '"></i>'; }).join("") : "") +
+        "</span></button>";
+    }).join("");
+
+    var ev = evenings[picked];
+    var hit = byEvening[iso(ev)];
+    title.textContent = "// " + (picked === 0 ? "ce soir, " : "") + longDate(ev) + (picked === 0 ? "" : " au soir");
+    if (hit) {
+      body.innerHTML = '<div class="bins"><h2>Sortez&nbsp;:</h2>' + BINS.map(binHtml).join("") + "</div>" +
+        "<p style=\"margin-top: 12px\">Collecte " + longDate(hit.date) + " au matin.</p>" +
+        (hit.cause ? '<p class="shift">Décalée d\'un jour à cause du jour férié (' + hit.cause.name + ").</p>" : "");
+    } else {
+      var next = list.filter(function (x) { return x.date - DAY > ev; })[0];
+      body.innerHTML = '<div class="none">Rien à sortir</div>' +
+        (next ? "<p style=\"margin-top: 8px\">Prochaine sortie&nbsp;: <strong>" + longDate(next.date - DAY) + " au soir</strong>, ordures ménagères et emballages." +
+          (next.cause ? " Décalée d'un jour à cause du jour férié (" + next.cause.name + ")." : "") + "</p>" : "");
+    }
+  }
+
+  // ---------- Agenda (.ics) ----------
+  function icsFor(c) {
+    var t0 = today();
+    var list = collections(c, t0 + DAY, Date.parse(DATA_END + "T00:00:00Z"));
+    var stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//swallowAGE//Quelle poubelle ce soir//FR", "CALSCALE:GREGORIAN",
+      "X-WR-CALNAME:Collectes " + c.name];
+    list.forEach(function (x) {
+      var ev = iso(x.date - DAY).replace(/-/g, "");
+      lines.push("BEGIN:VEVENT", "UID:" + ev + "-" + c.name.replace(/[^A-Za-z]/g, "") + "@swallowage.github.io", "DTSTAMP:" + stamp,
+        "DTSTART:" + ev + "T190000", "DTEND:" + ev + "T191500",
+        "SUMMARY:Sortir les poubelles (ordures ménagères + emballages)",
+        "DESCRIPTION:Collecte le " + longDate(x.date) + (x.cause ? ", décalée à cause du jour férié (" + x.cause.name + ")" : "") + ".",
+        "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:Sortir les poubelles", "TRIGGER:PT0M", "END:VALARM", "END:VEVENT");
+    });
+    lines.push("END:VCALENDAR");
+    return lines.join("\r\n");
+  }
+
+  $("ics").addEventListener("click", function () {
+    var c = currentCommune();
+    var blob = new Blob([icsFor(c)], { type: "text/calendar;charset=utf-8" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "collectes-" + c.name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-") + ".ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+
+  // ---------- Commune choisie ----------
+  $("commune").innerHTML =
+    '<optgroup label="SYVALORM">' + COMMUNES.map(function (c, i) { return c.plan ? '<option value="' + i + '">' + c.name + "</option>" : ""; }).join("") + "</optgroup>" +
+    '<optgroup label="Syndicat Mixte du Val de Loir (à venir)">' + COMMUNES.map(function (c, i) { return c.plan ? "" : '<option value="' + i + '">' + c.name + "</option>"; }).join("") + "</optgroup>";
+
+  var saved = null;
+  var q = new URLSearchParams(location.search).get("commune");
+  try { saved = q || localStorage.getItem("poubelle-commune"); } catch (e) { saved = q; }
+  var idx = COMMUNES.findIndex(function (c) { return c.name === saved; });
+  $("commune").value = String(idx >= 0 ? idx : COMMUNES.findIndex(function (c) { return c.name === "La Chartre-sur-le-Loir"; }));
+
+  $("commune").addEventListener("change", function () {
+    try { localStorage.setItem("poubelle-commune", currentCommune().name); } catch (e) { /* rien */ }
+    picked = 0;
+    render();
+  });
+  $("days").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    picked = +b.dataset.i;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
