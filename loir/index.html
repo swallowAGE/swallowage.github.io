@@ -118,7 +118,7 @@
     <section class="chart" aria-labelledby="chart-title">
       <div class="chart-head"><h2 id="chart-title">Le dernier mois</h2><span>hauteur en mètres</span></div>
       <div id="chart"></div>
-      <p>Mesures de la station, toutes les heures environ. Les données récentes ne sont pas encore validées.</p>
+      <p>Mesures de la station, toutes les heures environ. Les données récentes ne sont pas encore validées. <span id="source"></span></p>
     </section>
   </div>
 
@@ -127,7 +127,7 @@
   <footer class="notes">
     <div>
       <span class="kicker">// les mesures</span>
-      <p>Hauteurs mesurées par les stations du réseau Vigicrues, diffusées par l'API Hub'Eau (hubeau.eaufrance.fr), environ un mois en arrière. La hauteur est lue à l'échelle de la station : ce n'est pas une profondeur.</p>
+      <p>Hauteurs mesurées par les stations du réseau Vigicrues, diffusées par l'API Hub'Eau (hubeau.eaufrance.fr) ou, à défaut, par Vigicrues, environ un mois en arrière. La hauteur est lue à l'échelle de la station : ce n'est pas une profondeur.</p>
     </div>
     <div>
       <span class="kicker">// le plus haut niveau</span>
@@ -135,7 +135,7 @@
     </div>
     <div>
       <span class="kicker">// vie privée</span>
-      <p>Rien n'est enregistré ni envoyé : la page demande seulement les mesures de la station à Hub'Eau.</p>
+      <p>Rien n'est enregistré ni envoyé : la page demande seulement les mesures de la station à Hub'Eau ou à Vigicrues.</p>
     </div>
   </footer>
 </div>
@@ -153,24 +153,62 @@
   var cm = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
   var MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
 
+  // Requête avec délai maximal ; l'erreur dit ce qui s'est passé.
   function get(url) {
-    return fetch(url).then(function (r) {
-      if (!r.ok && r.status !== 206) throw new Error("http " + r.status);
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
+    return fetch(url, ctl ? { signal: ctl.signal } : {}).then(function (r) {
+      clearTimeout(timer);
+      if (!r.ok) throw new Error("erreur " + r.status);
       return r.json();
+    }, function (e) {
+      clearTimeout(timer);
+      throw new Error(e && e.name === "AbortError" ? "pas de réponse au bout de 20 s" : "service injoignable depuis le navigateur");
     });
   }
 
-  // Hauteurs (Hub'Eau les donne en millimètres), du plus ancien au plus récent.
+  function clean(list) {
+    var since = Date.now() - 31 * 86400000;
+    return list.filter(function (d) { return isFinite(d.t) && isFinite(d.h) && d.t >= since; })
+      .sort(function (a, b) { return a.t - b.t; });
+  }
+
+  // Hauteurs du plus ancien au plus récent : Hub'Eau d'abord (en millimètres), Vigicrues ensuite (en mètres).
+  var SOURCES = [
+    { name: "Hub'Eau", load: function (code) {
+      return get(API + "observations_tr?code_entite=" + code + "&grandeur_hydro=H&size=20000&fields=date_obs,resultat_obs")
+        .then(function (j) {
+          return clean((j.data || []).map(function (d) { return { t: Date.parse(d.date_obs), h: d.resultat_obs / 1000 }; }));
+        });
+    } },
+    { name: "Vigicrues", load: function (code) {
+      return get("https://www.vigicrues.gouv.fr/services/observations.json/index.php?CdStationHydro=" + code + "&GrdSerie=H&FormatDate=iso")
+        .then(function (j) {
+          var obs = (j && j.Serie && j.Serie.ObssHydro) || [];
+          return clean(obs.map(function (d) { return { t: Date.parse(d.DtObsHydro), h: +d.ResObsHydro }; }));
+        });
+    } }
+  ];
+
   function loadSeries(code) {
-    var since = new Date(Date.now() - 31 * 86400000).toISOString().slice(0, 19) + "Z";
-    var url = API + "observations_tr?code_entite=" + code + "&grandeur_hydro=H&date_debut_obs=" + since +
-      "&size=5000&fields=date_obs,resultat_obs";
-    return get(url).then(function (j) {
-      return (j.data || [])
-        .map(function (d) { return { t: Date.parse(d.date_obs), h: d.resultat_obs / 1000 }; })
-        .filter(function (d) { return isFinite(d.t) && isFinite(d.h); })
-        .sort(function (a, b) { return a.t - b.t; });
-    });
+    var why = [];
+    function next(i) {
+      if (i >= SOURCES.length) {
+        var e = new Error("vide");
+        e.why = why;
+        return Promise.reject(e);
+      }
+      var src = SOURCES[i];
+      return src.load(code).then(function (series) {
+        if (series.length) { series.source = src.name; return series; }
+        why.push(src.name + " : aucune mesure ces 31 derniers jours");
+        return next(i + 1);
+      }, function (e) {
+        why.push(src.name + " : " + e.message);
+        return next(i + 1);
+      });
+    }
+    return next(0);
   }
 
   function dateLabel(t) {
@@ -231,6 +269,7 @@
       if (current !== code) return;
       if (!series.length) throw new Error("vide");
       $("status").textContent = "";
+      $("source").textContent = "Source des mesures : " + series.source + ".";
       var last = series[series.length - 1];
       var opt = $("other").selectedOptions[0];
       var name = NAMES[code] || (opt && opt.value === code ? opt.textContent : "station " + code);
@@ -268,9 +307,11 @@
 
       drawn = [series, record];
       $("chart").innerHTML = chart(series, record);
-    }).catch(function () {
+    }).catch(function (e) {
       if (current !== code) return;
-      $("status").textContent = "Mesures indisponibles pour le moment. Réessayez plus tard, ou consultez Vigicrues.";
+      $("status").textContent = "Mesures indisponibles pour le moment. Réessayez plus tard, ou consultez Vigicrues." +
+        (e && e.why && e.why.length ? " (Détail : " + e.why.join(" ; ") + ".)" : "");
+      $("source").textContent = "";
       $("when").textContent = "// mesures indisponibles";
       $("level").textContent = "–";
       $("trend").textContent = "";

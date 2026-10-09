@@ -221,14 +221,35 @@ section > .wrap > p{
 
 /* ---------- Réalisation card ---------- */
 
+#realisations .wrap{
+  max-width:1120px;
+}
+
+.creations{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap:12px;
+  margin-top:8px;
+}
+
 .creation{
   display:flex;
-  gap:22px;
+  gap:18px;
   align-items:flex-start;
   background:var(--paper-raised);
   border-radius:4px;
-  padding:26px 28px;
-  margin-top:8px;
+  padding:24px 24px;
+}
+
+.creation > div:last-child{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
+.creation .link{
+  margin-top:auto;
+  align-self:flex-start;
 }
 
 .creation .mark{

@@ -108,6 +108,8 @@
     <div class="tile"><div class="k">Pesticides (total)</div><div class="v" id="t-pest"></div><div class="s" id="t-pest-s">limite 0,5 µg/L</div></div>
     <div class="tile"><div class="k">Dureté (calcaire)</div><div class="v" id="t-th"></div><div class="s" id="t-th-s"></div></div>
     <div class="tile"><div class="k">Bactéries</div><div class="v" id="t-bact"></div><div class="s">E. coli, entérocoques</div></div>
+    <div class="tile"><div class="k">pH</div><div class="v" id="t-ph"></div><div class="s" id="t-ph-s"></div></div>
+    <div class="tile"><div class="k">Chlore</div><div class="v" id="t-cl"></div><div class="s" id="t-cl-s"></div></div>
   </div>
 
   <div class="box" id="no3-box" hidden>
@@ -122,7 +124,7 @@
     </div>
     <div>
       <span class="kicker">// les repères</span>
-      <p>Nitrates : limite de 50 mg/L. Pesticides : 0,1 µg/L par molécule et 0,5 µg/L au total. Dureté : en dessous de 15 °f l'eau est douce, au-dessus de 30 °f elle est dure.</p>
+      <p>Nitrates : limite de 50 mg/L. Pesticides : 0,1 µg/L par molécule et 0,5 µg/L au total. Dureté : en dessous de 15 °f l'eau est douce, au-dessus de 30 °f elle est dure. pH : référence entre 6,5 et 9. Chlore : il désinfecte le réseau et varie d'un jour à l'autre ; pour un aquarium, laissez reposer l'eau ou utilisez un conditionneur.</p>
     </div>
     <div>
       <span class="kicker">// vie privée</span>
@@ -247,7 +249,7 @@
       $("official").hidden = !conclusion;
       $("card").hidden = false;
 
-      // Les quatre repères.
+      // Les repères.
       var nit = latest(rows, "1340", /^nitrates/i);
       $("t-no3").innerHTML = nit ? n1.format(nit.resultat_numerique) + " <small>mg/L</small>" : "non mesuré";
       var bar = $("t-no3-bar").firstChild;
@@ -270,6 +272,21 @@
       var ecoli = latest(rows, "1449", /escherichia/i), ent = latest(rows, "6455", /ent[ée]rocoques/i);
       $("t-bact").textContent = !ecoli && !ent ? "non mesuré"
         : (ecoli && ecoli.resultat_numerique > 0) || (ent && ent.resultat_numerique > 0) ? "Présence détectée" : "Aucune";
+      var shortDate = function (r) { var d = new Date(r.date_prelevement); return d.getDate() + " " + MOIS[d.getMonth()] + " " + d.getFullYear(); };
+      var ph = latest(rows, "1302", /^ph\b/i);
+      if (ph) {
+        var p = ph.resultat_numerique;
+        $("t-ph").innerHTML = n1.format(p) + " <small>" + (p < 6.5 ? "acide" : p > 8 ? "basique" : p > 7.5 ? "légèrement basique" : "neutre") + "</small>";
+        $("t-ph-s").textContent = "référence 6,5 à 9 · le " + shortDate(ph);
+      } else { $("t-ph").textContent = "non mesuré"; $("t-ph-s").textContent = ""; }
+
+      var cl = latest(rows, "1398", /^chlore libre/i), clKind = "chlore libre";
+      if (!cl) { cl = latest(rows, "1399", /^chlore total/i); clKind = "chlore total"; }
+      if (cl) {
+        $("t-cl").innerHTML = n2.format(cl.resultat_numerique) + " <small>mg/L</small>";
+        $("t-cl-s").textContent = clKind + " · le " + shortDate(cl);
+      } else { $("t-cl").textContent = "non mesuré"; $("t-cl-s").textContent = ""; }
+
       $("tiles").hidden = false;
 
       // Évolution des nitrates.

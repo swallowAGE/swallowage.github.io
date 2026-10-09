@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quelle poubelle ce soir ? – Swallow AGE</title>
-<meta name="description" content="Quelle poubelle sortir ce soir dans votre commune de Loir-Lucé-Bercé, les prochaines collectes et un rappel dans votre agenda.">
+<meta name="description" content="Quelle poubelle sortir ce soir dans votre commune de Loir-Lucé-Bercé (SYVALORM et Syndicat du Val de Loir), les prochaines collectes et un rappel dans votre agenda.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -79,6 +79,39 @@
   .btn:hover { background: var(--ink); }
   .hint { margin: -8px 0 0; font-size: 13px; color: var(--soft); text-align: center; }
 
+  .pick { background: var(--field); border: 1px solid var(--rule); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .pick h2 { margin: 4px 0 0; font-size: 22px; line-height: 1.2; font-weight: 500; }
+  .pick p { margin: 0; font-size: 15px; color: var(--soft); }
+  .pick .fld { background: var(--paper); }
+  .choices { display: flex; flex-direction: column; gap: 8px; }
+  .choices button { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); border-radius: 14px; padding: 12px 14px; min-height: 60px; text-align: left; font: inherit; cursor: pointer; }
+  .choices button:hover { border-color: var(--rose); }
+  .choices b { font-size: 17px; font-weight: 500; }
+  .choices span { font-size: 13px; color: var(--soft); }
+  .sectors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .sectors button { border: 2px solid; border-radius: 14px; padding: 12px; min-height: 64px; text-align: left; display: flex; flex-direction: column; gap: 2px; font: inherit; color: var(--ink); cursor: pointer; }
+  .sectors b { font-size: 18px; font-weight: 600; }
+  .sectors span { font-size: 13px; color: var(--soft); }
+  .sec-a { border-color: #C47A12 !important; background: #FFF4E3; }
+  .sec-b { border-color: #8C8487 !important; background: #F1EEEC; }
+  .hits { list-style: none; margin: 6px 0 0; padding: 4px; border: 1px solid var(--rule); border-radius: 12px; background: var(--field); }
+  .hits button { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 8px; border: 0; background: transparent; text-align: left; font: inherit; font-size: 15px; color: var(--ink); padding: 9px 10px; border-radius: 8px; min-height: 44px; cursor: pointer; }
+  .hits button:hover, .hits button:focus-visible { background: var(--raised); }
+  .badge { flex: none; font-size: 13px; font-weight: 500; color: var(--field); border-radius: 999px; padding: 2px 10px; }
+  .badge.a { background: #9A5B00; }
+  .badge.b { background: #6B6366; }
+  .nohit { margin: 6px 0 0 !important; font-size: 14px !important; }
+  .pick figure { margin: 0; }
+  .pick img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--rule); }
+  .pick figcaption { margin-top: 6px; font-size: 13px; color: var(--soft); }
+  .pick details { font-size: 14px; color: var(--soft); }
+  .pick summary { cursor: pointer; font-weight: 500; color: var(--ink); min-height: 32px; }
+  .pick details p { margin: 8px 0 0; font-size: 14px; }
+  .pick details strong { color: var(--ink); }
+  .chosen { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--raised); border-radius: 12px; padding: 8px 8px 8px 14px; font-size: 15px; }
+  .chosen button { flex: none; border: 1px solid var(--line); background: var(--field); color: var(--ink); border-radius: 10px; padding: 6px 12px; min-height: 40px; font: inherit; font-size: 14px; cursor: pointer; }
+  .chosen small { display: block; font-size: 13px; color: var(--soft); }
+
   .notes { margin-top: 16px; padding-top: 18px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 14px; font-size: 14px; color: var(--soft); }
   .notes p { margin: 4px 0 0; }
 </style>
@@ -96,6 +129,9 @@
     <select id="commune" class="fld"></select>
   </div>
 
+  <div class="chosen" id="chosen" hidden></div>
+  <section class="pick" id="pick" aria-live="polite" hidden></section>
+
   <section class="card" id="card" aria-live="polite">
     <span class="kicker" id="card-title"></span>
     <div id="card-body"></div>
@@ -110,20 +146,20 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"></path></svg>
     Ajouter les collectes à mon agenda
   </button>
-  <p class="hint" id="ics-hint">Un rappel la veille à 19 h, jours fériés compris, jusqu'à fin 2027.</p>
+  <p class="hint" id="ics-hint"></p>
 
   <footer class="notes">
     <div>
       <span class="kicker">// les collectes</span>
-      <p>Dans les communes du SYVALORM, les ordures ménagères et les emballages sont collectés le même jour, une semaine sur deux. Sortez les bacs la veille au soir. Après un jour férié, les collectes de la semaine sont décalées au lendemain, sauf le jeudi 6 mai 2027.</p>
+      <p>Dans les communes du SYVALORM, les ordures ménagères et les emballages sont collectés le même jour, une semaine sur deux. Dans celles du Syndicat du Val de Loir, les ordures ménagères passent chaque semaine et les emballages une semaine sur deux, selon le secteur&nbsp;: A les semaines impaires, B les semaines paires. Sortez les bacs la veille au soir. Après un jour férié, les collectes de la semaine sont décalées au lendemain, sauf le jeudi 6 mai 2027 au SYVALORM.</p>
     </div>
     <div>
       <span class="kicker">// les sources</span>
-      <p>Calendriers 2026 et 2027 du <a href="https://www.syvalorm.fr" target="_blank" rel="noopener">SYVALORM</a>. Pour Montval-sur-Loir et les autres communes du <a href="https://www.syndicatvaldeloir.fr" target="_blank" rel="noopener">Syndicat Mixte du Val de Loir</a>, les jours seront ajoutés plus tard. En cas de doute, le calendrier de votre syndicat fait foi.</p>
+      <p>Calendriers 2026 et 2027 du <a href="https://www.syvalorm.fr" target="_blank" rel="noopener">SYVALORM</a>, calendriers 2026 et cartes des secteurs du <a href="https://www.syndicatvaldeloir.fr" target="_blank" rel="noopener">Syndicat du Val de Loir</a> (02 43 94 86 50). Les listes de lieux-dits sont relevées sur ces cartes&nbsp;: près d'une limite, la carte et le syndicat font foi.</p>
     </div>
     <div>
       <span class="kicker">// vie privée</span>
-      <p>Rien n'est envoyé. Votre commune est seulement retenue sur cet appareil, pour la prochaine visite.</p>
+      <p>Rien n'est envoyé. Votre commune et votre secteur sont seulement retenus sur cet appareil, pour la prochaine visite.</p>
     </div>
   </footer>
 </div>
@@ -139,42 +175,110 @@
   // Groupe A : semaine du lundi 5 janvier 2026, puis une semaine sur deux (B : les autres).
   // Jours : 1 = lundi … 5 = vendredi. Relevé sur les calendriers 2026 et 2027 du SYVALORM.
   var ANCHOR_A = Date.UTC(2026, 0, 5);
-  var DATA_START = "2026-01-01", DATA_END = "2027-12-31";
-  var SYV = "SYVALORM", SMVL = "Syndicat Mixte du Val de Loir";
-  function always(group, day) { return [{ from: DATA_START, to: DATA_END, group: group, day: day }]; }
+  var DATA_START = "2026-01-01";
+  var SYV = "SYVALORM", SMVL = "Syndicat du Val de Loir";
+  var END = { SYVALORM: "2027-12-31", "Syndicat du Val de Loir": "2026-12-31" };
+  var SITE = { SYVALORM: "https://www.syvalorm.fr", "Syndicat du Val de Loir": "https://www.syndicatvaldeloir.fr" };
+  function always(group, day) { return [{ from: DATA_START, to: END[SYV], group: group, day: day }]; }
+
+  // Syndicat du Val de Loir : ordures ménagères chaque semaine le jour « day », emballages les semaines
+  // ISO impaires (secteur A, « odd ») ou paires (secteur B, « even »). Relevé sur les calendriers 2026.
+  // Pour les communes à deux secteurs, les lieux-dits sont relevés sur la carte du syndicat ;
+  // un « * » final signale un lieu tout près de la limite entre les deux secteurs.
+  var SECTEURS = {
+    "Flée": { map: "flee", day: 2,
+      A: ["La Guichardière", "La Naillère", "La Glacière", "Champ du Grenouillet", "La Petite Foucherie"],
+      B: ["Le bourg", "Les Pâqueries", "La Tuffière", "La Marottière", "La Patrie", "La Barsonnière", "Les Ribottières", "Le Bois Camus",
+        "La Tibergerie", "La Hérissonnière", "Maupertuis", "Doucet", "La Grande Maison", "Le Jarrier", "L'Aunay", "Bertre", "Luxembourg",
+        "La Croix Bardet", "La Petite Martinière", "La Bouvinière", "La Herverie", "Le Petit Vaux", "La Petite Vallée", "La Hérangerie",
+        "Ourne", "La Richardière", "La Chevalerie", "Les Fontaines", "La Gare", "Le Fresne", "Le Pêle", "Port Gauthier", "Malitourne",
+        "La Crolle", "Les Rohées", "Les Maisons Rouges", "Les Petites Filières", "Galon", "La Marmouchère", "La Chesnaie", "La Chimortière*",
+        "La Bretellerie", "La Pihérie", "Le Grand Fosse", "Quincampoix", "La Vignellerie", "La Bardetière", "Le Vaugué", "Le Petit Charme"] },
+    "Luceau": { map: "luceau", day: 2,
+      A: ["Le bourg", "Grande Rue", "Allée de Bel Air", "Moulin de Prelambert", "Rue de l'Arche*", "Rue du Nord*", "La Gautrie", "Hilleraie",
+        "Le Durau", "La Cour", "Le Grand Chavigné", "Malaquet", "La Brévière", "La Bomboirie", "La Bourdigault", "Loup Pendu", "La Hutterie",
+        "La Burasserie", "Maison Rouge", "La Drouaudrie", "La Péloiserie", "La Baratterie", "La Justice", "La Queurie", "La Plaudière",
+        "La Borde", "Coupaille", "Courtiran", "Le Verger", "La Croix de Paille", "La Boissière", "Le Puits", "La Crocherie", "La Coconnière",
+        "La Miottière", "La Minée", "Charence", "La Closerie", "Bellevue", "La Chaumine", "La Chesnaie", "La Grassinière"],
+      B: ["Rue de la Liberté*", "Route de Château-du-Loir", "Rue du Pâtis", "Rue de la Forge", "Rue des Mesles", "Le Clos du Moulin",
+        "L'Artigné", "L'Entre-Deux-Chemins", "L'Arche", "Le Clos de l'Arche", "Le Paradis", "Le Closeau", "La Pleutrie", "La Boirie",
+        "L'Ambrasière", "Les Lisambardières", "Poillé", "Vieux Moulin", "La Chauvellière", "La Bélerie", "La Grand Maison", "Carcahu",
+        "Les Tuileries", "Poitron", "Hameau de Doloire", "Les Léards", "La Massicoisière", "Les Breuils", "La Maladrie", "Le Trésor",
+        "Le Clos", "Le Courty", "Le Val de l'Ire", "Mon Refuge"] },
+    "Thoiré-sur-Dinan": { map: "thoire-sur-dinan", day: 2,
+      A: ["La Ménarderie", "Le Grand Clairet", "La Charbonnière", "Les Méaleries", "La Chênetrie", "La Brosse", "Blanc Puits",
+        "Le Chêne Vert", "La Caradoire", "La Noë Guilbert", "Le Clos des Liotières*"],
+      B: ["Le bourg", "Vaulumiers", "Le Coin des Fossés", "Les Boussions", "L'Épinay", "La Gougeonnière", "L'Olardière", "Vaux Thierry",
+        "Le Charme", "La Foussardière", "La Cailletière", "La Carriotière", "Le Chailloux", "La Passonnière", "La Gendronnière", "L'Éclèche",
+        "Saut Loup", "La Croix", "La Grange", "Le Gros Fouteau", "La Guibellerie", "Les Buissons", "Le Pesle", "Le Bas Bignon", "La Baltière",
+        "La Chardonnerie", "L'Habit", "Bas Beaugé", "Les Filières", "Haut Cerveau", "La Caillotière"] },
+    "Dissay-sous-Courcillon": { map: "dissay-sous-courcillon", day: 4,
+      A: ["Cerisay", "Marthe", "Route de Marthe", "Route du Vieux Marthe", "Les Fossées"],
+      B: ["Le bourg", "L'Aître des Guis*", "Route de Saint-Pierre", "La Voisinière", "Cavroche", "La Roche Blanche", "Beauregard*", "La Touche",
+        "Île de Bannes", "Laitre", "La Perdrillère", "Moulin de Courdamont", "Longèvre", "Pierrevouze", "Le Pavillon", "Les Rameries",
+        "Le Roncelet", "L'Hommeau", "Pontenaille", "Fosse Brault", "La Chaintre", "Couard", "Villeneuve", "Vaugourd", "La Taille",
+        "La Gonterie", "La Boulassière", "Bel-Air", "Le Paradis", "La Flotterie", "Larcaillère", "Les Plantes", "Vaussourd", "Le Marais",
+        "Le Houssay", "L'Hermennerie", "L'Arbondière", "La Fosse", "La Bordé", "La Chaponnière", "La Championnière", "Le Petit Vault",
+        "Route de Piery", "Vernay", "Les Caves", "L'Auberdière", "Gué Bodin", "Vauhudin", "La Jolivière"] },
+    "Château-du-Loir": { map: "chateau-du-loir", day: 2,
+      A: ["La Thibaudière", "La Vecquerie", "Le Petit Bois", "Constantine", "La Grande Pesnière", "Le Poirier Larron", "La Maison Neuve",
+        "Bois Gautier", "Les Plantes", "La Fredonnière", "La Roulière", "La Huppelière", "Les Motteaux*", "Rue des Paumons", "Avenue du Mans",
+        "Avenue Jean-Jaurès (vers le n° 80)*", "Rue Pitoulière (vers le n° 35)*", "Rue Pasteur", "Route de Nogent", "Rue du Val de Loir",
+        "Rue de la Vieille Gare", "Rue Aristide-Briand (hors n° 96)*", "Rue des Vertolines", "Allée des Vertolines", "Rue Sainte-Cécile",
+        "Rue de la Salle d'Asile", "Avenue de Tours", "Rue des Déportés", "Chemin de Goulard", "Rue du Mont sur Loir", "Rue Léon-Loiseau",
+        "Rue des Martyrs de la Résistance", "Rue Jahard*", "Rue Saint-Martin", "Allée des Roses"],
+      B: ["La Croix Bardet", "Les Pilletières", "La Martinière", "La Morinière", "Les Fromentinières", "La Pommerie", "La Chenardière",
+        "Les Landes", "Bois Saint-Martin", "La Binaudière", "La Petite Houdinière", "Les Fontaines", "Le Colombier", "Bel-Air", "Richelieu",
+        "La Borde", "Les Haies", "Route de Flée", "Rue des Mésanges", "Rue des Gabonnes", "Chemin du Riablay", "Rue Saint-Jean",
+        "Rue Lionel-Royer", "Huchepie", "Rue du Onze-Novembre", "Rue de Coupe-Pied", "Rue des Platanes", "Rue du Grand Douai",
+        "Avenue Jean-Jaurès (vers le n° 67)*", "Rue du Clos Joli", "Rue Westbury", "Chemin des Vaudrolles*", "Chemin de la Moricière",
+        "Rue Henry-Dunant*", "Rue Pitoulière (vers le n° 48)*", "Rue du Faubourg des Rognouses", "Rue de l'Hôpital*", "Rue de l'Ire",
+        "Rue Audet", "Place Lemonnier*", "Place et rue de l'Hôtel de Ville*", "Rue du 14-Juillet*", "Rue Aristide-Briand (n° 96)*",
+        "Rue de la Bascule"] },
+    "Vouvray-sur-Loir": { map: "vouvray-sur-loir", day: 4,
+      A: ["Salvert", "Vaux Jousse", "Champêtru", "La Pièce du Petit Verger", "Le Petit Verger", "Le Vau Tavernier", "119 rue du Val de Loir",
+        "Le Parc", "Chemin de Bannes"],
+      B: ["Le bourg", "La Souricière", "Le Verger", "Les Goulardières", "Les Jouberdières", "Le Gros Chêne", "La Grande Fosse", "Les Bordes",
+        "Les Gravelles", "Les Grignons", "Les Coteaux", "Rue Oscar-Moneris", "Rocheboison", "Bouteloup", "Route de la Martinière", "Barboiseau",
+        "Rue Nationale", "Coëmont", "Rue Basse", "Les Trois Moulins", "La Grande Pâture*"] }
+  };
+
   var COMMUNES = [
-    { name: "Beaumont-Pied-de-Bœuf", syndicat: SMVL },
+    { name: "Beaumont-Pied-de-Bœuf", syndicat: SMVL, smvl: { day: 2, emb: "odd" } },
     { name: "Beaumont-sur-Dême", syndicat: SYV, plan: always("B", 3) },
     { name: "Chahaignes", syndicat: SYV, plan: always("B", 5) },
     { name: "Courdemanche", syndicat: SYV, plan: always("B", 5) },
-    { name: "Dissay-sous-Courcillon", syndicat: SMVL },
-    { name: "Flée", syndicat: SMVL },
-    { name: "Jupilles", syndicat: SMVL },
+    { name: "Dissay-sous-Courcillon", syndicat: SMVL, smvl: { sectors: "Dissay-sous-Courcillon" } },
+    { name: "Flée", syndicat: SMVL, smvl: { sectors: "Flée" } },
+    { name: "Jupilles", syndicat: SMVL, smvl: { day: 2, emb: "odd" } },
     { name: "La Chartre-sur-le-Loir", syndicat: SYV, plan: always("B", 5) },
-    { name: "Lavernat", syndicat: SMVL },
+    { name: "Lavernat", syndicat: SMVL, smvl: { day: 1, emb: "even" } },
     { name: "Le Grand-Lucé", syndicat: SYV, plan: always("B", 5) },
     { name: "Lhomme", syndicat: SYV, plan: always("A", 5) },
     { name: "Loir en Vallée", syndicat: SYV, plan: always("A", 3) },
-    { name: "Luceau", syndicat: SMVL },
+    { name: "Luceau", syndicat: SMVL, smvl: { sectors: "Luceau" } },
     { name: "Marçon", syndicat: SYV, plan: always("B", 3) },
     { name: "Montreuil-le-Henri", syndicat: SYV, plan: always("B", 5) },
-    { name: "Montval-sur-Loir", syndicat: SMVL },
-    { name: "Nogent-sur-Loir", syndicat: SMVL },
+    { name: "Montval-sur-Loir", syndicat: SMVL, parts: [
+      { name: "Château-du-Loir", info: "mardi · 2 secteurs", smvl: { sectors: "Château-du-Loir" } },
+      { name: "Montabon", info: "jeudi", smvl: { day: 4, emb: "odd" } },
+      { name: "Vouvray-sur-Loir", info: "jeudi · 2 secteurs", smvl: { sectors: "Vouvray-sur-Loir" } }] },
+    { name: "Nogent-sur-Loir", syndicat: SMVL, smvl: { day: 4, emb: "odd" } },
     { name: "Pruillé-l'Éguillé", syndicat: SYV, plan: [
       { from: "2026-01-01", to: "2026-12-31", group: "A", day: 2 },
-      { from: "2027-01-01", to: DATA_END, group: "A", day: 5 }] },
+      { from: "2027-01-01", to: END[SYV], group: "A", day: 5 }] },
     { name: "Saint-Georges-de-la-Couée", syndicat: SYV, plan: always("B", 5) },
-    { name: "Saint-Pierre-de-Chevillé", syndicat: SMVL },
+    { name: "Saint-Pierre-de-Chevillé", syndicat: SMVL, smvl: { day: 4, emb: "odd" } },
     { name: "Saint-Pierre-du-Lorouër", syndicat: SYV, plan: [
       { from: "2026-01-01", to: "2026-12-31", group: "A", day: 1 },
-      { from: "2027-01-01", to: DATA_END, group: "B", day: 5 }] },
+      { from: "2027-01-01", to: END[SYV], group: "B", day: 5 }] },
     { name: "Saint-Vincent-du-Lorouër", syndicat: SYV, plan: [
       { from: "2026-01-01", to: "2026-12-31", group: "A", day: 2 },
-      { from: "2027-01-01", to: DATA_END, group: "A", day: 5 }] },
-    { name: "Thoiré-sur-Dinan", syndicat: SMVL },
+      { from: "2027-01-01", to: END[SYV], group: "A", day: 5 }] },
+    { name: "Thoiré-sur-Dinan", syndicat: SMVL, smvl: { sectors: "Thoiré-sur-Dinan" } },
     { name: "Villaines-sous-Lucé", syndicat: SYV, plan: always("A", 5) }
   ];
-  // Jours fériés sans décalage des collectes (annoncés par le syndicat).
+  // Jours fériés sans décalage des collectes (annoncés par le SYVALORM).
   var NO_SHIFT = { "2027-05-06": true };
 
   // ---------- Dates (en UTC pour éviter les surprises d'heure d'été) ----------
@@ -186,6 +290,11 @@
   function dow(t) { return new Date(t).getUTCDay(); }
   function longDate(t) { var d = new Date(t); return JOURS[d.getUTCDay()] + " " + d.getUTCDate() + (d.getUTCDate() === 1 ? "er" : "") + " " + MOIS[d.getUTCMonth()]; }
   function today() { var n = new Date(); return utc(n.getFullYear(), n.getMonth(), n.getDate()); }
+  // Numéro de semaine ISO du lundi « monday ».
+  function isoWeek(monday) {
+    var thursday = monday + 3 * DAY, y = new Date(thursday).getUTCFullYear();
+    return Math.floor((thursday - utc(y, 0, 1)) / DAY / 7) + 1;
+  }
 
   // Jours fériés (Pâques par l'algorithme de Meeus).
   var holidayCache = {};
@@ -206,30 +315,155 @@
   }
   function holidayName(t) { return holidays(new Date(t).getUTCFullYear())[iso(t)]; }
 
-  // Collectes d'une commune entre deux dates : [{ date, shiftedBy }]
-  function collections(commune, from, to) {
+  // Ce qu'il faut savoir pour calculer : { syndicat, end, week(monday) → null | { day, bins: [0, 1] } }
+  // bins : 0 = ordures ménagères, 1 = emballages.
+  function scheduleOf(sel) {
+    if (sel.plan) {
+      return { syndicat: SYV, end: END[SYV], week: function (w) {
+        var even = Math.round((w - ANCHOR_A) / (7 * DAY)) % 2 === 0, hit = null;
+        sel.plan.forEach(function (p) {
+          var t = w + (p.day - 1) * DAY;
+          if (iso(t) >= p.from && iso(t) <= p.to && (p.group === "A") === even) hit = { day: p.day, bins: [0, 1] };
+        });
+        return hit;
+      } };
+    }
+    if (sel.smvl) {
+      var day = sel.smvl.day, emb = sel.smvl.emb;
+      return { syndicat: SMVL, end: END[SMVL], week: function (w) {
+        if (iso(w) > END[SMVL] || iso(w + 6 * DAY) < DATA_START) return null;
+        var odd = isoWeek(w) % 2 === 1;
+        return { day: day, bins: (emb === "odd") === odd ? [0, 1] : [0] };
+      } };
+    }
+    return null;
+  }
+
+  // Collectes entre deux dates : [{ date, cause, bins }]
+  function collections(sched, from, to) {
     var out = [];
-    if (!commune.plan) return out;
+    if (!sched) return out;
     var monday = from - ((dow(from) + 6) % 7) * DAY;
     for (var w = monday - 7 * DAY; w <= to; w += 7 * DAY) {
-      var even = Math.round((w - ANCHOR_A) / (7 * DAY)) % 2 === 0;
-      var base = null, entry = null;
-      commune.plan.forEach(function (p) {
-        var t = w + (p.day - 1) * DAY;
-        if (iso(t) >= p.from && iso(t) <= p.to && (p.group === "A") === even) { base = t; entry = p; }
-      });
-      if (base === null) continue;
+      var hit = sched.week(w);
+      if (!hit) continue;
+      var base = w + (hit.day - 1) * DAY;
       // Un jour férié en semaine, avant ou le jour de la collecte, la décale au lendemain.
       var cause = null;
       for (var t = w; t <= base; t += DAY) {
         var hn = holidayName(t);
-        if (hn && !NO_SHIFT[iso(t)]) cause = { name: hn, date: t };
+        if (hn && !(sched.syndicat === SYV && NO_SHIFT[iso(t)])) cause = { name: hn, date: t };
       }
       var date = cause ? base + DAY : base;
-      if (date >= from && date <= to) out.push({ date: date, cause: cause });
+      if (date >= from && date <= to && iso(date) <= sched.end) out.push({ date: date, cause: cause, bins: hit.bins });
     }
     return out;
   }
+
+  // ---------- Choix : commune, puis commune déléguée et secteur s'il le faut ----------
+  var choice = { commune: null, part: null, sector: null };
+
+  function currentCommune() { return COMMUNES[+$("commune").value]; }
+  function partOf(c) {
+    if (!c.parts) return c;
+    for (var i = 0; i < c.parts.length; i++) if (c.parts[i].name === choice.part) return c.parts[i];
+    return null;
+  }
+  // Ce qui permet de calculer, ou null s'il manque une réponse.
+  function selection() {
+    var c = currentCommune(), p = partOf(c);
+    if (!p) return null;
+    if (p.plan) return { plan: p.plan };
+    if (p.smvl.sectors) {
+      var s = SECTEURS[p.smvl.sectors];
+      if (choice.sector !== "A" && choice.sector !== "B") return null;
+      return { smvl: { day: s.day, emb: choice.sector === "A" ? "odd" : "even" } };
+    }
+    return { smvl: p.smvl };
+  }
+  function placeName() {
+    var c = currentCommune(), p = partOf(c);
+    return c.name + (c.parts && p ? " · " + p.name : "") + (p && p.smvl && p.smvl.sectors && choice.sector ? " · secteur " + choice.sector : "");
+  }
+
+  function save() {
+    try { localStorage.setItem("poubelle-choix", JSON.stringify(choice)); localStorage.setItem("poubelle-commune", choice.commune); } catch (e) { /* rien */ }
+    try {
+      var q = "?commune=" + encodeURIComponent(choice.commune) + (choice.part ? "&partie=" + encodeURIComponent(choice.part) : "") +
+        (choice.sector ? "&secteur=" + choice.sector : "");
+      history.replaceState(null, "", q);
+    } catch (e) { /* rien */ }
+  }
+
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; });
+  }
+  function norm(t) { return t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[-'’]/g, " "); }
+  function label(n) { return n.replace(/\*$/, ""); }
+
+  // Carte et listes pour choisir son secteur.
+  function sectorPicker(where, s) {
+    var pick = $("pick");
+    pick.innerHTML =
+      '<div><span class="kicker">// une seule fois</span><h2 id="pick-title">Votre secteur à ' + esc(where) + "</h2>" +
+      "<p>Le bac des emballages ne passe pas la même semaine dans toute la commune. Choisissez votre secteur&nbsp;: la page s'en souviendra.</p></div>" +
+      '<div><label for="q">Votre lieu-dit ou votre rue</label>' +
+      '<input id="q" class="fld" type="text" autocomplete="off" placeholder="Ex. ' + esc(label(s.A[0])) + ', le bourg…" aria-describedby="q-help">' +
+      '<div id="q-res" aria-live="polite"></div><p id="q-help" class="sr-only" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Les lieux trouvés s\'affichent sous le champ.</p></div>' +
+      '<figure><a href="cartes/' + s.map + '.jpg" target="_blank" rel="noopener"><img src="cartes/' + s.map + '.jpg" width="900" height="900" loading="lazy" alt="Carte des secteurs de ' +
+      esc(where) + ' : secteur A en orange, secteur B en gris."></a>' +
+      '<figcaption>Carte du Syndicat du Val de Loir&nbsp;: <strong style="color: #9A5B00">A en orange</strong>, B en gris. Touchez la carte pour l\'agrandir.</figcaption></figure>' +
+      '<div class="sectors"><button type="button" class="sec-a" data-sector="A"><b>Secteur A</b><span>emballages les semaines impaires</span></button>' +
+      '<button type="button" class="sec-b" data-sector="B"><b>Secteur B</b><span>emballages les semaines paires</span></button></div>' +
+      "<details><summary>Voir tous les lieux par secteur</summary>" +
+      "<p><strong>Secteur A&nbsp;:</strong> " + s.A.map(function (n) { return esc(label(n)); }).join(", ") + ".</p>" +
+      "<p><strong>Secteur B&nbsp;:</strong> " + s.B.map(function (n) { return esc(label(n)); }).join(", ") + ".</p>" +
+      "<p>Lieu absent de la liste ou tout près d'une limite&nbsp;: regardez la carte, ou appelez le syndicat au 02 43 94 86 50.</p></details>";
+    var all = s.A.map(function (n) { return { n: n, s: "A" }; }).concat(s.B.map(function (n) { return { n: n, s: "B" }; }));
+    $("q").addEventListener("input", function () {
+      var q = norm(this.value.trim());
+      var res = $("q-res");
+      if (q.length < 2) { res.innerHTML = ""; return; }
+      var hits = all.filter(function (x) { return norm(label(x.n)).indexOf(q) !== -1; }).slice(0, 6);
+      res.innerHTML = hits.length
+        ? '<ul class="hits">' + hits.map(function (x) {
+          var near = /\*$/.test(x.n);
+          return '<li><button type="button" data-sector="' + x.s + '"><span>' + esc(label(x.n)) + (near ? "<br><small style=\"color: var(--soft)\">près de la limite : vérifiez sur la carte</small>" : "") +
+            '</span><span class="badge ' + x.s.toLowerCase() + '">secteur ' + x.s + "</span></button></li>";
+        }).join("") + "</ul>"
+        : '<p class="nohit">Pas trouvé dans la liste : regardez la carte ci-dessous.</p>';
+    });
+  }
+
+  function partPicker(c) {
+    $("pick").innerHTML =
+      '<div><span class="kicker">// une seule fois</span><h2>Où habitez-vous à ' + esc(c.name) + "&nbsp;?</h2>" +
+      "<p>Le jour de collecte dépend de l'ancienne commune.</p></div>" +
+      '<div class="choices">' + c.parts.map(function (p) {
+        return '<button type="button" data-part="' + esc(p.name) + '"><b>' + esc(p.name) + "</b><span>" + esc(p.info) + "</span></button>";
+      }).join("") + "</div>";
+  }
+
+  $("pick").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    if (b.dataset.part) { choice.part = b.dataset.part; choice.sector = null; }
+    else if (b.dataset.sector) choice.sector = b.dataset.sector;
+    else return;
+    save();
+    picked = 0;
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  $("chosen").addEventListener("click", function (e) {
+    if (!e.target.closest("button")) return;
+    var c = currentCommune(), p = partOf(c);
+    // « Changer » revient d'abord au secteur, puis à la commune déléguée.
+    if (p && p.smvl && p.smvl.sectors && choice.sector) choice.sector = null;
+    else { choice.part = null; choice.sector = null; }
+    save();
+    render();
+  });
 
   // ---------- Affichage ----------
   var BINS = [
@@ -241,47 +475,71 @@
       b.lid + '"></rect><path d="M6 10h22l-2.5 26a3 3 0 0 1-3 2.6H11.5a3 3 0 0 1-3-2.6z" style="fill: ' + b.body + '"></path></svg><div><b>' +
       b.name + "</b><span>" + b.what + "</span></div></div>";
   }
+  function binsText(bins) {
+    return bins.length === 2 ? "ordures ménagères et emballages" : "ordures ménagères seulement";
+  }
+  function endLabel(end) { return end.slice(0, 4); }
 
   var picked = 0; // soir choisi dans la bande des 7 prochains soirs
-  function currentCommune() { return COMMUNES[+$("commune").value]; }
+
+  function showMain(on) {
+    $("card").hidden = !on;
+    $("week-box").hidden = !on;
+    $("ics").hidden = !on; $("ics-hint").hidden = !on;
+  }
 
   function render() {
-    var c = currentCommune();
-    var t0 = today();
-    var lastData = Date.parse(DATA_END + "T00:00:00Z");
-    var weekBox = $("week-box"), body = $("card-body"), title = $("card-title");
+    var c = currentCommune(), p = partOf(c);
+    var body = $("card-body"), title = $("card-title"), pick = $("pick"), chosen = $("chosen");
 
-    if (!c.plan) {
-      weekBox.hidden = true;
-      $("ics").hidden = true; $("ics-hint").hidden = true;
-      title.textContent = "// " + c.name;
-      body.innerHTML = "<h2>Calendrier à venir</h2><p>" + c.name + " dépend du " + SMVL +
-        ". Ses jours de collecte seront ajoutés ici bientôt. En attendant, consultez <a href=\"https://www.syndicatvaldeloir.fr/calendrier-de-collecte-2026/\" target=\"_blank\" rel=\"noopener\">le calendrier du syndicat</a>.</p>";
-      return;
+    // Rappel du choix fait, avec « Changer ».
+    var detail = c.parts && p ? p.name : "";
+    if (p && p.smvl && p.smvl.sectors && choice.sector) {
+      detail += (detail ? " · " : "") + "secteur " + choice.sector;
     }
+    chosen.hidden = !detail;
+    if (detail) {
+      var sub = p && p.smvl && p.smvl.sectors && choice.sector
+        ? "emballages les semaines " + (choice.sector === "A" ? "impaires" : "paires") : "";
+      chosen.innerHTML = "<span>" + esc(c.name) + " · <strong>" + esc(detail) + "</strong>" + (sub ? "<small>" + sub + "</small>" : "") +
+        '</span><button type="button">Changer</button>';
+    }
+
+    // Une question reste à poser ?
+    if (!p) { partPicker(c); pick.hidden = false; showMain(false); return; }
+    if (p.smvl && p.smvl.sectors && !selection()) {
+      sectorPicker(p.name, SECTEURS[p.smvl.sectors]);
+      pick.hidden = false; showMain(false); return;
+    }
+    pick.hidden = true; pick.innerHTML = "";
+
+    var sched = scheduleOf(selection());
+    var t0 = today();
+    var lastData = Date.parse(sched.end + "T00:00:00Z");
+    showMain(true);
     if (t0 > lastData) {
-      weekBox.hidden = true;
+      $("week-box").hidden = true;
       $("ics").hidden = true; $("ics-hint").hidden = true;
-      title.textContent = "// " + c.name;
-      body.innerHTML = "<h2>Calendrier à mettre à jour</h2><p>Les collectes ne sont connues que jusqu'à fin 2027. Consultez <a href=\"https://www.syvalorm.fr\" target=\"_blank\" rel=\"noopener\">le site du SYVALORM</a>.</p>";
+      title.textContent = "// " + placeName();
+      body.innerHTML = "<h2>Calendrier à mettre à jour</h2><p>Les collectes ne sont connues que jusqu'à fin " + endLabel(sched.end) +
+        '. Consultez <a href="' + SITE[sched.syndicat] + '" target="_blank" rel="noopener">le site du ' + sched.syndicat + "</a>.</p>";
       return;
     }
-    weekBox.hidden = false;
-    $("ics").hidden = false; $("ics-hint").hidden = false;
+    $("ics-hint").textContent = "Un rappel la veille à 19 h, jours fériés compris, jusqu'à fin " + endLabel(sched.end) + ".";
 
     // Les bacs se sortent la veille au soir : le soir J correspond à la collecte de J + 1.
-    var list = collections(c, t0 + DAY, t0 + 60 * DAY);
+    var list = collections(sched, t0 + DAY, t0 + 60 * DAY);
     var byEvening = {};
     list.forEach(function (x) { byEvening[iso(x.date - DAY)] = x; });
 
     var evenings = [];
     for (var i = 0; i < 7; i++) evenings.push(t0 + i * DAY);
     $("days").innerHTML = evenings.map(function (t, i) {
-      var has = !!byEvening[iso(t)];
+      var hit = byEvening[iso(t)];
       var d = new Date(t);
       return '<button type="button" data-i="' + i + '" aria-pressed="' + (i === picked) + '" aria-label="' + longDate(t) + " au soir : " +
-        (has ? "ordures ménagères et emballages" : "rien") + '"><small>' + JOURS[d.getUTCDay()].slice(0, 3) + "</small><b>" + d.getUTCDate() +
-        '</b><span class="dots">' + (has ? BINS.map(function (b) { return '<i style="background: ' + (i === picked ? b.dot : b.body) + '"></i>'; }).join("") : "") +
+        (hit ? binsText(hit.bins) : "rien") + '"><small>' + JOURS[d.getUTCDay()].slice(0, 3) + "</small><b>" + d.getUTCDate() +
+        '</b><span class="dots">' + (hit ? hit.bins.map(function (k) { var b = BINS[k]; return '<i style="background: ' + (i === picked ? b.dot : b.body) + '"></i>'; }).join("") : "") +
         "</span></button>";
     }).join("");
 
@@ -289,29 +547,32 @@
     var hit = byEvening[iso(ev)];
     title.textContent = "// " + (picked === 0 ? "ce soir, " : "") + longDate(ev) + (picked === 0 ? "" : " au soir");
     if (hit) {
-      body.innerHTML = '<div class="bins"><h2>Sortez&nbsp;:</h2>' + BINS.map(binHtml).join("") + "</div>" +
+      body.innerHTML = '<div class="bins"><h2>Sortez&nbsp;:</h2>' + hit.bins.map(function (k) { return binHtml(BINS[k]); }).join("") + "</div>" +
+        (hit.bins.length === 1 ? '<p style="margin-top: 12px">Pas les emballages cette semaine.</p>' : "") +
         "<p style=\"margin-top: 12px\">Collecte " + longDate(hit.date) + " au matin.</p>" +
         (hit.cause ? '<p class="shift">Décalée d\'un jour à cause du jour férié (' + hit.cause.name + ").</p>" : "");
     } else {
       var next = list.filter(function (x) { return x.date - DAY > ev; })[0];
       body.innerHTML = '<div class="none">Rien à sortir</div>' +
-        (next ? "<p style=\"margin-top: 8px\">Prochaine sortie&nbsp;: <strong>" + longDate(next.date - DAY) + " au soir</strong>, ordures ménagères et emballages." +
+        (next ? "<p style=\"margin-top: 8px\">Prochaine sortie&nbsp;: <strong>" + longDate(next.date - DAY) + " au soir</strong>, " + binsText(next.bins) + "." +
           (next.cause ? " Décalée d'un jour à cause du jour férié (" + next.cause.name + ")." : "") + "</p>" : "");
     }
   }
 
   // ---------- Agenda (.ics) ----------
-  function icsFor(c) {
+  function icsFor() {
+    var sched = scheduleOf(selection());
     var t0 = today();
-    var list = collections(c, t0 + DAY, Date.parse(DATA_END + "T00:00:00Z"));
+    var name = placeName();
+    var list = collections(sched, t0 + DAY, Date.parse(sched.end + "T00:00:00Z"));
     var stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
     var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//swallowAGE//Quelle poubelle ce soir//FR", "CALSCALE:GREGORIAN",
-      "X-WR-CALNAME:Collectes " + c.name];
+      "X-WR-CALNAME:Collectes " + name];
     list.forEach(function (x) {
       var ev = iso(x.date - DAY).replace(/-/g, "");
-      lines.push("BEGIN:VEVENT", "UID:" + ev + "-" + c.name.replace(/[^A-Za-z]/g, "") + "@swallowage.github.io", "DTSTAMP:" + stamp,
+      lines.push("BEGIN:VEVENT", "UID:" + ev + "-" + name.normalize("NFD").replace(/[^A-Za-z]/g, "") + "@swallowage.github.io", "DTSTAMP:" + stamp,
         "DTSTART:" + ev + "T190000", "DTEND:" + ev + "T191500",
-        "SUMMARY:Sortir les poubelles (ordures ménagères + emballages)",
+        "SUMMARY:Sortir les poubelles (" + (x.bins.length === 2 ? "ordures ménagères + emballages" : "ordures ménagères") + ")",
         "DESCRIPTION:Collecte le " + longDate(x.date) + (x.cause ? ", décalée à cause du jour férié (" + x.cause.name + ")" : "") + ".",
         "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:Sortir les poubelles", "TRIGGER:PT0M", "END:VALARM", "END:VEVENT");
     });
@@ -320,11 +581,10 @@
   }
 
   $("ics").addEventListener("click", function () {
-    var c = currentCommune();
-    var blob = new Blob([icsFor(c)], { type: "text/calendar;charset=utf-8" });
+    var blob = new Blob([icsFor()], { type: "text/calendar;charset=utf-8" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "collectes-" + c.name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-") + ".ics";
+    a.download = "collectes-" + placeName().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + ".ics";
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -332,18 +592,28 @@
   });
 
   // ---------- Commune choisie ----------
-  $("commune").innerHTML =
-    '<optgroup label="SYVALORM">' + COMMUNES.map(function (c, i) { return c.plan ? '<option value="' + i + '">' + c.name + "</option>" : ""; }).join("") + "</optgroup>" +
-    '<optgroup label="Syndicat Mixte du Val de Loir (à venir)">' + COMMUNES.map(function (c, i) { return c.plan ? "" : '<option value="' + i + '">' + c.name + "</option>"; }).join("") + "</optgroup>";
+  function options(syndicat) {
+    return COMMUNES.map(function (c, i) { return c.syndicat === syndicat ? '<option value="' + i + '">' + c.name + "</option>" : ""; }).join("");
+  }
+  $("commune").innerHTML = '<optgroup label="SYVALORM">' + options(SYV) + "</optgroup>" +
+    '<optgroup label="Syndicat du Val de Loir">' + options(SMVL) + "</optgroup>";
 
-  var saved = null;
-  var q = new URLSearchParams(location.search).get("commune");
-  try { saved = q || localStorage.getItem("poubelle-commune"); } catch (e) { saved = q; }
-  var idx = COMMUNES.findIndex(function (c) { return c.name === saved; });
-  $("commune").value = String(idx >= 0 ? idx : COMMUNES.findIndex(function (c) { return c.name === "La Chartre-sur-le-Loir"; }));
+  // Choix de départ : le lien, sinon ce qui a été retenu sur l'appareil, sinon La Chartre.
+  var params = new URLSearchParams(location.search), saved = null;
+  try { saved = JSON.parse(localStorage.getItem("poubelle-choix") || "null"); } catch (e) { saved = null; }
+  if (!saved) { try { saved = { commune: localStorage.getItem("poubelle-commune") }; } catch (e) { saved = {}; } }
+  if (params.get("commune")) {
+    saved = { commune: params.get("commune"), part: params.get("partie"), sector: params.get("secteur") };
+  }
+  saved = saved || {};
+  var idx = COMMUNES.findIndex(function (c) { return c.name === saved.commune; });
+  if (idx < 0) idx = COMMUNES.findIndex(function (c) { return c.name === "La Chartre-sur-le-Loir"; });
+  $("commune").value = String(idx);
+  choice = { commune: COMMUNES[idx].name, part: saved.part || null, sector: saved.sector === "A" || saved.sector === "B" ? saved.sector : null };
 
   $("commune").addEventListener("change", function () {
-    try { localStorage.setItem("poubelle-commune", currentCommune().name); } catch (e) { /* rien */ }
+    choice = { commune: currentCommune().name, part: null, sector: null };
+    save();
     picked = 0;
     render();
   });
