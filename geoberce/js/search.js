@@ -13,11 +13,20 @@ function initRecherche(map, { onResultat } = {}) {
     let marqueurRecherche;
     let timer;
 
+    /* Sans accents ni majuscules ("electricien" trouve "électricien"),
+       et pas seulement dans le titre : le sous-titre et les mots-clés
+       (artisans, associations) comptent aussi, après les titres. */
+    function sansAccents(t) {
+        return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
     function rechercheLocale(q) {
-        const ql = q.toLowerCase();
-        return window.indexRecherche
-            .filter(item => item.titre.toLowerCase().includes(ql))
-            .slice(0, 5);
+        const ql = sansAccents(q);
+        const dansTitre = [], ailleurs = [];
+        window.indexRecherche.forEach(item => {
+            if (sansAccents(item.titre).includes(ql)) dansTitre.push(item);
+            else if (sansAccents((item.sousTitre || "") + " " + (item.motsCles || "")).includes(ql)) ailleurs.push(item);
+        });
+        return dansTitre.concat(ailleurs).slice(0, 5);
     }
 
     function rechercheAdresse(q) {

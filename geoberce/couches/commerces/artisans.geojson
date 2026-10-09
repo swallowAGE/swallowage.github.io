@@ -1,0 +1,4333 @@
+{
+ "type": "FeatureCollection",
+ "source": "Registre SIRENE (Insee), API Recherche d'entreprises",
+ "mise_a_jour": "2026-10-09",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.379151,
+     47.776529
+    ]
+   },
+   "properties": {
+    "siret": "52259695600014",
+    "nom": "Yves Edeline",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Le Patis Vert",
+    "com_insee": "72028",
+    "com_nom": "Beaumont-Pied-de-Bœuf",
+    "creation": "2010"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.569743,
+     47.697401
+    ]
+   },
+   "properties": {
+    "siret": "50002737000013",
+    "nom": "Dem'elec",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "1 Les Rochereaux",
+    "com_insee": "72027",
+    "com_nom": "Beaumont-sur-Dême",
+    "creation": "2007"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.579447,
+     47.683514
+    ]
+   },
+   "properties": {
+    "siret": "52856312500012",
+    "nom": "Esprit Vert",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Les Perriches",
+    "com_insee": "72027",
+    "com_nom": "Beaumont-sur-Dême",
+    "creation": "2010"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.511604,
+     47.746091
+    ]
+   },
+   "properties": {
+    "siret": "80808078200010",
+    "nom": "EIRL Barbet Sebastien",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "20 Rue de la Foret de Berce",
+    "com_insee": "72052",
+    "com_nom": "Chahaignes",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.508896,
+     47.746917
+    ]
+   },
+   "properties": {
+    "siret": "99933881700011",
+    "nom": "Elec'clim Innovation",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "32 Rue de la Foret de Berce",
+    "com_insee": "72052",
+    "com_nom": "Chahaignes",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.525378,
+     47.766342
+    ]
+   },
+   "properties": {
+    "siret": "52958619000033",
+    "nom": "Menuiserie Ebenisterie Evrard",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "2 Lieu Dit le Haut Perray",
+    "com_insee": "72052",
+    "com_nom": "Chahaignes",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.502146,
+     47.743411
+    ]
+   },
+   "properties": {
+    "siret": "44233769700027",
+    "nom": "Michel Dodier",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "13 Che Vaugermain",
+    "com_insee": "72052",
+    "com_nom": "Chahaignes",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.541387,
+     47.792654
+    ]
+   },
+   "properties": {
+    "siret": "35023882000061",
+    "nom": "Alta Industrie (MPTP)",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "La Piece Basse Rte de Brives",
+    "com_insee": "72103",
+    "com_nom": "Courdemanche",
+    "creation": "2007"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.562985,
+     47.846231
+    ]
+   },
+   "properties": {
+    "siret": "45025710000013",
+    "nom": "Bruno Brevard",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "Les Juguenieres",
+    "com_insee": "72103",
+    "com_nom": "Courdemanche",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.563143,
+     47.814505
+    ]
+   },
+   "properties": {
+    "siret": "79862928300010",
+    "nom": "Ecobat",
+    "categorie": "maconnerie",
+    "ape": "41.20B",
+    "activite": "Construction de bâtiments",
+    "adresse": "10 Rue du College",
+    "com_insee": "72103",
+    "com_nom": "Courdemanche",
+    "creation": "2013"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.540434,
+     47.842159
+    ]
+   },
+   "properties": {
+    "siret": "93081694700012",
+    "nom": "Jordan Letay",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Les Hamelieres",
+    "com_insee": "72103",
+    "com_nom": "Courdemanche",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.562371,
+     47.817738
+    ]
+   },
+   "properties": {
+    "siret": "41431589500022",
+    "nom": "Les Jardins de Monsieur Clement",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "10 Rue des Bouleaux",
+    "com_insee": "72103",
+    "com_nom": "Courdemanche",
+    "creation": "2016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.559581,
+     47.80384
+    ]
+   },
+   "properties": {
+    "siret": "52203544300012",
+    "nom": "MSP Mecanique et Soudure de Precision",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "LD la Piece Basse",
+    "com_insee": "72103",
+    "com_nom": "Courdemanche",
+    "creation": "2010"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.56038,
+     47.815562
+    ]
+   },
+   "properties": {
+    "siret": "32810166200018",
+    "nom": "Thierry Eloy",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Le Bourg",
+    "com_insee": "72103",
+    "com_nom": "Courdemanche",
+    "creation": "1983"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.474894,
+     47.664219
+    ]
+   },
+   "properties": {
+    "siret": "80962211100031",
+    "nom": "B.F. Concept Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "8 Rue Sainte Genevieve",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2020"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.480689,
+     47.663492
+    ]
+   },
+   "properties": {
+    "siret": "51336291300065",
+    "nom": "BM Concept Habitat",
+    "categorie": "maconnerie",
+    "ape": "41.20A",
+    "activite": "Construction de maisons individuelles",
+    "adresse": "Le Moulin de Courcillon Rue du Petit Sabot",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.529674,
+     47.65836
+    ]
+   },
+   "properties": {
+    "siret": "98310831700014",
+    "nom": "Esprit Paysage",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "LD la Bouvaterie Saint Joseph",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.490454,
+     47.682613
+    ]
+   },
+   "properties": {
+    "siret": "79804069700012",
+    "nom": "Frederic Mancellier",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Pierrevouze",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2013"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.479141,
+     47.660946
+    ]
+   },
+   "properties": {
+    "siret": "10233433100018",
+    "nom": "Jonathan Lubineau",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "7 Rue de la Joliverie",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.488233,
+     47.666901
+    ]
+   },
+   "properties": {
+    "siret": "90882964100012",
+    "nom": "Julien Pineau",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "2 Impasse des Rochettes",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.469442,
+     47.667958
+    ]
+   },
+   "properties": {
+    "siret": "10317998200014",
+    "nom": "KDM",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "3 Impasse du Ruisseau",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.487306,
+     47.664535
+    ]
+   },
+   "properties": {
+    "siret": "45392435900020",
+    "nom": "Patrick Dumoulin",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Rue de la Cotiere",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2012"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.519435,
+     47.661619
+    ]
+   },
+   "properties": {
+    "siret": "45109589700018",
+    "nom": "Reffay",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "La Piedorerie",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.469678,
+     47.679384
+    ]
+   },
+   "properties": {
+    "siret": "40906183500032",
+    "nom": "SARL Chevallier Dufeil",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Zi les Epinettes du Loir",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2005"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.435282,
+     47.665205
+    ]
+   },
+   "properties": {
+    "siret": "44326592100017",
+    "nom": "SARL Raimbault",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "La Touche",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2002"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.489992,
+     47.665011
+    ]
+   },
+   "properties": {
+    "siret": "99918739600018",
+    "nom": "SGR",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "29 Rue de la Cotiere",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.441121,
+     47.682444
+    ]
+   },
+   "properties": {
+    "siret": "80163035100022",
+    "nom": "Sbi",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "ST Jacques",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2017"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.507955,
+     47.650568
+    ]
+   },
+   "properties": {
+    "siret": "51013568400015",
+    "nom": "Sylvain Rincent",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Le Souillard",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.460316,
+     47.722846
+    ]
+   },
+   "properties": {
+    "siret": "81503253700046",
+    "nom": "Baz'elec",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "1 Lieu Dit le Petit Vaux",
+    "com_insee": "72134",
+    "com_nom": "Flée",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.454298,
+     47.731708
+    ]
+   },
+   "properties": {
+    "siret": "52473113000018",
+    "nom": "Clotures Blot-Chauvin",
+    "categorie": "autre",
+    "ape": "43.29B",
+    "activite": "Installations diverses",
+    "adresse": "3 Allee de la Croix Bodin",
+    "com_insee": "72134",
+    "com_nom": "Flée",
+    "creation": "2010"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.431035,
+     47.753365
+    ]
+   },
+   "properties": {
+    "siret": "80430512600018",
+    "nom": "EIRL Huon Harold",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "La Bardetiere",
+    "com_insee": "72134",
+    "com_nom": "Flée",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.480902,
+     47.743643
+    ]
+   },
+   "properties": {
+    "siret": "89524141200017",
+    "nom": "EURL Moireau Maconnerie Carrelage",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Croix Millet",
+    "com_insee": "72134",
+    "com_nom": "Flée",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.482236,
+     47.743672
+    ]
+   },
+   "properties": {
+    "siret": "49991198000021",
+    "nom": "Jerome Moireau",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Croix Millet",
+    "com_insee": "72134",
+    "com_nom": "Flée",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.453261,
+     47.733561
+    ]
+   },
+   "properties": {
+    "siret": "53931079700045",
+    "nom": "Kler Peinture - Kler Vintage",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "3 Rue du Lavoir",
+    "com_insee": "72134",
+    "com_nom": "Flée",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.409362,
+     47.787107
+    ]
+   },
+   "properties": {
+    "siret": "44158619500022",
+    "nom": "Couvr'toit",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "La Sablonniere",
+    "com_insee": "72153",
+    "com_nom": "Jupilles",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.417415,
+     47.786384
+    ]
+   },
+   "properties": {
+    "siret": "53276022000014",
+    "nom": "Eric Nicolas Labonne",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Bel Air",
+    "com_insee": "72153",
+    "com_nom": "Jupilles",
+    "creation": "2011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.408466,
+     47.778082
+    ]
+   },
+   "properties": {
+    "siret": "85026254400016",
+    "nom": "Sesame",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "La Guitonniere",
+    "com_insee": "72153",
+    "com_nom": "Jupilles",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.580656,
+     47.742154
+    ]
+   },
+   "properties": {
+    "siret": "35012595100037",
+    "nom": "Batiloir",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "17 Route des Jasnieres",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.582388,
+     47.739499
+    ]
+   },
+   "properties": {
+    "siret": "80319457000013",
+    "nom": "Bordier Peinture",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Za Val de Loire 2 Rue Pineau D'aunis la Charbonnie",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.586677,
+     47.722845
+    ]
+   },
+   "properties": {
+    "siret": "93445400000019",
+    "nom": "Cmventilation",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "69 T Rue les Caves la Fontaine",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.578423,
+     47.739011
+    ]
+   },
+   "properties": {
+    "siret": "91494574600016",
+    "nom": "Dylan Steyaert",
+    "categorie": "peinture",
+    "ape": "43.39Z",
+    "activite": "Travaux de finition",
+    "adresse": "59 Avenue des Deportes",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.58644,
+     47.740547
+    ]
+   },
+   "properties": {
+    "siret": "30090033900049",
+    "nom": "Entreprise Venot",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "9 Rue du Pineau D'aunis",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2015"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.582388,
+     47.739499
+    ]
+   },
+   "properties": {
+    "siret": "49002486600017",
+    "nom": "GP Meca",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "5 Rue du Pineau D'aunis",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2006"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.588555,
+     47.721193
+    ]
+   },
+   "properties": {
+    "siret": "84444872000020",
+    "nom": "Guivarch Maconnerie",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "6 Le Carroi des Pichons",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.58278,
+     47.739838
+    ]
+   },
+   "properties": {
+    "siret": "85026734500013",
+    "nom": "Heurtaux",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Z.a. Val de Loir la Charbonnie",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.585994,
+     47.725151
+    ]
+   },
+   "properties": {
+    "siret": "50418171000022",
+    "nom": "Isabelle Martin (devillers)",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "40 Rue les Caves la Fontaine",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.585994,
+     47.725151
+    ]
+   },
+   "properties": {
+    "siret": "52105902200017",
+    "nom": "L'atelier Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "40 Rue les Caves la Fontaine",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2010"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.577072,
+     47.734539
+    ]
+   },
+   "properties": {
+    "siret": "50385674200021",
+    "nom": "Laurent Ramauge",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "38 Avenue des Deportes",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.609793,
+     47.727437
+    ]
+   },
+   "properties": {
+    "siret": "42040332100037",
+    "nom": "Prudhomme",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "Les Vaux",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.55371,
+     47.728078
+    ]
+   },
+   "properties": {
+    "siret": "44948749500011",
+    "nom": "Serge Poisson",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Pic Oiseau",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.562664,
+     47.732943
+    ]
+   },
+   "properties": {
+    "siret": "81767888100043",
+    "nom": "Thomas Sassier Decorce (sassier)",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "2 Impasse Bellevue",
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.341827,
+     47.694637
+    ]
+   },
+   "properties": {
+    "siret": "10465724200012",
+    "nom": "Carreleur Lavernais",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "Lieu Dit Basse Belle Chaire",
+    "com_insee": "72160",
+    "com_nom": "Lavernat",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.350505,
+     47.728948
+    ]
+   },
+   "properties": {
+    "siret": "51297527700017",
+    "nom": "EURL Arboloir",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Les Verreries",
+    "com_insee": "72160",
+    "com_nom": "Lavernat",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.350505,
+     47.728948
+    ]
+   },
+   "properties": {
+    "siret": "83470371200010",
+    "nom": "Loir Office",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Lieu Dit les Verreries",
+    "com_insee": "72160",
+    "com_nom": "Lavernat",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.333963,
+     47.720052
+    ]
+   },
+   "properties": {
+    "siret": "84809744000012",
+    "nom": "NR Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "5 Rue de L Egalite",
+    "com_insee": "72160",
+    "com_nom": "Lavernat",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.372321,
+     47.703308
+    ]
+   },
+   "properties": {
+    "siret": "49757123200014",
+    "nom": "Renou David",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Le Verger des Landes",
+    "com_insee": "72160",
+    "com_nom": "Lavernat",
+    "creation": "2007"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.469667,
+     47.867666
+    ]
+   },
+   "properties": {
+    "siret": "45027535900013",
+    "nom": "Augereau",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Za de la Prairie Rue de la Torchetterie",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.465761,
+     47.858373
+    ]
+   },
+   "properties": {
+    "siret": "53962267000013",
+    "nom": "BDS (beaune Divers Services)",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "LD la Bonne Marcherie",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2012"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.522417,
+     47.853061
+    ]
+   },
+   "properties": {
+    "siret": "83947124000029",
+    "nom": "Cepen",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Le Moulin Neuf",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.470987,
+     47.863026
+    ]
+   },
+   "properties": {
+    "siret": "94032223300013",
+    "nom": "Cseh Robert Renovation",
+    "categorie": "peinture",
+    "ape": "43.29A",
+    "activite": "Isolation",
+    "adresse": "7 Rue du Remblai",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.474798,
+     47.862313
+    ]
+   },
+   "properties": {
+    "siret": "45075237300040",
+    "nom": "Cyril Lumineau",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "2 Rue Alexandre Martin",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.430009,
+     47.877709
+    ]
+   },
+   "properties": {
+    "siret": "80138041100018",
+    "nom": "Davelec",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Les Paqueries",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.475309,
+     47.878187
+    ]
+   },
+   "properties": {
+    "siret": "81835170200019",
+    "nom": "Dylan Pele",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Le Bordage",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.477074,
+     47.86077
+    ]
+   },
+   "properties": {
+    "siret": "90124443400022",
+    "nom": "Hardoin Couverture",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "254 Rue de la Paix",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.473977,
+     47.861456
+    ]
+   },
+   "properties": {
+    "siret": "10428681000015",
+    "nom": "J-L Service",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "1370 Route de Saint Vincent",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.43232,
+     47.875292
+    ]
+   },
+   "properties": {
+    "siret": "81445009400028",
+    "nom": "L'avenir en Couleur",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "33 Route des Brulonnieres",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.46156,
+     47.869292
+    ]
+   },
+   "properties": {
+    "siret": "49033992600027",
+    "nom": "L.M.C.",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Za de la Prairie",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2013"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.480522,
+     47.84991
+    ]
+   },
+   "properties": {
+    "siret": "87877917200013",
+    "nom": "M.p.e.p",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Le Bordage",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.475196,
+     47.864999
+    ]
+   },
+   "properties": {
+    "siret": "93376843400021",
+    "nom": "MTS",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "98 Route du Mans",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.468584,
+     47.865573
+    ]
+   },
+   "properties": {
+    "siret": "51470804900036",
+    "nom": "Marina",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "3 Rue Leon Aubert",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.460911,
+     47.868901
+    ]
+   },
+   "properties": {
+    "siret": "31783166700025",
+    "nom": "Michel Augereau",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "9 Rue de la Prairie",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2015"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.472746,
+     47.8655
+    ]
+   },
+   "properties": {
+    "siret": "49413545200030",
+    "nom": "Multi Travaux Renovation",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "33 Rue Chalot",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.431236,
+     47.871422
+    ]
+   },
+   "properties": {
+    "siret": "44381027000019",
+    "nom": "Promotion Aubert",
+    "categorie": "maconnerie",
+    "ape": "41.20A",
+    "activite": "Construction de maisons individuelles",
+    "adresse": "La Chataigneraie de la Van",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2002"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.463327,
+     47.869784
+    ]
+   },
+   "properties": {
+    "siret": "44310727100035",
+    "nom": "SARL Auriau Elagage",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "100 Za de la Prairie",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.45973,
+     47.870533
+    ]
+   },
+   "properties": {
+    "siret": "50739834500029",
+    "nom": "SARL Savattier",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Za de la Prairie",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.469462,
+     47.865098
+    ]
+   },
+   "properties": {
+    "siret": "81790023600024",
+    "nom": "Stevens Pele",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "2 Rue Nationale",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.469545,
+     47.865354
+    ]
+   },
+   "properties": {
+    "siret": "44405141100031",
+    "nom": "WMP",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "6 Rue Saint Facile",
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.567682,
+     47.760126
+    ]
+   },
+   "properties": {
+    "siret": "94484955300010",
+    "nom": "Alex Paysage",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "L'etre Lenaux 625 Route de la Chiquetiere",
+    "com_insee": "72161",
+    "com_nom": "Lhomme",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.549667,
+     47.779988
+    ]
+   },
+   "properties": {
+    "siret": "42023889100055",
+    "nom": "Art & Craft",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "328 Route de la Banniere",
+    "com_insee": "72161",
+    "com_nom": "Lhomme",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.573651,
+     47.75911
+    ]
+   },
+   "properties": {
+    "siret": "95374453900016",
+    "nom": "Bluzat Espaces Verts",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Lieu Dit les 4 Vents",
+    "com_insee": "72161",
+    "com_nom": "Lhomme",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.567591,
+     47.742403
+    ]
+   },
+   "properties": {
+    "siret": "51113359700027",
+    "nom": "Denis Rousier",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "9 La Croix Percee",
+    "com_insee": "72161",
+    "com_nom": "Lhomme",
+    "creation": "2017"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.616112,
+     47.748162
+    ]
+   },
+   "properties": {
+    "siret": "89499616400014",
+    "nom": "Ab Espaces Verts",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "9 Rue des Chardonnerets",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.629595,
+     47.775066
+    ]
+   },
+   "properties": {
+    "siret": "88461874500019",
+    "nom": "Anthony Losito",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Ruille sur Loir 1 Lieu Dit la Savariere",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2020"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.622555,
+     47.752201
+    ]
+   },
+   "properties": {
+    "siret": "42382762500025",
+    "nom": "Breton Cedric",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Ruille sur Loir 1 Rue du Petit Moulin",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.695782,
+     47.776022
+    ]
+   },
+   "properties": {
+    "siret": "98094083700027",
+    "nom": "Dylan Pouyaud",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "1 Lieu Dit L Euche",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.611506,
+     47.747455
+    ]
+   },
+   "properties": {
+    "siret": "84996346700022",
+    "nom": "E Abrahamse TP",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Za le Gue",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.61163,
+     47.746191
+    ]
+   },
+   "properties": {
+    "siret": "84996346700030",
+    "nom": "E Abrahamse TP",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Zone Artisanale le Gue Ruille sur Loir",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.612744,
+     47.748729
+    ]
+   },
+   "properties": {
+    "siret": "98525327700018",
+    "nom": "ETS Page",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Ruille-Sur-Loir 17 Route de la Chartre",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.630007,
+     47.75306
+    ]
+   },
+   "properties": {
+    "siret": "51922838100017",
+    "nom": "Fabrice Verron",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "2 Lot des Sablons",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2010"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.630174,
+     47.753755
+    ]
+   },
+   "properties": {
+    "siret": "89021469500011",
+    "nom": "Gabin Bordier",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "5 Rte de Ponce Ruille sur Loir",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2020"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.598828,
+     47.756907
+    ]
+   },
+   "properties": {
+    "siret": "94939857200022",
+    "nom": "Goupil Vallesien",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "23 Rue Principale (ponce-Sur-Le-Loir)",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.644044,
+     47.767751
+    ]
+   },
+   "properties": {
+    "siret": "34896175600023",
+    "nom": "Jean-Luc Boussion",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Les Saulais",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "1999"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.677018,
+     47.79856
+    ]
+   },
+   "properties": {
+    "siret": "95307513200019",
+    "nom": "Logan Pierre",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "8 Rue du Tusson Lavenay",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.610714,
+     47.747548
+    ]
+   },
+   "properties": {
+    "siret": "44126384500014",
+    "nom": "Oger",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "Ruille sur Loir 14 Rte de la Chartre",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2002"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.680889,
+     47.798356
+    ]
+   },
+   "properties": {
+    "siret": "53069291200013",
+    "nom": "Quentin Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "4 Rue Xaintrailles",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.608544,
+     47.746322
+    ]
+   },
+   "properties": {
+    "siret": "88967114500015",
+    "nom": "SR Metallerie",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "Le Gue 22 Rte de la Chartre Ruille sur Loir",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2020"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.654468,
+     47.803977
+    ]
+   },
+   "properties": {
+    "siret": "48126017200012",
+    "nom": "Stephane Abbatangeli",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Rougeolliere",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2005"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.680311,
+     47.8243
+    ]
+   },
+   "properties": {
+    "siret": "79337981900014",
+    "nom": "Thierry Paysages",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "LD la Pigaliere",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2013"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.685124,
+     47.797602
+    ]
+   },
+   "properties": {
+    "siret": "84292080300017",
+    "nom": "Yvan Peinture",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "La Chapelle Gaugain 5 Lot les Sablons",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.397457,
+     47.712624
+    ]
+   },
+   "properties": {
+    "siret": "93476234500015",
+    "nom": "BC Ravalement",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "6 Rue Pierre Cuillier",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.40163,
+     47.717235
+    ]
+   },
+   "properties": {
+    "siret": "39094034400026",
+    "nom": "Boyer Vitre",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Minee",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.393965,
+     47.713134
+    ]
+   },
+   "properties": {
+    "siret": "49536231100013",
+    "nom": "Christophe Chalot",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "33 Grande Rue",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2007"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.393874,
+     47.701589
+    ]
+   },
+   "properties": {
+    "siret": "80129006500029",
+    "nom": "DB Maconnerie",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Les Pres de la Fontaine",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.388746,
+     47.706486
+    ]
+   },
+   "properties": {
+    "siret": "44184343000030",
+    "nom": "Damien Robert",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "1 B Chemin de Carcahu",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2017"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.389953,
+     47.705862
+    ]
+   },
+   "properties": {
+    "siret": "85301419900022",
+    "nom": "Ejc Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Carcahu",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.384467,
+     47.702591
+    ]
+   },
+   "properties": {
+    "siret": "80764499200016",
+    "nom": "Francois Fouquet",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Poitron",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.37247,
+     47.718404
+    ]
+   },
+   "properties": {
+    "siret": "84148410800011",
+    "nom": "Helbert Victorien",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "L'ambrasiere",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.410399,
+     47.701078
+    ]
+   },
+   "properties": {
+    "siret": "93070833400014",
+    "nom": "MPC Energie",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "16 Route du Mans",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.400683,
+     47.717871
+    ]
+   },
+   "properties": {
+    "siret": "33859647100023",
+    "nom": "Ohlmann",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "Zone Industrielle du Puits",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "1988"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.410399,
+     47.701078
+    ]
+   },
+   "properties": {
+    "siret": "52175109900032",
+    "nom": "Serrurerie Metallerie Jauneau",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "26 Route du Mans",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2012"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.375362,
+     47.717909
+    ]
+   },
+   "properties": {
+    "siret": "50865430800016",
+    "nom": "Stephane Edeline",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "La Bijalloniere",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2008"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.394813,
+     47.705122
+    ]
+   },
+   "properties": {
+    "siret": "97836685400013",
+    "nom": "Val du Loir Charpente",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "516 Route de Coupepied",
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.515924,
+     47.708371
+    ]
+   },
+   "properties": {
+    "siret": "91003473500019",
+    "nom": "Cyril Barrier",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Le Carroir",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.50069,
+     47.691838
+    ]
+   },
+   "properties": {
+    "siret": "98252039700018",
+    "nom": "Damien Pilon",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "60 Lieu Dit les Borderies",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.57607,
+     47.710585
+    ]
+   },
+   "properties": {
+    "siret": "44869559300039",
+    "nom": "Delahousse Didier",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "57 Lieu Dit la Piece du Vaux Godin",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.538392,
+     47.696341
+    ]
+   },
+   "properties": {
+    "siret": "34244364500029",
+    "nom": "Denis Simon",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "La Tripotiere",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2007"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.503355,
+     47.691894
+    ]
+   },
+   "properties": {
+    "siret": "50943871900015",
+    "nom": "Derre Rodolphe",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "Les Borderies",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.517215,
+     47.709299
+    ]
+   },
+   "properties": {
+    "siret": "89214441100014",
+    "nom": "Favars Maconnerie",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Lieu Dit la Roche",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.50947,
+     47.703732
+    ]
+   },
+   "properties": {
+    "siret": "38484515200014",
+    "nom": "Joel Bardy",
+    "categorie": "maconnerie",
+    "ape": "41.20A",
+    "activite": "Construction de maisons individuelles",
+    "adresse": "LD les Pres Bodeaux",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "1992"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.517299,
+     47.7075
+    ]
+   },
+   "properties": {
+    "siret": "53299344100031",
+    "nom": "La Grange au Vert",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "58 Lieu Dit la Lucerie",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.518422,
+     47.712027
+    ]
+   },
+   "properties": {
+    "siret": "98781510700014",
+    "nom": "Piddiu",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "15 Lieu Dit la Roche",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.511139,
+     47.696563
+    ]
+   },
+   "properties": {
+    "siret": "94200652900013",
+    "nom": "RT.D Services",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Lieu Dit L Hopitau",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.492441,
+     47.697064
+    ]
+   },
+   "properties": {
+    "siret": "45114323400032",
+    "nom": "Sebastien Hodelin",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "75 Lieu Dit la Jonchere",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.510604,
+     47.713784
+    ]
+   },
+   "properties": {
+    "siret": "93748491300010",
+    "nom": "Serrurerie Pomarede",
+    "categorie": "autre",
+    "ape": "25.11Z",
+    "activite": "Structures métalliques",
+    "adresse": "17 Chemin de Bois Blandin",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.520522,
+     47.699427
+    ]
+   },
+   "properties": {
+    "siret": "43437798200013",
+    "nom": "Sylvaloir",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Lieu Dit la Fosse Gaude",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2001"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.498067,
+     47.690881
+    ]
+   },
+   "properties": {
+    "siret": "81786443200015",
+    "nom": "Tremblay Carrelage EIRL",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "Le Petit Loiray",
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "creation": "2016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.588117,
+     47.851054
+    ]
+   },
+   "properties": {
+    "siret": "79228393900025",
+    "nom": "C-Protec",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "La Fosse",
+    "com_insee": "72210",
+    "com_nom": "Montreuil-le-Henri",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.600705,
+     47.861807
+    ]
+   },
+   "properties": {
+    "siret": "80978484600010",
+    "nom": "Ebtce",
+    "categorie": "maconnerie",
+    "ape": "41.20A",
+    "activite": "Construction de maisons individuelles",
+    "adresse": "La Choquetterie",
+    "com_insee": "72210",
+    "com_nom": "Montreuil-le-Henri",
+    "creation": "2015"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.422358,
+     47.701203
+    ]
+   },
+   "properties": {
+    "siret": "80521492100027",
+    "nom": "A2 Barraud",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "11 All des Goelands",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.426018,
+     47.719035
+    ]
+   },
+   "properties": {
+    "siret": "97747102800018",
+    "nom": "Antoine Paysage",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Le Petit Bois",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.441653,
+     47.683919
+    ]
+   },
+   "properties": {
+    "siret": "39487292300021",
+    "nom": "Cheneau",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Coemont",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.425002,
+     47.683146
+    ]
+   },
+   "properties": {
+    "siret": "51353199600017",
+    "nom": "Christian Bourmault",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "59 Rue du Val de Loir - Chateau du Loir",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.425712,
+     47.690399
+    ]
+   },
+   "properties": {
+    "siret": "48887771300039",
+    "nom": "Christophe Deschambres",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "Chateau du Loir 4 Av de Tours",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2020"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.408883,
+     47.691351
+    ]
+   },
+   "properties": {
+    "siret": "40158224200046",
+    "nom": "Decoconcept72",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "7 Imp des Merisiers",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.41555,
+     47.688249
+    ]
+   },
+   "properties": {
+    "siret": "94818462700016",
+    "nom": "Dim Entretien",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "89 Av Jean Jaures",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.4172,
+     47.696421
+    ]
+   },
+   "properties": {
+    "siret": "40864416900018",
+    "nom": "ETS Pellerot Habitat",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "88 Rue Aristide Briand",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "1996"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.443635,
+     47.686968
+    ]
+   },
+   "properties": {
+    "siret": "94221138400014",
+    "nom": "Elegance Carrelage",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "18 Rue Haute Vouvray-Sur-Loir",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.427009,
+     47.690516
+    ]
+   },
+   "properties": {
+    "siret": "44410935900059",
+    "nom": "FTS (F.T.S.)",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "2 Av de Tours",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.452809,
+     47.698878
+    ]
+   },
+   "properties": {
+    "siret": "89867887500029",
+    "nom": "Gauthier.bastien",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Vouvray sur Loir 40 Rte du Coteau",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.430781,
+     47.70138
+    ]
+   },
+   "properties": {
+    "siret": "91777585000014",
+    "nom": "HMP",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Les Fontaines 501 Che du Petit Tortillard",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.469334,
+     47.698157
+    ]
+   },
+   "properties": {
+    "siret": "44508427000021",
+    "nom": "Hartmut Bode",
+    "categorie": "peinture",
+    "ape": "43.39Z",
+    "activite": "Travaux de finition",
+    "adresse": "2 Rte des Bordes",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.421798,
+     47.696564
+    ]
+   },
+   "properties": {
+    "siret": "98011700600018",
+    "nom": "Idp72",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Chateau-Du-Loir 31 Rue Saint Jean",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.42795,
+     47.692774
+    ]
+   },
+   "properties": {
+    "siret": "49123121300035",
+    "nom": "JF Henry",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Chateau du Loir 26 Rue Sainte Cecile",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.395058,
+     47.685254
+    ]
+   },
+   "properties": {
+    "siret": "91809020000018",
+    "nom": "JMD",
+    "categorie": "autre",
+    "ape": "95.22Z",
+    "activite": "Réparation d'électroménager et de matériel de jardin",
+    "adresse": "95 Rte des Vignes",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.44094,
+     47.686188
+    ]
+   },
+   "properties": {
+    "siret": "45071171800038",
+    "nom": "Jean Herisson",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "140 Rue Oscar Moneris",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2013"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.461879,
+     47.693457
+    ]
+   },
+   "properties": {
+    "siret": "39786912400024",
+    "nom": "Jean-Edmond Bruneau",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "8 Rue du Pin Vert",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2014"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.390755,
+     47.680134
+    ]
+   },
+   "properties": {
+    "siret": "89175713000028",
+    "nom": "Jessy Wouenzell",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "203 Route des Fontaines Montabon",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.426779,
+     47.692354
+    ]
+   },
+   "properties": {
+    "siret": "99292344100016",
+    "nom": "Matt Bartel",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "22 Rue Sainte Cecile Chateau-Du-Loir",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.414722,
+     47.686933
+    ]
+   },
+   "properties": {
+    "siret": "84321512000026",
+    "nom": "Ob Couverture",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "122 Av Jean Jaures",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.41418,
+     47.690729
+    ]
+   },
+   "properties": {
+    "siret": "99331682700019",
+    "nom": "Ondet Maconnerie",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "38 Rue du Grand Douai Chateau-Du-Loir",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.439371,
+     47.685679
+    ]
+   },
+   "properties": {
+    "siret": "74999565000019",
+    "nom": "Palec",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "6 B Coemont le Cul Goron",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2012"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.419164,
+     47.69266
+    ]
+   },
+   "properties": {
+    "siret": "49757123200022",
+    "nom": "Renou David",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "14 Rue Saint Martin",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2007"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.412688,
+     47.699701
+    ]
+   },
+   "properties": {
+    "siret": "49757123200055",
+    "nom": "Renou David",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Luceau 23 Av du Mans",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.42377,
+     47.694167
+    ]
+   },
+   "properties": {
+    "siret": "52412112600014",
+    "nom": "SARL Charpente Couverture Sevault Freres",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Rue des Vertolines",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2010"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.424339,
+     47.685943
+    ]
+   },
+   "properties": {
+    "siret": "40023930700020",
+    "nom": "Societe Nouvelle Sartor",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "34 Che de Goulard",
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "creation": "2004"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.396403,
+     47.668242
+    ]
+   },
+   "properties": {
+    "siret": "40416487300071",
+    "nom": "Alain le Moing",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "3 Rue Pierre de Ronsard",
+    "com_insee": "72221",
+    "com_nom": "Nogent-sur-Loir",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.404024,
+     47.657839
+    ]
+   },
+   "properties": {
+    "siret": "84018166300013",
+    "nom": "Anthony Rafert",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Lieu Dit la Raie",
+    "com_insee": "72221",
+    "com_nom": "Nogent-sur-Loir",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.395093,
+     47.668577
+    ]
+   },
+   "properties": {
+    "siret": "91925925900027",
+    "nom": "CB Plaquiste",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "11 Rue Pierre de Ronsard",
+    "com_insee": "72221",
+    "com_nom": "Nogent-sur-Loir",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.377385,
+     47.662665
+    ]
+   },
+   "properties": {
+    "siret": "51918222400013",
+    "nom": "Stephane Marie",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Les Bordes",
+    "com_insee": "72221",
+    "com_nom": "Nogent-sur-Loir",
+    "creation": "2009"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.425619,
+     47.837883
+    ]
+   },
+   "properties": {
+    "siret": "97914461500015",
+    "nom": "Amservices",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "56 Rue Rene Salmon",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.43318,
+     47.837347
+    ]
+   },
+   "properties": {
+    "siret": "84026149900015",
+    "nom": "EURL Coubard Olivier",
+    "categorie": "peinture",
+    "ape": "43.29A",
+    "activite": "Isolation",
+    "adresse": "4 Rue du Pont de L'arche",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.410236,
+     47.824047
+    ]
+   },
+   "properties": {
+    "siret": "53407691400017",
+    "nom": "Fleury",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "Le Pau",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2011"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.407639,
+     47.831594
+    ]
+   },
+   "properties": {
+    "siret": "99404720700018",
+    "nom": "Lenoir Surete Electricite",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "729 Route des Graffardieres",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.427849,
+     47.826559
+    ]
+   },
+   "properties": {
+    "siret": "89066339600012",
+    "nom": "Loic Plaquiste",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "La Quellerie",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2020"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.427545,
+     47.83761
+    ]
+   },
+   "properties": {
+    "siret": "49127717400034",
+    "nom": "Mickael Gasparin",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "39 Rue Rene Salmon",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.432859,
+     47.838416
+    ]
+   },
+   "properties": {
+    "siret": "99992239600018",
+    "nom": "Multinicopro",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "17 Rue du Pont de L'arche",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.435779,
+     47.848921
+    ]
+   },
+   "properties": {
+    "siret": "44108193200028",
+    "nom": "Nature et Jardin",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "LD le Chene Sec",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.443196,
+     47.833775
+    ]
+   },
+   "properties": {
+    "siret": "79215225800010",
+    "nom": "Pascal Plouseau",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Les Renaudieres",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2013"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.442807,
+     47.841871
+    ]
+   },
+   "properties": {
+    "siret": "32390353400028",
+    "nom": "SARL Entreprise Carcenac",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Petite Roche",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.451212,
+     47.83395
+    ]
+   },
+   "properties": {
+    "siret": "90769783300016",
+    "nom": "Yt Maconnerie",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Les Petites Prises",
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "creation": "2021"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.616843,
+     47.838334
+    ]
+   },
+   "properties": {
+    "siret": "95089225700011",
+    "nom": "Brisard Masson",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "LD la Richardiere",
+    "com_insee": "72279",
+    "com_nom": "Saint-Georges-de-la-Couée",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.442198,
+     47.650505
+    ]
+   },
+   "properties": {
+    "siret": "51844273600022",
+    "nom": "Borde Maconnerie",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "4 Hameau des Tesnieres",
+    "com_insee": "72311",
+    "com_nom": "Saint-Pierre-de-Chevillé",
+    "creation": "2016"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.43836,
+     47.643773
+    ]
+   },
+   "properties": {
+    "siret": "38825139900035",
+    "nom": "Jacky Gasior",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "22 Rue de la Sargeais",
+    "com_insee": "72311",
+    "com_nom": "Saint-Pierre-de-Chevillé",
+    "creation": "2013"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.51536,
+     47.777697
+    ]
+   },
+   "properties": {
+    "siret": "83333723100017",
+    "nom": "Pineau",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Les Vaudupuits",
+    "com_insee": "72314",
+    "com_nom": "Saint-Pierre-du-Lorouër",
+    "creation": "2017"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.519314,
+     47.807497
+    ]
+   },
+   "properties": {
+    "siret": "44185404900026",
+    "nom": "Saint Pierre Peinture et Sol (SPPS)",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Le Champ de la Fontaine",
+    "com_insee": "72314",
+    "com_nom": "Saint-Pierre-du-Lorouër",
+    "creation": "2007"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.525026,
+     47.80382
+    ]
+   },
+   "properties": {
+    "siret": "32665731900033",
+    "nom": "Thierry Bataillon",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Le Champ de la Croix",
+    "com_insee": "72314",
+    "com_nom": "Saint-Pierre-du-Lorouër",
+    "creation": "1900"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.521775,
+     47.819452
+    ]
+   },
+   "properties": {
+    "siret": "44464806700049",
+    "nom": "Art du Paysage et de L Environnement",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "La Tuffiere",
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.487436,
+     47.821274
+    ]
+   },
+   "properties": {
+    "siret": "92032447200017",
+    "nom": "Cyril Galpin Menuiseries",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "77 Chemin de Garechenne",
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.491541,
+     47.821547
+    ]
+   },
+   "properties": {
+    "siret": "98144171000010",
+    "nom": "DM Menuiseries",
+    "categorie": "menuiserie",
+    "ape": "16.23Z",
+    "activite": "Fabrication de charpentes et de menuiseries",
+    "adresse": "5 Rue des Varennes",
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.456555,
+     47.806151
+    ]
+   },
+   "properties": {
+    "siret": "84230326500016",
+    "nom": "Entreprise Guillaume Denis",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Vaubuffard",
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.454078,
+     47.807678
+    ]
+   },
+   "properties": {
+    "siret": "98894148000010",
+    "nom": "Multi du Lorouer",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "2934 Route de Jupilles",
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.490938,
+     47.822114
+    ]
+   },
+   "properties": {
+    "siret": "32774551900022",
+    "nom": "Precision Mecanique du Lorouer (PML)",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "7 Rue de Garechenne",
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "creation": "1995"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.525419,
+     47.838364
+    ]
+   },
+   "properties": {
+    "siret": "95247282700015",
+    "nom": "Renolandes",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "535 Route de Courdemanche",
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "creation": "2023"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.525419,
+     47.838364
+    ]
+   },
+   "properties": {
+    "siret": "41883056800071",
+    "nom": "Renolandes",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Lieu Dit les Landes 535 Route de Courdemanche",
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.449628,
+     47.756145
+    ]
+   },
+   "properties": {
+    "siret": "41167041700046",
+    "nom": "B.h.maconnerie",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "20 Rue du Dinan",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2026"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.462102,
+     47.745938
+    ]
+   },
+   "properties": {
+    "siret": "83919397600017",
+    "nom": "CFC Patrimoine",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Beauge",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.475749,
+     47.767845
+    ]
+   },
+   "properties": {
+    "siret": "98461545000017",
+    "nom": "Cam Cartereau Anthony",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Les Boussions",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.454357,
+     47.768283
+    ]
+   },
+   "properties": {
+    "siret": "48971234900013",
+    "nom": "Clasik Isolation",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "Lieu Dit la Chauvinerie",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2006"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.444315,
+     47.753108
+    ]
+   },
+   "properties": {
+    "siret": "82288516600022",
+    "nom": "EURL Lehoux Guillaume",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "4 B Rue de L Hommeau",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2019"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.448462,
+     47.751945
+    ]
+   },
+   "properties": {
+    "siret": "78955136300011",
+    "nom": "Florian Rouillard",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Les Ruaux",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2012"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.437791,
+     47.751712
+    ]
+   },
+   "properties": {
+    "siret": "43914916200018",
+    "nom": "Gerard Peltier",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Guibellerie",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2001"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.448462,
+     47.751945
+    ]
+   },
+   "properties": {
+    "siret": "40961201700023",
+    "nom": "Jean-Marie Rouillard",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Les Ruaux",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2002"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.462363,
+     47.768457
+    ]
+   },
+   "properties": {
+    "siret": "42163437900026",
+    "nom": "Techni Chauf 37 (techni Chauf 37)",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Hacheron",
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "creation": "2006"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.499205,
+     47.865599
+    ]
+   },
+   "properties": {
+    "siret": "94060610600018",
+    "nom": "Ag Peinture",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Les Renieres",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2024"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.504835,
+     47.859566
+    ]
+   },
+   "properties": {
+    "siret": "83967155900012",
+    "nom": "Alex Trassart",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "La Mardiniere",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.473046,
+     47.909159
+    ]
+   },
+   "properties": {
+    "siret": "40952645600044",
+    "nom": "Atelier de Mickael",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Lieu Dit la Croix de Pois",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2025"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.531817,
+     47.86195
+    ]
+   },
+   "properties": {
+    "siret": "82488644400010",
+    "nom": "Batteux Gilles",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Les Guenardieres",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2017"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.494093,
+     47.906264
+    ]
+   },
+   "properties": {
+    "siret": "74991386900014",
+    "nom": "C.renobat",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "126 La Sablonniere",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2012"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.486362,
+     47.866613
+    ]
+   },
+   "properties": {
+    "siret": "44886097300016",
+    "nom": "Delande Pere et Fils",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "La Basse Garenne",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.481073,
+     47.865467
+    ]
+   },
+   "properties": {
+    "siret": "84292079500015",
+    "nom": "Enzo Pierron",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "17 Rue de Saint Calais",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2018"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.484823,
+     47.866291
+    ]
+   },
+   "properties": {
+    "siret": "82823060700016",
+    "nom": "Menuiserie Delaroue",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Za la Charmoie",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2017"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.511941,
+     47.879376
+    ]
+   },
+   "properties": {
+    "siret": "52172621600042",
+    "nom": "Mikael Mellier",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "2 La Cheniere",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.480706,
+     47.865523
+    ]
+   },
+   "properties": {
+    "siret": "44867770800019",
+    "nom": "Pavillon",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "15 Rue ST Calais",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2003"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.504375,
+     47.888504
+    ]
+   },
+   "properties": {
+    "siret": "50739834500011",
+    "nom": "SARL Savattier",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "La Vallee",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2008"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.512641,
+     47.864851
+    ]
+   },
+   "properties": {
+    "siret": "91895097300019",
+    "nom": "SASU Renard Axel",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Les Houx",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2022"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.483622,
+     47.865806
+    ]
+   },
+   "properties": {
+    "siret": "50915514900016",
+    "nom": "Vaudoux",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Le Bourg Rte de ST Calais",
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "creation": "2008"
+   }
+  }
+ ]
+}

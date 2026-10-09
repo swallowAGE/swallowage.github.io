@@ -1,0 +1,4607 @@
+{
+ "type": "FeatureCollection",
+ "source": "Répertoire national des associations (RNA), data.gouv.fr",
+ "mise_a_jour": "2026-10-09",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.57942,
+     47.68729
+    ]
+   },
+   "properties": {
+    "com_insee": "72027",
+    "com_nom": "Beaumont-sur-Dême",
+    "nb": 8,
+    "titre": "Associations de Beaumont-sur-Dême",
+    "associations": [
+     {
+      "titre": "Amicale des Chasseurs de Beaumont-Sur-Dême",
+      "objet": "Exercice de la chasse, la promotion et la défense de la pérennité de la chasse, le repeuplement , la régulation des espèces nuisibles, le respect des propriétés et des récoltes, la répression du braconnage et ce, sur…",
+      "cat": "environnement",
+      "creation": "1946",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "CA Bouge a Beaumont",
+      "objet": "Organisation de manifestations culturelles et de loisirs au profit de la commune de Beaumont-sur-Dême",
+      "cat": "culture",
+      "creation": "2009",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Club de Générations Mouvement Aînés Ruraux de Beaumont sur Dême",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités ; les aider à résoudre leurs difficultés, les informer et les soutenir, par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "1985",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Dynamisme et Maintien en Forme ( D.e.m)",
+      "objet": "Promouvoir la santé en entretenant les conditions physiques, par des activités sportives (gymnastique, maintien en forme, danses collectives).",
+      "cat": "loisirs",
+      "creation": "2002",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Coucous du Val de Loir (L.C.V.L.)",
+      "objet": "Organiser des loisirs ou autres activites culturelles en faveur de ses membres et toutes manifestations a caractere publique",
+      "cat": "sport",
+      "creation": "1991",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Mains Sachantes",
+      "objet": "Cette association a pour objet de favoriser, développer et promouvoir, notamment en milieu rural, des actions dans un champ d'intervention patrimonial, culturel, éducatif et social : transmettre les valeurs de…",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Moto Cross Enduro Loisir",
+      "objet": "Decrouvrir et favoriser l'apprentisage de la moto cross et de l'enduro pour tous les ages enseignement et entrainement de la mot par des stages et des roulages sur circuit mais aussi par des randonnées organisées par…",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Paysages Paysans",
+      "objet": "Protéger les espaces naturels, les paysages et le patrimoine bâti du sud Sarthe, Nord Touraine et l'Ouest du Loir et Chef soit dans un rayon de dix kilomètres autour de Beaumont sur Dême comprenant intégralement le…",
+      "cat": "environnement",
+      "creation": "2005",
+      "declaration": "2024",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.38333,
+     47.7574
+    ]
+   },
+   "properties": {
+    "com_insee": "72028",
+    "com_nom": "Beaumont-Pied-de-Bœuf",
+    "nb": 17,
+    "titre": "Associations de Beaumont-Pied-de-Bœuf",
+    "associations": [
+     {
+      "titre": "À L'Atelier",
+      "objet": "Cette association a pour objet de promouvoir l'action culturelle et artistique au sein des structures d'accueil de la petite enfance, éducatives ou culturelles ; de développer un espace d'accueil psychopédagogique…",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Chasseurs Belmontais",
+      "objet": "Pratique de la chasse",
+      "cat": "environnement",
+      "creation": "1991",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Loisirs Belmontais",
+      "objet": "Créer, animer, développer les rencontres et liens d'amitié entre les membres ;",
+      "cat": "loisirs",
+      "creation": "2008",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association de Protection de L'Environnement des Vallées du Dinan, de L'Yre, du Loir.",
+      "objet": "Protection de l'environnement",
+      "cat": "environnement",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association des Anciens Jeunes de Beaumont Pied de Bœuf",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre ls membres, les aider à résoudre leurs difficultés, les informer dans la recherche de solutions.....(voir dossier)",
+      "cat": "loisirs",
+      "creation": "2006",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Comice Belmontais",
+      "objet": "Organiser les festivités liées au comice belmontais",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Beaumont Pied de Bœuf",
+      "objet": "Animer la commune",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Beaumont-Pied-De-Bœuf - les Farfelus Belmontais",
+      "objet": "Participer au rayonnement de la commune de Beaumont-Pied-de-Boeuf (72500) au travers de l'organisation d'événements festifs, culturels et sportifs, et en participant à de tels événements organisés par d'autres…",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2025",
+      "site": "https://www.facebook.com/profile.php?id=100091370084911"
+     },
+     {
+      "titre": "Freedom Road",
+      "objet": "Promouvoir la danse sur la musique country au travers de cours, de démonstrations, et de manifestations",
+      "cat": "culture",
+      "creation": "2017",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Horse Team Belmontaise",
+      "objet": "Accueil de chevaux de propriétaires en pension, travail des chevaux pensionnaires",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "L'Iroise",
+      "objet": "Association de pêcheurs et propriétaires riverains de l'ire et du moqueras pour préserver les terrains privés riverains de l'ire - assurer l'alevinage et protéger l'environnement.",
+      "cat": "environnement",
+      "creation": "1989",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "L'Univers 6 DÉS du Jeu de Rôle",
+      "objet": "Développer la pratique du jeu de rôle ; faciliter l'émergence de projets culturels ou ludiques portés par les membres, en assurer la création, la promotion et la diffusion ; organiser et participer à tout événement en…",
+      "cat": "loisirs",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": "https://univers6des.wixsite.com/univers-6-d"
+     },
+     {
+      "titre": "Les Amis de la Faverie",
+      "objet": "Cette association a pour objet d'organiser tout événement, colloque, conférence, concert, contribuant à l'animation de la Faverie ; Elle pourrait par ailleurs être amenée à promouvoir La Faverie de toute manière, et à…",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Murmures du Désert",
+      "objet": "Fournir des denrées alimentaires non périssable et du matériel solidaire comme du matériel paramédical, produit d'hygiène, jouet, fournitures scolaires, vêtements, à des enfants démunis en participant à des évènements…",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Organisation Caritative de Raid Automobile",
+      "objet": "Notre association a pour objectif la création d'un équipage de rallye raid pour la manifestation du \"4l trophy\". Ce rallye raid est organisé dans un but caritatif puisque son but premier est d'effectuer un apport de…",
+      "cat": "entraide",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Rêver en Vallée Verte",
+      "objet": "Promouvoir les activités de bien-être auprès du public au sein de la vallée verte Rendre accessible aux personnes à mobilité réduite les activités de pleine nature au sein de la vallée verte Développer les activités de…",
+      "cat": "entraide",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Silvestrodice Association",
+      "objet": "Mobiliser tous les moyens afin de promouvoir le projet artistique SilvestroDice dans son ensemble ; Ce projet est `a vis´ee majoritairement musicale",
+      "cat": "culture",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.51356,
+     47.75217
+    ]
+   },
+   "properties": {
+    "com_insee": "72052",
+    "com_nom": "Chahaignes",
+    "nb": 20,
+    "titre": "Associations de Chahaignes",
+    "associations": [
+     {
+      "titre": "Amicale Sportive de Chahaignes",
+      "objet": "Pratique d' exercices physiques",
+      "cat": "sport",
+      "creation": "1945",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association Chahaignes-Marçon pour la Pêche et la Protection du Milieu Aquatique - A.p.p.m.a.",
+      "objet": "Détenir et gérer droits de pêche sur les domaines publics et privés de l'etat et des collectivités locales ou de riverains",
+      "cat": "environnement",
+      "creation": "1942",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association des Commercants et Artisans de Chahaignes",
+      "objet": "Faire revivre et animer le village",
+      "cat": "autres",
+      "creation": "1986",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Gymnastique Volontaire de Chahaignes'",
+      "objet": "Développer la pratique de la gymnastique volontaire.",
+      "cat": "sport",
+      "creation": "1985",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Chahaignes Culture et Loisirs",
+      "objet": "Organiser des activités et manifestations festives, culturelles, patrimoniales et sportives à Chahaignes",
+      "cat": "loisirs",
+      "creation": "2022",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Club D'Echecs de Château du Loir",
+      "objet": "Pratique sportive et enseignement des échecs",
+      "cat": "loisirs",
+      "creation": "2001",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Club de Générations Mouvement de Chahaignes",
+      "objet": "Organisation de loisirs et de voyages pour les retraités de la commune",
+      "cat": "loisirs",
+      "creation": "1981",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Club des Gouteux D'Vins",
+      "objet": "Organisation de foires, salons, conférences en vue de promouvoir la gastronomie française et la richesse viticole, tant sur le plan national que régional",
+      "cat": "loisirs",
+      "creation": "1990",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Confrerie les Gouteux D'Vins",
+      "objet": "Promouvoir les vins de la Vallée du Loir et du Vendômois",
+      "cat": "autres",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Cyber Entraide",
+      "objet": "Donner des cours d'initiation au technologie de l'information et de la communication ( tic), organiser des ateliers sur l'utilisation de programmes divers, des ateliers sur les dangers d'internet et comment déceler les…",
+      "cat": "culture",
+      "creation": "2011",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Declik",
+      "objet": "Favoriser l évolution professionnelle l insertion l entraide et la mise en réseau de personnes éloignées de l emploi ou en transition professionnelle Elle propose des actions d accompagnement administratif des ateliers…",
+      "cat": "entraide",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "La Dynamique",
+      "objet": "Création d'animations à la résidence pour personnes âgées.",
+      "cat": "entraide",
+      "creation": "1992",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis de la Raderie",
+      "objet": "Valoriser, animer, développer, sauvegarder le patrimoine,",
+      "cat": "patrimoine",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Les Chahaignots à Marocco",
+      "objet": "Participer à des manifestations humanitaire",
+      "cat": "entraide",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Mam Pousses & Pampres",
+      "objet": "Accueillir de jeunes enfants par des assistantes maternelles agréées regroupées au sein d'une maison d'assistantes maternelles, mettre en oeuvre un projet éducatif et pédagogique contribuant au bien-être, à l'éveil et…",
+      "cat": "education",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Rallye du Val de Loir",
+      "objet": "Faire connaître la vallée du loir et y développer des liens d'amitié.",
+      "cat": "sport",
+      "creation": "1979",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Roues et Passions",
+      "objet": "Mise en valeur des mécaniques d'antan : fédérer les amoureux des véhicules et / ou objets anciens, réaliser des rencontres, réaliser des manifestations autour de l'ancien, faire connaître les mécaniques anciennes,…",
+      "cat": "sport",
+      "creation": "2007",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Sakartoun Chahaignes",
+      "objet": "Creer des ateliers d'eveil et d'epanouissement pour les enfants",
+      "cat": "education",
+      "creation": "1989",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Tarot-Club de Chahaignes",
+      "objet": "Pratique, initiation au tarot et organisation de concours",
+      "cat": "loisirs",
+      "creation": "1992",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Union Nationale des Anciens Commbattants D'Indochine, T.o.e. et Afrique du Nord - Groupement du Maine - Unacita",
+      "objet": "Resserrer les liens d'amitié entre tous les anciens combattants et défendre leurs intérêts matériels et moraux",
+      "cat": "patrimoine",
+      "creation": "1992",
+      "declaration": "2023",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.58123,
+     47.73044
+    ]
+   },
+   "properties": {
+    "com_insee": "72068",
+    "com_nom": "La Chartre-sur-le-Loir",
+    "nb": 56,
+    "titre": "Associations de La Chartre-sur-le-Loir",
+    "associations": [
+     {
+      "titre": "A Fond la Caisse",
+      "objet": "Organiser des événements ludiques pour faire rayonner la vallée du Loir et particulièrement son patrimoine automobile ;",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Actes en Scenes",
+      "objet": "L'association a pour but d'offrir à un large public des cours de théâtre, de danse, de poésie, de musique ou de cirque et d'une manière générale, des animations et activités culturelles ainsi que des évènements…",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Adp Arlon - Association de Défense des Propriétaires D'Arlon",
+      "objet": "L'association a pour objet de représenter et défendre les intérêts des copropriétaires ayant investi au sein de la résidence hôtelière sise 17, rue Zénobe Gramme 6700 ARLON ( Belgique ) ;",
+      "cat": "autres",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Employes Communaux de la Ville de la Chartre sur le Loir",
+      "objet": "Resserrer les liens amicaux entre le personnel de la ville de la chartre sur le loir, venir en aide aux agents pouvant se trouver en difficulte et en general de toute entraide de quelque nature qu'elle soit",
+      "cat": "loisirs",
+      "creation": "1974",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Pêcheurs la Chartre Lhomme Ruille (AAPPMA)",
+      "objet": "Pêche et protection du milieu aquatique.",
+      "cat": "environnement",
+      "creation": "2006",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs-Pompiers du Centre de Secours de la Chartre sur le Loir/ruille sur Loir",
+      "objet": "Resserrer les liens d'amitié qui unissent les membres du corps et de rechercher les moyens propres à améliorer leur situation ; subvenir aux frais des fêtes et concours ayant pour but le perfectionnement de…",
+      "cat": "loisirs",
+      "creation": "2011",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association-Brocante-Art-Patrimoine ( A.b.a.p)",
+      "objet": "Réunir et promouvoir des antiquaires, brocanteurs, artistes peintres, restaurateurs d'art, créateurs, métiers d'art, vignerons, gastronomie, écrivains et tout métier se rapportant à l'art et/ou au patrimoine culturel en…",
+      "cat": "patrimoine",
+      "creation": "2011",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association de Parents D'Eleves de L'Enseignement Libre ( A.P.E.L.) de L'École Sainte Marie de la Providence",
+      "objet": "Grouper les chefs de famille ayant la charge des enfants inscrits à l'école ; toutes activités susceptibles d'apporter un soutien matériel et moral à l'école, aux familles et aux maîtres",
+      "cat": "education",
+      "creation": "1951",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association de Sauvegarde des Lavoirs en Vallée du Loir",
+      "objet": "Sauvegarder, valoriser, promouvoir les lavoirs et le petit patrimoine non protégé en Vallée du Loir Faciliter les contacts des propriétaires de lavoirs avec les instances compétentes susceptibles de les aider à…",
+      "cat": "patrimoine",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association des Courses Hippiques de la Chartre-Sur-Le-Loir",
+      "objet": "Organisation des courses de chevaux et des activités directement liées à cet objet ou à l'exploitation des installations dont elle est propriétaire ou pour lesquelles elle est habilitée par la loi. (voir statuts)",
+      "cat": "sport",
+      "creation": "1904",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D'Élèves de L'École Publique la Pleïade",
+      "objet": "Groupement de parents bénévoles organisant des manifestations ou actions en faveur des projets scolaires et au bénéfice des enfants de l'école La Pleiäde",
+      "cat": "education",
+      "creation": "2021",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D'Eleves du College Pierre de Ronsard - la Chartre sur le Loir",
+      "objet": "Représenter les parents auprès des pouvoirs publics et agir en leur nom sur le plan local, proposer des activités à l'intention des élèves et de leur famille destinées à soutenir l'action éducative des enseignants sans…",
+      "cat": "education",
+      "creation": "2023",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Générations Mouvement - Canton de la Chartre sur le Loir",
+      "objet": "Renforcer les liens de solidarité existant entre les retraités et pré-retraités, vivant en milieu rural et assimilés, et développer en leur faveur, notamment par des clubs communaux ouverts indistinctement à tous, les…",
+      "cat": "loisirs",
+      "creation": "1973",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association Locale D'Aide a Domicile en Milieu Rural de la Chartre sur le Loir",
+      "objet": "Aider à tous le moments de leur existence toute famille ou personne habitant dans les communes et les quartiers ou elle exerce son action , pour ce faire, elle assure la responsabilité matérielle et morale de la marche…",
+      "cat": "entraide",
+      "creation": "1979",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Association Ondes Positives",
+      "objet": "Contribuer à la diffusion et la promotion des artistes; expérimentation de l'expression artistique dans toute sa diversité; promotion de l'art en milieu rural, manifestations culturelles, créations artistiques et…",
+      "cat": "culture",
+      "creation": "2014",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Part'Âges'",
+      "objet": "Permettre à travers l'animation, une amélioration de la qualité de vie des résidents de l'etablissement d'hébergement pour personnes âgées dépendantes 'résidence catherine de courtoux' à la chartre sur le loir, par des…",
+      "cat": "entraide",
+      "creation": "2007",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive Chartraine Basket-Ball",
+      "objet": "Pratique et enseignement du basket-ball en compétition et en loisir.",
+      "cat": "sport",
+      "creation": "2003",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive 'Pierre de Ronsard' la Chartre sur le Loir",
+      "objet": "93 - activités sportives",
+      "cat": "sport",
+      "creation": "1973",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Tarot-Club Chartrain",
+      "objet": "Apprendre et initier les personnes du canton, intéressées par le jeu de tarot et organiser des concours",
+      "cat": "loisirs",
+      "creation": "1989",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Bad Trip Chartrain",
+      "objet": "Promouvoir la pratique du badminton auprès des personnes souhaitant découvrir ce sport, pratiquer ce sport au niveau loisir ou progresser dans cette discipline",
+      "cat": "sport",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Centre Social Val du Loir",
+      "objet": "L'Association se donne pour objectifs de gérer le Centre Social, de mettre en place, de coordonner et de promouvoir les activités et services associatifs existants ou nouveaux d'ordre social, culturel, éducatif,…",
+      "cat": "loisirs",
+      "creation": "2013",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Club de Générations Mouvement la Chartre sur le Loir",
+      "objet": "Organiser des activités pour les personnes retraitées de La Chartre ; défendre leurs intérêts matériels et moraux",
+      "cat": "loisirs",
+      "creation": "1996",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité de Jumelage et D'Echanges Internationaux des Communes du Canton de la Chartre-Sur-Le Loir",
+      "objet": "Promouvoir les échanges internationaux scolaires, culturels, sportifs, professionnels ; préparer et réaliser des jumelages avec des villes d'autres états.",
+      "cat": "loisirs",
+      "creation": "1972",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes sur le Loir",
+      "objet": "Réunir et organiser des rencontres entre des personnes souhaitant s'entraider sur l'organisation d'événement - Mise à disposition de matériel aux associations cotisantes du Comité des fêtes ;",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Compagnie 'Entre Scene et Loir'",
+      "objet": "La pratique des arts du théâtre, et toutes les activités artistiques et logistiques rattachées à cette pratique",
+      "cat": "culture",
+      "creation": "2004",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Esprit Carpe 72",
+      "objet": "De fédérer toute pêche",
+      "cat": "environnement",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Et Si On Eteignait Nos Portables",
+      "objet": "Créer, production, conception, réalisations, enregistrement, communication, promotion, diffusion et organisation de spectacles vivants alliant plusieurs formes de théâtre (one man ou one woman show, spectacles de rue,…",
+      "cat": "culture",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Football Club Val du Loir",
+      "objet": "Promouvoir et développer la pratique du football",
+      "cat": "sport",
+      "creation": "2015",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Foyer Socio-Educatif College Pierre de Ronsard-La Chartre sur le Loir",
+      "objet": "Développer la vie collective et coopérative de l'établissement.",
+      "cat": "education",
+      "creation": "1996",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Groupement de Développement Viticole de la Sarthe",
+      "objet": "Rechercher et diffuser des connaissances techniques gérer le laboratoire de la sarthe développer l'activité oenotouristique participer et animer toutes foires, salons vendre du vin et accessoires fournir toutes…",
+      "cat": "autres",
+      "creation": "1998",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Inni",
+      "objet": "La pratique du yoga ;",
+      "cat": "loisirs",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Karate Val du Loir",
+      "objet": "Organiser,animer, gérer et développer le karaté des évènements sportifs sur le territoire communautaire du val de loir",
+      "cat": "sport",
+      "creation": "2009",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "La Chartre Association Pongiste",
+      "objet": "Développer l'activité du tennis de table. organiser, sous l'égide du comité départemental et de la ligue des pays de la loire, des championnats dans diverses catégories. prendre des engagements (encadrement, arbitrage)…",
+      "cat": "sport",
+      "creation": "2003",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "La Compagnie des Arts",
+      "objet": "Promouvoir et favoriser des activités culturelles et sportives. De développer l'esprit créatif, favoriser l'épanouissement de toutes les formes d'expression manuelle et culturelle",
+      "cat": "culture",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Le Jardin du Partage",
+      "objet": "Promouvoir le lien social à travers le jardinage collectif dans le respect de l'environnement, l'échange de savoir-faire, la mise en place d'actions pédagogiques en lien avec la nature , la promotion de la protection de…",
+      "cat": "loisirs",
+      "creation": "2016",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Leroux 2 MX",
+      "objet": "L'objet de l'association consiste au travers de la moto sous toutes ses formes et dans le contexte qui la compose, permettre le développement social et citoyen de l'individu, dans le respect de son intégrité physique…",
+      "cat": "sport",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis de L'Orgue de la Chartre sur le Loir",
+      "objet": "Entretien et amélioration de l'orgue de l' église de La Chartre-sur-le-Loir ainsi que sa mise en valeur sur le plan culturel et pédagogique ; organisation de concerts",
+      "cat": "patrimoine",
+      "creation": "1977",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Nounous du Loir",
+      "objet": "Cette association a pour but l'échange verbal, rencontres entre assistantes maternelles et prêt de jeux et de matériel puériculture",
+      "cat": "education",
+      "creation": "1999",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Les Six Potes au Feu",
+      "objet": "Développer, promouvoir et favoriser des activités à caractère culturel, sportif et social",
+      "cat": "culture",
+      "creation": "2015",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Libres",
+      "objet": "Organisation de la commémoration des 80 ans de la libération du Canton de la Chartre sur le loir",
+      "cat": "patrimoine",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Off Road Travelers",
+      "objet": "Rallye humanitaire / 4L Trophy (sport automobile)",
+      "cat": "sport",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Organisme de Gestion de l 'Ecole Catholique Sainte-Marie de la Chartre sur le Loir",
+      "objet": "Assurer la fondation et l'entretien des écoles catholiques reconnues comme telles par l'autorité canonique compétente, notamment la gestion de l'école ste marie de la chartre sur le loir, ainsi",
+      "cat": "loisirs",
+      "creation": "1988",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Panaltheia",
+      "objet": "Accompagner les dirigeants à résoudre leurs problématiques internes, notamment de digitalisation dans le cadre de la réforme de la facture électronique ou de toute réforme conduisant à des évolutions de processus…",
+      "cat": "autres",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Paradis",
+      "objet": "Organisation de spectacles et de loisirs",
+      "cat": "culture",
+      "creation": "1994",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Perimetral",
+      "objet": "Production de spectacles chorégraphiques et multidisciplinaires (théâtre, cirque, performance, etc ) ; promotion de l'art chorégraphique et autres arts scéniques et visuels à travers l'organisation d'ateliers, stages,…",
+      "cat": "culture",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Phartmaco",
+      "objet": "Promouvoir les arts plastiques, la céramique, la photographie, le design, l'art contemporain, valoriser et soutenir le travail de création de jeunes artistes, projets artistiques innovants dont des atelier d'écriture,…",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Plaisir des Mots",
+      "objet": "Échanger et encourager autour de la lecture, de l'écriture et de la réflexion",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Sarthe Recup",
+      "objet": "Récupérer tout ce qui peut resservir ; donner une seconde vie aux objets ; réparer et remettre en état des objets du quotidien ; proposer à la vente à petit prix afin d'éviter d'acheter du neuf",
+      "cat": "environnement",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Section de Gymnastique Volontaire",
+      "objet": "Initiation sportive féminine",
+      "cat": "sport",
+      "creation": "1975",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Société Amicale des Chasseurs de la Chartre sur le Loir",
+      "objet": "Favoriser la protection du gibier et son repeuplement, la répression du braconnage, la destruction des animaux nuisibles.",
+      "cat": "environnement",
+      "creation": "1946",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Tennis Club du Val de Loir",
+      "objet": "Pratique du tennis dans les domaines de l'éducation, de la compétition et du loisir pour jeunes et adultes.",
+      "cat": "sport",
+      "creation": "2006",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Tudo Bem ! TDB",
+      "objet": "Promouvoir les échanges entre le Brésil et la France ; faire connaitre et comprendre la société brésilienne à un public francophone par la diffusion et la traduction en français d'informations, de reportages,…",
+      "cat": "loisirs",
+      "creation": "2017",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Un Pas pour Elles",
+      "objet": "Soutenir la lutte contre le cancer du sein, sensibiliser le public, mener des actions solidaires, sportives et humaines, collecter des fonds, les reverser à des associations accompagnant les femmes et leurs familles,…",
+      "cat": "loisirs",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Veterans du Canton de la Chartre",
+      "objet": "Promotion du football de façon ludique au sein du canton de la chartre sur le loir.",
+      "cat": "sport",
+      "creation": "2003",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "WPL Competition",
+      "objet": "Aide à débuter dans le sport mécanique en compétition",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "WPL Team",
+      "objet": "Aide financièrement à se lancer dans la pratique de moto sur piste et en compétition",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.42909,
+     47.69352
+    ]
+   },
+   "properties": {
+    "com_insee": "72071",
+    "com_nom": "Montval-sur-Loir",
+    "nb": 111,
+    "titre": "Associations de Montval-sur-Loir",
+    "associations": [
+     {
+      "titre": "A.l.p.e.i Hauteclocque",
+      "objet": "Gérer et organiser des projets éducatifs interdisciplinaires, qu'ils soient culturels, sportifs, linguistiques ou autres pour les élèves du lycée professionnel Maréchal Leclerc de Hauteclocque, à Château du Loir",
+      "cat": "education",
+      "creation": "2009",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Abp Production",
+      "objet": "Organisation de manifestations évènementielles, le conseil en communication, l'animation en général et toutes opérations s'y rattachant, les techniques de bien être, salon, séance, y compris le YOGA du RIRE",
+      "cat": "culture",
+      "creation": "2016",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Agora Loir et Bercé",
+      "objet": "Gérer le Centre à partir d'objectifs et promouvoir, créer, coordonner toutes activités et services d'ordre sanitaire, social, culturel, éducatif, sportif, familial en faveur de l'ensemble de la population des communes…",
+      "cat": "entraide",
+      "creation": "1998",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Amicale Classe 78",
+      "objet": "Cette association a pour but de réunir et organiser une manifestation tous les cinq ans",
+      "cat": "loisirs",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Amicale de L'Ecole du Sivos Montabon-Lavernat",
+      "objet": "Promouvoir, soutenir, défendre une école publique de qualité, adaptée aux intérêts des enfants fréquentant l'école du SIVOS Montabon-Lavernat.",
+      "cat": "education",
+      "creation": "1992",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Amicale de la Chasse du Petit Bois",
+      "objet": "Gestion de la chasse du Petit Bois",
+      "cat": "environnement",
+      "creation": "2016",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Anciens Metallurgistes du Canton de Château-Du-Loir",
+      "objet": "Organiser la défense des intérêts des préretraités et des retraités sur tout ce qui concerne leurs moyens d'existence et organisation d'activités culturelles et de loisirs",
+      "cat": "loisirs",
+      "creation": "1985",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Anciens Sapeurs-Pompiers de Château du Loir",
+      "objet": "Réunir et fédérer au sein d'une même entité les sapeurs-pompiers n'étant plus en activité ; elle assure un lien privilégié avec l'amicale des sapeurs-pompiers sur le plan de la communication, manifestations et autres…",
+      "cat": "loisirs",
+      "creation": "2013",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Employes Communaux de Montval sur Loir",
+      "objet": "Permettre aux employés adhérents de la ville de château du loir de profiter des réductions diverses et de participer à certains événements familiaux (ex : aide pour la naissance, le mariage, le décès...).",
+      "cat": "loisirs",
+      "creation": "1974",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Amicale du College de Bercé",
+      "objet": "Organisation de repas, sorties. célébration des départs en retraite, naissances, mariages.",
+      "cat": "loisirs",
+      "creation": "2004",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Amicale du Personnel de L'Hopital de Château du Loir",
+      "objet": "Promouvoir toutes sortes d'actions sosio-culturelles et sportives afin de favoriser et développer des liens d'amitié entre les membres.",
+      "cat": "sport",
+      "creation": "1977",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Amicale Sportive des Cheminots de Château du Loir",
+      "objet": "Organisation et promotion des activités physiques et sportives. organisation pratique des dites activités.",
+      "cat": "sport",
+      "creation": "1936",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Amicale Sportive Montabonaise",
+      "objet": "Organiser et animer des manifestations sportives",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Animation de la Cave Touristique de Vouvray sur Loir",
+      "objet": "Promouvoir l'aspect touristique, le patrimoine local et régional.",
+      "cat": "loisirs",
+      "creation": "1992",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "APE de L'École Gabrielle Legras",
+      "objet": "Organiser des manifestations au profit des enfants de l'école du Point du Jour",
+      "cat": "education",
+      "creation": "2009",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "APE Laurentine Proust",
+      "objet": "Activité de soutien à l'enseignement",
+      "cat": "education",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Billard Club Castelorien'",
+      "objet": "Pratique du jeu de billard francais",
+      "cat": "sport",
+      "creation": "1983",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association C.C.P.V.L Club Collections et Passions du Val de Loir",
+      "objet": "Promouvoir l'esprit de collections et faire découvrir des passions diverses en organisant des réunions, rencontres, expositions, salons et bourses, brocantes et manifestations de portée générale ainsi que toutes…",
+      "cat": "loisirs",
+      "creation": "2002",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association Cantonale D'Aide a Domicile en Milieu Rural de Château du Loir",
+      "objet": "Aider à tous les moments de leur existence toute famille ou personne habitant dans les communes et les quartiers,ou elle exerce son action ; pour ce faire, elle assure la responsabilité matérielle et morale de la marche…",
+      "cat": "entraide",
+      "creation": "1977",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Association de Chasse du Ruisseau",
+      "objet": "Assurer une bonne organisation technique de la chasse de favoriser sur son territoire un développement du gibier et de la faune sauvage dans le respect d'un véritable équilibre agro-système cynégétique. D'assurer la…",
+      "cat": "environnement",
+      "creation": "2020",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association de Parents D'Eleves de Vouvray sur Loir",
+      "objet": "Organiser toutes activités favorisant les loisirs et la culture. assurer la garderie périscolaire.",
+      "cat": "education",
+      "creation": "1997",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association des Commerçants et Artisans du Bassin Montvalois",
+      "objet": "Permettre à l'ensemble des commerçants du secteur d'échanger, de s'entraider, de partager des moments conviviaux ; définir les objectifs communs qui puissent contribuer à l'amélioration globale de l'image de marque du…",
+      "cat": "autres",
+      "creation": "1992",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association des Copropriétaires la Prée D'Amont",
+      "objet": "Entretenir les parties communes en herbe Gérer le point d'eau potable commun",
+      "cat": "environnement",
+      "creation": "2022",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D'Eleves Beauregard",
+      "objet": "Proposer des animations ponctuelles à l'intention des élèves et de leur famille ; collecter des fonds pour accompagner l'école dans ses dépenses et financer les projets de l'association",
+      "cat": "education",
+      "creation": "2018",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D'Eleves de L'Ecole Privee Saint Jean de Château du Loir",
+      "objet": "Grouper les chefs de famille ayant la charge des enfants inscrits à l'école toutes activités susceptibles d'apporter un soutien matériel et moral à l'école, aux familles, aux maîtres",
+      "cat": "education",
+      "creation": "1951",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D' Élèves du Grand Douai - APE",
+      "objet": "Créer du lien enfants/famille/équipe enseignante au sein de l'école ;organiser des temps forts en lien avec l'équipe enseignante; créer des actions générant un bénéfice afin de financer des projets ; les activités…",
+      "cat": "education",
+      "creation": "2017",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association des Travailleurs en Recherche D' Emploi-Chantier - (A.t.r.e.-Chantier)",
+      "objet": "Oeuvrer pour l'emploi et la réinsertion professionnelle des demandeurs d'emploi du bassin de château du loir, en particulier des plus démunis.",
+      "cat": "entraide",
+      "creation": "1993",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Eclair Sportif Castelorien",
+      "objet": "Organiser et favoriser la pratique des activités physiques, sportives et artistiques pour les élèves volontaires fréquentant l'établissement ; l'association représente l'établissement durant les évènements pu épreuves…",
+      "cat": "sport",
+      "creation": "1949",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association Générations Mouvement Loir et Bercé",
+      "objet": "Renforcer les liens de solidarité existant entre les retraités de l'agriculture, exploitants, salariés et autres personnes membres adhérents et développer en leur faveur des activités culturelles,",
+      "cat": "loisirs",
+      "creation": "1972",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association 'La Perche Castelorienne de Château du Loir' pour la Pêche et la Protection du Milieu Aquatique - A.p.p.m.a.",
+      "objet": "Détenir et gérer droits de pêche sur les domaines publics et privés de l'etat et des collectivités locales ou de riverains",
+      "cat": "environnement",
+      "creation": "1956",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association la Petite Locomotive",
+      "objet": "Aider la famille de Joanna à financer plusieurs séjours aux Etas-Unis ou à Munich à partir de 2015/2016 pour proposer une méthode non existante en France pour les enfants atteints d'infirmité cérébrale et qui permet de…",
+      "cat": "loisirs",
+      "creation": "2013",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Les Amis Reunis'",
+      "objet": "Favoriser la protection et le repeuplement du gibier, la destruction des animaux nuisibles et la répression du braconnage.",
+      "cat": "environnement",
+      "creation": "1961",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association \" les Filopathes\"",
+      "objet": "Créer, broder, partager autour du fil",
+      "cat": "loisirs",
+      "creation": "2011",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association Locale pour le Culte des Temoins de Jehovah de Château du Loir",
+      "objet": "L'association a pour objet exclusif de subvenir aux frais, à l'entretien et à l'exercice public du culte des témoins de Jéhovah. Elle pourra apporter son aide et son assistance à toute association poursuivant un objet…",
+      "cat": "autres",
+      "creation": "1978",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Loisirs",
+      "objet": "Vacances loisirs à des tarifs groupes.",
+      "cat": "loisirs",
+      "creation": "1986",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Pôle Bercé Santé",
+      "objet": "Créer un pôle de santé libéral et ambulatoire sur le territoire Loir et Bercé ; anticiper une pénurie de professionnels de santé pour maintenir et consolider une offre de soins de premier recours sur un territoire est…",
+      "cat": "entraide",
+      "creation": "2014",
+      "declaration": "2016",
+      "site": ""
+     },
+     {
+      "titre": "Association pour la Promotion de L'Informatique Dans le Canton de Château-Du- Loir",
+      "objet": "Faire decouvrir et promouvoir la micro-informatique dans tous les milieux socio-professionnels du canton",
+      "cat": "culture",
+      "creation": "1984",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Association pour le Don de Sang Benevole du Val de Loir",
+      "objet": "Susciter le don volontaire et bénévole du sang susciter le don volontaire de moelle osseuse inciter au respect du code d'honneur des donneurs de sang bénévoles : principes éthiques",
+      "cat": "entraide",
+      "creation": "2000",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Praxis",
+      "objet": "Exercer deux missions complémentaires : animer des projets culturels d'intérêt public, des évènements, des formations, etc ; rechercher des modalités de création de projets culturels dans le monde rural répondant à des…",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive de la Maternelle Laurentine Proust ( A.s.m.l.p)",
+      "objet": "Former à la responsabilité, au civisme, à l'autonomie par la pratique d'activités physiques, sportives et de pleine nature, d'activités socioculturelles, dans le cadre d'un fonctionnement démocratique ; elle contribue à…",
+      "cat": "sport",
+      "creation": "2010",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive du College Saint-Jean de Château du Loir",
+      "objet": "Faire participer les élèves du collège saint-jean de château-du-loir à la préparation et la réalisation de rencontres sportives entre établissements scolaires.",
+      "cat": "sport",
+      "creation": "2003",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Avenir Local Vivant",
+      "objet": "Veiller d'une manière générale à la protection de l'environnement dans son territoire d'action ; d'oeuvrer pur l'intérêt général des populations, soumises ou non à des pressions diverses, en veillant au respect de leur…",
+      "cat": "environnement",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Bercedanse",
+      "objet": "Promouvoir les musiques et danses traditionnelles sans distinctions d'origines géographiques",
+      "cat": "culture",
+      "creation": "2015",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Bridge Club Montval-Sur-Loir",
+      "objet": "Pratique du bridge",
+      "cat": "loisirs",
+      "creation": "1986",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Centre de Ressources des Écoles Publiques Sarthe Sud-Est",
+      "objet": "Faciliter par tous moyens, le perfectionnement professionnel et la culture personnelle de ses membres",
+      "cat": "education",
+      "creation": "2001",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Chante L'Ire",
+      "objet": "Etude et diffusion du chant choral",
+      "cat": "culture",
+      "creation": "1981",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Château du Loir Poker Club (CLPC)",
+      "objet": "Développer la pratique du poker en loisir ou en compétition, et tous objets similaires, connexes ou complémentaires ou susceptibles d'en favoriser la réalisation ou le développement",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Château S'Anime",
+      "objet": "Animations : soirées dansantes ou à thèmes, thés dansants, brocantes et lotos",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Club Carpe-Unis",
+      "objet": "Initiation de la pratique et organisation de compétitions de pêche à la ligne",
+      "cat": "environnement",
+      "creation": "2016",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Club D'Histoire Locale de Château du Loir",
+      "objet": "Etudier l'histoire locale de la ville et du canton de château du loir et en assurer la diffusion.",
+      "cat": "patrimoine",
+      "creation": "1989",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Club Omnisports Château-Du-Loir",
+      "objet": "Pratique de l'éducation physique et des sports.",
+      "cat": "sport",
+      "creation": "1971",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Coc Rugby",
+      "objet": "Développement de la pratique sportive et culturelle du rugby pour tous",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Comice Montabonais 2026",
+      "objet": "Organisation du comice agricole sur la commune de montabon en septembre 2026",
+      "cat": "loisirs",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Comité de Jumelage et D'Échanges Montval sur Loir / Westbury",
+      "objet": "Développement entre les partenaires de Montval sur Loir et Westbury (GB) dans le cadre du jumelage",
+      "cat": "loisirs",
+      "creation": "2018",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Comité de Jumelage Montval-Sur-Loir/ganderkesee",
+      "objet": "Développer la connaissance mutuelle, la compréhension et la solidarité par l'organisation d'échanges internationaux",
+      "cat": "loisirs",
+      "creation": "1996",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Montabon",
+      "objet": "Organisation de festivités dans la commune.",
+      "cat": "loisirs",
+      "creation": "1971",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Comité Fêtes et Loisirs de Château du Loir",
+      "objet": "Représenter la ville de Château-du-Loir et organiser des manifestations dont : restauration ( barbecue,frites,casse-croûte et divers) ainsi que buvette ( vente de boissons diverses)",
+      "cat": "loisirs",
+      "creation": "1981",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Connaître la Bible",
+      "objet": "Promouvoir et faire connaître la bible et les ouvrages s'y rapportant.",
+      "cat": "autres",
+      "creation": "2003",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Cyclos Castéloriens",
+      "objet": "Faire connaître et encourager la pratique de la bicyclette ; organiser des excursions, randonnées, rallyes et brevets de cyclotourisme.",
+      "cat": "sport",
+      "creation": "1974",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Dauphines du Val de Loir",
+      "objet": "Reunir filles etgarcons en vue de les initier au rythme, a la musique et entretenir des loisirs",
+      "cat": "loisirs",
+      "creation": "1977",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Défense de L'Hôpital de Montval-Sur-Loir",
+      "objet": "Maintenir tous les services et soins de proximité de l'hôpital de Montval-sur-Loir pour tous les habitants du sud Sarthe",
+      "cat": "entraide",
+      "creation": "2021",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "École Lavernat Montabon",
+      "objet": "Organisation de manifestations sportives et culturelles",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Event'S Asso",
+      "objet": "Organisation de soirées dansantes à thème avec repas traiteur",
+      "cat": "loisirs",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Expo - Audiovisuel et Communication - Collection Joel Heslon",
+      "objet": "La sauvegarde, la conservation et la promotion du patrimoine culturel et scientifique et technique de la radio, de la télévision, des télécommunications et de la communication en général sous toutes ses formes ( parlée,…",
+      "cat": "patrimoine",
+      "creation": "2015",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Foyer Socio-Educatif du Lycee Racan",
+      "objet": "Favoriser dans l'établissement une forme éducative de vie permettant le développement de la personnalité de chaque élève par l'exercice de la liberté et des responsabilités. pour cela, il doit",
+      "cat": "education",
+      "creation": "1967",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Fse-Contact FM",
+      "objet": "Animer un lieu de vie, un foyer d'échanges, de communication, permettant l'expression, l'écoute l'ouverture des jeunes à l'actualité, à la vie qui les entoure, à des personnalités locales ou éloignées, à l'Europe, à la…",
+      "cat": "entraide",
+      "creation": "1963",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "FT Solidaire",
+      "objet": "Location, vente, réparation de vélo et motoculture, achat, vente alimentaire et non alimentaire",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement Club de Château du Loir - Commune Déléguée de Montval/loir",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités * organiser des déplacements et des voyages et diverses activités et loisirs adaptés aux voeux et goûts des adhérents *…",
+      "cat": "loisirs",
+      "creation": "2009",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement de Vouvray sur Loir",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités ; les aider à résoudre leurs difficultés, les informer et les soutenir, par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "2016",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Groupement de Développement Agricole du Canton de Château du Loir",
+      "objet": "Développement agricole",
+      "cat": "autres",
+      "creation": "1985",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Judo Club Castelorien",
+      "objet": "Pratique du judo et jiu-jitsu, du kendo, disciplines sportives régies par la F.F.J.D.A.et pratique d'autres activités physiques sportives et de pleine nature.",
+      "cat": "sport",
+      "creation": "1980",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "L'Amicale de la Classe 74",
+      "objet": "ORGANISER DES EVENEMENTS",
+      "cat": "loisirs",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "L'Outil en Main de Château du Loir",
+      "objet": "Initier des jeunes aux métiers du patrimoine et aux métiers manuels par des gens de métier, dans un cadre d'atelier ou tout autre lieu connexe . Son principe fondateur est de permettre aux jeunes, à partir de 9 ans, de…",
+      "cat": "culture",
+      "creation": "2011",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "La Guinguette des Trois Moulins.",
+      "objet": "Mettre en place une guinguette pour faire passer des moments festifs aux gens et se restaurer et accroitre l'attractivité de notre territoire",
+      "cat": "loisirs",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "La Main Dans la Main du Château du Loir",
+      "objet": "D'aider les personnes âgées et démunis pour des formalités administratives, trouver de quoi manger, se vêtir, trouver des logements d'urgence, briser la solitude par des sorties d'animation, assistance dans la gestion…",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "La Mini Boutique",
+      "objet": "Humanisation des conditions et du cadre de vie du secteur hébergement de l'hôpital de Château du Loir",
+      "cat": "entraide",
+      "creation": "1982",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "La Salle du Fond",
+      "objet": "Participer à la dynamique du territoire local, valoriser son patrimoine et ses acteurs ; Favoriser les échanges, les rencontres, créer du lien ;",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Le Moulin a Images",
+      "objet": "Développer, sur les plans culturels et artistiques, tout ce qui se rapporte aux moulins, à l'image sous toutes ses formes et à tout domaine artistique",
+      "cat": "culture",
+      "creation": "2006",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Le Rucher de Montval sur Loir",
+      "objet": "Initiation à la pratique de l'apiculture, protection et préservation des insectes pollinisateurs",
+      "cat": "environnement",
+      "creation": "2025",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Ateliers Moments D'Ici et D'Ailleurs",
+      "objet": "Initier les personnes aux pratiques culturelles et sportives liées aux musiques du monde",
+      "cat": "culture",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Les Decibellophiles",
+      "objet": "Organisation et soutien d'actions culturelles musicales en sud-sarthe",
+      "cat": "culture",
+      "creation": "2002",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Les Echos du Point du Jour",
+      "objet": "Promouvoir l'instrument (trompe de chasse) ; participer aux diverses manifestations musicales du département ; initier de futurs sonneurs ; développer l'activité musicale au sein du département",
+      "cat": "culture",
+      "creation": "2011",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Les Ensgeniors",
+      "objet": "Construction et promotion de machines médiévales.",
+      "cat": "loisirs",
+      "creation": "2004",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Les Guerriers D'Ibelin",
+      "objet": "De créer, organiser et/ou à participer à des événements à caractère culturels et historiques ( fêtes médiévales, rassemblements de troupes de reconstitution, banquets historiques, spectacles, concerts etc, , , , , ) et…",
+      "cat": "culture",
+      "creation": "2015",
+      "declaration": "2022",
+      "site": "https://guerriersibelin.wixsite.com/snow"
+     },
+     {
+      "titre": "Les Pêcheurs à la Ligne de Château",
+      "objet": "Détenir et gérer des droits de pêche sur les domaines publics et privés de l'etat et des collectivités locales ou de riverains. participer activement à la protection du patrimoine piscicole",
+      "cat": "environnement",
+      "creation": "1903",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Pistons du Desert",
+      "objet": "Cette association a pour objet : de récolter des fonds dans le but d'apporter des fournitures scolaires ainsi que des vélos en participant au raid aventure au Maroc, Le Nomad Raid ou chaque participant prend part à une…",
+      "cat": "entraide",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Les Semelles Bercé",
+      "objet": "Randonnée pédestre",
+      "cat": "sport",
+      "creation": "2002",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Les Symph0nies de L'Opera",
+      "objet": "Défense et protection de l'animal de compagnie sous toutes ses formes (voir dossier).",
+      "cat": "loisirs",
+      "creation": "2007",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Libellule",
+      "objet": "Proposer en sud Sarthe et alentour, un lieu itinérant d emprunt de livres, de supports audio ou vidéo, de vente lors d évènements",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Loir Lucé Bercé Handball",
+      "objet": "Pratique du handball en compétition et loisir dans l'intercommunalité Loir Lucé Bercé",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Maison des Lycéens du Lycée Maréchal Leclerc de Hauteclocque",
+      "objet": "Fédérer les initiatives portées par les lycéens de l'établissement au service de l'intérêt collectif, notamment dans les domaines culturels, artistiques, sportifs et humanitaires ;",
+      "cat": "education",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Maison des Lyceens du Lycee Professionnel (MDL du Lycee Professionnel)",
+      "objet": "L'education ne peut plus se limiter à la seule acquisition des connaissances. elle comporte à la fois un entraînement à l'activité manuelle, sportive ou artistique et un apprentissage de la liberté et de la…",
+      "cat": "education",
+      "creation": "2006",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "12 Mois pour Toi",
+      "objet": "Collecte de dons de toute nature en vue de distribuer des produits dits de \"survie\" et de première nécessité auprès des populations les plus précaires * fédérer les initiatives citoyennes individuelles ou collectives et…",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Mont' E-Sport",
+      "objet": "But non lucratif association d'évenement sur Montval Sur loir d'organisation de tournoi e-sport",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Moto Circuit",
+      "objet": "Promouvoir la pratique de la pétanque à travers l'organisation de concours et d'événements variés",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Mr.pandera",
+      "objet": "Découvrir la culture des mangas japonais et de leurs adaptation en animés",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Octopussies",
+      "objet": "Éditer, produire, promouvoir et distribuer des ouvrages d'auteurs qui défendent l'égalité des sexes ainsi que celles des personnes appartenant à la communauté LGBT ; promouvoir la lecture et la distribution de livres…",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Organisme de Gestion D'Enseignement Catholique (O.G.E.C.) de L'Ecole et College Saint-Jean.",
+      "objet": "Assumer juridiquement la gestion d'établissements d'enseignement fondés par l'autorité canonique compétente ; se livrer à toute activité se rapportant directement ou indirectement à l'éducation, l'enseignement, la…",
+      "cat": "loisirs",
+      "creation": "1947",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Paroles Épicées",
+      "objet": "Paroles Épicées a pour objet la promotion et l'animation du conte oral sous toutes ses formes et de la littérature jeunesse sous toutes ses formes, à destination de tous les publics, adultes ou enfants, sans distinction…",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Pêche Loisir",
+      "objet": "La pêche, une passion partagée la découverte et le partage de la pêche pour les passionner qui soit débutant ou non ; la convivialité et le respect est la règle n°1 de cette association ; qui dit pêche dit respect de la…",
+      "cat": "environnement",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "RDN Touquet",
+      "objet": "Activités sportives de loisir",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Rotary-Club de Château du Loir et de la Chartre sur le Loir",
+      "objet": "Cultiver l'idéal de servir auquel aspire toute profession honorable et plus particulièrement, s'engage à mettre à profit les relations et contacts pour servir l'intérêt général ; observer des règles de haute probité…",
+      "cat": "loisirs",
+      "creation": "1963",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Rotonde Ferroviaire de la Vallée du Loir ( RFVL)",
+      "objet": "Préservation et valorisation du site de la rotonde et de matériels ferroviaires, mobiliers et immobiliers ; présentation au public du site et ses composants ; circulation de matériels à vocation touristique ou…",
+      "cat": "patrimoine",
+      "creation": "2010",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Séniors Sportifs Montvalois",
+      "objet": "Organiser, promouvoir et développer la pratique des activités physiques et sportives des plus de 50 ans ;",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Shaucha Yoga",
+      "objet": "Promouvoir la connaissance du yoga par le biais de séances régulières ou ponctuelles (cours, ateliers, stage et conférences) ;",
+      "cat": "loisirs",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Société de Chasse des Agriculteurs de Montabon",
+      "objet": "Exploitation de la chasse sur les terres de ses adhérents, protection et conservation du gibier, repeuplement, répression du braconnage et destruction des animaux nuisibles",
+      "cat": "environnement",
+      "creation": "1958",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Société Hippique de Château du Loir",
+      "objet": "Améliorer la race chevaline dans le canton de château du loir par des courses de chevaux",
+      "cat": "sport",
+      "creation": "1907",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Team Riding 4 Life",
+      "objet": "Promouvoir des valeurs, telles que l'entraide, la solidarité, le partage, développement de la confiance en soi grâce à des actions humanitaires, culturelles ou d'intégrations sociales par la pratique et la participation…",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Union Nationale des Combattants D'Afrique du Nord-Section Cantonale de Château du Loir",
+      "objet": "Maintien de la solidarité entre tous les participants aux opérations de sécurité et de maintien de l'ordre de l'Afrique du Nord ; défense de leurs intérêts tant moraux que matériels",
+      "cat": "patrimoine",
+      "creation": "1959",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Voix - Lactées",
+      "objet": "L'objet de l'association Voix-lactées consiste en : un volet culturel artistique : * la promotion et la mise en valeur des musiques de tous types par des concerts, spectacles et animations musicales et théâtrales ; * le…",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Zutano Bazar",
+      "objet": "Création, production et diffusion artistique d'oeuvres chorégraphiques, vidéo, artistiques croisant ces outils et d'autres (musique, ampoules, théâtre...); diffusion de prestations vidéo, support de communication…",
+      "cat": "culture",
+      "creation": "2005",
+      "declaration": "2026",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.55509,
+     47.81621
+    ]
+   },
+   "properties": {
+    "com_insee": "72103",
+    "com_nom": "Courdemanche",
+    "nb": 21,
+    "titre": "Associations de Courdemanche",
+    "associations": [
+     {
+      "titre": "Amicale des Sapeurs Pompiers de Courdemanche",
+      "objet": "Subvenir aux frais des fêtes et concours ayant pour but le perfectionnement de l'instruction du corps",
+      "cat": "loisirs",
+      "creation": "1936",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Amicale du Si.vo.s. de L'Etangsort",
+      "objet": "Regrouper les parents et les enseignants des écoles de courdemanche et montreuil le henri ; faire des animations au profit des enfants.",
+      "cat": "education",
+      "creation": "1983",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Asso L'Etang Change",
+      "objet": "Participer à la revitalisation des territoires ruraux en permettant à ses habitants, petits artisans, producteurs, commerçants et autres acteurs socio-culturels locaux de se rencontrer et créer du lien en favorisant les…",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2026",
+      "site": "https://www.facebook.com/p/LEtang-change-61557991756780/?checkpo"
+     },
+     {
+      "titre": "Billard-Club de Courdemanche",
+      "objet": "Pratique du billard",
+      "cat": "sport",
+      "creation": "1991",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Courdemanche",
+      "objet": "Organiser ou co-organiser des manifestations, fêtes et évènements de toute nature, concourant à l'animation de la commune de Courdemanche et éventuellement des communes voisines",
+      "cat": "loisirs",
+      "creation": "1969",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Compagnie la Petite Tortue",
+      "objet": "Promouvoir différentes formes d'expression et d'éducation artistiques et culturelles ; elle s'engage à favoriser la création et la diffusion de spectacles vivants et à organiser différents projets d'éducation artistique…",
+      "cat": "culture",
+      "creation": "2013",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Compagnie Lily",
+      "objet": "Promouvoir les arts du spectacle vivant ; produire et créer des spectacles, tournées, diffusion, stages et promouvoir et développer des activités concernant la vie locale",
+      "cat": "culture",
+      "creation": "2008",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "École Courdemanche Usep",
+      "objet": "A pour but de contribuer à la formation du jeune citoyen par le développement de la responsabilité, du civisme, de l'autonomie au travers de la pratique d'activités physiques, sportives, d'activités socioculturelles ;…",
+      "cat": "education",
+      "creation": "2021",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Foyer Rural de Courdemanche",
+      "objet": "Organiser des loisirs culturels pour ses membres",
+      "cat": "loisirs",
+      "creation": "1958",
+      "declaration": "2024",
+      "site": "http://foyerruraldecourdemanche.org"
+     },
+     {
+      "titre": "Générations Mouvement Courdemanche-Saint Georges de la Couée",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié et de solidarité entre personnes physiques et morales et en particulier les retraités et préretraités ; les aider à résoudre leurs difficultés, les informer…",
+      "cat": "loisirs",
+      "creation": "2015",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "L'Amicale du 22 Juillet Sarthois",
+      "objet": "Diffuser les idées de l'amicale via des actions dans les domaines suivants : social, culturel, touristique et sportif",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Le Plateau, Art et Culture en Campagne",
+      "objet": "Organiser, promouvoir et diffuser tout projet à caractère artistique culturel ou éducatif porté par des artistes sélectionnés par les membres de l'association en particulier dans les domaines littéraire, musical et des…",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Les Marcheurs de L'Etang Sort",
+      "objet": "Organiser des marches promenades de découverte de la nature et de l'environnement",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Voix Nomades",
+      "objet": "Concevoir, promouvoir et diffuser des projets artistiques, culturels, littéraires, multimédias, éducatifs et participatifs",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Libre Pensée Groupe Hipatia D'Alexandrie",
+      "objet": "L'association Hipatia d'Alexandrie se propose de défendre aux côtés de tous ceux qui aspirent au même idéal : la laïcité de l'Etat telle qu'elle résulte de la loi du 9 décembre 1905, les droits et libertés de…",
+      "cat": "entraide",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Maison des Arts de Courdemanche",
+      "objet": "D'assurer un enseignement de qualité de la musique, des arts visuel, de l'anglais et du Taï Chi - d'organiser des évènements en lien avec les autres associations de la commune - d'organiser des stages de musique avec la…",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Musique de Courdemanche",
+      "objet": "Art de faire de la musique d'ensemble",
+      "cat": "culture",
+      "creation": "1936",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Racing Paineau Nicot Compétition",
+      "objet": "Notre association est une équipe de jeunes sportifs. Nous pratiquons le tracto-cross. Cette discipline consiste à effectuer des courses de tracteurs modifiés sur terre battue. L'équipe est constitué de 5 licenciés…",
+      "cat": "sport",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Spirdou Racing",
+      "objet": "Participer à des raids, rallyes et compétitions automobiles ainsi que de venir en aide à des personnes démunies via des actions liées aux activités précédentes",
+      "cat": "sport",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Team Tracto Cross des Mignons",
+      "objet": "Elaboration d'un tracteur de Course afin de participer au championnat de France de Tracto cross",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Union Nationale des Anciens Combattants D'Indochine, des T.o.e., D'Afrique du Nord et 39-45 - Section Cantonale de la Chartre sur le Loir",
+      "objet": "Resserrer les liens d'amitié entre tous les membres ; les aider ainsi que leurs familles ; défendre leurs intérêts matériels et moraux.",
+      "cat": "patrimoine",
+      "creation": "2002",
+      "declaration": "2020",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.48476,
+     47.66648
+    ]
+   },
+   "properties": {
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "nb": 19,
+    "titre": "Associations de Dissay-sous-Courcillon",
+    "associations": [
+     {
+      "titre": "Amicale des Anciens Combattants des Deux Guerres et D'A.f.n.",
+      "objet": "Resserrer les liens de camaraderie et entraide entre les anciens combattants des deux guerres et d'AFN.",
+      "cat": "patrimoine",
+      "creation": "1983",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs-Pompiers de Dissay sous Courcillon et Saint Pierre de Chevillé",
+      "objet": "Subvenir aux frais des fêtes et concours ayant pour but le perfectionnement de l'instruction du corps, verser des secours en cas de maladie ou accidents, (le cas échéant), encourager la pratique des sports pour…",
+      "cat": "loisirs",
+      "creation": "1967",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association Assistance Famille",
+      "objet": "Soutenir financièrement, moralement et dans la gestion les accidents de la vie subis par ses adhérents et leurs enfants mineurs, organiser des cousinades pour favoriser le regroupement familial des adhérents et de leurs…",
+      "cat": "loisirs",
+      "creation": "2012",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Association de la Protection de la Vallée du Loir, du Long et de de L'Escotais",
+      "objet": "Sur le territoire de la communauté de communes Loir et bercé, ainsi que sur les communes limitrophes et plus particulièrement les communes de Dissay sous Courcillon, Saint Pierre de Chevillé, Saint Christophe sur le…",
+      "cat": "environnement",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Association des Riverains Pêcheurs de Dissay sous Courcillon",
+      "objet": "Défendre les intérêts des riverains des rivières 'le long' et le 'le graveau', la pêche et la répression du braconnage sur ces rivières",
+      "cat": "environnement",
+      "creation": "1957",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association Parents D'Eleves 'Les P'Tits Dissayens'",
+      "objet": "Financer certains besoins de l'école de Dissay sous Courcillon ( voyages, jeux, etc...)",
+      "cat": "education",
+      "creation": "2000",
+      "declaration": "2024",
+      "site": "https://www.facebook.com/ape.dissaysouscourcillon.5"
+     },
+     {
+      "titre": "Au Bon Accueil",
+      "objet": "Organiser des thés dansants afin de divertir les retraités et les personnes seules",
+      "cat": "loisirs",
+      "creation": "2013",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Autos For You",
+      "objet": "Achats ventes réparations véhicules a petit budget destinés aux personnes a faibles revenus dans le but de leur réinsertion sociale et professionnelle",
+      "cat": "entraide",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": "https://www.facebook.com/autos4u72/"
+     },
+     {
+      "titre": "Comité des Fêtes de Dissay sous Courcillon",
+      "objet": "Organisation de fêtes et manifestations dans la commune",
+      "cat": "loisirs",
+      "creation": "1964",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Elan Sportif Dissayen",
+      "objet": "Pratique éducation physique et des sports",
+      "cat": "sport",
+      "creation": "1940",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Club de Dissay sous Courcillon",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités ; les aider à résoudre leurs difficultés, les informer et les soutenir par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "2015",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "4l Trop'Tite",
+      "objet": "APPORTER UN SOUTIEN HUMANITAIRE, FOURNITURES SCOLAIRE AUX ENFANTS DU DESERT ET PARTICIPER A UN RAID HUMANITAIRE",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "La 4l Sarthoise",
+      "objet": "Association ayant pour objet l'amélioration des conditions de vie des enfants marocains les plus démunis par l'achat de fournitures sportives et scolaires ; A également pour objet la facilitation de l'accès à la…",
+      "cat": "entraide",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "La Saint Dissayen",
+      "objet": "Cette association a pour objet de proposer des rencontres et des évènements conviviaux entre habitants de Dissay-Sous-Courcillon",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Le Chahut de Haute Crâne",
+      "objet": "Mise en place d'actions en faveur de la vie culturelle et des transitions sociales, écologiques et économiques sur les territoires environnants le lieu-dit Haute Crâne à Dissay-sous-Courcillon",
+      "cat": "environnement",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Les Abeilles des Menhirs",
+      "objet": "Contribuer à la protection, à la préservation, à la sauvegarde et au repeuplement des abeilles en contribuant à la protection contre les frelons",
+      "cat": "environnement",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Nasty Devil'S Association",
+      "objet": "Réunir des passionnés de moto ; organiser des sorties, repas et soirées ; l'exercice d'activités économiques d'un garage solidaire ouvert à tous",
+      "cat": "loisirs",
+      "creation": "2014",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Société Communale de Chasse de Dissay sous Courcillon",
+      "objet": "Favoriser la protection du gibier et son repeuplement, la répression du braconnage, la destruction des animaux nuisibles",
+      "cat": "environnement",
+      "creation": "1939",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Team Enb",
+      "objet": "Initiation, école de pilotage motocross financement de sorties et compétitions de motocross (engagement, déplacements...)",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2024",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.45722,
+     47.73174
+    ]
+   },
+   "properties": {
+    "com_insee": "72134",
+    "com_nom": "Flée",
+    "nb": 13,
+    "titre": "Associations de Flée",
+    "associations": [
+     {
+      "titre": "Amicale de Chasse du Cormier",
+      "objet": "Gérer la protection du gibier et son repeuplement et la destruction des animaux nuisibles",
+      "cat": "environnement",
+      "creation": "2009",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association Bouge Ta Campagne -BTC",
+      "objet": "Animer la commune de Flée et alentours à travers des actions diverses (soirées thématiques, randonnées, lotos, découverte de la production locale )",
+      "cat": "loisirs",
+      "creation": "2017",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Baroudeurs72",
+      "objet": "Organiser des randonnées découvertes quad et buggy dans le respect de l environnement",
+      "cat": "sport",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Club de Flée",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités ; les aider à résoudre leurs difficultés, les informer et les soutenir, par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "2011",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Landais Racing Team - LRT",
+      "objet": "Permettre le développement social et citoyen de l'individu, dans le respect de son intégrité physique dans un esprit laique et apolitique, et ce, au travers de la moto sous toutes ses formes et dans le contexte qui la…",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "\"le Nid du Phenix 72\"",
+      "objet": "Gérer et animer un lieu de vie et d'accueil destiné à héberger, accompagner et soutenir jusqu'à dix enfants ou adolescents de 5 à 18 ans, de manière mixte, dans un cadre bienveillant, éducatif et sécurisant ; Elle a…",
+      "cat": "entraide",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis de Sainte-Cecile",
+      "objet": "Participer à la restauration et à l'animation culturelle de la chapelle ste cécile",
+      "cat": "culture",
+      "creation": "1997",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis du Monastere de la Paix Notre Dame",
+      "objet": "Soutien des oeuvres culturelles, religieuses et sociales, inspirées par l'église catholique, qui ont été créées à flée, au prieuré 'la paix notre dame'. l'accueil dans un cadre de vie conforme, apporter son soutien au…",
+      "cat": "entraide",
+      "creation": "1953",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Les Sonneurs de Bercé",
+      "objet": "Développer par tous moyens, dans le souci d'une qualité accrue, l'enseignement de la trompe de chasse aux jeunes et adultes et d'aider au développement de la vie musicale locale",
+      "cat": "culture",
+      "creation": "2014",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Pays de la Loire - Alexandrie Egypte",
+      "objet": "Développer notre connaissance du passé de la ville d'Alexandrie ( Egypte), par la mise en oeuvre de missions sur le terrain, de prospections et de fouilles archéologiques par les soins du Centre d'études Alexandrines (…",
+      "cat": "loisirs",
+      "creation": "2017",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Po Flée 72",
+      "objet": "L'association porte les valeurs de MAUDUIT FONDATION Ltd ; accompagne la revitalisation de la vie locale au plan économique, social, culturel ; promeut une alternative à la \"finance loto\" au profit de la valeur ajoutée…",
+      "cat": "loisirs",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Prieuré des Bénédictines la Paix Notre Dame",
+      "objet": "Se consacrer à une vie de prière et de travail selon les préceptes de l'église catholique et romaine et particulièrement selon la règle de Saint Benoit ; s'adonner aux disciplines théologiques et spirituelles ;…",
+      "cat": "autres",
+      "creation": "2014",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Sportcitizen",
+      "objet": "Actions solidaires, éducatives et citoyennes dans le milieu du sport",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.46256,
+     47.86778
+    ]
+   },
+   "properties": {
+    "com_insee": "72143",
+    "com_nom": "Le Grand-Lucé",
+    "nb": 39,
+    "titre": "Associations de Le Grand-Lucé",
+    "associations": [
+     {
+      "titre": "Amicale des Écoles Publiques du Grand Lucé",
+      "objet": "Aider les coopératives scolaires des écoles publiques à acheter du matériel d'éducation et sportif. etudier et réaliser toutes organisations post et péri-scolaires.",
+      "cat": "education",
+      "creation": "1952",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs-Pompiers du Grand-Lucé",
+      "objet": "Subvenir aux frais des fêtes et concours ayant pour but le perfectionnement de l'instruction du corps. verser des secours en cas de maladie ou accidents. encourager la pratique des sports pour l'entraînement des sapeurs…",
+      "cat": "loisirs",
+      "creation": "1930",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Aremis 72 Association de Recherche et D'Etude du Milieu Souterrain - Sarthe",
+      "objet": "Unir toutes personnes pratiquant ou étudiant la spéléologie et les disciplines connexes ; l'exploration, l'étude, la recherche scientifique, la prévention des risques naturels, la protection du monde souterrain et de…",
+      "cat": "culture",
+      "creation": "2009",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association Bien Être Prevenir et Accompagner la Santé Par l 'Activite Physique Adaptee",
+      "objet": "Concevoir et animer des interventions dans des perspectives de réadaptation d'enseignement et de prévention de la santé ; Planifier des prises en charge globales des personnes au sein d'une équipe pluridisciplinaire ;…",
+      "cat": "entraide",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association de Chasse des Amis de la Forêt",
+      "objet": "Tout ce qui est lié à l'activité de la chasse, manifestations exceptionnelles.",
+      "cat": "environnement",
+      "creation": "2004",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Association de Soutien aux Écoles du Grand Lucé",
+      "objet": "Défendre les intérêts des élèves des écoles du Grand Lucé",
+      "cat": "education",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D'Eleves du College Paul Chevallier",
+      "objet": "Faciliter les rapports entre les parents, la direction du collège, le corps enseignant et les autorités dans le ressort de l'association ; * assurer la représentation des familles dans les conseils et organismes…",
+      "cat": "education",
+      "creation": "1995",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association du Centre Social Rural de Lucé",
+      "objet": "Gérer le centre, promouvoir, créer et gérer toutes activités et services d'ordre social culturel, éducatif, familial en faveur des enfants, adolescents, adultes, personnes âgées, des familles en général",
+      "cat": "entraide",
+      "creation": "1975",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Musique Municipale du Grand Lucé",
+      "objet": "Cette association, à durée illimitée, a pour objet de fédérer les musiciens autour de la pratique de leur instrument en groupe.Elle sera amenée à les accompagner en soutenant leurs formations et leurs évolutions. Elle…",
+      "cat": "culture",
+      "creation": "1931",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Operation Bouchons 72",
+      "objet": "Collecter des bouchons plastique et liège et barquettes repas sur l'ensemble du département et communes limitrophes ; de les trier et de les livrer à une société pour transformation ; les sommes collectées sont…",
+      "cat": "entraide",
+      "creation": "2003",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive du Collège Paul Chevallier",
+      "objet": "Organiser et développer, en prolongement des enseignements scolaires d'éducation physique et sportive, l'initiation et la pratique sportive des élèves qui y adhèrent. représenter l'établissement dans les épreuves…",
+      "cat": "sport",
+      "creation": "2003",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Cap Bercé (Créateur, Artisan, Producteur)",
+      "objet": "L'association a pour objet de favoriser les liens, les échanges et la coopération entre artisans, créateurs, agriculteurs et porteurs de projets en milieu rural ; elle vise notamment à encourager la création et le…",
+      "cat": "entraide",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes du Grand Lucé",
+      "objet": "Organiser des fêtes pour développer le commerce et attirer des étrangers, bals, cavalcades, jeux divers, manifestations musicales, théatrales, sportives",
+      "cat": "loisirs",
+      "creation": "1947",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Danse Folklorique Lucéenne",
+      "objet": "Promouvoir et développer la pratique de tous types de danses folkloriques ;",
+      "cat": "culture",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "École de Musique Associative les Lyres Lucéennes",
+      "objet": "Former les musiciens pour les harmonies du canton",
+      "cat": "culture",
+      "creation": "1985",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Foyer Socio-Educatif du College du Grand-Lucé",
+      "objet": "Développement de la vie sociale de l'établissement",
+      "cat": "education",
+      "creation": "1983",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement des Aînés Ruraux du Grand Lucé",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités, les aider à résoudre leurs difficultés, les informer et les soutenir par la création de services, ...",
+      "cat": "loisirs",
+      "creation": "2006",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement Pays de Lucé",
+      "objet": "Renforcer les liens de solidarité existant entre les retraités et pré-retraités, vivant en milieu rural, et assimilés, et de développer en leur faveur, notamment par des Clubs communaux ouverts indistinctement à tous…",
+      "cat": "loisirs",
+      "creation": "1972",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Groupe Art-Off",
+      "objet": "Organiser des expositions ou événements culturels autour d'un ou plusieurs artistes ; favoriser la découverte d'artistes singuliers, bruts ou naïfs développer toute action permettant la découverte de l'oeuvre des…",
+      "cat": "loisirs",
+      "creation": "2002",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Groupement de Développement Agricole du Canton du Grand-Lucé",
+      "objet": "Développement agricole",
+      "cat": "autres",
+      "creation": "1985",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Gymnastique Luceenne",
+      "objet": "Enseignement et la pratique d'une activité de gymnastique, baby-gym, g.r.s. (gymnastique rythmique sportive)",
+      "cat": "sport",
+      "creation": "2008",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "L'Arbre a Plumes",
+      "objet": "Promouvoir des actions, évènements, rencontres culturelles et artistiques afin de susciter l'expression et la création de tous ; favoriser ainsi l'épanouissement de l'individu et le développement du lien social",
+      "cat": "sport",
+      "creation": "2002",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "La CLÉ du Cur",
+      "objet": "Créer, gérer et animer toutes activités et tous services dans un but caritatif en faveur des populations les plus fragiles, démunies et empêchées ;",
+      "cat": "entraide",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "La Résistance Parisienne",
+      "objet": "Cette association sans but lucratif a pour objet de regrouper des supporters parisiens afin d'aller supporter le Paris Saint Germain, côté Boulogne",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Le Mans Sport Racing",
+      "objet": "Regrouper des membres intéressés et/ou encourageant le sport mécanique ; organiser la participation des membres à des compétitions ouvertes à tous ainsi que des compétitions sur sélection ; favoriser l'accompagnement de…",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Archers du Grand-Lucé",
+      "objet": "Pratiquer l'éducation physique et sportives, et plus particulièrement du tir à l'arc en loisir ou en compétition",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Infos du Grand Lulu",
+      "objet": "Intérêt général de la commune, informations, actualités, événements, emplois, échanges, partage etc",
+      "cat": "loisirs",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Les Marcheurs de Pruillé- Bercé",
+      "objet": "Organisation de randonnées pédestres.",
+      "cat": "sport",
+      "creation": "1998",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Loir-Lucé-Bercé - Comice du Pays de Lucé",
+      "objet": "Présenter l'agriculture, l'élevage, les innovations techniques agricoles rurales",
+      "cat": "loisirs",
+      "creation": "2008",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Lucé Cameo",
+      "objet": "Organiser de journées cinéma, accueil public, mise en place de salle",
+      "cat": "culture",
+      "creation": "2010",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Lueur : Lumière du Coeur",
+      "objet": "Cette association a pour objet d'exercer toutes activités permettant d'être présent à soi, à l'environnement, à l'autre. Présence à soi par des pratiques favorisant la conscience du corps, par la détente ; Tai-chi,…",
+      "cat": "entraide",
+      "creation": "2018",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Peintres en Liberte et Patrimoine",
+      "objet": "Animer et coordonner sur le plan local diverses activités se rapportant au domaine culturel sous toutes ses formes, en relation avec ou sans prestataires, ainsi que mettre au point et commercialiser divers produits…",
+      "cat": "patrimoine",
+      "creation": "2005",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Pétanque Lucéenne",
+      "objet": "Développer la pratique du sport Pétanque et Jeu Provençal, , faciliter la formation d'arbitres et d'éducateurs, favoriser la création d'une école de Pétanque ;",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Pole Associatif Santé Sud Sarthe ( Pa3s)",
+      "objet": "Optimiser l'offre de santé de premier recours en garantissant une continuité des soins",
+      "cat": "entraide",
+      "creation": "2017",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Tempo Kor",
+      "objet": "Organiser et réaliser des ateliers artistiques ; organiser et réaliser des évènements artistiques ;",
+      "cat": "culture",
+      "creation": "2002",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Tennis Club de Lucé (TCL)",
+      "objet": "Développement et pratique du tennis",
+      "cat": "sport",
+      "creation": "2005",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Union Sportive Luceenne Danse",
+      "objet": "Enseignement et pratique d'une activité danse",
+      "cat": "sport",
+      "creation": "2008",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Union Sportive Tennis de Table (Ustt)",
+      "objet": "Enseignement, promotion, initiation, perfectionnement, développement et pratique du tennis de table sous toutes ses formes, organisation des manifestations et toutes les activités s'y rapportant ; elle s'interdit toute…",
+      "cat": "sport",
+      "creation": "2008",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Usla-Union Sportive Luceenne Athlétisme",
+      "objet": "Entraînement et compétitions d'athlétisme pour les jeunes à partir de 6 ans jusqu'à 90 ans",
+      "cat": "sport",
+      "creation": "2008",
+      "declaration": "2024",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.41078,
+     47.79203
+    ]
+   },
+   "properties": {
+    "com_insee": "72153",
+    "com_nom": "Jupilles",
+    "nb": 23,
+    "titre": "Associations de Jupilles",
+    "associations": [
+     {
+      "titre": "Aide aux Jeunes Adultes de Jupilles - Ajaj",
+      "objet": "Aider les jeunes de jupilles à réaliser des projets de formation personnels.",
+      "cat": "entraide",
+      "creation": "1999",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Association au Pays des Nounous",
+      "objet": "Regrouper des assistantes maternelles avec les enfants accueillis sur un lieu commun",
+      "cat": "education",
+      "creation": "2019",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association de Parents D'Eleves de Bercé",
+      "objet": "Accompagner les enseignants dans le financement et l'organisation de manifestations et projets pédagogiques ; assurer un lien entre les équipes d'enseignants et les parents",
+      "cat": "education",
+      "creation": "2009",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association de Renaissance des Traditions Artisanales de Jupilles -A.r.t.a.j.",
+      "objet": "Conserver la tradition des métiers du bois ; créer toute situation favorisant l'installation des jeunes ; susciter une animation au village en créant des ateliers artisanaux et un point de vente",
+      "cat": "culture",
+      "creation": "1984",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association des Amateurs Benevoles pour la Sauvegarde des Varietes Fruitieres en Voie de Disparition du Maine et du Perche Dite 'Des Croqueurs de Pommes Maine-Perche'",
+      "objet": "Recherche et sauvegarde du patrimoine génétique fruitier régional ; promotion des variétés fruitières régionales et locales méritantes.",
+      "cat": "patrimoine",
+      "creation": "1991",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association des Onze Communes de Bercé",
+      "objet": "Promouvoir et valoriser la Forêt d'Exception de Bercé ; Mener toutes les actions, en coopération avec les parties prenantes concernées par la Forêt de Bercé, pour assurer le développement touristique, culturel, sportif,…",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association L'Escampe",
+      "objet": "Contribuer à l'épanouissement de l'individu envers son milieu par :-agriculture saine - habitations - énergies naturelles - communications généralisées",
+      "cat": "entraide",
+      "creation": "1991",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Association 'La Dinantaise de Jupilles' pour la Pêche et la Protection du Milieu Aquatique - A.p.p.m.a.",
+      "objet": "Détenir et gérer droits de pêche sur les domaines publics et privés de l'Etat et des collectivités locales ou riverains",
+      "cat": "environnement",
+      "creation": "1938",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Carpe Diem de Bercé",
+      "objet": "Organiser des salons et évènements éphémères",
+      "cat": "autres",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Comité de Pilotage du Comice Agricole de Jupilles",
+      "objet": "Association permettant l'organisation du comice agricole Cantonal qui a lieu cette année à Jupilles",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Jupilles",
+      "objet": "Organiser diverses manifestations dans le souci de créer une animation dans la commune ou en collaboration avec les communes avoisinantes et peut être amenée à apporter son assistance morale, physique, matérielle ou…",
+      "cat": "loisirs",
+      "creation": "1955",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Comité Local de Jupilles de la Fédération Nationale des Anciens Combattants en Algerie, Tunisie et Maroc",
+      "objet": "Entretenir et renforcer les liens de camaraderie et solidarité entre les anciens mobilisés appelés ou maintenus en Algérie, Tunisie et Maroc, leur permettre par une action concertée d'assurer la sauvegarde de leurs…",
+      "cat": "patrimoine",
+      "creation": "1968",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Equipage de Bercé",
+      "objet": "Monte équipages de chiens réunion participation équipages de chien de chasse",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Festival Intergalactik de Clowns de Jupilles And Co",
+      "objet": "Promouvoir l'art clownesque pour tous les publics sur le territoire sarthois et organiser le festival Intergalactik comme évènement fédérateur ;",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": "https://festivalclown72500.wixsite.com/fest-clowns-jupilles"
+     },
+     {
+      "titre": "Foyer Rural de Jupilles",
+      "objet": "Aménager un espace de vie agréable pour tous ; étudier les questions d'ordre technique et sociale de la vie rurale en liaison avec les organisations professionnelles ; favoriser les activités physiques",
+      "cat": "loisirs",
+      "creation": "1947",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Club de Jupilles",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités ; les aider à résoudre leurs difficultés, les informer et les soutenir, par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "2011",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "L'Arbre D'Entraide et de Solidarité",
+      "objet": "Faciliter l'entraide entre les membres, la réalisation des activités éducatives, artistiques, culturelles, de loisirs et de solidarité.",
+      "cat": "entraide",
+      "creation": "1996",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "La Brass'Vie de Jupilles",
+      "objet": "Proposer un lieu de vie au cur du village de jupilles et ceci par différents moyens : proposer un service de restauration associative favorisant les produits locaux et cohérents avec les enjeux écologiques actuels ;…",
+      "cat": "loisirs",
+      "creation": "2018",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "La Forêt des Arts",
+      "objet": "Contribuer au bien-être des participants en proposant des ateliers d'activités créatives ainsi que des activités en lien avec la nature",
+      "cat": "entraide",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Le Petit Théatre des Mains Vertes",
+      "objet": "Cette association a pour but de créer, de développer et promouvoir le spectacle de marionnettes en bois sous forme de conte musical, pour les écoles, les centres culturels etc. Elle proposera également des expositions,…",
+      "cat": "loisirs",
+      "creation": "2002",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Infusées du Bocal",
+      "objet": "Créer, développer, organiser des ateliers, stages, événements, séjours, formations favorisant la connaissance de la nature, des cycles, des savoirs faire, de soi en lien avec le vivant et l'invisible ; semer, cueillir,…",
+      "cat": "environnement",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Trolls en Folie",
+      "objet": "Organisation de spectacles ,de concerts,de bric à brac, camelots, et organisation de festivité",
+      "cat": "loisirs",
+      "creation": "2014",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Société de Chasse la Vallée du Dinan",
+      "objet": "Répression du braconnage, repeuplement en gibier, destruction des nuisibles",
+      "cat": "environnement",
+      "creation": "1964",
+      "declaration": "2025",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.34599,
+     47.71824
+    ]
+   },
+   "properties": {
+    "com_insee": "72160",
+    "com_nom": "Lavernat",
+    "nb": 13,
+    "titre": "Associations de Lavernat",
+    "associations": [
+     {
+      "titre": "Amicale de Chasse de Lavernat",
+      "objet": "Faciliter la pratique de la chasse, établir et entretenir des relations amicales entre les chasseurs et les propriétaires, concourir au repeuplement du territoire en gibier et réprimer le braconnage",
+      "cat": "environnement",
+      "creation": "1981",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D'Eleves de L'Ecole de Luceau",
+      "objet": "Organiser des manifestations au profit de la coopérative scolaire de l'école de Luceau, ainsi que des séances d'information axées sur le thème de l'enfant.",
+      "cat": "education",
+      "creation": "1994",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association 'La Perdrix Rouge'",
+      "objet": "Entretenir les relations amicales entre les chasseurs et les proprietaires, de concourir au repeuplement de territoire en gibier et de reprimer le braconnage.",
+      "cat": "environnement",
+      "creation": "1992",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Rencontre",
+      "objet": "Ouvrir un espace de prière. - permettre un rassemblement de personnes pour une recherche et une confrontation de la foi avec les cultures et les mentalités nouvelles dans l'évolution constante de la société,…",
+      "cat": "culture",
+      "creation": "1974",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité de Vigilance Alexis Danan de la Sarthe",
+      "objet": "Son objet : la promotion et la défense des droits des enfants, la protection de l'enfant contre toutes les formes de maltraitance et négligences graves, la lutte contre toutes les formes de violences qu'il aurait à…",
+      "cat": "entraide",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Lavernat",
+      "objet": "Animation du village en organisant diverses manifestations et en participant a l'elaboration du calendrier des fetes communal et cantonal. il pourra contribuer a diverses activites de la commune",
+      "cat": "loisirs",
+      "creation": "1972",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Confrerie du Nouzillard de Lavernat",
+      "objet": "Faire connaitre et apprécier les produits Sud-Sarthe et particulièrement une variété de châtaigne \" le Nouzillard\" de Lavernat ; établir entre tous ses membres des liens d'amitié et de générosité",
+      "cat": "loisirs",
+      "creation": "2012",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "De la Forge a la Lice",
+      "objet": "Promouvoir et soutenir l'éducation populaire et l'initiation en matière d'artisanat et d'arts martiaux médiévaux ; elle pourra se doter de tout moyen ( communication, participation, etc...) afin de promouvoir son…",
+      "cat": "loisirs",
+      "creation": "2016",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Événements Jeunes Lavernat",
+      "objet": "Organisation d'événements culturelles, festifs et à caractère sportifs ;",
+      "cat": "loisirs",
+      "creation": "2018",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement Club de Lavernat",
+      "objet": "Creer, animer developper les rencontres et les liens d'amitie entre les retrautes et les pre-retraites",
+      "cat": "loisirs",
+      "creation": "2007",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Sword Group Milsim",
+      "objet": "Promouvoir, développer, informer et initier à la pratique du Milsim et de l airsoft de manière légale, responsable et sécuritaire",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Team MC146",
+      "objet": "SPORT MECANIQUE",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Terragraphe",
+      "objet": "Colliger, conférer et conduire diverses expériences d'écriture de/du terrain impliquant les membres ou les bénéficiaires de l'association ; Face aux métamorphoses des terrains de subsistance, installer une nouvelle…",
+      "cat": "culture",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.56359,
+     47.76078
+    ]
+   },
+   "properties": {
+    "com_insee": "72161",
+    "com_nom": "Lhomme",
+    "nb": 13,
+    "titre": "Associations de Lhomme",
+    "associations": [
+     {
+      "titre": "Amicale des Employes Communaux de Lhomme",
+      "objet": "Organisation de loisirs",
+      "cat": "loisirs",
+      "creation": "1991",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association de Parents D'Eleves du Regroupement Pedagogique Intercommunal Chahaignes-Lhomme",
+      "objet": "Développer des activités culturelles, des oeuvres sociales au sein d'un établissement scolaire promouvoir des actions visant à favoriser l'éducation permanente des élèves favoriser la relation entre les parents d'élèves…",
+      "cat": "education",
+      "creation": "2023",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association Gymnastique Volontaire Lhommoise",
+      "objet": "Pratique de la gymnastique",
+      "cat": "sport",
+      "creation": "1986",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Billard Francais Lhommois",
+      "objet": "Réunir tout public dans la pratique d'une activité ludique, le billard français, dans une salle équipée d'un billard français (2,40m/1,20m)",
+      "cat": "sport",
+      "creation": "2009",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes et Loisirs de Lhomme",
+      "objet": "Animer le village ; promouvoir le commerce local et les produits du terroir ; coordonner les fêtes et manifestations organisées par les autres associations",
+      "cat": "loisirs",
+      "creation": "1963",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Confrerie des Chevaliers de la Puette et du Franc-Pinot",
+      "objet": "Promouvoir les vins de la Vallée du Loi r : Jasnières, Côteaux du Loir, Côteaux du Vendômois.",
+      "cat": "loisirs",
+      "creation": "2001",
+      "declaration": "2016",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Club des Aînés Ruraux de Lhomme",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités (voir statuts)",
+      "cat": "loisirs",
+      "creation": "1980",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "La Clef aux Champs",
+      "objet": "Promouvoir et dispenser une pratique musicale conviviale en milieu rural, y susciter des évènements musicaux pour favoriser un accès ecclectique à la musique",
+      "cat": "culture",
+      "creation": "1999",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Cyclos Lhommois",
+      "objet": "Développer la pratique du vélo et découvrir la nature.",
+      "cat": "sport",
+      "creation": "1979",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Musculation Lhommoise",
+      "objet": "Pratique de la musculation pour les adhérents à partir de 14 ans révolus.",
+      "cat": "sport",
+      "creation": "1999",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Ooose Parler",
+      "objet": "Lutte contre toutes formes de discriminations, promotion de l'inclusion et de la diversité, soutien aux personnes vulnérables, développement de la confiance en soi, prévention de le domaine de la santé et de la santé…",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Syndicat Communal de Chasse de Lhomme",
+      "objet": "Mise en commun entre les sociétaires du droit de chasse leur appartenant sur leurs propriétés, répression du braconnage et repeuplement du gibier",
+      "cat": "environnement",
+      "creation": "1947",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Theatra Lhomme",
+      "objet": "Cours ou stages de théâtre, de danse, de poésie, de cirque et d'une manière générale des animations et activités culturelles ainsi que des évènements culturelles (festivals, concours, spectacles, location de costumes et…",
+      "cat": "culture",
+      "creation": "2020",
+      "declaration": "2025",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.39143,
+     47.71787
+    ]
+   },
+   "properties": {
+    "com_insee": "72173",
+    "com_nom": "Luceau",
+    "nb": 15,
+    "titre": "Associations de Luceau",
+    "associations": [
+     {
+      "titre": "Amicale Classe 61 62",
+      "objet": "Réunion de personnes nées en 1941 et 1942 canton Château du Loir",
+      "cat": "loisirs",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs Pompiers de Montval sur Loir",
+      "objet": "Resserrer les liens d'amitié et de solidarité entre les sapeurs-pompiers ; encourager la pratique des sports pour leur entraînement.",
+      "cat": "sport",
+      "creation": "1956",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Sporting Club de Luceau",
+      "objet": "Développer la pratique de l'éducation physique et des sports et entre autres du football",
+      "cat": "sport",
+      "creation": "1982",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "BRZ Motorsport",
+      "objet": "Favoriser l'accès à la pratique du sport automobile sous toutes ses formes (rallye, circuit, karting, eSport, etc.) ; aider à la participation aux compétitions et autres manifestations de sport automobile sous toutes…",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Luceau",
+      "objet": "Animer le village et favoriser le rayonnement de la commune par l'organisation ou la participation aux fêtes, repas, et autres animations tant sur le territoire de la commune qu'à l'extérieur * mise à disposition de…",
+      "cat": "loisirs",
+      "creation": "1974",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Cuerda Rota And Co",
+      "objet": "Cuerda rota est une association à caractère socio-culturel et artistique, elle a pour objet de monter des ateliers artistiques de création et des projets artistiques pour tout public et tout type de structure validant…",
+      "cat": "culture",
+      "creation": "2023",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Esprit Béguinage Luceau",
+      "objet": "L'association a pour objet la fourniture directe ou indirecte des services à la personne du domicile du particulier locataire de son logement au béguinage de luceau qui est situé au lotissement de l'entre deux chemins,…",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Club de Luceau",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités, les aider à résoudre leurs difficultés, les informer et les soutenir, par la création de services dans la recherche de…",
+      "cat": "loisirs",
+      "creation": "2006",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Gymnastique Volontaire Luceenne (GVL)",
+      "objet": "Pratique de la gymnastique volontaire",
+      "cat": "sport",
+      "creation": "2004",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Immanessence",
+      "objet": "Ateliers de groupe - conférences méditation - communication interpersonnelle - bien être au quotidien organisation de rencontres, de formations sur tout ce qui concerne le bien-être au quotidien comme la confiance en…",
+      "cat": "loisirs",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis de Macéa",
+      "objet": "L'association Les Amis de Macéa a pour but de favoriser l'établissement de relations entre les adhérents de l'association et la commune de Macéa (Roumanie) dans les domaines : scolaire, culturel, social, économique,…",
+      "cat": "loisirs",
+      "creation": "2011",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Luceau Cafe",
+      "objet": "Créer, gérer et animer un café associatif et lieu de vie favorisant la convivialité, les rencontres, le lien social, la solidarité, la participation citoyenne et l'animation du territoire",
+      "cat": "loisirs",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Rene Comas et Compagnie, Organisation",
+      "objet": "L'organisation et participation à des activités sportives, culturelles et socio-éducatives. L'assistance dans la pratique sportive à des sportifs atteint d'un handicap",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Société de Chasse le Faisan Doré",
+      "objet": "Cette association a pour but la répression du braconnage, le repeuplement du gibier, la destruction des nuisibles et la pratique de la chasse",
+      "cat": "environnement",
+      "creation": "1948",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Zum Typh",
+      "objet": "Association sportive qui a pour but de donner des cours de mix dance (cardio en dansant)",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.5264,
+     47.70503
+    ]
+   },
+   "properties": {
+    "com_insee": "72183",
+    "com_nom": "Marçon",
+    "nb": 27,
+    "titre": "Associations de Marçon",
+    "associations": [
+     {
+      "titre": "Amicale des Chasseurs de Marçon",
+      "objet": "Gestion et repeuplement du gibier, la destruction des nuisibles, respect des propriétés et répression du braconnage",
+      "cat": "environnement",
+      "creation": "1938",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs-Pompiers de Marçon-Aspm",
+      "objet": "Resserrer les liens d amitié et de confraternité qui unissent les sapeurs-pompiers afin d'organiser des concours, banquets, voyages collectifs, manifestations sportives et d' assurer la transmission des voeux",
+      "cat": "loisirs",
+      "creation": "2017",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Ani'Marcon",
+      "objet": "Organisation et réalisation des différentes manifestations de la commune",
+      "cat": "loisirs",
+      "creation": "2002",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Arts-Totem",
+      "objet": "Rendre accessible à tous, toutes les formes d'expressions artistiques, culturelles et artisanales ; promouvoir les artistes et artisans par un site internet collectif qui leur permet de vendre leurs oeuvres, de…",
+      "cat": "culture",
+      "creation": "1999",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association des Amis de JMLB",
+      "objet": "L'association a pour objet de permettre à ses membres de chasser sur les territoires communaux, domaniaux ou privés loués par elle et ce dans un esprit sportif et amical selon les concepts cynégétiques, biologiques et…",
+      "cat": "environnement",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Association des Riverains de Marçon",
+      "objet": "La défense des intérêts des riverains des rivières 'la dême' et 'la rivière des bois', l'organisation et la gestion de la pêche, et la répression du braconnage sur ces rivières ;",
+      "cat": "autres",
+      "creation": "1967",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Gymnastique Volontaire Marconnaise'",
+      "objet": "Favoriser l'épanouissement des individus par la pratique des activités physiques",
+      "cat": "sport",
+      "creation": "1991",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association Trans-Missions",
+      "objet": "Organisation, animation, production, diffusion d'outils et de supports ayant pour but de transmettre gratuitement ou à petit prix de la connaissance et de l'expérience",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Bell'R Racing",
+      "objet": "Collecter des fonds pour accompagner Benjamin ROTTIER à ses déplacements et financer ses projets",
+      "cat": "sport",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Club de Voile de Marçon",
+      "objet": "Pratique et enseignement de la navigation à voile, ainsi que la pratique de loisirs et sportive de toutes activités nautiques. développer le goût de la navigation à voile et de toutes les activités annexes et connexes…",
+      "cat": "sport",
+      "creation": "1972",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Club Marconnais de L'Age D'Or",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les personnes âgées ; les aider à résoudre leurs difficultés, les informer et les soutenir",
+      "cat": "entraide",
+      "creation": "1988",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Coeurs de Chats 72/37",
+      "objet": "L'association, sans but lucratif, a pour objet : -intervenir dans le sauvetage et la prise en charge d'animaux abandonnées (décès, divorce, maltraitance, soucis de santé) ou en détresse ; ces animaux sont le plus…",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Comité de la Foire aux Vins de Marçon et de Défense des Produits Vitico les",
+      "objet": "Organisation de foires aux vins qui auront lieu sur la commune de marçon au moins tous les trois ans et la défense de la viticulture.",
+      "cat": "autres",
+      "creation": "1965",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "DPM - Danse et Pilâtes de Marçon",
+      "objet": "Promouvoir la pratique d'activités physiques et améliorer la coordination",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Forma'Plume",
+      "objet": "Formation autour du deuil ; sensibilisation et accompagnement des professionnels et bénévoles ; développement d'approches psycho-sociales du deuil ; analyse de la pratique professionnelle ; organisation de formations,…",
+      "cat": "entraide",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Ge Corsaire",
+      "objet": "Mettre à disposition de ses membres un ou plusieurs salariés et d'apporter conseil à ses membres en matière d'emploi ou de gestion des ressources humaines",
+      "cat": "entraide",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Harmonie de Marçon",
+      "objet": "Assurer les cérémonies officielles ainsi que défilés et aubades lors de fêtes et donner des concerts",
+      "cat": "culture",
+      "creation": "1925",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "L'Asso'Mnambule",
+      "objet": "Cette association a pour but l'organisation d'événements et activités culturelles",
+      "cat": "culture",
+      "creation": "2009",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "La Demeure du Soi",
+      "objet": "Cette association a pour objet d'être un centre international pour la transmission des soins, des enseignements et des messages de la Vie, de la Conscience et du développement personnel des êtres de la nouvelle…",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis de Cézin",
+      "objet": "Fédérer celles et ceux qui ont envie de mettre en avant le Domaine de Cézin mais aussi de découvrir l'histoire, le patrimoine l'environnement et la culture de la vigne et du vin",
+      "cat": "patrimoine",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Canotiers du Loir",
+      "objet": "Cette association a pour objet de faire connaître et partager les produits locaux et la gastronomie de la Vallée du Loir par le moyen de reportages via les réseaux sociaux ainsi que sur les manifestations locales",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Les Écoliers de la Dême",
+      "objet": "Représenter l'ensemble des parents d'élèves des deux écoles ; organiser des actions éducatives ; récolter des fonds pour mener ces actions ; améliorer la vie scolaire",
+      "cat": "education",
+      "creation": "2016",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Pêcheurs du Lac des Varennes",
+      "objet": "Gérance pêche lac des varennes, vente cartes de pêche, alevinage, manifestations liées à la pêche, surveillance respect du règlement intérieur",
+      "cat": "environnement",
+      "creation": "2021",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Marçon Hier et Aujourd'Hui",
+      "objet": "Créer un inventaire du patrimoine communal ; participer à la restauration conservation et mise en valeur du patrimoine en concertation avec les différents acteurs institutionnels ; promouvoir les recherches et conserver…",
+      "cat": "patrimoine",
+      "creation": "2016",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Racing Marçon 72 - RM 72",
+      "objet": "Diriger un club de rugby et, pour se faire, tout mettre en oeuvre afin de promouvoir, animer et développer conjointement le rugby au plus haut niveau possible, et le rugby pour tous",
+      "cat": "sport",
+      "creation": "2016",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Riri & Fifi",
+      "objet": "Promouvoir et partager la passion des sports mécaniques (automobile, moto, enduro) , à travers l'organisation et la participation à des sorties, rallyes et raids sportifs humanitaires, visant à allier aventure, entraide…",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Saga-Cité",
+      "objet": "Mobiliser l'intelligence et la sensibilité collectives citoyennes pour co-construire des territoires durables, solidaires et inclusifs, en valorisant les savoirs et initiatives locales ; favoriser le vivre-ensemble et…",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.57199,
+     47.86185
+    ]
+   },
+   "properties": {
+    "com_insee": "72210",
+    "com_nom": "Montreuil-le-Henri",
+    "nb": 6,
+    "titre": "Associations de Montreuil-le-Henri",
+    "associations": [
+     {
+      "titre": "Association de la Perle D'Or",
+      "objet": "Organisation de manifestations équestres au sein de l'élevage de la Perle d'Or ainsi que la participation à des manifestations extérieures",
+      "cat": "sport",
+      "creation": "2016",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association des Retraités de Montreuil le Henri",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités ; les aider à résoudre leurs difficultés, les informer et les soutenir par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "2009",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association du Breil",
+      "objet": "Aide sous toutes ses formes aux personnes qui se vouent à l'assistance, l'éducation et les loisirs des milieux ruraux et ouvriers l'exercice de toute activité ou entreprise à caractère sanitaire",
+      "cat": "entraide",
+      "creation": "1958",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Montreuil le Henri",
+      "objet": "Organiser des festivités de toute sorte et aider, sous une forme ou autre, toutes les manifestations locales favorisant l'animation de la commune de Montreuil-le-Henri et l'extension du développement touristique et…",
+      "cat": "loisirs",
+      "creation": "1966",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "L'Essence de Soi - Eveil et Ancrage",
+      "objet": "Organiser et créer des espaces de rencontre, de partage et de reconnexion ; notre raison d'être est de favoriser le mieux-être tant individuel que collectif, en organisant des évènements rassemblant des personnes…",
+      "cat": "environnement",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Team Leroux-2cv Cross",
+      "objet": "Maintenir et développer le sport automobile et plus précisément le 2 cv cross",
+      "cat": "sport",
+      "creation": "2019",
+      "declaration": "2020",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.39836,
+     47.65643
+    ]
+   },
+   "properties": {
+    "com_insee": "72221",
+    "com_nom": "Nogent-sur-Loir",
+    "nb": 3,
+    "titre": "Associations de Nogent-sur-Loir",
+    "associations": [
+     {
+      "titre": "Association Générations Mouvement Aînés Ruraux de Nogent sur Loir",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités. les aider à résoudre leurs difficultés, les informer et les soutenir par la création de services, dans la recherche de…",
+      "cat": "loisirs",
+      "creation": "2006",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Comice Nogentais",
+      "objet": "Organiser l'animation du comice agricole de la commune de Nogent-sur-Loir en 2020",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Nogent",
+      "objet": "Faire revivre la commune en proposant des soirées et des animations",
+      "cat": "loisirs",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.42118,
+     47.83871
+    ]
+   },
+   "properties": {
+    "com_insee": "72248",
+    "com_nom": "Pruillé-l'Éguillé",
+    "nb": 16,
+    "titre": "Associations de Pruillé-l'Éguillé",
+    "associations": [
+     {
+      "titre": "Abc \"association Bercé & Culture\"",
+      "objet": "Créer un lieu de rencontres intergénérationnelles, d'échanges, de solidarités, mais aussi un lieu culturel et convivial en réhabilitant un café épicerie ; Son principal objectif est de renforcer les liens sociaux et…",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Chasseurs de Pruillé L'Eguille",
+      "objet": "Développement du gibier, protection et repeuplement, destruction des nuisibles, répression du braconnage et exploitation rationnelle de la chasse",
+      "cat": "environnement",
+      "creation": "1994",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs-Pompiers de Pruillé L'Eguille",
+      "objet": "Entraide entre les membres du corps des sapeurs-pompiers et organisation de manifestations sportives et festivités diverses",
+      "cat": "loisirs",
+      "creation": "1976",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association de la Fosse Rouge Sarthoise",
+      "objet": "Cette association a pour but l'exploitation de la chasse sur les territoires où celle-ci détient de droit de chasse, dans le souci de la préservation de la faune sauvage, du développement du capital cynégétique, du…",
+      "cat": "environnement",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive et Culturelle de Pruillé-L'Eguille",
+      "objet": "Pratiquer des sports et de la culture",
+      "cat": "sport",
+      "creation": "1987",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association U.s.e.p. de L'Ecole de Pruillé L'Eguille",
+      "objet": "A pour but de contribuer à la formation du jeune citoyen par le développement de la responsabilité, du civisme, de l'autonomie au travers de la pratique d'activités physiques, sportives, d'activités socioculturelles ;…",
+      "cat": "sport",
+      "creation": "1987",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité Citoyen",
+      "objet": "Permettre à chacun, selon ses souhaits, de s'impliquer au quotidien à tous les niveaux de la vie publique sans limite géographique ni remettre en cause le pouvoir de décisions des élus politiques",
+      "cat": "autres",
+      "creation": "2015",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Pruillé L'Eguille",
+      "objet": "Développement culturel, artistique et sportif ; organisation de manifestations telles que Chandeleur, fête foraine, concours de cartes, rallye vélo, bric à brac, loto et autres définies par le conseil d'administration",
+      "cat": "loisirs",
+      "creation": "1977",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Corps en Mouvement",
+      "objet": "Favoriser, initier, développer, promouvoir l'activité physique ajustée dans le respect de l'intégrité physique des personnes ; L'activité physique ajustée correspond à l'exercice d'une pratique corporelle respectueuse…",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Entraid'Évous",
+      "objet": "L'Association a pour Objet de réunir des particuliers ayant comme objectif de faciliter entre eux des échanges bénévoles de services et compétences ;",
+      "cat": "loisirs",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Equi Chrono",
+      "objet": "Organiser des compétitions équestres ; fournir une aide à l'organisation de compétitions et manifestations équestres en y apportant assistance en matériels, logiciels, techniques et prestations bénévoles ; promouvoir le…",
+      "cat": "sport",
+      "creation": "2009",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Escale Artisanale",
+      "objet": "Promouvoir l'artisanat local",
+      "cat": "culture",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Le Jardin des Possibles",
+      "objet": "Cette association a pour but de sensibiliser au respect de la nature, redécouvrir et transmettre des savoirs-faire ancestraux auprès de différents publics (institutions et particuliers) , par le biais de la mise en…",
+      "cat": "environnement",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Les Metiers D'Antan de Pruillé-Bercé",
+      "objet": "Recenser et récupérer, par prêt ou don des outils anciens afin de les mettre en vleur et de ls porter à la connaissance du public.",
+      "cat": "loisirs",
+      "creation": "2004",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Patrimoine et Environnement Loir-Lucé-Bercé",
+      "objet": "Informer sur les sujets touchant l'environnement, le patrimoine mobilier et immobilier, ainsi que promouvoir, mettre en valeur, défendre et préserver l'environnement, le patrimoine mobilier et immobilier sur la totalité…",
+      "cat": "patrimoine",
+      "creation": "2014",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Pétanque Loisirs de Pruillé L'Éguillé",
+      "objet": "Développer la pratique de la pétanque loisir et autres jeux d'adresse",
+      "cat": "sport",
+      "creation": "2022",
+      "declaration": "2025",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.63964,
+     47.78799
+    ]
+   },
+   "properties": {
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "nb": 43,
+    "titre": "Associations de Loir en Vallée",
+    "associations": [
+     {
+      "titre": "Akiroy Events",
+      "objet": "Cette association a pour objet de : - Créer et participer à la valorisation du patrimoine artistique, voir diffusion de la culture ; - Réunir le public autour d'événement culturel, artistique et sportif à but non…",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Chasseurs de la Chapelle Gaugain",
+      "objet": "Mise en commun du droit de chasse, sauvegarde des intérêts des chasseurs. protection et repeuplement du gibier.",
+      "cat": "environnement",
+      "creation": "1950",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Amicale du Sivos de la Vallée du Tusson",
+      "objet": "Organisation de fêtes et manifestations au profit des enfants des écoles du sivos de vancé, la chapelle-gaugain, lavenay",
+      "cat": "education",
+      "creation": "1991",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "APE Loir en Vallée",
+      "objet": "Création d'une association de parents d'élèves",
+      "cat": "education",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Avicole le Mans 72",
+      "objet": "Encourager l'élevage amateur des animaux de basse-cour et d'agrément ; la sélection des animaux de race pure ainsi qu'encourager la production avicole pour aider à la reconnaissance et au développement de cette activité…",
+      "cat": "environnement",
+      "creation": "2016",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Bienvenue pour Mieux Vivre'",
+      "objet": "Amélioration des conditions et du cadre de vie des résidents et du personnel de la maison de retraite de ruillé sur loir au travers d'activités d'animation.",
+      "cat": "loisirs",
+      "creation": "1992",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association de Chasse de la Croix Peinte",
+      "objet": "Pratique de la chasse sur les territoires où celle-ci détient le droit, soit par apports d'adhérents, soit par la cession ou la location dans un grand esprit de convivialité et de respect ; la gestion cynégétique des…",
+      "cat": "environnement",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association des Amis de la Providence",
+      "objet": "Assistance, bienfaisance, hébergement des vieillards, des malades et des deshérités en général ; mise à disposition de tous moyens aux personnes physiques ou morales poursuivant cet objet. Apporter une aide humanitaire.…",
+      "cat": "entraide",
+      "creation": "1982",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Familles Rurales' - Association de Ruille sur Loir",
+      "objet": "Épanouissement des personnes, promotion des familles et développement de leur milieu de vie ; elle agit dans un esprit permanent d'ouverture et d'accueil à tous, notamment en intégrant toutes les générations ; faisant…",
+      "cat": "entraide",
+      "creation": "1978",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "'Association Festive en Val de Loir'",
+      "objet": "Organiser des activités festives de tous genres (culturelles, artistiques, éducatives, ludiques, sportives etc) et/ou d'apporter son concours matériel et moral à toutes manifestations pouvant intéresser ses adhérents.",
+      "cat": "loisirs",
+      "creation": "1961",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association \"les P'Tits Loirs\"",
+      "objet": "Gestion de la micro crèche dont l'objet est d'accueillir des enfants",
+      "cat": "entraide",
+      "creation": "2016",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Omnisport Ruillacoise",
+      "objet": "Promouvoir la pratique de l'éducation physique, sports et loisirs",
+      "cat": "sport",
+      "creation": "1977",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association pour la Formation et la Promotion en Milieu Rural de Ruille sur Loir",
+      "objet": "Développer, promouvoir à tous les stades et sous toutes ses formes l'enseignement, la formation, la promotion professionnelle et sociale, agricole et rurale.",
+      "cat": "education",
+      "creation": "1952",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Au Ptit Grenier",
+      "objet": "Récupérer, collecter, racheter divers objets afin de leur donner une seconde vie et les proposer à la vente à petit prix",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Causette & Cousette",
+      "objet": "Développer la couture et les loisirs créatifs sur la commune de Loir en Vallée en proposant des ateliers de couture ainsi que des moments de partage",
+      "cat": "loisirs",
+      "creation": "2017",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Club Aînés Ruraux - Générations Mouvement de Lavenay-Pont de Braye",
+      "objet": "Solidarité pour tous loisirs et culture informations",
+      "cat": "loisirs",
+      "creation": "1986",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Club Générations Mouvement de Ruille sur Loir",
+      "objet": "Renforcer les liens de solidarité et d'amitié entre les retraités de la commune.",
+      "cat": "loisirs",
+      "creation": "1981",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Club Ia Loirtech",
+      "objet": "Promotion de l'intelligence artificielle dans le contexte professionnel par la fourniture de formations, d'ateliers et de séminaires pour aider les entreprises de toutes tailles à intégrer l'IA dans leurs processus et à…",
+      "cat": "loisirs",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Lavenay-Pont de Braye",
+      "objet": "Organisation de manifestations populaires destinées à favoriser le développement du commerce local et à aider au renom de la cité.",
+      "cat": "loisirs",
+      "creation": "1978",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Communale de Chasse de Lavenay",
+      "objet": "Grouper les propriétaires et habitants de la commune ainsi que les étrangers qui seraient admis en vue du développement du gibier, par la protection, le repeuplement, l'élevage, la destruction des nuisibles, répression…",
+      "cat": "environnement",
+      "creation": "1954",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Confrerie des Tirebouchonneux",
+      "objet": "Gérer et promouvoir des activités à caractères culturel et festif (perpétuer les traditions locales de la Saint Vincent, rassemblement d'autres confréries) , la rénovation de la vaisselle de la Saint Vincent ou autre de…",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Decouverte et Promotion du Patrimoine de Ponce sur le Loir",
+      "objet": "Connaissance archéologique et historique de poncé. défense de l'environnement de la commune et de ses abords. développement de l'essor de la commune dans son milieu culturel, artistique et économique",
+      "cat": "patrimoine",
+      "creation": "1999",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Estello 1901",
+      "objet": "Cette association à but non lucratif a pour objet la promotion, la valorisation et le développement à long-terme de la création et de la production d'évènements culturels au sein des territoires ; L'association a pour…",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Eurêka Lab",
+      "objet": "Gérer le makerspace dans l'objectif de mettre à disposition de ses membres des ressources partagées (locaux aménagés, machines, outils, logiciels, documentation, base de connaissance, etc ; ) , Organiser des activités,…",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Foyer Rural de la Chapelle Gaugain",
+      "objet": "Achat d'immeubles, terrains, materiel pouvant permettre l'educa- tion, l'information technique et l'emancipation intellectuelle et sociale de ses membres",
+      "cat": "loisirs",
+      "creation": "1950",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "GDON Loir en Vallée",
+      "objet": "Lutte contre les nuisibles",
+      "cat": "environnement",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement de la Chapelle-Gaugain - Poncé-Sur-Le-Loir",
+      "objet": "Renforcer les liens de solidarité entre les retraités de l'agriculture et autres membres adhérents de la commune",
+      "cat": "loisirs",
+      "creation": "1986",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Hardware France",
+      "objet": "Promouvoir les métiers du hardware électronique et numérique et, pour cela, mener toute opération ou manifestation, qui serait utile à l'intérêt commun de ces métiers ; défendre les intérêts et droits des membres ainsi…",
+      "cat": "autres",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": "https://www.hardware-france.fr/"
+     },
+     {
+      "titre": "Kimura JJB",
+      "objet": "Créée par des sportifs, des pratiquants et surtout des passionnés (e) s, la Kimura JJB a pour objet la pratique, l'enseignement et la diffusion du jiu-jitsu brésilien pour tous, aussi bien à ceux souhaitant devenir…",
+      "cat": "sport",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "L'Atmo",
+      "objet": "Redynamiser un petit village et ses environs, créer un lieu d'échanges, de découvertes culturelles et de lien social, autour de différentes activités. L'objectif est de proposer une diversité culturelle à travers les…",
+      "cat": "culture",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "La Grande Turbine du Loir",
+      "objet": "Valoriser les savoir-faire de chacun et les initiatives collectives, rassembler et soutenir les forces actives et créatives des territoires, encourager le lien social et la transmission autour d'enjeux artisanaux,…",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Les Bios du Loir",
+      "objet": "Rendre accessible des produits locaux issus de l'agriculture biologique et mieux disant ; favoriser le développement local équitable de manière durable par la création d'un magasin de producteurs ;",
+      "cat": "autres",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Les Guernazelles Cafe Associatif au Bord du Loir",
+      "objet": "Proposer des contextes de vie pour ces membres, notamment dans la Vallée du Loir ; proposer un lieu accueillant pour tout membre adhérant à l'association ; promouvoir l'échange de savoirs et savoir-faire dans le respect…",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Les Moulins de Paillard Centre D'Art Contemporain et Residence D'Artistes",
+      "objet": "Soutenir et promouvoir des artistes et artisans contemporains dans la création, exposition et vente de leurs arts ; afin de réaliser ses objectifs, l'association exerce notamment les actions suivantes : accueillir en…",
+      "cat": "culture",
+      "creation": "2009",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Miss Lady Retro Centre Val de Loire",
+      "objet": "L'organisation d'évènement, de défilés, d'élection, animations, vente d'objets divers, Prestations de services, shooting photo, relooking et autres activités économique, dans l'esprit et le domaine vin- tage/pin-up",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "1nspire Academy",
+      "objet": "Développer la performance des athlètes",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Ombres Projetées",
+      "objet": "Créer des oeuvres relevant de l'art vivant, notamment théâtrales et musicales, et de l'audiovisuel, les produire et les diffuser par tous les moyens et pour le grand nombre, développer des actions culturelles auprès du…",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Pervenches Ruillacoises",
+      "objet": "Pratique de l'éducation physique de la gymnastique de base et d'entraînement, sport, danse et chorégraphie",
+      "cat": "sport",
+      "creation": "1982",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Plan/6",
+      "objet": "Accompagner la professionnalisation dans le milieu du cinéma, proposer des opportunités de production de films et de partage de connaissances",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Ponce en Fête",
+      "objet": "Organiser et animer des manifestations festives et culturelles",
+      "cat": "culture",
+      "creation": "2009",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Société de Chasse Intercommunale de Ruille sur Loir et Ponce sur le Loir",
+      "objet": "Mise en commun entre les sociétaires du droit de chasse leur appartenant sur leurs propriétés, répression du braconnage.",
+      "cat": "environnement",
+      "creation": "1946",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Sports Loisirs Loir et Bercé ( S 2 l B)",
+      "objet": "Favoriser le développement de la pratique des activités physiques et sportives et culturelles adaptées au temps libre, sans idée de compétition, dans le respect des règlements techniques pour les disciplines sportives,…",
+      "cat": "sport",
+      "creation": "2015",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "The Green Bike",
+      "objet": "Promouvoir la réparation de cycles et du tout faire soit même ;",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.5908,
+     47.82515
+    ]
+   },
+   "properties": {
+    "com_insee": "72279",
+    "com_nom": "Saint-Georges-de-la-Couée",
+    "nb": 3,
+    "titre": "Associations de Saint-Georges-de-la-Couée",
+    "associations": [
+     {
+      "titre": "Arret sur le Temps - Arret sur Image",
+      "objet": "Mettre en lumière par la photographie des instants de vie culturels, quotidiens, sociaux, politiques, écologiques, artistiques ; valoriser à travers des clichés, un territoire et ses ressources, un patrimoine, une…",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Les Bonnes Oeuvres de Siviard",
+      "objet": "Organiser des activités et manifestations festives, culturelles et patrimoniales ; favoriser l'épanouissement personnel de chacun à travers une fenêtre artistique ; favoriser les échanges intergénérationnels autour du…",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Compagnons de Saint Georges",
+      "objet": "Participer et organiser toutes actions et animations permettant de promouvoir et de développer le tourisme sur la commune de Saint Georges de la Couée (Sarthe) et les communes avoisinantes",
+      "cat": "loisirs",
+      "creation": "2015",
+      "declaration": "2018",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.43355,
+     47.63537
+    ]
+   },
+   "properties": {
+    "com_insee": "72311",
+    "com_nom": "Saint-Pierre-de-Chevillé",
+    "nb": 12,
+    "titre": "Associations de Saint-Pierre-de-Chevillé",
+    "associations": [
+     {
+      "titre": "Association Artistes Sarthois",
+      "objet": "Cours de dessin, peinture, cours de guitare",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association Générations Mouvement -Club de Saint Pierre de Chevillé",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités , les aider à résoudre leurs difficultés, les informer et les soutenir par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "2010",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive de L'École de ST Pierre de Chevillé",
+      "objet": "A pour but de contribuer à la formation du jeune citoyen par le développement de la responsabilité, du civisme, de l'autonomie au travers de la pratique d'activités physiques, sportives, d'activités socioculturelles ;…",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Chez Dany Pneu 72",
+      "objet": "Mettre en place un changement de pneus et petite mécanique sans rendez-vous",
+      "cat": "autres",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Saint Pierre de Chevillé",
+      "objet": "Etablir chaque année le calendrier des fêtes organisées par les différentes sociétes locales.",
+      "cat": "loisirs",
+      "creation": "1971",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Garage pour Tous 72",
+      "objet": "Favoriser l'autonomie et la mobilité des personnes ; lutter pour l'accès à tous à l'emploi, aux services et aux loisirs ; former, qualifier et créer des emplois, dans un secteur qui recrute ; acquisition sous forme de…",
+      "cat": "patrimoine",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Groupement D'Interets Cynegetiques de la Vallée du Loir",
+      "objet": "Développer entre les membres du groupement la concertation aux fins d'une information réciproque préalable à toute décision tendant à modifier les possibilités d'accueil faunistique du territoire concerné et en…",
+      "cat": "environnement",
+      "creation": "2004",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "La Java des Bottes",
+      "objet": "Organisation de soirée festifs es humouristique",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Parents et Ami du Rpi du Val de Loir",
+      "objet": "Regrouper les parents et amis des écoles du regroupement pédagogique du Val de Loir, afin de veiller à la défense des intérêts matériels et moraux des écoles",
+      "cat": "education",
+      "creation": "1983",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Pétanque Club de Saint Pierre de Chevillé",
+      "objet": "Pratique du jeu de boules petanque et jeu provencal",
+      "cat": "sport",
+      "creation": "1983",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Syndicat de Chasse de Saint Pierre de Chevillé",
+      "objet": "Sauvegarde du gibier, répression du braconnage, destruction des animaux nuisibles, repeuplement du gibier",
+      "cat": "environnement",
+      "creation": "1957",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Vétérans Dissay",
+      "objet": "Regrouper des joueurs vétérans pour des matchs de football, proposer une activité physique et de loisir et organiser des manifestations",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.50759,
+     47.79652
+    ]
+   },
+   "properties": {
+    "com_insee": "72314",
+    "com_nom": "Saint-Pierre-du-Lorouër",
+    "nb": 13,
+    "titre": "Associations de Saint-Pierre-du-Lorouër",
+    "associations": [
+     {
+      "titre": "Amicale des Cavaliers de la Forêt de Bercé",
+      "objet": "Développer les randonnées et le tourisme équestre dans le respect de l'environnement et promouvoir les connaissances du cavalier",
+      "cat": "sport",
+      "creation": "1991",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association Familiale D'Aide et D'Intégration",
+      "objet": "Venir en aide aux adultes souffrant de déficience intellectuelle ; aider à la création de structures adaptées à l'âge et au handicap telles que foyer occupationnel",
+      "cat": "entraide",
+      "creation": "1987",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité Chahaignot pour L'Accueil des Migrants",
+      "objet": "Prendre toute initiative permettant de favoriser localement l'accueil des migrants et répondre à leurs premiers besoins, notamment l'accès à un logement",
+      "cat": "loisirs",
+      "creation": "2015",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Des Reves Indiens Éducation Agility Mediation",
+      "objet": "Mettre en uvre toute forme d'activité thérapeutiques, éducatives, pédagogiques, de loisirs et d'éveil assistés par l'animal, entre autre, permettre à ses adhérents par l'éducation et les loisirs avec leurs chiens de…",
+      "cat": "entraide",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": "https://www.facebook.com/Drieam-Des-Rêves-Indiens-Education-Agil"
+     },
+     {
+      "titre": "Générations Mouvement des Aînés Ruraux de Saint-Pierre du Lorouër",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié et de solidarité entre personnes physiques et morales et en particulier les retraités et préretraités ; les aider à résoudre leurs difficultés, les informer…",
+      "cat": "loisirs",
+      "creation": "2014",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Groupe des Directeurs du Secteur Sanitaire et Social de la Sarthe(Gd4s)",
+      "objet": "Regrouper les personnes en fonction de direction des établissements et services du secteur sanitaire et social de la Sarthe susceptibles d'apporter leur concours technique à l'association.",
+      "cat": "loisirs",
+      "creation": "1987",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Gym Tonique",
+      "objet": "Permettre aux personnes du village ou des environs de pratiquer des activités de remise en forme",
+      "cat": "sport",
+      "creation": "2006",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Le Tour de Mob",
+      "objet": "Organisation de Rallye touristique en mobylette 49, 9cm3",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": "https://www.letourdemob.fr/"
+     },
+     {
+      "titre": "Les Gens du Village",
+      "objet": "Organiser des fêtes locales éventuellement a caractère culturel",
+      "cat": "loisirs",
+      "creation": "2013",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Parpaing Prod",
+      "objet": "Organiser divers évènements culturels",
+      "cat": "loisirs",
+      "creation": "2016",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Ping Pong Loisir ST Pierre ( PPLSP)",
+      "objet": "Pratique du tennis de table en loisirs voire compétitions",
+      "cat": "sport",
+      "creation": "2014",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Pour la Protection du Cadre de Vie et de la Biodiversité Autour de Bercé",
+      "objet": "Protéger les espaces naturels, le patrimoine bâti, les sites et le paysage de la communauté de communes LOIR-LUCE-BERCE, dépt de la Sarthe, plus particulièrement de la commune de ST PIERRE DU LOROUER et des communes…",
+      "cat": "environnement",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Tarot Club Luceen",
+      "objet": "Développement des loisirs au grand-lucé. rencontre avec d'autres clubs de tarot aux fins de compétitions amicales, tournois ou concours",
+      "cat": "loisirs",
+      "creation": "1987",
+      "declaration": "2017",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.48157,
+     47.82106
+    ]
+   },
+   "properties": {
+    "com_insee": "72325",
+    "com_nom": "Saint-Vincent-du-Lorouër",
+    "nb": 11,
+    "titre": "Associations de Saint-Vincent-du-Lorouër",
+    "associations": [
+     {
+      "titre": "Amicale des Écoles du Lorouër",
+      "objet": "Améliorer l'environnement culturel des enfants des écoles du Lorouër ; compléter les moyens des écoles du Lorouër au profit d'activités et de supports culturels et pédagogiques.",
+      "cat": "education",
+      "creation": "1947",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association du Patrimoine de Lorouër-Pays de Lucé",
+      "objet": "Conservation et mise en valeur du patrimoine culturel de la commune de st vincent-du-lorouër.",
+      "cat": "patrimoine",
+      "creation": "1992",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association 'La Truite Capricieuse' du Grand Lucé pour la Pêche et la Protection du Milieu Aquatique - A.p.p.m.a.",
+      "objet": "Détenir et gérer droits de pêche sur les domaines publics et privés de l'Etat ; organiser la surveillance, la gestion et l'exploitation équilibrée de ses droits de pêche dans le cadre des orientations",
+      "cat": "environnement",
+      "creation": "1925",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Brasscelib",
+      "objet": "Créer, organiser et animer des événements, rencontres, soirées, activités conviviales, culturelles, sociales ou de loisirs destinés à favoriser les échanges, les rencontres humaines et le lien social, notamment autour…",
+      "cat": "loisirs",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Comité de Défense des Habitants du Hameau des Besneries - Pince a Linge-",
+      "objet": "Mener toutes les actions légales tendant à préserver les intérêts des riverains contre toutes les nuisances engendrées par l'élevage des canards et la station de compostage de l'EARL de la plaine située à Le Boulay…",
+      "cat": "environnement",
+      "creation": "2013",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Saint Vincent du Lorouër",
+      "objet": "Organiser des festivités de toute sorte et d'aider, sous une forme ou une autre, toutes les manifestations locales favorisant l'animation de la commune de Saint Vincent du Lorouer et l'extension du développement…",
+      "cat": "loisirs",
+      "creation": "2011",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Fendeuse de Bois",
+      "objet": "Mise à disposition de ses membres d'une fendeuse de bois transportable par des tracteurs propriétés des membres",
+      "cat": "autres",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement des Aînés Ruraux de Saint Vincent du Lorouër",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités ;les aider à résoudre leurs difficultés, les informer et les soutenir par la création de services, dans la recherche de…",
+      "cat": "loisirs",
+      "creation": "2012",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Laika'Venture",
+      "objet": "Organiser des défis sportifs avec des attelages de chiens de traîneau ;",
+      "cat": "sport",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Musique de Saint Vincent du Lorouër",
+      "objet": "Développement et entretien du gout de la musique ; constitution d'un groupe pour aider à la diffusion de la musique ;",
+      "cat": "culture",
+      "creation": "1936",
+      "declaration": "2026",
+      "site": "https://www.facebook.com/lazikdestvincent"
+     },
+     {
+      "titre": "Saint Vincent Lucé-Bercé Cycliste",
+      "objet": "Pratique de l'éducation physique et des sports",
+      "cat": "sport",
+      "creation": "1968",
+      "declaration": "2025",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.46169,
+     47.7643
+    ]
+   },
+   "properties": {
+    "com_insee": "72356",
+    "com_nom": "Thoiré-sur-Dinan",
+    "nb": 11,
+    "titre": "Associations de Thoiré-sur-Dinan",
+    "associations": [
+     {
+      "titre": "Amicale des Pêcheurs de la Truite Dinantaise",
+      "objet": "Détenir et gérer des droits de pêche sur les domaines privés de propriétaires riverains du DINAN (communes de FLEE et THOIRE) * participer à la protection des milieux aquatiques et du patrimoine piscicole * mettre en…",
+      "cat": "environnement",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs Pompiers de Thoiré-Flée",
+      "objet": "Récolter des fonds afin d'apporter une aide sociale et de récompenser les pompiers actifs et retraités du centre de secours de thoiré-flée, les membres de la batterie fanfare sapeur pompier de la commune de thoiré sur…",
+      "cat": "loisirs",
+      "creation": "2008",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Amicale du Grand Cerf",
+      "objet": "Chasser en toute tranquillité, en respectant la nature et la faune",
+      "cat": "environnement",
+      "creation": "1999",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Animation du Comice Agricole de Thoiré-Sur-Dinan",
+      "objet": "Organiser le comice agricole",
+      "cat": "loisirs",
+      "creation": "2011",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Billard Club de Thoiré sur Dinan",
+      "objet": "Reunir les amateurs de billard francais.",
+      "cat": "sport",
+      "creation": "1972",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Bourse aux Vêtements et Jouets de Montval sur Loir",
+      "objet": "Cette association a pour objet de vendre des vêtements, chaussures, jouets, livres, petit matériel de puériculture et bibelots",
+      "cat": "loisirs",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Thoiré sur Dinan",
+      "objet": "Etablir chaque année le calendrier des fêtes organisées par les différentes sociétés locales.",
+      "cat": "loisirs",
+      "creation": "1970",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement Club de Thoiré sur Dinan",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié ,entre les retraités et pré-retraités ; les aider à résoudre leurs difficultés, les informer et les soutenir, par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "2010",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis D'Hacheron",
+      "objet": "Favoriser la pratique de la chasse entre ses membres dans un esprit de convivialité, d'amitié et de partage, de promouvoir le respect des traditions cynégétiques, d'organiser des activités cynégétiques et de rencontres…",
+      "cat": "environnement",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis de Nos Amis",
+      "objet": "Défendre la Nature, de la ruralité, du divertissement et du loisir Organiser des manifestations entres amis Repeupler le territoire en faune sauvage (petits gibiers) Aménager le territoire pour plus de sécurité",
+      "cat": "environnement",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Studio Nègre",
+      "objet": "Éditer des bandes dessinées ou des ouvrages liés à l'art graphique, et tous objets similaires, connexes ou complémentaires ou susceptibles d'en favoriser la réalisation ou le développement ;",
+      "cat": "culture",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": "http://www.studionegre.com"
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.50201,
+     47.88016
+    ]
+   },
+   "properties": {
+    "com_insee": "72376",
+    "com_nom": "Villaines-sous-Lucé",
+    "nb": 8,
+    "titre": "Associations de Villaines-sous-Lucé",
+    "associations": [
+     {
+      "titre": "Amicale de L'Ecole la Craie des Champs",
+      "objet": "Regrouper les parents d'élèves, anciens et anciennes élèves et amis de l'école publique en vue de défendre les droits matériels et moraux de l'école laïque.",
+      "cat": "education",
+      "creation": "1993",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Scolaire de la Craie des Champs",
+      "objet": "Former à la responsabilité, au civisme, à l'autonomie par la pratique d'activités physiques, sportives et de pleine nature, d'activités socioculturelles, dans le cadre d'un fonctionnement démocratique; contribuer à…",
+      "cat": "sport",
+      "creation": "2012",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Au Pays des Merveilles",
+      "objet": "Cette association a pour objet de créer, gérer et animer toutes activités et tous services en faveur des enfants, parents et des familles en général dans le cadre de la Maison d'Assistantes Maternelles « Au pays des…",
+      "cat": "entraide",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Villaines sous Lucé",
+      "objet": "Organiser des fêtes pour développer le commerce et favoriser la venu d'étrangers : bals, cavalcades, jeux divers, manifestations musicales, théâtrales, sportives",
+      "cat": "loisirs",
+      "creation": "1953",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "En 4l Simone",
+      "objet": "Trouver des sponsors et pour financer notre participation au 4L Trophy de 2019 ( financer et rénovation de la 4L)",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement des Aînés Ruraux de Villaines sous Lucé",
+      "objet": "Créer, animer, développer les rencontres et les liens d'amitié entre les retraités et pré-retraités ; les aider à résoudre leurs difficultés, les informer et les soutenir, par la création de services, dans la recherche…",
+      "cat": "loisirs",
+      "creation": "2009",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "300%MX",
+      "objet": "Promouvoir l'activité de la moto cross ; Apporter l'aide à Aubin MOREAU et Ilan MOREAU pour la préparation de leurs motos ( changements et achats de pièces, main d'uvre ) et voir pour l'achat des motos ; Assurer les…",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "#oukcekonfreine",
+      "objet": "L'objet de l'association consiste à la découverte et la pratique du vélo sous toutes ses formes et dans le contexte qui la compose, permettre le développement social et citoyen de l'individu, dans le respect de son…",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     }
+    ]
+   }
+  }
+ ]
+}

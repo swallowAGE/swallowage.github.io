@@ -409,6 +409,110 @@ function construirePopupCommerce(props) {
     </div>`;
 }
 
+/* Artisan (registre SIRENE, voir outils/build_artisans.py) : le registre
+   ne donne ni téléphone, ni horaires, ni site - plutôt qu'une fiche
+   vide, l'activité officielle, l'année de création et un lien vers
+   l'Annuaire des entreprises (fiche publique de l'État, qui renvoie
+   parfois vers le site de l'entreprise). "Signaler une erreur" ouvre le
+   formulaire de contact déjà prérempli (voir ouvrirSignalement). */
+function construirePopupArtisan(props) {
+    const cat = categorieArtisan({ properties: props });
+    const nom = props.nom || cat.label;
+    const adresse = [props.adresse, props.com_nom].filter(Boolean).join(" · ");
+    const annuaire = props.siret ? `https://annuaire-entreprises.data.gouv.fr/etablissement/${encodeURIComponent(props.siret)}` : null;
+    const message = `Fiche artisan « ${nom} » (${props.com_nom || ""}, SIRET ${props.siret || "?"}) : `;
+    return `<div class="popup-fiche">
+        <div class="popup-fiche-entete">
+            <div class="popup-fiche-icon" style="background:${cat.color}"><i class="${cat.icon}"></i></div>
+            <div class="popup-fiche-titre-wrap">
+                <div class="popup-fiche-tag" style="color:${cat.color}">${echapperHtml(cat.label)}</div>
+                <div class="popup-fiche-titre">${echapperHtml(nom)}</div>
+                ${adresse ? `<div class="popup-fiche-adresse">${echapperHtml(adresse)}</div>` : ""}
+            </div>
+        </div>
+        <div class="popup-fiche-section">
+            <div class="popup-fiche-section-titre">Activité</div>
+            <div class="popup-fiche-texte">${echapperHtml(props.activite || cat.label)}</div>
+            ${props.creation ? `<div class="popup-fiche-precision">Entreprise créée en ${echapperHtml(props.creation)}</div>` : ""}
+        </div>
+        <div class="popup-fiche-section">
+            <div class="popup-fiche-section-titre">Contact</div>
+            <div class="popup-fiche-precision">Le registre officiel des entreprises ne donne ni téléphone ni e-mail.</div>
+            ${annuaire ? `<a class="popup-fiche-contact popup-fiche-lien" href="${annuaire}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>Voir la fiche sur l'Annuaire des entreprises</a>` : ""}
+        </div>
+        <div class="popup-fiche-section popup-fiche-pied">
+            <span>Source : registre SIRENE (Insee)</span>
+            <button type="button" class="popup-signaler" data-message="${echapperHtml(message)}">Signaler une erreur</button>
+        </div>
+    </div>`;
+}
+
+/* Associations d'une commune (Répertoire national des associations,
+   voir outils/build_associations.py) : une seule fiche par commune, avec
+   des pastilles pour filtrer par activité (gérées par le clic délégué
+   plus bas, la popup étant du HTML statique). Pas d'adresse ni de
+   contact dans le registre publiable : on renvoie vers la mairie. */
+function construirePopupAssociations(props) {
+    const assos = Array.isArray(props.associations) ? props.associations : [];
+    const presentes = Object.keys(CATEGORIES_ASSOCIATIONS).filter(id => assos.some(a => a.cat === id));
+    const pastilles = [`<button type="button" class="asso-filtre" aria-pressed="true" data-cat="">Toutes</button>`]
+        .concat(presentes.map(id => `<button type="button" class="asso-filtre" aria-pressed="false" data-cat="${id}">${echapperHtml(CATEGORIES_ASSOCIATIONS[id])}</button>`));
+    const items = assos.map(a => `<li class="asso-item" data-cat="${echapperHtml(a.cat)}">
+            <div class="asso-cat">${echapperHtml(CATEGORIES_ASSOCIATIONS[a.cat] || CATEGORIES_ASSOCIATIONS.autres)}</div>
+            <div class="asso-titre">${echapperHtml(a.titre)}</div>
+            ${a.objet ? `<div class="asso-objet">${echapperHtml(a.objet)}</div>` : ""}
+            <div class="asso-dates">${a.creation ? `Créée en ${echapperHtml(a.creation)}` : ""}${a.creation && a.declaration ? " · " : ""}${a.declaration ? `dernière déclaration en ${echapperHtml(a.declaration)}` : ""}</div>
+            ${a.site ? `<a class="asso-site" href="${encodeURI(a.site)}" target="_blank" rel="noopener">Site de l'association</a>` : ""}
+        </li>`).join("");
+    const message = `Associations de ${props.com_nom || ""} : `;
+    return `<div class="popup-fiche popup-asso">
+        <div class="popup-fiche-entete">
+            <div class="popup-fiche-icon" style="background:${COULEUR_ASSOCIATIONS}"><i class="fa-solid fa-people-group"></i></div>
+            <div class="popup-fiche-titre-wrap">
+                <div class="popup-fiche-tag" style="color:${COULEUR_ASSOCIATIONS}">Associations</div>
+                <div class="popup-fiche-titre">${echapperHtml(props.com_nom || "")} · ${assos.length} ${assos.length > 1 ? "associations" : "association"}</div>
+            </div>
+        </div>
+        ${presentes.length > 1 ? `<div class="asso-filtres" role="group" aria-label="Filtrer par activité">${pastilles.join("")}</div>` : ""}
+        <ul class="asso-liste">${items}</ul>
+        <div class="popup-fiche-section popup-fiche-pied">
+            <span>Pour les joindre : la mairie. Placées sur leur commune, pas à leur adresse.</span>
+            <button type="button" class="popup-signaler" data-message="${echapperHtml(message)}">Signaler un oubli</button>
+        </div>
+    </div>`;
+}
+
+/* Clics délégués dans les fiches (HTML statique des popups) : filtres des
+   associations, et « Signaler » qui ouvre le formulaire de contact
+   prérempli (fenêtre « À propos »). */
+document.addEventListener("click", e => {
+    const filtre = e.target.closest(".asso-filtre");
+    if (filtre) {
+        const fiche = filtre.closest(".popup-asso");
+        const cat = filtre.dataset.cat;
+        fiche.querySelectorAll(".asso-filtre").forEach(b => b.setAttribute("aria-pressed", String(b === filtre)));
+        fiche.querySelectorAll(".asso-item").forEach(li => { li.hidden = !!cat && li.dataset.cat !== cat; });
+        return;
+    }
+    const signaler = e.target.closest(".popup-signaler");
+    if (signaler) ouvrirSignalement(signaler.dataset.message || "");
+});
+
+function ouvrirSignalement(message) {
+    const modale = document.getElementById("about-modal");
+    const type = document.getElementById("contact-type");
+    const texte = document.getElementById("contact-message");
+    if (!modale || !texte) return;
+    if (type) type.value = "bug";
+    texte.value = message;
+    modale.classList.add("modal-open");
+    setTimeout(() => {
+        texte.scrollIntoView({ block: "center" });
+        texte.focus();
+        texte.setSelectionRange(texte.value.length, texte.value.length);
+    }, 50);
+}
+
 /* Banque (agence) ou distributeur automatique (DAB) : même flux OSM,
    distingué par le champ "type". Terracotta pour les DAB, pour éviter
    que tout le SIG tourne autour du même bleu institutionnel. */
@@ -2144,6 +2248,8 @@ function construirePopup(feature, layerConf) {
     if (layerConf.id === "carburants") html = construirePopupCarburant(props);
     else if (layerConf.id === "commerces") html = construirePopupCommerce(props);
     else if (layerConf.id === "banques") html = construirePopupBanque(props);
+    else if (layerConf.id === "artisans") html = construirePopupArtisan(props);
+    else if (layerConf.id === "associations") html = construirePopupAssociations(props);
     else if (layerConf.id === "mairies") html = construirePopupMairie(props);
     else if (layerConf.id === "bal") html = construirePopupBal(props);
     else if (layerConf.id === "cadastre") html = construirePopupCadastreBase(props);
