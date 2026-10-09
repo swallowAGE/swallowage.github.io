@@ -60,8 +60,9 @@
   .gauge { width: 72px; flex: none; position: relative; border-left: 2px solid rgba(250, 246, 240, 0.25); }
   .gauge .water { position: absolute; left: 0; right: 0; bottom: 0; background: var(--water-soft); opacity: 0.9; transition: height 0.4s; }
   .gauge .rec { position: absolute; left: -2px; right: 0; border-top: 2px dashed var(--gold-hi); }
-  .gauge .rec span { position: absolute; right: 0; top: -20px; font-size: 12px; color: var(--gold-hi); }
-  .gauge .lab { position: absolute; left: 6px; font-size: 12px; color: var(--on-dark-soft); }
+  .gauge .rec span { position: absolute; right: 0; bottom: 3px; font-size: 11px; line-height: 1.2; text-align: right; color: var(--gold-hi); }
+  .gauge .lab { position: absolute; left: 6px; right: 2px; font-size: 11px; line-height: 1.2; color: var(--paper); }
+  .level-note { margin: -6px 0 0 !important; font-size: 13px !important; color: var(--on-dark-soft); }
 
   .chart { flex: 999 1 520px; min-width: 0; background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
   .chart-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
@@ -105,15 +106,15 @@
       <div class="now-text">
         <span class="kicker" id="when">// chargement…</span>
         <div class="level"><strong id="level">–</strong><span>m</span></div>
+        <p class="level-note">Hauteur lue sur l'échelle de la station, pas la profondeur de l'eau.</p>
         <p id="trend"></p>
         <p class="gap" id="gap"></p>
         <a id="vigicrues" href="https://www.vigicrues.gouv.fr" target="_blank" rel="noopener">Voir la station sur Vigicrues</a>
       </div>
       <div class="gauge" aria-hidden="true" id="gauge">
         <div class="water" id="g-water" style="height: 0"></div>
-        <div class="rec" id="g-rec" hidden><span>record</span></div>
-        <span class="lab" id="g-top" style="top: 4px"></span>
-        <span class="lab" id="g-bottom" style="bottom: 4px; color: var(--ink)"></span>
+        <div class="rec" id="g-rec" hidden><span id="g-rec-lab">record</span></div>
+        <span class="lab" id="g-now"></span>
       </div>
     </section>
 
@@ -365,8 +366,13 @@
       $("g-water").style.height = pct(last.h) + "%";
       $("g-rec").hidden = !record;
       if (record) $("g-rec").style.bottom = pct(record.h) + "%";
-      $("g-top").textContent = m2.format(hi) + " m";
-      $("g-bottom").textContent = m2.format(lo) + " m";
+      if (record) $("g-rec-lab").innerHTML = "record<br>" + m2.format(record.h) + " m";
+      // Étiquette posée sur la surface de l'eau : c'est le niveau actuel, pas une graduation.
+      var now = pct(last.h), gapRec = record ? pct(record.h) - now : 100;
+      $("g-now").innerHTML = "auj.<br>" + m2.format(last.h) + " m";
+      var dedans = gapRec < 22 || now > 80;
+      $("g-now").style.bottom = dedans ? "calc(" + now + "% - 34px)" : "calc(" + now + "% + 4px)";
+      $("g-now").style.color = dedans ? "var(--ink)" : "";
 
       drawn = [series, record];
       curIndex = -1;
