@@ -270,22 +270,9 @@ const TYPES_COMMERCES = [
         id: "brocante", label: "Brocante & antiquités", icon: "fa-solid fa-shop", color: "#7F7E7B",
         types: ["antiques", "second_hand", "wholesale"]
     },
-    /* Artisans ajoutés par l'utilisatrice à la main (voir plus haut :
-       osm_id "0", com_insee/com_nom absents de sa source, déduits par
-       point-dans-polygone contre couches/communes.geojson lors de
-       l'import) - valeurs de "type" en français, pas de vocabulaire OSM
-       standard pour ces métiers. "artisan" (générique, un seul cas
-       réel : "Elec'Clim innovation", électricité/climatisation) inclus
-       ici plutôt que dans "Autres commerces" : plus proche d'un artisan
-       du bâtiment que d'un commerce classique. "couverture" et
-       "charpente" séparés (pas "couverture/charpente" tel quel dans la
-       donnée source) : categorieCommerce découpe le type brut sur
-       "/" en plus de ";" et "," (butcher;convenience, par exemple) -
-       un slash gardé dans l'entrée n'aurait donc jamais matché. */
-    {
-        id: "artisansBatiment", label: "Artisans du bâtiment", icon: "fa-solid fa-hammer", color: PALETTE.ardoise,
-        types: ["plombier", "menuisier", "couverture", "charpente", "clotures", "chaudronnerie", "artisan"]
-    },
+    /* Les artisans (plombier, menuisier...) ont leur propre couche
+       "artisans" (registre SIRENE + saisies à la main, voir plus bas
+       TYPES_ARTISANS) : ceux d'abord saisis ici y ont été déplacés. */
     {
         id: "producteurLocal", label: "Producteurs locaux", icon: "fa-solid fa-carrot", color: PALETTE.foret,
         types: ["producteur local"]
@@ -358,9 +345,9 @@ function categoriePourFeature(feature) {
    "categorie" déjà calculé depuis le code APE de l'établissement. Les
    "motsCles" servent à la recherche ("plombier" doit trouver la
    catégorie "Plomberie & chauffage", pas seulement les noms).
-   Les 7 artisans saisis à la main dans commerces.geojson restent dans la
-   couche commerces ("Artisans du bâtiment") : le script ne reprend pas
-   un SIRET déjà présent là-bas.
+   Saisies à la main (téléphone, site, horaires au format OSM, fiche
+   "verifie", artisan ajouté avec source "manuel", "masquer") : gardées
+   d'un mois sur l'autre par le script, voir son en-tête et le README.
    ========================================================= */
 const TYPES_ARTISANS = [
     { id: "plomberie", label: "Plomberie & chauffage", icon: "fa-solid fa-faucet-drip", color: "#2F6FA8",
@@ -1327,6 +1314,7 @@ const LAYERS = [
         icon: "fa-solid fa-hammer", color: PALETTE.ardoise,
         iconePourFeature: iconeArtisan, sousTitrePourFeature: sousTitreArtisan, motsClesPourFeature: motsClesArtisan,
         legend: TYPES_ARTISANS, legendDefaut: TYPE_ARTISAN_DEFAUT, categoriser: feature => categorieArtisan(feature).id,
+        transform: data => ({ ...data, features: (data.features || []).filter(f => !(f.properties || {}).masquer) }),
         lazy: false, searchable: true, cluster: true,
         titleFields: ["nom"]
     },

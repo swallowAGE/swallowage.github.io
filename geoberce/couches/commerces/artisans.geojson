@@ -21,7 +21,14 @@
     "adresse": "Le Patis Vert",
     "com_insee": "72028",
     "com_nom": "Beaumont-Pied-de-Bœuf",
-    "creation": "2010"
+    "creation": "2010",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -42,7 +49,14 @@
     "adresse": "1 Les Rochereaux",
     "com_insee": "72027",
     "com_nom": "Beaumont-sur-Dême",
-    "creation": "2007"
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -63,7 +77,14 @@
     "adresse": "Les Perriches",
     "com_insee": "72027",
     "com_nom": "Beaumont-sur-Dême",
-    "creation": "2010"
+    "creation": "2010",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -84,7 +105,14 @@
     "adresse": "20 Rue de la Foret de Berce",
     "com_insee": "72052",
     "com_nom": "Chahaignes",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -92,20 +120,27 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     0.508896,
-     47.746917
+     0.506736520591388,
+     47.74887173590823
     ]
    },
    "properties": {
     "siret": "99933881700011",
-    "nom": "Elec'clim Innovation",
+    "nom": "Elec'Clim innovation",
     "categorie": "electricite",
     "ape": "43.21A",
     "activite": "Installation électrique",
-    "adresse": "32 Rue de la Foret de Berce",
+    "adresse": "32 route de la forêt de Bercé",
     "com_insee": "72052",
     "com_nom": "Chahaignes",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": "06 52 29 94 76",
+    "website": "https://www.elecclim-innovation.fr/",
+    "opening_hours": "Mo-Fr 08:00-18:00",
+    "verifie": true,
+    "email": null,
+    "note": null,
+    "masquer": null
    }
   },
   {
@@ -113,20 +148,27 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     0.525378,
-     47.766342
+     0.5253389188036,
+     47.766538360269735
     ]
    },
    "properties": {
     "siret": "52958619000033",
-    "nom": "Menuiserie Ebenisterie Evrard",
+    "nom": "L'Atelier Evrard Nicolas",
     "categorie": "menuiserie",
     "ape": "43.32A",
     "activite": "Menuiserie bois et PVC",
-    "adresse": "2 Lieu Dit le Haut Perray",
+    "adresse": "2 Le Haut Perray",
     "com_insee": "72052",
     "com_nom": "Chahaignes",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": "0689447121",
+    "verifie": true,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null
    }
   },
   {
@@ -147,7 +189,14 @@
     "adresse": "13 Che Vaugermain",
     "com_insee": "72052",
     "com_nom": "Chahaignes",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -168,7 +217,14 @@
     "adresse": "La Piece Basse Rte de Brives",
     "com_insee": "72103",
     "com_nom": "Courdemanche",
-    "creation": "2007"
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -189,7 +245,14 @@
     "adresse": "Les Juguenieres",
     "com_insee": "72103",
     "com_nom": "Courdemanche",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -210,7 +273,14 @@
     "adresse": "10 Rue du College",
     "com_insee": "72103",
     "com_nom": "Courdemanche",
-    "creation": "2013"
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -231,7 +301,14 @@
     "adresse": "Les Hamelieres",
     "com_insee": "72103",
     "com_nom": "Courdemanche",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -252,7 +329,14 @@
     "adresse": "10 Rue des Bouleaux",
     "com_insee": "72103",
     "com_nom": "Courdemanche",
-    "creation": "2016"
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -273,7 +357,14 @@
     "adresse": "LD la Piece Basse",
     "com_insee": "72103",
     "com_nom": "Courdemanche",
-    "creation": "2010"
+    "creation": "2010",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -294,7 +385,14 @@
     "adresse": "Le Bourg",
     "com_insee": "72103",
     "com_nom": "Courdemanche",
-    "creation": "1983"
+    "creation": "1983",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -315,7 +413,14 @@
     "adresse": "8 Rue Sainte Genevieve",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2020"
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -336,7 +441,14 @@
     "adresse": "Le Moulin de Courcillon Rue du Petit Sabot",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2021"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -357,7 +469,14 @@
     "adresse": "LD la Bouvaterie Saint Joseph",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -378,7 +497,14 @@
     "adresse": "Pierrevouze",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2013"
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -399,7 +525,14 @@
     "adresse": "7 Rue de la Joliverie",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -420,7 +553,14 @@
     "adresse": "2 Impasse des Rochettes",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -441,7 +581,14 @@
     "adresse": "3 Impasse du Ruisseau",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -462,7 +609,14 @@
     "adresse": "Rue de la Cotiere",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2012"
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -483,7 +637,43 @@
     "adresse": "La Piedorerie",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.441930885617666,
+     47.68230021777893
+    ]
+   },
+   "properties": {
+    "siret": null,
+    "nom": "Rivière Mathias S.B.I",
+    "categorie": "couverture",
+    "ape": null,
+    "activite": "Couverture et charpente",
+    "adresse": "Moulin de Courdamont",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": null,
+    "phone": "0683959832",
+    "email": null,
+    "website": null,
+    "opening_hours": "Mo-Th 09:00-18:00; Fr 09:00-17:00",
+    "note": null,
+    "masquer": null,
+    "verifie": true,
+    "source": "manuel"
    }
   },
   {
@@ -504,7 +694,14 @@
     "adresse": "Zi les Epinettes du Loir",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2005"
+    "creation": "2005",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -525,7 +722,14 @@
     "adresse": "La Touche",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2002"
+    "creation": "2002",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -546,7 +750,14 @@
     "adresse": "29 Rue de la Cotiere",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -567,7 +778,14 @@
     "adresse": "ST Jacques",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2017"
+    "creation": "2017",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -588,7 +806,14 @@
     "adresse": "Le Souillard",
     "com_insee": "72115",
     "com_nom": "Dissay-sous-Courcillon",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -609,7 +834,14 @@
     "adresse": "1 Lieu Dit le Petit Vaux",
     "com_insee": "72134",
     "com_nom": "Flée",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -617,20 +849,27 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     0.454298,
-     47.731708
+     0.454100103472594,
+     47.73189918876866
     ]
    },
    "properties": {
     "siret": "52473113000018",
-    "nom": "Clotures Blot-Chauvin",
+    "nom": "Clôtures Blot-Chauvin",
     "categorie": "autre",
     "ape": "43.29B",
     "activite": "Installations diverses",
     "adresse": "3 Allee de la Croix Bodin",
     "com_insee": "72134",
     "com_nom": "Flée",
-    "creation": "2010"
+    "creation": "2010",
+    "phone": "0243443097",
+    "website": "http://www.clotures-blotchauvin72.com/?utm_source=gmb",
+    "opening_hours": "Tu-Su 14:00-18:00",
+    "verifie": true,
+    "email": null,
+    "note": null,
+    "masquer": null
    }
   },
   {
@@ -651,7 +890,14 @@
     "adresse": "La Bardetiere",
     "com_insee": "72134",
     "com_nom": "Flée",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -672,7 +918,14 @@
     "adresse": "La Croix Millet",
     "com_insee": "72134",
     "com_nom": "Flée",
-    "creation": "2021"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -693,7 +946,14 @@
     "adresse": "La Croix Millet",
     "com_insee": "72134",
     "com_nom": "Flée",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -714,7 +974,14 @@
     "adresse": "3 Rue du Lavoir",
     "com_insee": "72134",
     "com_nom": "Flée",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -735,7 +1002,14 @@
     "adresse": "La Sablonniere",
     "com_insee": "72153",
     "com_nom": "Jupilles",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -756,7 +1030,14 @@
     "adresse": "Bel Air",
     "com_insee": "72153",
     "com_nom": "Jupilles",
-    "creation": "2011"
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -777,7 +1058,14 @@
     "adresse": "La Guitonniere",
     "com_insee": "72153",
     "com_nom": "Jupilles",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -798,7 +1086,14 @@
     "adresse": "17 Route des Jasnieres",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -819,7 +1114,14 @@
     "adresse": "Za Val de Loire 2 Rue Pineau D'aunis la Charbonnie",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -840,7 +1142,14 @@
     "adresse": "69 T Rue les Caves la Fontaine",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -861,7 +1170,14 @@
     "adresse": "59 Avenue des Deportes",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -882,7 +1198,14 @@
     "adresse": "9 Rue du Pineau D'aunis",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2015"
+    "creation": "2015",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -903,7 +1226,14 @@
     "adresse": "5 Rue du Pineau D'aunis",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2006"
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -924,7 +1254,14 @@
     "adresse": "6 Le Carroi des Pichons",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -945,7 +1282,14 @@
     "adresse": "Z.a. Val de Loir la Charbonnie",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -966,7 +1310,14 @@
     "adresse": "40 Rue les Caves la Fontaine",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2011"
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -987,7 +1338,14 @@
     "adresse": "40 Rue les Caves la Fontaine",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2010"
+    "creation": "2010",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1008,7 +1366,14 @@
     "adresse": "38 Avenue des Deportes",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1029,7 +1394,14 @@
     "adresse": "Les Vaux",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1050,7 +1422,14 @@
     "adresse": "Pic Oiseau",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1071,7 +1450,14 @@
     "adresse": "2 Impasse Bellevue",
     "com_insee": "72068",
     "com_nom": "La Chartre-sur-le-Loir",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1092,7 +1478,14 @@
     "adresse": "Lieu Dit Basse Belle Chaire",
     "com_insee": "72160",
     "com_nom": "Lavernat",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1113,7 +1506,14 @@
     "adresse": "Les Verreries",
     "com_insee": "72160",
     "com_nom": "Lavernat",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1134,7 +1534,14 @@
     "adresse": "Lieu Dit les Verreries",
     "com_insee": "72160",
     "com_nom": "Lavernat",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1155,7 +1562,14 @@
     "adresse": "5 Rue de L Egalite",
     "com_insee": "72160",
     "com_nom": "Lavernat",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1176,7 +1590,14 @@
     "adresse": "Le Verger des Landes",
     "com_insee": "72160",
     "com_nom": "Lavernat",
-    "creation": "2007"
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1197,7 +1618,14 @@
     "adresse": "Za de la Prairie Rue de la Torchetterie",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1218,7 +1646,14 @@
     "adresse": "LD la Bonne Marcherie",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2012"
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1239,7 +1674,14 @@
     "adresse": "Le Moulin Neuf",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2021"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1260,7 +1702,14 @@
     "adresse": "7 Rue du Remblai",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1281,7 +1730,14 @@
     "adresse": "2 Rue Alexandre Martin",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1302,7 +1758,14 @@
     "adresse": "Les Paqueries",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1323,7 +1786,14 @@
     "adresse": "Le Bordage",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2016"
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1344,7 +1814,14 @@
     "adresse": "254 Rue de la Paix",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1365,7 +1842,14 @@
     "adresse": "1370 Route de Saint Vincent",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1386,7 +1870,14 @@
     "adresse": "33 Route des Brulonnieres",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1407,7 +1898,14 @@
     "adresse": "Za de la Prairie",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2013"
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1428,7 +1926,14 @@
     "adresse": "Le Bordage",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1449,7 +1954,14 @@
     "adresse": "98 Route du Mans",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1470,7 +1982,14 @@
     "adresse": "3 Rue Leon Aubert",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1491,7 +2010,14 @@
     "adresse": "9 Rue de la Prairie",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2015"
+    "creation": "2015",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1512,7 +2038,14 @@
     "adresse": "33 Rue Chalot",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1533,7 +2066,14 @@
     "adresse": "La Chataigneraie de la Van",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2002"
+    "creation": "2002",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1554,7 +2094,14 @@
     "adresse": "100 Za de la Prairie",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1575,7 +2122,14 @@
     "adresse": "Za de la Prairie",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1596,7 +2150,14 @@
     "adresse": "2 Rue Nationale",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1617,7 +2178,14 @@
     "adresse": "6 Rue Saint Facile",
     "com_insee": "72143",
     "com_nom": "Le Grand-Lucé",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1638,7 +2206,14 @@
     "adresse": "L'etre Lenaux 625 Route de la Chiquetiere",
     "com_insee": "72161",
     "com_nom": "Lhomme",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1659,7 +2234,14 @@
     "adresse": "328 Route de la Banniere",
     "com_insee": "72161",
     "com_nom": "Lhomme",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1680,7 +2262,14 @@
     "adresse": "Lieu Dit les 4 Vents",
     "com_insee": "72161",
     "com_nom": "Lhomme",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1688,20 +2277,27 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     0.567591,
-     47.742403
+     0.567614387104441,
+     47.742332645083486
     ]
    },
    "properties": {
     "siret": "51113359700027",
-    "nom": "Denis Rousier",
+    "nom": "SARL Denis Rousier",
     "categorie": "plomberie",
     "ape": "43.22A",
     "activite": "Installation d'eau et de gaz",
     "adresse": "9 La Croix Percee",
     "com_insee": "72161",
     "com_nom": "Lhomme",
-    "creation": "2017"
+    "creation": "2017",
+    "phone": "0243790287",
+    "opening_hours": "Mo-Th 08:00-12:00,13:30-17:00; Fr 08:00-12:00",
+    "verifie": true,
+    "email": null,
+    "website": null,
+    "note": null,
+    "masquer": null
    }
   },
   {
@@ -1722,28 +2318,14 @@
     "adresse": "9 Rue des Chardonnerets",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2021"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     0.629595,
-     47.775066
-    ]
-   },
-   "properties": {
-    "siret": "88461874500019",
-    "nom": "Anthony Losito",
-    "categorie": "plomberie",
-    "ape": "43.22A",
-    "activite": "Installation d'eau et de gaz",
-    "adresse": "Ruille sur Loir 1 Lieu Dit la Savariere",
-    "com_insee": "72262",
-    "com_nom": "Loir en Vallée",
-    "creation": "2020"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1764,7 +2346,42 @@
     "adresse": "Ruille sur Loir 1 Rue du Petit Moulin",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.611913002414477,
+     47.74756889481248
+    ]
+   },
+   "properties": {
+    "siret": "44126384500014",
+    "nom": "Chaudronnerie OGER Sarl",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "Ruille sur Loir 14 Rte de la Chartre",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2002",
+    "phone": "0243445081",
+    "opening_hours": "Mo-Th 07:45-12:00,13:30-17:45; Fr 08:00-12:00",
+    "verifie": true,
+    "email": null,
+    "website": null,
+    "note": null,
+    "masquer": null
    }
   },
   {
@@ -1785,7 +2402,14 @@
     "adresse": "1 Lieu Dit L Euche",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1806,7 +2430,14 @@
     "adresse": "Za le Gue",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1827,7 +2458,42 @@
     "adresse": "Zone Artisanale le Gue Ruille sur Loir",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.629630761056811,
+     47.7750726830584
+    ]
+   },
+   "properties": {
+    "siret": "88461874500019",
+    "nom": "EIRL Losito Anthony",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Ruille sur Loir 1 Lieu Dit la Savariere",
+    "com_insee": "72262",
+    "com_nom": "Loir en Vallée",
+    "creation": "2020",
+    "phone": "0647081473",
+    "opening_hours": "Mo-Fr 08:00-18:00",
+    "verifie": true,
+    "email": null,
+    "website": null,
+    "note": null,
+    "masquer": null
    }
   },
   {
@@ -1848,7 +2514,14 @@
     "adresse": "Ruille-Sur-Loir 17 Route de la Chartre",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1869,7 +2542,14 @@
     "adresse": "2 Lot des Sablons",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2010"
+    "creation": "2010",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1890,7 +2570,14 @@
     "adresse": "5 Rte de Ponce Ruille sur Loir",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2020"
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1911,7 +2598,14 @@
     "adresse": "23 Rue Principale (ponce-Sur-Le-Loir)",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1932,7 +2626,14 @@
     "adresse": "Les Saulais",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "1999"
+    "creation": "1999",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1953,28 +2654,14 @@
     "adresse": "8 Rue du Tusson Lavenay",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2023"
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     0.610714,
-     47.747548
-    ]
-   },
-   "properties": {
-    "siret": "44126384500014",
-    "nom": "Oger",
-    "categorie": "menuiserie",
-    "ape": "43.32B",
-    "activite": "Menuiserie métallique et serrurerie",
-    "adresse": "Ruille sur Loir 14 Rte de la Chartre",
-    "com_insee": "72262",
-    "com_nom": "Loir en Vallée",
-    "creation": "2002"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -1995,7 +2682,14 @@
     "adresse": "4 Rue Xaintrailles",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2011"
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2016,7 +2710,14 @@
     "adresse": "Le Gue 22 Rte de la Chartre Ruille sur Loir",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2020"
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2037,7 +2738,14 @@
     "adresse": "La Rougeolliere",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2005"
+    "creation": "2005",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2058,7 +2766,14 @@
     "adresse": "LD la Pigaliere",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2013"
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2079,7 +2794,14 @@
     "adresse": "La Chapelle Gaugain 5 Lot les Sablons",
     "com_insee": "72262",
     "com_nom": "Loir en Vallée",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2100,7 +2822,14 @@
     "adresse": "6 Rue Pierre Cuillier",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2121,7 +2850,14 @@
     "adresse": "La Minee",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2016"
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2142,7 +2878,14 @@
     "adresse": "33 Grande Rue",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2007"
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2163,7 +2906,14 @@
     "adresse": "Les Pres de la Fontaine",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2184,7 +2934,14 @@
     "adresse": "1 B Chemin de Carcahu",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2017"
+    "creation": "2017",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2205,7 +2962,14 @@
     "adresse": "Carcahu",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2021"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2226,7 +2990,14 @@
     "adresse": "Poitron",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2247,7 +3018,14 @@
     "adresse": "L'ambrasiere",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2268,7 +3046,14 @@
     "adresse": "16 Route du Mans",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2289,7 +3074,14 @@
     "adresse": "Zone Industrielle du Puits",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "1988"
+    "creation": "1988",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2310,7 +3102,14 @@
     "adresse": "26 Route du Mans",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2012"
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2331,7 +3130,14 @@
     "adresse": "La Bijalloniere",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2008"
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2352,7 +3158,14 @@
     "adresse": "516 Route de Coupepied",
     "com_insee": "72173",
     "com_nom": "Luceau",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2373,7 +3186,14 @@
     "adresse": "Le Carroir",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2394,7 +3214,14 @@
     "adresse": "60 Lieu Dit les Borderies",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2415,7 +3242,14 @@
     "adresse": "57 Lieu Dit la Piece du Vaux Godin",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2436,7 +3270,14 @@
     "adresse": "La Tripotiere",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2007"
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2457,7 +3298,14 @@
     "adresse": "Les Borderies",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2478,7 +3326,14 @@
     "adresse": "Lieu Dit la Roche",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2021"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2499,7 +3354,14 @@
     "adresse": "LD les Pres Bodeaux",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "1992"
+    "creation": "1992",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2520,7 +3382,14 @@
     "adresse": "58 Lieu Dit la Lucerie",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2541,7 +3410,14 @@
     "adresse": "15 Lieu Dit la Roche",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2562,7 +3438,14 @@
     "adresse": "Lieu Dit L Hopitau",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2583,7 +3466,14 @@
     "adresse": "75 Lieu Dit la Jonchere",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2604,7 +3494,14 @@
     "adresse": "17 Chemin de Bois Blandin",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2625,7 +3522,14 @@
     "adresse": "Lieu Dit la Fosse Gaude",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2001"
+    "creation": "2001",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2646,7 +3550,14 @@
     "adresse": "Le Petit Loiray",
     "com_insee": "72183",
     "com_nom": "Marçon",
-    "creation": "2016"
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2667,7 +3578,14 @@
     "adresse": "La Fosse",
     "com_insee": "72210",
     "com_nom": "Montreuil-le-Henri",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2688,7 +3606,14 @@
     "adresse": "La Choquetterie",
     "com_insee": "72210",
     "com_nom": "Montreuil-le-Henri",
-    "creation": "2015"
+    "creation": "2015",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2709,7 +3634,14 @@
     "adresse": "11 All des Goelands",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2016"
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2730,7 +3662,14 @@
     "adresse": "Le Petit Bois",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2751,7 +3690,14 @@
     "adresse": "Coemont",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2772,7 +3718,14 @@
     "adresse": "59 Rue du Val de Loir - Chateau du Loir",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2793,7 +3746,14 @@
     "adresse": "Chateau du Loir 4 Av de Tours",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2020"
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2814,7 +3774,14 @@
     "adresse": "7 Imp des Merisiers",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2016"
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2835,7 +3802,14 @@
     "adresse": "89 Av Jean Jaures",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2856,7 +3830,14 @@
     "adresse": "88 Rue Aristide Briand",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "1996"
+    "creation": "1996",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2877,7 +3858,14 @@
     "adresse": "18 Rue Haute Vouvray-Sur-Loir",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2898,7 +3886,14 @@
     "adresse": "2 Av de Tours",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2919,7 +3914,14 @@
     "adresse": "Vouvray sur Loir 40 Rte du Coteau",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2940,7 +3942,14 @@
     "adresse": "Les Fontaines 501 Che du Petit Tortillard",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2961,7 +3970,14 @@
     "adresse": "2 Rte des Bordes",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -2982,7 +3998,14 @@
     "adresse": "Chateau-Du-Loir 31 Rue Saint Jean",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3003,7 +4026,14 @@
     "adresse": "Chateau du Loir 26 Rue Sainte Cecile",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2021"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3024,7 +4054,14 @@
     "adresse": "95 Rte des Vignes",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3045,7 +4082,14 @@
     "adresse": "140 Rue Oscar Moneris",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2013"
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3066,7 +4110,14 @@
     "adresse": "8 Rue du Pin Vert",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2014"
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3087,7 +4138,14 @@
     "adresse": "203 Route des Fontaines Montabon",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3108,7 +4166,14 @@
     "adresse": "22 Rue Sainte Cecile Chateau-Du-Loir",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3129,7 +4194,14 @@
     "adresse": "122 Av Jean Jaures",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3150,7 +4222,14 @@
     "adresse": "38 Rue du Grand Douai Chateau-Du-Loir",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3171,7 +4250,14 @@
     "adresse": "6 B Coemont le Cul Goron",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2012"
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3192,7 +4278,14 @@
     "adresse": "14 Rue Saint Martin",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2007"
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3213,7 +4306,14 @@
     "adresse": "Luceau 23 Av du Mans",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3234,7 +4334,14 @@
     "adresse": "Rue des Vertolines",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2010"
+    "creation": "2010",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3255,7 +4362,14 @@
     "adresse": "34 Che de Goulard",
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "creation": "2004"
+    "creation": "2004",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3276,7 +4390,14 @@
     "adresse": "3 Rue Pierre de Ronsard",
     "com_insee": "72221",
     "com_nom": "Nogent-sur-Loir",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3297,7 +4418,14 @@
     "adresse": "Lieu Dit la Raie",
     "com_insee": "72221",
     "com_nom": "Nogent-sur-Loir",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3318,7 +4446,14 @@
     "adresse": "11 Rue Pierre de Ronsard",
     "com_insee": "72221",
     "com_nom": "Nogent-sur-Loir",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3339,7 +4474,14 @@
     "adresse": "Les Bordes",
     "com_insee": "72221",
     "com_nom": "Nogent-sur-Loir",
-    "creation": "2009"
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3360,7 +4502,14 @@
     "adresse": "56 Rue Rene Salmon",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3381,7 +4530,14 @@
     "adresse": "4 Rue du Pont de L'arche",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3402,7 +4558,14 @@
     "adresse": "Le Pau",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2011"
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3423,7 +4586,14 @@
     "adresse": "729 Route des Graffardieres",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3444,7 +4614,14 @@
     "adresse": "La Quellerie",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2020"
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3465,7 +4642,14 @@
     "adresse": "39 Rue Rene Salmon",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2021"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3486,7 +4670,14 @@
     "adresse": "17 Rue du Pont de L'arche",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3507,7 +4698,14 @@
     "adresse": "LD le Chene Sec",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3528,7 +4726,14 @@
     "adresse": "Les Renaudieres",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2013"
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3549,7 +4754,14 @@
     "adresse": "La Petite Roche",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3570,7 +4782,14 @@
     "adresse": "Les Petites Prises",
     "com_insee": "72248",
     "com_nom": "Pruillé-l'Éguillé",
-    "creation": "2021"
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3591,7 +4810,14 @@
     "adresse": "LD la Richardiere",
     "com_insee": "72279",
     "com_nom": "Saint-Georges-de-la-Couée",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3612,7 +4838,14 @@
     "adresse": "4 Hameau des Tesnieres",
     "com_insee": "72311",
     "com_nom": "Saint-Pierre-de-Chevillé",
-    "creation": "2016"
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3633,7 +4866,14 @@
     "adresse": "22 Rue de la Sargeais",
     "com_insee": "72311",
     "com_nom": "Saint-Pierre-de-Chevillé",
-    "creation": "2013"
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3654,7 +4894,14 @@
     "adresse": "Les Vaudupuits",
     "com_insee": "72314",
     "com_nom": "Saint-Pierre-du-Lorouër",
-    "creation": "2017"
+    "creation": "2017",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3675,7 +4922,14 @@
     "adresse": "Le Champ de la Fontaine",
     "com_insee": "72314",
     "com_nom": "Saint-Pierre-du-Lorouër",
-    "creation": "2007"
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3696,7 +4950,14 @@
     "adresse": "Le Champ de la Croix",
     "com_insee": "72314",
     "com_nom": "Saint-Pierre-du-Lorouër",
-    "creation": "1900"
+    "creation": "1900",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3717,7 +4978,14 @@
     "adresse": "La Tuffiere",
     "com_insee": "72325",
     "com_nom": "Saint-Vincent-du-Lorouër",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3738,7 +5006,14 @@
     "adresse": "77 Chemin de Garechenne",
     "com_insee": "72325",
     "com_nom": "Saint-Vincent-du-Lorouër",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3759,7 +5034,14 @@
     "adresse": "5 Rue des Varennes",
     "com_insee": "72325",
     "com_nom": "Saint-Vincent-du-Lorouër",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3780,7 +5062,14 @@
     "adresse": "Vaubuffard",
     "com_insee": "72325",
     "com_nom": "Saint-Vincent-du-Lorouër",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3801,7 +5090,14 @@
     "adresse": "2934 Route de Jupilles",
     "com_insee": "72325",
     "com_nom": "Saint-Vincent-du-Lorouër",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3822,7 +5118,14 @@
     "adresse": "7 Rue de Garechenne",
     "com_insee": "72325",
     "com_nom": "Saint-Vincent-du-Lorouër",
-    "creation": "1995"
+    "creation": "1995",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3843,7 +5146,14 @@
     "adresse": "535 Route de Courdemanche",
     "com_insee": "72325",
     "com_nom": "Saint-Vincent-du-Lorouër",
-    "creation": "2023"
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3864,7 +5174,14 @@
     "adresse": "Lieu Dit les Landes 535 Route de Courdemanche",
     "com_insee": "72325",
     "com_nom": "Saint-Vincent-du-Lorouër",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3885,7 +5202,14 @@
     "adresse": "20 Rue du Dinan",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2026"
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3906,7 +5230,14 @@
     "adresse": "Beauge",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3927,7 +5258,14 @@
     "adresse": "Les Boussions",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3948,7 +5286,14 @@
     "adresse": "Lieu Dit la Chauvinerie",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2006"
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3969,7 +5314,14 @@
     "adresse": "4 B Rue de L Hommeau",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2019"
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -3990,7 +5342,14 @@
     "adresse": "Les Ruaux",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2012"
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4011,7 +5370,14 @@
     "adresse": "La Guibellerie",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2001"
+    "creation": "2001",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4032,7 +5398,14 @@
     "adresse": "Les Ruaux",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2002"
+    "creation": "2002",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4053,7 +5426,14 @@
     "adresse": "Hacheron",
     "com_insee": "72356",
     "com_nom": "Thoiré-sur-Dinan",
-    "creation": "2006"
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4074,7 +5454,14 @@
     "adresse": "Les Renieres",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2024"
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4095,7 +5482,14 @@
     "adresse": "La Mardiniere",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4116,7 +5510,14 @@
     "adresse": "Lieu Dit la Croix de Pois",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2025"
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4137,7 +5538,14 @@
     "adresse": "Les Guenardieres",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2017"
+    "creation": "2017",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4158,7 +5566,14 @@
     "adresse": "126 La Sablonniere",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2012"
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4179,7 +5594,14 @@
     "adresse": "La Basse Garenne",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4200,7 +5622,14 @@
     "adresse": "17 Rue de Saint Calais",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2018"
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4221,7 +5650,14 @@
     "adresse": "Za la Charmoie",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2017"
+    "creation": "2017",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4242,7 +5678,14 @@
     "adresse": "2 La Cheniere",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4263,7 +5706,14 @@
     "adresse": "15 Rue ST Calais",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2003"
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4284,7 +5734,14 @@
     "adresse": "La Vallee",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2008"
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4305,7 +5762,14 @@
     "adresse": "Les Houx",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2022"
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   },
   {
@@ -4326,7 +5790,14 @@
     "adresse": "Le Bourg Rte de ST Calais",
     "com_insee": "72376",
     "com_nom": "Villaines-sous-Lucé",
-    "creation": "2008"
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
    }
   }
  ]
