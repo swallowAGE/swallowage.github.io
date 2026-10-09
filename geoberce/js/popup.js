@@ -410,8 +410,8 @@ function construirePopupCommerce(props) {
 }
 
 /* Artisan (registre SIRENE, voir outils/build_artisans.py) : le registre
-   ne donne ni téléphone, ni horaires, ni site - plutôt qu'une fiche
-   vide, l'activité officielle, l'année de création et un lien vers
+   ne donne ni téléphone, ni horaires, ni site - affichés seulement quand
+   ils ont été saisis à la main ; sinon l'activité officielle, l'année de création et un lien vers
    l'Annuaire des entreprises (fiche publique de l'État, qui renvoie
    parfois vers le site de l'entreprise). "Signaler une erreur" ouvre le
    formulaire de contact déjà prérempli (voir ouvrirSignalement). */
@@ -420,6 +420,9 @@ function construirePopupArtisan(props) {
     const nom = props.nom || cat.label;
     const adresse = [props.adresse, props.com_nom].filter(Boolean).join(" · ");
     const annuaire = props.siret ? `https://annuaire-entreprises.data.gouv.fr/etablissement/${encodeURIComponent(props.siret)}` : null;
+    const horaires = parserHorairesOsm(props.opening_hours);
+    const lignesHoraires = construireLignesHoraires(horaires);
+    const contacts = construireContacts(props);
     const message = `Fiche artisan « ${nom} » (${props.com_nom || ""}, SIRET ${props.siret || "?"}) : `;
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
@@ -429,6 +432,7 @@ function construirePopupArtisan(props) {
                 <div class="popup-fiche-titre">${echapperHtml(nom)}</div>
                 ${adresse ? `<div class="popup-fiche-adresse">${echapperHtml(adresse)}</div>` : ""}
             </div>
+            ${horaires ? construireBadgeOuvert(horaires) : ""}
         </div>
         <div class="popup-fiche-section">
             <div class="popup-fiche-section-titre">Activité</div>
@@ -437,11 +441,13 @@ function construirePopupArtisan(props) {
         </div>
         <div class="popup-fiche-section">
             <div class="popup-fiche-section-titre">Contact</div>
-            <div class="popup-fiche-precision">Le registre officiel des entreprises ne donne ni téléphone ni e-mail.</div>
+            ${contacts.length ? `<div class="popup-fiche-contacts">${contacts.join("")}</div>` : `<div class="popup-fiche-precision">Le registre officiel des entreprises ne donne ni téléphone ni e-mail.</div>`}
             ${annuaire ? `<a class="popup-fiche-contact popup-fiche-lien" href="${annuaire}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>Voir la fiche sur l'Annuaire des entreprises</a>` : ""}
         </div>
+        ${lignesHoraires ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Horaires</div>${lignesHoraires}</div>` : ""}
+        ${props.note ? `<div class="popup-fiche-section"><div class="popup-fiche-precision">${echapperHtml(props.note)}</div></div>` : ""}
         <div class="popup-fiche-section popup-fiche-pied">
-            <span>Source : registre SIRENE (Insee)</span>
+            <span>${props.source === "manuel" ? "Fiche ajoutée à la main" : props.verifie ? "Fiche vérifiée · registre SIRENE (Insee)" : "Source : registre SIRENE (Insee)"}</span>
             <button type="button" class="popup-signaler" data-message="${echapperHtml(message)}">Signaler une erreur</button>
         </div>
     </div>`;
