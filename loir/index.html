@@ -67,6 +67,8 @@
   .chart-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
   .chart h2 { margin: 0; font-size: 20px; font-weight: 500; }
   .chart-head span, .chart p { font-size: 14px; color: var(--soft); margin: 0; }
+  #chart svg { touch-action: pan-y; cursor: crosshair; border-radius: 6px; }
+  .chart p.readout { min-height: 1.5em; font-size: 15px; color: var(--ink); }
   .alert { margin: 20px 0 0; background: var(--raised); border-radius: 12px; padding: 14px 16px; font-size: 15px; }
   .status { min-height: 1.4em; font-size: 15px; color: var(--soft); margin: 12px 0 0; }
   .notes { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px; color: var(--soft); }
@@ -118,6 +120,7 @@
     <section class="chart" aria-labelledby="chart-title">
       <div class="chart-head"><h2 id="chart-title">Le dernier mois</h2><span>hauteur en mètres</span></div>
       <div id="chart"></div>
+      <p class="readout" id="readout" aria-live="polite">Touchez ou survolez la courbe pour lire une mesure.</p>
       <p>Mesures de la station, toutes les heures environ. Les données récentes ne sont pas encore validées. <span id="source"></span></p>
     </section>
   </div>
@@ -229,7 +232,8 @@
     var t0 = series[0].t, t1 = series[series.length - 1].t || t0 + 1;
     var X = function (t) { return L + (t - t0) / Math.max(1, t1 - t0) * (R - L); };
     var Y = function (h) { return B - (h - lo) / (hi - lo) * (B - T); };
-    var s = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" role="img" aria-label="Hauteur sur le dernier mois, de ' +
+    scale = { series: series, X: X, Y: Y, W: W, H: H, L: L, R: R, T: T, B: B };
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" tabindex="0" role="img" aria-describedby="readout" aria-label="Hauteur sur le dernier mois, de ' +
       m2.format(series[0].h) + " m à " + m2.format(series[series.length - 1].h) + ' m" style="display: block; font-family: inherit">';
     for (var v = lo; v <= hi + 1e-9; v += step) {
       s += '<line x1="' + L + '" x2="' + R + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="rgba(43,34,48,.1)"></line>' +
@@ -247,14 +251,73 @@
       s += '<text x="' + X(t) + '" y="' + (H - 6) + '" font-size="12" fill="#6B5F5A" text-anchor="' + ["start", "middle", "end"][i] + '">' +
         (i === 2 ? "maintenant" : dateLabel(t)) + "</text>";
     });
+    // Repère de lecture, placé au toucher ou au survol.
+    s += '<g id="cur" visibility="hidden" pointer-events="none"><line id="cur-line" y1="' + T + '" y2="' + B + '" stroke="#2B2230" stroke-width="1" stroke-dasharray="3 3"></line>' +
+      '<circle id="cur-dot" r="6" fill="#FFFDF9" stroke="#2F6F8F" stroke-width="3"></circle>' +
+      '<rect id="cur-box" height="24" rx="6" fill="#2B2230"></rect><text id="cur-text" font-size="13" fill="#FAF6F0"></text></g>';
     return s + "</svg>";
   }
+
+  // ---------- Lecture d'une mesure sur la courbe ----------
+  var scale = null, curIndex = -1;
+  function hourLabel(t) {
+    var d = new Date(t);
+    return dateLabel(t) + " à " + d.getHours() + " h " + String(d.getMinutes()).padStart(2, "0");
+  }
+  function nearest(t) {
+    var a = scale.series, lo = 0, hi = a.length - 1;
+    while (hi - lo > 1) { var mid = (lo + hi) >> 1; if (a[mid].t < t) lo = mid; else hi = mid; }
+    return Math.abs(a[lo].t - t) <= Math.abs(a[hi].t - t) ? lo : hi;
+  }
+  function pointAt(i) {
+    if (!scale) return;
+    var d = scale.series[i], svg = $("chart").querySelector("svg");
+    if (!d || !svg) return;
+    curIndex = i;
+    var x = scale.X(d.t), y = scale.Y(d.h);
+    var txt = m2.format(d.h) + " m · " + hourLabel(d.t);
+    svg.querySelector("#cur").setAttribute("visibility", "visible");
+    var line = svg.querySelector("#cur-line"); line.setAttribute("x1", x); line.setAttribute("x2", x);
+    var dot = svg.querySelector("#cur-dot"); dot.setAttribute("cx", x); dot.setAttribute("cy", y);
+    var text = svg.querySelector("#cur-text"); text.textContent = txt;
+    var w = text.getComputedTextLength() + 16;
+    var bx = Math.max(scale.L, Math.min(scale.R - w, x - w / 2));
+    var by = y - 38 < scale.T - 18 ? y + 14 : y - 38;
+    var box = svg.querySelector("#cur-box"); box.setAttribute("x", bx); box.setAttribute("y", by); box.setAttribute("width", w);
+    text.setAttribute("x", bx + 8); text.setAttribute("y", by + 17);
+    $("readout").textContent = "Le " + hourLabel(d.t) + " : " + m2.format(d.h) + " m.";
+  }
+  function fromPointer(e) {
+    var svg = $("chart").querySelector("svg");
+    if (!scale || !svg) return;
+    var r = svg.getBoundingClientRect();
+    var x = (e.clientX - r.left) / r.width * scale.W;
+    var a = scale.series, t0 = a[0].t, t1 = a[a.length - 1].t;
+    var t = t0 + (Math.max(scale.L, Math.min(scale.R, x)) - scale.L) / (scale.R - scale.L) * (t1 - t0);
+    pointAt(nearest(t));
+  }
+  $("chart").addEventListener("pointermove", fromPointer);
+  $("chart").addEventListener("pointerdown", fromPointer);
+  $("chart").addEventListener("keydown", function (e) {
+    if (!scale) return;
+    var n = scale.series.length, i = curIndex < 0 ? n - 1 : curIndex;
+    // Flèches : mesure par mesure ; avec Maj : jour par jour.
+    var step = e.shiftKey ? Math.max(1, Math.round(n / 31)) : 1;
+    if (e.key === "ArrowLeft") i = Math.max(0, i - step);
+    else if (e.key === "ArrowRight") i = Math.min(n - 1, i + step);
+    else if (e.key === "Home") i = 0;
+    else if (e.key === "End") i = n - 1;
+    else return;
+    e.preventDefault();
+    pointAt(i);
+  });
 
   var current = null, drawn = null, rw = 0;
   window.addEventListener("resize", function () {
     if (!drawn || $("chart").clientWidth === rw) return;
     rw = $("chart").clientWidth;
     $("chart").innerHTML = chart(drawn[0], drawn[1]);
+    if (curIndex >= 0) pointAt(curIndex);
   });
   function show(code) {
     current = code;
@@ -306,7 +369,9 @@
       $("g-bottom").textContent = m2.format(lo) + " m";
 
       drawn = [series, record];
+      curIndex = -1;
       $("chart").innerHTML = chart(series, record);
+      $("readout").textContent = "Touchez ou survolez la courbe pour lire une mesure.";
     }).catch(function (e) {
       if (current !== code) return;
       $("status").textContent = "Mesures indisponibles pour le moment. Réessayez plus tard, ou consultez Vigicrues." +
@@ -317,7 +382,8 @@
       $("trend").textContent = "";
       $("gap").hidden = true;
       $("chart").innerHTML = "";
-      drawn = null;
+      $("readout").textContent = "";
+      drawn = null; scale = null;
     });
   }
 
