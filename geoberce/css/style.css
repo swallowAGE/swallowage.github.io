@@ -831,3 +831,28 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
         width: 34px; height: 34px;
     }
 }
+/* ---------- Artisans et associations ---------- */
+/* Pastille avec un nombre (associations d'une commune) à la place d'une icône. */
+.geo-marker-nombre {
+    min-width: 34px; height: 34px; box-sizing: border-box; padding: 0 6px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 999px; border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    color: #fff; font-weight: 800; font-size: 13px; font-family: var(--font-texte);
+}
+.popup-fiche-texte { font-size: 12.5px; color: #2A2A28; margin-bottom: 3px; }
+.popup-fiche-lien { margin-top: 8px; }
+.popup-fiche-pied { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 10.5px; color: var(--ardoise); }
+.popup-signaler { flex: none; border: 0; background: none; padding: 4px 0; color: var(--primaire); font-size: 11px; font-weight: 800; }
+.popup-signaler:hover { text-decoration: underline; }
+.asso-filtres { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 16px 4px; }
+.asso-filtre { border: 1px solid var(--bordure); background: #fff; color: #2A2A28; border-radius: 999px; padding: 5px 10px; font-size: 11.5px; font-weight: 700; }
+.asso-filtre[aria-pressed="true"] { background: #2A2A28; border-color: #2A2A28; color: #fff; }
+.asso-liste { list-style: none; margin: 0; padding: 8px 16px 12px; max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid var(--bordure); }
+.asso-item { border: 1px solid var(--bordure); border-radius: 12px; padding: 9px 11px; }
+.asso-item[hidden] { display: none; }
+.asso-cat { font-size: 9px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #B5461F; }
+.asso-titre { font-family: var(--font-titre); font-weight: 700; font-size: 14px; line-height: 1.15; margin-top: 1px; }
+.asso-objet { font-size: 11.5px; color: var(--ardoise); margin-top: 3px; }
+.asso-dates { font-size: 10.5px; color: var(--ardoise); margin-top: 3px; }
+.asso-site { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 700; color: var(--primaire); text-decoration: none; }

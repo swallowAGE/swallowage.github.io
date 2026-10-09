@@ -61,6 +61,12 @@ const iconeCache = {};
 
 function iconePourCouche(feature, layerConf) {
     const r = resoudreIconeCouleur(feature, layerConf);
+    /* `html` : marqueur entièrement personnalisé (ex : pastille avec le
+       nombre d'associations d'une commune) - pas mis en cache, chaque
+       pastille porte son propre nombre. */
+    if (r.html) {
+        return L.divIcon({ className: "geo-marker", html: r.html, iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -18] });
+    }
     if (r.segments && r.segments.length) {
         const cle = layerConf.id + "|camembert|" + r.icon + "|" + r.segments.join(",");
         if (!iconeCache[cle]) {

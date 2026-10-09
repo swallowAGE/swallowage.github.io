@@ -22,6 +22,7 @@ const GROUPS = {
     services: { label: "Services & mairie", icon: "fa-solid fa-landmark", color: PALETTE.foret },
     famille: { label: "Famille", icon: "fa-solid fa-child-reaching", color: PALETTE.terracotta },
     commerces: { label: "Commerces", icon: "fa-solid fa-basket-shopping", color: PALETTE.feuille },
+    associations: { label: "Associations", icon: "fa-solid fa-people-group", color: "#B5461F" },
     mobilite: { label: "Mobilité", icon: "fa-solid fa-bus", color: PALETTE.riviere },
     securite: { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", color: "#AD4826" },
     tourisme: { label: "Nature & rando", icon: "fa-solid fa-person-hiking", color: PALETTE.feuille },
@@ -348,6 +349,92 @@ function iconeCommerce(feature) {
    affichable/masquable séparément depuis la légende du panneau. */
 function categoriePourFeature(feature) {
     return categorieCommerce((feature.properties || {}).type).id;
+}
+
+/* =========================================================
+   ARTISANS (registre SIRENE)
+   couches/commerces/artisans.geojson est reconstruit chaque mois par
+   outils/build_artisans.py (workflow donnees-mensuelles.yml) : champ
+   "categorie" déjà calculé depuis le code APE de l'établissement. Les
+   "motsCles" servent à la recherche ("plombier" doit trouver la
+   catégorie "Plomberie & chauffage", pas seulement les noms).
+   Les 7 artisans saisis à la main dans commerces.geojson restent dans la
+   couche commerces ("Artisans du bâtiment") : le script ne reprend pas
+   un SIRET déjà présent là-bas.
+   ========================================================= */
+const TYPES_ARTISANS = [
+    { id: "plomberie", label: "Plomberie & chauffage", icon: "fa-solid fa-faucet-drip", color: "#2F6FA8",
+      motsCles: "plombier plomberie chauffagiste chauffage climatisation pompe à chaleur sanitaire" },
+    { id: "electricite", label: "Électricité", icon: "fa-solid fa-bolt", color: PALETTE.ardoise,
+      motsCles: "électricien électricité électrique éclairage" },
+    { id: "maconnerie", label: "Maçonnerie & gros œuvre", icon: "fa-solid fa-trowel-bricks", color: PALETTE.ardoise,
+      motsCles: "maçon maçonnerie gros oeuvre construction terrassement terrassier démolition" },
+    { id: "couverture", label: "Couverture & charpente", icon: "fa-solid fa-house-chimney", color: PALETTE.ardoise,
+      motsCles: "couvreur couverture toiture toit charpentier charpente zinguerie étanchéité" },
+    { id: "menuiserie", label: "Menuiserie", icon: "fa-solid fa-door-open", color: PALETTE.ardoise,
+      motsCles: "menuisier menuiserie fenêtre fenêtres porte portes serrurier serrurerie ébéniste" },
+    { id: "peinture", label: "Peinture & sols", icon: "fa-solid fa-paint-roller", color: PALETTE.ardoise,
+      motsCles: "peintre peinture plaquiste plâtrier plâtrerie carreleur carrelage sols isolation" },
+    { id: "jardin", label: "Parcs & jardins", icon: "fa-solid fa-seedling", color: PALETTE.foret,
+      motsCles: "paysagiste jardinier jardin jardins espaces verts élagage entretien" }
+];
+const TYPE_ARTISAN_DEFAUT = { id: "autre", label: "Autres artisans", icon: "fa-solid fa-hammer", color: PALETTE.ardoise,
+    motsCles: "artisan réparation métallerie forage" };
+
+function categorieArtisan(feature) {
+    const id = (feature.properties || {}).categorie;
+    return TYPES_ARTISANS.find(cat => cat.id === id) || TYPE_ARTISAN_DEFAUT;
+}
+function iconeArtisan(feature) {
+    const cat = categorieArtisan(feature);
+    return { icon: cat.icon, color: cat.color };
+}
+function sousTitreArtisan(feature) {
+    const props = feature.properties || {};
+    return [categorieArtisan(feature).label, props.com_nom].filter(Boolean).join(" · ");
+}
+function motsClesArtisan(feature) {
+    const props = feature.properties || {};
+    return [categorieArtisan(feature).motsCles, props.activite].filter(Boolean).join(" ");
+}
+
+/* =========================================================
+   ASSOCIATIONS (Répertoire national des associations)
+   couches/associations/associations.geojson, reconstruit chaque mois
+   par outils/build_associations.py : UN point par commune (son centre),
+   qui porte la liste de ses associations. Volontairement pas l'adresse
+   du siège : pour une petite association, c'est souvent le domicile
+   d'un ou d'une bénévole.
+   ========================================================= */
+const CATEGORIES_ASSOCIATIONS = {
+    sport: "Sport",
+    culture: "Culture",
+    loisirs: "Loisirs & fêtes",
+    entraide: "Entraide & santé",
+    education: "Enfance & école",
+    patrimoine: "Patrimoine & mémoire",
+    environnement: "Nature, chasse & pêche",
+    autres: "Autres"
+};
+const COULEUR_ASSOCIATIONS = "#B5461F";
+
+/* Pastille avec le nombre d'associations plutôt qu'une icône (voir
+   iconeHtml dans js/icons.js). */
+function iconeAssociations(feature) {
+    const nb = (feature.properties || {}).nb || 0;
+    return {
+        icon: "fa-solid fa-people-group", color: COULEUR_ASSOCIATIONS,
+        html: `<div class="geo-marker-nombre" style="background:${COULEUR_ASSOCIATIONS}">${nb}</div>`
+    };
+}
+function sousTitreAssociations(feature) {
+    const nb = (feature.properties || {}).nb || 0;
+    return nb + (nb > 1 ? " associations" : " association");
+}
+/* Recherche : le nom de chaque association renvoie vers la fiche de sa
+   commune ("football" trouve "Associations de Montval-sur-Loir"). */
+function motsClesAssociations(feature) {
+    return ((feature.properties || {}).associations || []).map(a => a.titre).join(" ");
 }
 
 /* Point d'extension utilisé par layers.js (ajouterAuIndex) : sous-titre
@@ -1234,6 +1321,23 @@ const LAYERS = [
         lazy: false, searchable: true, cluster: true,
         titleFields: ["name", "brand", "com_nom"]
     },
+    {
+        id: "artisans", group: "commerces", label: "Artisans",
+        file: "couches/commerces/artisans.geojson", type: "point",
+        icon: "fa-solid fa-hammer", color: PALETTE.ardoise,
+        iconePourFeature: iconeArtisan, sousTitrePourFeature: sousTitreArtisan, motsClesPourFeature: motsClesArtisan,
+        legend: TYPES_ARTISANS, legendDefaut: TYPE_ARTISAN_DEFAUT, categoriser: feature => categorieArtisan(feature).id,
+        lazy: false, searchable: true, cluster: true,
+        titleFields: ["nom"]
+    },
+    {
+        id: "associations", group: "associations", label: "Associations par commune",
+        file: "couches/associations/associations.geojson", type: "point",
+        icon: "fa-solid fa-people-group", color: COULEUR_ASSOCIATIONS,
+        iconePourFeature: iconeAssociations, sousTitrePourFeature: sousTitreAssociations, motsClesPourFeature: motsClesAssociations,
+        lazy: false, searchable: true, cluster: false,
+        titleFields: ["titre"]
+    },
     /* venteFerme (vente directe à la ferme) supprimée : filtrage précis sur
        le vrai polygone du territoire (voir README) donne 0 résultat réel -
        les quelques points vus en flux Overpass n'existaient que dans la
@@ -1576,6 +1680,7 @@ const THEMES = [
     { label: "Services & mairie", icon: "fa-solid fa-landmark", groups: ["services"] },
     { label: "Famille", icon: "fa-solid fa-child-reaching", groups: ["famille"] },
     { label: "Commerces", icon: "fa-solid fa-basket-shopping", groups: ["commerces"] },
+    { label: "Associations", icon: "fa-solid fa-people-group", groups: ["associations"] },
     { label: "Mobilité", icon: "fa-solid fa-bus", groups: ["mobilite"] },
     { label: "Nature & rando", icon: "fa-solid fa-person-hiking", groups: ["tourisme", "patrimoine"] },
     { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", groups: ["securite"] },
@@ -1636,6 +1741,11 @@ const RACCOURCIS = [
         label: "Commerces près de chez moi",
         icon: "fa-solid fa-basket-shopping",
         layerIds: ["commerces"]
+    },
+    {
+        label: "Un artisan près de chez moi",
+        icon: "fa-solid fa-hammer",
+        layerIds: ["artisans"]
     },
     {
         label: "Écoles près de chez moi",

@@ -72,9 +72,15 @@ function ajouterAuIndex(feature, latlng, layerConf, layer) {
         ? layerConf.sousTitrePourFeature(feature)
         : (layerConf.subtitleFields || []).map(c => props[c]).filter(Boolean).join(" · ");
 
+    /* layerConf.motsClesPourFeature (optionnel) : mots trouvables par la
+       recherche sans être affichés ("plombier" pour un artisan classé
+       "Plomberie & chauffage", noms des associations d'une commune...). */
+    const motsCles = layerConf.motsClesPourFeature ? layerConf.motsClesPourFeature(feature) : "";
+
     window.indexRecherche.push({
         titre: String(titre),
         sousTitre,
+        motsCles,
         icon: icon,
         color: color,
         latlng: latlng,
