@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Loir monte-t-il ? – Swallow AGE</title>
+<meta name="description" content="La hauteur du Loir en direct à La Chartre-sur-le-Loir et au Lude, son évolution sur un mois et ce qu'il lui manque pour atteindre le plus haut niveau mesuré.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B2230;
+    --soft: #6B5F5A;
+    --paper: #FAF6F0;
+    --raised: #F3ECE2;
+    --field: #FFFDF9;
+    --gold: #C9A85C;
+    --gold-ink: #8A6D2B;
+    --gold-hi: #E2C47E;
+    --rose: #8E4458;
+    --water: #2F6F8F;
+    --water-soft: #7FA4B8;
+    --on-dark: #E5DCD6;
+    --on-dark-soft: #D3C8C2;
+    --rule: rgba(43, 34, 48, 0.12);
+    --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Jost", system-ui, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 56px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 18px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 12px 0 0; font-size: clamp(30px, 5vw, 46px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+  .lede { margin: 10px 0 0; font-size: 18px; font-weight: 300; color: var(--soft); max-width: 62ch; }
+
+  .stations { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .stations button { border: 1px solid var(--line); background: var(--field); color: var(--ink); border-radius: 999px; padding: 8px 16px; min-height: 44px; font: inherit; font-size: 15px; cursor: pointer; }
+  .stations button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .stations select { font: inherit; font-size: 15px; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; min-height: 44px; max-width: 100%; }
+
+  .main { display: flex; flex-wrap: wrap; gap: 28px; align-items: stretch; margin-top: 24px; }
+  .now { flex: 1 1 360px; min-width: 0; background: var(--ink); color: var(--paper); border-radius: 18px; padding: 28px; display: flex; gap: 24px; }
+  .now .kicker { color: var(--gold); }
+  .now-text { flex: 1; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .level { display: flex; align-items: baseline; gap: 10px; }
+  .level strong { font-size: clamp(56px, 9vw, 84px); line-height: 1; font-weight: 500; color: var(--gold-hi); font-variant-numeric: tabular-nums; }
+  .level span { font-size: 20px; font-weight: 300; }
+  .now p { margin: 0; font-size: 17px; font-weight: 300; color: var(--on-dark); }
+  .now p strong { font-weight: 600; color: var(--gold-hi); }
+  .gap { margin-top: auto !important; border-top: 1px dashed rgba(250, 246, 240, 0.25); padding-top: 14px; font-size: 16px !important; }
+  .now a { color: var(--gold-hi); font-size: 15px; }
+  .gauge { width: 72px; flex: none; position: relative; border-left: 2px solid rgba(250, 246, 240, 0.25); }
+  .gauge .water { position: absolute; left: 0; right: 0; bottom: 0; background: var(--water-soft); opacity: 0.9; transition: height 0.4s; }
+  .gauge .rec { position: absolute; left: -2px; right: 0; border-top: 2px dashed var(--gold-hi); }
+  .gauge .rec span { position: absolute; right: 0; top: -20px; font-size: 12px; color: var(--gold-hi); }
+  .gauge .lab { position: absolute; left: 6px; font-size: 12px; color: var(--on-dark-soft); }
+
+  .chart { flex: 999 1 520px; min-width: 0; background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .chart-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+  .chart h2 { margin: 0; font-size: 20px; font-weight: 500; }
+  .chart-head span, .chart p { font-size: 14px; color: var(--soft); margin: 0; }
+  .alert { margin: 20px 0 0; background: var(--raised); border-radius: 12px; padding: 14px 16px; font-size: 15px; }
+  .status { min-height: 1.4em; font-size: 15px; color: var(--soft); margin: 12px 0 0; }
+  .notes { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 6px 0 0; }
+  @media (max-width: 700px) {
+    .wrap { padding: 0 16px 40px; }
+    .now { padding: 22px; gap: 16px; }
+    .gauge { width: 52px; }
+    .chart { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../">← swallow·AGE</a>
+    <span class="kicker">// outil · rivières</span>
+  </div>
+  <header>
+    <h1>Le Loir monte-t-il&nbsp;?</h1>
+    <p class="lede">La hauteur de la rivière en direct, son évolution sur un mois, et ce qu'il lui manque pour atteindre le plus haut niveau mesuré.</p>
+  </header>
+
+  <div class="stations" role="group" aria-label="Station de mesure" id="stations">
+    <button type="button" data-code="M130161010" aria-pressed="true">Le Loir à La Chartre-sur-le-Loir</button>
+    <button type="button" data-code="M144161010" aria-pressed="false">Le Loir au Lude</button>
+    <label for="other" class="sr-only" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Autre station en Sarthe</label>
+    <select id="other" hidden><option value="">Autre station en Sarthe…</option></select>
+  </div>
+  <p class="status" id="status" role="status"></p>
+
+  <div class="main" id="main">
+    <section class="now" aria-label="Niveau actuel" aria-live="polite">
+      <div class="now-text">
+        <span class="kicker" id="when">// chargement…</span>
+        <div class="level"><strong id="level">–</strong><span>m</span></div>
+        <p id="trend"></p>
+        <p class="gap" id="gap"></p>
+        <a id="vigicrues" href="https://www.vigicrues.gouv.fr" target="_blank" rel="noopener">Voir la station sur Vigicrues</a>
+      </div>
+      <div class="gauge" aria-hidden="true" id="gauge">
+        <div class="water" id="g-water" style="height: 0"></div>
+        <div class="rec" id="g-rec" hidden><span>record</span></div>
+        <span class="lab" id="g-top" style="top: 4px"></span>
+        <span class="lab" id="g-bottom" style="bottom: 4px; color: var(--ink)"></span>
+      </div>
+    </section>
+
+    <section class="chart" aria-labelledby="chart-title">
+      <div class="chart-head"><h2 id="chart-title">Le dernier mois</h2><span>hauteur en mètres</span></div>
+      <div id="chart"></div>
+      <p>Mesures de la station, toutes les heures environ. Les données récentes ne sont pas encore validées.</p>
+    </section>
+  </div>
+
+  <p class="alert">En cas de crue, suivez les consignes officielles sur <a href="https://www.vigicrues.gouv.fr" target="_blank" rel="noopener">vigicrues.gouv.fr</a>. Cette page ne remplace pas les alertes.</p>
+
+  <footer class="notes">
+    <div>
+      <span class="kicker">// les mesures</span>
+      <p>Hauteurs mesurées par les stations du réseau Vigicrues, diffusées par l'API Hub'Eau (hubeau.eaufrance.fr), environ un mois en arrière. La hauteur est lue à l'échelle de la station : ce n'est pas une profondeur.</p>
+    </div>
+    <div>
+      <span class="kicker">// le plus haut niveau</span>
+      <p>À La Chartre-sur-le-Loir, le plus haut niveau mesuré par la station est de 1,35 m, le 4 janvier 2003. Les grandes crues plus anciennes ne sont pas toujours mesurées à cette échelle.</p>
+    </div>
+    <div>
+      <span class="kicker">// vie privée</span>
+      <p>Rien n'est enregistré ni envoyé : la page demande seulement les mesures de la station à Hub'Eau.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var API = "https://hubeau.eaufrance.fr/api/v2/hydrometrie/";
+  // Plus hauts niveaux mesurés connus, par station (hauteur en m).
+  var RECORDS = { M130161010: { h: 1.35, label: "1,35 m le 4 janvier 2003" } };
+  var NAMES = { M130161010: "La Chartre-sur-le-Loir", M144161010: "Le Lude" };
+  var m2 = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var cm = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+  var MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+
+  function get(url) {
+    return fetch(url).then(function (r) {
+      if (!r.ok && r.status !== 206) throw new Error("http " + r.status);
+      return r.json();
+    });
+  }
+
+  // Hauteurs (Hub'Eau les donne en millimètres), du plus ancien au plus récent.
+  function loadSeries(code) {
+    var since = new Date(Date.now() - 31 * 86400000).toISOString().slice(0, 19) + "Z";
+    var url = API + "observations_tr?code_entite=" + code + "&grandeur_hydro=H&date_debut_obs=" + since +
+      "&size=5000&fields=date_obs,resultat_obs";
+    return get(url).then(function (j) {
+      return (j.data || [])
+        .map(function (d) { return { t: Date.parse(d.date_obs), h: d.resultat_obs / 1000 }; })
+        .filter(function (d) { return isFinite(d.t) && isFinite(d.h); })
+        .sort(function (a, b) { return a.t - b.t; });
+    });
+  }
+
+  function dateLabel(t) {
+    var d = new Date(t);
+    return d.getDate() + " " + MOIS[d.getMonth()];
+  }
+
+  function chart(series, record) {
+    // Dessiné à la taille réelle du cadre, pour garder des textes lisibles sur téléphone.
+    var W = Math.round($("chart").clientWidth) || 600, H = W < 500 ? 220 : 260, L = 44, R = W - 10, T = 20, B = H - 28;
+    var hs = series.map(function (d) { return d.h; });
+    var lo = Math.min.apply(null, hs), hi = Math.max.apply(null, hs);
+    if (record) hi = Math.max(hi, record.h);
+    var pad = Math.max(0.05, (hi - lo) * 0.1);
+    lo -= pad; hi += pad;
+    var step = [0.05, 0.1, 0.2, 0.25, 0.5, 1].find(function (s) { return (hi - lo) / s <= 5; }) || 1;
+    lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step;
+    var t0 = series[0].t, t1 = series[series.length - 1].t || t0 + 1;
+    var X = function (t) { return L + (t - t0) / Math.max(1, t1 - t0) * (R - L); };
+    var Y = function (h) { return B - (h - lo) / (hi - lo) * (B - T); };
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" role="img" aria-label="Hauteur sur le dernier mois, de ' +
+      m2.format(series[0].h) + " m à " + m2.format(series[series.length - 1].h) + ' m" style="display: block; font-family: inherit">';
+    for (var v = lo; v <= hi + 1e-9; v += step) {
+      s += '<line x1="' + L + '" x2="' + R + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="rgba(43,34,48,.1)"></line>' +
+        '<text x="' + (L - 6) + '" y="' + (Y(v) + 4) + '" text-anchor="end" font-size="12" fill="#6B5F5A">' + m2.format(v) + "</text>";
+    }
+    if (record) {
+      s += '<line x1="' + L + '" x2="' + R + '" y1="' + Y(record.h) + '" y2="' + Y(record.h) + '" stroke="#C9A85C" stroke-dasharray="5 5"></line>' +
+        '<text x="' + (R - 4) + '" y="' + (Y(record.h) - 6) + '" text-anchor="end" font-size="12" fill="#8A6D2B">plus haut niveau mesuré</text>';
+    }
+    var pts = series.map(function (d) { return X(d.t).toFixed(1) + "," + Y(d.h).toFixed(1); }).join(" ");
+    s += '<polyline points="' + pts + '" fill="none" stroke="#2F6F8F" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></polyline>';
+    var last = series[series.length - 1];
+    s += '<circle cx="' + X(last.t) + '" cy="' + Y(last.h) + '" r="5" fill="#2F6F8F"></circle>';
+    [t0, (t0 + t1) / 2, t1].forEach(function (t, i) {
+      s += '<text x="' + X(t) + '" y="' + (H - 6) + '" font-size="12" fill="#6B5F5A" text-anchor="' + ["start", "middle", "end"][i] + '">' +
+        (i === 2 ? "maintenant" : dateLabel(t)) + "</text>";
+    });
+    return s + "</svg>";
+  }
+
+  var current = null, drawn = null, rw = 0;
+  window.addEventListener("resize", function () {
+    if (!drawn || $("chart").clientWidth === rw) return;
+    rw = $("chart").clientWidth;
+    $("chart").innerHTML = chart(drawn[0], drawn[1]);
+  });
+  function show(code) {
+    current = code;
+    document.querySelectorAll("#stations button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.code === code)); });
+    if (!document.querySelector('#stations button[data-code="' + code + '"]')) $("other").value = code;
+    else $("other").value = "";
+    $("vigicrues").href = "https://www.vigicrues.gouv.fr/station/" + code;
+    $("status").textContent = "Chargement des mesures…";
+    try { history.replaceState(null, "", "?station=" + code); } catch (e) { /* rien */ }
+
+    loadSeries(code).then(function (series) {
+      if (current !== code) return;
+      if (!series.length) throw new Error("vide");
+      $("status").textContent = "";
+      var last = series[series.length - 1];
+      var opt = $("other").selectedOptions[0];
+      var name = NAMES[code] || (opt && opt.value === code ? opt.textContent : "station " + code);
+      var d = new Date(last.t);
+      $("when").textContent = "// " + name + " · " + (Date.now() - last.t < 86400000 ? "aujourd'hui" : dateLabel(last.t)) +
+        " à " + d.getHours() + " h " + String(d.getMinutes()).padStart(2, "0");
+      $("level").textContent = m2.format(last.h);
+
+      // Tendance sur trois jours.
+      var ref = series.filter(function (x) { return x.t <= last.t - 3 * 86400000; }).pop() || series[0];
+      var delta = last.h - ref.h;
+      $("trend").textContent = Math.abs(delta) < 0.02 ? "Stable depuis 3 jours."
+        : (delta > 0 ? "En hausse" : "En baisse") + " de " + cm.format(Math.abs(delta) * 100) + " cm en 3 jours.";
+
+      var record = RECORDS[code];
+      if (record) {
+        var missing = record.h - last.h;
+        $("gap").innerHTML = missing > 0
+          ? "Il manque <strong>" + m2.format(missing) + " m</strong> pour atteindre le plus haut niveau mesuré (" + record.label + ")."
+          : "<strong>Au-dessus du plus haut niveau mesuré</strong> (" + record.label + ") : suivez Vigicrues.";
+        $("gap").hidden = false;
+      } else {
+        $("gap").hidden = true;
+      }
+
+      // Jauge : du plus bas du mois au plus haut niveau connu.
+      var hs = series.map(function (x) { return x.h; });
+      var lo = Math.min.apply(null, hs) - 0.2, hi = Math.max(record ? record.h : -Infinity, Math.max.apply(null, hs)) + 0.2;
+      var pct = function (h) { return Math.max(0, Math.min(100, (h - lo) / (hi - lo) * 100)); };
+      $("g-water").style.height = pct(last.h) + "%";
+      $("g-rec").hidden = !record;
+      if (record) $("g-rec").style.bottom = pct(record.h) + "%";
+      $("g-top").textContent = m2.format(hi) + " m";
+      $("g-bottom").textContent = m2.format(lo) + " m";
+
+      drawn = [series, record];
+      $("chart").innerHTML = chart(series, record);
+    }).catch(function () {
+      if (current !== code) return;
+      $("status").textContent = "Mesures indisponibles pour le moment. Réessayez plus tard, ou consultez Vigicrues.";
+      $("when").textContent = "// mesures indisponibles";
+      $("level").textContent = "–";
+      $("trend").textContent = "";
+      $("gap").hidden = true;
+      $("chart").innerHTML = "";
+      drawn = null;
+    });
+  }
+
+  document.querySelectorAll("#stations button").forEach(function (b) {
+    b.addEventListener("click", function () { show(b.dataset.code); });
+  });
+  $("other").addEventListener("change", function () { if (this.value) show(this.value); });
+
+  // Les autres stations de la Sarthe, pour le menu « Autre station ».
+  get(API + "referentiel/stations?code_departement=72&en_service=true&size=200&fields=code_station,libelle_station")
+    .then(function (j) {
+      var list = (j.data || []).filter(function (s) { return s.code_station && s.libelle_station && !NAMES[s.code_station]; })
+        .sort(function (a, b) { return a.libelle_station.localeCompare(b.libelle_station, "fr"); });
+      if (!list.length) return;
+      list.forEach(function (s) { $("other").appendChild(new Option(s.libelle_station, s.code_station)); });
+      $("other").hidden = false;
+      if (current && !NAMES[current]) $("other").value = current;
+    }).catch(function () { /* les deux stations du Loir suffisent */ });
+
+  var start = new URLSearchParams(location.search).get("station");
+  show(/^[A-Z0-9]{8,10}$/.test(start || "") ? start : "M130161010");
+})();
+</script>
+</body>
+</html>
