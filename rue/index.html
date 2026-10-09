@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ma rue il y a 70 ans – Swallow AGE</title>
-<meta name="description" content="Votre maison, votre village ou votre champ vus du ciel dans les années 1950, puis aujourd'hui : un curseur pour comparer les photos aériennes de l'IGN.">
+<title>Ma rue à travers les siècles – Swallow AGE</title>
+<meta name="description" content="Votre rue, votre village ou votre champ sur la carte de Cassini (vers 1750), la carte d'état-major (vers 1850), les photos aériennes des années 1950 et d'aujourd'hui : un curseur pour comparer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -62,6 +62,14 @@
   .chips button:hover { border-color: var(--rose); }
   .status { font-size: 14px; color: var(--soft); margin: 8px 0 0; min-height: 1.3em; }
 
+  /* ---------- Époques ---------- */
+  .eras { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: 20px; }
+  .eras .lbl { display: block; font-size: 13px; font-weight: 500; color: var(--soft); margin: 0 0 6px; }
+  .seg { display: flex; gap: 4px; background: #E8DED0; border-radius: 12px; padding: 4px; }
+  .seg button { border: 0; border-radius: 9px; min-height: 40px; padding: 8px 14px; font: inherit; font-size: 15px; font-weight: 500; background: transparent; color: var(--soft); cursor: pointer; white-space: nowrap; }
+  .seg button:hover { color: var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--field); color: var(--ink); box-shadow: 0 1px 2px rgba(43, 34, 48, 0.15); }
+
   /* ---------- Comparaison ---------- */
   .viewer { position: relative; margin-top: 18px; height: min(62vh, 600px); min-height: 360px; border-radius: 18px; overflow: hidden; background: #B5A88E; }
   #map { position: absolute; inset: 0; background: #B5A88E; }
@@ -87,6 +95,8 @@
     .lede { font-size: 16px; }
     .viewer { height: 64vh; border-radius: 14px; margin-left: -16px; margin-right: -16px; border-radius: 0; }
     .tag { font-size: 13px; padding: 5px 12px; }
+    .eras > div { flex: 1 1 100%; }
+    .seg button { flex: 1; padding: 8px 4px; font-size: 14px; }
   }
 </style>
 </head>
@@ -94,11 +104,11 @@
 <div class="wrap">
   <div class="topbar">
     <a href="../">← swallow·AGE</a>
-    <span class="kicker">// outil · photos aériennes</span>
+    <span class="kicker">// outil · cartes anciennes</span>
   </div>
   <header>
-    <h1>Ma rue il y a 70 ans</h1>
-    <p class="lede">Votre maison, votre village ou votre champ, vus du ciel dans les années 1950, puis aujourd'hui. Faites glisser le curseur.</p>
+    <h1>Ma rue à travers les siècles</h1>
+    <p class="lede">De la carte de Cassini aux photos d'aujourd'hui&nbsp;: choisissez deux époques pour votre rue, votre village ou votre champ, et faites glisser le curseur.</p>
   </header>
 
   <form class="search" id="search-form" autocomplete="off" role="search">
@@ -118,21 +128,31 @@
     <button type="button" data-place="47.7313,0.5775,17" data-label="La Chartre-sur-le-Loir, centre">La Chartre-sur-le-Loir</button>
     <button type="button" data-place="47.8618,0.4708,17" data-label="Le Grand-Lucé, centre">Le Grand-Lucé</button>
   </div>
+  <div class="eras">
+    <div>
+      <span class="lbl" id="lbl-left">À gauche</span>
+      <div class="seg" role="group" aria-labelledby="lbl-left" data-side="left"></div>
+    </div>
+    <div>
+      <span class="lbl" id="lbl-right">À droite</span>
+      <div class="seg" role="group" aria-labelledby="lbl-right" data-side="right"></div>
+    </div>
+  </div>
   <p class="status" id="status" role="status"></p>
 
   <div class="viewer" id="viewer">
-    <div id="map" aria-label="Photo aérienne : années 1950 à gauche du curseur, aujourd'hui à droite"></div>
+    <div id="map" aria-label="Carte : années 1950 à gauche du curseur, aujourd'hui à droite"></div>
     <div class="divider" id="divider"></div>
     <button type="button" class="knob" id="knob" aria-label="Faire glisser pour comparer" tabindex="-1">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2B2230" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"></path></svg>
     </button>
-    <span class="tag old">1950-1965</span>
-    <span class="tag now">Aujourd'hui</span>
+    <span class="tag old" id="tag-left">1950-1965</span>
+    <span class="tag now" id="tag-right">Aujourd'hui</span>
   </div>
   <div class="range">
-    <span aria-hidden="true">1950</span>
+    <span aria-hidden="true" id="r-left">1950</span>
     <input id="pos" type="range" min="0" max="100" step="1" value="50" aria-label="Position du curseur entre les années 1950 et aujourd'hui">
-    <span aria-hidden="true">aujourd'hui</span>
+    <span aria-hidden="true" id="r-right">aujourd'hui</span>
   </div>
   <div class="below">
     <p id="place-label">Château-du-Loir, centre</p>
@@ -144,8 +164,8 @@
 
   <footer class="notes">
     <div>
-      <span class="kicker">// les photos</span>
-      <p>Photographies aériennes historiques 1950-1965 et photographies actuelles de l'IGN (Géoplateforme), redressées pour se superposer. La date exacte des anciennes photos varie selon les endroits, et certaines zones ne sont pas couvertes.</p>
+      <span class="kicker">// les cartes et les photos</span>
+      <p>Carte de Cassini (vers 1750, BnF et IGN), carte d'état-major (vers 1850), photographies aériennes 1950-1965 et actuelles de l'IGN (Géoplateforme), redressées pour se superposer. Les cartes anciennes sont moins détaillées&nbsp;: on y voit les villages, les routes et les rivières, pas chaque maison. La date exacte des anciennes photos varie selon les endroits.</p>
     </div>
     <div>
       <span class="kicker">// partout en France</span>
@@ -172,11 +192,26 @@
   }
   var attribution = '<a href="https://www.ign.fr" target="_blank" rel="noopener">IGN</a>';
 
-  // Lieu de départ : celui du lien partagé (#lat,lon,zoom,curseur), sinon Château-du-Loir.
-  var start = { lat: 47.6950, lon: 0.4183, zoom: 17, pos: 50 };
+  // Les quatre époques. « best » : zoom au-delà duquel la carte ancienne devient floue.
+  var ERAS = [
+    { label: "vers 1750", tag: "Cassini, vers 1750", short: "1750", layer: "BNF-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI", style: "normal", format: "image/png",
+      native: 14, best: 15, attr: 'Carte de Cassini <a href="https://www.bnf.fr" target="_blank" rel="noopener">BnF</a>, ' + attribution },
+    { label: "vers 1850", tag: "État-major, vers 1850", short: "1850", layer: "GEOGRAPHICALGRIDSYSTEMS.ETATMAJOR40", style: "normal", format: "image/jpeg",
+      native: 15, best: 16, attr: "Carte d'état-major " + attribution },
+    { label: "1950", tag: "1950-1965", short: "1950", layer: "ORTHOIMAGERY.ORTHOPHOTOS.1950-1965", style: "BDORTHOHISTORIQUE", format: "image/png",
+      native: 18, best: 19, attr: "1950-1965 " + attribution },
+    { label: "aujourd'hui", tag: "Aujourd'hui", short: "aujourd'hui", layer: "ORTHOIMAGERY.ORTHOPHOTOS", style: "normal", format: "image/jpeg",
+      native: 19, best: 19, attr: "Photos " + attribution }
+  ];
+
+  // Lieu de départ : celui du lien partagé (#lat,lon,zoom,curseur,gauche,droite), sinon Château-du-Loir.
+  var start = { lat: 47.6950, lon: 0.4183, zoom: 16, pos: 50, left: 1, right: 3 };
   var hash = location.hash.slice(1).split(",").map(parseFloat);
-  if (hash.length >= 3 && hash.every(isFinite)) {
-    start = { lat: hash[0], lon: hash[1], zoom: hash[2], pos: isFinite(hash[3]) ? hash[3] : 50 };
+  if (hash.length >= 3 && hash.slice(0, 3).every(isFinite)) {
+    var era = function (v, d) { return v >= 0 && v <= 3 && v === Math.round(v) ? v : d; };
+    // Les anciens liens (quatre nombres) comparaient 1950 et aujourd'hui.
+    start = { lat: hash[0], lon: hash[1], zoom: hash[2], pos: isFinite(hash[3]) ? hash[3] : 50,
+      left: era(hash[4], hash.length >= 5 ? 1 : 2), right: era(hash[5], 3) };
     $("place-label").textContent = "Lieu partagé";
   }
 
@@ -184,16 +219,52 @@
   L.control.zoom({ position: "bottomright", zoomInTitle: "Zoomer", zoomOutTitle: "Dézoomer" }).addTo(map);
   map.attributionControl.setPrefix(false);
 
-  L.tileLayer(ign("ORTHOIMAGERY.ORTHOPHOTOS", "normal", "image/jpeg"), {
-    maxZoom: 19, maxNativeZoom: 19, attribution: "Photos " + attribution
-  }).addTo(map);
+  // Chaque côté a son calque ; celui de gauche est découpé à gauche du curseur.
+  map.createPane("right").style.zIndex = 220;
+  map.createPane("left").style.zIndex = 250;
+  var sides = { left: { era: start.left, layer: null }, right: { era: start.right, layer: null } };
 
-  // Les photos anciennes vont dans leur propre calque, découpé à gauche du curseur.
-  map.createPane("old");
-  map.getPane("old").style.zIndex = 250;
-  L.tileLayer(ign("ORTHOIMAGERY.ORTHOPHOTOS.1950-1965", "BDORTHOHISTORIQUE", "image/png"), {
-    pane: "old", maxZoom: 19, maxNativeZoom: 18, attribution: "1950-1965 " + attribution
-  }).addTo(map);
+  function setEra(side, i) {
+    var s = sides[side], e = ERAS[i];
+    if (s.layer) map.removeLayer(s.layer);
+    s.era = i;
+    var ok = false, errors = 0;
+    s.layer = L.tileLayer(ign(e.layer, e.style, e.format), {
+      pane: side, maxZoom: 19, maxNativeZoom: e.native, attribution: e.attr
+    }).on("tileload", function () { ok = true; })
+      .on("tileerror", function () {
+        // Prévenir une seule fois si aucune tuile ne vient.
+        if (++errors === 4 && !ok && s.era === i) {
+          $("status").textContent = "La carte « " + e.tag + " » ne s'affiche pas ici pour le moment (zone non couverte ou service indisponible).";
+        }
+      }).addTo(map);
+    $("tag-" + side).textContent = e.tag;
+    $("r-" + side).textContent = e.short;
+    document.querySelectorAll('.seg[data-side="' + side + '"] button').forEach(function (b) {
+      b.setAttribute("aria-pressed", String(+b.dataset.i === i));
+    });
+    var l = ERAS[sides.left.era], r = ERAS[sides.right.era];
+    $("map").setAttribute("aria-label", "Carte : " + l.tag + " à gauche du curseur, " + r.tag + " à droite");
+    $("pos").setAttribute("aria-label", "Position du curseur entre " + l.tag + " et " + r.tag);
+  }
+
+  document.querySelectorAll(".seg").forEach(function (g) {
+    var side = g.dataset.side;
+    g.innerHTML = ERAS.map(function (e, i) { return '<button type="button" data-i="' + i + '">' + e.label + "</button>"; }).join("");
+    g.addEventListener("click", function (ev) {
+      var b = ev.target.closest("button");
+      if (!b) return;
+      var i = +b.dataset.i;
+      $("status").textContent = "";
+      setEra(side, i);
+      // Les cartes anciennes sont moins précises : on recule un peu si l'on est trop près.
+      var best = Math.min(ERAS[sides.left.era].best, ERAS[sides.right.era].best);
+      if (map.getZoom() > best) map.setZoom(best);
+      updateHash();
+    });
+  });
+  setEra("left", start.left);
+  setEra("right", start.right);
 
   // ---------- Curseur ----------
   var pos = Math.max(0, Math.min(100, start.pos));
@@ -203,7 +274,7 @@
     var nw = map.containerPointToLayerPoint([0, 0]);
     var se = map.containerPointToLayerPoint(size);
     var x = nw.x + size.x * pos / 100;
-    map.getPane("old").style.clip = "rect(" + nw.y + "px, " + x + "px, " + se.y + "px, " + nw.x + "px)";
+    map.getPane("left").style.clip = "rect(" + nw.y + "px, " + x + "px, " + se.y + "px, " + nw.x + "px)";
     $("divider").style.left = pos + "%";
     $("knob").style.left = pos + "%";
     $("pos").value = pos;
@@ -242,7 +313,8 @@
     clearTimeout(hashTimer);
     hashTimer = setTimeout(function () {
       var c = map.getCenter();
-      history.replaceState(null, "", "#" + c.lat.toFixed(5) + "," + c.lng.toFixed(5) + "," + map.getZoom() + "," + Math.round(pos));
+      history.replaceState(null, "", "#" + c.lat.toFixed(5) + "," + c.lng.toFixed(5) + "," + map.getZoom() + "," + Math.round(pos) +
+        "," + sides.left.era + "," + sides.right.era);
     }, 300);
   }
   map.on("moveend", updateHash);
@@ -251,7 +323,7 @@
     updateHash();
     setTimeout(function () {
       var url = location.href;
-      var title = "Ma rue il y a 70 ans – " + $("place-label").textContent;
+      var title = "Ma rue à travers les siècles – " + $("place-label").textContent;
       if (navigator.share) {
         navigator.share({ title: title, url: url }).catch(function () {});
       } else if (navigator.clipboard) {
@@ -265,7 +337,8 @@
 
   // ---------- Aller à un lieu ----------
   function goTo(lat, lon, zoom, label) {
-    map.setView([lat, lon], zoom || 17);
+    var best = Math.min(ERAS[sides.left.era].best, ERAS[sides.right.era].best);
+    map.setView([lat, lon], Math.min(zoom || 17, best));
     if (label) $("place-label").textContent = label;
     $("status").textContent = "";
   }

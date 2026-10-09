@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'eau de mon robinet – Swallow AGE</title>
+<meta name="description" content="Qu'y a-t-il dans l'eau du robinet de votre commune ? Conformité, nitrates, pesticides, dureté et bactéries, d'après le contrôle sanitaire officiel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B2230;
+    --soft: #6B5F5A;
+    --paper: #FAF6F0;
+    --raised: #F3ECE2;
+    --field: #FFFDF9;
+    --gold: #C9A85C;
+    --gold-ink: #8A6D2B;
+    --gold-hi: #E2C47E;
+    --rose: #8E4458;
+    --green: #5E8C61;
+    --water: #2F6F8F;
+    --on-dark: #E5DCD6;
+    --rule: rgba(43, 34, 48, 0.12);
+    --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Jost", system-ui, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 16px 48px; display: flex; flex-direction: column; gap: 16px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 14px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 0; font-size: clamp(28px, 6vw, 40px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+  label, .lbl { display: block; font-size: 13px; font-weight: 500; color: var(--soft); margin: 0 0 6px; }
+  .fld { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 46px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .row > div { flex: 1 1 220px; min-width: 0; position: relative; }
+  .suggest { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 10; list-style: none; margin: 0; padding: 4px; background: var(--field); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 6px 20px rgba(43, 34, 48, 0.12); }
+  .suggest button { display: block; width: 100%; text-align: left; border: 0; background: transparent; font: inherit; font-size: 15px; color: var(--ink); padding: 9px 10px; border-radius: 8px; cursor: pointer; }
+  .suggest button:hover, .suggest button:focus-visible { background: var(--raised); }
+  .suggest small { display: block; font-size: 13px; color: var(--soft); }
+  .status { min-height: 1.3em; font-size: 15px; color: var(--soft); margin: 0; }
+
+  .card { background: var(--ink); color: var(--paper); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .card .kicker { color: var(--gold); }
+  .verdict { display: flex; align-items: center; gap: 12px; }
+  .verdict svg { flex: none; }
+  .verdict strong { font-size: clamp(28px, 7vw, 34px); line-height: 1.1; font-weight: 500; color: var(--gold-hi); }
+  .card p { margin: 0; font-size: 15px; font-weight: 300; color: var(--on-dark); }
+  .card .official { font-size: 14px; border-top: 1px dashed rgba(250, 246, 240, 0.25); padding-top: 10px; }
+  .card ul { margin: 0; padding-left: 18px; font-size: 15px; color: var(--on-dark); }
+
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tile { background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 14px; padding: 14px; }
+  .tile .k { font-size: 14px; color: var(--soft); }
+  .tile .v { font-size: 22px; font-weight: 500; line-height: 1.25; margin-top: 4px; }
+  .tile .v small { font-size: 14px; font-weight: 400; }
+  .tile .s { font-size: 12px; color: var(--soft); margin-top: 6px; }
+  .bar { height: 8px; border-radius: 999px; background: #F0E8DC; margin-top: 8px; overflow: hidden; }
+  .bar div { height: 100%; border-radius: 999px; }
+  .box { background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 14px; padding: 14px; }
+  .box-head { display: flex; justify-content: space-between; gap: 8px; }
+  .box-head b { font-size: 15px; font-weight: 500; }
+  .box-head span { font-size: 13px; color: var(--soft); }
+  .notes { margin-top: 12px; padding-top: 18px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 14px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 4px 0 0; }
+  @media (max-width: 360px) { .tiles { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../">← swallow·AGE</a>
+    <span class="kicker">// outil · eau potable</span>
+  </div>
+  <h1>Qu'y a-t-il dans l'eau de mon robinet&nbsp;?</h1>
+
+  <div class="row">
+    <div>
+      <label for="commune">Ma commune</label>
+      <select id="commune" class="fld"></select>
+    </div>
+    <div>
+      <label for="search">Ou une autre commune</label>
+      <input id="search" class="fld" type="text" placeholder="Nom de la commune" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggest">
+      <ul id="suggest" class="suggest" role="listbox" aria-label="Communes proposées" hidden></ul>
+    </div>
+  </div>
+  <p class="status" id="status" role="status"></p>
+
+  <section class="card" id="card" aria-live="polite" hidden>
+    <span class="kicker" id="when"></span>
+    <div class="verdict"><span id="verdict-icon"></span><strong id="verdict"></strong></div>
+    <p id="verdict-text"></p>
+    <ul id="over" hidden></ul>
+    <p class="official" id="official"></p>
+  </section>
+
+  <div class="tiles" id="tiles" hidden>
+    <div class="tile"><div class="k">Nitrates</div><div class="v" id="t-no3"></div><div class="bar" id="t-no3-bar"><div></div></div><div class="s">limite 50 mg/L</div></div>
+    <div class="tile"><div class="k">Pesticides (total)</div><div class="v" id="t-pest"></div><div class="s" id="t-pest-s">limite 0,5 µg/L</div></div>
+    <div class="tile"><div class="k">Dureté (calcaire)</div><div class="v" id="t-th"></div><div class="s" id="t-th-s"></div></div>
+    <div class="tile"><div class="k">Bactéries</div><div class="v" id="t-bact"></div><div class="s">E. coli, entérocoques</div></div>
+  </div>
+
+  <div class="box" id="no3-box" hidden>
+    <div class="box-head"><b>Nitrates depuis 2019</b><span>mg/L</span></div>
+    <div id="no3-chart"></div>
+  </div>
+
+  <footer class="notes">
+    <div>
+      <span class="kicker">// les analyses</span>
+      <p>Résultats du contrôle sanitaire officiel de l'eau distribuée (Agences régionales de santé), diffusés par l'API Hub'Eau et mis à jour chaque mois. Les prélèvements sont faits sur le réseau de la commune, pas forcément à votre robinet.</p>
+    </div>
+    <div>
+      <span class="kicker">// les repères</span>
+      <p>Nitrates : limite de 50 mg/L. Pesticides : 0,1 µg/L par molécule et 0,5 µg/L au total. Dureté : en dessous de 15 °f l'eau est douce, au-dessus de 30 °f elle est dure.</p>
+    </div>
+    <div>
+      <span class="kicker">// vie privée</span>
+      <p>Rien n'est enregistré. La page demande les analyses à Hub'Eau, et le nom de la commune tapé part à l'IGN pour la trouver.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var API = "https://hubeau.eaufrance.fr/api/v1/qualite_eau_potable/resultats_dis";
+  var COMMUNES = [["Beaumont-Pied-de-Bœuf", "72028"], ["Beaumont-sur-Dême", "72027"], ["Chahaignes", "72052"], ["Courdemanche", "72103"],
+    ["Dissay-sous-Courcillon", "72115"], ["Flée", "72134"], ["Jupilles", "72153"], ["La Chartre-sur-le-Loir", "72068"], ["Lavernat", "72160"],
+    ["Le Grand-Lucé", "72143"], ["Lhomme", "72161"], ["Loir en Vallée", "72262"], ["Luceau", "72173"], ["Marçon", "72183"],
+    ["Montreuil-le-Henri", "72210"], ["Montval-sur-Loir", "72071"], ["Nogent-sur-Loir", "72221"], ["Pruillé-l'Éguillé", "72248"],
+    ["Saint-Georges-de-la-Couée", "72279"], ["Saint-Pierre-de-Chevillé", "72311"], ["Saint-Pierre-du-Lorouër", "72314"],
+    ["Saint-Vincent-du-Lorouër", "72325"], ["Thoiré-sur-Dinan", "72356"], ["Villaines-sous-Lucé", "72376"]];
+  var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+  var n1 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 1 });
+  var n2 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
+
+  function esc(t) {
+    return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; });
+  }
+  function longDate(s) { var d = new Date(s); return d.getDate() + (d.getDate() === 1 ? "er" : "") + " " + MOIS[d.getMonth()] + " " + d.getFullYear(); }
+  function ymd(t) { return new Date(t).toISOString().slice(0, 10); }
+
+  function get(url) {
+    return fetch(url).then(function (r) {
+      if (!r.ok && r.status !== 206) throw new Error("http " + r.status);
+      return r.json();
+    }).then(function (j) { return j.data || []; });
+  }
+
+  // Un paramètre : par code SANDRE, ou à défaut par son libellé.
+  function isParam(r, code, re) { return String(r.code_parametre) === code || re.test(r.libelle_parametre || ""); }
+  function latest(rows, code, re) {
+    return rows.filter(function (r) { return isParam(r, code, re) && r.resultat_numerique !== null && r.resultat_numerique !== undefined; })
+      .sort(function (a, b) { return Date.parse(b.date_prelevement) - Date.parse(a.date_prelevement); })[0];
+  }
+  // « <=50 mg/L » → 50
+  function limitOf(r) {
+    var m = String(r.limite_qualite_parametre || "").replace(/,/g, ".").match(/(?:<=|≤)\s*([\d.]+)/);
+    return m ? parseFloat(m[1]) : NaN;
+  }
+
+  var ICON_OK = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E2C47E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg>';
+  var ICON_WARN = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E2C47E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2z"></path><path d="M12 10v5M12 18h.01"></path></svg>';
+
+  function chart(points) {
+    // Dessiné à la taille réelle du cadre, pour garder des textes lisibles sur téléphone.
+    var W = Math.round($("no3-chart").clientWidth) || 600, H = 170, L = 34, R = W - 10, T = 12, B = 146;
+    var hi = Math.max(55, Math.max.apply(null, points.map(function (p) { return p.v; })) * 1.1);
+    var t0 = points[0].t, t1 = points[points.length - 1].t;
+    var X = function (t) { return L + (t - t0) / Math.max(1, t1 - t0) * (R - L); };
+    var Y = function (v) { return B - v / hi * (B - T); };
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" width="100%" role="img" aria-label="Nitrates de ' + n1.format(points[0].v) + " à " +
+      n1.format(points[points.length - 1].v) + ' mg/L, limite 50" style="display: block; margin-top: 6px; font-family: inherit">';
+    [0, 25, 50].forEach(function (v) {
+      s += '<line x1="' + L + '" x2="' + R + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="' + (v === 50 ? "#8E4458" : "rgba(43,34,48,.1)") + '"' +
+        (v === 50 ? ' stroke-dasharray="5 5"' : "") + '></line><text x="' + (L - 6) + '" y="' + (Y(v) + 4) + '" text-anchor="end" font-size="12" fill="' +
+        (v === 50 ? "#8E4458" : "#6B5F5A") + '">' + v + "</text>";
+    });
+    s += '<polyline points="' + points.map(function (p) { return X(p.t).toFixed(1) + "," + Y(p.v).toFixed(1); }).join(" ") +
+      '" fill="none" stroke="#2F6F8F" stroke-width="2.5" stroke-linejoin="round"></polyline>';
+    s += '<text x="' + L + '" y="' + (H - 4) + '" font-size="12" fill="#6B5F5A">' + new Date(t0).getFullYear() + "</text>" +
+      '<text x="' + R + '" y="' + (H - 4) + '" font-size="12" fill="#6B5F5A" text-anchor="end">' + new Date(t1).getFullYear() + "</text>";
+    return s + "</svg>";
+  }
+
+  var asked = 0, drawn = null, rw = 0;
+  window.addEventListener("resize", function () {
+    if (!drawn || $("no3-box").hidden || $("no3-chart").clientWidth === rw) return;
+    rw = $("no3-chart").clientWidth;
+    $("no3-chart").innerHTML = chart(drawn);
+  });
+  function show(code, name) {
+    var n = ++asked;
+    $("status").textContent = "Recherche des analyses de " + name + "…";
+    $("card").hidden = $("tiles").hidden = $("no3-box").hidden = true;
+    try { history.replaceState(null, "", "?commune=" + code); } catch (e) { /* rien */ }
+    var since = ymd(Date.now() - 548 * 86400000);
+    Promise.all([
+      get(API + "?code_commune=" + code + "&date_min_prelevement=" + since + "&size=10000"),
+      get(API + "?code_commune=" + code + "&code_parametre=1340&date_min_prelevement=2019-01-01&size=2000").catch(function () { return []; })
+    ]).then(function (res) {
+      if (n !== asked) return;
+      var rows = res[0], no3 = res[1];
+      if (!rows.length) {
+        $("status").textContent = "Aucune analyse trouvée pour " + name + " ces 18 derniers mois.";
+        return;
+      }
+      $("status").textContent = "";
+
+      // Dernier prélèvement complet.
+      var byPrel = {};
+      rows.forEach(function (r) { var k = r.code_prelevement || r.date_prelevement; (byPrel[k] = byPrel[k] || []).push(r); });
+      var prels = Object.keys(byPrel).map(function (k) { return byPrel[k]; })
+        .sort(function (a, b) { return Date.parse(b[0].date_prelevement) - Date.parse(a[0].date_prelevement); });
+      var last = prels[0], head = last[0];
+      var flag = function (f) { return String(head[f] || "").toUpperCase(); };
+      var conclusion = String(head.conclusion_conformite_prelevement || "");
+      var over = last.filter(function (r) { var l = limitOf(r); return isFinite(l) && r.resultat_numerique > l; });
+      var bad = flag("conformite_limites_bact_prelevement") === "N" || flag("conformite_limites_pc_prelevement") === "N" || over.length > 0;
+      var reserve = !bad && (flag("conformite_references_bact_prelevement") === "N" || flag("conformite_references_pc_prelevement") === "N");
+
+      $("when").textContent = "// " + name + " · dernier contrôle le " + longDate(head.date_prelevement);
+      $("verdict-icon").innerHTML = bad || reserve ? ICON_WARN : ICON_OK;
+      $("verdict").textContent = bad ? "Eau non conforme" : reserve ? "Conforme, avec une réserve" : "Eau conforme";
+      $("verdict-text").textContent = bad
+        ? "Au dernier prélèvement, au moins une limite de qualité est dépassée. Suivez les consignes de votre mairie ou de l'ARS."
+        : reserve ? "Les limites de qualité sont respectées, mais une référence de confort ou de bon fonctionnement est dépassée."
+          : "L'eau respecte toutes les limites de qualité au dernier prélèvement.";
+      $("over").innerHTML = over.map(function (r) {
+        return "<li>" + esc(r.libelle_parametre) + " : " + n2.format(r.resultat_numerique) + " " + esc(r.libelle_unite || "") + " (limite " + esc(String(r.limite_qualite_parametre).replace(/<=\s*/, "≤ ")) + ")</li>";
+      }).join("");
+      $("over").hidden = !over.length;
+      $("official").textContent = conclusion ? "Conclusion officielle : « " + conclusion.trim() + " »" : "";
+      $("official").hidden = !conclusion;
+      $("card").hidden = false;
+
+      // Les quatre repères.
+      var nit = latest(rows, "1340", /^nitrates/i);
+      $("t-no3").innerHTML = nit ? n1.format(nit.resultat_numerique) + " <small>mg/L</small>" : "non mesuré";
+      var bar = $("t-no3-bar").firstChild;
+      bar.style.width = nit ? Math.min(100, nit.resultat_numerique / 50 * 100) + "%" : "0";
+      bar.style.background = nit && nit.resultat_numerique > 50 ? "#8E4458" : nit && nit.resultat_numerique > 25 ? "#C9A85C" : "#5E8C61";
+
+      var pest = latest(rows, "6276", /total des pesticides/i);
+      var pestOver = over.filter(function (r) { return /µg\/l|µg\/L/i.test(r.libelle_unite || ""); });
+      $("t-pest").innerHTML = pestOver.length ? "Dépassement" : !pest ? "non mesuré" : pest.resultat_numerique > 0
+        ? n2.format(pest.resultat_numerique) + " <small>µg/L</small>" : "Non détectés";
+      $("t-pest-s").textContent = pestOver.length ? pestOver.map(function (r) { return r.libelle_parametre; }).join(", ") : "limite 0,5 µg/L au total";
+
+      var th = latest(rows, "1345", /titre hydrotim|dureté/i);
+      if (th) {
+        var v = th.resultat_numerique;
+        $("t-th").textContent = v < 15 ? "Eau douce" : v <= 30 ? "Moyennement dure" : "Eau dure";
+        $("t-th-s").textContent = n1.format(v) + " °f" + (v > 30 ? " : pensez au calcaire" : "");
+      } else { $("t-th").textContent = "non mesuré"; $("t-th-s").textContent = ""; }
+
+      var ecoli = latest(rows, "1449", /escherichia/i), ent = latest(rows, "6455", /ent[ée]rocoques/i);
+      $("t-bact").textContent = !ecoli && !ent ? "non mesuré"
+        : (ecoli && ecoli.resultat_numerique > 0) || (ent && ent.resultat_numerique > 0) ? "Présence détectée" : "Aucune";
+      $("tiles").hidden = false;
+
+      // Évolution des nitrates.
+      var pts = no3.filter(function (r) { return isParam(r, "1340", /^nitrates/i) && isFinite(r.resultat_numerique); })
+        .map(function (r) { return { t: Date.parse(r.date_prelevement), v: r.resultat_numerique }; })
+        .filter(function (p) { return isFinite(p.t); }).sort(function (a, b) { return a.t - b.t; });
+      if (pts.length > 1) { $("no3-box").hidden = false; drawn = pts; $("no3-chart").innerHTML = chart(pts); }
+    }).catch(function () {
+      if (n !== asked) return;
+      $("status").textContent = "Analyses indisponibles pour le moment. Réessayez plus tard.";
+    });
+  }
+
+  // Liste des communes de Loir-Lucé-Bercé, puis recherche libre (Géoplateforme de l'IGN).
+  $("commune").innerHTML = COMMUNES.map(function (c) { return '<option value="' + c[1] + '">' + c[0] + "</option>"; }).join("");
+  $("commune").addEventListener("change", function () { show(this.value, this.selectedOptions[0].textContent); $("search").value = ""; });
+
+  var input = $("search"), list = $("suggest"), found = [], timer = null, q = 0;
+  function close() { list.hidden = true; input.setAttribute("aria-expanded", "false"); }
+  input.addEventListener("input", function () {
+    clearTimeout(timer);
+    var text = input.value.trim();
+    if (text.length < 2) { close(); return; }
+    timer = setTimeout(function () {
+      var n = ++q;
+      fetch("https://data.geopf.fr/geocodage/search?q=" + encodeURIComponent(text) + "&type=municipality&limit=6&lat=47.8&lon=0.45")
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (n !== q) return;
+          found = (j.features || []).map(function (f) { return { name: f.properties.city || f.properties.label, code: f.properties.citycode, ctx: f.properties.context || "" }; })
+            .filter(function (c) { return c.code; });
+          if (!found.length) { close(); return; }
+          list.innerHTML = found.map(function (c, i) { return '<li role="option"><button type="button" data-i="' + i + '">' + esc(c.name) + "<small>" + esc(c.ctx) + "</small></button></li>"; }).join("");
+          list.hidden = false;
+          input.setAttribute("aria-expanded", "true");
+        }).catch(close);
+    }, 250);
+  });
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown" && !list.hidden) { e.preventDefault(); list.querySelector("button").focus(); }
+    if (e.key === "Enter" && !list.hidden && found.length) { e.preventDefault(); pick(found[0]); }
+    if (e.key === "Escape") close();
+  });
+  list.addEventListener("keydown", function (e) {
+    var btns = Array.prototype.slice.call(list.querySelectorAll("button"));
+    var i = btns.indexOf(document.activeElement);
+    if (e.key === "ArrowDown" && i < btns.length - 1) { e.preventDefault(); btns[i + 1].focus(); }
+    if (e.key === "ArrowUp") { e.preventDefault(); (i > 0 ? btns[i - 1] : input).focus(); }
+    if (e.key === "Escape") { close(); input.focus(); }
+  });
+  function pick(c) {
+    input.value = c.name;
+    close();
+    var inList = COMMUNES.some(function (x) { return x[1] === c.code; });
+    if (inList) $("commune").value = c.code;
+    show(c.code, c.name);
+  }
+  list.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) pick(found[+b.dataset.i]); });
+  document.addEventListener("click", function (e) { if (e.target !== input && !list.contains(e.target)) close(); });
+
+  var start = new URLSearchParams(location.search).get("commune");
+  var known = COMMUNES.filter(function (c) { return c[1] === start; })[0];
+  if (start && /^\d[\dAB]\d{3}$/.test(start)) {
+    if (known) $("commune").value = start;
+    show(start, known ? known[0] : "la commune " + start);
+  } else {
+    $("commune").value = "72068";
+    show("72068", "La Chartre-sur-le-Loir");
+  }
+})();
+</script>
+</body>
+</html>
