@@ -59,6 +59,8 @@
   .now a { color: var(--gold-hi); font-size: 15px; }
   .gauge { width: 72px; flex: none; position: relative; border-left: 2px solid rgba(250, 246, 240, 0.25); }
   .gauge .water { position: absolute; left: 0; right: 0; bottom: 0; background: var(--water-soft); opacity: 0.9; transition: height 0.4s; }
+  .gauge .zero { position: absolute; left: -2px; right: 0; border-top: 1px solid var(--on-dark-soft); }
+  .gauge .zero span { position: absolute; right: 3px; top: 1px; font-size: 11px; line-height: 1.2; color: var(--on-dark-soft); }
   .gauge .rec { position: absolute; left: -2px; right: 0; border-top: 2px dashed var(--gold-hi); }
   .gauge .rec span { position: absolute; right: 0; bottom: 3px; font-size: 11px; line-height: 1.2; text-align: right; color: var(--gold-hi); }
   .gauge .lab { position: absolute; left: 6px; right: 2px; font-size: 11px; line-height: 1.2; color: var(--paper); }
@@ -106,13 +108,14 @@
       <div class="now-text">
         <span class="kicker" id="when">// chargement…</span>
         <div class="level"><strong id="level">–</strong><span>m</span></div>
-        <p class="level-note">Hauteur lue sur l'échelle de la station, pas la profondeur de l'eau.</p>
+        <p class="level-note">Hauteur par rapport au zéro de l'échelle de la station, pas la profondeur de l'eau.</p>
         <p id="trend"></p>
         <p class="gap" id="gap"></p>
         <a id="vigicrues" href="https://www.vigicrues.gouv.fr" target="_blank" rel="noopener">Voir la station sur Vigicrues</a>
       </div>
       <div class="gauge" aria-hidden="true" id="gauge">
         <div class="water" id="g-water" style="height: 0"></div>
+        <div class="zero" id="g-zero"><span id="g-zero-lab">0</span></div>
         <div class="rec" id="g-rec" hidden><span id="g-rec-lab">record</span></div>
         <span class="lab" id="g-now"></span>
       </div>
@@ -132,6 +135,7 @@
     <div>
       <span class="kicker">// les mesures</span>
       <p>Hauteurs mesurées par les stations du réseau Vigicrues, diffusées par l'API Hub'Eau (hubeau.eaufrance.fr) ou, à défaut, par Vigicrues, environ un mois en arrière. La hauteur est lue à l'échelle de la station : ce n'est pas une profondeur.</p>
+      <p>Le zéro de cette échelle n'est ni le fond de la rivière ni le niveau de la mer : c'est un repère fixé une fois pour toutes à l'installation de la station, souvent près des basses eaux de l'époque. Quand l'eau descend en dessous (sécheresse, vannes des moulins ouvertes pendant les écourues…), la hauteur devient négative, sans que la rivière soit à sec.</p>
     </div>
     <div>
       <span class="kicker">// le plus haut niveau</span>
@@ -361,9 +365,13 @@
 
       // Jauge : du plus bas du mois au plus haut niveau connu.
       var hs = series.map(function (x) { return x.h; });
-      var lo = Math.min.apply(null, hs) - 0.2, hi = Math.max(record ? record.h : -Infinity, Math.max.apply(null, hs)) + 0.2;
+      // Le zéro de l'échelle est toujours dans la jauge, pour situer un niveau négatif.
+      var lo = Math.min(Math.min.apply(null, hs) - 0.2, -0.15), hi = Math.max(record ? record.h : -Infinity, Math.max.apply(null, hs), 0) + 0.2;
       var pct = function (h) { return Math.max(0, Math.min(100, (h - lo) / (hi - lo) * 100)); };
       $("g-water").style.height = pct(last.h) + "%";
+      $("g-zero").style.bottom = pct(0) + "%";
+      // Sous l'eau, le « 0 » passe en foncé pour rester lisible sur le bleu.
+      $("g-zero-lab").style.color = last.h > 0 ? "var(--ink)" : "";
       $("g-rec").hidden = !record;
       if (record) $("g-rec").style.bottom = pct(record.h) + "%";
       if (record) $("g-rec-lab").innerHTML = "record<br>" + m2.format(record.h) + " m";
