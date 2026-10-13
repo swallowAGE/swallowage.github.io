@@ -550,11 +550,11 @@
     // Jour de collecte aujourd'hui : on le dit, même s'il n'y a rien à sortir ce soir.
     var ceMatin = picked === 0 ? collections(sched, t0, t0)[0] : null;
     var avant = ceMatin ? '<p class="today">Aujourd\'hui, c\'est jour de collecte (' + binsText(ceMatin.bins) +
-      "). Le camion passe le matin : si vos bacs ne sont pas sortis, c'est sans doute trop tard.</p>" : "";
+      "). Bacs pas encore sortis ? Sortez-les vite : selon les tournées, le camion n'est peut-être pas encore passé.</p>" : "";
     if (hit) {
       body.innerHTML = avant + '<div class="bins"><h2>Sortez&nbsp;:</h2>' + hit.bins.map(function (k) { return binHtml(BINS[k]); }).join("") + "</div>" +
         (hit.bins.length === 1 ? '<p style="margin-top: 12px">Pas les emballages cette semaine.</p>' : "") +
-        "<p style=\"margin-top: 12px\">Collecte " + longDate(hit.date) + " au matin.</p>" +
+        "<p style=\"margin-top: 12px\">Collecte " + longDate(hit.date) + ".</p>" +
         (hit.cause ? '<p class="shift">Décalée d\'un jour à cause du jour férié (' + hit.cause.name + ").</p>" : "");
     } else {
       var next = list.filter(function (x) { return x.date - DAY > ev; })[0];
