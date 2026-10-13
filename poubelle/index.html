@@ -65,6 +65,7 @@
   .card p { margin: 0; font-size: 16px; font-weight: 300; color: var(--on-dark); }
   .card p strong { font-weight: 600; color: var(--paper); }
   .shift { font-size: 14px !important; color: var(--gold-hi) !important; }
+  .today { font-size: 14px !important; color: var(--gold-hi) !important; padding-bottom: 12px; margin-bottom: 14px !important; border-bottom: 1px dashed rgba(250, 246, 240, 0.25); }
   .card a { color: var(--gold-hi); }
 
   .days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
@@ -546,14 +547,18 @@
     var ev = evenings[picked];
     var hit = byEvening[iso(ev)];
     title.textContent = "// " + (picked === 0 ? "ce soir, " : "") + longDate(ev) + (picked === 0 ? "" : " au soir");
+    // Jour de collecte aujourd'hui : on le dit, même s'il n'y a rien à sortir ce soir.
+    var ceMatin = picked === 0 ? collections(sched, t0, t0)[0] : null;
+    var avant = ceMatin ? '<p class="today">Aujourd\'hui, c\'est jour de collecte (' + binsText(ceMatin.bins) +
+      "). Le camion passe le matin : si vos bacs ne sont pas sortis, c'est sans doute trop tard.</p>" : "";
     if (hit) {
-      body.innerHTML = '<div class="bins"><h2>Sortez&nbsp;:</h2>' + hit.bins.map(function (k) { return binHtml(BINS[k]); }).join("") + "</div>" +
+      body.innerHTML = avant + '<div class="bins"><h2>Sortez&nbsp;:</h2>' + hit.bins.map(function (k) { return binHtml(BINS[k]); }).join("") + "</div>" +
         (hit.bins.length === 1 ? '<p style="margin-top: 12px">Pas les emballages cette semaine.</p>' : "") +
         "<p style=\"margin-top: 12px\">Collecte " + longDate(hit.date) + " au matin.</p>" +
         (hit.cause ? '<p class="shift">Décalée d\'un jour à cause du jour férié (' + hit.cause.name + ").</p>" : "");
     } else {
       var next = list.filter(function (x) { return x.date - DAY > ev; })[0];
-      body.innerHTML = '<div class="none">Rien à sortir</div>' +
+      body.innerHTML = avant + '<div class="none">Rien à sortir</div>' +
         (next ? "<p style=\"margin-top: 8px\">Prochaine sortie&nbsp;: <strong>" + longDate(next.date - DAY) + " au soir</strong>, " + binsText(next.bins) + "." +
           (next.cause ? " Décalée d'un jour à cause du jour férié (" + next.cause.name + ")." : "") + "</p>" : "");
     }
