@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le voyage de l'eau · du captage au robinet</title>
+<meta name="description" content="Visite pas à pas du parcours de l'eau potable, du captage au robinet, à partir de données ouvertes.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <p class="kicker">Pays de Bercé · données ouvertes</p>
+  <h1>Le voyage de l'eau</h1>
+  <p class="lead">Du captage au robinet, en huit étapes. Faites défiler : la carte vous suit.</p>
+  <p class="hint" aria-hidden="true">↓</p>
+</header>
+
+<div class="layout">
+  <div id="map" role="img" aria-label="Carte des captages d'eau potable du territoire"></div>
+
+  <main id="steps">
+
+    <section class="step" data-step="source">
+      <article class="card">
+        <span class="num">1</span>
+        <h2>Tout commence sous nos pieds</h2>
+        <p>La pluie s'infiltre dans le sol et rejoint les nappes souterraines, ou ruisselle vers les rivières. Sols, prairies et forêts jouent un rôle de filtre : plus l'eau traverse de terrain, plus elle se purifie naturellement.</p>
+        <p>C'est dans ces réserves, souterraines ou de surface, que l'on va chercher l'eau que nous buvons.</p>
+      </article>
+    </section>
+
+    <section class="step" data-step="captage">
+      <article class="card">
+        <span class="num">2</span>
+        <h2>Le captage</h2>
+        <p>Chaque point de la carte est un ouvrage qui prélève de l'eau pour la consommation : forage, puits ou source. Plus le rond est grand, plus le volume prélevé dans l'année est important.</p>
+        <p class="live" id="stat-captage">Chargement des données…</p>
+        <p class="note">Cliquez sur un point pour le détail. La position de certains ouvrages est approximative.</p>
+      </article>
+    </section>
+
+    <section class="step" data-step="protection">
+      <article class="card">
+        <span class="num">3</span>
+        <h2>Protéger la ressource</h2>
+        <p>Autour de chaque captage, la réglementation prévoit jusqu'à trois zones de protection, définies à partir d'une étude hydrogéologique. Plus on s'approche du captage, plus les règles sont strictes.</p>
+        <svg class="perim" viewBox="0 0 300 190" role="img" aria-label="Schéma de trois zones concentriques autour d'un captage">
+          <circle cx="150" cy="95" r="88" class="p3"/>
+          <circle cx="150" cy="95" r="56" class="p2"/>
+          <circle cx="150" cy="95" r="24" class="p1"/>
+          <circle cx="150" cy="95" r="4" class="c"/>
+        </svg>
+        <ul class="legend">
+          <li><i class="sw s1"></i><b>Immédiate</b> : les abords du captage, en général clôturés et propriété de la collectivité.</li>
+          <li><i class="sw s2"></i><b>Rapprochée</b> : la zone vulnérable autour, où certaines activités sont interdites ou réglementées.</li>
+          <li><i class="sw s3"></i><b>Éloignée</b> : une zone de vigilance plus large.</li>
+        </ul>
+        <p class="note">Schéma théorique : les vraies zones ont des formes irrégulières fixées par arrêté. Leurs cartes détaillées sont souvent réservées aux professionnels, elles ne figurent donc pas ici.</p>
+      </article>
+    </section>
+
+    <section class="step" data-step="traitement">
+      <article class="card">
+        <span class="num">4</span>
+        <h2>Le traitement</h2>
+        <p>L'eau brute n'est pas toujours prête à boire. Selon sa provenance, elle passe par une filtration, un retrait du fer et du manganèse, un ajustement de son équilibre, puis une désinfection qui la protège jusqu'au robinet.</p>
+        <p>Certaines eaux de forage très bien protégées n'ont besoin que d'une désinfection.</p>
+        <p class="live" id="stat-traitement"></p>
+      </article>
+    </section>
+
+    <section class="step" data-step="stockage">
+      <article class="card">
+        <span class="num">5</span>
+        <h2>Le stockage</h2>
+        <p>Châteaux d'eau et réservoirs jouent trois rôles : absorber les pointes de consommation (le matin, le soir), garder une réserve en cas de panne ou d'incendie, et fournir la pression par simple gravité.</p>
+        <p class="live" id="stat-stockage"></p>
+      </article>
+    </section>
+
+    <section class="step" data-step="reseau">
+      <article class="card">
+        <span class="num">6</span>
+        <h2>Le réseau</h2>
+        <p>Des dizaines de kilomètres de canalisations relient les réservoirs aux habitations. Le réseau est découpé en « unités de distribution », zones où l'eau a la même origine et la même qualité.</p>
+        <label class="pick">Choisissez une commune
+          <select class="commune-select"></select>
+        </label>
+        <p class="live" id="reseau-info">Chargement…</p>
+      </article>
+    </section>
+
+    <section class="step" data-step="robinet">
+      <article class="card">
+        <span class="num">7</span>
+        <h2>Au robinet</h2>
+        <p>L'eau du robinet est l'aliment le plus contrôlé : l'Agence régionale de santé fait réaliser des analyses régulières à la ressource, en sortie de traitement et au robinet.</p>
+        <label class="pick">Commune
+          <select class="commune-select"></select>
+        </label>
+        <div class="live" id="qualite-info">Chargement…</div>
+      </article>
+    </section>
+
+    <section class="step" data-step="retour">
+      <article class="card">
+        <span class="num">8</span>
+        <h2>Et ensuite, le retour au milieu</h2>
+        <p>Une fois utilisée, l'eau part vers l'assainissement, où elle est collectée puis dépolluée avant d'être rendue à la rivière. Là, le cycle recommence.</p>
+        <p>Économiser l'eau et protéger les captages, c'est préserver tout ce cycle.</p>
+      </article>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p><b>Sources</b> (Licence Ouverte) :
+    <a href="https://hubeau.eaufrance.fr/page/api-prelevements-eau">Hub'Eau, Prélèvements en eau</a> (BNPE) ·
+    <a href="https://hubeau.eaufrance.fr/page/api-qualite-eau-potable">Hub'Eau, Qualité de l'eau potable</a> (contrôle sanitaire, ministère de la Santé) ·
+    <a href="https://www.openstreetmap.org/copyright">contributeurs OpenStreetMap</a> pour le fond de carte, les châteaux d'eau et les usines de traitement.</p>
+  <p>Projet personnel à visée pédagogique. Les données sont affichées telles que publiées : positions et volumes peuvent comporter des imprécisions. Pour la situation officielle de votre commune, consultez <a href="https://eaupotable.sante.gouv.fr/">eaupotable.sante.gouv.fr</a>.</p>
+</footer>
+
+<noscript><p class="note" style="padding:16px">Cette page a besoin de JavaScript pour afficher la carte et les données.</p></noscript>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
