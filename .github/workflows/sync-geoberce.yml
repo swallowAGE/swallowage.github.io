@@ -1,4 +1,4 @@
-name: Sync GéoBercé
+name: Sync des SIG (GéoBercé, GéoSudSarthe, GéoBelinois)
 
 on:
   schedule:
@@ -24,33 +24,46 @@ jobs:
           repository: cl4ire/cl4ire.github.io
           path: upstream
 
-      - name: Sync runtime files into geoberce/
+      - name: Sync runtime files into each territory folder
         run: |
           set -euo pipefail
 
-          DEST="site/geoberce"
-          SRC="upstream"
+          SCRIPT="upstream/outils/publier_territoire.py"
 
-          # Directories: mirror exactly, replacing destination content.
-          for dir in couches css img js; do
-            rm -rf "$DEST/$dir"
-            if [ -d "$SRC/$dir" ]; then
-              cp -R "$SRC/$dir" "$DEST/$dir"
-            fi
-          done
+          if [ -f "$SCRIPT" ]; then
+            # Un dossier par territoire (geoberce/, geosudsarthe/, geobelinois/...) :
+            # la liste vient du dépôt de développement (GéoBercé + chaque dossier de
+            # territoires/ qui contient un territoire.js). Ajouter un territoire là-bas
+            # suffit, rien à changer ici. Les README.md des dossiers ne sont jamais touchés.
+            for id in $(python3 "$SCRIPT" --liste); do
+              mkdir -p "site/$id"
+              python3 "$SCRIPT" "$id" "site/$id"
+            done
+          else
+            # Dépôt de développement sans script de publication (ancien état) :
+            # GéoBercé seul, comme avant.
+            DEST="site/geoberce"
+            SRC="upstream"
 
-          # Files: copy as-is. geoberce/README.md is intentionally never touched.
-          for file in index.html manifest.json sw.js; do
-            if [ -f "$SRC/$file" ]; then
-              cp "$SRC/$file" "$DEST/$file"
-            fi
-          done
+            for dir in couches css img js; do
+              rm -rf "$DEST/$dir"
+              if [ -d "$SRC/$dir" ]; then
+                cp -R "$SRC/$dir" "$DEST/$dir"
+              fi
+            done
+
+            for file in index.html manifest.json sw.js; do
+              if [ -f "$SRC/$file" ]; then
+                cp "$SRC/$file" "$DEST/$file"
+              fi
+            done
+          fi
 
       - name: Detect changes
         id: diff
         working-directory: site
         run: |
-          git add geoberce
+          git add -A .
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
@@ -63,11 +76,11 @@ jobs:
         working-directory: site
         run: |
           set -euo pipefail
-          BRANCH="sync-geoberce-$(date +%Y%m%d-%H%M%S)"
+          BRANCH="sync-sig-$(date +%Y%m%d-%H%M%S)"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git commit -m "Sync geoberce/ depuis cl4ire/cl4ire.github.io"
+          git commit -m "Sync des SIG depuis cl4ire/cl4ire.github.io"
           git push origin "$BRANCH"
           echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
 
@@ -78,12 +91,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cat > /tmp/pr-body.md <<'EOF'
-          Synchronisation automatique du contenu de `geoberce/` (index.html, css/, js/, couches/, img/, manifest.json, sw.js) depuis le dépôt de développement [cl4ire/cl4ire.github.io](https://github.com/cl4ire/cl4ire.github.io). `geoberce/README.md` n'est pas modifié par cette synchronisation.
+          Synchronisation automatique des SIG (`geoberce/`, `geosudsarthe/`, `geobelinois/`...) depuis le dépôt de développement [cl4ire/cl4ire.github.io](https://github.com/cl4ire/cl4ire.github.io) : code commun (index.html, css/, js/, img/, manifest.json, sw.js) et données de chaque territoire (couches/). Les `README.md` des dossiers ne sont pas modifiés par cette synchronisation.
 
           Ce PR a été généré automatiquement par le workflow `sync-geoberce.yml`.
           EOF
           gh pr create \
-            --title "Sync geoberce/ depuis cl4ire/cl4ire.github.io" \
+            --title "Sync des SIG depuis cl4ire/cl4ire.github.io" \
             --body-file /tmp/pr-body.md \
             --base main \
             --head "${{ steps.commit.outputs.branch }}"
