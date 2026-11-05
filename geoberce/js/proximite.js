@@ -86,12 +86,24 @@ let filtreCarburantActif = LISTE_CARBURANTS[0].champ; // Gazole par défaut, le 
    un choix explicite propre aux carburants (seule couche à porter un
    prix comparable d'un résultat à l'autre). */
 let triCarburantActif = "distance";
+/* Filtre par métier pour "Trouver un artisan" : "tous" ou l'id d'une
+   catégorie de TYPES_ARTISANS (plomberie, electricite...). */
+let filtreArtisanActif = "tous";
 
 function rendreResultatsProximite(map) {
     const estCarburant = derniersResultatsProximite.length > 0 && derniersResultatsProximite[0].layerId === "carburants";
+    const estArtisan = derniersResultatsProximite.length > 0 && derniersResultatsProximite[0].layerId === "artisans";
 
     let resultats = derniersResultatsProximite;
     if (filtreOuvertActif) resultats = resultats.filter(item => item.ouvert === true);
+    if (estArtisan) {
+        /* Tous les artisans du territoire sont chargés (triés par distance) :
+           le filtre par métier s'applique d'abord, puis on garde les plus
+           proches - sinon un métier rare serait absent des 15 plus proches. */
+        resultats = resultats
+            .filter(item => filtreArtisanActif === "tous" || categorieArtisan(item.layer.feature).id === filtreArtisanActif)
+            .slice(0, 15);
+    }
     if (estCarburant) {
         resultats = resultats
             .map(item => {
@@ -206,6 +218,24 @@ function afficherResultatsProximite(map, titre, resultats, triInitial = "distanc
         });
     }
 
+    const estArtisan = resultats.length > 0 && resultats[0].layerId === "artisans";
+    filtreArtisanActif = "tous";
+    const filtreArtisanConteneur = document.getElementById("results-filtre-artisan");
+    filtreArtisanConteneur.hidden = !estArtisan;
+    if (estArtisan) {
+        const presents = new Set(resultats.map(item => categorieArtisan(item.layer.feature).id));
+        const metiers = TYPES_ARTISANS.concat([TYPE_ARTISAN_DEFAUT]).filter(c => presents.has(c.id));
+        filtreArtisanConteneur.innerHTML = `<button type="button" class="results-filtre-btn actif" data-metier="tous">Tous</button>` +
+            metiers.map(c => `<button type="button" class="results-filtre-btn" data-metier="${c.id}">${echapperHtml(c.label)}</button>`).join("");
+        filtreArtisanConteneur.querySelectorAll(".results-filtre-btn").forEach(bouton => {
+            bouton.addEventListener("click", () => {
+                filtreArtisanActif = bouton.dataset.metier;
+                filtreArtisanConteneur.querySelectorAll(".results-filtre-btn").forEach(b => b.classList.toggle("actif", b === bouton));
+                rendreResultatsProximite(map);
+            });
+        });
+    }
+
     const triCarburantConteneur = document.getElementById("results-tri-carburant");
     triCarburantConteneur.hidden = !estCarburant;
     triCarburantConteneur.querySelectorAll(".results-filtre-btn").forEach(bouton => {
@@ -283,7 +313,7 @@ function lancerRechercheProximite(map, raccourci) {
                    plupart des stations les plus proches ; garder plus de
                    candidats en réserve évite de se retrouver avec trop peu
                    de résultats après filtrage sur ces carburants-là. */
-                const limite = raccourci.layerIds.includes("carburants") ? 60 : 15;
+                const limite = raccourci.layerIds.includes("artisans") ? Infinity : (raccourci.layerIds.includes("carburants") ? 60 : 15);
                 /* Un commerce repéré comme définitivement fermé
                    (COMMERCES_FERMES, js/config.js) reste sur la carte et
                    dans la recherche texte (voir iconeCommerce/
