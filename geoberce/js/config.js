@@ -25,7 +25,7 @@ const GROUPS = {
     associations: { label: "Associations", icon: "fa-solid fa-people-group", color: "#B5461F" },
     mobilite: { label: "Mobilité", icon: "fa-solid fa-bus", color: PALETTE.riviere },
     securite: { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", color: "#AD4826" },
-    tourisme: { label: "Nature, chasse & pêche", icon: "fa-solid fa-person-hiking", color: PALETTE.feuille },
+    tourisme: { label: "Nature & rando", icon: "fa-solid fa-person-hiking", color: PALETTE.feuille },
     patrimoine: { label: "Patrimoine", icon: "fa-solid fa-monument", color: "#7F7E7B" },
     urbanisme: { label: "Habitat & urbanisme", icon: "fa-solid fa-house-chimney", color: PALETTE.ardoise },
     risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#AD4826" }
@@ -1698,7 +1698,7 @@ const THEMES = [
     { label: "Commerces", icon: "fa-solid fa-basket-shopping", groups: ["commerces"] },
     { label: "Associations", icon: "fa-solid fa-people-group", groups: ["associations"] },
     { label: "Mobilité", icon: "fa-solid fa-bus", groups: ["mobilite"] },
-    { label: "Nature, chasse & pêche", icon: "fa-solid fa-person-hiking", groups: ["tourisme", "patrimoine"] },
+    { label: "Nature & rando", icon: "fa-solid fa-person-hiking", groups: ["tourisme", "patrimoine"] },
     { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", groups: ["securite"] },
     { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", groups: ["risques"] }
 ];
