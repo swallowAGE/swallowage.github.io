@@ -1084,20 +1084,53 @@ function geojsonDepuisQualiteEau(data) {
     }));
     return { type: "FeatureCollection", features };
 }
-/* Même test de mot-clé que construireCarteQualiteEau (js/communes.js,
-   carte du dashboard) sur conclusion_conformite_prelevement - seul champ
-   fiable confirmé en conditions réelles pour ce flux (voir ce fichier),
-   partagé ici pour que la couleur de la couche et le texte de la popup
-   ne puissent jamais se contredire. */
+/* Trois niveaux, comme l'outil « Qu'y a-t-il dans l'eau de mon robinet ? »
+   (swallowAGE/eau) : une eau peut respecter toutes les LIMITES de qualité
+   (sanitaires) tout en dépassant une RÉFÉRENCE de qualité (confort, bon
+   fonctionnement : fer, turbidité, etc.) - c'est « conforme, avec une
+   réserve », pas « non conforme ». Un simple test sur la phrase de
+   conclusion qui contiendrait « non conforme » classait à tort ce cas en
+   « non conforme » (retour de l'utilisatrice, Montval-sur-Loir).
+   On lit d'abord les indicateurs du prélèvement (conformite_limites_* /
+   conformite_references_*, "N" = non conforme, comme dans l'outil eau),
+   et à défaut la phrase de conclusion. En cas de doute, on reste
+   prudent : une phrase « non conforme » dont on ne reconnaît pas la
+   nature est classée « non conforme », jamais « conforme ». */
+const NIVEAUX_EAU = {
+    conforme: { label: "Conforme", color: PALETTE.feuille, icon: "fa-circle-check",
+        texte: "Toutes les limites de qualité sont respectées au dernier prélèvement." },
+    reserve: { label: "Conforme, avec une réserve", color: "#E0A030", icon: "fa-circle-exclamation",
+        texte: "Les limites de qualité sont respectées, mais une référence de confort ou de bon fonctionnement est dépassée." },
+    non_conforme: { label: "Non conforme", color: "#AD4826", icon: "fa-triangle-exclamation",
+        texte: "Au dernier prélèvement, au moins une limite de qualité est dépassée. Suivez les consignes de votre mairie ou de l'ARS." }
+};
+function niveauConformiteEau(resultat) {
+    if (!resultat) return null;
+    const drapeau = champ => String(resultat[champ] || "").toUpperCase();
+    const limitesN = drapeau("conformite_limites_bact_prelevement") === "N" || drapeau("conformite_limites_pc_prelevement") === "N";
+    const referencesN = drapeau("conformite_references_bact_prelevement") === "N" || drapeau("conformite_references_pc_prelevement") === "N";
+    const aDesIndicateurs = ["conformite_limites_bact_prelevement", "conformite_limites_pc_prelevement",
+        "conformite_references_bact_prelevement", "conformite_references_pc_prelevement"].some(c => drapeau(c));
+    if (aDesIndicateurs) return limitesN ? "non_conforme" : referencesN ? "reserve" : "conforme";
+
+    const phrase = String(resultat.conclusion_conformite_prelevement || "");
+    if (!phrase) return null;
+    if (/non\s+conforme\s+aux\s+limites/i.test(phrase)) return "non_conforme";
+    if (/non\s+conforme\s+aux\s+r[ée]f[ée]rences/i.test(phrase)) return "reserve";
+    return /non\s+conforme/i.test(phrase) ? "non_conforme" : "conforme";
+}
+/* Conservé pour les appelants existants : « non conforme » au sens strict
+   (limite dépassée), pas la simple réserve. */
 function qualiteEauNonConforme(resultat) {
-    return !!(resultat && resultat.conclusion_conformite_prelevement && /non\s+conforme/i.test(resultat.conclusion_conformite_prelevement));
+    return niveauConformiteEau(resultat) === "non_conforme";
 }
 function styleQualiteEau(feature) {
     const resultat = feature.properties.qualite_eau_resultat;
-    if (!resultat || !resultat.conclusion_conformite_prelevement) {
+    const niveau = niveauConformiteEau(resultat);
+    if (!resultat || !resultat.conclusion_conformite_prelevement || !niveau) {
         return { color: "#fff", weight: 1, fillColor: "#D8D6D0", fillOpacity: 0.5 };
     }
-    return { color: "#fff", weight: 1, fillColor: qualiteEauNonConforme(resultat) ? "#AD4826" : PALETTE.feuille, fillOpacity: 0.55 };
+    return { color: "#fff", weight: 1, fillColor: NIVEAUX_EAU[niveau].color, fillOpacity: 0.55 };
 }
 
 /* Couleur par opérateur pour les antennes-relais (couches/services/antennes.geojson) :
