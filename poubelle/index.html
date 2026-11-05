@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quelle poubelle ce soir ? – Swallow AGE</title>
-<meta name="description" content="Quelle poubelle sortir ce soir dans votre commune de Loir-Lucé-Bercé (SYVALORM et Syndicat du Val de Loir), les prochaines collectes et un rappel dans votre agenda.">
+<meta name="description" content="Quelle poubelle sortir ce soir dans votre commune de Loir-Lucé-Bercé (SYVALORM et Syndicat du Val de Loir) ou d'Orée de Bercé-Bélinois, les prochaines collectes et un rappel dans votre agenda.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -152,11 +152,11 @@
   <footer class="notes">
     <div>
       <span class="kicker">// les collectes</span>
-      <p>Dans les communes du SYVALORM, les ordures ménagères et les emballages sont collectés le même jour, une semaine sur deux. Dans celles du Syndicat du Val de Loir, les ordures ménagères passent chaque semaine et les emballages une semaine sur deux, selon le secteur&nbsp;: A les semaines impaires, B les semaines paires. Sortez les bacs la veille au soir. Après un jour férié, les collectes de la semaine sont décalées au lendemain, sauf le jeudi 6 mai 2027 au SYVALORM.</p>
+      <p>Dans les communes du SYVALORM, les ordures ménagères et les emballages sont collectés le même jour, une semaine sur deux. Dans celles du Syndicat du Val de Loir, les ordures ménagères passent chaque semaine et les emballages une semaine sur deux, selon le secteur&nbsp;: A les semaines impaires, B les semaines paires. Sortez les bacs la veille au soir. Après un jour férié, les collectes de la semaine sont décalées au lendemain, sauf le jeudi 6 mai 2027 au SYVALORM. Dans les communes d'Orée de Bercé-Bélinois, les ordures ménagères (bac gris) et les emballages (bac jaune) passent une semaine sur deux chacun, à tour de rôle, et le calendrier 2026 tient déjà compte des jours fériés.</p>
     </div>
     <div>
       <span class="kicker">// les sources</span>
-      <p>Calendriers 2026 et 2027 du <a href="https://www.syvalorm.fr" target="_blank" rel="noopener">SYVALORM</a>, calendriers 2026 et cartes des secteurs du <a href="https://www.syndicatvaldeloir.fr" target="_blank" rel="noopener">Syndicat du Val de Loir</a> (02 43 94 86 50). Les listes de lieux-dits sont relevées sur ces cartes&nbsp;: près d'une limite, la carte et le syndicat font foi.</p>
+      <p>Calendriers 2026 et 2027 du <a href="https://www.syvalorm.fr" target="_blank" rel="noopener">SYVALORM</a>, calendriers 2026 et cartes des secteurs du <a href="https://www.syndicatvaldeloir.fr" target="_blank" rel="noopener">Syndicat du Val de Loir</a> (02 43 94 86 50), calendrier 2026 des collectes de la <a href="https://www.cc-berce-belinois.fr/la-collecte-selective/" target="_blank" rel="noopener">communauté de communes Orée de Bercé-Bélinois</a>. Les listes de lieux-dits sont relevées sur ces cartes&nbsp;: près d'une limite, la carte et le syndicat font foi.</p>
     </div>
     <div>
       <span class="kicker">// vie privée</span>
@@ -178,8 +178,9 @@
   var ANCHOR_A = Date.UTC(2026, 0, 5);
   var DATA_START = "2026-01-01";
   var SYV = "SYVALORM", SMVL = "Syndicat du Val de Loir";
-  var END = { SYVALORM: "2027-12-31", "Syndicat du Val de Loir": "2026-12-31" };
-  var SITE = { SYVALORM: "https://www.syvalorm.fr", "Syndicat du Val de Loir": "https://www.syndicatvaldeloir.fr" };
+  var CCOBB_ID = "Orée de Bercé-Bélinois";
+  var END = { SYVALORM: "2027-12-31", "Syndicat du Val de Loir": "2026-12-31", "Orée de Bercé-Bélinois": "2026-12-31" };
+  var SITE = { SYVALORM: "https://www.syvalorm.fr", "Syndicat du Val de Loir": "https://www.syndicatvaldeloir.fr", "Orée de Bercé-Bélinois": "https://www.cc-berce-belinois.fr" };
   function always(group, day) { return [{ from: DATA_START, to: END[SYV], group: group, day: day }]; }
 
   // Syndicat du Val de Loir : ordures ménagères chaque semaine le jour « day », emballages les semaines
@@ -244,6 +245,32 @@
         "Rue Nationale", "Coëmont", "Rue Basse", "Les Trois Moulins", "La Grande Pâture*"] }
   };
 
+  // Communauté de communes Orée de Bercé-Bélinois : calendrier 2026 des collectes par commune et secteur
+  // (PDF du 30 avril 2026). Dates relevées case par case sur le calendrier (« MM-JJ », en 2026) : gris = ordures
+  // ménagères (om), jaune = emballages et papiers (emb). Ordures et emballages alternent chaque semaine ; les jours
+  // fériés sont déjà décalés dans le calendrier.
+  var CCOBB = "Communauté de communes Orée de Bercé-Bélinois";
+  var DATES = {
+    "ecommoy-bourg": { om: ["01-14","01-28","02-11","02-25","03-11","03-25","04-09","04-22","05-06","05-20","06-03","06-17","07-01","07-16","07-29","08-12","08-26","09-09","09-23","10-07","10-21","11-04","11-18","12-02","12-16","12-30"],
+      emb: ["01-07","01-21","02-04","02-18","03-04","03-18","04-01","04-15","04-29","05-13","05-28","06-10","06-24","07-08","07-22","08-06","08-19","09-02","09-16","09-30","10-14","10-28","11-12","11-25","12-09","12-23"] },
+    "ecommoy-campagne": { om: ["01-05","01-19","02-02","02-16","03-02","03-16","03-30","04-13","04-27","05-11","05-26","06-08","06-22","07-06","07-20","08-03","08-17","08-31","09-14","09-28","10-12","10-26","11-09","11-23","12-07","12-21"],
+      emb: ["01-12","01-26","02-09","02-23","03-09","03-23","04-07","04-20","05-04","05-18","06-01","06-15","06-29","07-13","07-27","08-10","08-24","09-07","09-21","10-05","10-19","11-02","11-16","11-30","12-14","12-28"] },
+    "laigne": { om: ["01-12","01-26","02-09","02-23","03-09","03-23","04-07","04-20","05-04","05-18","06-01","06-15","06-29","07-13","07-27","08-10","08-24","09-07","09-21","10-05","10-19","11-02","11-16","11-30","12-14","12-28"],
+      emb: ["01-09","01-23","02-06","02-20","03-06","03-20","04-03","04-17","05-02","05-16","05-30","06-12","06-26","07-10","07-24","08-07","08-21","09-04","09-18","10-02","10-16","10-30","11-14","11-27","12-11","12-26"] },
+    "saint-gervais": { om: ["01-08","01-22","02-05","02-19","03-05","03-19","04-02","04-16","04-30","05-15","05-29","06-11","06-25","07-09","07-23","08-06","08-20","09-03","09-17","10-01","10-15","10-29","11-13","11-26","12-10","12-24"],
+      emb: ["01-13","01-27","02-10","02-24","03-10","03-24","04-08","04-21","05-05","05-19","06-02","06-16","06-30","07-15","07-28","08-11","08-25","09-08","09-22","10-06","10-20","11-03","11-17","12-01","12-15","12-29"] },
+    "marigne-laille": { om: ["01-13","01-27","02-10","02-24","03-10","03-24","04-08","04-21","05-05","05-19","06-02","06-16","06-30","07-15","07-28","08-11","08-25","09-08","09-22","10-06","10-20","11-03","11-17","12-01","12-15","12-29"],
+      emb: ["01-05","01-19","02-02","02-16","03-02","03-16","03-30","04-13","04-27","05-11","05-26","06-08","06-22","07-06","07-20","08-03","08-17","08-31","09-14","09-28","10-12","10-26","11-09","11-23","12-07","12-21"] },
+    "monce-en-belin": { om: ["01-06","01-20","02-03","02-17","03-03","03-17","03-31","04-14","04-28","05-12","05-27","06-09","06-23","07-07","07-21","08-04","08-18","09-01","09-15","09-29","10-13","10-27","11-10","11-24","12-08","12-22"],
+      emb: ["01-14","01-28","02-11","02-25","03-11","03-25","04-09","04-22","05-06","05-20","06-03","06-17","07-01","07-16","07-29","08-12","08-26","09-09","09-23","10-07","10-21","11-04","11-18","12-02","12-16","12-30"] },
+    "saint-biez-en-belin": { om: ["01-13","01-27","02-10","02-24","03-10","03-24","04-08","04-21","05-05","05-19","06-02","06-16","06-30","07-15","07-28","08-11","08-25","09-08","09-22","10-06","10-20","11-03","11-17","12-01","12-15","12-29"],
+      emb: ["01-07","01-21","02-04","02-18","03-04","03-18","04-01","04-15","04-29","05-13","05-28","06-10","06-24","07-08","07-22","08-05","08-19","09-02","09-16","09-30","10-14","10-28","11-12","11-25","12-09","12-23"] },
+    "saint-ouen-en-belin": { om: ["01-13","01-27","02-10","02-24","03-10","03-24","04-08","04-21","05-05","05-19","06-02","06-16","06-30","07-15","07-28","08-11","08-25","09-08","09-22","10-06","10-20","11-03","11-17","12-01","12-15","12-29"],
+      emb: ["01-06","01-20","02-03","02-17","03-03","03-17","03-31","04-14","04-28","05-12","05-27","06-09","06-23","07-07","07-21","08-04","08-18","09-01","09-15","09-29","10-13","10-27","11-10","11-24","12-08","12-22"] },
+    "teloche": { om: ["01-08","01-22","02-05","02-19","03-05","03-19","04-02","04-16","04-30","05-15","05-29","06-11","06-25","07-09","07-23","08-06","08-20","09-03","09-17","10-01","10-15","10-29","11-13","11-26","12-10","12-24"],
+      emb: ["01-15","01-29","02-12","02-26","03-12","03-26","04-10","04-23","05-07","05-21","06-04","06-18","07-02","07-17","07-30","08-13","08-27","09-10","09-24","10-08","10-22","11-05","11-19","12-03","12-17","12-31"] }
+  };
+
   var COMMUNES = [
     { name: "Beaumont-Pied-de-Bœuf", syndicat: SMVL, smvl: { day: 2, emb: "odd" } },
     { name: "Beaumont-sur-Dême", syndicat: SYV, plan: always("B", 3) },
@@ -277,7 +304,18 @@
       { from: "2026-01-01", to: "2026-12-31", group: "A", day: 2 },
       { from: "2027-01-01", to: END[SYV], group: "A", day: 5 }] },
     { name: "Thoiré-sur-Dinan", syndicat: SMVL, smvl: { sectors: "Thoiré-sur-Dinan" } },
-    { name: "Villaines-sous-Lucé", syndicat: SYV, plan: always("A", 5) }
+    { name: "Villaines-sous-Lucé", syndicat: SYV, plan: always("A", 5) },
+    { name: "Écommoy", syndicat: CCOBB_ID, parts: [
+      { name: "Le bourg", info: "mercredi", dates: "ecommoy-bourg" },
+      { name: "La campagne", info: "lundi", dates: "ecommoy-campagne" }] },
+    { name: "Laigné-Saint-Gervais", syndicat: CCOBB_ID, parts: [
+      { name: "Laigné", info: "ordures le lundi, emballages le vendredi", dates: "laigne" },
+      { name: "Saint-Gervais", info: "ordures le jeudi, emballages le mardi", dates: "saint-gervais" }] },
+    { name: "Marigné-Laillé", syndicat: CCOBB_ID, dates: "marigne-laille" },
+    { name: "Moncé-en-Belin", syndicat: CCOBB_ID, dates: "monce-en-belin" },
+    { name: "Saint-Biez-en-Belin", syndicat: CCOBB_ID, dates: "saint-biez-en-belin" },
+    { name: "Saint-Ouen-en-Belin", syndicat: CCOBB_ID, dates: "saint-ouen-en-belin" },
+    { name: "Téloché", syndicat: CCOBB_ID, dates: "teloche" }
   ];
   // Jours fériés sans décalage des collectes (annoncés par le SYVALORM).
   var NO_SHIFT = { "2027-05-06": true };
@@ -319,6 +357,10 @@
   // Ce qu'il faut savoir pour calculer : { syndicat, end, week(monday) → null | { day, bins: [0, 1] } }
   // bins : 0 = ordures ménagères, 1 = emballages.
   function scheduleOf(sel) {
+    if (sel.dates) {
+      var jours = DATES[sel.dates];
+      return { syndicat: CCOBB_ID, end: END[CCOBB_ID], dates: jours };
+    }
     if (sel.plan) {
       return { syndicat: SYV, end: END[SYV], week: function (w) {
         var even = Math.round((w - ANCHOR_A) / (7 * DAY)) % 2 === 0, hit = null;
@@ -344,6 +386,20 @@
   function collections(sched, from, to) {
     var out = [];
     if (!sched) return out;
+    if (sched.dates) {
+      // Jours relevés tels quels sur le calendrier (jours fériés déjà décalés).
+      var parJour = {};
+      [["om", 0], ["emb", 1]].forEach(function (k) {
+        (sched.dates[k[0]] || []).forEach(function (md) {
+          var t = Date.parse("2026-" + md + "T00:00:00Z");
+          (parJour[t] = parJour[t] || []).push(k[1]);
+        });
+      });
+      Object.keys(parJour).map(Number).sort(function (a, b) { return a - b; }).forEach(function (t) {
+        if (t >= from && t <= to) out.push({ date: t, cause: null, bins: parJour[t].sort() });
+      });
+      return out;
+    }
     var monday = from - ((dow(from) + 6) % 7) * DAY;
     for (var w = monday - 7 * DAY; w <= to; w += 7 * DAY) {
       var hit = sched.week(w);
@@ -374,8 +430,9 @@
   function selection() {
     var c = currentCommune(), p = partOf(c);
     if (!p) return null;
+    if (p.dates) return { dates: p.dates };
     if (p.plan) return { plan: p.plan };
-    if (p.smvl.sectors) {
+    if (p.smvl && p.smvl.sectors) {
       var s = SECTEURS[p.smvl.sectors];
       if (choice.sector !== "A" && choice.sector !== "B") return null;
       return { smvl: { day: s.day, emb: choice.sector === "A" ? "odd" : "even" } };
@@ -477,7 +534,7 @@
       b.name + "</b><span>" + b.what + "</span></div></div>";
   }
   function binsText(bins) {
-    return bins.length === 2 ? "ordures ménagères et emballages" : "ordures ménagères seulement";
+    return bins.length === 2 ? "ordures ménagères et emballages" : bins[0] === 1 ? "emballages seulement" : "ordures ménagères seulement";
   }
   function endLabel(end) { return end.slice(0, 4); }
 
@@ -553,7 +610,7 @@
       "). Bacs pas encore sortis ? Sortez-les vite : selon les tournées, le camion n'est peut-être pas encore passé.</p>" : "";
     if (hit) {
       body.innerHTML = avant + '<div class="bins"><h2>Sortez&nbsp;:</h2>' + hit.bins.map(function (k) { return binHtml(BINS[k]); }).join("") + "</div>" +
-        (hit.bins.length === 1 ? '<p style="margin-top: 12px">Pas les emballages cette semaine.</p>' : "") +
+        (hit.bins.length === 1 ? '<p style="margin-top: 12px">Pas ' + (hit.bins[0] === 1 ? "les ordures ménagères" : "les emballages") + " cette fois.</p>" : "") +
         "<p style=\"margin-top: 12px\">Collecte " + longDate(hit.date) + ".</p>" +
         (hit.cause ? '<p class="shift">Décalée d\'un jour à cause du jour férié (' + hit.cause.name + ").</p>" : "");
     } else {
@@ -577,7 +634,7 @@
       var ev = iso(x.date - DAY).replace(/-/g, "");
       lines.push("BEGIN:VEVENT", "UID:" + ev + "-" + name.normalize("NFD").replace(/[^A-Za-z]/g, "") + "@swallowage.github.io", "DTSTAMP:" + stamp,
         "DTSTART:" + ev + "T190000", "DTEND:" + ev + "T191500",
-        "SUMMARY:Sortir les poubelles (" + (x.bins.length === 2 ? "ordures ménagères + emballages" : "ordures ménagères") + ")",
+        "SUMMARY:Sortir les poubelles (" + (x.bins.length === 2 ? "ordures ménagères + emballages" : x.bins[0] === 1 ? "emballages" : "ordures ménagères") + ")",
         "DESCRIPTION:Collecte le " + longDate(x.date) + (x.cause ? ", décalée à cause du jour férié (" + x.cause.name + ")" : "") + ".",
         "BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:Sortir les poubelles", "TRIGGER:PT0M", "END:VALARM", "END:VEVENT");
     });
@@ -601,7 +658,8 @@
     return COMMUNES.map(function (c, i) { return c.syndicat === syndicat ? '<option value="' + i + '">' + c.name + "</option>" : ""; }).join("");
   }
   $("commune").innerHTML = '<optgroup label="SYVALORM">' + options(SYV) + "</optgroup>" +
-    '<optgroup label="Syndicat du Val de Loir">' + options(SMVL) + "</optgroup>";
+    '<optgroup label="Syndicat du Val de Loir">' + options(SMVL) + "</optgroup>" +
+    '<optgroup label="Orée de Bercé-Bélinois">' + options(CCOBB_ID) + "</optgroup>";
 
   // Choix de départ : le lien, sinon ce qui a été retenu sur l'appareil, sinon La Chartre.
   var params = new URLSearchParams(location.search), saved = null;
