@@ -31,6 +31,25 @@ const GROUPS = {
     risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#AD4826" }
 };
 
+/* Retrait-gonflement des argiles : une teinte par niveau d'aléa (jaune
+   -> orange -> rouge brique, du plus faible au plus fort), plus
+   l'aplat est opaque plus l'aléa est élevé. Les mêmes couleurs sont
+   reprises par la légende (cases à cocher par niveau) et la popup.
+   Ordre du tableau = ordre de dessin : "fort" est tracé en dernier,
+   donc au-dessus. */
+const TYPES_RGA = [
+    { id: "1", label: "Aléa faible", icon: "fa-solid fa-house-crack", color: "#F2D14B", opacite: 0.40 },
+    { id: "2", label: "Aléa moyen", icon: "fa-solid fa-house-crack", color: "#EE8A2E", opacite: 0.55 },
+    { id: "3", label: "Aléa fort", icon: "fa-solid fa-house-crack", color: "#B5321C", opacite: 0.70 }
+];
+function categorieRga(feature) {
+    return String(Math.round(Number((feature.properties || {}).niveau)) || 1);
+}
+function styleRga(feature) {
+    const cat = TYPES_RGA.find(t => t.id === categorieRga(feature)) || TYPES_RGA[0];
+    return { color: cat.color, weight: 1, opacity: 0.9, fillColor: cat.color, fillOpacity: cat.opacite };
+}
+
 /* Couleurs des 5 lots de chasse de Bercé, reprises de l'affiche ONF. */
 const COULEURS_LOTS_CHASSE = { 1: "#E8836B", 2: "#E3CF3F", 3: "#4FA3E0", 4: "#3A9A3A", 5: "#B88FCB" };
 function styleLotChasse(feature) {
@@ -1602,7 +1621,8 @@ const LAYERS = [
     {
         id: "rga", group: "risques", label: "Retrait-gonflement des argiles",
         file: "couches/urbanisme/rga_2025_loir_luce_berce.geojson", type: "polygon",
-        color: "#D85A30",
+        color: "#D85A30", styleFn: styleRga,
+        legend: TYPES_RGA, categoriser: categorieRga,
         lazy: true, searchable: false, cluster: false,
         titleFields: ["niveau"],
         subtitleFields: ["surf_m2"]

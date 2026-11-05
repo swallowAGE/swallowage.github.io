@@ -2029,7 +2029,7 @@ function construirePopupLotChasse(props) {
     } else {
         corps = `
             ${liste.includes(iso) ? `<div class="popup-fiche-ligne"><i class="fa-solid fa-triangle-exclamation" style="color:#AD4826"></i> <strong>Chasse prévue aujourd'hui</strong></div>` : ""}
-            <div class="popup-fiche-ligne"><i class="fa-regular fa-calendar"></i> ${aVenir.length ? `${aVenir.length} jour${aVenir.length > 1 ? "s" : ""} à venir sur ${liste.length}` : `Saison terminée (${liste.length} jours)`}</div>
+            <div class="popup-fiche-ligne"><i class="fa-regular fa-calendar"></i> ${aVenir.length ? `${liste.length} jour${liste.length > 1 ? "s" : ""} de chasse cette saison, dont ${aVenir.length} à venir` : `Saison terminée (${liste.length} jour${liste.length > 1 ? "s" : ""} de chasse)`}</div>
             ${aVenir.slice(0, 5).map(d => `<div class="popup-fiche-ligne"><i class="fa-solid fa-crosshairs"></i> ${echapperHtml(fmt(d))}</div>`).join("")}
             <details><summary>Toutes les dates (${liste.length})</summary>
                 ${liste.map(d => `<div class="popup-fiche-ligne${d < iso ? " popup-fiche-precision" : ""}">${echapperHtml(fmt(d))}</div>`).join("")}
@@ -2081,7 +2081,7 @@ const CONSEILS_RGA = {
 };
 function construirePopupRga(props) {
     const label = (typeof LABELS_RGA !== "undefined" && LABELS_RGA[props.niveau]) || String(props.niveau);
-    const couleur = { 1: "#F2C94C", 2: "#F2994A", 3: "#D85A30" }[props.niveau] || "#D85A30";
+    const couleur = (TYPES_RGA.find(t => t.id === categorieRga({ properties: props })) || TYPES_RGA[0]).color;
     const conseil = CONSEILS_RGA[props.niveau];
 
     return `<div class="popup-fiche">
