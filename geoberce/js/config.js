@@ -5,13 +5,24 @@
    est générique et lit cette configuration.
    ========================================================= */
 
-/* Couleurs de l'identité graphique (voir aussi css/style.css) */
+/* Couleurs de l'identité graphique (voir aussi css/style.css). Les noms
+   viennent de l'ancienne charte et sont gardés pour ne pas réécrire toutes
+   les couches ; les valeurs sont celles de la charte swallow·AGE et de
+   l'icône des SIG :
+     foret      -> bleu marine de l'icône
+     feuille    -> vert de la charte
+     terracotta -> rose brique de la charte
+     riviere    -> bleu eau (plus sourd) de la charte
+     ardoise    -> gris chaud de la charte */
 const PALETTE = {
-    foret: "#0F6E56",
-    feuille: "#1D9E75",
-    terracotta: "#D85A30",
-    riviere: "#378ADD",
-    ardoise: "#5F5E5A"
+    foret: "#15304A",
+    feuille: "#5E8C61",
+    terracotta: "#B5677A",
+    riviere: "#2F6F8F",
+    ardoise: "#6B5F5A",
+    or: "#D5A35D",
+    orFonce: "#8A6D2B",
+    roseFonce: "#8E4458"
 };
 
 /* =========================================================
@@ -22,13 +33,13 @@ const GROUPS = {
     services: { label: "Services & mairie", icon: "fa-solid fa-landmark", color: PALETTE.foret },
     famille: { label: "Famille", icon: "fa-solid fa-child-reaching", color: PALETTE.terracotta },
     commerces: { label: "Commerces", icon: "fa-solid fa-basket-shopping", color: PALETTE.feuille },
-    associations: { label: "Associations", icon: "fa-solid fa-people-group", color: "#B5461F" },
+    associations: { label: "Associations", icon: "fa-solid fa-people-group", color: "#8A6D2B" },
     mobilite: { label: "Mobilité", icon: "fa-solid fa-bus", color: PALETTE.riviere },
-    securite: { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", color: "#AD4826" },
+    securite: { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", color: "#8E4458" },
     tourisme: { label: "Nature & rando", icon: "fa-solid fa-person-hiking", color: PALETTE.feuille },
-    patrimoine: { label: "Patrimoine", icon: "fa-solid fa-monument", color: "#7F7E7B" },
+    patrimoine: { label: "Patrimoine", icon: "fa-solid fa-monument", color: "#8A7F78" },
     urbanisme: { label: "Habitat & urbanisme", icon: "fa-solid fa-house-chimney", color: PALETTE.ardoise },
-    risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#AD4826" }
+    risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#8E4458" }
 };
 
 /* Retrait-gonflement des argiles : une teinte par niveau d'aléa (jaune
@@ -213,7 +224,7 @@ function couleurVigieau(feature) {
    Rouge volontairement absent de cette palette : déjà réservé aux
    couleurs d'alerte/risque ailleurs sur le site (Vigieau), inutile de
    prêter à confusion sur un simple tracé de randonnée. */
-const PALETTE_ITINERAIRES = ["#1D9E75", "#378ADD", "#D85A30", "#8E44AD", "#E1B12C", "#16A085", "#D63384", "#2C3E50"];
+const PALETTE_ITINERAIRES = ["#5E8C61", "#2F6F8F", "#B5677A", "#8E44AD", "#E1B12C", "#16A085", "#D63384", "#2C3E50"];
 const compteurCouleurItineraires = {}; // id de couche -> nombre déjà attribués
 const couleurParItineraire = {}; // "idCouche|idTrace" -> couleur déjà attribuée
 function couleurItineraire(feature, idCouche) {
@@ -253,7 +264,7 @@ const TYPES_COMMERCES = [
         types: ["restaurant", "bar", "pub", "fast_food"]
     },
     {
-        id: "coiffure", label: "Coiffure", icon: "fa-solid fa-scissors", color: "#AD4826",
+        id: "coiffure", label: "Coiffure", icon: "fa-solid fa-scissors", color: "#8E4458",
         types: ["hairdresser"]
     },
     {
@@ -293,7 +304,7 @@ const TYPES_COMMERCES = [
         types: ["books", "art", "cinema", "sports", "photo", "gift", "handicraft", "sewing", "museum"]
     },
     {
-        id: "brocante", label: "Brocante & antiquités", icon: "fa-solid fa-shop", color: "#7F7E7B",
+        id: "brocante", label: "Brocante & antiquités", icon: "fa-solid fa-shop", color: "#8A7F78",
         types: ["antiques", "second_hand", "wholesale"]
     },
     /* Les artisans (plombier, menuisier...) ont leur propre couche
@@ -429,7 +440,7 @@ const CATEGORIES_ASSOCIATIONS = {
     environnement: "Nature, chasse & pêche",
     autres: "Autres"
 };
-const COULEUR_ASSOCIATIONS = "#B5461F";
+const COULEUR_ASSOCIATIONS = "#8A6D2B";
 
 /* Pastille avec le nombre d'associations plutôt qu'une icône (voir
    iconeHtml dans js/icons.js). */
@@ -634,19 +645,11 @@ function iconeDechet(feature) {
    une future "fiche parcelle" (croisement avec les mutations DVF, le
    DPE, le PLUi...).
    ========================================================= */
-const COMMUNES_TERRITOIRE = {
-    "72027": "Beaumont-sur-Dême", "72028": "Beaumont-Pied-de-Bœuf", "72052": "Chahaignes",
-    "72068": "La Chartre-sur-le-Loir", "72071": "Montval-sur-Loir", "72103": "Courdemanche",
-    "72115": "Dissay-sous-Courcillon", "72134": "Flée", "72143": "Le Grand-Lucé",
-    "72153": "Jupilles", "72160": "Lavernat", "72161": "Lhomme", "72173": "Luceau",
-    "72183": "Marçon", "72210": "Montreuil-le-Henri", "72221": "Nogent-sur-Loir",
-    "72248": "Pruillé-l'Éguillé", "72262": "Loir en Vallée", "72279": "Saint-Georges-de-la-Couée",
-    "72311": "Saint-Pierre-de-Chevillé", "72314": "Saint-Pierre-du-Lorouër",
-    "72325": "Saint-Vincent-du-Lorouër", "72356": "Thoiré-sur-Dinan", "72376": "Villaines-sous-Lucé"
-};
+/* Défini dans js/territoire.js (propre à chaque territoire). */
+const COMMUNES_TERRITOIRE = TERRITOIRE.communes;
 
-/* SIREN de la comcom Loir-Lucé-Bercé (code_siren dans couches/communes.geojson). */
-const URL_CADASTRE_EPCI = "https://cadastre.data.gouv.fr/bundler/cadastre-etalab/epcis/200070373/geojson/parcelles";
+/* SIREN de la comcom (TERRITOIRE.siren, voir js/territoire.js). */
+const URL_CADASTRE_EPCI = `https://cadastre.data.gouv.fr/bundler/cadastre-etalab/epcis/${TERRITOIRE.siren}/geojson/parcelles`;
 
 /* =========================================================
    ILLIWAP — actualités/alertes des mairies et de la CC
@@ -658,7 +661,7 @@ const URL_CADASTRE_EPCI = "https://cadastre.data.gouv.fr/bundler/cadastre-etalab
    La CC elle-même a un identifiant à part (pas de code INSEE pour
    une intercommunalité), fourni par l'utilisatrice.
    ========================================================= */
-const ILLIWAP_TERRITOIRE = "cc-loir-luce-berce";
+const ILLIWAP_TERRITOIRE = TERRITOIRE.illiwap;
 
 function urlIllwapEmbed(identifiant) {
     return `https://station.illiwap.com/fr/public/${identifiant}/actu/embed`;
@@ -910,7 +913,7 @@ function categoriePatrimoineRural(props) {
     if (props.man_made === "wash_house") return { id: "lavoir", label: "Lavoir", icon: "fa-solid fa-water", color: PALETTE.riviere };
     if (props.man_made === "watermill" || props.historic === "mill") return { id: "moulin", label: "Moulin", icon: "fa-solid fa-industry", color: PALETTE.terracotta };
     if (props.amenity === "fountain") return { id: "fontaine", label: "Fontaine", icon: "fa-solid fa-droplet", color: PALETTE.riviere };
-    return { id: "autre", label: "Petit patrimoine", icon: "fa-solid fa-landmark", color: "#7F7E7B" };
+    return { id: "autre", label: "Petit patrimoine", icon: "fa-solid fa-landmark", color: "#8A7F78" };
 }
 function iconePatrimoineRural(feature) {
     const cat = categoriePatrimoineRural(feature.properties || {});
@@ -941,7 +944,7 @@ function iconePointRemarquableBerce(feature) {
    possible avec un simple fichier statique. Géométrie des communes reprise de
    couches/communes.geojson (déjà dans le dépôt) plutôt que demandée à
    Géorisques : seuls les événements viennent du flux distant. */
-const CACHE_CATNAT_CLE = "geoberce-cache-catnat";
+const CACHE_CATNAT_CLE = TERRITOIRE.id + "-cache-catnat";
 const CACHE_CATNAT_DUREE_MS = 24 * 60 * 60 * 1000; // historique d'arrêtés, change rarement : cache plus long que les flux Overpass
 
 function lireCacheCatnat() {
@@ -1011,7 +1014,7 @@ function couleurCatnat(nb) {
     if (!nb) return "#D8D6D0";
     if (nb <= 3) return "#F2C94C";
     if (nb <= 7) return "#F2994A";
-    return "#AD4826";
+    return "#8E4458";
 }
 function styleCatnat(feature) {
     const nb = (feature.properties.catnat_evenements || []).length;
@@ -1035,7 +1038,7 @@ function styleCatnat(feature) {
    Cache localStorage 24h comme CATNAT : un contrôle sanitaire ne change
    pas d'un chargement de page à l'autre, inutile de refaire les 24
    appels à chaque fois. */
-const CACHE_QUALITE_EAU_CLE = "geoberce-cache-qualite-eau";
+const CACHE_QUALITE_EAU_CLE = TERRITOIRE.id + "-cache-qualite-eau";
 const CACHE_QUALITE_EAU_DUREE_MS = 24 * 60 * 60 * 1000;
 const URL_HUBEAU_EAU_POTABLE = "https://hubeau.eaufrance.fr/api/v1/qualite_eau_potable/resultats_dis";
 
@@ -1101,7 +1104,7 @@ const NIVEAUX_EAU = {
         texte: "Toutes les limites de qualité sont respectées au dernier prélèvement." },
     reserve: { label: "Conforme, avec une réserve", color: "#E0A030", icon: "fa-circle-exclamation",
         texte: "Les limites de qualité sont respectées, mais une référence de confort ou de bon fonctionnement est dépassée." },
-    non_conforme: { label: "Non conforme", color: "#AD4826", icon: "fa-triangle-exclamation",
+    non_conforme: { label: "Non conforme", color: "#8E4458", icon: "fa-triangle-exclamation",
         texte: "Au dernier prélèvement, au moins une limite de qualité est dépassée. Suivez les consignes de votre mairie ou de l'ARS." }
 };
 function niveauConformiteEau(resultat) {
@@ -1427,7 +1430,7 @@ const LAYERS = [
     {
         id: "dae", group: "securite", label: "Défibrillateurs",
         file: "couches/securite/dae.geojson", type: "point",
-        icon: "fa-solid fa-heart-pulse", color: "#AD4826",
+        icon: "fa-solid fa-heart-pulse", color: "#8E4458",
         lazy: false, searchable: true, cluster: true,
         titleFields: ["c_nom", "c_com_nom"],
         subtitleFields: ["c_adr_num", "c_adr_voie", "c_com_nom"]
@@ -1440,7 +1443,7 @@ const LAYERS = [
     {
         id: "pompiers", group: "securite", label: "Casernes de pompiers",
         file: "couches/securite/pompiers.geojson",
-        type: "point", icon: "fa-solid fa-fire", color: "#AD4826",
+        type: "point", icon: "fa-solid fa-fire", color: "#8E4458",
         lazy: false, searchable: true, cluster: true,
         titleFields: ["name"],
         subtitleFields: ["operator"]
@@ -1448,7 +1451,7 @@ const LAYERS = [
     {
         id: "gendarmerie", group: "securite", label: "Gendarmerie & police",
         file: "couches/securite/gendarmerie.geojson",
-        type: "point", icon: "fa-solid fa-shield-halved", color: "#AD4826",
+        type: "point", icon: "fa-solid fa-shield-halved", color: "#8E4458",
         lazy: false, searchable: true, cluster: true,
         titleFields: ["name"],
         subtitleFields: ["operator", "phone"]
@@ -1456,7 +1459,7 @@ const LAYERS = [
     {
         id: "ehpad", group: "securite", label: "EHPAD & maisons de retraite",
         file: "couches/securite/ehpad.geojson",
-        type: "point", icon: "fa-solid fa-person-cane", color: "#AD4826",
+        type: "point", icon: "fa-solid fa-person-cane", color: "#8E4458",
         lazy: false, searchable: true, cluster: true,
         titleFields: ["name", "operator"],
         subtitleFields: ["operator", "phone"]
@@ -1466,7 +1469,7 @@ const LAYERS = [
     {
         id: "immeublesProteges", group: "patrimoine", label: "Monuments protégés",
         file: "couches/patrimoine/immeublesProteges.geojson", type: "point",
-        icon: "fa-solid fa-monument", color: "#7F7E7B",
+        icon: "fa-solid fa-monument", color: "#8A7F78",
         lazy: false, searchable: true, cluster: true,
         titleFields: ["titre_editorial_de_la_notice", "denomination_de_l_edifice", "autre_appellation_de_l_edifice"],
         subtitleFields: ["commune_forme_index", "typologie_de_la_protection"]
@@ -1479,7 +1482,7 @@ const LAYERS = [
            statique d'OpenStreetMap, filtré sur le vrai polygone du
            territoire - voir le README. */
         file: "couches/patrimoine/patrimoineRural.geojson",
-        type: "point", icon: "fa-solid fa-landmark", color: "#7F7E7B",
+        type: "point", icon: "fa-solid fa-landmark", color: "#8A7F78",
         iconePourFeature: iconePatrimoineRural,
         lazy: false, searchable: true, cluster: true,
         titleFields: ["name"],
@@ -1541,7 +1544,7 @@ const LAYERS = [
         subtitleFields: ["capacity", "fee"]
     },
     {
-        id: "pointsRemarquablesBerce", group: "tourisme", label: "Points remarquables (forêt de Bercé)",
+        id: "pointsRemarquablesBerce", group: "tourisme", territoires: ["geoberce"], label: "Points remarquables (forêt de Bercé)",
         /* Extrait statique d'OpenStreetMap (arbres nommés, sources,
            attractions), filtré sur le vrai polygone du territoire,
            complété par un fichier local pour les sites emblématiques
@@ -1567,7 +1570,7 @@ const LAYERS = [
         subtitleFields: []
     },
     {
-        id: "lotsChasse", group: "tourisme", label: "Lots de chasse 2026-2027 (forêt de Bercé)",
+        id: "lotsChasse", group: "tourisme", territoires: ["geoberce"], label: "Lots de chasse 2026-2027 (forêt de Bercé)",
         /* Les numéros de l'affiche sont des parcelles forestières ONF,
            pas des parcelles cadastrales : la couche cadastre ne
            convient donc pas. Les 5 contours sont les périmètres
@@ -1654,7 +1657,7 @@ const LAYERS = [
     {
         id: "rga", group: "risques", label: "Retrait-gonflement des argiles",
         file: "couches/urbanisme/rga_2025_loir_luce_berce.geojson", type: "polygon",
-        color: "#D85A30", styleFn: styleRga,
+        color: "#B5321C", styleFn: styleRga,
         legend: TYPES_RGA, categoriser: categorieRga,
         lazy: true, searchable: false, cluster: false,
         titleFields: ["niveau"],
@@ -1710,7 +1713,7 @@ const LAYERS = [
         wmsLayer: "DEBROUSSAILLEMENT",
         opacity: 0.6,
         attribution: "IGN",
-        color: "#AD4826",
+        color: "#8E4458",
         lazy: true, searchable: false, cluster: false
     },
     {
@@ -1731,7 +1734,7 @@ const LAYERS = [
         id: "carburants", group: "mobilite", label: "Prix des carburants",
         /* Flux instantané officiel (mis à jour ~10 min), filtré sur un rayon
            de 25 km autour du territoire pour ne récupérer que les stations utiles. */
-        file: "https://data.economie.gouv.fr/api/records/1.0/search/?dataset=prix-des-carburants-en-france-flux-instantane-v2&geofilter.distance=47.791528,0.412223,25000&rows=300",
+        file: `https://data.economie.gouv.fr/api/records/1.0/search/?dataset=prix-des-carburants-en-france-flux-instantane-v2&geofilter.distance=${TERRITOIRE.centre[0]},${TERRITOIRE.centre[1]},${TERRITOIRE.rayonCarburantsM}&rows=300`,
         transform: geojsonDepuisFluxODS,
         type: "point",
         icon: "fa-solid fa-gas-pump", color: PALETTE.riviere,
@@ -1740,6 +1743,22 @@ const LAYERS = [
         subtitleFields: ["ville", "cp", "gazole_prix", "sp95_prix", "e10_prix"]
     }
 ];
+
+/* Retire les couches exclues pour ce territoire (TERRITOIRE.couchesExclues),
+   réservées à d'autres (`territoires: [...]` sur la couche), ou dont un
+   fichier local (couches/...) n'existe pas encore : si le territoire
+   déclare `fichiersDisponibles`, une couche n'est gardée que si tous ses
+   fichiers locaux y figurent (les couches en flux, sans fichier local,
+   restent toujours). GéoBercé ne déclare pas cette liste : tout est gardé. */
+function fichiersLocauxDeLaCouche(conf) {
+    return [].concat(conf.file || []).filter(f => typeof f === "string" && f.startsWith("couches/"));
+}
+for (let i = LAYERS.length - 1; i >= 0; i--) {
+    const l = LAYERS[i];
+    const manqueUnFichier = Array.isArray(TERRITOIRE.fichiersDisponibles)
+        && fichiersLocauxDeLaCouche(l).some(f => !TERRITOIRE.fichiersDisponibles.includes(f));
+    if ((TERRITOIRE.couchesExclues || []).includes(l.id) || (l.territoires && !l.territoires.includes(TERRITOIRE.id)) || manqueUnFichier) LAYERS.splice(i, 1);
+}
 
 /* =========================================================
    THÉMATIQUES DE LA PAGE D'ACCUEIL

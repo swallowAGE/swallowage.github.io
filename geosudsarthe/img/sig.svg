@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="60 60 1740 1740" role="img" aria-label="Boussole">
+  <defs>
+    <!-- Le moyeu de l'aiguille est un vrai trou : l'icône reste propre sur tout fond -->
+    <mask id="moyeu" maskUnits="userSpaceOnUse" x="60" y="60" width="1740" height="1740">
+      <rect x="60" y="60" width="1740" height="1740" fill="#fff"/>
+      <circle cx="942" cy="903" r="60" fill="#000"/>
+    </mask>
+  </defs>
+  <!-- Pointes cardinales -->
+  <g fill="#D5A35D">
+    <polygon points="928,113 877,385 981,385"/>
+    <polygon points="928,1700 878,1428 981,1428"/>
+    <polygon points="133,908 372,858 372,958"/>
+    <polygon points="1725,908 1487,862 1487,960"/>
+  </g>
+  <!-- Anneau, interrompu aux quatre points cardinaux -->
+  <g fill="none" stroke="#15304A" stroke-width="24">
+    <path d="M 1017.4 292.3 A 620 620 0 0 1 1542.7 817.6"/>
+    <path d="M 1542.7 994.4 A 620 620 0 0 1 1017.4 1519.7"/>
+    <path d="M 840.6 1519.7 A 620 620 0 0 1 315.3 994.4"/>
+    <path d="M 315.3 817.6 A 620 620 0 0 1 840.6 292.3"/>
+  </g>
+  <!-- Reflets -->
+  <g fill="#15304A">
+    <path d="M435,833 A 497 497 0 0 1 858,424 A 690 690 0 0 0 435,833 Z"/>
+    <path d="M1418,938 A 470 470 0 0 1 946,1349 A 660 660 0 0 0 1418,938 Z"/>
+  </g>
+  <!-- Aiguille -->
+  <g mask="url(#moyeu)">
+    <polygon points="567,1295 862,828 905,797 990,848 1048,942 1030,968" fill="#15304A"/>
+    <polygon points="905,797 1315,500 1048,942 990,848" fill="#E39596"/>
+  </g>
+</svg>

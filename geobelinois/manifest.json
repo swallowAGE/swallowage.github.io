@@ -1,0 +1,15 @@
+{
+  "name": "GéoBelinois — Le SIG local",
+  "short_name": "GéoBelinois",
+  "description": "Le SIG local de la Communauté de communes Orée de Bercé – Bélinois : commerces, services, risques, urbanisme et démarches du quotidien.",
+  "start_url": "index.html",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#FAF6F0",
+  "theme_color": "#15304A",
+  "lang": "fr",
+  "icons": [
+    { "src": "img/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "img/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

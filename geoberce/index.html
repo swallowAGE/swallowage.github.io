@@ -27,7 +27,7 @@
 <meta property="og:url" content="https://swallowage.github.io/geoberce/">
 <meta property="og:title" content="GéoBercé — Le SIG local du territoire Loir-Lucé-Bercé">
 <meta property="og:description" content="Un SIG local, gratuit et ouvert, qui regroupe au même endroit les informations utiles du territoire Loir-Lucé-Bercé : services, famille, commerces, mobilité, nature et patrimoine.">
-<meta property="og:image" content="https://swallowage.github.io/geoberce/img/geoberce.png">
+<meta property="og:image" content="https://swallowage.github.io/geoberce/img/sig-partage.png">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">
@@ -48,14 +48,14 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Nunito:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <!-- FIN STYLES -->
 
 <!-- DEBUT PWA (installation sur l'écran d'accueil) -->
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0F6E56">
+<meta name="theme-color" content="#15304A">
 <!-- Safari iOS ignore le manifest pour l'icône d'écran d'accueil, lit
      uniquement cette balise dédiée (voir js/installation.js pour la
      limite de fond : pas de bouton "Installer" possible sur iOS, aucune
@@ -73,7 +73,7 @@
     <a id="back-swallowage" href="https://swallowage.github.io/" title="Retour à swallow·AGE"><i class="fa-solid fa-arrow-left"></i><span>swallow·AGE</span></a>
 
     <div id="brand">
-        <img src="img/geoberce.png" alt="Logo GéoBercé" class="brand-logo">
+        <img src="img/sig.svg" alt="Logo GéoBercé" class="brand-logo">
         <div>
             <div id="brand-title">GéoBercé</div>
             <div id="brand-subtitle">Le SIG local</div>
@@ -252,11 +252,11 @@
         <button type="button" id="about-close" class="info-close" aria-label="Fermer">×</button>
         <div class="about-info">
             <div id="about-logo">
-                <img src="img/geoberce.png" alt="Logo GéoBercé" class="brand-logo brand-logo-large">
+                <img src="img/sig.svg" alt="Logo GéoBercé" class="brand-logo brand-logo-large">
             </div>
             <h2>GéoBercé</h2>
             <p>Un SIG local, gratuit et ouvert, qui regroupe au même endroit les informations utiles du territoire Loir-Lucé-Bercé : services, famille, commerces, mobilité, nature et patrimoine.</p>
-            <p>Les couches marquées d'un point orange <span style="color:var(--terracotta)">●</span> dans le panneau sont chargées à la demande, seulement quand vous les cochez : certaines interrogent des données en direct (OpenStreetMap, Géorisques...) plutôt qu'un fichier déjà présent sur le site, et peuvent donc prendre quelques secondes à s'afficher.</p>
+            <p>Les couches marquées d'un point doré <span style="color:var(--or)">●</span> dans le panneau sont chargées à la demande, seulement quand vous les cochez : certaines interrogent des données en direct (OpenStreetMap, Géorisques...) plutôt qu'un fichier déjà présent sur le site, et peuvent donc prendre quelques secondes à s'afficher.</p>
             <p class="about-source">Données : communes, EPCI, OpenStreetMap, data.gouv.fr, Vigieau, IGN Géoplateforme, Géoportail de l'Urbanisme, prix-carburants.gouv.fr, Géorisques, ANCT.</p>
 
             <button type="button" id="tour-relancer" class="rf-bouton-secondaire">Revoir la visite guidée</button>
@@ -303,6 +303,7 @@
 <script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
+<script src="js/territoire.js"></script>
 <script src="js/config.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/popup.js"></script>

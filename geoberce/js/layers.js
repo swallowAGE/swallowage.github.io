@@ -48,7 +48,7 @@ function couleurPopulation(pop) {
     if (pop < 1000) return "#8AC4B7";
     if (pop < 1500) return "#5AA898";
     if (pop < 2500) return "#2E8B7A";
-    return "#0F6E56";
+    return "#15304A";
 }
 
 /* `layer` (le marqueur/polygone/ligne Leaflet réel, déjà lié à sa vraie

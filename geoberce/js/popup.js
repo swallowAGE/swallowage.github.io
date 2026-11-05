@@ -931,12 +931,12 @@ function construirePopupPompiers(props) {
 
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
-            <div class="popup-fiche-icon" style="background:#AD4826"><i class="fa-solid fa-fire"></i></div>
+            <div class="popup-fiche-icon" style="background:#8E4458"><i class="fa-solid fa-fire"></i></div>
             <div class="popup-fiche-titre-wrap">
-                <div class="popup-fiche-tag" style="color:#AD4826">Caserne de pompiers</div>
+                <div class="popup-fiche-tag" style="color:#8E4458">Caserne de pompiers</div>
                 <div class="popup-fiche-titre">${echapperHtml(nom)}</div>
                 ${adresse ? `<div class="popup-fiche-adresse">${echapperHtml(adresse)}</div>` : ""}
-                ${operateur ? `<div class="popup-fiche-puce" style="color:#AD4826"><i class="fa-solid fa-building"></i>${echapperHtml(operateur)}</div>` : ""}
+                ${operateur ? `<div class="popup-fiche-puce" style="color:#8E4458"><i class="fa-solid fa-building"></i>${echapperHtml(operateur)}</div>` : ""}
             </div>
         </div>
         <div class="popup-fiche-section"><div class="popup-fiche-precision">En cas d'urgence, composez le 18 ou le 112.</div></div>
@@ -957,9 +957,9 @@ function construirePopupGendarmerie(props) {
 
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
-            <div class="popup-fiche-icon" style="background:#AD4826"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="popup-fiche-icon" style="background:#8E4458"><i class="fa-solid fa-shield-halved"></i></div>
             <div class="popup-fiche-titre-wrap">
-                <div class="popup-fiche-tag" style="color:#AD4826">${echapperHtml(tag)}</div>
+                <div class="popup-fiche-tag" style="color:#8E4458">${echapperHtml(tag)}</div>
                 <div class="popup-fiche-titre">${echapperHtml(nom)}</div>
                 ${adresse ? `<div class="popup-fiche-adresse">${echapperHtml(adresse)}</div>` : ""}
             </div>
@@ -976,9 +976,9 @@ function construirePopupEhpad(props) {
 
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
-            <div class="popup-fiche-icon" style="background:#AD4826"><i class="fa-solid fa-person-cane"></i></div>
+            <div class="popup-fiche-icon" style="background:#8E4458"><i class="fa-solid fa-person-cane"></i></div>
             <div class="popup-fiche-titre-wrap">
-                <div class="popup-fiche-tag" style="color:#AD4826">EHPAD / maison de retraite</div>
+                <div class="popup-fiche-tag" style="color:#8E4458">EHPAD / maison de retraite</div>
                 <div class="popup-fiche-titre">${echapperHtml(nom)}</div>
                 ${adresse ? `<div class="popup-fiche-adresse">${echapperHtml(adresse)}</div>` : ""}
             </div>
@@ -1698,9 +1698,9 @@ function construirePopupDae(props) {
 
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
-            <div class="popup-fiche-icon" style="background:#AD4826"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div class="popup-fiche-icon" style="background:#8E4458"><i class="fa-solid fa-heart-pulse"></i></div>
             <div class="popup-fiche-titre-wrap">
-                <div class="popup-fiche-tag" style="color:#AD4826">Défibrillateur</div>
+                <div class="popup-fiche-tag" style="color:#8E4458">Défibrillateur</div>
                 <div class="popup-fiche-titre">${echapperHtml(nom)}</div>
                 ${adresse ? `<div class="popup-fiche-adresse">${echapperHtml(adresse)}</div>` : ""}
             </div>
@@ -1734,7 +1734,7 @@ function construirePopupDae(props) {
    (droit du patrimoine français) : distingués par la couleur du badge
    plutôt qu'une même couleur "info" indifférenciée. */
 function couleurProtectionMH(typologie) {
-    return typologie && /class/i.test(typologie) ? "#AD4826" : "#7F7E7B";
+    return typologie && /class/i.test(typologie) ? "#8E4458" : "#8A7F78";
 }
 
 /* "2020/07/03 : inscrit MH" (parfois avec espace insécable avant ":")
@@ -1808,9 +1808,9 @@ function construirePopupMonument(props) {
 
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
-            <div class="popup-fiche-icon" style="background:#7F7E7B"><i class="fa-solid fa-monument"></i></div>
+            <div class="popup-fiche-icon" style="background:#8A7F78"><i class="fa-solid fa-monument"></i></div>
             <div class="popup-fiche-titre-wrap">
-                <div class="popup-fiche-tag" style="color:#7F7E7B">${echapperHtml(typeEdifice || "Monument historique")}</div>
+                <div class="popup-fiche-tag" style="color:#8A7F78">${echapperHtml(typeEdifice || "Monument historique")}</div>
                 <div class="popup-fiche-titre">${echapperHtml(nom)}</div>
                 ${(lieu || props.commune_forme_index) ? `<div class="popup-fiche-adresse">${echapperHtml([lieu, props.commune_forme_index].filter(Boolean).join(" · "))}</div>` : ""}
             </div>
@@ -2029,7 +2029,7 @@ function construirePopupLotChasse(props) {
         corps = `<div class="popup-fiche-vide">Aucun jour de chasse publié à ce jour par l'ONF pour ce lot (calendrier encore partiel). Consultez régulièrement la page de l'ONF.</div>`;
     } else {
         corps = `
-            ${liste.includes(iso) ? `<div class="popup-fiche-ligne"><i class="fa-solid fa-triangle-exclamation" style="color:#AD4826"></i> <strong>Chasse prévue aujourd'hui</strong></div>` : ""}
+            ${liste.includes(iso) ? `<div class="popup-fiche-ligne"><i class="fa-solid fa-triangle-exclamation" style="color:#8E4458"></i> <strong>Chasse prévue aujourd'hui</strong></div>` : ""}
             <div class="popup-fiche-ligne"><i class="fa-regular fa-calendar"></i> ${aVenir.length ? `${liste.length} jour${liste.length > 1 ? "s" : ""} de chasse cette saison, dont ${aVenir.length} à venir` : `Saison terminée (${liste.length} jour${liste.length > 1 ? "s" : ""} de chasse)`}</div>
             ${aVenir.slice(0, 5).map(d => `<div class="popup-fiche-ligne"><i class="fa-solid fa-crosshairs"></i> ${echapperHtml(fmt(d))}</div>`).join("")}
             <details><summary>Toutes les dates (${liste.length})</summary>
