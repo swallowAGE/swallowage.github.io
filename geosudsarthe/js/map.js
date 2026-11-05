@@ -294,11 +294,11 @@ document.getElementById("tour-relancer").addEventListener("click", () => {
 
 /* Formulaire de contact (bugs/idées) : pas de backend sur un site 100%
    statique GitHub Pages, donc pas de serveur mail à nous - Web3Forms
-   reçoit la requête et fait l'envoi réel à notre place (clé liée à
-   swallowage@proton.me, pas de compte/mot de passe à gérer côté site).
+   reçoit la requête et fait l'envoi réel à notre place (clé encore liée à
+   l'ancienne adresse swallowage@proton.me : à recréer pour contact@hirundage.fr, pas de compte/mot de passe à gérer côté site).
    Remplace l'ancien lien mailto, qui ouvrait le client mail du visiteur
    au lieu d'envoyer directement - retour direct de l'utilisatrice. */
-const EMAIL_CONTACT = "swallowage@proton.me";
+const EMAIL_CONTACT = "contact@hirundage.fr";
 const WEB3FORMS_ACCESS_KEY = "f8e3cf6f-6ad8-42dd-b403-1ad9728373f6";
 document.getElementById("contact-envoyer").addEventListener("click", () => {
     const bouton = document.getElementById("contact-envoyer");
