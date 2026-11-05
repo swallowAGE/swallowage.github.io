@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quelle poubelle ce soir ? – Swallow AGE</title>
-<meta name="description" content="Quelle poubelle sortir ce soir dans votre commune de Loir-Lucé-Bercé (SYVALORM et Syndicat du Val de Loir) ou d'Orée de Bercé-Bélinois, les prochaines collectes et un rappel dans votre agenda.">
+<meta name="description" content="Quelle poubelle sortir ce soir dans votre commune de Loir-Lucé-Bercé, de Sud Sarthe (SYVALORM et Syndicat du Val de Loir) ou d'Orée de Bercé-Bélinois, les prochaines collectes et un rappel dans votre agenda.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -152,7 +152,7 @@
   <footer class="notes">
     <div>
       <span class="kicker">// les collectes</span>
-      <p>Dans les communes du SYVALORM, les ordures ménagères et les emballages sont collectés le même jour, une semaine sur deux. Dans celles du Syndicat du Val de Loir, les ordures ménagères passent chaque semaine et les emballages une semaine sur deux, selon le secteur&nbsp;: A les semaines impaires, B les semaines paires. Sortez les bacs la veille au soir. Après un jour férié, les collectes de la semaine sont décalées au lendemain, sauf le jeudi 6 mai 2027 au SYVALORM. Dans les communes d'Orée de Bercé-Bélinois, les ordures ménagères (bac gris) et les emballages (bac jaune) passent une semaine sur deux chacun, à tour de rôle, et le calendrier 2026 tient déjà compte des jours fériés.</p>
+      <p>Dans les communes du SYVALORM, les ordures ménagères et les emballages sont collectés le même jour, une semaine sur deux. Dans celles du Syndicat du Val de Loir, les ordures ménagères passent chaque semaine et les emballages une semaine sur deux, selon le secteur&nbsp;: A les semaines impaires, B les semaines paires. Sortez les bacs la veille au soir. Après un jour férié, les collectes de la semaine sont décalées au lendemain, sauf le jeudi 6 mai 2027 au SYVALORM. Dans les communes d'Orée de Bercé-Bélinois, les ordures ménagères (bac gris) et les emballages (bac jaune) passent une semaine sur deux chacun, à tour de rôle, et le calendrier 2026 tient déjà compte des jours fériés. Au Syndicat du Val de Loir, la collecte passera à une seule tournée tous les 15 jours (ordures ménagères et tri ensemble) à partir du 1er janvier 2027.</p>
     </div>
     <div>
       <span class="kicker">// les sources</span>
@@ -188,6 +188,16 @@
   // Pour les communes à deux secteurs, les lieux-dits sont relevés sur la carte du syndicat ;
   // un « * » final signale un lieu tout près de la limite entre les deux secteurs.
   var SECTEURS = {
+    // Communes de la communauté de communes Sud Sarthe : carte des secteurs du syndicat, sans liste de lieux-dits.
+    "Aubigné-Racan": { map: "aubigne-racan", day: 1, A: [], B: [] },
+    "Le Lude": { map: "le-lude", day: 3, A: [], B: [] },
+    "Luché-Pringé": { map: "luche-pringe", day: 3, A: [], B: [] },
+    "Mansigné": { map: "mansigne", day: 5, A: [], B: [] },
+    "Mayet": { map: "mayet", day: 1, A: [], B: [] },
+    "Requeil": { map: "requeil", day: 5, A: [], B: [] },
+    "Vaas": { map: "vaas", day: 4, A: [], B: [] },
+    "Verneil-le-Chétif": { map: "verneil-le-chetif", day: 1, A: [], B: [] },
+    "Yvré-le-Pôlin": { map: "yvre-le-polin", day: 5, A: [], B: [] },
     "Flée": { map: "flee", day: 2,
       A: ["La Guichardière", "La Naillère", "La Glacière", "Champ du Grenouillet", "La Petite Foucherie"],
       B: ["Le bourg", "Les Pâqueries", "La Tuffière", "La Marottière", "La Patrie", "La Barsonnière", "Les Ribottières", "Le Bois Camus",
@@ -305,6 +315,25 @@
       { from: "2027-01-01", to: END[SYV], group: "A", day: 5 }] },
     { name: "Thoiré-sur-Dinan", syndicat: SMVL, smvl: { sectors: "Thoiré-sur-Dinan" } },
     { name: "Villaines-sous-Lucé", syndicat: SYV, plan: always("A", 5) },
+    { name: "Château-l'Hermitage", syndicat: SMVL, smvl: { day: 5, emb: "odd" } },
+    { name: "Chenu", syndicat: SMVL, smvl: { day: 4, emb: "odd" } },
+    { name: "Coulongé", syndicat: SMVL, smvl: { day: 3, emb: "odd" } },
+    { name: "La Bruère-sur-Loir", syndicat: SMVL, smvl: { day: 4, emb: "odd" } },
+    { name: "La Chapelle-aux-Choux", syndicat: SMVL, smvl: { day: 4, emb: "even" } },
+    { name: "Pontvallain", syndicat: SMVL, smvl: { day: 5, emb: "odd" } },
+    { name: "Sarcé", syndicat: SMVL, smvl: { day: 1, emb: "odd" } },
+    { name: "Savigné-sous-le-Lude", syndicat: SMVL, smvl: { day: 3, emb: "odd" } },
+    { name: "Saint-Germain-d'Arcé", syndicat: SMVL, smvl: { day: 4, emb: "even" } },
+    { name: "Saint-Jean-de-la-Motte", syndicat: SMVL, smvl: { day: 5, emb: "even" } },
+    { name: "Aubigné-Racan", syndicat: SMVL, smvl: { sectors: "Aubigné-Racan" } },
+    { name: "Le Lude", syndicat: SMVL, smvl: { sectors: "Le Lude" } },
+    { name: "Luché-Pringé", syndicat: SMVL, smvl: { sectors: "Luché-Pringé" } },
+    { name: "Mansigné", syndicat: SMVL, smvl: { sectors: "Mansigné" } },
+    { name: "Mayet", syndicat: SMVL, smvl: { sectors: "Mayet" } },
+    { name: "Requeil", syndicat: SMVL, smvl: { sectors: "Requeil" } },
+    { name: "Vaas", syndicat: SMVL, smvl: { sectors: "Vaas" } },
+    { name: "Verneil-le-Chétif", syndicat: SMVL, smvl: { sectors: "Verneil-le-Chétif" } },
+    { name: "Yvré-le-Pôlin", syndicat: SMVL, smvl: { sectors: "Yvré-le-Pôlin" } },
     { name: "Écommoy", syndicat: CCOBB_ID, parts: [
       { name: "Le bourg", info: "mercredi", dates: "ecommoy-bourg" },
       { name: "La campagne", info: "lundi", dates: "ecommoy-campagne" }] },
@@ -462,21 +491,27 @@
   // Carte et listes pour choisir son secteur.
   function sectorPicker(where, s) {
     var pick = $("pick");
+    var avecListes = s.A.length > 0 && s.B.length > 0;
     pick.innerHTML =
       '<div><span class="kicker">// une seule fois</span><h2 id="pick-title">Votre secteur à ' + esc(where) + "</h2>" +
       "<p>Le bac des emballages ne passe pas la même semaine dans toute la commune. Choisissez votre secteur&nbsp;: la page s'en souviendra.</p></div>" +
-      '<div><label for="q">Votre lieu-dit ou votre rue</label>' +
-      '<input id="q" class="fld" type="text" autocomplete="off" placeholder="Ex. ' + esc(label(s.A[0])) + ', le bourg…" aria-describedby="q-help">' +
-      '<div id="q-res" aria-live="polite"></div><p id="q-help" class="sr-only" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Les lieux trouvés s\'affichent sous le champ.</p></div>' +
+      (avecListes
+        ? '<div><label for="q">Votre lieu-dit ou votre rue</label>' +
+          '<input id="q" class="fld" type="text" autocomplete="off" placeholder="Ex. ' + esc(label(s.A[0])) + ', le bourg…" aria-describedby="q-help">' +
+          '<div id="q-res" aria-live="polite"></div><p id="q-help" class="sr-only" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Les lieux trouvés s\'affichent sous le champ.</p></div>'
+        : "") +
       '<figure><a href="cartes/' + s.map + '.jpg" target="_blank" rel="noopener"><img src="cartes/' + s.map + '.jpg" width="900" height="900" loading="lazy" alt="Carte des secteurs de ' +
       esc(where) + ' : secteur A en orange, secteur B en gris."></a>' +
       '<figcaption>Carte du Syndicat du Val de Loir&nbsp;: <strong style="color: #9A5B00">A en orange</strong>, B en gris. Touchez la carte pour l\'agrandir.</figcaption></figure>' +
       '<div class="sectors"><button type="button" class="sec-a" data-sector="A"><b>Secteur A</b><span>emballages les semaines impaires</span></button>' +
       '<button type="button" class="sec-b" data-sector="B"><b>Secteur B</b><span>emballages les semaines paires</span></button></div>' +
-      "<details><summary>Voir tous les lieux par secteur</summary>" +
-      "<p><strong>Secteur A&nbsp;:</strong> " + s.A.map(function (n) { return esc(label(n)); }).join(", ") + ".</p>" +
-      "<p><strong>Secteur B&nbsp;:</strong> " + s.B.map(function (n) { return esc(label(n)); }).join(", ") + ".</p>" +
-      "<p>Lieu absent de la liste ou tout près d'une limite&nbsp;: regardez la carte, ou appelez le syndicat au 02 43 94 86 50.</p></details>";
+      (avecListes
+        ? "<details><summary>Voir tous les lieux par secteur</summary>" +
+          "<p><strong>Secteur A&nbsp;:</strong> " + s.A.map(function (n) { return esc(label(n)); }).join(", ") + ".</p>" +
+          "<p><strong>Secteur B&nbsp;:</strong> " + s.B.map(function (n) { return esc(label(n)); }).join(", ") + ".</p>" +
+          "<p>Lieu absent de la liste ou tout près d'une limite&nbsp;: regardez la carte, ou appelez le syndicat au 02 43 94 86 50.</p></details>"
+        : "<p style=\"font-size: 14px; color: var(--soft)\">Un doute près d'une limite&nbsp;? Appelez le syndicat au 02 43 94 86 50.</p>");
+    if (!avecListes) return;
     var all = s.A.map(function (n) { return { n: n, s: "A" }; }).concat(s.B.map(function (n) { return { n: n, s: "B" }; }));
     $("q").addEventListener("input", function () {
       var q = norm(this.value.trim());
@@ -580,7 +615,8 @@
       $("ics").hidden = true; $("ics-hint").hidden = true;
       title.textContent = "// " + placeName();
       body.innerHTML = "<h2>Calendrier à mettre à jour</h2><p>Les collectes ne sont connues que jusqu'à fin " + endLabel(sched.end) +
-        '. Consultez <a href="' + SITE[sched.syndicat] + '" target="_blank" rel="noopener">le site du ' + sched.syndicat + "</a>.</p>";
+        '. Consultez <a href="' + SITE[sched.syndicat] + '" target="_blank" rel="noopener">le site du ' + sched.syndicat + "</a>.</p>" +
+        (sched.syndicat === SMVL ? "<p style=\"margin-top: 10px\">À savoir&nbsp;: à partir du 1er janvier 2027, le Syndicat du Val de Loir collectera le bac des ordures ménagères et le bac de tri en même temps, tous les 15 jours. Les calendriers 2027 seront distribués début décembre.</p>" : "");
       return;
     }
     $("ics-hint").textContent = "Un rappel la veille à 19 h, jours fériés compris, jusqu'à fin " + endLabel(sched.end) + ".";
@@ -655,7 +691,10 @@
 
   // ---------- Commune choisie ----------
   function options(syndicat) {
-    return COMMUNES.map(function (c, i) { return c.syndicat === syndicat ? '<option value="' + i + '">' + c.name + "</option>" : ""; }).join("");
+    return COMMUNES.map(function (c, i) { return { c: c, i: i }; })
+      .filter(function (x) { return x.c.syndicat === syndicat; })
+      .sort(function (a, b) { return a.c.name.localeCompare(b.c.name, "fr"); })
+      .map(function (x) { return '<option value="' + x.i + '">' + x.c.name + "</option>"; }).join("");
   }
   $("commune").innerHTML = '<optgroup label="SYVALORM">' + options(SYV) + "</optgroup>" +
     '<optgroup label="Syndicat du Val de Loir">' + options(SMVL) + "</optgroup>" +
