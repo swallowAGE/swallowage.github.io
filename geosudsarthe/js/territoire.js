@@ -24,7 +24,30 @@ const TERRITOIRE = {
        (couches/communes.geojson et epci.geojson sont toujours présents).
        Une couche de js/config.js dont un fichier local n'est pas dans cette
        liste n'est pas affichée. À compléter au fil des scripts de données. */
-    fichiersDisponibles: [],
+    fichiersDisponibles: [
+        "couches/associations/associations.geojson",
+        "couches/commerces/artisans.geojson",
+        "couches/commerces/banques.geojson",
+        "couches/commerces/commerces.geojson",
+        "couches/famille/education.geojson",
+        "couches/patrimoine/patrimoineRural.geojson",
+        "couches/securite/ehpad.geojson",
+        "couches/securite/gendarmerie.geojson",
+        "couches/securite/pompiers.geojson",
+        "couches/services/airesJeu.geojson",
+        "couches/services/antennes.geojson",
+        "couches/services/bibliotheques.geojson",
+        "couches/services/equipementSportif.geojson",
+        "couches/services/fontaines.geojson",
+        "couches/services/lockers_manuels.geojson",
+        "couches/services/marches.geojson",
+        "couches/services/parkings.geojson",
+        "couches/services/toilettes.geojson",
+        "couches/tourisme/campingcar.geojson",
+        "couches/tourisme/cours_eau.geojson",
+        "couches/tourisme/officesTourisme.geojson",
+        "couches/tourisme/randonnees.geojson"
+    ],
 
     communes: {
         "72013": "Aubigné-Racan",
