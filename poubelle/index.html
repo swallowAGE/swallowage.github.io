@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quelle poubelle ce soir ? – Hirundo AGE</title>
+<title>Quelle poubelle ce soir ? – Hirund AGE</title>
 <meta name="description" content="Quelle poubelle sortir ce soir dans votre commune de Loir-Lucé-Bercé, de Sud Sarthe (SYVALORM et Syndicat du Val de Loir) ou d'Orée de Bercé-Bélinois, les prochaines collectes et un rappel dans votre agenda.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,7 +120,7 @@
 <body>
 <div class="wrap">
   <div class="topbar">
-    <a href="../">← hirundo·AGE</a>
+    <a href="../">← hirund·AGE</a>
     <span class="kicker">// outil · déchets</span>
   </div>
   <h1>Quelle poubelle ce soir&nbsp;?</h1>
@@ -664,11 +664,11 @@
     var name = placeName();
     var list = collections(sched, t0 + DAY, Date.parse(sched.end + "T00:00:00Z"));
     var stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
-    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//hirundoAGE//Quelle poubelle ce soir//FR", "CALSCALE:GREGORIAN",
+    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//hirundAGE//Quelle poubelle ce soir//FR", "CALSCALE:GREGORIAN",
       "X-WR-CALNAME:Collectes " + name];
     list.forEach(function (x) {
       var ev = iso(x.date - DAY).replace(/-/g, "");
-      lines.push("BEGIN:VEVENT", "UID:" + ev + "-" + name.normalize("NFD").replace(/[^A-Za-z]/g, "") + "@hirundoage.github.io", "DTSTAMP:" + stamp,
+      lines.push("BEGIN:VEVENT", "UID:" + ev + "-" + name.normalize("NFD").replace(/[^A-Za-z]/g, "") + "@hirundage.github.io", "DTSTAMP:" + stamp,
         "DTSTART:" + ev + "T190000", "DTEND:" + ev + "T191500",
         "SUMMARY:Sortir les poubelles (" + (x.bins.length === 2 ? "ordures ménagères + emballages" : x.bins[0] === 1 ? "emballages" : "ordures ménagères") + ")",
         "DESCRIPTION:Collecte le " + longDate(x.date) + (x.cause ? ", décalée à cause du jour férié (" + x.cause.name + ")" : "") + ".",
