@@ -61,6 +61,25 @@ function styleRga(feature) {
     return { color: cat.color, weight: 1, opacity: 0.9, fillColor: cat.color, fillOpacity: cat.opacite };
 }
 
+/* Zonage PLUi : une couleur par grande famille de zones (champ typezone du Géoportail
+   de l'urbanisme), reprise par la légende comme pour les argiles. U et AU en tons chauds
+   (là où l'on construit), A et N en tons verts (agricole, naturel). */
+const TYPES_PLUI = [
+    { id: "N", label: "N — Zone naturelle", icon: "fa-solid fa-tree", color: "#5E8C61", opacite: 0.40 },
+    { id: "A", label: "A — Zone agricole", icon: "fa-solid fa-wheat-awn", color: "#D9B94A", opacite: 0.40 },
+    { id: "AUs", label: "AUs — À urbaniser (stricte)", icon: "fa-solid fa-person-digging", color: "#E8A06A", opacite: 0.50 },
+    { id: "AUc", label: "AUc — À urbaniser (constructible)", icon: "fa-solid fa-person-digging", color: "#D9632B", opacite: 0.55 },
+    { id: "U", label: "U — Zone urbaine", icon: "fa-solid fa-city", color: "#B8405E", opacite: 0.55 }
+];
+function categoriePlui(feature) {
+    const t = String((feature.properties || {}).typezone || "").trim();
+    return TYPES_PLUI.some(x => x.id === t) ? t : "N";
+}
+function stylePlui(feature) {
+    const cat = TYPES_PLUI.find(t => t.id === categoriePlui(feature)) || TYPES_PLUI[0];
+    return { color: cat.color, weight: 1, opacity: 0.9, fillColor: cat.color, fillOpacity: cat.opacite };
+}
+
 /* Couleurs des 5 lots de chasse de Bercé, reprises de l'affiche ONF. */
 const COULEURS_LOTS_CHASSE = { 1: "#E8836B", 2: "#E3CF3F", 3: "#4FA3E0", 4: "#3A9A3A", 5: "#B88FCB" };
 function styleLotChasse(feature) {
@@ -1649,7 +1668,8 @@ const LAYERS = [
     {
         id: "zonagePLUi", group: "urbanisme", label: "Zonage PLUi",
         file: "couches/urbanisme/zonage_plui_loir_luce_berce_filtre.geojson", type: "polygon",
-        color: PALETTE.ardoise,
+        color: PALETTE.ardoise, styleFn: stylePlui,
+        legend: TYPES_PLUI, categoriser: categoriePlui,
         lazy: true, searchable: false, cluster: false,
         titleFields: ["libelong", "libelle"],
         subtitleFields: ["typezone"]
