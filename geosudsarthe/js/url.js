@@ -2,8 +2,8 @@
    GÉOBERCÉ — OUVERTURE PAR L'ADRESSE (?couche=...)
    Permet de partager un lien qui ouvre GéoBercé avec une ou plusieurs
    couches déjà affichées, sans passer par l'écran d'accueil :
-     https://swallowage.github.io/geoberce/?couche=carburant
-     https://swallowage.github.io/geoberce/?couche=carburant,bal
+     https://hirundage.fr/geoberce/?couche=carburant
+     https://hirundage.fr/geoberce/?couche=carburant,bal
    Le nom est reconnu souplement : identifiant exact de la couche
    (carburants), singulier/pluriel, sans accents ni majuscules, quelques
    mots courants (essence, courrier, colis...), ou un morceau de son
