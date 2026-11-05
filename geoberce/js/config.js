@@ -1736,36 +1736,55 @@ const THEMES = [
    courrier"/"la boulangerie la plus proche" parlent à tout le monde,
    contrairement par exemple à "Assistante maternelle" (utile, mais à un
    public bien plus restreint) qui n'a donc plus sa place ici. */
-/* Ordre retour direct de l'utilisatrice : les 5 premiers sont les
-   raccourcis jugés les plus utiles au quotidien, dans cet ordre précis -
-   le reste suit sans ordre particulier demandé. */
+/* Écran d'accueil allégé : seuls les raccourcis marqués `accueil: true`
+   sont affichés en grandes tuiles (choisis avec l'utilisatrice : colis,
+   courrier, assistante maternelle, artisan, carburant le plus proche /
+   le moins cher). Les autres restent disponibles sous "Plus d'options".
+   `triInitial: "prix"` : ouvre la liste des stations déjà triée par prix. */
 const RACCOURCIS = [
     {
-        label: "Carburant le plus proche de chez moi",
+        label: "Où déposer mon colis ?",
+        icon: "fa-solid fa-box",
+        layerIds: ["lockers"],
+        accueil: true
+    },
+    {
+        label: "Où déposer mon courrier ?",
+        icon: "fa-solid fa-envelope",
+        layerIds: ["bal"],
+        accueil: true
+    },
+    {
+        label: "Trouver une assistante maternelle",
+        icon: "fa-solid fa-baby",
+        layerIds: ["petiteEnfance"],
+        filtre: item => item.layer.feature && item.layer.feature.properties.type === "Assistant maternel",
+        accueil: true
+    },
+    {
+        label: "Trouver un artisan",
+        icon: "fa-solid fa-hammer",
+        layerIds: ["artisans"],
+        accueil: true
+    },
+    {
+        label: "Carburant le plus proche",
         icon: "fa-solid fa-gas-pump",
-        layerIds: ["carburants"]
+        layerIds: ["carburants"],
+        accueil: true
+    },
+    {
+        label: "Carburant le moins cher",
+        icon: "fa-solid fa-euro-sign",
+        layerIds: ["carburants"],
+        triInitial: "prix",
+        accueil: true
     },
     {
         label: "La boulangerie la plus proche",
         icon: "fa-solid fa-bread-slice",
         layerIds: ["commerces"],
         filtre: item => item.layer.feature && item.layer.feature.properties.type === "bakery"
-    },
-    {
-        label: "Où déposer mon courrier ?",
-        icon: "fa-solid fa-envelope",
-        layerIds: ["bal"]
-    },
-    {
-        label: "Point relais / casier colis le plus proche",
-        icon: "fa-solid fa-box",
-        layerIds: ["lockers"]
-    },
-    {
-        label: "Assistante maternelle proche de chez moi",
-        icon: "fa-solid fa-baby",
-        layerIds: ["petiteEnfance"],
-        filtre: item => item.layer.feature && item.layer.feature.properties.type === "Assistant maternel"
     },
     {
         label: "La pharmacie la plus proche",
@@ -1777,11 +1796,6 @@ const RACCOURCIS = [
         label: "Commerces près de chez moi",
         icon: "fa-solid fa-basket-shopping",
         layerIds: ["commerces"]
-    },
-    {
-        label: "Un artisan près de chez moi",
-        icon: "fa-solid fa-hammer",
-        layerIds: ["artisans"]
     },
     {
         label: "Écoles près de chez moi",

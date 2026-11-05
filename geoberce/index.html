@@ -70,6 +70,8 @@
 
 <!-- DEBUT HEADER -->
 <header id="topbar">
+    <a id="back-swallowage" href="https://swallowage.github.io/" title="Retour à swallow·AGE"><i class="fa-solid fa-arrow-left"></i><span>swallow·AGE</span></a>
+
     <div id="brand">
         <img src="img/geoberce.png" alt="Logo GéoBercé" class="brand-logo">
         <div>
@@ -78,6 +80,8 @@
         </div>
     </div>
 
+    <button type="button" id="home-button" class="topbtn" aria-label="Accueil"><i class="fa-solid fa-house"></i><span>Accueil</span></button>
+
     <div id="search-container">
         <span id="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
         <input type="text" id="search" placeholder="Rechercher un lieu, une adresse, un service..." autocomplete="off">
@@ -85,10 +89,9 @@
     </div>
 
     <div id="topbar-actions">
-        <button type="button" id="home-button" aria-label="Accueil"><i class="fa-solid fa-house"></i></button>
-        <button type="button" id="menu-button" aria-label="Couches"><i class="fa-solid fa-layer-group"></i></button>
+        <button type="button" id="menu-button" class="topbtn topbtn-plein" aria-label="Couches"><i class="fa-solid fa-layer-group"></i><span>Couches</span></button>
         <div class="actu-wrap">
-            <button type="button" id="actu-button" aria-label="Actualités"><i class="fa-solid fa-bullhorn"></i></button>
+            <button type="button" id="actu-button" class="topbtn topbtn-actu" aria-label="Actualités"><i class="fa-solid fa-bullhorn"></i><span>Actualités</span></button>
             <div id="actu-dropdown" class="actu-dropdown" hidden>
                 <div class="actu-dropdown-header">
                     <span><i class="fa-solid fa-bullhorn"></i> Actualités du territoire</span>
@@ -99,14 +102,15 @@
                 </div>
             </div>
         </div>
-        <button type="button" id="recherche-button" title="Recherche foncière"><i class="fa-solid fa-sliders"></i><span>Recherche foncière</span></button>
+        <button type="button" id="recherche-button" class="topbtn topbtn-plein" title="Recherche foncière"><i class="fa-solid fa-sliders"></i><span>Recherche foncière</span></button>
+        <button type="button" id="about-button" class="topbtn" title="À propos"><i class="fa-solid fa-circle-info"></i><span>À propos</span></button>
         <!-- Masqué par défaut (hidden) : affiché par js/installation.js
              seulement quand le navigateur confirme (événement
              "beforeinstallprompt") que le site est réellement
              installable et pas déjà installé - jamais un bouton mort
-             qui ne ferait rien au clic. -->
-        <button type="button" id="install-button" title="Installer l'application" hidden><i class="fa-solid fa-download"></i></button>
-        <button type="button" id="about-button" title="À propos"><i class="fa-solid fa-circle-info"></i><span>À propos</span></button>
+             qui ne ferait rien au clic. Placé après "À propos", même
+             teinte. -->
+        <button type="button" id="install-button" class="topbtn" title="Installer l'application" hidden><i class="fa-solid fa-download"></i><span>Installer</span></button>
     </div>
 </header>
 <!-- FIN HEADER -->
@@ -159,8 +163,8 @@
             <div id="recherche-contenu"><!-- Généré par recherche.js --></div>
         </div>
 
-        <div id="layers-resize-handle" title="Faire glisser pour redimensionner le panneau"></div>
     </aside>
+    <div id="layers-resize-handle" role="separator" aria-orientation="vertical" title="Faire glisser pour redimensionner le panneau"><span class="grip"></span></div>
 
     <div id="map"></div>
 
@@ -182,45 +186,64 @@
     <div id="hero">
         <div id="hero-inner">
             <p id="hero-title">Que recherchez-vous ?</p>
-            <p id="hero-subtitle">Tapez dans la barre de recherche en haut, choisissez votre commune, un raccourci ou une recherche de parcelle ci-dessous</p>
+            <p id="hero-subtitle">Choisissez un raccourci, ou tapez votre recherche dans la barre en haut</p>
 
-            <div id="hero-communes">
-                <label for="hero-commune-select">Votre commune</label>
-                <select id="hero-commune-select">
-                    <option value="">Choisir une commune...</option>
-                    <!-- Options générées par communes.js -->
-                </select>
-            </div>
+            <div id="hero-raccourcis"><!-- Généré par proximite.js : les raccourcis marqués "accueil" dans config.js --></div>
 
-            <div id="hero-raccourcis-titre">Ou un raccourci près de chez vous</div>
-            <div id="hero-raccourcis"><!-- Généré par proximite.js, défilement horizontal --></div>
+            <button type="button" id="hero-explore" class="rf-bouton-principal">Voir la carte</button>
 
             <details id="hero-plus">
-                <summary>Voir plus de thématiques</summary>
-                <div id="hero-tiles"><!-- Généré par hero.js --></div>
-            </details>
+                <summary>Plus d'options</summary>
 
-            <div id="hero-parcelle">
-                <div id="hero-parcelle-titre"><i class="fa-solid fa-magnifying-glass-location"></i> Rechercher une parcelle</div>
-                <form id="hero-parcelle-form">
-                    <select id="hp-commune" aria-label="Commune">
-                        <option value="">Toutes les communes</option>
-                        <!-- Options générées par recherche.js -->
+                <div id="hero-communes">
+                    <label for="hero-commune-select">Fiche d'une commune</label>
+                    <select id="hero-commune-select">
+                        <option value="">Choisir une commune...</option>
+                        <!-- Options générées par communes.js -->
                     </select>
-                    <input type="number" id="hp-surface-min" min="0" placeholder="Surface min (m²)">
-                    <label class="hp-case"><input type="checkbox" id="hp-constructible">Constructible</label>
-                    <label class="hp-case"><input type="checkbox" id="hp-dpe-connu">DPE connu</label>
-                    <button type="submit" class="rf-bouton-principal">Rechercher</button>
-                </form>
-            </div>
+                </div>
 
-            <button type="button" id="hero-explore">Voir la carte complète</button>
+                <div class="hero-sous-titre">Autres raccourcis près de chez vous</div>
+                <div id="hero-raccourcis-plus"><!-- Généré par proximite.js : les autres raccourcis --></div>
+
+                <div class="hero-sous-titre">Par thématique</div>
+                <div id="hero-tiles"><!-- Généré par hero.js --></div>
+
+                <div id="hero-parcelle">
+                    <div id="hero-parcelle-titre"><i class="fa-solid fa-magnifying-glass-location"></i> Rechercher une parcelle</div>
+                    <form id="hero-parcelle-form">
+                        <select id="hp-commune" aria-label="Commune">
+                            <option value="">Toutes les communes</option>
+                            <!-- Options générées par recherche.js -->
+                        </select>
+                        <input type="number" id="hp-surface-min" min="0" placeholder="Surface min (m²)">
+                        <label class="hp-case"><input type="checkbox" id="hp-constructible">Constructible</label>
+                        <label class="hp-case"><input type="checkbox" id="hp-dpe-connu">DPE connu</label>
+                        <button type="submit" class="rf-bouton-principal">Rechercher</button>
+                    </form>
+                </div>
+            </details>
         </div>
     </div>
     <!-- FIN ÉCRAN D'ACCUEIL -->
 
 </main>
 <!-- FIN APPLICATION -->
+
+<!-- DEBUT BARRE DU BAS (mobile) : les mêmes actions que la barre du haut, au pouce -->
+<nav id="bottom-nav" aria-label="Navigation principale">
+    <button type="button" data-cible="home-button"><i class="fa-solid fa-house"></i><span>Accueil</span></button>
+    <button type="button" data-cible="menu-button"><i class="fa-solid fa-layer-group"></i><span>Couches</span></button>
+    <button type="button" data-cible="recherche-button"><i class="fa-solid fa-sliders"></i><span>Parcelles</span></button>
+    <button type="button" data-cible="actu-button"><i class="fa-solid fa-bullhorn"></i><span>Actualités</span></button>
+    <button type="button" id="bn-plus" aria-expanded="false" aria-controls="plus-sheet"><i class="fa-solid fa-ellipsis"></i><span>Plus</span></button>
+</nav>
+<div id="plus-sheet" hidden>
+    <button type="button" data-cible="about-button"><i class="fa-solid fa-circle-info"></i>À propos</button>
+    <button type="button" data-cible="install-button" id="plus-install" hidden><i class="fa-solid fa-download"></i>Installer l'application</button>
+    <a href="https://swallowage.github.io/"><i class="fa-solid fa-arrow-left"></i>Retour à swallow·AGE</a>
+</div>
+<!-- FIN BARRE DU BAS -->
 
 <!-- DEBUT MODALE À PROPOS -->
 <div id="about-modal" class="modal">
@@ -231,7 +254,7 @@
         </div>
         <h2>GéoBercé</h2>
         <p>Un SIG local, gratuit et ouvert, qui regroupe au même endroit les informations utiles du territoire Loir-Lucé-Bercé : services, famille, commerces, mobilité, nature et patrimoine.</p>
-        <p>Les couches marquées d'un point orange ● dans le panneau sont chargées à la demande, seulement quand vous les cochez : certaines interrogent des données en direct (OpenStreetMap, Géorisques...) plutôt qu'un fichier déjà présent sur le site, et peuvent donc prendre quelques secondes à s'afficher.</p>
+        <p>Les couches marquées d'un point orange <span style="color:var(--terracotta)">●</span> dans le panneau sont chargées à la demande, seulement quand vous les cochez : certaines interrogent des données en direct (OpenStreetMap, Géorisques...) plutôt qu'un fichier déjà présent sur le site, et peuvent donc prendre quelques secondes à s'afficher.</p>
         <p class="about-source">Données : communes, EPCI, OpenStreetMap, data.gouv.fr, Vigieau, IGN Géoplateforme, Géoportail de l'Urbanisme, prix-carburants.gouv.fr, Géorisques, ANCT.</p>
 
         <button type="button" id="tour-relancer" class="rf-bouton-secondaire">Revoir la visite guidée</button>
@@ -290,6 +313,8 @@
 <script src="js/tour.js"></script>
 <script src="js/map.js"></script>
 <script src="js/installation.js"></script>
+<script src="js/navbas.js"></script>
+<script src="js/url.js"></script>
 <script src="js/analytics.js"></script>
 <!-- FIN SCRIPTS -->
 

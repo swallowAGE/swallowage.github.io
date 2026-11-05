@@ -10,12 +10,18 @@
    ========================================================= */
 const ETAPES_VISITE = [
     { cible: "#search-container", texte: "Recherchez une adresse, un lieu ou un service (mairie, commerce, école...) directement ici." },
-    { cible: "#hero-communes", texte: "Consultez le dashboard de votre commune : mairie, chiffres clés, actualités locales." },
-    { cible: "#hero-raccourcis", texte: "Ou faites défiler les raccourcis pour trouver ce qui est le plus proche de chez vous." },
-    { cible: "#hero-parcelle", texte: "Recherchez une parcelle par surface, constructibilité ou DPE - pour affiner davantage, le panneau complet s'ouvre avec ces critères déjà remplis." },
-    { cible: "#menu-button", texte: "Affichez ou masquez les couches de données sur la carte (cadastre, commerces, risques...)." },
-    { cible: "#actu-button", texte: "Les actualités Illiwap du territoire, en un clic." }
+    { cible: "#hero-raccourcis", texte: "Ou choisissez un raccourci : colis, courrier, assistante maternelle, artisan, carburant le plus proche ou le moins cher." },
+    { cible: "#hero-plus summary", texte: "\"Plus d'options\" : la fiche de votre commune, d'autres raccourcis, les thématiques et la recherche de parcelle." },
+    { cible: "#menu-button", cibleMobile: "#bottom-nav [data-cible=menu-button]", texte: "Affichez ou masquez les couches de données sur la carte (cadastre, commerces, risques...)." },
+    { cible: "#actu-button", cibleMobile: "#bottom-nav [data-cible=actu-button]", texte: "Les actualités Illiwap du territoire, en un clic." }
 ];
+
+/* Sur téléphone, les boutons de la barre du haut sont masqués au profit de
+   la barre du bas : la visite doit viser le bouton réellement visible. */
+function cibleDeLEtape(etape) {
+    const mobile = window.matchMedia("(max-width: 780px)").matches;
+    return document.querySelector(mobile && etape.cibleMobile ? etape.cibleMobile : etape.cible);
+}
 
 let etapeVisiteActuelle = 0;
 
@@ -47,7 +53,7 @@ function positionnerBulleVisite(cible) {
 
 function afficherEtapeVisite(index) {
     const etape = ETAPES_VISITE[index];
-    const cible = document.querySelector(etape.cible);
+    const cible = cibleDeLEtape(etape);
     if (!cible) {
         /* Élément absent (ex. masqué à cette largeur d'écran) : on
            saute directement à l'étape suivante plutôt que de mettre en
@@ -81,7 +87,11 @@ function terminerVisiteGuidee() {
 function demarrerVisiteSiPremiereFois() {
     let dejaVue = true;
     try { dejaVue = localStorage.getItem("geoberce_visite_vue") === "1"; } catch (_) { dejaVue = false; }
-    if (!dejaVue) setTimeout(demarrerVisiteGuidee, 800);
+    /* Pas de visite quand le lien ouvre directement une couche (?couche=...) :
+       l'accueil est volontairement sauté. */
+    let ouvertureParLien = false;
+    try { ouvertureParLien = new URLSearchParams(window.location.search).has("couche"); } catch (_) { /* ignoré */ }
+    if (!dejaVue && !ouvertureParLien) setTimeout(demarrerVisiteGuidee, 800);
 }
 
 document.getElementById("tour-suivant").addEventListener("click", () => {
@@ -92,7 +102,7 @@ document.getElementById("tour-passer").addEventListener("click", terminerVisiteG
 
 window.addEventListener("resize", () => {
     if (!document.getElementById("tour").hidden) {
-        const cible = document.querySelector(ETAPES_VISITE[etapeVisiteActuelle].cible);
+        const cible = cibleDeLEtape(ETAPES_VISITE[etapeVisiteActuelle]);
         if (cible) positionnerBulleVisite(cible);
     }
 });
