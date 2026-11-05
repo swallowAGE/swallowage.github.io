@@ -8,7 +8,7 @@
 /* Couleurs des données de la carte (icônes, aplats). Les noms viennent de
    l'ancienne charte et sont gardés pour ne pas réécrire toutes les couches ;
    les valeurs sont indépendantes du logo, choisies pour bien se distinguer
-   sur la carte tout en restant dans les tons de la charte swallow·AGE :
+   sur la carte tout en restant dans les tons de la charte hirund·AGE :
      foret      -> prune doux
      feuille    -> vert
      terracotta -> rose
