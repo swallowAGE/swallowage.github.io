@@ -459,7 +459,7 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
 #hero {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(230,243,238,0.97), rgba(250,250,248,0.97));
+    background: linear-gradient(180deg, rgba(250,250,248,0.98), rgba(241,239,234,0.98));
     display: flex;
     align-items: safe center;
     justify-content: safe center;
@@ -470,7 +470,7 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
 .hero-hidden { opacity: 0; pointer-events: none; }
 
 #hero-inner { max-width: 560px; width: 90%; text-align: center; padding: 24px 0; }
-#hero-title { font-family: var(--font-titre); font-size: 28px; font-weight: 700; color: var(--primaire); margin: 0 0 6px; }
+#hero-title { font-family: var(--font-titre); font-size: 28px; font-weight: 700; color: #2A2A28; margin: 0 0 6px; }
 #hero-subtitle { font-size: 14px; color: var(--ardoise); margin: 0 0 22px; }
 
 #hero-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 10px; margin-bottom: 4px; }
