@@ -19,7 +19,7 @@ const TERRITOIRE = {
     nom: "GéoBercé",
     nomComplet: "Loir-Lucé-Bercé",
     comcom: "Communauté de communes Loir-Lucé-Bercé",
-    urlProd: "https://swallowage.github.io/geoberce/",
+    urlProd: "https://hirundage.fr/geoberce/",
 
     /* Carte : centre [lat, lon] et zoom de départ. */
     centre: [47.791528, 0.412223],
