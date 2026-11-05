@@ -762,6 +762,19 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
 .contact-statut-succes { color: var(--foret); font-weight: 700; }
 .contact-statut-erreur { color: #C94338; font-weight: 700; }
 
+/* Fenêtre « À propos » : deux colonnes sur ordinateur (présentation à gauche,
+   formulaire de contact à droite) plutôt qu'une longue colonne étroite ;
+   une seule colonne sur téléphone. */
+#about-modal .modal-content {
+    max-width: 880px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 32px; align-items: start; padding: 32px;
+}
+#about-modal .contact-form { margin-top: 0; padding-top: 0; padding-left: 32px; border-top: none; border-left: 1px solid var(--bordure); }
+@media (max-width: 760px) {
+    #about-modal .modal-content { display: block; max-width: 420px; padding: 28px; }
+    #about-modal .contact-form { margin-top: 18px; padding: 16px 0 0; border-left: none; border-top: 1px solid var(--bordure); }
+}
+
 @media (max-width: 780px) {
     /* Icône seule pour ces deux-là aussi (comme Accueil/Couches/
        Actualités, déjà en 38x38 fixe) plutôt qu'un texte qui peut

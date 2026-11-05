@@ -74,8 +74,8 @@ function chargerQualiteEauCommune(codeInsee) {
    qui reste alors un simple espace vide dans la grille). */
 function construireCarteQualiteEau(resultat) {
     if (!resultat || !resultat.conclusion_conformite_prelevement) return "";
-    const nonConforme = /non\s+conforme/i.test(resultat.conclusion_conformite_prelevement);
-    const couleur = nonConforme ? PALETTE.terracotta : PALETTE.feuille;
+    const niveau = NIVEAUX_EAU[niveauConformiteEau(resultat) || "conforme"];
+    const couleur = niveau.color;
     const reseau = resultat.reseaux && resultat.reseaux[0] && resultat.reseaux[0].nom;
     const precisions = [
         reseau ? `Réseau ${reseau}` : null,
@@ -84,8 +84,9 @@ function construireCarteQualiteEau(resultat) {
 
     return `<div class="commune-carte">
         <div class="commune-carte-titre"><i class="fa-solid fa-droplet"></i>Qualité de l'eau potable</div>
-        <div class="commune-eau-badge" style="color:${couleur}"><span></span>${nonConforme ? "Non conforme" : "Conforme"}</div>
-        <div class="commune-ligne">${echapperHtml(resultat.conclusion_conformite_prelevement)}</div>
+        <div class="commune-eau-badge" style="color:${couleur}"><span></span>${niveau.label}</div>
+        <div class="commune-ligne">${echapperHtml(niveau.texte)}</div>
+        <div class="popup-fiche-precision">Conclusion officielle : ${echapperHtml(resultat.conclusion_conformite_prelevement)}</div>
         ${precisions ? `<div class="popup-fiche-precision">${echapperHtml(precisions)}</div>` : ""}
     </div>`;
 }

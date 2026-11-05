@@ -1163,7 +1163,7 @@ function construirePopupQualiteEau(props) {
         </div>`;
     }
 
-    const nonConforme = qualiteEauNonConforme(resultat);
+    const niveau = NIVEAUX_EAU[niveauConformiteEau(resultat) || "conforme"];
     const reseau = resultat.reseaux && resultat.reseaux[0] && resultat.reseaux[0].nom;
 
     return `<div class="popup-fiche">
@@ -1175,7 +1175,8 @@ function construirePopupQualiteEau(props) {
             </div>
         </div>
         <div class="popup-fiche-section">
-            <div class="popup-fiche-ligne"><i class="fa-solid ${nonConforme ? "fa-triangle-exclamation" : "fa-circle-check"}" style="color:${nonConforme ? "#AD4826" : PALETTE.feuille}"></i> ${echapperHtml(resultat.conclusion_conformite_prelevement)}</div>
+            <div class="popup-fiche-ligne"><i class="fa-solid fa-${niveau.icon}" style="color:${niveau.color}"></i> <strong>${niveau.label}</strong></div>
+            <div class="popup-fiche-ligne">${echapperHtml(niveau.texte)}</div>
             ${reseau ? `<div class="popup-fiche-ligne"><i class="fa-solid fa-water"></i> Réseau ${echapperHtml(reseau)}</div>` : ""}
             ${resultat.date_prelevement ? `<div class="popup-fiche-ligne"><i class="fa-regular fa-calendar"></i> Dernier contrôle le ${formaterDateSeule(resultat.date_prelevement)}</div>` : ""}
         </div>
