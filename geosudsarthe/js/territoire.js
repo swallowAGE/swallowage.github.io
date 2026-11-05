@@ -58,6 +58,8 @@ const TERRITOIRE = {
         "couches/tourisme/officesTourisme.geojson",
         "couches/tourisme/randonnees.geojson",
         "couches/urbanisme/dpe_loir_luce_berce.geojson",
+        "couches/urbanisme/parcelles_dvf_2021_2025_loir_luce_berce.geojson",
+        "couches/urbanisme/prix_immobilier_communes.geojson",
         "couches/urbanisme/rga_2025_loir_luce_berce.geojson",
         "couches/urbanisme/zonage_plui_loir_luce_berce_filtre.geojson"
     ],
