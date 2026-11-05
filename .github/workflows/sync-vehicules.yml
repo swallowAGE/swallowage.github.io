@@ -16,7 +16,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout hirundage.github.io
+      - name: Checkout swallowage.github.io
         uses: actions/checkout@v4
 
       - name: Download ADEME Car Labelling
