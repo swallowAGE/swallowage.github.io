@@ -664,7 +664,7 @@
     var name = placeName();
     var list = collections(sched, t0 + DAY, Date.parse(sched.end + "T00:00:00Z"));
     var stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
-    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//swallowAGE//Quelle poubelle ce soir//FR", "CALSCALE:GREGORIAN",
+    var lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//hirundAGE//Quelle poubelle ce soir//FR", "CALSCALE:GREGORIAN",
       "X-WR-CALNAME:Collectes " + name];
     list.forEach(function (x) {
       var ev = iso(x.date - DAY).replace(/-/g, "");

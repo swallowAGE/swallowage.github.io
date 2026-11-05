@@ -2,7 +2,7 @@
 
 **GéoBercé** est un SIG (système d'information géographique) local, gratuit et ouvert, dédié au territoire de la Communauté de communes **Loir-Lucé-Bercé**.
 
-👉 [**Ouvrir GéoBercé**](https://swallowage.github.io/geoberce/)
+👉 [**Ouvrir GéoBercé**](https://hirundage.fr/geoberce/)
 
 ## À quoi ça sert ?
 
@@ -19,7 +19,7 @@ Le tout est présenté sous forme de couches que l'on peut afficher ou masquer s
 
 ## Comment l'utiliser
 
-Il suffit d'ouvrir la page **[swallowage.github.io/geoberce](https://swallowage.github.io/geoberce/)** dans un navigateur, sur ordinateur comme sur téléphone.
+Il suffit d'ouvrir la page **[hirundage.fr/geoberce](https://hirundage.fr/geoberce/)** dans un navigateur, sur ordinateur comme sur téléphone.
 
 Sur mobile, GéoBercé peut aussi être **installé sur l'écran d'accueil** comme une application (le navigateur propose l'installation automatiquement, ou via son menu « Ajouter à l'écran d'accueil »), pour un accès plus rapide.
 
