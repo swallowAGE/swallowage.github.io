@@ -52,7 +52,7 @@ pour construire, décorer et peupler son village.
 
 ## Installer sur Android
 
-Ouvrir https://swallowage.github.io/village dans Chrome, puis
+Ouvrir https://hirundoage.github.io/village dans Chrome, puis
 menu ⋮ → **Installer l'application**. Le jeu s'ouvre alors en plein écran
 et fonctionne hors connexion. La progression est enregistrée sur le téléphone.
 

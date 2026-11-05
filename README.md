@@ -1,3 +1,3 @@
-# swallow·AGE
+# hirundo·AGE
 >_ création du logo
 >_ création du GitHub

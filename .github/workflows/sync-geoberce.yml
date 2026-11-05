@@ -13,7 +13,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout swallowage.github.io
+      - name: Checkout hirundoage.github.io
         uses: actions/checkout@v4
         with:
           path: site
