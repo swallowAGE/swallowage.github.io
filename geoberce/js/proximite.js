@@ -17,8 +17,10 @@ function couleurRaccourci(raccourci) {
 }
 
 function construireRaccourcis(map) {
-    const conteneur = document.getElementById("hero-raccourcis");
-    conteneur.innerHTML = "";
+    const principal = document.getElementById("hero-raccourcis");
+    const secondaire = document.getElementById("hero-raccourcis-plus");
+    principal.innerHTML = "";
+    secondaire.innerHTML = "";
 
     RACCOURCIS.forEach(raccourci => {
         const couleur = couleurRaccourci(raccourci);
@@ -30,7 +32,7 @@ function construireRaccourcis(map) {
             <span class="hero-tile-label">${raccourci.label}</span>
         `;
         bouton.addEventListener("click", () => lancerRechercheProximite(map, raccourci));
-        conteneur.appendChild(bouton);
+        (raccourci.accueil ? principal : secondaire).appendChild(bouton);
     });
 }
 
@@ -161,11 +163,11 @@ let ecouteursTriCarburantBranches = false;
    "Stations essence" (seule couche qui porte des prix de carburant) :
    les deux filtres sont mutuellement exclusifs, jamais affichés en
    même temps. */
-function afficherResultatsProximite(map, titre, resultats) {
+function afficherResultatsProximite(map, titre, resultats, triInitial = "distance") {
     dernierTitreProximite = titre;
     derniersResultatsProximite = resultats.map(item => ({ ...item, ouvert: estOuvertItem(item) }));
     filtreOuvertActif = false;
-    triCarburantActif = "distance";
+    triCarburantActif = triInitial;
 
     ouvrirVueResultats(titre);
 
@@ -207,7 +209,7 @@ function afficherResultatsProximite(map, titre, resultats) {
     const triCarburantConteneur = document.getElementById("results-tri-carburant");
     triCarburantConteneur.hidden = !estCarburant;
     triCarburantConteneur.querySelectorAll(".results-filtre-btn").forEach(bouton => {
-        bouton.classList.toggle("actif", bouton.dataset.tri === "distance");
+        bouton.classList.toggle("actif", bouton.dataset.tri === triCarburantActif);
     });
     if (!ecouteursTriCarburantBranches) {
         ecouteursTriCarburantBranches = true;
@@ -300,7 +302,7 @@ function lancerRechercheProximite(map, raccourci) {
                     .slice(0, limite);
 
                 map.setView(origine, 13);
-                afficherResultatsProximite(map, raccourci.label, resultats);
+                afficherResultatsProximite(map, raccourci.label, resultats, raccourci.triInitial);
             });
         },
         erreur => {
