@@ -1,84 +1,120 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Le voyage de l'eau · du captage au robinet</title>
-<meta name="description" content="Un schéma animé qui suit une goutte d'eau, de la pluie jusqu'au robinet, puis jusqu'à la rivière.">
+<title>Le voyage de l'eau – Swallow AGE</title>
+<meta name="description" content="Un schéma animé qui suit une goutte d'eau, de la pluie jusqu'au robinet puis jusqu'à la rivière, avec un quiz et un « et si la pluie s'arrêtait ? ».">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <style>
   :root {
-    --bg: #f3f8fb; --card: #ffffff; --text: #17303f; --muted: #5c7384; --border: #d3e2ec;
-    --accent: #1c7fb5; --accent2: #2aa7d8;
-    --sky1: #cfe9f7; --sky2: #f4fbff;
+    --ink: #2B2230; --soft: #6B5F5A; --paper: #FAF6F0; --raised: #F3ECE2; --field: #FFFDF9;
+    --gold: #C9A85C; --gold-ink: #8A6D2B; --gold-hi: #E2C47E; --rose: #8E4458; --green: #5E8C61; --water: #2F6F8F;
+    --on-dark: #E5DCD6; --rule: rgba(43, 34, 48, 0.12); --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    /* Dessin : ciel, sol et nappe dans des tons chauds de la charte */
+    --sky1: #dcebf0; --sky2: #f7f5ef;
     --soil: #a98258; --sub: #9a7449; --aq: #6bb7da; --clay: #6e5a4c;
-    --lbl: #17303f; --soillbl: #fff8ec;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f1a22; --card: #17252f; --text: #e4eef5; --muted: #8fa5b5; --border: #263a48;
-      --accent: #5db8e8; --accent2: #3aa6d8;
-      --sky1: #14304a; --sky2: #1d3e5a;
-      --soil: #6f5638; --sub: #644d32; --aq: #2f7fa6; --clay: #4a3d33;
-      --lbl: #e4eef5; --soillbl: #f1e6d3;
-    }
+    --lbl: #2B2230; --soillbl: #fff8ec;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  a { color: var(--accent); }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Jost", system-ui, sans-serif; font-weight: 400; font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
 
-  .hero { text-align: center; padding: 64px 20px 36px; }
-  .kicker { text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; color: var(--muted); margin: 0 0 8px; }
-  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.1; margin: 0 0 12px; color: var(--accent); }
-  .lead { max-width: 560px; margin: 0 auto; color: var(--muted); }
-  .hint { font-size: 1.6rem; margin: 22px 0 0; color: var(--accent2); animation: bob 1.8s ease-in-out infinite; }
+  .topbar { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding: 14px 20px 0; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+
+  .hero { text-align: center; padding: 40px 20px 28px; }
+  .hero .kicker { margin: 0 0 10px; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 12px; }
+  .lead { max-width: 560px; margin: 0 auto; color: var(--soft); font-weight: 300; }
+  .hint { font-size: 1.6rem; margin: 22px 0 0; color: var(--gold); animation: bob 1.8s ease-in-out infinite; }
   @keyframes bob { 50% { transform: translateY(6px); } }
 
   .layout { display: grid; grid-template-columns: minmax(300px, 0.85fr) 1.5fr; max-width: 1280px; margin: 0 auto; }
   .visual { grid-column: 2; grid-row: 1; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 16px 20px; }
-  .visual svg { width: 100%; height: auto; max-height: 84vh; border-radius: 16px; border: 1px solid var(--border); background: var(--sky2); }
-  .cap { text-align: center; color: var(--muted); font-size: .9rem; margin-top: 10px; min-height: 1.4em; }
+  .visual svg { width: 100%; height: auto; max-height: 84vh; border-radius: 18px; border: 1px solid var(--line); background: var(--sky2); }
+  .cap { text-align: center; color: var(--soft); font-family: var(--mono); font-size: .8rem; margin-top: 10px; min-height: 1.4em; }
   #steps { grid-column: 1; grid-row: 1; padding: 0 24px 30vh; }
 
   .step { min-height: 92vh; display: flex; align-items: center; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 22px 18px; width: 100%; opacity: .5; transition: opacity .35s, box-shadow .35s, border-color .35s; position: relative; }
-  .step.active .card { opacity: 1; border-color: var(--accent2); box-shadow: 0 8px 28px rgba(28, 127, 181, .18); }
-  .num { position: absolute; top: -14px; left: 18px; background: var(--accent); color: #fff; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: .95rem; }
-  .card h2 { margin: 6px 0 10px; font-size: 1.35rem; }
+  .card { background: var(--field); border: 1px solid var(--line); border-radius: 18px; padding: 24px 22px 20px; width: 100%; opacity: .55; transition: opacity .35s, box-shadow .35s, border-color .35s; position: relative; }
+  .step.active .card { opacity: 1; border-color: var(--gold); box-shadow: 0 8px 28px rgba(201, 168, 92, .22); }
+  .num { position: absolute; top: -15px; left: 18px; background: var(--ink); color: var(--gold-hi); width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 500; font-size: .95rem; }
+  .card h2 { margin: 6px 0 8px; font-size: 1.35rem; font-weight: 500; line-height: 1.2; }
+  .gist { margin: 0 0 12px; padding-left: 10px; border-left: 3px solid var(--gold); font-weight: 500; }
   .card p { margin: 0 0 12px; }
-  .note { color: var(--muted); font-size: .85rem; }
-  .legend { list-style: none; padding: 0; margin: 0 0 10px; font-size: .92rem; }
+  .note { color: var(--soft); font-size: .85rem; }
+  .legend { list-style: none; padding: 0; margin: 0 0 10px; font-size: .95rem; }
   .legend li { display: flex; gap: 10px; margin-bottom: 6px; }
   .sw { flex: none; width: 12px; height: 12px; border-radius: 50%; margin-top: 7px; }
   .s1 { background: #d64545; } .s2 { background: #e0a030; } .s3 { background: #2aa7d8; }
 
-  footer { max-width: 760px; margin: 0 auto; padding: 32px 20px 56px; color: var(--muted); font-size: .88rem; border-top: 1px solid var(--border); }
+  .btn { font: inherit; font-weight: 500; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); padding: 11px 20px; min-height: 44px; cursor: pointer; }
+  .btn:hover { background: var(--rose); }
+  .btn[aria-pressed="true"] { background: var(--rose); }
+
+  /* Quiz */
+  .quiz-wrap { max-width: 680px; margin: 0 auto; padding: 24px 20px 56px; }
+  .quiz { background: var(--ink); color: var(--paper); border-radius: 18px; padding: 24px 22px; display: flex; flex-direction: column; gap: 14px; }
+  .quiz .kicker { color: var(--gold); }
+  .quiz h2 { margin: 0; font-size: 1.5rem; font-weight: 500; color: var(--gold-hi); }
+  .quiz #quiz-corps { display: flex; flex-direction: column; gap: 14px; }
+  .quiz .q { font-size: 1.1rem; font-weight: 500; margin: 0; }
+  .quiz .opts { display: flex; flex-direction: column; gap: 8px; }
+  .quiz .opt { font: inherit; text-align: left; border: 1px solid rgba(250, 246, 240, .3); background: transparent; color: var(--paper); border-radius: 12px; padding: 11px 14px; min-height: 44px; cursor: pointer; }
+  .quiz .opt:hover:not(:disabled) { border-color: var(--gold); }
+  .quiz .opt:disabled { cursor: default; }
+  .quiz .opt.ok { border-color: #8fd19a; background: rgba(143, 209, 154, .15); }
+  .quiz .opt.ko { border-color: #e59aa8; background: rgba(229, 154, 168, .12); }
+  .quiz .why { margin: 0; font-weight: 300; color: var(--on-dark); font-size: .95rem; }
+  .quiz .score { font-size: 1.1rem; font-weight: 500; margin: 0; }
+  .quiz .btn { background: var(--gold); color: var(--ink); align-self: flex-start; }
+  .quiz .btn:hover { background: var(--gold-hi); }
+
+  footer { max-width: 760px; margin: 0 auto; padding: 32px 20px 56px; color: var(--soft); font-size: .9rem; border-top: 1px solid var(--rule); }
 
   /* ----- Schéma ----- */
   .soil { fill: var(--soil); } .subsoil { fill: var(--sub); } .aq { fill: var(--aq); } .clay { fill: var(--clay); }
-  .lbl { font: 600 15px system-ui, sans-serif; fill: var(--lbl); text-anchor: middle; paint-order: stroke; stroke: var(--sky2); stroke-width: 4px; stroke-linejoin: round; }
+  .aq-dry { fill: var(--sub); opacity: 0; transition: opacity 1.2s ease; }
+  .clouds { transition: fill .8s ease; }
+  .lbl { font: 500 15px "Jost", system-ui, sans-serif; fill: var(--lbl); text-anchor: middle; paint-order: stroke; stroke: var(--sky2); stroke-width: 4px; stroke-linejoin: round; }
   .lbl.soillbl { fill: var(--soillbl); stroke: none; }
   .pipe { fill: none; stroke: #3f8fbf; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
   .pipe.dirty { stroke: #8a7a55; }
   .flow { fill: none; stroke: #bfe6f7; stroke-width: 2; stroke-dasharray: 3 9; stroke-linecap: round; animation: flow 1.2s linear infinite; }
   .flow.dirty { stroke: #d9cfae; }
   @keyframes flow { to { stroke-dashoffset: -12; } }
-  .rain { stroke: #3f8fbf; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 7 11; animation: rain .7s linear infinite; }
+  .rain { stroke: #3f8fbf; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 7 11; animation: rain .7s linear infinite; transition: opacity .6s ease; }
   @keyframes rain { to { stroke-dashoffset: -18; } }
-  .infil { fill: none; stroke: #2a7fb0; stroke-width: 2.5; stroke-dasharray: 2 8; stroke-linecap: round; animation: flow 1.4s linear infinite; }
-  .bubble { fill: var(--card); stroke: var(--accent); stroke-width: 2; }
-  .dash { fill: none; stroke: var(--accent2); stroke-width: 2; stroke-dasharray: 5 6; }
+  .infil { fill: none; stroke: #2a7fb0; stroke-width: 2.5; stroke-dasharray: 2 8; stroke-linecap: round; animation: flow 1.4s linear infinite; transition: opacity .6s ease; }
+  .bubble { fill: var(--field); stroke: var(--gold); stroke-width: 2; }
+  .dash { fill: none; stroke: var(--gold); stroke-width: 2; stroke-dasharray: 5 6; }
+
+  /* Mode "et si la pluie s'arrêtait ?" */
+  .sec .rain, .sec .infil { opacity: 0; }
+  .sec .clouds { fill: #d8d1c6; }
+  .sec .aq-dry { opacity: 1; }
+  .sec .flow { animation-duration: 3.2s; }
 
   .js .el { opacity: .12; transition: opacity .6s ease, filter .6s ease; }
   .js .el.seen { opacity: 1; }
-  .js .el.now { filter: drop-shadow(0 0 7px rgba(42, 167, 216, .85)); }
+  .js .el.now { filter: drop-shadow(0 0 7px rgba(201, 168, 92, .9)); }
 
   #drop { transition: opacity .3s; }
 
   @media (max-width: 820px) {
     .layout { display: block; }
-    .visual { height: 46vh; padding: 8px 10px; background: var(--bg); z-index: 5; border-bottom: 1px solid var(--border); }
+    .visual { height: 46vh; padding: 8px 10px; background: var(--paper); z-index: 5; border-bottom: 1px solid var(--rule); }
     .visual svg { max-height: calc(46vh - 48px); }
     .lbl { display: none; }
     #steps { padding: 0 14px 30vh; }
@@ -88,16 +124,21 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .hint, .flow, .rain, .infil { animation: none; }
-    .card, .js .el { transition: none; }
+    .card, .js .el, .aq-dry, .clouds, .rain, .infil { transition: none; }
   }
 </style>
 </head>
 <body>
 
+<div class="topbar">
+  <a href="../">← swallow·AGE</a>
+  <span class="kicker">// outil · cycle de l'eau</span>
+</div>
+
 <header class="hero">
-  <p class="kicker">Schéma pédagogique</p>
+  <p class="kicker">// schéma pédagogique</p>
   <h1>Le voyage de l'eau</h1>
-  <p class="lead">Suivez une goutte, de la pluie jusqu'au robinet, puis jusqu'à la rivière. Faites défiler : le dessin se construit.</p>
+  <p class="lead">Suivez une goutte, de la pluie jusqu'au robinet, puis jusqu'à la rivière. Faites défiler : le dessin se construit, et à la fin, un petit quiz.</p>
   <p class="hint" aria-hidden="true">↓</p>
 </header>
 
@@ -134,6 +175,7 @@
         <rect x="0" y="412" width="900" height="150" class="clay"/>
         <path d="M0,360 q25,-7 50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0" fill="none" stroke="#e8f6fd" stroke-opacity=".5" stroke-width="2"/>
         <path d="M0,392 q25,-7 50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0" fill="none" stroke="#e8f6fd" stroke-opacity=".35" stroke-width="2"/>
+        <rect class="aq-dry" x="0" y="340" width="900" height="36"/>
       </g>
       <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 L840,300 L900,300" fill="none" stroke="#5da35d" stroke-width="6" stroke-linejoin="round"/>
 
@@ -143,7 +185,7 @@
 
       <!-- ÉTAPE 1 : la pluie -->
       <g class="el" data-step="1">
-        <g fill="#ffffff" stroke="#b8cfdd" stroke-width="1.5">
+        <g class="clouds" fill="#ffffff" stroke="#b8cfdd" stroke-width="1.5">
           <ellipse cx="110" cy="58" rx="46" ry="20"/>
           <ellipse cx="78" cy="64" rx="26" ry="15"/>
           <ellipse cx="142" cy="64" rx="28" ry="16"/>
@@ -271,16 +313,18 @@
       <article class="card">
         <span class="num">1</span>
         <h2>Tout commence par la pluie</h2>
-        <p>L'eau que nous buvons a d'abord été de la pluie. En tombant, elle rencontre le sol, les prairies, les forêts. Une partie ruisselle vers les rivières, une autre s'évapore, et une troisième, la plus précieuse pour nous, s'enfonce dans le sol.</p>
+        <p class="gist">L'eau du robinet a d'abord été de la pluie.</p>
+        <p>Quand il pleut, l'eau tombe sur le sol, les prés, les forêts. Une partie file vers les rivières, une autre repart dans l'air (elle s'évapore), et une troisième, la plus précieuse pour nous, s'enfonce dans la terre.</p>
       </article>
     </section>
 
     <section class="step" data-step="2" data-title="L'infiltration et la nappe">
       <article class="card">
         <span class="num">2</span>
-        <h2>Elle s'infiltre et se purifie</h2>
-        <p>En traversant le sol, l'eau se filtre peu à peu : les particules sont retenues, une partie des impuretés est dégradée. Elle finit par atteindre une couche de roche ou de sable gorgée d'eau, la <b>nappe souterraine</b>, qui repose sur une couche imperméable.</p>
-        <p>L'eau y circule lentement, parfois pendant des années, voire beaucoup plus.</p>
+        <h2>Elle s'infiltre et se nettoie</h2>
+        <p class="gist">Le sol joue le rôle d'un filtre.</p>
+        <p>En traversant la terre, l'eau se nettoie peu à peu : les grains du sol retiennent une partie des saletés. Elle arrive enfin dans une couche de roche ou de sable gorgée d'eau, la <b>nappe souterraine</b>, un peu comme une grosse éponge cachée sous nos pieds. Dessous, une roche imperméable l'empêche de descendre plus bas.</p>
+        <p>L'eau y circule très lentement, parfois pendant des années.</p>
       </article>
     </section>
 
@@ -288,11 +332,12 @@
       <article class="card">
         <span class="num">3</span>
         <h2>Le captage : aller chercher l'eau</h2>
-        <p>Un forage descend jusqu'à la nappe, et une pompe remonte l'eau. Pour éviter qu'une pollution ne l'atteigne, la réglementation prévoit jusqu'à trois zones de protection autour du captage.</p>
+        <p class="gist">On va la chercher là où elle se cache.</p>
+        <p>Un forage descend jusqu'à la nappe, et une pompe remonte l'eau. Pour éviter qu'une pollution ne l'atteigne, jusqu'à trois zones de protection entourent le captage.</p>
         <ul class="legend">
-          <li><i class="sw s1"></i><span><b>Immédiate</b> : les abords du captage, en général clôturés.</span></li>
-          <li><i class="sw s2"></i><span><b>Rapprochée</b> : certaines activités y sont interdites ou encadrées.</span></li>
-          <li><i class="sw s3"></i><span><b>Éloignée</b> : une zone de vigilance plus large.</span></li>
+          <li><i class="sw s1"></i><span><b>Immédiate</b> : juste autour du captage, souvent clôturée.</span></li>
+          <li><i class="sw s2"></i><span><b>Rapprochée</b> : certaines activités y sont interdites ou surveillées.</span></li>
+          <li><i class="sw s3"></i><span><b>Éloignée</b> : une grande zone où l'on reste vigilant.</span></li>
         </ul>
         <p class="note">Schéma de principe : les vraies zones ont des formes irrégulières, définies par une étude hydrogéologique.</p>
       </article>
@@ -302,8 +347,9 @@
       <article class="card">
         <span class="num">4</span>
         <h2>Le traitement : la rendre propre à boire</h2>
-        <p>Selon son origine, l'eau passe par une ou plusieurs étapes : filtration, retrait de certains éléments naturels comme le fer ou le manganèse, ajustement de son équilibre, et presque toujours une <b>désinfection</b> qui la protège pendant son trajet jusqu'au robinet.</p>
-        <p>Une eau de nappe bien protégée peut demander peu de traitement, une eau de rivière en demande davantage.</p>
+        <p class="gist">Un bon nettoyage avant de boire.</p>
+        <p>Selon d'où elle vient, l'eau est filtrée, on lui retire certains éléments naturels (comme le fer), et presque toujours on la <b>désinfecte</b> pour qu'elle reste saine pendant son voyage jusqu'au robinet.</p>
+        <p>Une eau de nappe bien protégée demande peu de traitement, une eau de rivière en demande davantage.</p>
       </article>
     </section>
 
@@ -311,16 +357,18 @@
       <article class="card">
         <span class="num">5</span>
         <h2>Le stockage : garder de la réserve</h2>
-        <p>L'eau traitée monte dans un <b>château d'eau</b> ou un réservoir. Il sert de tampon : on en consomme beaucoup le matin et le soir, peu la nuit. Il garde aussi une réserve en cas de panne ou d'incendie.</p>
-        <p>Placé en hauteur, il donne enfin la pression au réseau par simple gravité.</p>
+        <p class="gist">Une réserve, placée en hauteur.</p>
+        <p>L'eau propre monte dans un <b>château d'eau</b>. Il sert de réserve : on en utilise beaucoup le matin et le soir, très peu la nuit. Il en garde aussi en cas de panne ou d'incendie.</p>
+        <p>Comme il est en hauteur, il pousse l'eau dans les tuyaux tout seul, grâce à la pesanteur.</p>
       </article>
     </section>
 
     <section class="step" data-step="6" data-title="Le réseau">
       <article class="card">
         <span class="num">6</span>
-        <h2>Le réseau : jusqu'aux habitations</h2>
-        <p>Des canalisations enterrées, parfois sur des dizaines de kilomètres, relient le réservoir aux maisons, aux écoles, aux entreprises. Entretenir ce réseau, réparer les fuites, le renouveler peu à peu : c'est une grande part du travail d'un service d'eau.</p>
+        <h2>Le réseau : jusqu'aux maisons</h2>
+        <p class="gist">Des kilomètres de tuyaux sous terre.</p>
+        <p>Des canalisations enterrées, parfois sur des dizaines de kilomètres, relient le réservoir aux maisons, aux écoles, aux entreprises. Réparer les fuites et renouveler peu à peu les tuyaux, c'est une grande part du travail d'un service d'eau.</p>
       </article>
     </section>
 
@@ -328,28 +376,50 @@
       <article class="card">
         <span class="num">7</span>
         <h2>Au robinet</h2>
-        <p>L'eau du robinet est l'un des aliments les plus contrôlés. Des analyses régulières sont réalisées sur la ressource, à la sortie du traitement et chez les particuliers, sous le contrôle de l'Agence régionale de santé.</p>
-        <p class="note">Pour consulter les résultats d'analyse de votre commune : <a href="https://eaupotable.sante.gouv.fr/" rel="noopener">eaupotable.sante.gouv.fr</a>.</p>
+        <p class="gist">L'un des aliments les plus surveillés.</p>
+        <p>Des analyses régulières sont faites sur l'eau de la ressource, à la sortie du traitement et chez les habitants, sous le contrôle de l'Agence régionale de santé.</p>
+        <p class="note">Pour voir les résultats de votre commune : <a href="https://eaupotable.sante.gouv.fr/" rel="noopener">eaupotable.sante.gouv.fr</a>, ou notre outil <a href="../eau/">Qu'y a-t-il dans l'eau de mon robinet ?</a></p>
       </article>
     </section>
 
-    <section class="step" data-step="8" data-title="Le retour au milieu">
+    <section class="step" data-step="8" data-title="Le retour à la nature">
       <article class="card">
         <span class="num">8</span>
         <h2>Puis le retour à la nature</h2>
-        <p>Une fois utilisée, l'eau part dans le réseau d'assainissement jusqu'à une <b>station d'épuration</b>. Elle y est nettoyée avant d'être rendue à la rivière. Là, le soleil en évapore une partie, qui formera de nouveaux nuages. Le cycle recommence.</p>
-        <p>Économiser l'eau et protéger les captages, c'est préserver ce cycle tout entier.</p>
+        <p class="gist">Et le cycle recommence.</p>
+        <p>Une fois utilisée, l'eau part dans les égouts jusqu'à une <b>station d'épuration</b>, où elle est nettoyée avant de retourner à la rivière. Le soleil en évapore une partie, qui formera de nouveaux nuages.</p>
+        <p>Économiser l'eau et protéger les captages, c'est préserver tout ce cycle.</p>
+      </article>
+    </section>
+
+    <section class="step" data-step="9" data-title="Et si la pluie s'arrêtait ?">
+      <article class="card">
+        <span class="num">9</span>
+        <h2>Et si la pluie s'arrêtait ?</h2>
+        <p class="gist">Sans pluie, la réserve se vide.</p>
+        <p>La pluie qui remplit les nappes tombe surtout en automne et en hiver, quand la terre est humide et que les plantes boivent peu. Si elle manque longtemps, le niveau de la nappe baisse : il y a moins d'eau à pomper. C'est pourquoi, certains étés, on demande de limiter l'arrosage ou le lavage des voitures.</p>
+        <p><button type="button" class="btn" id="sec-btn" aria-pressed="false">Arrêter la pluie</button></p>
+        <p class="note" id="sec-note" aria-live="polite">Appuyez, et regardez la nappe en bas du dessin.</p>
       </article>
     </section>
 
   </main>
 </div>
 
+<div class="quiz-wrap">
+  <section class="quiz" id="quiz" aria-labelledby="quiz-titre">
+    <span class="kicker">// quiz · 3 questions</span>
+    <h2 id="quiz-titre">Et vous, qu'avez-vous retenu ?</h2>
+    <div id="quiz-corps"></div>
+  </section>
+</div>
+
 <footer>
   <p>Schéma simplifié à visée pédagogique : les installations réelles varient beaucoup d'un endroit à l'autre (eau de nappe ou de rivière, nombre d'étapes de traitement, taille des réservoirs). Aucune donnée locale n'est utilisée.</p>
+  <p><a href="../">← swallow·AGE</a></p>
 </footer>
 
-<noscript><p class="note" style="padding:16px;text-align:center">Les animations demandent JavaScript, mais le texte reste lisible sans.</p></noscript>
+<noscript><p class="note" style="padding:16px;text-align:center">Les animations et le quiz demandent JavaScript, mais le texte reste lisible sans.</p></noscript>
 
 <script>
 (() => {
@@ -416,6 +486,19 @@
     raf = requestAnimationFrame(tick);
   };
 
+  /* Bouton "Arrêter la pluie" (étape 9) */
+  const secBtn = document.getElementById('sec-btn');
+  const secNote = document.getElementById('sec-note');
+  function setSec(on) {
+    document.body.classList.toggle('sec', on);
+    secBtn.setAttribute('aria-pressed', String(on));
+    secBtn.textContent = on ? 'Faire revenir la pluie' : 'Arrêter la pluie';
+    secNote.textContent = on
+      ? 'Plus de pluie : le niveau de la nappe baisse. Rien ne la remplit.'
+      : 'Appuyez, et regardez la nappe en bas du dessin.';
+  }
+  secBtn.addEventListener('click', () => setSec(!document.body.classList.contains('sec')));
+
   let active = 0;
   function setStep(n) {
     if (n === active) return;
@@ -427,9 +510,16 @@
     });
     stepEls.forEach(s => s.classList.toggle('active', +s.dataset.step === n));
     const st = stepEls[n - 1];
-    cap.textContent = st ? `Étape ${n} sur 8 · ${st.dataset.title}` : '';
+    cap.textContent = st ? `Étape ${n} sur ${stepEls.length} · ${st.dataset.title}` : '';
 
-    if (n === 8) {
+    // Mode "et si la pluie s'arrêtait ?" : seulement pendant l'étape 9
+    if (n !== 9) setSec(false);
+
+    if (n === 9) {
+      // La goutte attend la pluie, dans le nuage
+      if (cur.route !== routes.r1) { cur.route = routes.r1; cur.len = routes.r1.total; place(); }
+      tween(0, 1400);
+    } else if (n === 8) {
       if (cur.route !== routes.r2) { cur.route = routes.r2; cur.len = 0; place(); }
       tween(routes.r2.total, 2600);
     } else {
@@ -445,6 +535,56 @@
 
   // Au chargement : seule l'étape 1 est visible une fois qu'on atteint le contenu.
   els.forEach(el => el.classList.remove('seen', 'now'));
+})();
+
+(() => {
+  'use strict';
+  const QUESTIONS = [
+    { q: "Où se cache l'eau que l'on pompe pour la boire ?",
+      options: ["Dans les nuages", "Dans la nappe souterraine", "Dans le château d'eau"], bonne: 1,
+      why: "C'est dans la nappe, sous nos pieds, que le captage va la chercher. Le château d'eau, lui, la garde en réserve après le traitement." },
+    { q: "À quoi sert un château d'eau ?",
+      options: ["À garder de la réserve et à donner de la pression", "À nettoyer l'eau", "À fabriquer la pluie"], bonne: 0,
+      why: "Il fait tampon entre ce que l'on consomme et ce que l'on produit, et sa hauteur pousse l'eau dans les tuyaux." },
+    { q: "Que se passe-t-il si la pluie manque très longtemps ?",
+      options: ["Rien, la nappe est infinie", "Le niveau de la nappe baisse, il faut économiser l'eau", "L'eau devient salée"], bonne: 1,
+      why: "Les nappes se remplissent surtout avec la pluie d'automne et d'hiver : sans elle, la réserve baisse." }
+  ];
+  const corps = document.getElementById('quiz-corps');
+  let i = 0, score = 0;
+
+  function question() {
+    const Q = QUESTIONS[i];
+    corps.innerHTML = '';
+    const p = document.createElement('p'); p.className = 'q'; p.textContent = `${i + 1}/${QUESTIONS.length} · ${Q.q}`;
+    const opts = document.createElement('div'); opts.className = 'opts';
+    const why = document.createElement('p'); why.className = 'why'; why.setAttribute('aria-live', 'polite');
+    const next = document.createElement('button'); next.type = 'button'; next.className = 'btn'; next.hidden = true;
+    next.textContent = i + 1 < QUESTIONS.length ? 'Question suivante' : 'Voir mon résultat';
+    Q.options.forEach((txt, k) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.textContent = txt;
+      b.addEventListener('click', () => {
+        opts.querySelectorAll('.opt').forEach((o, j) => { o.disabled = true; if (j === Q.bonne) o.classList.add('ok'); });
+        if (k === Q.bonne) score++; else b.classList.add('ko');
+        why.textContent = (k === Q.bonne ? 'Bravo ! ' : 'Pas tout à fait. ') + Q.why;
+        next.hidden = false; next.focus();
+      });
+      opts.appendChild(b);
+    });
+    next.addEventListener('click', () => { i++; if (i < QUESTIONS.length) question(); else fin(); });
+    corps.append(p, opts, why, next);
+  }
+
+  function fin() {
+    corps.innerHTML = '';
+    const s = document.createElement('p'); s.className = 'score';
+    s.textContent = `${score} bonne${score > 1 ? 's' : ''} réponse${score > 1 ? 's' : ''} sur ${QUESTIONS.length}. ` +
+      (score === QUESTIONS.length ? "Vous avez tout compris : chaque goutte compte." : "Remontez dans le schéma pour revoir les étapes, puis réessayez.");
+    const again = document.createElement('button'); again.type = 'button'; again.className = 'btn'; again.textContent = 'Rejouer';
+    again.addEventListener('click', () => { i = 0; score = 0; question(); });
+    corps.append(s, again);
+  }
+  question();
 })();
 </script>
 </body>
