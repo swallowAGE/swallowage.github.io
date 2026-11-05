@@ -1107,7 +1107,7 @@ function geojsonDepuisQualiteEau(data) {
     return { type: "FeatureCollection", features };
 }
 /* Trois niveaux, comme l'outil « Qu'y a-t-il dans l'eau de mon robinet ? »
-   (swallowAGE/eau) : une eau peut respecter toutes les LIMITES de qualité
+   (hirund·AGE/eau) : une eau peut respecter toutes les LIMITES de qualité
    (sanitaires) tout en dépassant une RÉFÉRENCE de qualité (confort, bon
    fonctionnement : fer, turbidité, etc.) - c'est « conforme, avec une
    réserve », pas « non conforme ». Un simple test sur la phrase de
