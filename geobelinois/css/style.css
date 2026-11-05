@@ -3,7 +3,7 @@
    ========================================================= */
 
 :root {
-    /* Charte swallow·AGE */
+    /* Charte hirund·AGE */
     --ink: #2B2230;
     --soft: #6B5F5A;
     --paper: #FAF6F0;
@@ -24,7 +24,7 @@
     --brique: #C2677F;
 
     /* Anciens noms, conservés pour ne pas réécrire tout le CSS :
-       le « chrome » de l'interface (boutons, liens, titres) est l'encre prune de swallow·AGE.
+       le « chrome » de l'interface (boutons, liens, titres) est l'encre prune de hirund·AGE.
        Le marine de l'icône ne sert plus qu'au logo. */
     --foret: var(--ink);
     --feuille: var(--green);
@@ -84,12 +84,12 @@ button { font-family: inherit; cursor: pointer; }
 .suggestion-sous { font-size: 11px; color: var(--ardoise); }
 .suggestion-vide { padding: 12px 14px; font-size: 13px; color: var(--ardoise); }
 #topbar-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-/* Lien de retour vers swallow·AGE, comme sur les autres outils. */
-#back-swallowage {
+/* Lien de retour vers hirund·AGE, comme sur les autres outils. */
+#back-hirundage {
     display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
     font-size: 12px; font-weight: 700; color: var(--ardoise); text-decoration: none;
 }
-#back-swallowage:hover { color: var(--primaire); text-decoration: underline; }
+#back-hirundage:hover { color: var(--primaire); text-decoration: underline; }
 /* Boutons de la barre du haut : tous sur le même modèle (pictogramme +
    texte), pour qu'on sache ce que fait chacun sans deviner. Contour gris :
    Accueil, À propos, Installer. Plein vert forêt : les deux outils
@@ -811,7 +811,7 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
        boutons. Taille fixe = plus aucune variation possible. */
     .topbtn span { display: none; }
     .topbtn { width: 38px; padding: 0; justify-content: center; }
-    #back-swallowage span { display: none; }
+    #back-hirundage span { display: none; }
     #topbar-actions { gap: 4px; }
     /* Hors champ par défaut (pas "display:none" comme sur PC) : c'est ce
        qui permet l'animation de glissement au lieu d'une simple
@@ -897,7 +897,7 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
     /* La barre du haut ne garde que le logo et la recherche : les boutons
        sont dans la barre du bas. #actu-wrap reste affiché car le menu des
        actualités en dépend (position: fixed, voir plus haut). */
-    #topbar-actions .topbtn, #home-button, #back-swallowage { display: none; }
+    #topbar-actions .topbtn, #home-button, #back-hirundage { display: none; }
     #topbar-actions { margin-left: 0; }
     #search-container { max-width: none; }
     #app { height: calc(100% - 62px - 60px - env(safe-area-inset-bottom, 0px)); }
