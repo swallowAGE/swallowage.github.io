@@ -21,17 +21,18 @@
     /* Tons de la charte pour les données de la carte */
     --green: #5E8C61;
     --water: #2F6F8F;
-    --brique: #B5677A;
+    --brique: #C2677F;
 
     /* Anciens noms, conservés pour ne pas réécrire tout le CSS :
-       le « chrome » de l'interface (boutons, liens, titres) est marine. */
-    --foret: var(--marine);
+       le « chrome » de l'interface (boutons, liens, titres) est l'encre prune de swallow·AGE.
+       Le marine de l'icône ne sert plus qu'au logo. */
+    --foret: var(--ink);
     --feuille: var(--green);
     --terracotta: var(--brique);
     --riviere: var(--water);
     --ardoise: var(--soft);
-    --primaire: var(--marine);
-    --brume: var(--raised);
+    --primaire: var(--ink);
+    --brume: #F1ECEF;
     --fond: var(--paper);
     --bordure: var(--rule);
     --font-titre: 'Jost', sans-serif;
@@ -105,7 +106,7 @@ button { font-family: inherit; cursor: pointer; }
 .topbtn[hidden] { display: none !important; }
 .topbtn-plein { background: var(--primaire); border-color: var(--primaire); color: #fff; }
 .topbtn-plein i { color: #fff; }
-.topbtn-plein:hover { background: #0E2133; }
+.topbtn-plein:hover { background: #46384F; }
 .topbtn-actu { background: #4F7A52; border-color: #4F7A52; color: #fff; }
 .topbtn-actu i { color: #fff; }
 .topbtn-actu:hover { background: #416644; }
@@ -914,6 +915,7 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
     }
     #bottom-nav button i { font-size: 18px; color: var(--primaire); }
     #bottom-nav button:active { background: var(--brume); }
+    #bottom-nav button[hidden] { display: none; }
 
     #plus-sheet {
         display: flex; flex-direction: column; position: fixed; right: 10px;
@@ -931,3 +933,11 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
     #plus-sheet button[hidden] { display: none; }
     #plus-sheet i { width: 18px; text-align: center; color: var(--primaire); }
 }
+
+/* Actualités sans flux intégrable (Intramuros) : liste des communes dans le menu, lien dans la fiche. */
+.actu-liste { list-style: none; margin: 0; padding: 0 14px 14px; display: flex; flex-direction: column; gap: 6px; }
+.actu-liste a { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--bordure); border-radius: 12px; background: #fff; color: var(--ink); font-weight: 600; font-size: 13.5px; text-decoration: none; }
+.leaflet-container .actu-liste a { color: var(--ink); }
+.actu-liste a:hover { background: var(--brume); }
+.actu-liste i { color: var(--primaire); font-size: 11px; }
+.commune-lien-actu { display: inline-block; margin-top: 10px; text-decoration: none; text-align: center; }

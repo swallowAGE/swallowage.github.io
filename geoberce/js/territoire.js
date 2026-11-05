@@ -4,9 +4,11 @@
    centre de la carte, identifiants des services tiers. Le reste du code
    (js/*.js) est le même pour tous les territoires et lit TERRITOIRE.
 
-   Chargé AVANT js/config.js (voir index.html). Pour un autre territoire,
-   on remplace ce fichier par celui de territoires/<id>.js au moment de la
-   publication (voir README, section « Plusieurs territoires »).
+   Chargé AVANT js/config.js (voir index.html). Ce fichier ne contient que
+   des DONNÉES : pour un autre territoire, il est remplacé par
+   territoires/<id>/territoire.js à la publication (voir README). Le
+   comportement qui en dépend est dans js/territoire-appliquer.js, commun
+   à tous les territoires.
    ========================================================= */
 const TERRITOIRE = {
     /* Identifiant technique : préfixe des clés de stockage local et des
@@ -30,10 +32,22 @@ const TERRITOIRE = {
        couches/communes.geojson) : sert au cadastre complet par EPCI. */
     siren: "200070373",
 
-    /* Identifiant Illiwap de la communauté de communes (null = pas de
-       station Illiwap connue : le bouton « Actualités » n'a alors rien à
-       montrer au niveau de l'intercommunalité). */
-    illiwap: "cc-loir-luce-berce",
+    /* Actualités : bouton « Actualités » de la barre du haut, et carte
+       « Actualités » de la fiche de chaque commune. Trois cas :
+         { type: "illiwap", id: "cc-...", communes: true }
+             fenêtre intégrée avec le flux Illiwap de la communauté de communes ;
+             `communes: true` ajoute le flux Illiwap de chaque commune (code INSEE)
+             dans sa fiche ;
+         { type: "lien", libelle: "Intramuros", url: "https://..." }
+             le bouton ouvre ce lien dans un nouvel onglet (pour un service qui ne
+             s'intègre pas dans la page, comme Intramuros) ;
+         { type: "intramuros", communes: { "72124": "https://www.intramuros.org/...", ... } }
+             une page Intramuros par commune (le service ne s'intègre pas dans la
+             page) : le bouton ouvre un menu des communes, chacune renvoyant vers sa
+             page dans un nouvel onglet, et la fiche de chaque commune a son lien ;
+         null
+             pas de bouton « Actualités ». */
+    actualites: { type: "illiwap", id: "cc-loir-luce-berce", communes: true },
 
     /* Sous-domaine GoatCounter (suivi de visites), null = pas de suivi. */
     goatcounter: "geoberce",
@@ -55,17 +69,3 @@ const TERRITOIRE = {
         "72325": "Saint-Vincent-du-Lorouër", "72356": "Thoiré-sur-Dinan", "72376": "Villaines-sous-Lucé"
     }
 };
-
-/* Applique le nom du territoire aux textes visibles de la page. Le HTML
-   contient déjà ceux de GéoBercé (la page reste correcte sans JavaScript) :
-   pour GéoBercé, cette fonction ne change donc rien. */
-document.addEventListener("DOMContentLoaded", () => {
-    document.title = `${TERRITOIRE.nom} — Le SIG local du territoire ${TERRITOIRE.nomComplet}`;
-    const titre = document.getElementById("brand-title");
-    if (titre) titre.textContent = TERRITOIRE.nom;
-    const apropos = document.querySelector("#about-modal h2");
-    if (apropos) apropos.textContent = TERRITOIRE.nom;
-    document.querySelectorAll(".brand-logo").forEach(img => { img.alt = `Logo ${TERRITOIRE.nom}`; });
-    const intro = document.querySelector("#about-modal .about-info p");
-    if (intro) intro.textContent = intro.textContent.replace("Loir-Lucé-Bercé", TERRITOIRE.nomComplet);
-});

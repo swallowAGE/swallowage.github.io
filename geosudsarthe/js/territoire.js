@@ -13,9 +13,9 @@ const TERRITOIRE = {
     rayonCarburantsM: 25000,
     siren: "200073112",
 
-    /* À renseigner : identifiant Illiwap de la communauté de communes, et
-       sous-domaine GoatCounter. null = pas encore connu / pas de suivi. */
-    illiwap: null,
+    /* À renseigner : actualités (voir js/territoire.js : Illiwap, lien ou null)
+       et sous-domaine GoatCounter. null = pas de bouton / pas de suivi. */
+    actualites: null,
     goatcounter: null,
 
     couchesExclues: [],

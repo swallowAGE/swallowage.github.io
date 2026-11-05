@@ -5,19 +5,19 @@
    est générique et lit cette configuration.
    ========================================================= */
 
-/* Couleurs de l'identité graphique (voir aussi css/style.css). Les noms
-   viennent de l'ancienne charte et sont gardés pour ne pas réécrire toutes
-   les couches ; les valeurs sont celles de la charte swallow·AGE et de
-   l'icône des SIG :
-     foret      -> bleu marine de l'icône
-     feuille    -> vert de la charte
-     terracotta -> rose brique de la charte
-     riviere    -> bleu eau (plus sourd) de la charte
-     ardoise    -> gris chaud de la charte */
+/* Couleurs des données de la carte (icônes, aplats). Les noms viennent de
+   l'ancienne charte et sont gardés pour ne pas réécrire toutes les couches ;
+   les valeurs sont indépendantes du logo, choisies pour bien se distinguer
+   sur la carte tout en restant dans les tons de la charte swallow·AGE :
+     foret      -> prune doux
+     feuille    -> vert
+     terracotta -> rose
+     riviere    -> bleu eau
+     ardoise    -> gris chaud */
 const PALETTE = {
-    foret: "#15304A",
+    foret: "#7A5C8E",
     feuille: "#5E8C61",
-    terracotta: "#B5677A",
+    terracotta: "#C2677F",
     riviere: "#2F6F8F",
     ardoise: "#6B5F5A",
     or: "#D5A35D",
@@ -32,14 +32,14 @@ const PALETTE = {
 const GROUPS = {
     services: { label: "Services & mairie", icon: "fa-solid fa-landmark", color: PALETTE.foret },
     famille: { label: "Famille", icon: "fa-solid fa-child-reaching", color: PALETTE.terracotta },
-    commerces: { label: "Commerces", icon: "fa-solid fa-basket-shopping", color: PALETTE.feuille },
-    associations: { label: "Associations", icon: "fa-solid fa-people-group", color: "#8A6D2B" },
+    commerces: { label: "Commerces", icon: "fa-solid fa-basket-shopping", color: "#C98A2B" },
+    associations: { label: "Associations", icon: "fa-solid fa-people-group", color: "#A0603A" },
     mobilite: { label: "Mobilité", icon: "fa-solid fa-bus", color: PALETTE.riviere },
-    securite: { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", color: "#8E4458" },
+    securite: { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", color: "#B0413E" },
     tourisme: { label: "Nature & rando", icon: "fa-solid fa-person-hiking", color: PALETTE.feuille },
     patrimoine: { label: "Patrimoine", icon: "fa-solid fa-monument", color: "#8A7F78" },
     urbanisme: { label: "Habitat & urbanisme", icon: "fa-solid fa-house-chimney", color: PALETTE.ardoise },
-    risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#8E4458" }
+    risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#C2663A" }
 };
 
 /* Retrait-gonflement des argiles : une teinte par niveau d'aléa (jaune
@@ -661,7 +661,7 @@ const URL_CADASTRE_EPCI = `https://cadastre.data.gouv.fr/bundler/cadastre-etalab
    La CC elle-même a un identifiant à part (pas de code INSEE pour
    une intercommunalité), fourni par l'utilisatrice.
    ========================================================= */
-const ILLIWAP_TERRITOIRE = TERRITOIRE.illiwap;
+const ILLIWAP_TERRITOIRE = (TERRITOIRE.actualites && TERRITOIRE.actualites.type === "illiwap") ? TERRITOIRE.actualites.id : null;
 
 function urlIllwapEmbed(identifiant) {
     return `https://station.illiwap.com/fr/public/${identifiant}/actu/embed`;
@@ -1737,7 +1737,7 @@ const LAYERS = [
         file: `https://data.economie.gouv.fr/api/records/1.0/search/?dataset=prix-des-carburants-en-france-flux-instantane-v2&geofilter.distance=${TERRITOIRE.centre[0]},${TERRITOIRE.centre[1]},${TERRITOIRE.rayonCarburantsM}&rows=300`,
         transform: geojsonDepuisFluxODS,
         type: "point",
-        icon: "fa-solid fa-gas-pump", color: PALETTE.riviere,
+        icon: "fa-solid fa-gas-pump", color: "#D9822B",
         lazy: true, searchable: true, cluster: true,
         titleFields: ["adresse", "nom", "enseigne", "id"],
         subtitleFields: ["ville", "cp", "gazole_prix", "sp95_prix", "e10_prix"]
