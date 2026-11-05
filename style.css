@@ -221,7 +221,11 @@ section > .wrap > p{
 
 /* ---------- Réalisation card ---------- */
 
-#realisations .wrap{
+/* Créations et Origine partagent la même largeur : leurs titres et leurs
+   textes sont alignés sur la même marge gauche. Les paragraphes gardent
+   leur largeur de lecture (58ch, voir plus haut). */
+#realisations .wrap,
+#qui-suis-je .wrap{
   max-width:1120px;
 }
 
