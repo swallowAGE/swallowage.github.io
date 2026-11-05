@@ -226,14 +226,22 @@ section > .wrap > p{
    leur largeur de lecture (58ch, voir plus haut). */
 #realisations .wrap,
 #qui-suis-je .wrap{
-  max-width:1120px;
+  max-width:1280px;
 }
 
 .creations{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  grid-template-columns:repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap:12px;
   margin-top:8px;
+}
+
+/* Grand écran : 4 colonnes fixes (7 créations = 4 + 3). En dessous,
+   la grille se réorganise seule en 3, 2 puis 1 colonne. */
+@media (min-width:1240px){
+  .creations{
+    grid-template-columns:repeat(4, minmax(0, 1fr));
+  }
 }
 
 .creation{
