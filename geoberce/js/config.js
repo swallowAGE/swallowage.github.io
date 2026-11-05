@@ -31,6 +31,13 @@ const GROUPS = {
     risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#AD4826" }
 };
 
+/* Couleurs des 5 lots de chasse de Bercé, reprises de l'affiche ONF. */
+const COULEURS_LOTS_CHASSE = { 1: "#E8836B", 2: "#E3CF3F", 3: "#4FA3E0", 4: "#3A9A3A", 5: "#B88FCB" };
+function styleLotChasse(feature) {
+    const c = COULEURS_LOTS_CHASSE[(feature.properties || {}).lot] || PALETTE.ardoise;
+    return { color: c, weight: 2, opacity: 0.9, fillColor: c, fillOpacity: 0.35 };
+}
+
 /* =========================================================
    STYLES DYNAMIQUES POUR COUCHES "FLUX"
    (données dont on ne maîtrise pas totalement le nom exact
@@ -1505,6 +1512,27 @@ const LAYERS = [
         color: PALETTE.riviere, styleFn: styleCoursEau,
         lazy: true, searchable: true, cluster: false,
         titleFields: ["name"],
+        subtitleFields: []
+    },
+    {
+        id: "lotsChasse", group: "tourisme", label: "Lots de chasse 2026-2027 (forêt de Bercé)",
+        /* Les numéros de l'affiche sont des parcelles forestières ONF,
+           pas des parcelles cadastrales : la couche cadastre ne
+           convient donc pas. Les 5 contours sont les périmètres
+           officiels des lots (service ArcGIS ONF "artemis_ref_chasse",
+           couche "Périmètres des lots de chasse", codes 8320_BE_1 à
+           8320_BE_5), les dates viennent du calendrier publié sur
+           onf.fr (forêt F09431S), relevés le 05/11/2026 - voir
+           couches/chasse/lots_chasse_berce_2026_2027.geojson.
+           Lots 1 et 5 : "dates": null, l'ONF n'avait encore rien publié
+           pour eux (calendrier "encore partiel") - à compléter en
+           rejouant la même extraction. Pas de zones de non-tir : l'ONF
+           ne les publie pas en données, elles ne figurent que sur
+           l'affiche (couches/chasse/calendrier_chasse_2026-2027.webp). */
+        file: "couches/chasse/lots_chasse_berce_2026_2027.geojson", type: "polygon",
+        color: "#C2562E", styleFn: styleLotChasse,
+        lazy: false, searchable: false, cluster: false,
+        titleFields: ["nom"],
         subtitleFields: []
     },
 

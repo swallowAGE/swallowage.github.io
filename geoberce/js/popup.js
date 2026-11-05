@@ -2008,6 +2008,51 @@ function construirePopupDemographie(props) {
     </div>`;
 }
 
+/* Lots de chasse (forêt de Bercé) : dates en ISO "AAAA-MM-JJ" dans
+   props.dates (null = pas encore publiées par l'ONF). Comparaison sur
+   la date locale du jour en texte ISO pour éviter tout décalage de
+   fuseau. */
+const URL_CALENDRIER_CHASSE_ONF = "https://www.onf.fr/vivre-la-foret/foret-domaniale-pres-de-chez-moi/%2B%2Bcc%2B%2Bf09431s::jours-chasses-en-foret-domaniale-de-berce.html";
+const IMAGE_CALENDRIER_CHASSE = "couches/chasse/calendrier_chasse_2026-2027.webp";
+function construirePopupLotChasse(props) {
+    const couleur = (typeof COULEURS_LOTS_CHASSE !== "undefined" && COULEURS_LOTS_CHASSE[props.lot]) || PALETTE.terracotta;
+    const dates = parserValeur(props.dates);
+    const liste = Array.isArray(dates) ? dates.slice().sort() : [];
+    const auj = new Date();
+    const iso = `${auj.getFullYear()}-${String(auj.getMonth() + 1).padStart(2, "0")}-${String(auj.getDate()).padStart(2, "0")}`;
+    const fmt = d => capitaliserPremiere(new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" }));
+    const aVenir = liste.filter(d => d >= iso);
+
+    let corps;
+    if (!liste.length) {
+        corps = `<div class="popup-fiche-vide">Aucun jour de chasse publié à ce jour par l'ONF pour ce lot (calendrier encore partiel). Consultez régulièrement la page de l'ONF.</div>`;
+    } else {
+        corps = `
+            ${liste.includes(iso) ? `<div class="popup-fiche-ligne"><i class="fa-solid fa-triangle-exclamation" style="color:#AD4826"></i> <strong>Chasse prévue aujourd'hui</strong></div>` : ""}
+            <div class="popup-fiche-ligne"><i class="fa-regular fa-calendar"></i> ${aVenir.length ? `${aVenir.length} jour${aVenir.length > 1 ? "s" : ""} à venir sur ${liste.length}` : `Saison terminée (${liste.length} jours)`}</div>
+            ${aVenir.slice(0, 5).map(d => `<div class="popup-fiche-ligne"><i class="fa-solid fa-crosshairs"></i> ${echapperHtml(fmt(d))}</div>`).join("")}
+            <details><summary>Toutes les dates (${liste.length})</summary>
+                ${liste.map(d => `<div class="popup-fiche-ligne${d < iso ? " popup-fiche-precision" : ""}">${echapperHtml(fmt(d))}</div>`).join("")}
+            </details>`;
+    }
+
+    return `<div class="popup-fiche">
+        <div class="popup-fiche-entete">
+            <div class="popup-fiche-icon" style="background:${couleur}"><i class="fa-solid fa-crosshairs"></i></div>
+            <div class="popup-fiche-titre-wrap">
+                <div class="popup-fiche-tag" style="color:${couleur}">Chasse collective · forêt de Bercé</div>
+                <div class="popup-fiche-titre">${echapperHtml(props.nom || "Lot de chasse")} · saison ${echapperHtml(props.saison || "2026-2027")}</div>
+            </div>
+        </div>
+        <div class="popup-fiche-section">${corps}</div>
+        <div class="popup-fiche-section">
+            <a class="popup-fiche-contact" href="${IMAGE_CALENDRIER_CHASSE}" target="_blank" rel="noopener noreferrer"><i class="fa-regular fa-image"></i>Voir l'affiche du calendrier</a>
+            <a class="popup-fiche-contact" href="${URL_CALENDRIER_CHASSE_ONF}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i>Calendrier officiel (ONF)</a>
+        </div>
+        <div class="popup-fiche-section"><div class="popup-fiche-precision">Dates indicatives de l'ONF (actions collectives à tir au grand gibier), susceptibles d'évoluer : restez attentif aux panneaux sur place.</div></div>
+    </div>`;
+}
+
 /* Zonage PLUi : LABELS_PLUI (recherche.js) déjà utilisé par la
    recherche foncière et la fiche parcelle, réutilisé ici pour rester
    cohérent partout où un code de zone PLUi est affiché. */
@@ -2291,6 +2336,7 @@ function construirePopup(feature, layerConf) {
     else if (layerConf.id === "demographie") html = construirePopupDemographie(props);
     else if (layerConf.id === "qualiteEau") html = construirePopupQualiteEau(props);
     else if (layerConf.id === "coursEau") html = construirePopupCoursEau(props);
+    else if (layerConf.id === "lotsChasse") html = construirePopupLotChasse(props);
     else if (layerConf.id === "zonagePLUi") html = construirePopupZonePLUi(props);
     else if (layerConf.id === "rga") html = construirePopupRga(props);
     else if (layerConf.id === "vigieau") html = construirePopupVigieau(props);
