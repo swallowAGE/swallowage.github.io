@@ -1312,7 +1312,17 @@ function construirePopupDecheterie(props) {
        le champ est vide ou mal formé, comme partout ailleurs sur le
        site. */
     const horaires = parserHorairesOsm(props.opening_hours);
-    const lignesHoraires = construireLignesHoraires(horaires);
+    /* Horaires relevés à la main (outils/build_osm.py, saisie/horaires-decheteries.json) :
+       les deux périodes de l'année sont affichées, celle en cours est signalée. */
+    const saisons = Array.isArray(props.horaires_saisons) ? props.horaires_saisons : [];
+    const sectionsSaisons = saisons.map(per => {
+        const lignes = construireLignesHoraires(parserHorairesOsm(per.horaires));
+        if (!lignes) return "";
+        const enCours = parserHorairesOsm(`${per.mois}: Mo-Su 00:00-01:00`) !== null;
+        return `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">${echapperHtml(per.label)}${enCours ? " · en ce moment" : ""}</div>${lignes}</div>`;
+    }).join("");
+    const lignesHoraires = sectionsSaisons ? "" : construireLignesHoraires(horaires);
+    const contacts = construireContacts({ ...props, phone: props.telephone || null, email: null, website: null });
 
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
@@ -1320,12 +1330,14 @@ function construirePopupDecheterie(props) {
             <div class="popup-fiche-titre-wrap">
                 <div class="popup-fiche-tag" style="color:${PALETTE.foret}">Déchèterie</div>
                 <div class="popup-fiche-titre">${echapperHtml(props.name || "Déchèterie")}</div>
-                ${props.com_nom ? `<div class="popup-fiche-adresse">${echapperHtml(props.com_nom)}</div>` : ""}
+                ${(props.adresse || props.com_nom) ? `<div class="popup-fiche-adresse">${echapperHtml(props.adresse || props.com_nom)}</div>` : ""}
                 ${operateur ? `<div class="popup-fiche-puce" style="color:${PALETTE.foret}"><i class="fa-solid fa-building"></i>Gérée par ${echapperHtml(operateur)}</div>` : ""}
             </div>
             ${construireBadgeOuvert(horaires)}
         </div>
-
+        ${contacts.length ? `<div class="popup-fiche-section"><div class="popup-fiche-contacts">${contacts.join("")}</div></div>` : ""}
+        ${sectionsSaisons}
+        ${Array.isArray(props.horaires_notes) && props.horaires_notes.length ? `<div class="popup-fiche-section">${props.horaires_notes.map(n => `<div class="popup-fiche-precision">${echapperHtml(n)}</div>`).join("")}</div>` : ""}
         ${lignesHoraires ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Horaires</div>${lignesHoraires}</div>` : ""}
     </div>`;
 }
@@ -2059,12 +2071,13 @@ function construirePopupLotChasse(props) {
    cohérent partout où un code de zone PLUi est affiché. */
 function construirePopupZonePLUi(props) {
     const label = (typeof LABELS_PLUI !== "undefined" && LABELS_PLUI[props.typezone]) || props.typezone || "Zone";
+    const couleur = (TYPES_PLUI.find(t => t.id === categoriePlui({ properties: props })) || {}).color || PALETTE.ardoise;
 
     return `<div class="popup-fiche">
         <div class="popup-fiche-entete">
-            <div class="popup-fiche-icon" style="background:${PALETTE.ardoise}"><i class="fa-solid fa-map"></i></div>
+            <div class="popup-fiche-icon" style="background:${couleur}"><i class="fa-solid fa-map"></i></div>
             <div class="popup-fiche-titre-wrap">
-                <div class="popup-fiche-tag" style="color:${PALETTE.ardoise}">Zonage PLUi</div>
+                <div class="popup-fiche-tag" style="color:${couleur}">Zonage PLUi</div>
                 <div class="popup-fiche-titre">${echapperHtml(label)}</div>
                 ${(props.libelong && props.libelong !== label) ? `<div class="popup-fiche-adresse">${echapperHtml(props.libelong)}</div>` : ""}
             </div>
