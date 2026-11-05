@@ -329,6 +329,18 @@ function construireCartePrixImmobilier(codeInsee) {
 }
 
 function construireCarteActualites(codeInsee) {
+    /* Seulement quand le territoire a un flux Illiwap par commune (voir TERRITOIRE.actualites). */
+    const actu = TERRITOIRE.actualites;
+    if (actu && actu.type === "intramuros") {
+        const url = (actu.communes || {})[codeInsee];
+        if (!url) return "";
+        return `<div class="commune-carte commune-carte-large">
+        <div class="commune-carte-titre"><i class="fa-solid fa-bullhorn"></i>Actualités (Intramuros)</div>
+        <div class="commune-ligne">Les actualités et les alertes de la commune sont publiées sur Intramuros.</div>
+        <a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">Voir les actualités de ${echapperHtml(COMMUNES_TERRITOIRE[codeInsee] || "la commune")}</a>
+    </div>`;
+    }
+    if (!actu || actu.type !== "illiwap" || !actu.communes) return "";
     return `<div class="commune-carte commune-carte-large">
         <div class="commune-carte-titre"><i class="fa-solid fa-bullhorn"></i>Actualités (Illiwap)</div>
         <div class="illiwap-embed">
@@ -569,7 +581,40 @@ function construireSelecteurCommunes(map) {
    par commune, restée telle quelle) - retour direct de l'utilisatrice,
    ça n'a pas besoin de prendre la place de tout le panneau pour un
    simple coup d'œil aux actus du territoire. */
+/* Menu des actualités pour un territoire sans flux intégrable : la liste des
+   communes, chacune vers sa page Intramuros (nouvel onglet). */
+function remplirListeActualitesIntramuros(menu, actu) {
+    const integre = menu.querySelector(".illiwap-embed");
+    if (integre) integre.hidden = true;
+    let liste = menu.querySelector("#actu-liste");
+    if (!liste) {
+        liste = document.createElement("ul");
+        liste.id = "actu-liste";
+        liste.className = "actu-liste";
+        menu.appendChild(liste);
+    }
+    liste.innerHTML = Object.keys(actu.communes || {})
+        .sort((a, b) => String(COMMUNES_TERRITOIRE[a] || a).localeCompare(String(COMMUNES_TERRITOIRE[b] || b), "fr"))
+        .map(code => `<li><a href="${echapperHtml(actu.communes[code])}" target="_blank" rel="noopener noreferrer"><span>${echapperHtml(COMMUNES_TERRITOIRE[code] || code)}</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>`)
+        .join("");
+}
+
 function toggleActuDropdown(forcerOuvert) {
+    const actu = TERRITOIRE.actualites;
+    if (!actu) return;
+    /* Intramuros : une page par commune, listées dans le menu déroulant. */
+    if (actu.type === "intramuros") {
+        const menu = document.getElementById("actu-dropdown");
+        const ouvrir = forcerOuvert !== undefined ? forcerOuvert : menu.hidden;
+        menu.hidden = !ouvrir;
+        if (ouvrir) remplirListeActualitesIntramuros(menu, actu);
+        return;
+    }
+    /* Un simple lien : ouvert dans un nouvel onglet, rien à intégrer. */
+    if (actu.type === "lien") {
+        if (forcerOuvert !== false) window.open(actu.url, "_blank", "noopener");
+        return;
+    }
     const dropdown = document.getElementById("actu-dropdown");
     const seraOuvert = forcerOuvert !== undefined ? forcerOuvert : dropdown.hidden;
     dropdown.hidden = !seraOuvert;

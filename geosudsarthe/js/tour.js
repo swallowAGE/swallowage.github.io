@@ -13,7 +13,7 @@ const ETAPES_VISITE = [
     { cible: "#hero-raccourcis", texte: "Ou choisissez un raccourci : colis, courrier, assistante maternelle, artisan, carburant le plus proche ou le moins cher." },
     { cible: "#hero-plus summary", texte: "\"Plus d'options\" : la fiche de votre commune, d'autres raccourcis, les thématiques et la recherche de parcelle." },
     { cible: "#menu-button", cibleMobile: "#bottom-nav [data-cible=menu-button]", texte: "Affichez ou masquez les couches de données sur la carte (cadastre, commerces, risques...)." },
-    { cible: "#actu-button", cibleMobile: "#bottom-nav [data-cible=actu-button]", texte: "Les actualités Illiwap du territoire, en un clic." }
+    { cible: "#actu-button", cibleMobile: "#bottom-nav [data-cible=actu-button]", texte: "Les actualités du territoire, en un clic." }
 ];
 
 /* Sur téléphone, les boutons de la barre du haut sont masqués au profit de
@@ -54,7 +54,7 @@ function positionnerBulleVisite(cible) {
 function afficherEtapeVisite(index) {
     const etape = ETAPES_VISITE[index];
     const cible = cibleDeLEtape(etape);
-    if (!cible) {
+    if (!cible || cible.getClientRects().length === 0) {
         /* Élément absent (ex. masqué à cette largeur d'écran) : on
            saute directement à l'étape suivante plutôt que de mettre en
            avant un élément invisible. */
