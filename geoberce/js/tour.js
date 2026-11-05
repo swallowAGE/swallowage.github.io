@@ -81,12 +81,12 @@ function demarrerVisiteGuidee() {
 
 function terminerVisiteGuidee() {
     document.getElementById("tour").hidden = true;
-    try { localStorage.setItem("geoberce_visite_vue", "1"); } catch (_) { /* navigation privée : tant pis, pas bloquant */ }
+    try { localStorage.setItem(TERRITOIRE.id + "_visite_vue", "1"); } catch (_) { /* navigation privée : tant pis, pas bloquant */ }
 }
 
 function demarrerVisiteSiPremiereFois() {
     let dejaVue = true;
-    try { dejaVue = localStorage.getItem("geoberce_visite_vue") === "1"; } catch (_) { dejaVue = false; }
+    try { dejaVue = localStorage.getItem(TERRITOIRE.id + "_visite_vue") === "1"; } catch (_) { dejaVue = false; }
     /* Pas de visite quand le lien ouvre directement une couche (?couche=...) :
        l'accueil est volontairement sauté. */
     let ouvertureParLien = false;

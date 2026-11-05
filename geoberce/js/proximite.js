@@ -22,7 +22,9 @@ function construireRaccourcis(map) {
     principal.innerHTML = "";
     secondaire.innerHTML = "";
 
-    RACCOURCIS.forEach(raccourci => {
+    /* Un raccourci dont une couche n'existe pas pour ce territoire (voir
+       TERRITOIRE.fichiersDisponibles, js/config.js) n'est pas proposé. */
+    RACCOURCIS.filter(r => r.layerIds.every(id => LAYERS.some(l => l.id === id))).forEach(raccourci => {
         const couleur = couleurRaccourci(raccourci);
         const bouton = document.createElement("button");
         bouton.type = "button";

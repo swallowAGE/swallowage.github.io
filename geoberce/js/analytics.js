@@ -5,7 +5,7 @@
    sync-geoberce.yml côté swallowage), donc une seule version de ce
    fichier existe pour les deux : c'est à lui de décider où il s'active
    au chargement plutôt que d'exister en deux variantes selon le dépôt. */
-function estProdGeoberce(hostname) {
+function estProd(hostname) {
     return hostname === "swallowage.github.io";
 }
 
@@ -13,8 +13,8 @@ function injecterGoatCounter() {
     const script = document.createElement("script");
     script.async = true;
     script.src = "//gc.zgo.at/count.js";
-    script.dataset.goatcounter = "https://geoberce.goatcounter.com/count";
+    script.dataset.goatcounter = `https://${TERRITOIRE.goatcounter}.goatcounter.com/count`;
     document.head.appendChild(script);
 }
 
-if (estProdGeoberce(location.hostname)) injecterGoatCounter();
+if (TERRITOIRE.goatcounter && estProd(location.hostname)) injecterGoatCounter();

@@ -21,7 +21,7 @@
    autoClose, resté activé, un mécanisme différent de celui-ci) - léger
    changement d'habitude, largement préférable à des popups qui se
    ferment sans prévenir. */
-const map = L.map("map", { zoomControl: false, closePopupOnClick: false }).setView([47.791528, 0.412223], 12);
+const map = L.map("map", { zoomControl: false, closePopupOnClick: false }).setView(TERRITOIRE.centre, TERRITOIRE.zoom);
 
 /* Un clic sur une zone vide de la carte referme la popup ouverte (habitude
    attendue). Fait à la main plutôt que via closePopupOnClick, pour ignorer
@@ -210,7 +210,7 @@ function initRedimensionnementPanneau() {
 
     const LARGEUR_MIN = 280, LARGEUR_MAX = 640;
     try {
-        const sauvegardee = Number(localStorage.getItem("geoberce_largeur_panneau"));
+        const sauvegardee = Number(localStorage.getItem(TERRITOIRE.id + "_largeur_panneau"));
         if (sauvegardee) panel.style.width = Math.min(LARGEUR_MAX, Math.max(LARGEUR_MIN, sauvegardee)) + "px";
     } catch (_) { /* navigation privée : tant pis, largeur par défaut (340px) */ }
 
@@ -232,7 +232,7 @@ function initRedimensionnementPanneau() {
         enCours = false;
         poignee.classList.remove("en-cours");
         document.body.style.userSelect = "";
-        try { localStorage.setItem("geoberce_largeur_panneau", parseInt(panel.style.width, 10)); } catch (_) { /* tant pis, pas bloquant */ }
+        try { localStorage.setItem(TERRITOIRE.id + "_largeur_panneau", parseInt(panel.style.width, 10)); } catch (_) { /* tant pis, pas bloquant */ }
     });
 }
 initRedimensionnementPanneau();
@@ -312,7 +312,7 @@ document.getElementById("contact-envoyer").addEventListener("click", () => {
         return;
     }
 
-    const sujet = type === "bug" ? "[GéoBercé] Signalement de bug" : "[GéoBercé] Proposition d'idée";
+    const sujet = type === "bug" ? `[${TERRITOIRE.nom}] Signalement de bug` : `[${TERRITOIRE.nom}] Proposition d'idée`;
     bouton.disabled = true;
     statut.textContent = "Envoi en cours...";
     statut.className = "contact-statut";

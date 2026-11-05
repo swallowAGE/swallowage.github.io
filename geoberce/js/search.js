@@ -41,7 +41,7 @@ function initRecherche(map, { onResultat } = {}) {
            client sur COMMUNES_TERRITOIRE (js/config.js) avant de ne garder
            que les 5 premiers - une recherche "boula" ne doit pas proposer
            une adresse en Ille-et-Vilaine ou dans l'Indre. */
-        const params = "q=" + encodeURIComponent(q) + "&lat=47.791528&lon=0.412223&limit=15";
+        const params = "q=" + encodeURIComponent(q) + "&lat=" + TERRITOIRE.centre[0] + "&lon=" + TERRITOIRE.centre[1] + "&limit=15";
         return fetch("https://api-adresse.data.gouv.fr/search/?" + params)
             .then(r => r.ok ? r.json() : { features: [] })
             .then(d => d.features

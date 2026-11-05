@@ -9,7 +9,8 @@ function construireEcranAccueil(map) {
     const conteneur = document.getElementById("hero-tiles");
     conteneur.innerHTML = "";
 
-    THEMES.forEach(theme => {
+    /* Une thématique sans aucune couche pour ce territoire n'est pas proposée. */
+    THEMES.filter(theme => theme.groups.some(g => LAYERS.some(l => l.group === g))).forEach(theme => {
         const couleur = (GROUPS[theme.groups[0]] || {}).color || PALETTE.ardoise;
         const carte = document.createElement("button");
         carte.type = "button";
