@@ -2464,7 +2464,7 @@
     "website": null,
     "opening_hours": null,
     "note": null,
-    "masquer": null,
+    "masquer": true,
     "verifie": false
    }
   },
@@ -5180,7 +5180,7 @@
     "website": null,
     "opening_hours": null,
     "note": null,
-    "masquer": null,
+    "masquer": true,
     "verifie": false
    }
   },
@@ -5653,8 +5653,8 @@
     "creation": "2017",
     "phone": null,
     "email": null,
-    "website": null,
-    "opening_hours": null,
+    "website": "https://menuiserie-delaroue.fr/",
+    "opening_hours": "Mo,Tu,Th 08:00-12:00,14:00-18:00; Fr 08:00-12:00,13:00-17:00",
     "note": null,
     "masquer": null,
     "verifie": false
