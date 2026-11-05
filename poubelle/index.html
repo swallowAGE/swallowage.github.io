@@ -668,7 +668,7 @@
       "X-WR-CALNAME:Collectes " + name];
     list.forEach(function (x) {
       var ev = iso(x.date - DAY).replace(/-/g, "");
-      lines.push("BEGIN:VEVENT", "UID:" + ev + "-" + name.normalize("NFD").replace(/[^A-Za-z]/g, "") + "@swallowage.github.io", "DTSTAMP:" + stamp,
+      lines.push("BEGIN:VEVENT", "UID:" + ev + "-" + name.normalize("NFD").replace(/[^A-Za-z]/g, "") + "@hirundage.fr", "DTSTAMP:" + stamp,
         "DTSTART:" + ev + "T190000", "DTEND:" + ev + "T191500",
         "SUMMARY:Sortir les poubelles (" + (x.bins.length === 2 ? "ordures ménagères + emballages" : x.bins[0] === 1 ? "emballages" : "ordures ménagères") + ")",
         "DESCRIPTION:Collecte le " + longDate(x.date) + (x.cause ? ", décalée à cause du jour férié (" + x.cause.name + ")" : "") + ".",
