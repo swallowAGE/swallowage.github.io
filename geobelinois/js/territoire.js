@@ -41,6 +41,7 @@ const TERRITOIRE = {
         "couches/commerces/banques.geojson",
         "couches/commerces/commerces.geojson",
         "couches/famille/education.geojson",
+        "couches/famille/petiteEnfance.geojson",
         "couches/mobilite/airecovoiturage.geojson",
         "couches/mobilite/arretsALEOP.geojson",
         "couches/mobilite/reseauALEOP.geojson",
