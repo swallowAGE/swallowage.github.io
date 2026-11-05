@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","name":"marches","features":[{"type":"Feature","properties":{"amenity":"marketplace","opening_hours":"Th 08:00-14:00","osm_id":"node/5464621327","com_insee":"72176","com_nom":"Le Lude"},"geometry":{"type":"Point","coordinates":[0.1563427,47.6434439]}}]}

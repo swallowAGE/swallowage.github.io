@@ -1,0 +1,6335 @@
+{
+ "type": "FeatureCollection",
+ "source": "Registre SIRENE (Insee), API Recherche d'entreprises",
+ "mise_a_jour": "2026-11-05",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.269054,
+     47.691121
+    ]
+   },
+   "properties": {
+    "siret": "97820635700011",
+    "nom": "Afdecor72",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "11 HLM Racan",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.257735,
+     47.690996
+    ]
+   },
+   "properties": {
+    "siret": "49057856400026",
+    "nom": "Atelier D'usinage de la Vallee du Loir",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "Rue du 8 Mai",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.242817,
+     47.695123
+    ]
+   },
+   "properties": {
+    "siret": "10324002400010",
+    "nom": "Atelier F.L.",
+    "categorie": "maconnerie",
+    "ape": "41.20B",
+    "activite": "Construction de bâtiments",
+    "adresse": "8 Route des Aulnays",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.267255,
+     47.69041
+    ]
+   },
+   "properties": {
+    "siret": "84039775600015",
+    "nom": "Christophe Leboucher",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "9 Place de L'eglise",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.26378,
+     47.690289
+    ]
+   },
+   "properties": {
+    "siret": "49041955300030",
+    "nom": "Climaconcept72",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "9 Rue de la Maison-Neuve",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.232901,
+     47.685806
+    ]
+   },
+   "properties": {
+    "siret": "48287205800029",
+    "nom": "Couverture du Loir",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Le Verger",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.260583,
+     47.69532
+    ]
+   },
+   "properties": {
+    "siret": "99039022100028",
+    "nom": "Don'elec",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "37 Rue du Haut Perrin",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.267381,
+     47.697985
+    ]
+   },
+   "properties": {
+    "siret": "84177689100027",
+    "nom": "Guillaume Portier",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Les Fosses Cornu 30 Rue de Bellevue",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.268766,
+     47.686258
+    ]
+   },
+   "properties": {
+    "siret": "84803190200010",
+    "nom": "M-G Espaces Verts",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "50 Rue des Peupliers",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.2533,
+     47.710635
+    ]
+   },
+   "properties": {
+    "siret": "88221755700025",
+    "nom": "Mickael Beaumont",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "4 Route de Mayet",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.264864,
+     47.687834
+    ]
+   },
+   "properties": {
+    "siret": "74999565000027",
+    "nom": "Palec",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "14 Rue Neuve",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.267508,
+     47.688426
+    ]
+   },
+   "properties": {
+    "siret": "98297484200014",
+    "nom": "Platrier Pro",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "1er Etage 8 Rue de la Gare",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.272207,
+     47.689499
+    ]
+   },
+   "properties": {
+    "siret": "90838149400016",
+    "nom": "Plumerand",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "21 Rue du 11 Novembre",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.257435,
+     47.675576
+    ]
+   },
+   "properties": {
+    "siret": "98155936200018",
+    "nom": "Poulain Couverture",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "15 Chemin de la Carte",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.260757,
+     47.679469
+    ]
+   },
+   "properties": {
+    "siret": "37785643000022",
+    "nom": "SARL Royer Batiment",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Za de L'ecobue",
+    "com_insee": "72013",
+    "com_nom": "Aubigné-Racan",
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.341285,
+     47.625279
+    ]
+   },
+   "properties": {
+    "siret": "48055781800022",
+    "nom": "Entreprise VMS",
+    "categorie": "autre",
+    "ape": "95.22Z",
+    "activite": "Réparation d'électroménager et de matériel de jardin",
+    "adresse": "La Rousseliere",
+    "com_insee": "72077",
+    "com_nom": "Chenu",
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.369718,
+     47.634089
+    ]
+   },
+   "properties": {
+    "siret": "98249026000014",
+    "nom": "Fabrice Fouquet",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Lieu Dit la Roche D'alizon",
+    "com_insee": "72077",
+    "com_nom": "Chenu",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.369793,
+     47.638333
+    ]
+   },
+   "properties": {
+    "siret": "40167846100021",
+    "nom": "Franck Lerat",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "La Gagnerie",
+    "com_insee": "72077",
+    "com_nom": "Chenu",
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.340158,
+     47.611767
+    ]
+   },
+   "properties": {
+    "siret": "80450132800012",
+    "nom": "Francois Lecloux",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "13 Grand Rue",
+    "com_insee": "72077",
+    "com_nom": "Chenu",
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.387465,
+     47.583399
+    ]
+   },
+   "properties": {
+    "siret": "49537166800015",
+    "nom": "Gonnin Christophe",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Beau Soleil",
+    "com_insee": "72077",
+    "com_nom": "Chenu",
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.383157,
+     47.604344
+    ]
+   },
+   "properties": {
+    "siret": "39941893800029",
+    "nom": "Jean-Pierre Ascouet",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Le Boulay",
+    "com_insee": "72077",
+    "com_nom": "Chenu",
+    "creation": "2004",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.340414,
+     47.614244
+    ]
+   },
+   "properties": {
+    "siret": "49798018500019",
+    "nom": "Jules Cloarec",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "6 Rue Saint-Jean",
+    "com_insee": "72077",
+    "com_nom": "Chenu",
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.390104,
+     47.58045
+    ]
+   },
+   "properties": {
+    "siret": "98966229100016",
+    "nom": "Sam TP",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Lieu Dit la Ronceraie",
+    "com_insee": "72077",
+    "com_nom": "Chenu",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.201901,
+     47.809726
+    ]
+   },
+   "properties": {
+    "siret": "10329445000012",
+    "nom": "Pauvert Pascal",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "9 Route de Saint Biez en Belin",
+    "com_insee": "72072",
+    "com_nom": "Château-l'Hermitage",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.199009,
+     47.81035
+    ]
+   },
+   "properties": {
+    "siret": "79516969700013",
+    "nom": "Remy Verri",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "6 Route de Saint Ouen en Belin",
+    "com_insee": "72072",
+    "com_nom": "Château-l'Hermitage",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.199078,
+     47.694907
+    ]
+   },
+   "properties": {
+    "siret": "79820018400017",
+    "nom": "Alain Royne",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "La Croix Quartereau",
+    "com_insee": "72098",
+    "com_nom": "Coulongé",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.202552,
+     47.689719
+    ]
+   },
+   "properties": {
+    "siret": "51816437100016",
+    "nom": "Francis Louis Tisserand",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "8 Rue de la Mairie",
+    "com_insee": "72098",
+    "com_nom": "Coulongé",
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.198422,
+     47.697785
+    ]
+   },
+   "properties": {
+    "siret": "92250919500017",
+    "nom": "Guillaume Bussonnais",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "1 Les Ongras",
+    "com_insee": "72098",
+    "com_nom": "Coulongé",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.209064,
+     47.682537
+    ]
+   },
+   "properties": {
+    "siret": "90818456700018",
+    "nom": "Nico TP",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Le Pre Long",
+    "com_insee": "72098",
+    "com_nom": "Coulongé",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.333913,
+     47.639521
+    ]
+   },
+   "properties": {
+    "siret": "91140301200014",
+    "nom": "Morgan Renaudat TP",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "La Petite Maison Rouge",
+    "com_insee": "72049",
+    "com_nom": "La Bruère-sur-Loir",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.355306,
+     47.645777
+    ]
+   },
+   "properties": {
+    "siret": "43950446500014",
+    "nom": "SARL Delay",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "7 Chemin de la Fleurtiere",
+    "com_insee": "72049",
+    "com_nom": "La Bruère-sur-Loir",
+    "creation": "2001",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.250293,
+     47.633079
+    ]
+   },
+   "properties": {
+    "siret": "92025232700019",
+    "nom": "Damien Trouve",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Malloire",
+    "com_insee": "72060",
+    "com_nom": "La Chapelle-aux-Choux",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.219457,
+     47.640827
+    ]
+   },
+   "properties": {
+    "siret": "79156919700019",
+    "nom": "Dominique Reverdy",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "3 Rue les Charbottieres",
+    "com_insee": "72060",
+    "com_nom": "La Chapelle-aux-Choux",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.171972,
+     47.602386
+    ]
+   },
+   "properties": {
+    "siret": "85046411600019",
+    "nom": "A Votre Service",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Disse sous le Lude la Tacheraie",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.12663,
+     47.6283
+    ]
+   },
+   "properties": {
+    "siret": "49124894400010",
+    "nom": "A.s.p.l.",
+    "categorie": "autre",
+    "ape": "25.11Z",
+    "activite": "Structures métalliques",
+    "adresse": "Rte de Genneteil",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.133405,
+     47.650983
+    ]
+   },
+   "properties": {
+    "siret": "92972901000017",
+    "nom": "Arh",
+    "categorie": "autre",
+    "ape": "95.24Z",
+    "activite": "Réparation de meubles",
+    "adresse": "Route de Savigne",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.152004,
+     47.610384
+    ]
+   },
+   "properties": {
+    "siret": "93254423200014",
+    "nom": "Auddino Services",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "11 Rue de la Pretrie",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.178734,
+     47.631287
+    ]
+   },
+   "properties": {
+    "siret": "92064661900014",
+    "nom": "Ca Batiment",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "3163 R du Raillon",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.158145,
+     47.611958
+    ]
+   },
+   "properties": {
+    "siret": "93071448000017",
+    "nom": "Chauvreau Thibaut",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "73 Route des Caves Neuves",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.15725,
+     47.646295
+    ]
+   },
+   "properties": {
+    "siret": "79262730900018",
+    "nom": "Christophe Lemaire",
+    "categorie": "maconnerie",
+    "ape": "41.20A",
+    "activite": "Construction de maisons individuelles",
+    "adresse": "20 Rue D'oree",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.155884,
+     47.642416
+    ]
+   },
+   "properties": {
+    "siret": "79208657100025",
+    "nom": "Cormier - Penard",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "4 Av de Saumur",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.159326,
+     47.642889
+    ]
+   },
+   "properties": {
+    "siret": "81408147700014",
+    "nom": "Create Divice",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Chez M.fereira Dos Santos Baptista 38 Rue du Montruchon",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.165345,
+     47.636331
+    ]
+   },
+   "properties": {
+    "siret": "98213993300039",
+    "nom": "Dalin Carrelage",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "7 Rue des Cerisiers",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.171686,
+     47.607783
+    ]
+   },
+   "properties": {
+    "siret": "81280609900022",
+    "nom": "Daniel Mark",
+    "categorie": "peinture",
+    "ape": "43.39Z",
+    "activite": "Travaux de finition",
+    "adresse": "Disse sous le Lude la Brosse",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2017",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.15555,
+     47.637228
+    ]
+   },
+   "properties": {
+    "siret": "50909501400015",
+    "nom": "Denis",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Le Champ de la Plaine de la Delivrance",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.117103,
+     47.607348
+    ]
+   },
+   "properties": {
+    "siret": "99122483300012",
+    "nom": "EI Cyprien Louis",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "1060 La Guitiere Route de Chigne",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.160603,
+     47.639529
+    ]
+   },
+   "properties": {
+    "siret": "50182090600011",
+    "nom": "ETS Bordeau",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "33 Rue des Tallandiers",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.168898,
+     47.637028
+    ]
+   },
+   "properties": {
+    "siret": "80331392300028",
+    "nom": "EURL la Zinguerie D'art",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "41 Rte de Tours",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.161706,
+     47.636796
+    ]
+   },
+   "properties": {
+    "siret": "57675063200035",
+    "nom": "Entreprise Colin",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Zone Artisanale",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "1982",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.161184,
+     47.638534
+    ]
+   },
+   "properties": {
+    "siret": "42901854200036",
+    "nom": "Fabrice Bordeau",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "1 All des Bourreliers",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.157958,
+     47.64652
+    ]
+   },
+   "properties": {
+    "siret": "93828936000019",
+    "nom": "Flamafilm",
+    "categorie": "peinture",
+    "ape": "43.39Z",
+    "activite": "Travaux de finition",
+    "adresse": "23 Rue D'oree",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.159475,
+     47.639605
+    ]
+   },
+   "properties": {
+    "siret": "48797592200013",
+    "nom": "Franck Legendre",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "8 Rue des Taillandiers",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.147314,
+     47.621086
+    ]
+   },
+   "properties": {
+    "siret": "44159630100024",
+    "nom": "Frederic Richard",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "LD Pierrefine",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.161551,
+     47.640323
+    ]
+   },
+   "properties": {
+    "siret": "42451318200016",
+    "nom": "Guillaume Ledru",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "4 Rue de Touraine",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "1999",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.16421,
+     47.600281
+    ]
+   },
+   "properties": {
+    "siret": "94776356100026",
+    "nom": "Ju'elec",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Disse sous le Lude 346 Route de la Bordeliere",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.156007,
+     47.64899
+    ]
+   },
+   "properties": {
+    "siret": "79262731700011",
+    "nom": "Laurent Allard",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "14 BD de L Hospice",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.15799,
+     47.639875
+    ]
+   },
+   "properties": {
+    "siret": "10418789300011",
+    "nom": "Les Ateliers Martin Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Zi Route de Disse 1 Allee des Tanneurs",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.159475,
+     47.639605
+    ]
+   },
+   "properties": {
+    "siret": "50888197600015",
+    "nom": "Menuiserie Aluminium Ludoise",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "Zi des Tourelles 6 B Rue des Taillandiers",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.190601,
+     47.653274
+    ]
+   },
+   "properties": {
+    "siret": "91972318900016",
+    "nom": "N.M Services",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "564 Rte Malfrairies",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.178734,
+     47.631287
+    ]
+   },
+   "properties": {
+    "siret": "89947030600023",
+    "nom": "Notburga",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "3163 Rue du Raillon",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.149989,
+     47.617497
+    ]
+   },
+   "properties": {
+    "siret": "49064052100012",
+    "nom": "Richard",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Le Pre des Noues Durand",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.183318,
+     47.652537
+    ]
+   },
+   "properties": {
+    "siret": "99400125300016",
+    "nom": "Rousteau",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "1422 Route de Chateau du Loir",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.181834,
+     47.652191
+    ]
+   },
+   "properties": {
+    "siret": "81788676500012",
+    "nom": "Rousteau Cedric",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Le Petit Malidor",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.162725,
+     47.636485
+    ]
+   },
+   "properties": {
+    "siret": "44060589700022",
+    "nom": "SARL ETS le Corre",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Zi des Tourelles",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.191885,
+     47.654205
+    ]
+   },
+   "properties": {
+    "siret": "38450431200040",
+    "nom": "SARL Fourreau",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "Rte du Chateau du Loir Rte les Malfrairies",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2001",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.168414,
+     47.636632
+    ]
+   },
+   "properties": {
+    "siret": "83469568600016",
+    "nom": "SARL Menard Cordon",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "BD des Tourelles",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.156494,
+     47.64558
+    ]
+   },
+   "properties": {
+    "siret": "38424583300015",
+    "nom": "SARL Robic",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "22 Rue du Boeuf",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "1992",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.158202,
+     47.639755
+    ]
+   },
+   "properties": {
+    "siret": "33024111800034",
+    "nom": "Soc ETS Tancogne",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "Zone Industrielle BD des Tourelles",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.157607,
+     47.647071
+    ]
+   },
+   "properties": {
+    "siret": "80191401100029",
+    "nom": "Steve Da Silva Canto",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "PL Francois de Nicolay",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.163456,
+     47.637722
+    ]
+   },
+   "properties": {
+    "siret": "43777503400030",
+    "nom": "T.m.i.",
+    "categorie": "autre",
+    "ape": "25.11Z",
+    "activite": "Structures métalliques",
+    "adresse": "BD des Tourelles Zone Industrielle",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.167498,
+     47.636504
+    ]
+   },
+   "properties": {
+    "siret": "90027245100015",
+    "nom": "The Acoustics Company",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "BD des Tourelles",
+    "com_insee": "72176",
+    "com_nom": "Le Lude",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.098717,
+     47.700566
+    ]
+   },
+   "properties": {
+    "siret": "52776979800044",
+    "nom": "Atelier Vegetal Art Design",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Le Port des Roches",
+    "com_insee": "72175",
+    "com_nom": "Luché-Pringé",
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.081717,
+     47.707476
+    ]
+   },
+   "properties": {
+    "siret": "94367282400019",
+    "nom": "C.C.B Clement Construction Bois",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "19 B Rue des Champs",
+    "com_insee": "72175",
+    "com_nom": "Luché-Pringé",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.096068,
+     47.701444
+    ]
+   },
+   "properties": {
+    "siret": "84022770600016",
+    "nom": "Harvey Peinture",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "11 Les Grandes Maisons",
+    "com_insee": "72175",
+    "com_nom": "Luché-Pringé",
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.085639,
+     47.695737
+    ]
+   },
+   "properties": {
+    "siret": "81853897700047",
+    "nom": "Lamy",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Zone Industrielle le Breil",
+    "com_insee": "72175",
+    "com_nom": "Luché-Pringé",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.097294,
+     47.730973
+    ]
+   },
+   "properties": {
+    "siret": "87965911800027",
+    "nom": "Mesure Toit (MT)",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "6 Lieu Dit les Gridieres",
+    "com_insee": "72175",
+    "com_nom": "Luché-Pringé",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.073745,
+     47.704891
+    ]
+   },
+   "properties": {
+    "siret": "93193493900014",
+    "nom": "Multi Services",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "4 Rue des Jardins",
+    "com_insee": "72175",
+    "com_nom": "Luché-Pringé",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.039992,
+     47.700895
+    ]
+   },
+   "properties": {
+    "siret": "94799569200011",
+    "nom": "Thibaut Lhermite",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Lieu Dit la Riviere",
+    "com_insee": "72175",
+    "com_nom": "Luché-Pringé",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.134925,
+     47.747304
+    ]
+   },
+   "properties": {
+    "siret": "47985942300036",
+    "nom": "Adf Plomberie",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "6 Rue Principale",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.13666,
+     47.739328
+    ]
+   },
+   "properties": {
+    "siret": "89800596200011",
+    "nom": "Alban Rohee",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Bois de Fay",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.13556,
+     47.747628
+    ]
+   },
+   "properties": {
+    "siret": "89947211200015",
+    "nom": "Arc en Ciel",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "29 Rue Principale",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.083871,
+     47.739947
+    ]
+   },
+   "properties": {
+    "siret": "79273641500011",
+    "nom": "Chevalier Marcel",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "La Gosmardiere",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.138459,
+     47.752144
+    ]
+   },
+   "properties": {
+    "siret": "78957879600011",
+    "nom": "EURL Jeanne",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Rte de Penchien - L'eden",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.131664,
+     47.712292
+    ]
+   },
+   "properties": {
+    "siret": "82206671800013",
+    "nom": "Emmanuel Perrouault",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Le Petit Poyer",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.120192,
+     47.726314
+    ]
+   },
+   "properties": {
+    "siret": "93091594700012",
+    "nom": "GP Couverture",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "1093 Route de Poissard",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.125847,
+     47.741765
+    ]
+   },
+   "properties": {
+    "siret": "48452272700029",
+    "nom": "Jean Dupre",
+    "categorie": "peinture",
+    "ape": "43.29A",
+    "activite": "Isolation",
+    "adresse": "Longchamp",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2015",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.149612,
+     47.721606
+    ]
+   },
+   "properties": {
+    "siret": "98293037200015",
+    "nom": "Joaa",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Lieudit la Scierie du Barreau 3857 Route de Coulonge",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.155282,
+     47.718059
+    ]
+   },
+   "properties": {
+    "siret": "83916768100023",
+    "nom": "Julien Bergeot",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "4431 Route de Coulonge",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.148549,
+     47.766637
+    ]
+   },
+   "properties": {
+    "siret": "79076479900017",
+    "nom": "Maison de la Patine",
+    "categorie": "autre",
+    "ape": "95.24Z",
+    "activite": "Réparation de meubles",
+    "adresse": "Tulievre",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.120448,
+     47.726418
+    ]
+   },
+   "properties": {
+    "siret": "41153149400036",
+    "nom": "Martin TP",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "1071 Route de Poissard",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.131769,
+     47.748692
+    ]
+   },
+   "properties": {
+    "siret": "79159738800010",
+    "nom": "Multi-Brico",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "13 Ruelle du Gravier",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.135278,
+     47.740195
+    ]
+   },
+   "properties": {
+    "siret": "94171651600013",
+    "nom": "Nel Bat",
+    "categorie": "menuiserie",
+    "ape": "16.23Z",
+    "activite": "Fabrication de charpentes et de menuiseries",
+    "adresse": "473 Route de Fay",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.13559,
+     47.709581
+    ]
+   },
+   "properties": {
+    "siret": "49752008000019",
+    "nom": "SARL Daulny",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "La Maffrere",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.148243,
+     47.722499
+    ]
+   },
+   "properties": {
+    "siret": "89425657700038",
+    "nom": "Stephen Ulma",
+    "categorie": "autre",
+    "ape": "25.62B",
+    "activite": "Mécanique industrielle",
+    "adresse": "Le Barreau",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.13559,
+     47.709581
+    ]
+   },
+   "properties": {
+    "siret": "80416785600017",
+    "nom": "Thomas Daulny",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "La Maffrere",
+    "com_insee": "72182",
+    "com_nom": "Mansigné",
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.237857,
+     47.737205
+    ]
+   },
+   "properties": {
+    "siret": "98131062600016",
+    "nom": "2R Meta'vert",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "1 Route de L'arcy Brule",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.287311,
+     47.761584
+    ]
+   },
+   "properties": {
+    "siret": "79509755900012",
+    "nom": "Arnaud Jactat",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "1 Rue de la Baronnerie",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.281776,
+     47.760482
+    ]
+   },
+   "properties": {
+    "siret": "83491317000025",
+    "nom": "Crea-Peinture",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "13 B Place de la Caille",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.275265,
+     47.754764
+    ]
+   },
+   "properties": {
+    "siret": "92504365500016",
+    "nom": "DM Travaux Publics",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "40 Rue Eugene Termeau",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.273492,
+     47.758696
+    ]
+   },
+   "properties": {
+    "siret": "92970032600010",
+    "nom": "DPC72",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "1 Rue de L'arche",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.270001,
+     47.758045
+    ]
+   },
+   "properties": {
+    "siret": "49352076100039",
+    "nom": "David Papillon",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Allee du Ruisseau",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.293106,
+     47.78718
+    ]
+   },
+   "properties": {
+    "siret": "38419875000026",
+    "nom": "Didier Lavaud",
+    "categorie": "autre",
+    "ape": "43.29B",
+    "activite": "Installations diverses",
+    "adresse": "Aubterre",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.273425,
+     47.763146
+    ]
+   },
+   "properties": {
+    "siret": "10201401600012",
+    "nom": "E-Pac Solar",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "1 Chemin de Vezin",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.267068,
+     47.763451
+    ]
+   },
+   "properties": {
+    "siret": "91038135900017",
+    "nom": "EURL Jessy Coquemont",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "19 Rue du Bonnet Rouge",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.276977,
+     47.75215
+    ]
+   },
+   "properties": {
+    "siret": "44034290500047",
+    "nom": "Emmanuel Coubard",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "49 Rue Eugene Termeau",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.267105,
+     47.773067
+    ]
+   },
+   "properties": {
+    "siret": "51101612300016",
+    "nom": "Emmanuel Metivier",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Perriere",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2009",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.26591,
+     47.770338
+    ]
+   },
+   "properties": {
+    "siret": "48805406500013",
+    "nom": "Franck Bouthier",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "Les Perrinnieres",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.240709,
+     47.772918
+    ]
+   },
+   "properties": {
+    "siret": "95261093900011",
+    "nom": "Ilien Metivier",
+    "categorie": "autre",
+    "ape": "43.29B",
+    "activite": "Installations diverses",
+    "adresse": "5 Chemin de la Duchee",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.267118,
+     47.759565
+    ]
+   },
+   "properties": {
+    "siret": "41959686100023",
+    "nom": "Jean Maupoussin",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "10 Avenue de la Pelouse",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.278102,
+     47.767019
+    ]
+   },
+   "properties": {
+    "siret": "42339152300036",
+    "nom": "La Charpente Couverture Traditionnelle (LCCT)",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Rue Za le Vieux Moulin",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.282515,
+     47.760539
+    ]
+   },
+   "properties": {
+    "siret": "53764391800015",
+    "nom": "Maine Reno Concept (MRC)",
+    "categorie": "peinture",
+    "ape": "43.29A",
+    "activite": "Isolation",
+    "adresse": "1 Rue Saint Nicolas",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.273789,
+     47.783166
+    ]
+   },
+   "properties": {
+    "siret": "10328480800013",
+    "nom": "Millet TP",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "15 Route de la Maison Brulee",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.285118,
+     47.760911
+    ]
+   },
+   "properties": {
+    "siret": "91914931000014",
+    "nom": "Plurinergie",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "27 Rue Saint Nicolas",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.289711,
+     47.75618
+    ]
+   },
+   "properties": {
+    "siret": "85077499300024",
+    "nom": "Poses References",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "1 Route du Chateau du Fort des Salles",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.293518,
+     47.779084
+    ]
+   },
+   "properties": {
+    "siret": "80817912100013",
+    "nom": "Prestiges Platrerie",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "Ripoissin",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.315163,
+     47.789512
+    ]
+   },
+   "properties": {
+    "siret": "84506718000016",
+    "nom": "Restauration du Patrimoine Batis",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Lieu Dit la Chatellerie 36 Route de Laille",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.265498,
+     47.760558
+    ]
+   },
+   "properties": {
+    "siret": "39781455900027",
+    "nom": "SARL Artipose",
+    "categorie": "peinture",
+    "ape": "43.29A",
+    "activite": "Isolation",
+    "adresse": "2 Rue de la Faigne Zone du Guittion",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.294624,
+     47.783612
+    ]
+   },
+   "properties": {
+    "siret": "92281026200019",
+    "nom": "SARL Leroux Julien",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "L'arcy D'aubterre",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.2637,
+     47.765532
+    ]
+   },
+   "properties": {
+    "siret": "50307722400015",
+    "nom": "Sebastien Janvier",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "17 Rue de la Faigne",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.276814,
+     47.766089
+    ]
+   },
+   "properties": {
+    "siret": "53964835200026",
+    "nom": "Sogetherm",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "Zi Vieux Moulin",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.302503,
+     47.773529
+    ]
+   },
+   "properties": {
+    "siret": "95341110500018",
+    "nom": "T.s.p.c Vaidie",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "Le Cabaret 10 Route de Laille",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.265541,
+     47.761505
+    ]
+   },
+   "properties": {
+    "siret": "35365864400011",
+    "nom": "Thierry Ragot",
+    "categorie": "menuiserie",
+    "ape": "16.23Z",
+    "activite": "Fabrication de charpentes et de menuiseries",
+    "adresse": "6 Rue de la Faigne la Halle",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "1988",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.235617,
+     47.736304
+    ]
+   },
+   "properties": {
+    "siret": "50019250500013",
+    "nom": "Valnais",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "L'arcy Brule",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2007",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.278295,
+     47.75963
+    ]
+   },
+   "properties": {
+    "siret": "79176362600037",
+    "nom": "Vision Peinture",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "32 Rue Bouttevin Boullay",
+    "com_insee": "72191",
+    "com_nom": "Mayet",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.189265,
+     47.745536
+    ]
+   },
+   "properties": {
+    "siret": "94275282500011",
+    "nom": "A. Goupil Electricite & Plomberie",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "49 Rue du Guesclin",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.188425,
+     47.769035
+    ]
+   },
+   "properties": {
+    "siret": "94845378200021",
+    "nom": "Alexis Monet Services",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Lieu-Dit la Noe 424 Route de Casse",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.198648,
+     47.733834
+    ]
+   },
+   "properties": {
+    "siret": "91172129800014",
+    "nom": "Au Bout des Cimes",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "141 Chemin des Mezeaux",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.181663,
+     47.746725
+    ]
+   },
+   "properties": {
+    "siret": "82993778800018",
+    "nom": "Belinelec",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "La Mechiniere",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2017",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.186405,
+     47.756868
+    ]
+   },
+   "properties": {
+    "siret": "51490567800025",
+    "nom": "EURL Serge Pautte",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "418 La Gueriniere",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.187151,
+     47.768945
+    ]
+   },
+   "properties": {
+    "siret": "79484931500013",
+    "nom": "Eaps",
+    "categorie": "autre",
+    "ape": "25.11Z",
+    "activite": "Structures métalliques",
+    "adresse": "La Vallee Zone Artisanale du Loup Pendu",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.17504,
+     47.770882
+    ]
+   },
+   "properties": {
+    "siret": "89390578600016",
+    "nom": "FB Multitravaux",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "La Preverie",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.18118,
+     47.781729
+    ]
+   },
+   "properties": {
+    "siret": "93237900100013",
+    "nom": "HPL Couvreur Multiservices",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "2921 Route du Mans",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.179377,
+     47.739465
+    ]
+   },
+   "properties": {
+    "siret": "89997186500014",
+    "nom": "La Patte de Dylan",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "La Drouardiere",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.190635,
+     47.753805
+    ]
+   },
+   "properties": {
+    "siret": "94952141300011",
+    "nom": "Les Agenceurs Sarthois",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "1 Rue Visbek",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.189907,
+     47.767637
+    ]
+   },
+   "properties": {
+    "siret": "52836238700011",
+    "nom": "Ludovic Guerneve",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Boussardiere",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2010",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.193474,
+     47.750141
+    ]
+   },
+   "properties": {
+    "siret": "82823059900015",
+    "nom": "Passion Carrelage",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "5 Rue du Prieure",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2017",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.190049,
+     47.764939
+    ]
+   },
+   "properties": {
+    "siret": "32197067500013",
+    "nom": "Pigeon Bois 72",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Route du Mans",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "1981",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.189788,
+     47.748469
+    ]
+   },
+   "properties": {
+    "siret": "50502328300029",
+    "nom": "R.i.s",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "38 Rue du Guesclin",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.189259,
+     47.744879
+    ]
+   },
+   "properties": {
+    "siret": "43255298200030",
+    "nom": "SARL Lecor Pere et Fille",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Les Sablons",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2005",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.185234,
+     47.76817
+    ]
+   },
+   "properties": {
+    "siret": "48787605400015",
+    "nom": "Stephane Loyau",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Le Loup Pendu",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.187809,
+     47.75678
+    ]
+   },
+   "properties": {
+    "siret": "52876614000024",
+    "nom": "Theodore Carrelage",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "La Gueriniere",
+    "com_insee": "72243",
+    "com_nom": "Pontvallain",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.162708,
+     47.782888
+    ]
+   },
+   "properties": {
+    "siret": "92771576300011",
+    "nom": "Alexandre Lhuissier",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "9 Rue des Rosiers",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.172395,
+     47.802468
+    ]
+   },
+   "properties": {
+    "siret": "40170401000016",
+    "nom": "Charpente Cenomane",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Za Belle Croix",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "1995",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.165976,
+     47.790391
+    ]
+   },
+   "properties": {
+    "siret": "10581429700013",
+    "nom": "Deslaurent Coordination et Travaux",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "11 Rue Constance Dutay",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.139966,
+     47.79622
+    ]
+   },
+   "properties": {
+    "siret": "92497628500016",
+    "nom": "Dugast Terrassement",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "9 Ham de la Serviniere",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.160183,
+     47.784288
+    ]
+   },
+   "properties": {
+    "siret": "50793602900010",
+    "nom": "Franck Hemon",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "6 Rue Victor Hugo",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.172364,
+     47.803485
+    ]
+   },
+   "properties": {
+    "siret": "81794309500015",
+    "nom": "Generale Mancelle Charpente Couverture (GMCC)",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Za de la Belle Croix",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.166968,
+     47.796969
+    ]
+   },
+   "properties": {
+    "siret": "53223294900034",
+    "nom": "Guillaume Dubois",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "La Potterie 732 Route de la Croix-Rouge",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.16262,
+     47.786808
+    ]
+   },
+   "properties": {
+    "siret": "84006811800016",
+    "nom": "MCS",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "6 B Rue Pierre et Marie Curie",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.163517,
+     47.786788
+    ]
+   },
+   "properties": {
+    "siret": "98362031100016",
+    "nom": "MH Climatique",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "1 Rue Pierre et Marie Curie",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.159341,
+     47.796024
+    ]
+   },
+   "properties": {
+    "siret": "91224552900017",
+    "nom": "Martin Service",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "139 Route de la Croix-Rouge",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.163001,
+     47.786172
+    ]
+   },
+   "properties": {
+    "siret": "78943718300013",
+    "nom": "Presti Services Montage D'ameubleme",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "16 Rue Pasteur",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.132933,
+     47.786976
+    ]
+   },
+   "properties": {
+    "siret": "94392425800016",
+    "nom": "R.a.r Batiment",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "Nesle 2016 Route de la Dreurie",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.171255,
+     47.792407
+    ]
+   },
+   "properties": {
+    "siret": "93447362000011",
+    "nom": "Req'elag",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Les Grandes Roches 320 Route du Mans",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.158103,
+     47.769341
+    ]
+   },
+   "properties": {
+    "siret": "91394854300016",
+    "nom": "Romain Louvet",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "14 Hameau de la Lijonniere",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.162521,
+     47.780012
+    ]
+   },
+   "properties": {
+    "siret": "90439627200018",
+    "nom": "SBP",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "85 Route de la Henriere",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.156878,
+     47.785753
+    ]
+   },
+   "properties": {
+    "siret": "94812257700018",
+    "nom": "Teddy Cador",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "All de la Fontaine Saint Pierre",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.156667,
+     47.783195
+    ]
+   },
+   "properties": {
+    "siret": "94844492200017",
+    "nom": "Valentin Niepceron",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "106 Route de la Dreurie",
+    "com_insee": "72252",
+    "com_nom": "Requeil",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.314565,
+     47.653897
+    ]
+   },
+   "properties": {
+    "siret": "99536459300013",
+    "nom": "Grandin Plomberie Chauffage",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "87 Rue de la Coutardiere",
+    "com_insee": "72283",
+    "com_nom": "Saint-Germain-d'Arcé",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.06145,
+     47.747141
+    ]
+   },
+   "properties": {
+    "siret": "78909706000014",
+    "nom": "Alexandre Sauvage",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Le Palet",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.056146,
+     47.743982
+    ]
+   },
+   "properties": {
+    "siret": "94430710700010",
+    "nom": "Clemence Couprie",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "5 Ruelle de la Maladrerie",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.060509,
+     47.740142
+    ]
+   },
+   "properties": {
+    "siret": "52939631900012",
+    "nom": "Dominique Bernard Bouhours",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "La Poterie",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.057142,
+     47.743653
+    ]
+   },
+   "properties": {
+    "siret": "33900300600022",
+    "nom": "Guy Delareux",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "12 Rue de L'eglise",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.062775,
+     47.742745
+    ]
+   },
+   "properties": {
+    "siret": "89743483300017",
+    "nom": "Hydro - Jardin",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Lieu Dit la Haute Biguerie",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.062775,
+     47.742745
+    ]
+   },
+   "properties": {
+    "siret": "49349756400010",
+    "nom": "Hydro Jardin Services",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "Lieu Dit la Haute Biguerie",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.087527,
+     47.758831
+    ]
+   },
+   "properties": {
+    "siret": "79241601800010",
+    "nom": "Julien Veron",
+    "categorie": "plomberie",
+    "ape": "43.22B",
+    "activite": "Chauffage et climatisation",
+    "adresse": "Les Grandes Landes",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.081599,
+     47.769491
+    ]
+   },
+   "properties": {
+    "siret": "93075645700014",
+    "nom": "Le Petit Agenceur",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "1 L'aulnay Briant",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.055623,
+     47.740627
+    ]
+   },
+   "properties": {
+    "siret": "94917340500018",
+    "nom": "MCT Demilly",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "7 Rue de la Fuie",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.044827,
+     47.74595
+    ]
+   },
+   "properties": {
+    "siret": "90292719300026",
+    "nom": "Pose Menuiserie 72",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "LD le Carrefour",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.057967,
+     47.743495
+    ]
+   },
+   "properties": {
+    "siret": "87911171400017",
+    "nom": "Poupasrenov",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "1 Rue de la Mairie",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.101426,
+     47.754044
+    ]
+   },
+   "properties": {
+    "siret": "82303364200021",
+    "nom": "Reno-Style 72",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "Route de la Vallee la Chataigneraie",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.041903,
+     47.748751
+    ]
+   },
+   "properties": {
+    "siret": "79304859600019",
+    "nom": "Renov'in",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "La Racinee",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.055483,
+     47.764228
+    ]
+   },
+   "properties": {
+    "siret": "79406958300019",
+    "nom": "S M C",
+    "categorie": "couverture",
+    "ape": "43.91B",
+    "activite": "Couverture",
+    "adresse": "La Haute Croix",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.08155,
+     47.77039
+    ]
+   },
+   "properties": {
+    "siret": "48029341400011",
+    "nom": "S.t.a.",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Les 3 Etangs L'aulnay Briant",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2005",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.029947,
+     47.742445
+    ]
+   },
+   "properties": {
+    "siret": "50356762000029",
+    "nom": "SARL Bouttier Pere et Fils",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Rte de la Francoisiere - L'anneau",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.035858,
+     47.751229
+    ]
+   },
+   "properties": {
+    "siret": "44037965900012",
+    "nom": "SARL Froger Preteux",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "La Croix Bourdon",
+    "com_insee": "72291",
+    "com_nom": "Saint-Jean-de-la-Motte",
+    "creation": "2002",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.215506,
+     47.712411
+    ]
+   },
+   "properties": {
+    "siret": "82124998400013",
+    "nom": "Led",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Les Picouleaux",
+    "com_insee": "72327",
+    "com_nom": "Sarcé",
+    "creation": "2016",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.220131,
+     47.720966
+    ]
+   },
+   "properties": {
+    "siret": "91797401600029",
+    "nom": "Looping",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "6 Place de L Eglise",
+    "com_insee": "72327",
+    "com_nom": "Sarcé",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.221669,
+     47.720531
+    ]
+   },
+   "properties": {
+    "siret": "91510153900020",
+    "nom": "Travaux D'installation Electrique Dans Tous Locaux Pose et Entretien D",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "11 Route de Mayet",
+    "com_insee": "72327",
+    "com_nom": "Sarcé",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.089618,
+     47.622879
+    ]
+   },
+   "properties": {
+    "siret": "98904330200011",
+    "nom": "2a Maconnerie",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "2 Lieu Dit le Buron",
+    "com_insee": "72330",
+    "com_nom": "Savigné-sous-le-Lude",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.057017,
+     47.618614
+    ]
+   },
+   "properties": {
+    "siret": "84030499200026",
+    "nom": "Fabien Poivet",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Batiment Na Escalier Na Etg Rez de CH 5 Place de L'europe",
+    "com_insee": "72330",
+    "com_nom": "Savigné-sous-le-Lude",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.035601,
+     47.635932
+    ]
+   },
+   "properties": {
+    "siret": "88157330700017",
+    "nom": "Jbe Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Lieu Dit la Bondonniere",
+    "com_insee": "72330",
+    "com_nom": "Savigné-sous-le-Lude",
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.020789,
+     47.626341
+    ]
+   },
+   "properties": {
+    "siret": "80998129300016",
+    "nom": "MPS Chauffage",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "Les Ruaux",
+    "com_insee": "72330",
+    "com_nom": "Savigné-sous-le-Lude",
+    "creation": "2015",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.057958,
+     47.618519
+    ]
+   },
+   "properties": {
+    "siret": "13056575700015",
+    "nom": "P.G.L. Carrelage",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "5 Place de la Boulangerie",
+    "com_insee": "72330",
+    "com_nom": "Savigné-sous-le-Lude",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.081143,
+     47.631675
+    ]
+   },
+   "properties": {
+    "siret": "44236922900020",
+    "nom": "Sacha Bouquet",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Le Cosnilloux",
+    "com_insee": "72330",
+    "com_nom": "Savigné-sous-le-Lude",
+    "creation": "2004",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.301479,
+     47.6748
+    ]
+   },
+   "properties": {
+    "siret": "44098700600028",
+    "nom": "A.d.s.m.",
+    "categorie": "autre",
+    "ape": "95.22Z",
+    "activite": "Réparation d'électroménager et de matériel de jardin",
+    "adresse": "Za du Roineau",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.347962,
+     47.678566
+    ]
+   },
+   "properties": {
+    "siret": "92943311800015",
+    "nom": "Alexis Lehoux",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "La Gougerie",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.330578,
+     47.679976
+    ]
+   },
+   "properties": {
+    "siret": "44928724200027",
+    "nom": "BS Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "5000 La Litre",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.36004,
+     47.677038
+    ]
+   },
+   "properties": {
+    "siret": "48354545500022",
+    "nom": "Breton Francois",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Les Graviers",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2008",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.309902,
+     47.655767
+    ]
+   },
+   "properties": {
+    "siret": "53346377400018",
+    "nom": "Chaigneau",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Le Lacart",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.31492,
+     47.654001
+    ]
+   },
+   "properties": {
+    "siret": "84022754000019",
+    "nom": "EIRL Jonathan Verrier",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "8 B Rue de la Coutardiere",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2018",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.318488,
+     47.668167
+    ]
+   },
+   "properties": {
+    "siret": "90186519600017",
+    "nom": "La Clef de la Securite",
+    "categorie": "menuiserie",
+    "ape": "43.32B",
+    "activite": "Menuiserie métallique et serrurerie",
+    "adresse": "16 Rue Louise Nion",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.312049,
+     47.653744
+    ]
+   },
+   "properties": {
+    "siret": "45173469300026",
+    "nom": "Loic Roineau",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "LD 999 La Mandrouziere",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.302566,
+     47.679512
+    ]
+   },
+   "properties": {
+    "siret": "91834415100017",
+    "nom": "Loirenergie",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "266 Rte de Loirecopark",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.330471,
+     47.680145
+    ]
+   },
+   "properties": {
+    "siret": "99506720400017",
+    "nom": "MB Services",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Etage 0 32 Route de Luceau",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.316647,
+     47.69136
+    ]
+   },
+   "properties": {
+    "siret": "53486746000022",
+    "nom": "Nicolas Toupin",
+    "categorie": "maconnerie",
+    "ape": "43.12B",
+    "activite": "Terrassements spécialisés",
+    "adresse": "5 Les Vieilles Maisons la Freche",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.31458,
+     47.672205
+    ]
+   },
+   "properties": {
+    "siret": "51982649900039",
+    "nom": "Pa Renovation",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "14 Route de L Etang",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.301525,
+     47.673901
+    ]
+   },
+   "properties": {
+    "siret": "42895372300015",
+    "nom": "Paumard Batiment",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "Za du Roineau",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2000",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.311119,
+     47.667884
+    ]
+   },
+   "properties": {
+    "siret": "92477648700010",
+    "nom": "Pierre et Jardin",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "10 Rue du Port Liberge",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.297526,
+     47.671409
+    ]
+   },
+   "properties": {
+    "siret": "42207546500019",
+    "nom": "SARL Bardet T.P.",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "4 Rue de la Benetrie",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "1999",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.29936,
+     47.678756
+    ]
+   },
+   "properties": {
+    "siret": "53346842700018",
+    "nom": "Vdi-It",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "Loirecopark 1",
+    "com_insee": "72364",
+    "com_nom": "Vaas",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.310319,
+     47.711028
+    ]
+   },
+   "properties": {
+    "siret": "79001266000011",
+    "nom": "Charly Pierron",
+    "categorie": "maconnerie",
+    "ape": "43.11Z",
+    "activite": "Démolition",
+    "adresse": "La Gabriellerie",
+    "com_insee": "72369",
+    "com_nom": "Verneil-le-Chétif",
+    "creation": "2012",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.296261,
+     47.725113
+    ]
+   },
+   "properties": {
+    "siret": "87803573200014",
+    "nom": "Dominique Gervais",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "La Tuffiere",
+    "com_insee": "72369",
+    "com_nom": "Verneil-le-Chétif",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.311892,
+     47.713944
+    ]
+   },
+   "properties": {
+    "siret": "94485908100019",
+    "nom": "Green Bear",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "5 Route de Sable",
+    "com_insee": "72369",
+    "com_nom": "Verneil-le-Chétif",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.294692,
+     47.729049
+    ]
+   },
+   "properties": {
+    "siret": "80038910800013",
+    "nom": "Mathieu Robinet",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "Rte le Pincon",
+    "com_insee": "72369",
+    "com_nom": "Verneil-le-Chétif",
+    "creation": "2014",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.29551,
+     47.734467
+    ]
+   },
+   "properties": {
+    "siret": "50972102300026",
+    "nom": "Olivier Carre",
+    "categorie": "maconnerie",
+    "ape": "43.99C",
+    "activite": "Maçonnerie générale et gros œuvre",
+    "adresse": "15 Place de Verdun",
+    "com_insee": "72369",
+    "com_nom": "Verneil-le-Chétif",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.307335,
+     47.717263
+    ]
+   },
+   "properties": {
+    "siret": "53737274000010",
+    "nom": "Romain Pierron",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "La Licorne",
+    "com_insee": "72369",
+    "com_nom": "Verneil-le-Chétif",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.15462,
+     47.820683
+    ]
+   },
+   "properties": {
+    "siret": "49214895200046",
+    "nom": "Ag Charpente",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "18 Rue du 11 Novembre",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.144635,
+     47.818417
+    ]
+   },
+   "properties": {
+    "siret": "93228649500019",
+    "nom": "Alli Relooking",
+    "categorie": "autre",
+    "ape": "95.24Z",
+    "activite": "Réparation de meubles",
+    "adresse": "1 Impasse des Sports",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2024",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.144635,
+     47.818417
+    ]
+   },
+   "properties": {
+    "siret": "10148801300018",
+    "nom": "Dam'peinture",
+    "categorie": "peinture",
+    "ape": "43.34Z",
+    "activite": "Peinture et vitrerie",
+    "adresse": "1 Impasse des Sports",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.151852,
+     47.823182
+    ]
+   },
+   "properties": {
+    "siret": "79230533600010",
+    "nom": "EIRL la Platrerie Patry",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "2 Rue Michel Roullier",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2013",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.143467,
+     47.811544
+    ]
+   },
+   "properties": {
+    "siret": "84321527800022",
+    "nom": "Ecobois",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "L'ouvrardiere",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.174452,
+     47.850647
+    ]
+   },
+   "properties": {
+    "siret": "99451601100016",
+    "nom": "GB Concept",
+    "categorie": "jardin",
+    "ape": "81.30Z",
+    "activite": "Aménagement paysager",
+    "adresse": "2784 Route de la Noirie",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2025",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.148937,
+     47.834192
+    ]
+   },
+   "properties": {
+    "siret": "43143336600025",
+    "nom": "J.P. Ravalement",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "Le Petit Peze",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2006",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.172796,
+     47.847472
+    ]
+   },
+   "properties": {
+    "siret": "51769633200025",
+    "nom": "Jerome Boussard",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "126 Chemin de la Butte des Perrieres",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.139255,
+     47.818264
+    ]
+   },
+   "properties": {
+    "siret": "44535827800023",
+    "nom": "Lelarge Electricite",
+    "categorie": "electricite",
+    "ape": "43.21A",
+    "activite": "Installation électrique",
+    "adresse": "30 Route de Cerans Foulletourte",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2003",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.140983,
+     47.818825
+    ]
+   },
+   "properties": {
+    "siret": "90220958400025",
+    "nom": "MSH Deco Decap",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "116 Route de Oize",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2021",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.15271,
+     47.819374
+    ]
+   },
+   "properties": {
+    "siret": "90220958400033",
+    "nom": "MSH Deco Decap",
+    "categorie": "maconnerie",
+    "ape": "43.99D",
+    "activite": "Travaux spécialisés de construction",
+    "adresse": "10 Rue du 8 Mai",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.172005,
+     47.833577
+    ]
+   },
+   "properties": {
+    "siret": "89790405800020",
+    "nom": "Mcf.reno",
+    "categorie": "peinture",
+    "ape": "43.33Z",
+    "activite": "Revêtement des sols et des murs",
+    "adresse": "1001 Route de la Piltiere",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2022",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.134508,
+     47.804121
+    ]
+   },
+   "properties": {
+    "siret": "52113009600022",
+    "nom": "Menard Alexandre",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Route de L Esperance la Mercerie",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2019",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.156242,
+     47.822662
+    ]
+   },
+   "properties": {
+    "siret": "81236191300013",
+    "nom": "Michel Beucher",
+    "categorie": "couverture",
+    "ape": "43.91A",
+    "activite": "Charpente",
+    "adresse": "Le Casseau",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2015",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.154559,
+     47.820387
+    ]
+   },
+   "properties": {
+    "siret": "95155611700012",
+    "nom": "Nader Mhamdi",
+    "categorie": "peinture",
+    "ape": "43.31Z",
+    "activite": "Plâtrerie",
+    "adresse": "14 Rue du 11 Novembre",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2023",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.143011,
+     47.831513
+    ]
+   },
+   "properties": {
+    "siret": "10573203600014",
+    "nom": "Pelle Service",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "1422 Route de la Gravelle",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.15936,
+     47.823494
+    ]
+   },
+   "properties": {
+    "siret": "99994293100018",
+    "nom": "RC Menuiserie",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "1 Route de Longrais",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.141879,
+     47.826478
+    ]
+   },
+   "properties": {
+    "siret": "53758244700018",
+    "nom": "Raphael Champion",
+    "categorie": "plomberie",
+    "ape": "43.22A",
+    "activite": "Installation d'eau et de gaz",
+    "adresse": "La Sapiniere",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2011",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.13512,
+     47.822961
+    ]
+   },
+   "properties": {
+    "siret": "52068776500021",
+    "nom": "TP.MR",
+    "categorie": "maconnerie",
+    "ape": "43.12A",
+    "activite": "Terrassement",
+    "adresse": "Fessard",
+    "com_insee": "72385",
+    "com_nom": "Yvré-le-Pôlin",
+    "creation": "2020",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  }
+ ]
+}

@@ -1,0 +1,2125 @@
+{
+ "type": "FeatureCollection",
+ "source": "Répertoire national des associations (RNA), data.gouv.fr",
+ "mise_a_jour": "2026-11-05",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.28528,
+     47.82536
+    ]
+   },
+   "properties": {
+    "com_insee": "72124",
+    "com_nom": "Écommoy",
+    "nb": 70,
+    "titre": "Associations de Écommoy",
+    "associations": [
+     {
+      "titre": "AEP Mille Clubs et Loisirs D'Ecommoy",
+      "objet": "Mettre à disposition des adhérents un lieu de rencontre ; faciliter les activités manuelles, culturelles et sportives (patchwork, théâtre, arts plastiques, gymnastique etc) avec les locaux et matériel existants des…",
+      "cat": "entraide",
+      "creation": "1964",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "After Not'",
+      "objet": "EXERCER DES PRESTATIONS BENEVOLES OU REMUNEREES EN LIEN AVEC LA MUSIQUE",
+      "cat": "culture",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Amicale de la Futaie",
+      "objet": "Regrouper les anciens membres du personnel de la ciaeslc et de l'urco, ayant travaillé sur les départements de la sarthe et du loir et cher - entretenir et développer les liens d'amitiés entre eux - organiser visites,…",
+      "cat": "loisirs",
+      "creation": "1985",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Écoles Publiques D'Ecommoy",
+      "objet": "Récolter des fonds afin de développer des projets pour les enfants scolarisés dans les écoles publiques d'Ecommoy",
+      "cat": "education",
+      "creation": "1995",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs-Pompiers D'Ecommoy",
+      "objet": "Fournir le calendrier sapeur pompier à l'ensemble de la population qui dépend de notre secteur d'activités en premier appel ; la recette qui découle de cette distribution permet : de réaliser un fond social de…",
+      "cat": "loisirs",
+      "creation": "1932",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Anim'À Coeur",
+      "objet": "Cette association a pour but de sauver des animaux en détresse, abandonnés, blessés; de leur trouver une famille d'accueil, le temps de les soigner, les sociabiliser, les faire identifier,tester (sida/leucose),…",
+      "cat": "education",
+      "creation": "2020",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Anim'Ecommoy",
+      "objet": "Organiser des randonnées pédestres, des manifestations diverses susceptibles de distraire, d'attirer etde retenir les visiteurs, ; l'association participe au développement et à la prospérité de la localité",
+      "cat": "loisirs",
+      "creation": "1975",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association.covermind72",
+      "objet": "Promouvoir la musique live et les pratiques artistiques amateurs, à travers la création, l'interprétation et la diffusion de spectacles musicaux ;",
+      "cat": "culture",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association de Bercey-Grammont",
+      "objet": "2-1/ l'association de Grammont est une association culturelle ; elle a pour but de favoriser l'entretien et le rayonnement du Domaine de Grammont, sis à Saint Mars d'Outillé (Sarthe) ; 2-2/ Elle intervient par - sa…",
+      "cat": "environnement",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association de Chasse des Guerinieres D'Ecommoy",
+      "objet": "Exercice de la chasse",
+      "cat": "environnement",
+      "creation": "1991",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Association de Parents D'Eleves de L'Enseignement Libre de L' École Saint-Martin",
+      "objet": "Grouper les parents et les personnes ayant la charge des enfants inscrits à l'école, toutes les activités susceptibles d'apporter un soutien matériel et moral aux écoles, aux familles et aux maîtres,",
+      "cat": "education",
+      "creation": "1968",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association de Protection de L'Environnement et du Patrimoine du Sud D'Ecommoy - Apepse",
+      "objet": "Protection et défense de l'environnement et du patrimoine de tout le secteur sud de la commune d'ecommoy.",
+      "cat": "patrimoine",
+      "creation": "2000",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association des Secouristes Francais Croix Blanche D'Ecommoy",
+      "objet": "Représenter la fédération dans le département de la Sarthe et favoriser la formation, le recyclage et la pratique du secourisme sous toutes ses formes",
+      "cat": "loisirs",
+      "creation": "1996",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association du Personnel Communal D'Ecommoy",
+      "objet": "Action sociale et attribution d'une prime de vacances au personnel communal",
+      "cat": "loisirs",
+      "creation": "1973",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Ecommoy Football-Club'",
+      "objet": "Pratique de l'éducation physique et du football.",
+      "cat": "sport",
+      "creation": "1996",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Association G'Garage",
+      "objet": "Promouvoir et accompagner les pratiquants de la compétition motocycliste, en favorisant leur préparation sportive, matérielle et logistique, en développant l'accès aux moyens nécessaires à la pratique (formation,…",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association 'La Truite de L'Aune D'Ecommoy' pour la Pêche et la Protection du Milieu Aquatique - A.p.p.m.a.",
+      "objet": "Détenir et gérer des droits de pêche sur les domaines publics et privés de l'Etat et des collectivités locales ou de riverains",
+      "cat": "environnement",
+      "creation": "1948",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association Partage - Solidarité Par le Travail D'Ecommoy",
+      "objet": "Oeuvrer pour l'emploi et la réinsertion sociale de personnes en difficulté dans la recherche d'un travail ; pour donner plus de chance aux demandeurs d'emploi longue durée et Rmistes dans la recherche d'un emploi,…",
+      "cat": "entraide",
+      "creation": "1985",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association Percheronne la Belinoise ( A.p.b.)",
+      "objet": "Participer ou organiser des concours de labours lors des comices ainsi que toutes fêtes à l'ancienne avec matériel tracté par des chevaux percherons",
+      "cat": "loisirs",
+      "creation": "1999",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association Solidaire Aden",
+      "objet": "Aider à vendre des pièces détachées de véhicules, moteur, démarreur, alternateurs, toutes sortes de pièces à prix réduit",
+      "cat": "loisirs",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive du Collège Alfred de Musset D'Ecommoy",
+      "objet": "L'association sportive du collège Alfred de Musset a pour objet d'organiser et de développer l'apprentissage et la pratique de la vie associative et des activités sportives. Elle représente l'établissement dans les…",
+      "cat": "sport",
+      "creation": "1973",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Badminton Club Écommoy",
+      "objet": "La pratique sportive du badminton",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Balades Sarthoises",
+      "objet": "Cette association a pour but : balade à moto et toutes manifestations d'ordre touristique, participation à des manifestations locales, fêtes, salons, expositions, etc ; participation à des oeuvres caritatives diverses",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Cercle Eugène Caillaux",
+      "objet": "Cercle de conférence sur des sujets culturels, philosophique, d'actualité",
+      "cat": "culture",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Chant'Ecomm",
+      "objet": "Promotion du chant et animation culturelle",
+      "cat": "culture",
+      "creation": "1980",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Club de Natation Bercé Belinois (C.N.B.B )",
+      "objet": "Promouvoir la pratique de la natation sportive et toutes les activités relevant de la fédération française de natation",
+      "cat": "sport",
+      "creation": "2006",
+      "declaration": "2023",
+      "site": "https://www.cnbb.e-monsite.com"
+     },
+     {
+      "titre": "Club de Tir Sportif du Maine",
+      "objet": "Pratique du tir de compétition",
+      "cat": "sport",
+      "creation": "1972",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Club du Temps de Vivre D'Ecommoy",
+      "objet": "Renforcer les liens de solidarité existant entre les retraités adhérents sans distinction de régime de retraite",
+      "cat": "loisirs",
+      "creation": "1987",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Club Pétanque de Marigné-Laillé",
+      "objet": "La pétanque du jeu de pétanque sur un terrain approprié appartenant à la commune de Marigné-Laillé l'organisation de concours",
+      "cat": "sport",
+      "creation": "2022",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Comité Agricole Cantonal D'Echanges Techniques Internationaux",
+      "objet": "Promouvoir des échanges techniques et culturels agricoles internationaux",
+      "cat": "culture",
+      "creation": "1993",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Courir à Ecommoy",
+      "objet": "Encourager la pratique du sport en général et de la course à pied",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Elan Gymnique Ecommeen",
+      "objet": "Pratiquer la gymnastique",
+      "cat": "sport",
+      "creation": "2009",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Familles Rurales - Association D'Ecommoy",
+      "objet": "Etude, défense et représentation des droits et intérêts moraux et matériels des familles rurales. création de tous services susceptibles de les aider à remplir efficacement leur mission.",
+      "cat": "entraide",
+      "creation": "1968",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Foyer Socio-Educatif du College Alfred de Musset a Ecommoy",
+      "objet": "Promouvoir, coordonner, animer les activités périscolaires culturelles et socio-éducatives du collège Alfred de Musset à Ecommoy",
+      "cat": "education",
+      "creation": "2004",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Galaxian Compagnie",
+      "objet": "Réaliser et promouvoir des objet artistique des mobiliers de décoration et scénographique pour les manifestations et projets événementiels mais aussi la création la production la diffusion la promotion de spectacles…",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": "https://galaxiancompagnie.fr"
+     },
+     {
+      "titre": "Générations Mouvement - Association des Séniors de Bercé Belinois",
+      "objet": "Développer toutes les actions menées en faveur de leurs membres par les diverses associations adhérentes indiquées à l'association cantonale des retraités d'Ecommoy",
+      "cat": "loisirs",
+      "creation": "1989",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Glinche Racing",
+      "objet": "Développement du sport automobile par la participation à des compétitions et autres manifestations sportives relatives au sport automobile ; mise en place ou participation à divers évènementiels en lien avec le sport…",
+      "cat": "sport",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Institut National de Pédagogie en Addictologie",
+      "objet": "Concevoir des outils de prévention innovants dans le domaine des risques liés aux conduites addictives ; pour cela, l'inpa s'appuie sur les apports de l'intelligence artificielle afin de créer des supports pédagogiques…",
+      "cat": "entraide",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Judo Club Oree de Bercé",
+      "objet": "Concourir au developpement personnel de l'individu par la pratique du judo et de ses disciplines associees",
+      "cat": "sport",
+      "creation": "2001",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Jumelage Sportif Franco-Allemand D'Ecommoy",
+      "objet": "Promouvoir les échanges sportifs entre les jeunes de STUHR-BRINKUM (Allemagne) et ECOMMOY (France)",
+      "cat": "loisirs",
+      "creation": "2009",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Kangourou Basket Club (K.B.C.)",
+      "objet": "Pratique du basket ball",
+      "cat": "sport",
+      "creation": "1996",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Korbak Asso",
+      "objet": "Organisation d'évènements à vocation culturelle, artistique et/ou musicale, en ce compris la création, la production, l'organisation, la gestion et le développement de concert (s) , spectacle (s) et festival (s) sur le…",
+      "cat": "culture",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "La Carambole Ecommeenne",
+      "objet": "Billard français - loisir.",
+      "cat": "loisirs",
+      "creation": "2002",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "La Guilde du Roussard, Jeux de L'Imaginaire",
+      "objet": "Réunir des amateurs de jeux de l'imaginaire pour une pratique régulière de cette activité. S'engager dans des activités économiques en proposant des démonstrations et des initiations ponctuelles dans le cadre de…",
+      "cat": "loisirs",
+      "creation": "2018",
+      "declaration": "2026",
+      "site": "https://laguildeduroussard.fr/"
+     },
+     {
+      "titre": "Le Cabas Ecomméen",
+      "objet": "Apporter une aide alimentaire temporaire à des personnes momentanément démunies tout en leur demandant une participation financière ; être un lieu d'accueil et de rencontres en vue de contribuer à faciliter, voire à…",
+      "cat": "loisirs",
+      "creation": "2016",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Les Amateurs d Équipements Pimpés",
+      "objet": "Organiser des rencontres sportives, roleplay, sur le thème de l'airsoft et ses dérivés",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis des Parcs et Jardins D'Ecommoy",
+      "objet": "Animer et gérer les parcs et jardins d'Ecommoy ; inciter à la création et au développement des jardins partagés",
+      "cat": "loisirs",
+      "creation": "2018",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis du Rallye Parence",
+      "objet": "Pratique de la vénerie au sein du rallye parence ; gestion du rallye parence ; défense et maintien des traditions et régles de la vénerie.",
+      "cat": "loisirs",
+      "creation": "2005",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Les Archers D'Ecommoy",
+      "objet": "Pratique de l'éducation physique et des sports et, entre autres, du tir à l'arc olympique sous toutes ses disciplines.",
+      "cat": "sport",
+      "creation": "1997",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Les Arpenteurs D'Ecommoy",
+      "objet": "Promouvoir la pratique du jeu de carte magic the gathering ainsi que l'organisation d'activités et d'événements à ecommoy",
+      "cat": "loisirs",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Caves Sainte Anne",
+      "objet": "LOCATION MEUBLES LOCATION DE SALLE POUR EVENEMENTS",
+      "cat": "autres",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Les Mans'Zelles du Désert",
+      "objet": "Participation au Rallye Aicha des Gazelles",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Les Pink Power",
+      "objet": "Collecter des fonds pour participer à des projets sportifs et solidaires",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Liberty Mob",
+      "objet": "Proposer des balades en mobylette avec un guide encadrant",
+      "cat": "loisirs",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "MC Twin",
+      "objet": "Organisation de journée de roulage et de compétitions automobile ; action de sensibilisation à la sécurité routière sur route et sur circuit ; regroupement et entraide des passionnés d'automobile ; représentation de…",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Mille et Une Fripes",
+      "objet": "Aider les personnes ou familles à faibles revenus, d'accéder aux besoins essentiels, de se vêtir et ainsi de favoriser l'aisance relationnelle et l'accès à l'emploi. Elle apportera toutes aides (vestimentaires) achat…",
+      "cat": "loisirs",
+      "creation": "2008",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Moto Club des Gluttes",
+      "objet": "Organisation de rassemblement de balades touristiques ainsi que diverses activites de loisirs",
+      "cat": "sport",
+      "creation": "1994",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Orée de Bercé Bélinois Environnements",
+      "objet": "De veiller d'une manière générale à la protection de l'environnement dans son territoire d'action * d'oeuvrer pour l'intérêt général des populations, soumises ou non à des pressions diverses, en veillant au respect de…",
+      "cat": "environnement",
+      "creation": "2023",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Organisme de Gestion de L'Enseignement Catholique Saint-Martin D'Ecommoy",
+      "objet": "Assurer la fondation, l'entretien d'écoles catholiques reconnues par l'autorité canonique et la gestion de tout ce qui se rapporte à l'enseignement, et notamment de l'école saint-martin d'ecommoy.",
+      "cat": "loisirs",
+      "creation": "1946",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Plac'Ecommoy",
+      "objet": "Mettre en valeur le rôle social et humain des commerçants, artisans et professions libérales ; Assurer le lien entre les commerçants, artisans et professions libérales ; Faire mieux connaître et apprécier les services…",
+      "cat": "culture",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Renouveau pour Écommoy",
+      "objet": "Cette association a pour objet de défendre une vision moderne et raisonnée de la gestion communale à ECOMMOY, en matière économique, sociale, financière, de cadre de vie, de développement économique et sportif cette…",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Rokastabi",
+      "objet": "Promouvoir la mobilité internationale et les échanges culturels des jeunes",
+      "cat": "loisirs",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Shadow Sarthe Paintball",
+      "objet": "Développer dans le cadre d'activité de loisirs, la pratique de l'éducation physique et des sports et plus particulièrement de développer et de favoriser par tous moyens appropriés, sur le plan sportif et accessoirement…",
+      "cat": "loisirs",
+      "creation": "2013",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Société des Courses Hippiques D'Ecommoy",
+      "objet": "Organiser des courses de chevaux dans les conditions fixées par les dispositions législatives en vigueur qui en réglementent l'autorisation et le fonctionnement (voir dossier)",
+      "cat": "sport",
+      "creation": "1926",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Support'R Club D'Ecommoy FC",
+      "objet": "SOUTENIR LE CLUB DE FOOTBALL ECOMMOY FC EN CREANT DE NOUVELLES ANIMATIONS ET PARTICIPER AU BIEN ETRE DES ENFANTS DE L 'ECOLE DE FOOT",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Team MD Endurance",
+      "objet": "Réunir des personnes qui ont en commun le plaisir de la moto ; organiser ou participer à des roulages sur piste hors compétition ; participer à des compétitions moto vitesse et endurance ; organiser des sorties moto ou…",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Tennis Club D'Ecommoy",
+      "objet": "Pratique, promotion et enseignement du tennis.",
+      "cat": "sport",
+      "creation": "2006",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "'Une Journee Un Circuit'",
+      "objet": "Faciliter l'accès à l'initiation, la formation au pilotage et le perfectionnement à la conduite dans le domaine de l'automobile et du sport automobile ; l'organisation d'évènements dans les domaines des sports…",
+      "cat": "sport",
+      "creation": "2008",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Union Nationale des Combattants D'Ecommoy",
+      "objet": "Maintenir les liens de solidarité, de camaraderie, d'amitié entre les personnes ayant participé à la défense de la patrie.",
+      "cat": "patrimoine",
+      "creation": "2001",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Union Sportive D'Ecommoy Handball",
+      "objet": "Education et pratique du handball.",
+      "cat": "sport",
+      "creation": "2006",
+      "declaration": "2021",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.21932,
+     47.8688
+    ]
+   },
+   "properties": {
+    "com_insee": "72155",
+    "com_nom": "Laigné-Saint-Gervais",
+    "nb": 34,
+    "titre": "Associations de Laigné-Saint-Gervais",
+    "associations": [
+     {
+      "titre": "A Portee de Bonheur",
+      "objet": "Permettre aux parents et futurs parents de se rencontrer et d'échanger sur leurs expériences, de rassembler et diffuser des informations claires et objectives concernant différents sujets ayant un lien avec le maternage…",
+      "cat": "loisirs",
+      "creation": "2009",
+      "declaration": "2020",
+      "site": "https://aporteedebonheur72.wordpress.com/"
+     },
+     {
+      "titre": "Accord Java",
+      "objet": "Promouvoir la musique par le biais de spectacles et concerts",
+      "cat": "culture",
+      "creation": "1994",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Cyclos-Sportifs de la Sarthe 'Le Pedalier'",
+      "objet": "Réunir les anciens coureurs et dirigeants de différents clubs, afin de participer en commun aux courses réservées aux cyclos- sportifs",
+      "cat": "sport",
+      "creation": "1968",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Amicale du Groupe Scolaire Jean-Baptiste Galan",
+      "objet": "Favoriser le dialogue parents-enseignants ; informer et représenter l'ensemble des parents d'élèves auprès des enseignants, autorités administratives et apporter une aide matérielle et pécuniaire dans les projets…",
+      "cat": "education",
+      "creation": "2000",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Chasse Amicale du Plessis a Saint-Gervais en Belin'",
+      "objet": "Favoriser le repeuplement en gibier ; faciliter la pratique de la chasse ; assurer la destruction des animaux nuisibles",
+      "cat": "environnement",
+      "creation": "1984",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Culture et Loisirs des Foyers de la Fuie",
+      "objet": "Apporter des fonds au bénéfice des résidents de l'EHPAD et de l'UPAD des foyers de la Fuie ; achat et vente de matériels et matières direct ou indirect",
+      "cat": "entraide",
+      "creation": "1993",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association des Producteurs de Chanvre de la Sarthe et des Departements Limitrophes",
+      "objet": "Regroupement producteurs de chanvre ( pas de statuts)",
+      "cat": "loisirs",
+      "creation": "1966",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association Familles Rurales Laigne Saint Gervais",
+      "objet": "Respecter la moralité publique, lutte contre les fléaux sociaux, développer le sens familial par une propagande et enseignement approprié",
+      "cat": "entraide",
+      "creation": "1947",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association les Socio-Coiffeuses Medico-Sociales",
+      "objet": "Promouvoir le bien-être, l'estime de soi et l'inclusion social des personnes fragilisées à travers la pratique de la socio-coiffure ; intervenir, notamment, auprès des publics en situation de vulnérabilité (personnes…",
+      "cat": "loisirs",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association pour le Développement des Loisirs",
+      "objet": "Favoriser le développement des loisirs et de la culture et notamment, organisation et création de randonnées, roller skating loisir et compétition, diaporama et bibliothèque",
+      "cat": "loisirs",
+      "creation": "1978",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Belinois Tracto Cross",
+      "objet": "Participer à des compétitions ainsi qu'à différentes démonstrations encadrées ; l'exposition de ses véhicules lors de diverses manifestations ; la préparation de véhicules afin de participer à des compétitions…",
+      "cat": "sport",
+      "creation": "2011",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Bien-Être en Belinois",
+      "objet": "Cette association a pour objet : - L'enseignement, - La formation, - La communication, - La promotion de la connaissance dans le domaine de l'énergie vitale (appelée \"chi\" dans la tradition chinoise) , au travers des…",
+      "cat": "entraide",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Big Band de L'Orée de Bercé Belinois",
+      "objet": "Promouvoir la pratique musicale collective au sein d'une formation orchestrale de type big band ; Donner des concerts, participer aux fêtes et réunions pour lesquelles son concours est sollicité par toutes collectivités…",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Cercle Olympique du Laigné-St Gervais (Colsg)",
+      "objet": "Pratique de l'éducation physique et des sports (football, volley-ball, basket-ball, tennis de table, tir à l'arc, sport pour tous, échanges franco-allemands)",
+      "cat": "sport",
+      "creation": "1966",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Club des Loisirs de Laigne-Saint Gervais en Belin",
+      "objet": "Créer, organiser, animer des festivités ; se doter d'installations nécessaires à ses activités",
+      "cat": "loisirs",
+      "creation": "1977",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Comice LSG 2025",
+      "objet": "Organiser un comice et les manifestations annexes en amont du comice",
+      "cat": "loisirs",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Comité D'Échanges Européens du Pays D'Ecommoy",
+      "objet": "Promouvoir des échanges : scolaires, culturels, sportifs et professionnels ; de préparer et réaliser des jumelages avec des villes de la Communauté Européenne et en premier lieu avec Stuhr en Allemagne. Le comité…",
+      "cat": "loisirs",
+      "creation": "1976",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes Laigne/saint Gervais",
+      "objet": "Organisation de festivité",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Compagnie du Dernier Rang",
+      "objet": "Promouvoir le spectacle vivant et en particulier les arts du cirque",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Diapason, Association de Parents D'Élèves, Élèves et Amis de L'École de Musique de L'Orée de Bercé Bélinois",
+      "objet": "Favoriser la diffusion de l'art musical ; soutenir moralement, humainement, matériellement et/ou financièrement l'école de musique, les parents et les élèves",
+      "cat": "education",
+      "creation": "1980",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Etoile Cycliste Belinoise",
+      "objet": "Pratique du cyclisme sous toutes ses formes (cyclotourisme, cyclisme de compétition, cyclo-cross, école de cyclisme, bicross) dans un esprit de camaraderie sportive",
+      "cat": "sport",
+      "creation": "1984",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Fédération 'National Tracto-Cross'",
+      "objet": "Regrouper les associations de tracteurs préparés pour le tracto-cross ainsi que des membres afin d'assurer la promotion de ce sport mécanique",
+      "cat": "sport",
+      "creation": "1996",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Aînés Ruraux Club de Saint-Gervais en Belin",
+      "objet": "Renforcer les liens de solidarité entre les retraités adhérents sans distinction de régime de retraite",
+      "cat": "loisirs",
+      "creation": "1990",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Club de Laigne en Belin",
+      "objet": "Renforcer les liens de solidarité existant entre les retraités adhérents sans distinction de régime de retraite",
+      "cat": "loisirs",
+      "creation": "1987",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Kizomans",
+      "objet": "Organiser et délivrer des cours de danse, ateliers, animations et événements liés à la pratique des danses sociales et culturelles",
+      "cat": "culture",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "La Ruche, Centre Social",
+      "objet": "Favoriser l'humain : éveiller, accompagner, soutenir, relier pour mieux vivre et faire collectif",
+      "cat": "entraide",
+      "creation": "2000",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Mam les Petits Gervais",
+      "objet": "Cette association a pour objet de : - mettre à la disposition d'assistant (e) s maternel (le) s agréé (e) s, en échange d'une participation mensuelle aux charges et frais de fonctionnement de la structure, des locaux…",
+      "cat": "education",
+      "creation": "2018",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Modelisme Agricole en Belinois",
+      "objet": "Organiser des événements sur le thème de l'agriculture et plus particulièrement l'exposition de miniatures agricoles de maquettes et de matériels agricoles ainsi que d'être en contact avec d'autres collectionneurs la…",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Orchestre D'Harmonie du Belinois (O.h.b)",
+      "objet": "Promouvoir la musique d'harmonie d'entretenir et de développer le goût de la musique dans les communes de laigné en belin, moncé en belin, saint gervais en belin et les communes environnantes, d'organiser des concerts…",
+      "cat": "culture",
+      "creation": "1932",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Section de Gymnastique Volontaire de Laigne - Saint Gervais",
+      "objet": "Regrouper les personnes désirant pratiquer la gymnastique volontaire ; les activités peuvent s'étendre aux autres sports de groupes (hommes et femmes)",
+      "cat": "sport",
+      "creation": "1976",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Sports-Loisirs-Detente (S.L.D.)",
+      "objet": "Organiser diverses manifestations sportives, de loisirs et de détente",
+      "cat": "sport",
+      "creation": "2003",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Team Blin Racing Kart",
+      "objet": "Promouvoir la pratique de sports mécaniques (karting, automobiles, motos ) par l'encadrement éducatif, moral et matériel pour des pilotes amateurs",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Touche de Rage",
+      "objet": "Produire, promouvoir, et diffuser des projets artistiques et culturels, dans tous les domaines de l'art sous toutes ses formes et par tous ses moyens ; Mettre en place des actions pédagogiques, de transmission, d'action…",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Union Nationale des Combattants D'Afrique du Nord et D'Indochine - Section de Laigne en Belin",
+      "objet": "Defense des interets des combattants",
+      "cat": "patrimoine",
+      "creation": "2014",
+      "declaration": "2023",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.35194,
+     47.81783
+    ]
+   },
+   "properties": {
+    "com_insee": "72187",
+    "com_nom": "Marigné-Laillé",
+    "nb": 24,
+    "titre": "Associations de Marigné-Laillé",
+    "associations": [
+     {
+      "titre": "Association de Chasse de M. Martineau Jean-Pierre",
+      "objet": "Organiser l'exercice de la chasse",
+      "cat": "environnement",
+      "creation": "1999",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Association des Chasseurs de la Croix Manceau a Marigne Laille",
+      "objet": "Défense des intérêts de ses membres quant à la chasse, la protection du gibier et la répression du braconnage sous toutes ses formes",
+      "cat": "environnement",
+      "creation": "1960",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association L'Amie des Jeanne",
+      "objet": "Promouvoir, mettre en oeuvre tout ce qui peut permettre de valoriser l'ART - Art graphique, art photographique, art théâtral, art musical, art culinaire, par l'organisation d'expositions, de concerts, d'animations :…",
+      "cat": "culture",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association pour la Promotion de la Sterilisation des Animaux de Compagnie 72",
+      "objet": "Promouvoir la stérilisation des animaux de compagnie afin de soutenir les associations d'aide aux animaux de compagnie dans leur mission d'améliorer les conditions de vie des animaux",
+      "cat": "entraide",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Auto Club Sarthois 72",
+      "objet": "Nous une association dans le but de créer des événements autour du milieu automobile ;",
+      "cat": "sport",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Azidisa",
+      "objet": "Récolter des fonds afin de les reverser à des associations visant à l'aide aux personnes en difficulté, à l'enfance par la vente de produits ou de prestations créés et réalisés au sein de l'association",
+      "cat": "entraide",
+      "creation": "2019",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Barba Jovis",
+      "objet": "Participer à différentes activités telles que manifestations, cours pédagogique, animations, fêtes et reconstitutions à thème médiéval. recherche et formation, étudier les pratiques et usages des disciplines culinaires…",
+      "cat": "education",
+      "creation": "2008",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Be Happy Coaching",
+      "objet": "Proposer un accompagnement aux particuliers ou aux entreprises dans l'accomplissement et la réussite de leurs projets grâce au coaching et à l'hypnose, proposer des animations et des spectacles d'hypnose, proposer des…",
+      "cat": "culture",
+      "creation": "2019",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Bellanger Racing",
+      "objet": "Bellanger Racing a pour but d'aider des personnes à pratiquer des sports mécaniques en loisir ou en compétition grâce à des sponsors ou des évènements de financement",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Bercé, Naturellement",
+      "objet": "Contribuer a la connaissance de la faune sauvage du massif forestier de berce ; participer a toute action de recherche et d'étude ; elle organise ou participe à toute action de recherche, d'étude, de conservation, de…",
+      "cat": "environnement",
+      "creation": "1994",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Bercé sur Deux Roues",
+      "objet": "Pratique du vélo en forêt de Bercé.",
+      "cat": "sport",
+      "creation": "1997",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Comice de Marigné Laillé 2026",
+      "objet": "Organiser un comice et célébrer les traditions locales planifier et coordonner l'ensemble des activités liés à l'organisation des événements promouvoir des événements impliquer le habitants du village dans…",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Comité des Fêtes de Marigne Laille",
+      "objet": "Créer, organiser, susciter, coordonner les fêtes dans la commune.",
+      "cat": "loisirs",
+      "creation": "1985",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "'Count-Folk-Danse'",
+      "objet": "Initiation à la danse",
+      "cat": "culture",
+      "creation": "2008",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Country Cheyenne 72",
+      "objet": "Dance country et enseignement",
+      "cat": "culture",
+      "creation": "2020",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Club de Marigne Laille",
+      "objet": "Renforcer les liens de solidarité existant entre les retraités adhérents sans distinction de régime de retraite",
+      "cat": "loisirs",
+      "creation": "1987",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Lecureuil Racing Team",
+      "objet": "Promouvoir la pratique du sport automobile et plus particulièrement du karting, auprès notamment des jeunes dans un esprit éducatif et sportif ; - organiser des évènements sportifs et culturels liés à l'automobile et au…",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis de L'Ecole Publique de Marigne Laille",
+      "objet": "Prolonger l'oeuvre scolaire et notamment par l'aide à l'organisation d'activités sociales, éducatives, culturelles ou sportives",
+      "cat": "sport",
+      "creation": "1997",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Lumieres!",
+      "objet": "Promouvoir et soutenir l'expression artistique de personnes vivant avec des troubles psychiques par l'organisation de tout moyen de communication : exposition de phtographies, peintures, dessins, réalisations de films,…",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Norine et Augustin, \"caôsaient Sarthois, Dis-Tu ?\"",
+      "objet": "Promouvoir le patois sarthois afin que ce langage perdure et ne se perde pas",
+      "cat": "culture",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Rev'En Raid au Maroc",
+      "objet": "Participer au renault raid maroc 2022, un concept unique 2 500 kilomètres en 11 jours à travers le maroc, vaste région alternant zones montagneuses et désertiques un raid à taille humaine : 15 équipages par session à…",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Société de Chasse de Laille",
+      "objet": "Favoriser la protection du gibier et son repeuplement ; répression du braconnage ; destruction des animaux nuisibles",
+      "cat": "environnement",
+      "creation": "1961",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Team Never Give Up",
+      "objet": "Promouvoir et mettre en uvre toutes activités permettant la pratique de sports motocyclistes au cours d'entrainements sur circuit, compétions ; rassembler les passionnés de moto, les aider à pratiquer leur passion en…",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Tisseurs de Liens",
+      "objet": "Vocation de promouvoir et de mettre en oeuvre tout ce qui peut permettre de faire vivre la culture dans le village de Marigné-Laillé et les environs : concerts, théâtre, expositions, conférences, ateliers, opérations…",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.19661,
+     47.89794
+    ]
+   },
+   "properties": {
+    "com_insee": "72200",
+    "com_nom": "Moncé-en-Belin",
+    "nb": 46,
+    "titre": "Associations de Moncé-en-Belin",
+    "associations": [
+     {
+      "titre": "Amicale des Écoles de Monce en Belin",
+      "objet": "Intéresser les familles aux oeuvres post et péri-scolaires et les faire contribuer aux manifestations locales de l'école publique",
+      "cat": "education",
+      "creation": "2006",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Ask Consent",
+      "objet": "Sensibiliser au consentement à travers des ateliers de réflexion guidée, des formations et toute action favorisant la compréhension, la communication et le respect mutuel, créer des espaces sûrs de discussion autour du…",
+      "cat": "education",
+      "creation": "2025",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Asso Karma",
+      "objet": "Développement de nouveaux talents artistiques via la mise en place d'actions ponctuelles, culturelles et évènementiels promotion de jeunes talents, aide à l'équipement et à l'enregistrement, audio et vidéo participation…",
+      "cat": "culture",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Chaine des Carrossiers'",
+      "objet": "Promotion et défense des intérêts des carrossiers",
+      "cat": "autres",
+      "creation": "1991",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association D'Animation et de Gestion du Centre Socio-Culturel 'Le Val'Rhonne' de Monce en Belin",
+      "objet": "Gérer et animer le centre Socioculturel et ses annexes ; le centre socioculturel offre à l'ensemble de la population de devenir des citoyens actifs et responsables d'une démocratie vivante ; il met en oeuvre une action…",
+      "cat": "entraide",
+      "creation": "1991",
+      "declaration": "2026",
+      "site": "http://www.valrhonne.org/"
+     },
+     {
+      "titre": "Association du Personnel Communal de Monce en Belin",
+      "objet": "Créer les liens d'amitié et d'entraide entre ses membres.",
+      "cat": "loisirs",
+      "creation": "1979",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association Golf Moncéen",
+      "objet": "Pour échanger, participer sur la pratique du golf",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association JH",
+      "objet": "Promouvoir la création artistique",
+      "cat": "culture",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association Mam les Petites Quenottes",
+      "objet": "Rassembler les familles et les personnes vivant en milieu rural et assurer la défense de leurs intérêts matériels et moraux ; l'association peut intervenir dans tous les domaines concourant à la promotion des familles…",
+      "cat": "education",
+      "creation": "2016",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association pour L'Érection du Monument",
+      "objet": "Encadrer l'étude matériel et financière de l'édification d'un monument aux morts dédié aux opérations extérieures( OPEX), morts pour la France",
+      "cat": "patrimoine",
+      "creation": "2017",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive, Culturelle et de Loisirs",
+      "objet": "Découvrir de nouvelles pratiques sportives, favoriser les loisirs et promouvoir la culture sous toutes ses formes",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association Sportive U.s.e.p. de L'Ecole de Monce en Belin",
+      "objet": "Pratique des activités physiques et de pleine nature et d'activités socio-culturelles.",
+      "cat": "sport",
+      "creation": "1987",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Team Competition'",
+      "objet": "Réunir les moyens financiers afin de promouvoir le karting et la voiture de compétition",
+      "cat": "sport",
+      "creation": "1995",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Boules Monceenne",
+      "objet": "Pratiquer la pétanque loisir sans affiliation aucune",
+      "cat": "sport",
+      "creation": "2011",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Cap Forme 72",
+      "objet": "Favoriser et encourager la pratique du jogging en amateur ; courir tous ensemble en tout lieu, sans distinction de catégories d'âges, de sexe, de milieu socioculturel et de niveau ; participer activement à la…",
+      "cat": "sport",
+      "creation": "2008",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Club des Supporters de Football de Monce en Belin",
+      "objet": "Animation au sein du club de football de moncé en belin.",
+      "cat": "sport",
+      "creation": "1987",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Club Monce Tennis de Table - CMTT",
+      "objet": "La pratique, le développement et la promotion des sports de raquette et de toute autre activité sportive sur la commune de Moncé en Belin",
+      "cat": "sport",
+      "creation": "2014",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Comité de Jumelage Monce-Welton",
+      "objet": "Organiser des échanges culturels, sportifs entre les deux villes, pour les scolaires, les jeunes et les adultes",
+      "cat": "loisirs",
+      "creation": "1975",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Compagnie Clair de Songes",
+      "objet": "Créer et diffuser ses spectacles de théâtre et de musique et participer à des manifestations culturelles, dans un cadre amateur ;",
+      "cat": "culture",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Cre'Air",
+      "objet": "Participer à différentes manifestations sportives de cyclisme",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Défenses et Maintiens des Fêtes Foraines du Mans",
+      "objet": "La défense des intérêts des commerçants forains participant aux foires du Mans ; à l'organisation, la mise en oeuvre et le conseil auprès de la municipalité du Mans ; à la mise en oeuvre de tous moyens nécessaires à la…",
+      "cat": "loisirs",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Elanza",
+      "objet": "Promouvoir la pratique et le développement des sports d endurance et de pleine nature, soutenir la réalisation de projets sportifs et audiovisuels, favoriser la création et l organisation d événements sportifs et…",
+      "cat": "sport",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Entente Sportive Monceenne",
+      "objet": "Pratique éducation physique et des sports entre autres le football.",
+      "cat": "sport",
+      "creation": "1946",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Espossibilis",
+      "objet": "Rassembler un groupe d'habitants autour de l'émergence d'un projet d'habitat participatif dans un esprit coopératif visant à réduire l'empreinte écologique et à favoriser le vivre-ensemble",
+      "cat": "environnement",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "FBL Raid",
+      "objet": "Le raid s'inscrit dans une action humanitaire qui vise à aider des personnes vivant dans des conditions particulièrement difficiles (climat aride, pauvreté, isolement, exclusion",
+      "cat": "entraide",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "FC 10 (Footgolf 72)",
+      "objet": "Encadrer des groupes (découverte Footgolf) participer aux compétitions régionales, nationales et internationales préparation de la logistique (hébergements, trajets, inscription compétitions)",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Gaspi'Eat",
+      "objet": "Lutter contre le gaspillage alimentaire et non alimentaire ; récupérer et distribuer les invendus par des paniers antigaspi ; collecter des fonds ou des dons (ponctuels ou permanent) ; lutter contre le gaspillage…",
+      "cat": "entraide",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement- Club de Monce en Belin",
+      "objet": "Renforcer les liens de solidarité existant entre les personnes retraitées et développer en leur faveur des activités culturelles et de loisirs",
+      "cat": "loisirs",
+      "creation": "1973",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Grain de Sable et Pomme de Pin",
+      "objet": "Défendre l'environnement, tout particulièrement les espaces naturels ; défendre le cadre de vie des habitants ; promouvoir le développement durable",
+      "cat": "environnement",
+      "creation": "2008",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Intensemans.fr",
+      "objet": "Média d'information sur le sport automobile",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": "https://www.intensemans.fr/"
+     },
+     {
+      "titre": "Joueurs de L'Entente Sportive Moncéenne",
+      "objet": "Organisation d'événements sportifs ou non",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Judo Club Belinois",
+      "objet": "La pratique du judo, jujitsu, et disciplines associées, disciplines sportives régies par la fédération française de judo, jujitsu, kendo et disciplines associées (FFJDA) comme le taïso et d'une façon complémentaire…",
+      "cat": "sport",
+      "creation": "2010",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Karate Monce en Belin",
+      "objet": "Pratique du karaté",
+      "cat": "sport",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "4l Trophy 2018 : les Siamois Moncéens",
+      "objet": "Faire le 4L Trophy ; recueillir dons de sponsors",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "La Renaissance de Bois-Martin a Change",
+      "objet": "Promouvoir, soutenir, favoriser l'éducation et la formation musicale, intellectuelle et morale des jeunes.",
+      "cat": "culture",
+      "creation": "1966",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Les Chevrons du Loir",
+      "objet": "Organiser des sorties de véhicules de marque CitroËn et notamment des modèles 2 CV et dérivés",
+      "cat": "loisirs",
+      "creation": "2007",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Les Elles du BMX",
+      "objet": "Accompagner la pratique sportive féminine à travers le BMX Favoriser une pratique féminine collective Aider des sportive à participer à des compétitions de haut-niveau",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Mam le Royaume des Mignons",
+      "objet": "L'association a pour objet la gestion administrative, financière et morale de la MAM, tenue par des assistantes maternelles agréées. Cette structure permet la prise en charge de chaque enfant accueilli dans son…",
+      "cat": "education",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Moncé'Anim",
+      "objet": "Organisation de fêtes et manifestations pour l'animation de Moncé en Belin",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Moncé Billard Club",
+      "objet": "Pratique du billard",
+      "cat": "sport",
+      "creation": "2019",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Objectif_kart",
+      "objet": "Cette association a pour but d'acheter un karting et ensuite de le rénover ainsi que faire des vidéos pour aider les propriétaires de karting a faire leur réparation, cette association sera dans le cadre d'un projet en…",
+      "cat": "sport",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Sgvo",
+      "objet": "Organisation du marché de Noël, bric à brac, repas dansants et soirées à thème",
+      "cat": "loisirs",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Société de Chasse des Amis de Tourne-Lune",
+      "objet": "Gérer la faune chassable ; organiser et pratiquer la chasse ainsi que la protection des propriétés et des récoltes et la destruction des espèces classées nuisibles ; ses moyens d'action sont la tenue de réunions de…",
+      "cat": "environnement",
+      "creation": "2014",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "The Hot Boots",
+      "objet": "Enseignement et pratique de la danse country",
+      "cat": "culture",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Tintin Racing Team 18",
+      "objet": "Promouvoir et soutenir les activités liées au sport automobile et à la mécanique notamment la participation à des compétitions, l'organisation de manifestations sportives ou d'évènements ainsi qu'à la sensibilisation à…",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Urban Culture 72",
+      "objet": "Développer les cultures urbaines sur le territoire sarthois, à travers la mise en place d'ateliers, d'évènements, d'actions de sensibilisation et de valorisation des disciplines issues des cultures urbaines, danse,…",
+      "cat": "culture",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.23835,
+     47.81838
+    ]
+   },
+   "properties": {
+    "com_insee": "72268",
+    "com_nom": "Saint-Biez-en-Belin",
+    "nb": 11,
+    "titre": "Associations de Saint-Biez-en-Belin",
+    "associations": [
+     {
+      "titre": "Amicale de L'Ecole Publique de Saint-Biez en Belin",
+      "objet": "Étudier et réaliser toutes organisations péri ou post scolaires dans les secteurs culturel, sportif ou de loisirs et sociaux.- veiller à la défense des intérêts matériels et moraux de l'école publique",
+      "cat": "education",
+      "creation": "1969",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association de Soutien et D'Accompagnement à la Parentalité - Asap72",
+      "objet": "Informer des futurs/jeunes parents et les professionnels, Soutenir les familles, Accompagner les usagers au moyen d'ateliers liés à la parentalité : massages bébés, allaitement maternel, portage physiologique, etc",
+      "cat": "autres",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Comité D'Animations et de Loisirs de Saint Biez en Belin",
+      "objet": "Organiser des festivités, loisirs et voyages pour les habitants de la commune.",
+      "cat": "loisirs",
+      "creation": "1989",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Cercle des Retraités de Saint Biez en Belin",
+      "objet": "Renforcer les liens de solidarité existant entre les retraités adhérents sans distinction de régime de retraite",
+      "cat": "loisirs",
+      "creation": "1987",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Jupiter FM 103MHZ",
+      "objet": "Création de contenus musicaux, radiophoniques, audiovisuel, l'organisation de manifestations culturelles et de spectacle vivant",
+      "cat": "culture",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": "http://www.jupiterfm.fr/"
+     },
+     {
+      "titre": "Le Groupe Chantant de ST Biez en Belin",
+      "objet": "Promouvoir l'apprentissage du chant choral et organiser des concerts",
+      "cat": "culture",
+      "creation": "2011",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Les Bidouilleurs",
+      "objet": "Participer à divers évènements sportifs et notamment les courses de rallyes automobiles ;",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Les Bipedes Gaudinois",
+      "objet": "Développer la pratique de la course à pied et la randonnée dans un esprit convivial et familial, organiser une course nature sur le territoire de la commune de Chemiré le Gaudin (Sarthe)",
+      "cat": "sport",
+      "creation": "2009",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "RC Motors",
+      "objet": "Association reliant les sports mécaniques en loisirs ainsi que la découverte du pays",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "S T R Sarthe Tracto Racing",
+      "objet": "L'association a notamment pour objet la pratique, la promotion et le développement des sports mécaniques, notamment du tracto-cross, ainsi que l'organisation et la participation à des manifestations sportives,…",
+      "cat": "sport",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Saint Biez Bike Team",
+      "objet": "Pratiquer le VTT",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.21249,
+     47.83582
+    ]
+   },
+   "properties": {
+    "com_insee": "72306",
+    "com_nom": "Saint-Ouen-en-Belin",
+    "nb": 14,
+    "titre": "Associations de Saint-Ouen-en-Belin",
+    "associations": [
+     {
+      "titre": "Acanta",
+      "objet": "Promotion, soutien et diffusion de la création artistique et culturelle sous toutes ses formes, favoriser de l'accès à l'art à tous les publics ; soutenir la création artistique contemporaine",
+      "cat": "culture",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Amicale Laique de L'Ecole Claire Fontaine de Saint Ouen en Belin",
+      "objet": "Etablir un lien entre les familles et l'école, prolonger l'oeuvre scolaire et procurer une aide logistique et financière l'école pour les sorties pédagogiques, spectacles, livres de bibliothèque, fêtes de fin d'année,…",
+      "cat": "education",
+      "creation": "1999",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association Amateur Ornithologie Protection 72",
+      "objet": "Élevage des oiseaux de cage et de volière autorisé par la loi ; pose de nichoirs pour la protection",
+      "cat": "loisirs",
+      "creation": "2016",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Belinos.mc",
+      "objet": "Promouvoir la pratique de la moto et l'organisation de balades",
+      "cat": "sport",
+      "creation": "2011",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Familles Rurales - Association de ST Ouen - ST Biez en Belin",
+      "objet": "Grouper les familles vivant en milieu rural et assurer la défense de leurs intérêts matériels et moraux",
+      "cat": "entraide",
+      "creation": "1950",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Amicale du Temps de Loisirs",
+      "objet": "Renforcer les liens de solidarité existant entre les retraités adhérents sans distinction de régime de retraite",
+      "cat": "loisirs",
+      "creation": "1987",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "L'Envie de Rire",
+      "objet": "Développer et promouvoir des activités artistiques, culturelles et sociales et toutes activités permettant de répondre à cela ;",
+      "cat": "culture",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Les Amis du Manoir de la Poissonniere en Belinois",
+      "objet": "Préserver et mettre en valeur le manoir de la poissonnière, ses abords et son environnement.",
+      "cat": "patrimoine",
+      "creation": "1996",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "MP Cycles Team",
+      "objet": "Proposer des activités sportifs en lien avec le vélo",
+      "cat": "sport",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Random Station",
+      "objet": "Administrer et gérer le groupe musical amateur « Random Station » dans sa démarche culturelle, promouvoir ce groupe auprès des organisateurs de concerts, assurer l'organisation par elle-même de concerts dudit groupe ;",
+      "cat": "sport",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Sport Santé Sud-Sarthe",
+      "objet": "Cette association a pour objet de favoriser le lien social et la convivialité entre les adhérents, de promouvoir le potentiel vital de chacun, le bien-être physique, mental et social par la pratique en groupe de multi…",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Team Rider Junior",
+      "objet": "Promouvoir, développer et apporter un soutien à la pratique de la moto en compétition sur circuit de vitesse, pour les jeunes pilotes ;",
+      "cat": "sport",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Union Sportive de Saint Ouen - Saint Biez",
+      "objet": "La pratique de l'éducation physique et des sports",
+      "cat": "sport",
+      "creation": "1967",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Ynes (Yoga et Nature pour L'Equilibre et la Sante)",
+      "objet": "Promouvoir l'étude, l'initiation et la transmission du yoga viniyoga. développer des activités 'nature' favorables au bien-être, pour tous. ouvrir et échanger avec différents domaines de travail en faveur de l'équilibre…",
+      "cat": "sport",
+      "creation": "2005",
+      "declaration": "2022",
+      "site": ""
+     }
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.27846,
+     47.88991
+    ]
+   },
+   "properties": {
+    "com_insee": "72350",
+    "com_nom": "Teloché",
+    "nb": 50,
+    "titre": "Associations de Teloché",
+    "associations": [
+     {
+      "titre": "Afb Teloché",
+      "objet": "Cette association a pour objet la gestion et l'administration en lien avec la pratique des activités physiques et sportives en général et celle du football en particulier ; Ses activités vont de l'initiation pour les…",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Amicale des Sapeurs Pompiers de Teloche",
+      "objet": "Subvenir aux frais des fêtes et concours ayant pour but le perfectionnement de l'instruction des sapeurs-pompiers du corps de Teloché. verser des secours en cas de maladie ou accident. supporter un membre actif",
+      "cat": "loisirs",
+      "creation": "1956",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Arcturia",
+      "objet": "Mise en place d'ateliers de formation à la création d'objets et bijoux de lithothérapie ( soins par les pierres), vibratoires et de protection ; création et vente d'objets et bijoux de lithothérapie, de protection,…",
+      "cat": "loisirs",
+      "creation": "2016",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Artisanat Detente",
+      "objet": "Créer des contacts dans la détente et l'artisanat pour des personnes sans travail ou qui sont seules ; activités de couture, crochet, peinture sur tissu, pâte à sel, vannerie, jeux, sorties et autres suggestions",
+      "cat": "culture",
+      "creation": "1994",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Association Belinoise de Chasse a B C",
+      "objet": "Pratiquer la chasse sur les territoires où l'association possède les droits de chasse, tout en privilégiant la préservation et l'équilibre du milieu naturel ; maintenir la convivialité entre les membres de cette…",
+      "cat": "environnement",
+      "creation": "2008",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D'Eleves de L'Enseignement Libre du College Saint Jean Baptiste de la Salle de Teloche ( 72220)",
+      "objet": "Grouper les parents et autres personnes qui ont la charge des enfants ; apporter un soutien au collège.",
+      "cat": "education",
+      "creation": "1980",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Association des Parents D'Eleves des Écoles Libres Sainte Therese et Saint Joseph - Primaires de Teloche",
+      "objet": "Grouper parents et autres personnes ayant la charge ou la garde des enfants inscrits à l'école, l'association reconnait membres de droit les directeurs ou directrices des établissements.",
+      "cat": "education",
+      "creation": "1951",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Association Génération Lowcal",
+      "objet": "Promouvoir la consommation locale et responsable ; Nous fédérons une communauté autour des producteurs locaux et des initiatives de proximité ; Grâce à vos dons et soutiens, nous pouvons créer du contenu éducatif,…",
+      "cat": "autres",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Association Legeay Sports Association",
+      "objet": "Promotion du sport automobile sous toutes ses formes et en tout lieu.",
+      "cat": "sport",
+      "creation": "1994",
+      "declaration": "2016",
+      "site": ""
+     },
+     {
+      "titre": "Association Locale D'Aide a Domicile en Milieu Rural de L'Oree de Bercé",
+      "objet": "Aider à tous les moments de leur existence toute famille ou personne habitant dans les communes et les quartiers ou elle exerce son action ; pour ce faire, elle assure la responsabilité matérielle et morale de la marche…",
+      "cat": "entraide",
+      "creation": "1979",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Association pour la Préservation et la Valorisation du Patrimoine de Téloché",
+      "objet": "Favoriser toutes actions et animations destinées à assurer la conservation du patrimoine de la commune",
+      "cat": "patrimoine",
+      "creation": "2019",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Association Télochéenne Loisirs, Découvertes, Terroir",
+      "objet": "Organiser des week-ends ou journées et découvrir les régions françaises, le terroir ; Partager les connaissances et l'expérience de chacun",
+      "cat": "loisirs",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Association 'Tennis de Table de Teloche - les 3t.'",
+      "objet": "Pratique du tennis de table",
+      "cat": "sport",
+      "creation": "1994",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Au Fil du Rhonne",
+      "objet": "Former à la responsabilité, au civisme, à l'autonomie par la pratique d'activités physiques, sportives et de pleine nature",
+      "cat": "loisirs",
+      "creation": "2002",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Badminton Teloche",
+      "objet": "Développer la pratique du badminton sur la commune de Téloché",
+      "cat": "sport",
+      "creation": "2011",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Batterie Fanfare du Bélinois",
+      "objet": "Assurer les cérémonies officielles",
+      "cat": "culture",
+      "creation": "1995",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Centre Francais de Secourisme de la Sarthe (CFS 72)",
+      "objet": "Intervenir dans les domaines suivants en France ou à l'étranger : les missions de sécurité civile (opérations de secours, soutien aux populations sinistrées, encadrement des bénévoles lors des actions de soutien aux…",
+      "cat": "loisirs",
+      "creation": "2013",
+      "declaration": "2026",
+      "site": "http://www.cfs72.fr"
+     },
+     {
+      "titre": "Collas Compétition",
+      "objet": "Participation à des épreuves de slaloms et de courses de côte",
+      "cat": "sport",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Cybernight Sensation",
+      "objet": "Promouvoir les musiques actuelles autour des sciences des nouvelles technologies et du numérique",
+      "cat": "culture",
+      "creation": "2018",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Cyclo Club de Teloche",
+      "objet": "Pratique du cyclotourisme",
+      "cat": "sport",
+      "creation": "1994",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "École Maternelle Croque Lune",
+      "objet": "Former à la responsabilité, au civisme, à l'autonomie par la pratique d'activités physiques, sportives et de pleine nature, d'activités socio-culturelles dans le cadre d'un fonctionnement démocratique.",
+      "cat": "sport",
+      "creation": "2000",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Familles Rurales - Association de Teloche",
+      "objet": "Rassembler les familles et les personnes vivant en milieu rural et assurer la défense de leurs intérêts matériels et moraux",
+      "cat": "entraide",
+      "creation": "1945",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Fitness Center",
+      "objet": "Promouvoir la santé par une activité physique adaptée à chacun ; elle s'adresse à toutes et à tous quel que soit le niveau et l'âge ; elle a pour objet la pratique encadrée d'activités physiques, sportives, de détente,…",
+      "cat": "sport",
+      "creation": "2015",
+      "declaration": "2019",
+      "site": ""
+     },
+     {
+      "titre": "Générations Mouvement - Amicale de Teloche",
+      "objet": "Défendre les intérêts matériels et moraux des retraités et favoriser les liens d'amitié entre eux",
+      "cat": "loisirs",
+      "creation": "1973",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Jardin Associatif Solid'Air des Figuiers",
+      "objet": "Apprendre sur le jardin et ses fonctions ; S'investir dans un projet collectif ; Récolter et partager les fruits et légumes ;",
+      "cat": "loisirs",
+      "creation": "2021",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "L'Ordre du Pixel",
+      "objet": "Association ayant pour objet de rassembler des bénévoles pour apporter un soutient logistique et organisationnel durant des événements publique afin de promouvoir la culture geek ;",
+      "cat": "culture",
+      "creation": "2019",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "La Petite Auberge des Mondes",
+      "objet": "Cette association a pour objet social tant en France qu'à l'étranger, tant pour son compte que pour le compte de tiers, la prestation de service de restauration, tous types de restauration, la préparation de plats…",
+      "cat": "loisirs",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Le PRÉ en Fête Teloché",
+      "objet": "Organiser des evenements festifs et conviviaux favorisant les rencontres entre habitants, promouvoir la convivialite et la solidarite locale par des repas et des animations, developper le lien social par l organisation…",
+      "cat": "loisirs",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Ateliers des Anges de la Citadelle",
+      "objet": "Assurer la création, la production, la programmation et la diffusion d'oeuvres artistiques et de spectacles pluridisciplinaires, ainsi que l'organisation d'événements culturels ; développer des actions de formation dans…",
+      "cat": "culture",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Les Echos des Grandes Forges",
+      "objet": "Pratiquer la trompe de chasse en tous lieux, maintenir la convivialité entre les membres de cette association et promouvoir la trompe de chasse, faciliter l'apprentissage et la pratique de la trompe de chasse auprès de…",
+      "cat": "culture",
+      "creation": "2009",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Les Rencontres de L'App",
+      "objet": "Développer et promouvoir l'analyse des pratiques professionnelles (app) auprès des différents acteurs concernés par cette activité",
+      "cat": "autres",
+      "creation": "2026",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Lez'Arts",
+      "objet": "Sensibiliser à l'art, la création et au spectacle vivant par le biais de spectacles, de manifestations diverses et par la mise en place d'ateliers de pratique artistique et de loisirs créatifs",
+      "cat": "culture",
+      "creation": "2007",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Loisirs Basket Teloche",
+      "objet": "Pratique loisirs du basket",
+      "cat": "sport",
+      "creation": "2017",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Lullaby Skate",
+      "objet": "Réaliser des modules de skateboard et trotinettes pour améliorer les skate-parks locaux, organiser des évènements regroupant les riders aux alentours, monter des court-métrage de ses évènements, développer et promouvoir…",
+      "cat": "sport",
+      "creation": "2020",
+      "declaration": "2020",
+      "site": ""
+     },
+     {
+      "titre": "Mam la Petite Maison des Joyeux Lutins",
+      "objet": "C'est une maison d'assistante maternelle qui regroupe 2 assistantes maternelles dans une même maison pour accueillir des enfants de 0 à 3 ans",
+      "cat": "education",
+      "creation": "2023",
+      "declaration": "2023",
+      "site": ""
+     },
+     {
+      "titre": "Mam les Coccinelles du Belinois",
+      "objet": "Regroupement d'assistante maternelles pour accueillir des jeunes enfants de 3 mois à 3 ans , dans un lieux sécurisé et adapter leurs besoins ;",
+      "cat": "education",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Moa Colo (Mouvement Original D'Animation)",
+      "objet": "Développer personnellement et collectivement par le biais de l'éducation, en cherchant à enrichir les connaissances et les compétences des participants ;",
+      "cat": "loisirs",
+      "creation": "2024",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Organisme de Gestion de L'Ecole Catholique Ste Therese-St Joseph (OGEC)",
+      "objet": "Assurer la fondation et l'entretien d'écoles catholiques, la gestion des écoles primaires SteThérèse et St Joseph ainsi que la gestion de tout ce qui se rapporte a l'éducation et l'enseignement",
+      "cat": "education",
+      "creation": "1904",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Organisme de Gestion de L'Etablissement Catholique D'Enseignement (O.G.E.C.) College Saint Jean Baptiste de la Salle",
+      "objet": "Assurer la gestion du collège privé mixte",
+      "cat": "education",
+      "creation": "1980",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Passionné Mans Gravel",
+      "objet": "Organiser des évènements liés au vélo, des sorties à vélos entre membres, des conférences sur le vélo, des salons vélos",
+      "cat": "sport",
+      "creation": "2022",
+      "declaration": "2022",
+      "site": ""
+     },
+     {
+      "titre": "Prestigia Racing Team",
+      "objet": "Favoriser la participation des étudiants aux compétitions automobiles et de promouvoir la culture du sport mécanique, notamment à travers la participation au projet StemRacing et d'autres initiatives liées au sport…",
+      "cat": "sport",
+      "creation": "2025",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "Qi Gong Teloche",
+      "objet": "Pratique des sports de combat et gymnastique chinoise",
+      "cat": "sport",
+      "creation": "1995",
+      "declaration": "2018",
+      "site": ""
+     },
+     {
+      "titre": "Société de Chasse Intercommunale de Teloche et Brette-Les-Pins",
+      "objet": "Favoriser la protection du gibier, répression du braconnage, destruction des animaux nuisibles.",
+      "cat": "environnement",
+      "creation": "1950",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Team JS Competition",
+      "objet": "Cette association sportive non professionnelle a pour objet de développer et promouvoir le sport mécanique dans le domaine du loisir et de la compétition, de permettre à ses membres de participer à des courses de…",
+      "cat": "sport",
+      "creation": "2006",
+      "declaration": "2021",
+      "site": ""
+     },
+     {
+      "titre": "Tel O Fête",
+      "objet": "Organiser diverses manifestations de loisirs, culturelles, repas à thème, concerts musicaux, etc......., avec la volonté d'animer la commune",
+      "cat": "loisirs",
+      "creation": "2011",
+      "declaration": "2024",
+      "site": ""
+     },
+     {
+      "titre": "Teloch'Evenements",
+      "objet": "Permettre l'organisation de manifestations évènementiels",
+      "cat": "loisirs",
+      "creation": "2015",
+      "declaration": "2026",
+      "site": ""
+     },
+     {
+      "titre": "Teloche Animation",
+      "objet": "Organiser divers repas à thèmes",
+      "cat": "loisirs",
+      "creation": "2014",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Teloche Country Stomp",
+      "objet": "Promouvoir la danse country au travers de cours, de démonstrations, et de soirées",
+      "cat": "culture",
+      "creation": "2011",
+      "declaration": "2017",
+      "site": ""
+     },
+     {
+      "titre": "Teloche Football Club",
+      "objet": "Promouvoir la pratique et le développement du football",
+      "cat": "sport",
+      "creation": "1995",
+      "declaration": "2025",
+      "site": ""
+     },
+     {
+      "titre": "We Dance",
+      "objet": "Créer et développer une activité artistique de danse dans un cadre culturel et sportif. Sa durée est illimitée",
+      "cat": "entraide",
+      "creation": "1971",
+      "declaration": "2025",
+      "site": ""
+     }
+    ]
+   }
+  }
+ ]
+}
