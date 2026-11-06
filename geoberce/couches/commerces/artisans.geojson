@@ -1,7 +1,7 @@
 {
  "type": "FeatureCollection",
  "source": "Registre SIRENE (Insee), API Recherche d'entreprises",
- "mise_a_jour": "2026-10-09",
+ "mise_a_jour": "2026-11-06",
  "features": [
   {
    "type": "Feature",
@@ -135,12 +135,12 @@
     "com_nom": "Chahaignes",
     "creation": "2026",
     "phone": "06 52 29 94 76",
+    "email": null,
     "website": "https://www.elecclim-innovation.fr/",
     "opening_hours": "Mo-Fr 08:00-18:00",
-    "verifie": true,
-    "email": null,
     "note": null,
-    "masquer": null
+    "masquer": null,
+    "verifie": true
    }
   },
   {
@@ -163,12 +163,12 @@
     "com_nom": "Chahaignes",
     "creation": "2024",
     "phone": "0689447121",
-    "verifie": true,
     "email": null,
     "website": null,
     "opening_hours": null,
     "note": null,
-    "masquer": null
+    "masquer": null,
+    "verifie": true
    }
   },
   {
@@ -596,6 +596,34 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
+     0.47177,
+     47.679013
+    ]
+   },
+   "properties": {
+    "siret": "79268443300024",
+    "nom": "Menuiserie Vigot",
+    "categorie": "menuiserie",
+    "ape": "43.32A",
+    "activite": "Menuiserie bois et PVC",
+    "adresse": "7 Zone Artisanale Epinettes Loir",
+    "com_insee": "72115",
+    "com_nom": "Dissay-sous-Courcillon",
+    "creation": "2026",
+    "phone": null,
+    "email": null,
+    "website": null,
+    "opening_hours": null,
+    "note": null,
+    "masquer": null,
+    "verifie": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
      0.487306,
      47.664535
     ]
@@ -821,8 +849,8 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     0.460316,
-     47.722846
+     0.460111,
+     47.722711
     ]
    },
    "properties": {
@@ -864,12 +892,12 @@
     "com_nom": "Flée",
     "creation": "2010",
     "phone": "0243443097",
+    "email": null,
     "website": "http://www.clotures-blotchauvin72.com/?utm_source=gmb",
     "opening_hours": "Tu-Su 14:00-18:00",
-    "verifie": true,
-    "email": null,
     "note": null,
-    "masquer": null
+    "masquer": null,
+    "verifie": true
    }
   },
   {
@@ -2221,34 +2249,6 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     0.549667,
-     47.779988
-    ]
-   },
-   "properties": {
-    "siret": "42023889100055",
-    "nom": "Art & Craft",
-    "categorie": "peinture",
-    "ape": "43.34Z",
-    "activite": "Peinture et vitrerie",
-    "adresse": "328 Route de la Banniere",
-    "com_insee": "72161",
-    "com_nom": "Lhomme",
-    "creation": "2025",
-    "phone": null,
-    "email": null,
-    "website": null,
-    "opening_hours": null,
-    "note": null,
-    "masquer": null,
-    "verifie": false
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
      0.573651,
      47.75911
     ]
@@ -2292,12 +2292,12 @@
     "com_nom": "Lhomme",
     "creation": "2017",
     "phone": "0243790287",
-    "opening_hours": "Mo-Th 08:00-12:00,13:30-17:00; Fr 08:00-12:00",
-    "verifie": true,
     "email": null,
     "website": null,
+    "opening_hours": "Mo-Th 08:00-12:00,13:30-17:00; Fr 08:00-12:00",
     "note": null,
-    "masquer": null
+    "masquer": null,
+    "verifie": true
    }
   },
   {
@@ -2376,12 +2376,12 @@
     "com_nom": "Loir en Vallée",
     "creation": "2002",
     "phone": "0243445081",
-    "opening_hours": "Mo-Th 07:45-12:00,13:30-17:45; Fr 08:00-12:00",
-    "verifie": true,
     "email": null,
     "website": null,
+    "opening_hours": "Mo-Th 07:45-12:00,13:30-17:45; Fr 08:00-12:00",
     "note": null,
-    "masquer": null
+    "masquer": null,
+    "verifie": true
    }
   },
   {
@@ -2389,8 +2389,8 @@
    "geometry": {
     "type": "Point",
     "coordinates": [
-     0.695782,
-     47.776022
+     0.653376,
+     47.76128
     ]
    },
    "properties": {
@@ -2488,12 +2488,12 @@
     "com_nom": "Loir en Vallée",
     "creation": "2020",
     "phone": "0647081473",
-    "opening_hours": "Mo-Fr 08:00-18:00",
-    "verifie": true,
     "email": null,
     "website": null,
+    "opening_hours": "Mo-Fr 08:00-18:00",
     "note": null,
-    "masquer": null
+    "masquer": null,
+    "verifie": true
    }
   },
   {
@@ -3159,34 +3159,6 @@
     "com_insee": "72173",
     "com_nom": "Luceau",
     "creation": "2023",
-    "phone": null,
-    "email": null,
-    "website": null,
-    "opening_hours": null,
-    "note": null,
-    "masquer": null,
-    "verifie": false
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     0.515924,
-     47.708371
-    ]
-   },
-   "properties": {
-    "siret": "91003473500019",
-    "nom": "Cyril Barrier",
-    "categorie": "jardin",
-    "ape": "81.30Z",
-    "activite": "Aménagement paysager",
-    "adresse": "Le Carroir",
-    "com_insee": "72183",
-    "com_nom": "Marçon",
-    "creation": "2022",
     "phone": null,
     "email": null,
     "website": null,
