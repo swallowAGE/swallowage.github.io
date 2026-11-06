@@ -1667,6 +1667,7 @@ function construirePopupPetiteEnfance(props) {
                 <div class="popup-fiche-tag" style="color:${PALETTE.terracotta}">${echapperHtml(props.type || "Petite enfance")}</div>
                 <div class="popup-fiche-titre">${echapperHtml(nom)}</div>
                 ${props.adresse ? `<div class="popup-fiche-adresse">${echapperHtml(props.adresse)}</div>` : ""}
+                ${props.precision ? `<div class="popup-fiche-precision">${echapperHtml(props.precision)}</div>` : ""}
             </div>
         </div>
         ${contacts.length ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Contact</div><div class="popup-fiche-contacts">${contacts.join("")}</div></div>` : ""}
