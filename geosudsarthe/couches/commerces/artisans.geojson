@@ -1,7 +1,7 @@
 {
  "type": "FeatureCollection",
  "source": "Registre SIRENE (Insee), API Recherche d'entreprises",
- "mise_a_jour": "2026-11-05",
+ "mise_a_jour": "2026-11-06",
  "features": [
   {
    "type": "Feature",
@@ -1730,34 +1730,6 @@
     "com_insee": "72176",
     "com_nom": "Le Lude",
     "creation": "2025",
-    "phone": null,
-    "email": null,
-    "website": null,
-    "opening_hours": null,
-    "note": null,
-    "masquer": null,
-    "verifie": false
-   }
-  },
-  {
-   "type": "Feature",
-   "geometry": {
-    "type": "Point",
-    "coordinates": [
-     0.181834,
-     47.652191
-    ]
-   },
-   "properties": {
-    "siret": "81788676500012",
-    "nom": "Rousteau Cedric",
-    "categorie": "maconnerie",
-    "ape": "43.99C",
-    "activite": "Maçonnerie générale et gros œuvre",
-    "adresse": "Le Petit Malidor",
-    "com_insee": "72176",
-    "com_nom": "Le Lude",
-    "creation": "2016",
     "phone": null,
     "email": null,
     "website": null,

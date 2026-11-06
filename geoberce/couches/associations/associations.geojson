@@ -1,7 +1,7 @@
 {
  "type": "FeatureCollection",
  "source": "Répertoire national des associations (RNA), data.gouv.fr",
- "mise_a_jour": "2026-10-09",
+ "mise_a_jour": "2026-11-06",
  "features": [
   {
    "type": "Feature",
@@ -895,7 +895,7 @@
    "properties": {
     "com_insee": "72071",
     "com_nom": "Montval-sur-Loir",
-    "nb": 111,
+    "nb": 110,
     "titre": "Associations de Montval-sur-Loir",
     "associations": [
      {
@@ -1176,14 +1176,6 @@
       "cat": "loisirs",
       "creation": "1986",
       "declaration": "2025",
-      "site": ""
-     },
-     {
-      "titre": "Association Pôle Bercé Santé",
-      "objet": "Créer un pôle de santé libéral et ambulatoire sur le territoire Loir et Bercé ; anticiper une pénurie de professionnels de santé pour maintenir et consolider une offre de soins de premier recours sur un territoire est…",
-      "cat": "entraide",
-      "creation": "2014",
-      "declaration": "2016",
       "site": ""
      },
      {

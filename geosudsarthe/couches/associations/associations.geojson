@@ -1,7 +1,7 @@
 {
  "type": "FeatureCollection",
  "source": "Répertoire national des associations (RNA), data.gouv.fr",
- "mise_a_jour": "2026-11-05",
+ "mise_a_jour": "2026-11-06",
  "features": [
   {
    "type": "Feature",
@@ -625,7 +625,7 @@
    "properties": {
     "com_insee": "72098",
     "com_nom": "Coulongé",
-    "nb": 15,
+    "nb": 14,
     "titre": "Associations de Coulongé",
     "associations": [
      {
@@ -738,14 +738,6 @@
       "cat": "culture",
       "creation": "2013",
       "declaration": "2018",
-      "site": ""
-     },
-     {
-      "titre": "Tout Se Dire Avec le Papier",
-      "objet": "Faire découvrir et promouvoir des activités de loisirs créatifs, par le biais d'échanges de techniques et de savoir-faire ; loisirs créatifs, principalement liés au papier : scrapbooking, carterie, boitage, art de la…",
-      "cat": "loisirs",
-      "creation": "2016",
-      "declaration": "2016",
       "site": ""
      }
     ]
