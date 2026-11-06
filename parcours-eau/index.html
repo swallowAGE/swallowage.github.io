@@ -196,7 +196,7 @@
           <circle cx="58" cy="24" r="1.3" fill="#5e3b1c" opacity=".3"/>
         </pattern>
         <clipPath id="gclip">
-          <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 L840,300 L900,300 L900,560 L0,560 Z"/>
+          <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 C832,262 840,282 852,292 L900,292 L900,560 L0,560 Z"/>
         </clipPath>
         <filter id="soft" x="-20%" y="-30%" width="140%" height="180%">
           <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#17303f" flood-opacity=".22"/>
@@ -286,10 +286,10 @@
           <ellipse cx="780" cy="310" rx="6" ry="3.5"/>
         </g>
         <!-- nappe -->
-        <path d="M0,348 C100,336 200,356 300,346 S500,336 600,348 S800,356 900,344 L900,414 L0,414 Z" fill="url(#gAq)"/>
+        <path d="M0,352 C150,352 300,346 450,340 S700,328 800,320 C830,316 842,314 852,314 L900,314 L900,414 L0,414 Z" fill="url(#gAq)"/>
         <path d="M0,366 q25,-7 50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0" fill="none" stroke="#ffffff" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"/>
         <path d="M0,392 q25,-7 50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/>
-        <path class="aq-dry" d="M0,330 L900,330 L900,372 q-25,7 -50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 Z"/>
+        <path class="aq-dry" d="M0,352 C150,352 300,346 450,340 S700,328 800,320 C830,316 842,314 852,314 L900,314 L900,372 q-25,7 -50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 Z"/>
         <!-- roche -->
         <path d="M0,410 C150,400 300,420 450,410 S750,402 900,414 L900,560 L0,560 Z" fill="url(#gRock)"/>
         <g fill="#000" opacity=".16">
@@ -303,8 +303,8 @@
           <ellipse cx="636" cy="504" rx="24" ry="7"/><ellipse cx="816" cy="452" rx="18" ry="6"/>
         </g>
         <!-- herbe : la moitié basse du trait épais, seule visible sous la surface -->
-        <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 L840,300 L900,300" fill="none" stroke="var(--grass)" stroke-width="22" stroke-linejoin="round"/>
-        <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 L840,300 L900,300" fill="none" stroke="var(--grass2)" stroke-width="8" stroke-linejoin="round" opacity=".9"/>
+        <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 C832,262 840,282 852,292" fill="none" stroke="var(--grass)" stroke-width="22" stroke-linejoin="round"/>
+        <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 C832,262 840,282 852,292" fill="none" stroke="var(--grass2)" stroke-width="8" stroke-linejoin="round" opacity=".9"/>
       </g>
 
       <!-- Brins d'herbe et buissons -->
@@ -321,9 +321,9 @@
         </g>
       </g>
 
-      <!-- Rivière -->
-      <rect x="842" y="288" width="58" height="28" rx="3" fill="url(#gWater)"/>
-      <path d="M848,296 q6,-4 12,0 t12,0 t12,0 t12,0 M850,306 q6,-4 12,0 t12,0 t12,0" fill="none" stroke="#e8f6fd" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
+      <!-- Rivière : un chenal qui rejoint la nappe -->
+      <rect x="848" y="292" width="52" height="32" rx="3" style="fill: var(--aq1)"/>
+      <path d="M852,300 q6,-4 12,0 t12,0 t12,0 t12,0 M854,311 q6,-4 12,0 t12,0 t12,0" fill="none" stroke="#e8f6fd" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
 
       <!-- ÉTAPE 8 (partie haute) : l'évaporation, dessinée sous les étiquettes et la bulle du robinet -->
       <g class="el" data-step="8">
@@ -354,6 +354,7 @@
           <polygon points="143,336 157,336 150,348"/>
         </g>
         <path class="flow" d="M60,375 L290,375" style="stroke-width:3"/>
+        <path class="flow" d="M330,378 L740,378 C805,378 845,356 862,324" style="stroke-width:3"/>
         <g class="tag" transform="translate(560,384)"><rect x="-74.8" y="-13.5" width="149.5" height="27" rx="14"/><text x="0" y="-0.5">Nappe souterraine</text></g>
         <g class="tag" transform="translate(560,486)"><rect x="-74.8" y="-13.5" width="149.5" height="27" rx="14"/><text x="0" y="-0.5">Roche imperméable</text></g>
       </g>
@@ -449,7 +450,7 @@
         <path class="pipe" d="M815,256 L846,256 L846,290" style="stroke-width:4"/>
         <path class="flow" d="M815,256 L846,256 L846,290"/>
         <g class="tag" transform="translate(770,340)"><rect x="-82.2" y="-13.5" width="164.5" height="27" rx="14"/><text x="0" y="-0.5">Station d'épuration</text></g>
-        <g class="tag" transform="translate(866,310)"><rect x="-37.2" y="-13.5" width="74.5" height="27" rx="14"/><text x="0" y="-0.5">Rivière</text></g>
+        <g class="tag" transform="translate(866,308)"><rect x="-37.2" y="-13.5" width="74.5" height="27" rx="14"/><text x="0" y="-0.5">Rivière</text></g>
       </g>
 
       <!-- La goutte -->
