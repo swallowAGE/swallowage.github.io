@@ -1,7 +1,7 @@
 {
  "type": "FeatureCollection",
  "source": "Répertoire national des associations (RNA), data.gouv.fr",
- "mise_a_jour": "2026-11-06",
+ "mise_a_jour": "2026-11-08",
  "features": [
   {
    "type": "Feature",
@@ -1715,7 +1715,7 @@
    "properties": {
     "com_insee": "72350",
     "com_nom": "Teloché",
-    "nb": 50,
+    "nb": 49,
     "titre": "Associations de Teloché",
     "associations": [
      {
@@ -1780,14 +1780,6 @@
       "cat": "autres",
       "creation": "2025",
       "declaration": "2025",
-      "site": ""
-     },
-     {
-      "titre": "Association Legeay Sports Association",
-      "objet": "Promotion du sport automobile sous toutes ses formes et en tout lieu.",
-      "cat": "sport",
-      "creation": "1994",
-      "declaration": "2016",
       "site": ""
      },
      {
