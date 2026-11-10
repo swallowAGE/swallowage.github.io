@@ -29,7 +29,11 @@ const TERRITOIRE = {
         /* Widget d'actualités officiel d'Intramuros : identifiants fournis dans le code du widget
            (intramurosCityIdNews / intramurosAggloIdNews). Une commune sans entrée garde le simple lien. */
         widgets: {
-            "72124": { cityId: "49", aggloId: "3" }
+            "72124": { cityId: "49", aggloId: "3" },
+            "72155": { cityId: "51", aggloId: "3" },
+            "72187": { cityId: "53", aggloId: "3" },
+            "72200": { cityId: "22", aggloId: "3" },
+            "72350": { cityId: "50", aggloId: "3" }
         }
     },
     goatcounter: null,

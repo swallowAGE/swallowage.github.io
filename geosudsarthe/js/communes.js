@@ -72,18 +72,15 @@ function chargerQualiteEauCommune(codeInsee) {
    traités pareil, comme le reste du dashboard quand une source n'a
    rien à montrer (voir #commune-qualite-eau dans construireDashboardCommune,
    qui reste alors un simple espace vide dans la grille). */
-/* Résultats officiels du contrôle sanitaire (Ministère de la Santé / ARS) : le site orobnat n'a pas
-   d'adresse directe par commune, la page de résultats s'obtient par un formulaire envoyé en POST
-   (région, département, code INSEE de la commune, réseau « code_UDI_département »). On envoie
-   donc ce même formulaire, depuis un bouton, dans un nouvel onglet. Sarthe (région 52) seulement. */
+/* Résultats officiels du contrôle sanitaire (Ministère de la Santé / ARS, site orobnat). Le formulaire de résultats
+   refuse d'être envoyé depuis un autre site (« Un problème technique est survenu », il lui faut une session ouverte
+   sur ses pages) : on ouvre donc la page de recherche de la région, et on rappelle quoi choisir. */
 function construireLienAnalysesEau(resultat) {
     const insee = String(resultat.code_commune || "");
-    const reseau = resultat.reseaux && resultat.reseaux[0] && resultat.reseaux[0].code;
-    if (!/^72\d{3}$/.test(insee) || !reseau) return "";
-    const champs = { methode: "rechercher", idRegion: "52", usd: "AEP", posPLV: "0", departement: "072",
-        communeDepartement: insee, reseau: `${reseau}_072` };
-    const inputs = Object.entries(champs).map(([k, v]) => `<input type="hidden" name="${k}" value="${echapperHtml(v)}">`).join("");
-    return `<form class="commune-eau-analyses" method="post" action="https://orobnat.sante.gouv.fr/orobnat/rechercherResultatQualite.do" target="_blank">${inputs}<button type="submit" class="rf-bouton-principal commune-lien-actu"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir les analyses officielles</button></form>`;
+    if (!/^72\d{3}$/.test(insee)) return "";
+    const nom = COMMUNES_TERRITOIRE[insee] || "votre commune";
+    return `<div class="popup-fiche-precision">Sur le site officiel : département Sarthe, commune « ${echapperHtml(nom)} », puis « Rechercher ».</div>
+        <a class="rf-bouton-principal commune-lien-actu" href="https://orobnat.sante.gouv.fr/orobnat/afficherPage.do?methode=menu&usd=AEP&idRegion=52" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir les analyses officielles</a>`;
 }
 
 function construireCarteQualiteEau(resultat) {
@@ -367,26 +364,34 @@ window.showPinnedFirstNews = 1;
 <div id="intramuros_news"></div>`;
 }
 
+/* Carte « Actualités (Intramuros) » d'une commune : widget officiel si on a ses identifiants, sinon simple lien. */
+function carteActualitesIntramuros(codeInsee, url, widget) {
+    const nom = COMMUNES_TERRITOIRE[codeInsee] || "la commune";
+    /* Intramuros refuse d'afficher ses pages dans un cadre (« Access Denied ») mais fournit un widget officiel
+       d'actualités (script widget.intramuros.org) : on le charge dans un cadre isolé (srcdoc), une instance par
+       commune, car le widget lit des variables globales de la page. */
+    const cadre = widget ? `<div class="illiwap-embed intramuros-embed">
+            <iframe srcdoc="${echapperHtml(documentWidgetIntramuros(widget))}" title="Actualités de ${echapperHtml(nom)} (Intramuros)" loading="lazy"></iframe>
+        </div>` : `<div class="commune-ligne">Les actualités et les alertes de la commune sont publiées sur Intramuros.</div>`;
+    return `<div class="commune-carte commune-carte-large">
+        <div class="commune-carte-titre"><i class="fa-solid fa-bullhorn"></i>Actualités (Intramuros)</div>
+        ${cadre}
+        ${url ? `<a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">${widget ? "Ouvrir sur Intramuros" : `Voir les actualités de ${echapperHtml(nom)}`}</a>` : ""}
+    </div>`;
+}
+
 function construireCarteActualites(codeInsee) {
     /* Seulement quand le territoire a un flux Illiwap par commune (voir TERRITOIRE.actualites). */
     const actu = TERRITOIRE.actualites;
     if (actu && actu.type === "intramuros") {
         const url = (actu.communes || {})[codeInsee];
         if (!url) return "";
-        const nom = COMMUNES_TERRITOIRE[codeInsee] || "la commune";
-        const widget = (actu.widgets || {})[codeInsee];
-        /* Intramuros refuse d'afficher ses pages dans un cadre (« Access Denied ») mais fournit un widget officiel
-           d'actualités (script widget.intramuros.org) : on le charge dans un cadre isolé (srcdoc), une instance par
-           commune, car le widget lit des variables globales de la page. Sans identifiants de commune : simple lien. */
-        const cadre = widget ? `<div class="illiwap-embed intramuros-embed">
-            <iframe srcdoc="${echapperHtml(documentWidgetIntramuros(widget))}" title="Actualités de ${echapperHtml(nom)} (Intramuros)" loading="lazy"></iframe>
-        </div>` : `<div class="commune-ligne">Les actualités et les alertes de la commune sont publiées sur Intramuros.</div>`;
-        return `<div class="commune-carte commune-carte-large">
-        <div class="commune-carte-titre"><i class="fa-solid fa-bullhorn"></i>Actualités (Intramuros)</div>
-        ${cadre}
-        <a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">${widget ? "Ouvrir sur Intramuros" : `Voir les actualités de ${echapperHtml(nom)}`}</a>
-    </div>`;
+        return carteActualitesIntramuros(codeInsee, url, (actu.widgets || {})[codeInsee]);
     }
+    /* Territoire Illiwap dont certaines communes publient sur Intramuros (actu.intramuros) : leur carte
+       remplace celle d'Illiwap. */
+    const autre = actu && actu.type === "illiwap" ? (actu.intramuros || {})[codeInsee] : null;
+    if (autre) return carteActualitesIntramuros(codeInsee, autre.url, autre.cityId ? autre : null);
     if (!actu || actu.type !== "illiwap" || !actu.communes) return "";
     return `<div class="commune-carte commune-carte-large">
         <div class="commune-carte-titre"><i class="fa-solid fa-bullhorn"></i>Actualités (Illiwap)</div>

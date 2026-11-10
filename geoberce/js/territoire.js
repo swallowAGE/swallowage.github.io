@@ -49,7 +49,10 @@ const TERRITOIRE = {
              communes, le widget d'actualités officiel d'Intramuros ;
          null
              pas de bouton « Actualités ». */
-    actualites: { type: "illiwap", id: "cc-loir-luce-berce", communes: true },
+    /* Beaumont-Pied-de-Bœuf publie sur Intramuros (widget) plutôt que sur Illiwap : `intramuros` remplace
+       sa carte d'actualités (identifiants du widget Intramuros ; `url` facultative pour un lien en plus). */
+    actualites: { type: "illiwap", id: "cc-loir-luce-berce", communes: true,
+        intramuros: { "72028": { cityId: "1140", url: null } } },
 
     /* Sous-domaine GoatCounter (suivi de visites), null = pas de suivi. */
     goatcounter: "geoberce",
