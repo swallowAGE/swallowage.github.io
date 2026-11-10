@@ -121,6 +121,24 @@ function construirePanneauCouches(map) {
             /* Couche interrogée en direct : une ligne d'état dit pourquoi la carte est vide (zoom trop faible),
                combien d'observations sont affichées, ou si la source ne répond pas. */
             if (conf.fetchViewport) {
+                if (conf.periodes) {
+                    const choix = document.createElement("label");
+                    choix.className = "layer-periode";
+                    choix.innerHTML = `<span>Période</span>`;
+                    const select = document.createElement("select");
+                    conf.periodes.forEach(per => {
+                        const o = document.createElement("option");
+                        o.value = per.id; o.textContent = per.label;
+                        if (per.id === conf.periodeActive) o.selected = true;
+                        select.appendChild(o);
+                    });
+                    select.addEventListener("change", () => {
+                        conf.periodeActive = select.value;
+                        if (checkbox.checked) actualiserCoucheDynamique(conf, map, conf.surEtat);
+                    });
+                    choix.appendChild(select);
+                    details.appendChild(choix);
+                }
                 const etat = document.createElement("div");
                 etat.className = "layer-etat-ligne";
                 etat.hidden = true;
