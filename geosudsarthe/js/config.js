@@ -1218,9 +1218,25 @@ function wktRectangle(b) {
     const w = b.getWest().toFixed(5), e = b.getEast().toFixed(5), s = b.getSouth().toFixed(5), n = b.getNorth().toFixed(5);
     return `POLYGON((${w} ${s}, ${e} ${s}, ${e} ${n}, ${w} ${n}, ${w} ${s}))`;
 }
+/* Périodes proposées dans le panneau (mois = durée remontée depuis aujourd'hui, null = toutes les années). */
+const PERIODES_OBS_NATURE = [
+    { id: "12m", label: "12 derniers mois", mois: 12 },
+    { id: "3a", label: "3 dernières années", mois: 36 },
+    { id: "toutes", label: "Toutes les années", mois: null }
+];
+function plageDatesObservations(periodeId) {
+    const p = PERIODES_OBS_NATURE.find(x => x.id === periodeId) || PERIODES_OBS_NATURE[0];
+    if (!p.mois) return null;
+    const fin = new Date(), debut = new Date();
+    debut.setMonth(debut.getMonth() - p.mois);
+    const iso = d => d.toISOString().slice(0, 10);
+    return `${iso(debut)},${iso(fin)}`;
+}
 function fetchObservationsNature(bounds) {
     const params = new URLSearchParams({ geometry: wktRectangle(bounds), limit: String(OBS_NATURE_MAX), hasCoordinate: "true",
         hasGeospatialIssue: "false", occurrenceStatus: "PRESENT", coordinateUncertaintyInMeters: "0,1000" });
+    const plage = plageDatesObservations((LAYERS.find(l => l.id === "observationsNature") || {}).periodeActive);
+    if (plage) params.set("eventDate", plage);
     ["HUMAN_OBSERVATION", "OBSERVATION", "MACHINE_OBSERVATION"].forEach(b => params.append("basisOfRecord", b));
     return Promise.all([
         fetch("https://api.gbif.org/v1/occurrence/search?" + params).then(r => { if (!r.ok) throw new Error("GBIF " + r.status); return r.json(); }),
@@ -1813,6 +1829,7 @@ const LAYERS = [
             return { icon: t.icon, color: t.color };
         },
         legend: TYPES_OBS_NATURE, legendDefaut: TYPE_OBS_NATURE_DEFAUT, categoriser: categorieObservationNature,
+        periodes: PERIODES_OBS_NATURE, periodeActive: "12m",
         zoomMin: 13, lazy: true, searchable: false, cluster: false,
         titleFields: ["nom", "latin"],
         subtitleFields: ["latin"]
