@@ -311,6 +311,15 @@ function chargerCouche(layerConf, onReady, onError) {
         return;
     }
 
+    /* Couche interrogée en direct sur la zone affichée (layerConf.fetchViewport, ex : observations nature) :
+       rien à charger ici, actualiserCoucheDynamique la remplit à chaque déplacement. */
+    if (layerConf.fetchViewport) {
+        groupesLeaflet[layerConf.id] = L.layerGroup();
+        coucheChargee[layerConf.id] = true;
+        if (onReady) onReady();
+        return;
+    }
+
     if (layerConf.type === "wms") {
         groupesLeaflet[layerConf.id] = construireCoucheWMS(layerConf);
         coucheChargee[layerConf.id] = true;
@@ -451,6 +460,43 @@ function actualiserCoucheViewport(conf, map) {
     nouvelle.addTo(map);
 }
 
+/* Couches « dynamiques » (layerConf.fetchViewport(bounds) -> Promise<FeatureCollection>) : redemandées à la
+   source à chaque déplacement ou zoom, sous le seuil zoomMin elles sont masquées. Les catégories décochées dans
+   la légende (conf.categoriesMasquees) sont conservées d'un rafraîchissement à l'autre. */
+const requeteDynamique = {};
+function actualiserCoucheDynamique(conf, map, onEtat) {
+    const ancienne = groupesLeaflet[conf.id];
+    if (!coucheDoitEtreVisible(conf, map)) {
+        if (ancienne && map.hasLayer(ancienne)) map.removeLayer(ancienne);
+        if (onEtat) onEtat("zoom");
+        return;
+    }
+    const numero = (requeteDynamique[conf.id] || 0) + 1;
+    requeteDynamique[conf.id] = numero;
+    if (onEtat) onEtat("chargement");
+    conf.fetchViewport(map.getBounds()).then(geo => {
+        if (requeteDynamique[conf.id] !== numero) return; // une requête plus récente a pris le relais
+        const checkbox = document.getElementById("layer-" + conf.id);
+        if (checkbox && !checkbox.checked) return;
+        let nouvelle;
+        if (conf.categoriser) {
+            const masquees = conf.categoriesMasquees || new Set();
+            const sous = construireSousCouches(geo, conf);
+            souscouchesLeaflet[conf.id] = sous;
+            nouvelle = L.layerGroup(Object.entries(sous).filter(([id]) => !masquees.has(id)).map(([, couche]) => couche));
+        } else {
+            nouvelle = construireCoucheDonnees(geo, conf);
+        }
+        if (ancienne && map.hasLayer(ancienne)) map.removeLayer(ancienne);
+        groupesLeaflet[conf.id] = nouvelle;
+        nouvelle.addTo(map);
+        if (onEtat) onEtat("ok", geo);
+    }).catch(err => {
+        console.error("Chargement", conf.id, ":", err);
+        if (onEtat) onEtat("erreur");
+    });
+}
+
 /* Surveille zoom ET déplacement (moveend couvre les deux) pour : masquer/
    afficher les couches à seuil de zoom (zoomMin), et reconstruire les
    couches "viewportOnly" sur la zone actuellement visible. Un léger
@@ -469,6 +515,10 @@ function surveillerAffichageCouches(map) {
 
                 if (conf.viewportOnly) {
                     actualiserCoucheViewport(conf, map);
+                    return;
+                }
+                if (conf.fetchViewport) {
+                    actualiserCoucheDynamique(conf, map, conf.surEtat);
                     return;
                 }
                 if (!conf.zoomMin) return;

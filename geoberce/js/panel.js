@@ -64,6 +64,8 @@ function construirePanneauCouches(map) {
                         retirerBadgeEtat();
                         if (conf.viewportOnly) {
                             actualiserCoucheViewport(conf, map);
+                        } else if (conf.fetchViewport) {
+                            actualiserCoucheDynamique(conf, map, conf.surEtat);
                         } else if (coucheDoitEtreVisible(conf, map)) {
                             groupesLeaflet[conf.id].addTo(map);
                         }
@@ -115,6 +117,27 @@ function construirePanneauCouches(map) {
             ligne.appendChild(checkbox);
             ligne.appendChild(texte);
             details.appendChild(ligne);
+
+            /* Couche interrogée en direct : une ligne d'état dit pourquoi la carte est vide (zoom trop faible),
+               combien d'observations sont affichées, ou si la source ne répond pas. */
+            if (conf.fetchViewport) {
+                const etat = document.createElement("div");
+                etat.className = "layer-etat-ligne";
+                etat.hidden = true;
+                details.appendChild(etat);
+                conf.surEtat = (nom, geo) => {
+                    if (!checkbox.checked) { etat.hidden = true; return; }
+                    etat.hidden = false;
+                    if (nom === "zoom") etat.textContent = `Zoomez (niveau ${conf.zoomMin} ou plus) pour voir les observations.`;
+                    else if (nom === "chargement") etat.textContent = "Chargement des observations...";
+                    else if (nom === "erreur") etat.textContent = "La source (GBIF) ne répond pas, déplacez la carte pour réessayer.";
+                    else if (geo) {
+                        const n = geo.features.length, total = geo.total || n;
+                        etat.textContent = total > n ? `${n} observations affichées sur ${total.toLocaleString("fr-FR")} : zoomez pour affiner.` : `${n} observation${n > 1 ? "s" : ""} sur cet écran.`;
+                    }
+                };
+                checkbox.addEventListener("change", () => { if (!checkbox.checked) etat.hidden = true; });
+            }
 
             if (conf.legend) {
                 details.appendChild(construireLegende(conf, map));
@@ -182,6 +205,10 @@ function construireLegende(conf, map) {
         `;
 
         item.querySelector("input").addEventListener("change", function () {
+            if (conf.fetchViewport) {
+                conf.categoriesMasquees = conf.categoriesMasquees || new Set();
+                if (this.checked) conf.categoriesMasquees.delete(cat.id); else conf.categoriesMasquees.add(cat.id);
+            }
             const couche = (souscouchesLeaflet[conf.id] || {})[cat.id];
             if (!couche) return;
             if (this.checked) {
