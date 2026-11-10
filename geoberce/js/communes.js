@@ -343,18 +343,48 @@ function construireCartePrixImmobilier(codeInsee) {
     </div>`;
 }
 
+/* Page HTML du widget d'actualités officiel d'Intramuros (idem snippet fourni par Intramuros) pour une commune. */
+function documentWidgetIntramuros(w) {
+    const v = x => JSON.stringify(String(x));
+    return `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;font-family:sans-serif}</style>
+<script>
+window.intramurosCityIdNews = ${v(w.cityId)};
+window.intramurosAggloIdNews = ${v(w.aggloId || "")};
+window.zoomNews = 1;
+window.containerSizeNews = 'medium';
+window.itemPerPageNews = 10;
+window.imageMaxHeightNews = 0;
+window.backgroundColorNews = '#ffffff';
+window.titleColorNews = '#000000';
+window.excludeActorsNews = false;
+window.speedNews = 5;
+window.displayModeNews = 'grid';
+window.truncateNews = 0;
+window.showFiltersNews = 1;
+window.showPinnedFirstNews = 1;
+<\/script>
+<script charset="UTF-8" src="https://widget.intramuros.org/js/5.1.0/actualite.js" async><\/script>
+<div id="intramuros_news"></div>`;
+}
+
 function construireCarteActualites(codeInsee) {
     /* Seulement quand le territoire a un flux Illiwap par commune (voir TERRITOIRE.actualites). */
     const actu = TERRITOIRE.actualites;
     if (actu && actu.type === "intramuros") {
         const url = (actu.communes || {})[codeInsee];
         if (!url) return "";
-        /* Intramuros (Akamai) refuse l'affichage de ses pages dans un cadre d'un autre site
-           (« Access Denied ») : on renvoie donc vers sa page, dans un nouvel onglet. */
+        const nom = COMMUNES_TERRITOIRE[codeInsee] || "la commune";
+        const widget = (actu.widgets || {})[codeInsee];
+        /* Intramuros refuse d'afficher ses pages dans un cadre (« Access Denied ») mais fournit un widget officiel
+           d'actualités (script widget.intramuros.org) : on le charge dans un cadre isolé (srcdoc), une instance par
+           commune, car le widget lit des variables globales de la page. Sans identifiants de commune : simple lien. */
+        const cadre = widget ? `<div class="illiwap-embed intramuros-embed">
+            <iframe srcdoc="${echapperHtml(documentWidgetIntramuros(widget))}" title="Actualités de ${echapperHtml(nom)} (Intramuros)" loading="lazy"></iframe>
+        </div>` : `<div class="commune-ligne">Les actualités et les alertes de la commune sont publiées sur Intramuros.</div>`;
         return `<div class="commune-carte commune-carte-large">
         <div class="commune-carte-titre"><i class="fa-solid fa-bullhorn"></i>Actualités (Intramuros)</div>
-        <div class="commune-ligne">Les actualités et les alertes de la commune sont publiées sur Intramuros.</div>
-        <a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">Voir les actualités de ${echapperHtml(COMMUNES_TERRITOIRE[codeInsee] || "la commune")}</a>
+        ${cadre}
+        <a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">${widget ? "Ouvrir sur Intramuros" : `Voir les actualités de ${echapperHtml(nom)}`}</a>
     </div>`;
     }
     if (!actu || actu.type !== "illiwap" || !actu.communes) return "";
