@@ -1155,6 +1155,35 @@ function styleQualiteEau(feature) {
     return { color: "#fff", weight: 1, fillColor: NIVEAUX_EAU[niveau].color, fillOpacity: 0.55 };
 }
 
+/* Légendes des couches en dégradé (choroplèthes) : fonctions appelées à l'affichage du panneau,
+   les couleurs sont lues sur les mêmes fonctions que les cartes (couleurPrix, couleurPopulation,
+   NIVEAUX_EAU) pour que légende et carte ne divergent jamais. */
+function legendePrix() {
+    return { titre: "Prix au m²", classes: [
+        { color: couleurPrix(900), label: "moins de 1 000 €" }, { color: couleurPrix(1100), label: "1 000 à 1 300 €" },
+        { color: couleurPrix(1400), label: "1 300 à 1 600 €" }, { color: couleurPrix(1700), label: "1 600 à 1 900 €" },
+        { color: couleurPrix(2000), label: "1 900 à 2 200 €" }, { color: couleurPrix(2400), label: "2 200 à 2 600 €" },
+        { color: couleurPrix(3000), label: "plus de 2 600 €" }, { color: couleurPrix(null), label: "pas assez de ventes / non calculable" }] };
+}
+function legendePopulation() {
+    return { titre: "Habitants", classes: [
+        { color: couleurPopulation(100), label: "moins de 300" }, { color: couleurPopulation(400), label: "300 à 600" },
+        { color: couleurPopulation(800), label: "600 à 1 000" }, { color: couleurPopulation(1200), label: "1 000 à 1 500" },
+        { color: couleurPopulation(2000), label: "1 500 à 2 500" }, { color: couleurPopulation(3000), label: "plus de 2 500" },
+        { color: couleurPopulation(null), label: "donnée absente" }] };
+}
+function legendeQualiteEau() {
+    return { titre: "Dernier contrôle sanitaire", classes: [
+        { color: NIVEAUX_EAU.conforme.color, label: NIVEAUX_EAU.conforme.label },
+        { color: NIVEAUX_EAU.reserve.color, label: NIVEAUX_EAU.reserve.label },
+        { color: NIVEAUX_EAU.non_conforme.color, label: NIVEAUX_EAU.non_conforme.label },
+        { color: "#D8D6D0", label: "pas de résultat" }] };
+}
+function legendeMutations() {
+    const l = legendePrix();
+    return { titre: "Prix au m² de la dernière vente", classes: l.classes.slice(0, 7).concat([{ color: couleurPrix(null), label: "prix non calculable (terrain nu...)" }]) };
+}
+
 /* Couleur par opérateur pour les antennes-relais (couches/services/antennes.geojson) :
    comparaison par mot-clé plutôt que valeur exacte du champ "operator",
    dont les variantes réelles observées dans ce fichier sont multiples
@@ -1615,6 +1644,7 @@ const LAYERS = [
         id: "prixImmobilier", group: "urbanisme", label: "Prix immobilier par commune",
         file: "couches/urbanisme/prix_immobilier_communes.geojson", type: "choropleth",
         color: PALETTE.ardoise,
+        legendeEchelle: legendePrix,
         lazy: false, searchable: false, cluster: false,
         valueField: "prix_m2_median",
         titleFields: ["commune"],
@@ -1639,6 +1669,7 @@ const LAYERS = [
         file: "couches/urbanisme/demographie_communes.geojson", type: "choropleth",
         color: PALETTE.terracotta,
         styleFn: feature => ({ color: "#fff", weight: 1, fillColor: couleurPopulation(feature.properties.population), fillOpacity: 0.65 }),
+        legendeEchelle: legendePopulation,
         lazy: false, searchable: true, cluster: false,
         valueField: "population",
         titleFields: ["commune_nom", "commune"],
@@ -1652,6 +1683,7 @@ const LAYERS = [
            choroplèthe plutôt qu'un marqueur ponctuel. */
         fetchPersonnalise: fetchQualiteEauTerritoire, transform: geojsonDepuisQualiteEau,
         type: "polygon", color: PALETTE.feuille, styleFn: styleQualiteEau,
+        legendeEchelle: legendeQualiteEau,
         lazy: true, searchable: false, cluster: false,
         titleFields: ["nom_offici"],
         subtitleFields: []
@@ -1688,6 +1720,7 @@ const LAYERS = [
         file: "couches/urbanisme/parcelles_dvf_2021_2025_loir_luce_berce.geojson", type: "polygon",
         color: PALETTE.terracotta,
         styleFn: stylePrixMutation,
+        legendeEchelle: legendeMutations,
         lazy: true, searchable: false, cluster: false,
         titleFields: ["adresse", "reference_parcelle"],
         subtitleFields: ["commune", "nb_mutations"]

@@ -118,11 +118,39 @@ function construirePanneauCouches(map) {
 
             if (conf.legend) {
                 details.appendChild(construireLegende(conf, map));
+            } else if (conf.legendeEchelle) {
+                details.appendChild(construireLegendeEchelle(conf.legendeEchelle()));
             }
         });
 
         conteneur.appendChild(details);
     });
+}
+
+/* Légende d'une couche en dégradé (choroplèthe) : une pastille de couleur par classe, sans cases à cocher
+   (on ne filtre pas un dégradé). Repliée comme les autres légendes du panneau. */
+function construireLegendeEchelle(legende) {
+    const details = document.createElement("details");
+    details.className = "layer-legend";
+    const summary = document.createElement("summary");
+    summary.textContent = "Voir la légende";
+    details.appendChild(summary);
+    const liste = document.createElement("div");
+    liste.className = "layer-legend-items";
+    if (legende.titre) {
+        const t = document.createElement("div");
+        t.className = "layer-legend-titre";
+        t.textContent = legende.titre;
+        liste.appendChild(t);
+    }
+    legende.classes.forEach(cl => {
+        const item = document.createElement("div");
+        item.className = "layer-legend-item layer-legend-echelle";
+        item.innerHTML = `<span class="layer-legend-pastille" style="background:${cl.color}"></span><span>${cl.label}</span>`;
+        liste.appendChild(item);
+    });
+    details.appendChild(liste);
+    return details;
 }
 
 /* Petite légende repliable (icône + couleur par catégorie), affichée
