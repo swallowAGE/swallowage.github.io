@@ -349,16 +349,12 @@ function construireCarteActualites(codeInsee) {
     if (actu && actu.type === "intramuros") {
         const url = (actu.communes || {})[codeInsee];
         if (!url) return "";
-        const nom = COMMUNES_TERRITOIRE[codeInsee] || "la commune";
-        const page = url.replace(/\/+$/, "") + "/actualites";
-        /* Les actualités sont intégrées comme celles d'Illiwap. Si Intramuros refuse de s'afficher dans
-           une page tierce, le cadre reste vide : le bouton « Ouvrir sur Intramuros » reste donc toujours visible. */
+        /* Intramuros (Akamai) refuse l'affichage de ses pages dans un cadre d'un autre site
+           (« Access Denied ») : on renvoie donc vers sa page, dans un nouvel onglet. */
         return `<div class="commune-carte commune-carte-large">
         <div class="commune-carte-titre"><i class="fa-solid fa-bullhorn"></i>Actualités (Intramuros)</div>
-        <div class="illiwap-embed">
-            <iframe src="${echapperHtml(page)}" title="Actualités de ${echapperHtml(nom)} (Intramuros)" loading="lazy"></iframe>
-        </div>
-        <a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">Ouvrir sur Intramuros</a>
+        <div class="commune-ligne">Les actualités et les alertes de la commune sont publiées sur Intramuros.</div>
+        <a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">Voir les actualités de ${echapperHtml(COMMUNES_TERRITOIRE[codeInsee] || "la commune")}</a>
     </div>`;
     }
     if (!actu || actu.type !== "illiwap" || !actu.communes) return "";
