@@ -109,17 +109,14 @@ function chargerQualiteEauCommune(codeInsee) {
    traités pareil, comme le reste du dashboard quand une source n'a
    rien à montrer (voir #commune-qualite-eau dans construireDashboardCommune,
    qui reste alors un simple espace vide dans la grille). */
-/* Résultats officiels du contrôle sanitaire (Ministère de la Santé / ARS, site orobnat) : la page de résultats
-   s'ouvre directement avec les mêmes champs que le formulaire du site (région 52, département 072, code INSEE,
-   réseau « code_072 »). Un envoi en POST depuis nos pages est refusé par le site, l'adresse avec les champs
-   dans l'URL fonctionne. Sarthe seulement. */
+/* Résultats officiels du contrôle sanitaire (Ministère de la Santé / ARS, site orobnat) : la page de recherche
+   s'ouvre avec la commune déjà choisie (région 52, département 072, code INSEE). On n'envoie pas le réseau :
+   une commune desservie par plusieurs réseaux laisse l'utilisateur choisir le sien sur le site. Sarthe seulement. */
 function construireLienAnalysesEau(resultat) {
     const insee = String(resultat.code_commune || "");
-    const reseau = resultat.reseaux && resultat.reseaux[0] && resultat.reseaux[0].code;
-    if (!/^72\d{3}$/.test(insee) || !reseau) return "";
-    const params = new URLSearchParams({ methode: "rechercher", idRegion: "52", usd: "AEP", posPLV: "0",
-        departement: "072", communeDepartement: insee, reseau: `${reseau}_072` });
-    return `<a class="rf-bouton-principal commune-lien-actu" href="https://orobnat.sante.gouv.fr/orobnat/rechercherResultatQualite.do?${echapperHtml(params.toString())}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir les analyses officielles</a>`;
+    if (!/^72\d{3}$/.test(insee)) return "";
+    const params = new URLSearchParams({ methode: "menu", idRegion: "52", dpt: "072", usd: "AEP", comDpt: insee });
+    return `<a class="rf-bouton-principal commune-lien-actu" href="https://orobnat.sante.gouv.fr/orobnat/afficherPage.do?${echapperHtml(params.toString())}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir les analyses officielles</a>`;
 }
 
 function construireCarteQualiteEau(resultat) {
