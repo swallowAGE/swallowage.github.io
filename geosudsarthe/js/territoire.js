@@ -15,7 +15,17 @@ const TERRITOIRE = {
 
     /* À renseigner : actualités (voir js/territoire.js : Illiwap, lien ou null)
        et sous-domaine GoatCounter. null = pas de bouton / pas de suivi. */
-    actualites: null,
+    actualites: {
+        type: "intramuros",
+        communes: {
+            "72013": "https://www.intramuros.org/aubigne-racan",
+            "72182": "https://www.intramuros.org/mansigne"
+        },
+        widgets: {
+            "72013": { cityId: "2473", aggloId: "3" },
+            "72182": { cityId: "46", aggloId: "3" }
+        }
+    },
     goatcounter: null,
 
     couchesExclues: [],
