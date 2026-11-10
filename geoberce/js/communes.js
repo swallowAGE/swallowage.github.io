@@ -30,6 +30,43 @@ function chargerDemographieCommunes() {
 }
 
 /* =========================================================
+   NATURE (observations ouvertes GBIF, outils/build_biodiversite.py)
+   Chiffres agrégés par commune : espèces observées par grand groupe, espèces à statut de
+   conservation. Lu dans couches/nature/biodiversite_communes.json (absent = pas de carte). */
+let biodiversiteEnCache = null;
+function chargerBiodiversiteCommunes() {
+    if (biodiversiteEnCache) return biodiversiteEnCache;
+    biodiversiteEnCache = fetch("couches/nature/biodiversite_communes.json")
+        .then(r => r.ok ? r.json() : null)
+        .catch(() => null);
+    return biodiversiteEnCache;
+}
+
+const GROUPES_NATURE = { oiseaux: "Oiseaux", mammiferes: "Mammifères", reptiles: "Reptiles", amphibiens: "Amphibiens", insectes: "Insectes", plantes: "Plantes" };
+const STATUTS_UICN = { CR: "En danger critique", EN: "En danger", VU: "Vulnérable", NT: "Quasi menacée" };
+
+function construireCarteNature(donnees, codeInsee) {
+    const f = donnees && donnees.communes && donnees.communes[codeInsee];
+    if (!f) return "";
+    const fr = n => Number(n).toLocaleString("fr-FR");
+    const groupes = Object.keys(GROUPES_NATURE).filter(k => f.groupes && f.groupes[k])
+        .map(k => `<div class="commune-stat-mini"><strong>${fr(f.groupes[k])}</strong><span>${GROUPES_NATURE[k]}</span></div>`).join("");
+    const remarquables = (f.remarquables || []).map(r => `<li><span class="nature-statut nature-${echapperHtml(r.statut)}">${echapperHtml(STATUTS_UICN[r.statut] || r.statut)}</span>
+        <span>${echapperHtml(r.nom)}${r.latin ? ` <em>${echapperHtml(r.latin)}</em>` : ""}</span></li>`).join("");
+    const maj = donnees.maj ? ` (mise à jour : ${echapperHtml(donnees.maj.split("-").reverse().join("/"))})` : "";
+    return `<div class="commune-carte commune-carte-large">
+        <div class="commune-carte-titre"><i class="fa-solid fa-feather-pointed"></i>Nature</div>
+        <div class="commune-hero-nombre" style="font-size:28px;">${fr(f.especes)}<span>espèces observées</span></div>
+        <div class="popup-fiche-precision" style="margin-top:6px;">${fr(f.observations)} observations de faune et de flore sur la commune.</div>
+        ${groupes ? `<div class="commune-stats-secondaires" style="margin-top:12px;">${groupes}</div>` : ""}
+        ${remarquables ? `<div class="nature-titre-liste">Espèces animales à statut de conservation (liste rouge mondiale UICN)</div><ul class="nature-liste">${remarquables}</ul>
+        ${f.menacees_total > f.remarquables.length ? `<div class="popup-fiche-precision">et ${fr(f.menacees_total - f.remarquables.length)} autres.</div>` : ""}` : ""}
+        <div class="popup-fiche-precision" style="margin-top:12px;">Observations ouvertes de GBIF (INPN, iNaturalist, eBird...)${maj}. Toutes les observations locales n'y figurent pas.</div>
+        <a class="rf-bouton-principal commune-lien-actu" href="https://www.faune-maine.org/" target="_blank" rel="noopener noreferrer">Voir Faune-Maine</a>
+    </div>`;
+}
+
+/* =========================================================
    QUALITÉ DE L'EAU POTABLE (Hub'Eau)
    Retour direct de l'utilisatrice : compléter le dashboard commune
    avec une info du quotidien en plus des chiffres statiques. Hub'Eau
@@ -418,6 +455,7 @@ function construireDashboardCommune(codeInsee, mairies, demographieFeature) {
         ${carteMairie}
         <div id="commune-qualite-eau"><!-- Rempli séparément une fois Hub'Eau résolu, voir ouvrirDashboardCommune --></div>
         ${construireCartePrixImmobilier(codeInsee)}
+        <div id="commune-nature" class="commune-carte-large"></div>
         ${carteDecompte}
         ${construireCarteActualites(codeInsee)}
     </div>`;
@@ -598,6 +636,10 @@ function ouvrirDashboardCommune(map, codeInsee) {
         promesseQualiteEau.then(resultat => {
             const cible = document.getElementById("commune-qualite-eau");
             if (cible) cible.innerHTML = construireCarteQualiteEau(resultat);
+        });
+        chargerBiodiversiteCommunes().then(donnees => {
+            const cible = document.getElementById("commune-nature");
+            if (cible) cible.innerHTML = construireCarteNature(donnees, codeInsee);
         });
     });
 }
