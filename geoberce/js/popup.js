@@ -1026,6 +1026,35 @@ function construirePopupEhpad(props) {
     </div>`;
 }
 
+/* Observation nature (GBIF) : espèce, date, statut de conservation et origine de la donnée avec sa licence. */
+function construirePopupObservationNature(props) {
+    const type = (typeof TYPES_OBS_NATURE !== "undefined" ? TYPES_OBS_NATURE.find(t => t.id === props.groupe) : null) || TYPE_OBS_NATURE_DEFAUT;
+    const titre = props.nom || props.latin || props.nom_anglais || "Observation";
+    const sousTitre = props.nom && props.latin ? props.latin : (!props.nom && props.nom_anglais && props.latin ? props.nom_anglais : null);
+    const statuts = { CR: "En danger critique", EN: "En danger", VU: "Vulnérable", NT: "Quasi menacée" };
+    const date = props.date ? props.date.slice(0, 10).split("-").reverse().join("/") : null;
+    const licence = props.licence ? (/by-nc/i.test(props.licence) ? "CC BY-NC" : (/by/i.test(props.licence) ? "CC BY" : (/zero|cc0/i.test(props.licence) ? "CC0" : null))) : null;
+    return `<div class="popup-fiche">
+        <div class="popup-fiche-entete">
+            <div class="popup-fiche-icon" style="background:${type.color}"><i class="${type.icon}"></i></div>
+            <div class="popup-fiche-titre-wrap">
+                <div class="popup-fiche-tag" style="color:${type.color}">${echapperHtml(type.label)}</div>
+                <div class="popup-fiche-titre">${echapperHtml(titre)}</div>
+                ${sousTitre ? `<div class="popup-fiche-adresse"><em>${echapperHtml(sousTitre)}</em></div>` : ""}
+            </div>
+        </div>
+        <div class="popup-fiche-section">
+            ${date ? `<div class="popup-fiche-ligne"><i class="fa-solid fa-calendar-day"></i> Observé le ${echapperHtml(date)}</div>` : ""}
+            ${props.precision_m ? `<div class="popup-fiche-ligne"><i class="fa-solid fa-location-crosshairs"></i> Position précise à environ ${Math.round(props.precision_m)} m</div>` : ""}
+            ${statuts[props.statut_uicn] ? `<div class="popup-fiche-ligne"><i class="fa-solid fa-triangle-exclamation"></i> ${echapperHtml(statuts[props.statut_uicn])} (liste rouge mondiale UICN)</div>` : ""}
+        </div>
+        <div class="popup-fiche-section">
+            <div class="popup-fiche-precision">Source : ${props.jeu ? echapperHtml(props.jeu) + ", via " : ""}GBIF${licence ? " · licence " + licence : ""}</div>
+            ${props.cle ? `<a class="popup-fiche-lien" href="https://www.gbif.org/occurrence/${encodeURIComponent(props.cle)}" target="_blank" rel="noopener noreferrer">Voir l'observation sur GBIF</a>` : ""}
+        </div>
+    </div>`;
+}
+
 function construirePopupToilettes(props) {
     const horaires = parserHorairesOsm(props.opening_hours);
     const infos = [
@@ -2373,6 +2402,7 @@ function construirePopup(feature, layerConf) {
     else if (layerConf.id === "dpe") html = construirePopupDpe(props);
     else if (layerConf.id === "mutations") html = construirePopupMutation(props, feature);
     else if (layerConf.id === "dechets") html = construirePopupDechet(props);
+    else if (layerConf.id === "observationsNature") html = construirePopupObservationNature(props);
     else if (layerConf.id === "lockers") html = construirePopupLocker(props);
     else if (layerConf.id === "bibliotheques") html = construirePopupBibliotheque(props);
     else if (layerConf.id === "officesTourisme") html = construirePopupOfficeTourisme(props);

@@ -180,6 +180,7 @@ button { font-family: inherit; cursor: pointer; }
 .layer-etat-badge { color: var(--primaire); font-size: 11px; margin-left: 6px; vertical-align: middle; }
 .layer-etat-badge-erreur { color: #C94338; }
 
+.layer-etat-ligne { margin: 0 0 4px 28px; font-size: 11px; color: var(--soft); }
 .layer-legend { margin: 0 0 4px 28px; }
 .layer-legend summary { cursor: pointer; list-style: none; font-size: 11.5px; font-weight: 700; color: var(--primaire); padding: 2px 0; }
 .layer-legend summary::-webkit-details-marker { display: none; }

@@ -1184,6 +1184,66 @@ function legendeMutations() {
     return { titre: "Prix au m² de la dernière vente", classes: l.classes.slice(0, 7).concat([{ color: couleurPrix(null), label: "prix non calculable (terrain nu...)" }]) };
 }
 
+/* =========================================================
+   OBSERVATIONS NATURE (GBIF, interrogé en direct sur la zone affichée)
+   Comme un portail naturaliste : un point par observation de faune ou de flore, coloré par grand groupe.
+   Source : observations ouvertes de GBIF (INPN, iNaturalist, eBird...), avec leur licence et leur origine
+   indiquées dans la fiche. Seules les observations bien localisées (précision <= 1 km) sont gardées, et
+   au plus OBS_NATURE_MAX par écran : zoomer pour voir le détail. Les noms français viennent de
+   couches/nature/noms_especes.json (outils/build_noms_especes.py), à défaut le nom latin.
+   ========================================================= */
+const OBS_NATURE_MAX = 250;
+const TYPES_OBS_NATURE = [
+    { id: "oiseaux", label: "Oiseaux", icon: "fa-solid fa-dove", color: "#3E7CB1" },
+    { id: "mammiferes", label: "Mammifères", icon: "fa-solid fa-paw", color: "#A0603A" },
+    { id: "reptiles", label: "Reptiles", icon: "fa-solid fa-staff-snake", color: "#6B8E4E" },
+    { id: "amphibiens", label: "Amphibiens", icon: "fa-solid fa-frog", color: "#2E8B7A" },
+    { id: "insectes", label: "Insectes", icon: "fa-solid fa-bug", color: "#C98A2B" },
+    { id: "plantes", label: "Plantes", icon: "fa-solid fa-leaf", color: "#5E8C61" }
+];
+const TYPE_OBS_NATURE_DEFAUT = { id: "autres", label: "Autres (champignons, araignées...)", icon: "fa-solid fa-feather", color: "#8A7F78" };
+const CLASSES_OBS_NATURE = { 212: "oiseaux", 359: "mammiferes", 358: "reptiles", 131: "amphibiens", 216: "insectes" };
+function categorieObservationNature(feature) {
+    return (feature.properties || {}).groupe || "autres";
+}
+let nomsEspecesEnCache = null;
+function chargerNomsEspeces() {
+    if (!nomsEspecesEnCache) {
+        nomsEspecesEnCache = fetch("couches/nature/noms_especes.json").then(r => r.ok ? r.json() : {}).catch(() => ({}));
+    }
+    return nomsEspecesEnCache;
+}
+/* WKT (sens trigonométrique, comme l'exige GBIF) du rectangle affiché. */
+function wktRectangle(b) {
+    const w = b.getWest().toFixed(5), e = b.getEast().toFixed(5), s = b.getSouth().toFixed(5), n = b.getNorth().toFixed(5);
+    return `POLYGON((${w} ${s}, ${e} ${s}, ${e} ${n}, ${w} ${n}, ${w} ${s}))`;
+}
+function fetchObservationsNature(bounds) {
+    const params = new URLSearchParams({ geometry: wktRectangle(bounds), limit: String(OBS_NATURE_MAX), hasCoordinate: "true",
+        hasGeospatialIssue: "false", occurrenceStatus: "PRESENT", coordinateUncertaintyInMeters: "0,1000" });
+    ["HUMAN_OBSERVATION", "OBSERVATION", "MACHINE_OBSERVATION"].forEach(b => params.append("basisOfRecord", b));
+    return Promise.all([
+        fetch("https://api.gbif.org/v1/occurrence/search?" + params).then(r => { if (!r.ok) throw new Error("GBIF " + r.status); return r.json(); }),
+        chargerNomsEspeces()
+    ]).then(([rep, noms]) => ({
+        type: "FeatureCollection",
+        total: rep.count,
+        features: (rep.results || []).filter(o => typeof o.decimalLatitude === "number" && typeof o.decimalLongitude === "number").map(o => ({
+            type: "Feature",
+            geometry: { type: "Point", coordinates: [o.decimalLongitude, o.decimalLatitude] },
+            properties: {
+                cle: o.key, espece_cle: o.speciesKey || null,
+                nom: noms[o.speciesKey] || null, latin: o.species || o.scientificName || null,
+                nom_anglais: o.vernacularName || null,
+                groupe: CLASSES_OBS_NATURE[o.classKey] || (o.kingdom === "Plantae" ? "plantes" : "autres"),
+                date: o.eventDate || null, statut_uicn: o.iucnRedListCategory || null,
+                jeu: o.datasetName || o.institutionCode || null, licence: o.license || null,
+                precision_m: o.coordinateUncertaintyInMeters || null
+            }
+        }))
+    }));
+}
+
 /* Couleur par opérateur pour les antennes-relais (couches/services/antennes.geojson) :
    comparaison par mot-clé plutôt que valeur exacte du champ "operator",
    dont les variantes réelles observées dans ce fichier sont multiples
@@ -1741,6 +1801,21 @@ const LAYERS = [
         lazy: true, searchable: false, cluster: false,
         titleFields: ["reference"],
         subtitleFields: ["commune_nom", "surface_m2"]
+    },
+
+    {
+        id: "observationsNature", group: "tourisme", label: "Observations nature (faune et flore)",
+        /* Observations ouvertes de GBIF, interrogées en direct sur la zone affichée (voir plus haut). */
+        fetchViewport: fetchObservationsNature,
+        type: "point", icon: "fa-solid fa-feather", color: PALETTE.feuille,
+        iconePourFeature: feature => {
+            const t = TYPES_OBS_NATURE.find(x => x.id === categorieObservationNature(feature)) || TYPE_OBS_NATURE_DEFAUT;
+            return { icon: t.icon, color: t.color };
+        },
+        legend: TYPES_OBS_NATURE, legendDefaut: TYPE_OBS_NATURE_DEFAUT, categoriser: categorieObservationNature,
+        zoomMin: 13, lazy: true, searchable: false, cluster: false,
+        titleFields: ["nom", "latin"],
+        subtitleFields: ["latin"]
     },
 
     /* ---------- RISQUES & PRÉVENTION (couches en flux, données distantes
