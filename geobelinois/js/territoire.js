@@ -33,6 +33,8 @@ const TERRITOIRE = {
             "72155": { cityId: "51", aggloId: "3" },
             "72187": { cityId: "53", aggloId: "3" },
             "72200": { cityId: "22", aggloId: "3" },
+            "72268": { cityId: "55", aggloId: "3" },
+            "72306": { cityId: "54", aggloId: "3" },
             "72350": { cityId: "50", aggloId: "3" }
         }
     },
