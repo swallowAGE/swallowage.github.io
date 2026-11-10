@@ -192,6 +192,44 @@ function developperJoursOsm(plage) {
     return resultat;
 }
 
+const MOTIF_PREFIXE_SAISON = "[A-Za-z]{3,9}(?:\\s+\\d{1,2})?\\s*-\\s*[A-Za-z]{3,9}(?:\\s+\\d{1,2})?\\s*:";
+
+/* Données saisies à la main : le « ; » manque parfois avant une nouvelle plage
+   saisonnière ("...We:14:00-17:00 Jun-Aug: ..."), ce qui faisait perdre toute la période. */
+function normaliserSaisonsOsm(valeur) {
+    return valeur.replace(new RegExp("\\s+(?=" + MOTIF_PREFIXE_SAISON + ")", "g"), ";");
+}
+
+const MOIS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+function libelleMoisFr(mois, jour) {
+    const i = ORDRE_MOIS_OSM.indexOf(mois.slice(0, 3).toUpperCase());
+    if (i === -1) return null;
+    return (jour ? (Number(jour) === 1 ? "1er " : Number(jour) + " ") : "") + MOIS_FR[i];
+}
+
+/* Périodes d'un opening_hours saisonnier : [{label, mois, horaires}] dans l'ordre de saisie,
+   ou [] s'il n'y a pas au moins deux périodes distinctes. */
+function periodesSaisonnieresOsm(valeur) {
+    if (!valeur || typeof valeur !== "string") return [];
+    const groupes = [];
+    normaliserSaisonsOsm(valeur).split(";").forEach(bloc => {
+        const m = bloc.trim().match(/^([A-Za-z]{3,9})(?:\s+(\d{1,2}))?\s*-\s*([A-Za-z]{3,9})(?:\s+(\d{1,2}))?\s*:\s*(.+)$/);
+        if (!m) return;
+        const cle = `${m[1]} ${m[2] || ""}-${m[3]} ${m[4] || ""}`.replace(/\s+/g, " ");
+        let g = groupes.find(x => x.cle === cle);
+        if (!g) {
+            const d = libelleMoisFr(m[1], m[2]), f = libelleMoisFr(m[3], m[4]);
+            if (!d || !f) return;
+            g = { cle, mois: `${m[1]}${m[2] ? " " + m[2] : ""}-${m[3]}${m[4] ? " " + m[4] : ""}`,
+                  label: (m[2] || m[4]) ? `Du ${d} au ${f}` : `De ${d} à ${f}`, blocs: [] };
+            groupes.push(g);
+        }
+        g.blocs.push(m[5].trim());
+    });
+    if (groupes.length < 2) return [];
+    return groupes.map(g => ({ label: g.label, mois: g.mois, horaires: g.blocs.join(";") }));
+}
+
 function parserHorairesOsm(valeur) {
     if (!valeur || typeof valeur !== "string") return null;
     if (/^24\/7$/i.test(valeur.trim())) {
@@ -204,7 +242,7 @@ function parserHorairesOsm(valeur) {
     const jourActuel = maintenant.getDate(); // 1-31
     const horaires = {};
     let auMoinsUn = false;
-    valeur.split(";").forEach(bloc => {
+    normaliserSaisonsOsm(valeur).split(";").forEach(bloc => {
         bloc = bloc.trim();
         /* Plage saisonnière optionnelle en tête du bloc ("Apr-Sep: ..."
            ou "Jun 15-Sep 15: ..." pour un changement en cours de mois,
@@ -1314,7 +1352,8 @@ function construirePopupDecheterie(props) {
     const horaires = parserHorairesOsm(props.opening_hours);
     /* Horaires relevés à la main (outils/build_osm.py, saisie/horaires-decheteries.json) :
        les deux périodes de l'année sont affichées, celle en cours est signalée. */
-    const saisons = Array.isArray(props.horaires_saisons) ? props.horaires_saisons : [];
+    const saisons = Array.isArray(props.horaires_saisons) && props.horaires_saisons.length
+        ? props.horaires_saisons : periodesSaisonnieresOsm(props.opening_hours);
     const sectionsSaisons = saisons.map(per => {
         const lignes = construireLignesHoraires(parserHorairesOsm(per.horaires));
         if (!lignes) return "";
