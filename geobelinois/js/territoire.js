@@ -25,6 +25,11 @@ const TERRITOIRE = {
             "72268": "https://www.intramuros.org/saint-biez-en-belin",
             "72306": "https://www.intramuros.org/saint-ouen-en-belin",
             "72350": "https://www.intramuros.org/teloche"
+        },
+        /* Widget d'actualités officiel d'Intramuros : identifiants fournis dans le code du widget
+           (intramurosCityIdNews / intramurosAggloIdNews). Une commune sans entrée garde le simple lien. */
+        widgets: {
+            "72124": { cityId: "49", aggloId: "3" }
         }
     },
     goatcounter: null,

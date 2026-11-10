@@ -45,6 +45,8 @@ const TERRITOIRE = {
              une page Intramuros par commune (le service ne s'intègre pas dans la
              page) : le bouton ouvre un menu des communes, chacune renvoyant vers sa
              page dans un nouvel onglet, et la fiche de chaque commune a son lien ;
+             `widgets: { "72124": { cityId, aggloId } }` (facultatif) affiche en plus, dans la fiche de ces
+             communes, le widget d'actualités officiel d'Intramuros ;
          null
              pas de bouton « Actualités ». */
     actualites: { type: "illiwap", id: "cc-loir-luce-berce", communes: true },
