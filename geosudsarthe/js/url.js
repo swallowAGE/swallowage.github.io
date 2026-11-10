@@ -8,6 +8,10 @@
    (carburants), singulier/pluriel, sans accents ni majuscules, quelques
    mots courants (essence, courrier, colis...), ou un morceau de son
    libellé. Un nom inconnu est simplement ignoré.
+   Avec « commune » (code INSEE ou nom, sans accents ni majuscules), la carte
+   s'ouvre aussi zoomée sur cette commune, au niveau de zoom nécessaire aux
+   couches ouvertes :
+     https://hirundage.fr/geoberce/?couche=observationsNature&commune=le-grand-luce
    ========================================================= */
 (function () {
     const ALIAS = {
@@ -54,5 +58,31 @@
         if (trouvees) fermerAccueil();
     }
 
+    /* ?commune=72143 ou ?commune=Le Grand-Lucé : zoom sur la commune. Les contours des communes se chargent
+       en différé : on réessaie quelques secondes. Le zoom est relevé au seuil des couches ouvertes (zoomMin),
+       sinon une couche comme les observations nature resterait masquée. */
+    function zoomerCommuneDepuisUrl() {
+        let valeur;
+        try { valeur = new URLSearchParams(window.location.search).get("commune"); } catch (_) { return; }
+        if (!valeur) return;
+        const n = normaliser(valeur);
+        const code = Object.keys(COMMUNES_TERRITOIRE).find(c => c === valeur.trim() || normaliser(COMMUNES_TERRITOIRE[c]) === n);
+        if (!code) { console.warn("GéoBercé : commune inconnue dans l'adresse :", valeur); return; }
+        fermerAccueil();
+        let essais = 0;
+        const attente = setInterval(() => {
+            essais++;
+            if (typeof couchesCommunesParInsee === "undefined" || !couchesCommunesParInsee[code]) {
+                if (essais > 60) clearInterval(attente);
+                return;
+            }
+            clearInterval(attente);
+            zoomerSurCommune(map, code);
+            const seuil = Math.max(0, ...LAYERS.filter(l => l.zoomMin && document.getElementById("layer-" + l.id)?.checked).map(l => l.zoomMin));
+            if (map.getZoom() < seuil) map.setView(couchesCommunesParInsee[code].getBounds().getCenter(), seuil);
+        }, 250);
+    }
+
     ouvrirCouchesDepuisUrl();
+    zoomerCommuneDepuisUrl();
 })();
