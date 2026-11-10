@@ -368,9 +368,9 @@ function construireContacts(props, champs = {}) {
 
 /* Liste jour par jour à partir d'un objet horaires {Mo: [...], ...},
    jour courant mis en évidence. */
-function construireLignesHoraires(horaires) {
+function construireLignesHoraires(horaires, surlignerAujourdhui = true) {
     if (!horaires) return "";
-    const aujourdhui = jourOsmAujourdhui();
+    const aujourdhui = surlignerAujourdhui ? jourOsmAujourdhui() : null;
     return ORDRE_JOURS_OSM.filter(j => j in horaires).map(j => {
         const plages = horaires[j];
         const texte = plages.length ? plages.join(", ") : "Fermé";
@@ -1355,9 +1355,9 @@ function construirePopupDecheterie(props) {
     const saisons = Array.isArray(props.horaires_saisons) && props.horaires_saisons.length
         ? props.horaires_saisons : periodesSaisonnieresOsm(props.opening_hours);
     const sectionsSaisons = saisons.map(per => {
-        const lignes = construireLignesHoraires(parserHorairesOsm(per.horaires));
-        if (!lignes) return "";
         const enCours = parserHorairesOsm(`${per.mois}: Mo-Su 00:00-01:00`) !== null;
+        const lignes = construireLignesHoraires(parserHorairesOsm(per.horaires), enCours);
+        if (!lignes) return "";
         return `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">${echapperHtml(per.label)}${enCours ? " · en ce moment" : ""}</div>${lignes}</div>`;
     }).join("");
     const lignesHoraires = sectionsSaisons ? "" : construireLignesHoraires(horaires);
