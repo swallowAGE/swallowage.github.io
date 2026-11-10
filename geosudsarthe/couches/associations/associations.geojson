@@ -1,7 +1,7 @@
 {
  "type": "FeatureCollection",
  "source": "Répertoire national des associations (RNA), data.gouv.fr",
- "mise_a_jour": "2026-11-08",
+ "mise_a_jour": "2026-11-10",
  "features": [
   {
    "type": "Feature",
@@ -1993,7 +1993,7 @@
    "properties": {
     "com_insee": "72191",
     "com_nom": "Mayet",
-    "nb": 52,
+    "nb": 51,
     "titre": "Associations de Mayet",
     "associations": [
      {
@@ -2090,14 +2090,6 @@
       "cat": "environnement",
       "creation": "2012",
       "declaration": "2023",
-      "site": ""
-     },
-     {
-      "titre": "Association la Tour de Mayet",
-      "objet": "Pratique du jeu d'echecs",
-      "cat": "loisirs",
-      "creation": "1996",
-      "declaration": "2016",
       "site": ""
      },
      {

@@ -1,7 +1,7 @@
 {
  "type": "FeatureCollection",
  "source": "Registre SIRENE (Insee), API Recherche d'entreprises",
- "mise_a_jour": "2026-11-08",
+ "mise_a_jour": "2026-11-10",
  "features": [
   {
    "type": "Feature",

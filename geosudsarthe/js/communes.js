@@ -72,6 +72,20 @@ function chargerQualiteEauCommune(codeInsee) {
    traités pareil, comme le reste du dashboard quand une source n'a
    rien à montrer (voir #commune-qualite-eau dans construireDashboardCommune,
    qui reste alors un simple espace vide dans la grille). */
+/* Résultats officiels du contrôle sanitaire (Ministère de la Santé / ARS) : le site orobnat n'a pas
+   d'adresse directe par commune, la page de résultats s'obtient par un formulaire envoyé en POST
+   (région, département, code INSEE de la commune, réseau « code_UDI_département »). On envoie
+   donc ce même formulaire, depuis un bouton, dans un nouvel onglet. Sarthe (région 52) seulement. */
+function construireLienAnalysesEau(resultat) {
+    const insee = String(resultat.code_commune || "");
+    const reseau = resultat.reseaux && resultat.reseaux[0] && resultat.reseaux[0].code;
+    if (!/^72\d{3}$/.test(insee) || !reseau) return "";
+    const champs = { methode: "rechercher", idRegion: "52", usd: "AEP", posPLV: "0", departement: "072",
+        communeDepartement: insee, reseau: `${reseau}_072` };
+    const inputs = Object.entries(champs).map(([k, v]) => `<input type="hidden" name="${k}" value="${echapperHtml(v)}">`).join("");
+    return `<form class="commune-eau-analyses" method="post" action="https://orobnat.sante.gouv.fr/orobnat/rechercherResultatQualite.do" target="_blank">${inputs}<button type="submit" class="rf-bouton-principal commune-lien-actu"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir les analyses officielles</button></form>`;
+}
+
 function construireCarteQualiteEau(resultat) {
     if (!resultat || !resultat.conclusion_conformite_prelevement) return "";
     const niveau = NIVEAUX_EAU[niveauConformiteEau(resultat) || "conforme"];
@@ -88,6 +102,7 @@ function construireCarteQualiteEau(resultat) {
         <div class="commune-ligne">${echapperHtml(niveau.texte)}</div>
         <div class="popup-fiche-precision">Conclusion officielle : ${echapperHtml(resultat.conclusion_conformite_prelevement)}</div>
         ${precisions ? `<div class="popup-fiche-precision">${echapperHtml(precisions)}</div>` : ""}
+        ${construireLienAnalysesEau(resultat)}
     </div>`;
 }
 
@@ -334,10 +349,16 @@ function construireCarteActualites(codeInsee) {
     if (actu && actu.type === "intramuros") {
         const url = (actu.communes || {})[codeInsee];
         if (!url) return "";
+        const nom = COMMUNES_TERRITOIRE[codeInsee] || "la commune";
+        const page = url.replace(/\/+$/, "") + "/actualites";
+        /* Les actualités sont intégrées comme celles d'Illiwap. Si Intramuros refuse de s'afficher dans
+           une page tierce, le cadre reste vide : le bouton « Ouvrir sur Intramuros » reste donc toujours visible. */
         return `<div class="commune-carte commune-carte-large">
         <div class="commune-carte-titre"><i class="fa-solid fa-bullhorn"></i>Actualités (Intramuros)</div>
-        <div class="commune-ligne">Les actualités et les alertes de la commune sont publiées sur Intramuros.</div>
-        <a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">Voir les actualités de ${echapperHtml(COMMUNES_TERRITOIRE[codeInsee] || "la commune")}</a>
+        <div class="illiwap-embed">
+            <iframe src="${echapperHtml(page)}" title="Actualités de ${echapperHtml(nom)} (Intramuros)" loading="lazy"></iframe>
+        </div>
+        <a class="rf-bouton-principal commune-lien-actu" href="${echapperHtml(url)}" target="_blank" rel="noopener noreferrer">Ouvrir sur Intramuros</a>
     </div>`;
     }
     if (!actu || actu.type !== "illiwap" || !actu.communes) return "";
