@@ -156,7 +156,7 @@
 <div class="layout">
 
   <div class="visual">
-    <svg id="scene" viewBox="0 0 900 560" role="img" aria-label="Coupe d'un paysage montrant le parcours de l'eau : pluie, nappe souterraine, captage, usine de traitement, château d'eau, réseau, robinet, station d'épuration et rivière.">
+    <svg id="scene" viewBox="0 0 1000 560" role="img" aria-label="Coupe d'un paysage montrant le parcours de l'eau : pluie, nappe souterraine, captage, usine de traitement, château d'eau, réseau, robinet, station d'épuration et rivière.">
       <defs>
         <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" style="stop-color: var(--sky1)"/>
@@ -196,7 +196,7 @@
           <circle cx="58" cy="24" r="1.3" fill="#5e3b1c" opacity=".3"/>
         </pattern>
         <clipPath id="gclip">
-          <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 L840,300 L900,300 L900,560 L0,560 Z"/>
+          <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 C835,262 850,266 868,280 C884,292 898,294 912,294 L944,294 C968,294 988,276 1000,254 L1000,560 L0,560 Z"/>
         </clipPath>
         <filter id="soft" x="-20%" y="-30%" width="140%" height="180%">
           <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#17303f" flood-opacity=".22"/>
@@ -239,10 +239,10 @@
       </defs>
 
       <!-- Ciel -->
-      <rect x="0" y="0" width="900" height="560" fill="url(#sky)"/>
+      <rect x="0" y="0" width="1000" height="560" fill="url(#sky)"/>
 
       <!-- Soleil -->
-      <g transform="translate(846,42)">
+      <g transform="translate(930,44)">
         <circle r="30" fill="#ffe9a0" opacity=".4"/>
         <g stroke="#f0c455" stroke-width="3" stroke-linecap="round">
           <path d="M0,-30 V-40 M0,30 V40 M-30,0 H-40 M30,0 H40 M21,-21 L28,-28 M-21,21 L-28,28 M21,21 L28,28 M-21,-21 L-28,-28"/>
@@ -254,12 +254,12 @@
       <g opacity=".85">
         <use href="#cloud" transform="translate(300,92) scale(.55)"/>
         <use href="#cloud" transform="translate(468,138) scale(.6)"/>
-        <use href="#cloud" transform="translate(880,168) scale(.5)"/>
+        <use href="#cloud" transform="translate(900,178) scale(.5)"/>
       </g>
 
       <!-- Collines au loin -->
       <path d="M180,232 C240,196 330,192 400,228 C450,206 520,206 580,236 L580,270 L180,270 Z" fill="var(--hill1)"/>
-      <path d="M560,232 C620,204 700,206 760,232 C810,214 860,214 900,230 L900,275 L560,275 Z" fill="var(--hill1)"/>
+      <path d="M560,232 C620,204 700,206 760,232 C810,214 860,214 900,230 C940,246 975,222 1000,228 L1000,275 L560,275 Z" fill="var(--hill1)"/>
       <path d="M0,205 C60,182 150,186 235,226 L235,270 L0,270 Z" fill="var(--hill2)"/>
 
       <!-- Arbres (derrière le sol) -->
@@ -270,14 +270,15 @@
         <use href="#tree" transform="translate(205,208) scale(.8)"/>
         <use href="#tree" transform="translate(486,250) scale(.7)"/>
         <use href="#tree" transform="translate(648,248) scale(.8)"/>
-        <use href="#tree" transform="translate(826,262) scale(.85)"/>
-        <use href="#tree" transform="translate(872,268) scale(1.05)"/>
+        <use href="#tree" transform="translate(836,264) scale(.8)"/>
+        <use href="#tree" transform="translate(972,282) scale(.95)"/>
+        <use href="#tree" transform="translate(992,262) scale(1.05)"/>
       </g>
 
       <!-- Sol en coupe -->
       <g clip-path="url(#gclip)">
-        <rect x="0" y="0" width="900" height="560" fill="url(#gSoil)"/>
-        <rect x="0" y="190" width="900" height="220" fill="url(#speck)"/>
+        <rect x="0" y="0" width="1000" height="560" fill="url(#gSoil)"/>
+        <rect x="0" y="190" width="1000" height="220" fill="url(#speck)"/>
         <!-- pierres dans le sol -->
         <g fill="#8f6a43" opacity=".55">
           <ellipse cx="60" cy="318" rx="9" ry="5"/><ellipse cx="205" cy="326" rx="7" ry="4"/>
@@ -286,16 +287,16 @@
           <ellipse cx="780" cy="310" rx="6" ry="3.5"/>
         </g>
         <!-- nappe -->
-        <path d="M0,348 C100,336 200,356 300,346 S500,336 600,348 S800,356 900,344 L900,414 L0,414 Z" fill="url(#gAq)"/>
-        <path d="M0,366 q25,-7 50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0" fill="none" stroke="#ffffff" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"/>
-        <path d="M0,392 q25,-7 50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/>
-        <path class="aq-dry" d="M0,330 L900,330 L900,372 q-25,7 -50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 Z"/>
+        <path d="M0,352 C150,352 300,346 450,340 S700,328 800,320 C850,316 880,314 900,314 L1000,314 L1000,414 L0,414 Z" fill="url(#gAq)"/>
+        <path d="M0,366 q25,-7 50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0" fill="none" stroke="#ffffff" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"/>
+        <path d="M0,392 q25,-7 50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0 t50,0" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="2" stroke-linecap="round"/>
+        <path class="aq-dry" d="M0,352 C150,352 300,346 450,340 S700,328 800,320 C850,316 880,314 900,314 L1000,314 L1000,372 q-25,7 -50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 t-50,0 Z"/>
         <!-- roche -->
-        <path d="M0,410 C150,400 300,420 450,410 S750,402 900,414 L900,560 L0,560 Z" fill="url(#gRock)"/>
+        <path d="M0,410 C150,400 300,420 450,410 S750,402 900,414 S980,414 1000,414 L1000,560 L0,560 Z" fill="url(#gRock)"/>
         <g fill="#000" opacity=".16">
           <ellipse cx="70" cy="452" rx="26" ry="12"/><ellipse cx="250" cy="500" rx="30" ry="13"/>
           <ellipse cx="420" cy="446" rx="22" ry="10"/><ellipse cx="640" cy="508" rx="34" ry="14"/>
-          <ellipse cx="820" cy="456" rx="28" ry="12"/><ellipse cx="520" cy="530" rx="22" ry="9"/>
+          <ellipse cx="820" cy="456" rx="28" ry="12"/><ellipse cx="520" cy="530" rx="22" ry="9"/><ellipse cx="940" cy="520" rx="30" ry="12"/><ellipse cx="960" cy="450" rx="22" ry="10"/>
           <ellipse cx="130" cy="530" rx="20" ry="9"/>
         </g>
         <g fill="#fff" opacity=".1">
@@ -303,8 +304,8 @@
           <ellipse cx="636" cy="504" rx="24" ry="7"/><ellipse cx="816" cy="452" rx="18" ry="6"/>
         </g>
         <!-- herbe : la moitié basse du trait épais, seule visible sous la surface -->
-        <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 L840,300 L900,300" fill="none" stroke="var(--grass)" stroke-width="22" stroke-linejoin="round"/>
-        <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 L840,300 L900,300" fill="none" stroke="var(--grass2)" stroke-width="8" stroke-linejoin="round" opacity=".9"/>
+        <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 C835,262 850,266 868,280 C884,292 898,294 912,294 L944,294 C968,294 988,276 1000,254" fill="none" stroke="var(--grass)" stroke-width="22" stroke-linejoin="round"/>
+        <path d="M0,200 C80,170 170,180 240,225 C280,250 300,262 340,262 L470,262 C500,262 515,240 540,215 C560,196 585,190 610,200 C640,215 650,262 690,262 L820,262 C835,262 850,266 868,280 C884,292 898,294 912,294 L944,294 C968,294 988,276 1000,254" fill="none" stroke="var(--grass2)" stroke-width="8" stroke-linejoin="round" opacity=".9"/>
       </g>
 
       <!-- Brins d'herbe et buissons -->
@@ -321,13 +322,13 @@
         </g>
       </g>
 
-      <!-- Rivière -->
-      <rect x="842" y="288" width="58" height="28" rx="3" fill="url(#gWater)"/>
-      <path d="M848,296 q6,-4 12,0 t12,0 t12,0 t12,0 M850,306 q6,-4 12,0 t12,0 t12,0" fill="none" stroke="#e8f6fd" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
+      <!-- Rivière : un chenal qui rejoint la nappe -->
+      <rect x="898" y="292" width="52" height="32" rx="3" style="fill: var(--aq1)"/>
+      <path d="M902,300 q6,-4 12,0 t12,0 t12,0 t12,0 M904,311 q6,-4 12,0 t12,0 t12,0" fill="none" stroke="#e8f6fd" stroke-width="1.6" stroke-linecap="round" opacity=".8"/>
 
       <!-- ÉTAPE 8 (partie haute) : l'évaporation, dessinée sous les étiquettes et la bulle du robinet -->
       <g class="el" data-step="8">
-        <path class="dash" d="M870,290 C895,140 500,0 120,70" marker-end="url(#arrow)"/>
+        <path class="dash" d="M925,292 C950,140 500,0 120,70" marker-end="url(#arrow)"/>
         <g class="tag" transform="translate(500,28)"><rect x="-183.5" y="-13.5" width="367.0" height="27" rx="14"/><text x="0" y="-0.5">Évaporation, puis nuages : le cycle recommence</text></g>
       </g>
 
@@ -354,6 +355,7 @@
           <polygon points="143,336 157,336 150,348"/>
         </g>
         <path class="flow" d="M60,375 L290,375" style="stroke-width:3"/>
+        <path class="flow" d="M330,378 L760,378 C860,378 900,358 922,326" style="stroke-width:3"/>
         <g class="tag" transform="translate(560,384)"><rect x="-74.8" y="-13.5" width="149.5" height="27" rx="14"/><text x="0" y="-0.5">Nappe souterraine</text></g>
         <g class="tag" transform="translate(560,486)"><rect x="-74.8" y="-13.5" width="149.5" height="27" rx="14"/><text x="0" y="-0.5">Roche imperméable</text></g>
       </g>
@@ -446,10 +448,10 @@
         <circle cx="791" cy="251" r="6.5" fill="#bfe0f2" stroke="#8fa0ab" stroke-width="1.5"/>
         <circle cx="805" cy="251" r="6.5" fill="#a9d3ea" stroke="#8fa0ab" stroke-width="1.5"/>
         <path d="M778,262 v-6 M818,262 v-6 M778,258 h40" stroke="#a89572" stroke-width="1.5" fill="none"/>
-        <path class="pipe" d="M815,256 L846,256 L846,290" style="stroke-width:4"/>
-        <path class="flow" d="M815,256 L846,256 L846,290"/>
+        <path class="pipe" d="M816,256 L824,256 L824,302 L920,302 L925,292" style="stroke-width:4"/>
+        <path class="flow" d="M816,256 L824,256 L824,302 L920,302 L925,292"/>
         <g class="tag" transform="translate(770,340)"><rect x="-82.2" y="-13.5" width="164.5" height="27" rx="14"/><text x="0" y="-0.5">Station d'épuration</text></g>
-        <g class="tag" transform="translate(866,310)"><rect x="-37.2" y="-13.5" width="74.5" height="27" rx="14"/><text x="0" y="-0.5">Rivière</text></g>
+        <g class="tag" transform="translate(924,266)"><rect x="-37.2" y="-13.5" width="74.5" height="27" rx="14"/><text x="0" y="-0.5">Rivière</text></g>
       </g>
 
       <!-- La goutte -->
@@ -608,8 +610,8 @@
     return [u*u*u*p0[0] + 3*u*u*t*p1[0] + 3*u*t*t*p2[0] + t*t*t*p3[0],
             u*u*u*p0[1] + 3*u*u*t*p1[1] + 3*u*t*t*p2[1] + t*t*t*p3[1]];
   });
-  const R2 = [[768,262],[768,290],[790,290],[790,256],[846,256],[846,290],[870,290],
-              ...arc([870,290],[895,140],[500,0],[120,70], 40)];
+  const R2 = [[768,262],[768,290],[790,290],[790,256],[816,256],[824,256],[824,302],[920,302],[925,292],
+              ...arc([925,292],[950,140],[500,0],[120,70], 40)];
 
   const build = pts => {
     const cum = [0];
