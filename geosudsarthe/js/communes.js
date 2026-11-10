@@ -109,15 +109,17 @@ function chargerQualiteEauCommune(codeInsee) {
    traités pareil, comme le reste du dashboard quand une source n'a
    rien à montrer (voir #commune-qualite-eau dans construireDashboardCommune,
    qui reste alors un simple espace vide dans la grille). */
-/* Résultats officiels du contrôle sanitaire (Ministère de la Santé / ARS, site orobnat). Le formulaire de résultats
-   refuse d'être envoyé depuis un autre site (« Un problème technique est survenu », il lui faut une session ouverte
-   sur ses pages) : on ouvre donc la page de recherche de la région, et on rappelle quoi choisir. */
+/* Résultats officiels du contrôle sanitaire (Ministère de la Santé / ARS, site orobnat) : la page de résultats
+   s'ouvre directement avec les mêmes champs que le formulaire du site (région 52, département 072, code INSEE,
+   réseau « code_072 »). Un envoi en POST depuis nos pages est refusé par le site, l'adresse avec les champs
+   dans l'URL fonctionne. Sarthe seulement. */
 function construireLienAnalysesEau(resultat) {
     const insee = String(resultat.code_commune || "");
-    if (!/^72\d{3}$/.test(insee)) return "";
-    const nom = COMMUNES_TERRITOIRE[insee] || "votre commune";
-    return `<div class="popup-fiche-precision">Sur le site officiel : département Sarthe, commune « ${echapperHtml(nom)} », puis « Rechercher ».</div>
-        <a class="rf-bouton-principal commune-lien-actu" href="https://orobnat.sante.gouv.fr/orobnat/afficherPage.do?methode=menu&usd=AEP&idRegion=52" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir les analyses officielles</a>`;
+    const reseau = resultat.reseaux && resultat.reseaux[0] && resultat.reseaux[0].code;
+    if (!/^72\d{3}$/.test(insee) || !reseau) return "";
+    const params = new URLSearchParams({ methode: "rechercher", idRegion: "52", usd: "AEP", posPLV: "0",
+        departement: "072", communeDepartement: insee, reseau: `${reseau}_072` });
+    return `<a class="rf-bouton-principal commune-lien-actu" href="https://orobnat.sante.gouv.fr/orobnat/rechercherResultatQualite.do?${echapperHtml(params.toString())}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir les analyses officielles</a>`;
 }
 
 function construireCarteQualiteEau(resultat) {
