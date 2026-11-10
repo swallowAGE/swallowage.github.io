@@ -360,6 +360,15 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
    que la hauteur de son propre contenu : d'où la carte "Qualité de
    l'eau" plus courte que ses voisines - retour direct de l'utilisatrice. */
 #commune-qualite-eau, #commune-qualite-eau .commune-carte { height: 100%; }
+#commune-nature:empty { display: none; }
+.nature-titre-liste { margin: 16px 0 6px; font-size: 11px; font-weight: 700; color: var(--soft); }
+.nature-liste { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 4px 16px; }
+.nature-liste li { display: flex; align-items: baseline; gap: 8px; font-size: 12px; color: var(--ink); padding: 3px 0; }
+.nature-liste em { color: var(--soft); font-size: 11px; }
+.nature-statut { flex-shrink: 0; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: var(--raised); color: var(--ink); }
+.nature-CR, .nature-EN { background: #F3D9DD; color: #8E2F40; }
+.nature-VU { background: #F6E3C4; color: #8A5A12; }
+.nature-NT { background: #EFEBC9; color: #6B6420; }
 .commune-carte-titre {
     display: flex; align-items: center; gap: 8px;
     font-size: 11px; font-weight: 800; color: var(--ardoise);
