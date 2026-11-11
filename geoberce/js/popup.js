@@ -142,6 +142,32 @@ function jourOsmAujourdhui() {
     return ORDRE_JOURS_OSM[(new Date().getDay() + 6) % 7]; // getDay() : 0 = dimanche
 }
 
+/* Jours fériés en France métropolitaine (« PH » dans la syntaxe OSM : "Mo-Sa 09:00-18:00; PH off") :
+   1er janvier, lundi de Pâques, 1er mai, 8 mai, Ascension, lundi de Pentecôte, 14 juillet, 15 août,
+   1er novembre, 11 novembre, 25 décembre. Pâques par l'algorithme de Meeus/Jones/Butcher. */
+const cacheJoursFeries = {};
+function joursFeriesFrance(annee) {
+    if (cacheJoursFeries[annee]) return cacheJoursFeries[annee];
+    const a = annee % 19, b = Math.floor(annee / 100), c = annee % 100, d = Math.floor(b / 4), e = b % 4;
+    const f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const mois = Math.floor((h + l - 7 * m + 114) / 31), jour = ((h + l - 7 * m + 114) % 31) + 1;
+    const paques = new Date(annee, mois - 1, jour);
+    const apres = n => { const x = new Date(paques); x.setDate(x.getDate() + n); return [x.getMonth() + 1, x.getDate()]; };
+    const cle = (mm, jj) => `${mm}-${jj}`;
+    const fixes = [[1, 1], [5, 1], [5, 8], [7, 14], [8, 15], [11, 1], [11, 11], [12, 25]];
+    cacheJoursFeries[annee] = new Set(fixes.concat([apres(1), apres(39), apres(50)]).map(([mm, jj]) => cle(mm, jj)));
+    return cacheJoursFeries[annee];
+}
+function estJourFerie(date = new Date()) {
+    return joursFeriesFrance(date.getFullYear()).has(`${date.getMonth() + 1}-${date.getDate()}`);
+}
+/* Clé des horaires à lire aujourd'hui : « PH » un jour férié si l'établissement a des horaires de jours fériés
+   (sinon le jour de semaine habituel, comme le veut la syntaxe OSM). */
+function cleHorairesAujourdhui(horaires) {
+    return (horaires && "PH" in horaires && estJourFerie()) ? "PH" : jourOsmAujourdhui();
+}
+
 /* Horaires saisonniers ("Apr-Sep: Mo-Sa 09:00-19:00; Oct-Mar: Mo-Sa
    09:00-17:00", motif courant pour les déchèteries été/hiver) : à
    vérifier si la date actuelle tombe dans une plage "Mmm[ jj]-Mmm[ jj]:"
@@ -185,7 +211,7 @@ function developperJoursOsm(plage) {
                 if (i === j) break;
                 i = (i + 1) % 7;
             }
-        } else if (ORDRE_JOURS_OSM.includes(morceau)) {
+        } else if (ORDRE_JOURS_OSM.includes(morceau) || morceau === "PH") {
             resultat.push(morceau);
         }
     });
@@ -262,7 +288,7 @@ function parserHorairesOsm(valeur) {
            12:30") : on capture d'abord la liste de jours par motif plutôt
            que par position, puis on retire l'espace et/ou le ":" qui suit,
            quel que soit celui utilisé. */
-        const motifJours = bloc.match(/^((?:Mo|Tu|We|Th|Fr|Sa|Su)(?:[-,](?:Mo|Tu|We|Th|Fr|Sa|Su))*)/);
+        const motifJours = bloc.match(/^((?:Mo|Tu|We|Th|Fr|Sa|Su|PH)(?:[-,](?:Mo|Tu|We|Th|Fr|Sa|Su|PH))*)/);
         if (!motifJours) return;
         const jours = developperJoursOsm(motifJours[1]);
         const horaireBrut = bloc.slice(motifJours[0].length).replace(/^[\s:]+/, "").trim();
@@ -313,7 +339,7 @@ function parserHorairesMairie(texte) {
 
 function estOuvertMaintenant(horaires) {
     if (!horaires) return null;
-    const plages = horaires[jourOsmAujourdhui()];
+    const plages = horaires[cleHorairesAujourdhui(horaires)];
     if (!plages || !plages.length) return false;
     const maintenant = new Date();
     const minutes = maintenant.getHours() * 60 + maintenant.getMinutes();
@@ -370,12 +396,18 @@ function construireContacts(props, champs = {}) {
    jour courant mis en évidence. */
 function construireLignesHoraires(horaires, surlignerAujourdhui = true) {
     if (!horaires) return "";
-    const aujourdhui = surlignerAujourdhui ? jourOsmAujourdhui() : null;
-    return ORDRE_JOURS_OSM.filter(j => j in horaires).map(j => {
-        const plages = horaires[j];
+    const aujourdhui = surlignerAujourdhui ? cleHorairesAujourdhui(horaires) : null;
+    const ligne = (cle, libelle) => {
+        const plages = horaires[cle];
         const texte = plages.length ? plages.join(", ") : "Fermé";
-        return `<div class="popup-fiche-jour${j === aujourdhui ? " aujourdhui" : ""}"><span>${JOURS_OSM[j]}</span><strong>${echapperHtml(texte)}</strong></div>`;
-    }).join("");
+        return `<div class="popup-fiche-jour${cle === aujourdhui ? " aujourdhui" : ""}"><span>${libelle}</span><strong>${echapperHtml(texte)}</strong></div>`;
+    };
+    const jours = ORDRE_JOURS_OSM.filter(j => j in horaires).map(j => ligne(j, JOURS_OSM[j])).join("");
+    /* Un jour férié sans horaires de jours fériés connus : les horaires affichés sont ceux d'un jour ordinaire, ce
+       qui peut être faux (beaucoup de commerces et de déchèteries ferment) - on le dit plutôt que d'afficher « Ouvert ». */
+    const note = (surlignerAujourdhui && !("PH" in horaires) && estJourFerie())
+        ? `<div class="popup-fiche-precision">Aujourd'hui est un jour férié : horaires non précisés pour les jours fériés, à vérifier.</div>` : "";
+    return jours + ("PH" in horaires ? ligne("PH", "Jours fériés") : "") + note;
 }
 
 function construireBadgeOuvert(horaires) {
