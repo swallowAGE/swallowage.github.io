@@ -238,7 +238,9 @@ function libelleMoisFr(mois, jour) {
 function periodesSaisonnieresOsm(valeur) {
     if (!valeur || typeof valeur !== "string") return [];
     const groupes = [];
+    const feries = []; // blocs « PH ... » sans saison : valables dans chaque période
     normaliserSaisonsOsm(valeur).split(";").forEach(bloc => {
+        if (/^PH\b/.test(bloc.trim())) { feries.push(bloc.trim()); return; }
         const m = bloc.trim().match(/^([A-Za-z]{3,9})(?:\s+(\d{1,2}))?\s*-\s*([A-Za-z]{3,9})(?:\s+(\d{1,2}))?\s*:\s*(.+)$/);
         if (!m) return;
         const cle = `${m[1]} ${m[2] || ""}-${m[3]} ${m[4] || ""}`.replace(/\s+/g, " ");
@@ -253,7 +255,7 @@ function periodesSaisonnieresOsm(valeur) {
         g.blocs.push(m[5].trim());
     });
     if (groupes.length < 2) return [];
-    return groupes.map(g => ({ label: g.label, mois: g.mois, horaires: g.blocs.join(";") }));
+    return groupes.map(g => ({ label: g.label, mois: g.mois, horaires: g.blocs.concat(feries).join(";") }));
 }
 
 function parserHorairesOsm(valeur) {
