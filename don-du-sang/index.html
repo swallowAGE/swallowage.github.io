@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Où donner son sang ? – Hirund AGE</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="La prochaine collecte de sang près de chez vous, les suivantes avec les places libres, et les maisons du don ouvertes toute l&#x27;année, d&#x27;après l&#x27;Établissement français du sang.">
+<link rel="canonical" href="https://hirundage.fr/don-du-sang/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="hirund·AGE">
+<meta property="og:title" content="Où donner son sang ? – Hirund AGE">
+<meta property="og:description" content="La prochaine collecte de sang près de chez vous, les suivantes avec les places libres, et les maisons du don ouvertes toute l&#x27;année, d&#x27;après l&#x27;Établissement français du sang.">
+<meta property="og:url" content="https://hirundage.fr/don-du-sang/">
+<meta property="og:image" content="https://hirundage.fr/partage.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B2230; --soft: #6B5F5A; --paper: #FAF6F0; --raised: #F3ECE2; --field: #FFFDF9;
+    --gold: #C9A85C; --gold-ink: #8A6D2B; --gold-hi: #E2C47E; --rose: #8E4458; --green: #5E8C61;
+    --water: #2F6F8F; --on-dark: #E5DCD6; --rule: rgba(43, 34, 48, 0.12); --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Jost", system-ui, sans-serif; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 16px 48px; display: flex; flex-direction: column; gap: 16px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 14px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 0; font-size: clamp(28px, 6vw, 40px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+  .intro { margin: 0; color: var(--soft); font-size: 16px; }
+  label, .lbl { display: block; font-size: 13px; font-weight: 500; color: var(--soft); margin: 0 0 6px; }
+  .fld { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 46px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .row > div { flex: 1 1 220px; min-width: 0; position: relative; }
+  .suggest { position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 10; list-style: none; margin: 0; padding: 4px; background: var(--field); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 6px 20px rgba(43, 34, 48, 0.12); }
+  .suggest button { display: block; width: 100%; text-align: left; border: 0; background: transparent; font: inherit; font-size: 15px; color: var(--ink); padding: 9px 10px; border-radius: 8px; cursor: pointer; }
+  .suggest button:hover, .suggest button:focus-visible { background: var(--raised); }
+  .suggest small { display: block; font-size: 13px; color: var(--soft); }
+  .status { min-height: 1.3em; font-size: 15px; color: var(--soft); margin: 0; }
+  .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .seg button { font: inherit; font-size: 15px; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; min-height: 40px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .card { background: var(--ink); color: var(--paper); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .card .kicker { color: var(--gold); }
+  .verdict { display: flex; align-items: center; gap: 12px; }
+  .verdict svg { flex: none; }
+  .verdict strong { font-size: clamp(28px, 7vw, 34px); line-height: 1.1; font-weight: 500; color: var(--gold-hi); }
+  .card p { margin: 0; font-size: 15px; font-weight: 300; color: var(--on-dark); }
+  .card .official { font-size: 14px; border-top: 1px dashed rgba(250, 246, 240, 0.25); padding-top: 10px; }
+  .card a { color: var(--gold-hi); }
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tile { background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 14px; padding: 14px; }
+  .tile .k { font-size: 14px; color: var(--soft); }
+  .tile .v { font-size: 22px; font-weight: 500; line-height: 1.25; margin-top: 4px; }
+  .tile .v small { font-size: 14px; font-weight: 400; }
+  .tile .s { font-size: 12px; color: var(--soft); margin-top: 6px; }
+  .box { background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .box-head { display: flex; justify-content: space-between; gap: 8px; }
+  .box-head b { font-size: 15px; font-weight: 500; }
+  .box-head span { font-size: 13px; color: var(--soft); }
+  .box p { margin: 0; font-size: 15px; }
+  .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .item { background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+  .item b { font-weight: 500; font-size: 16px; }
+  .item .meta { font-size: 14px; color: var(--soft); }
+  .item p { margin: 0; font-size: 15px; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 500; border-radius: 999px; padding: 2px 9px; margin-right: 4px; background: var(--raised); color: var(--ink); }
+  .pill.red { background: #F4DADF; color: #7A2238; }
+  .pill.amber { background: #F6E8C8; color: #6B4F12; }
+  .pill.green { background: #DCEBDD; color: #2F5A32; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; font: inherit; font-size: 15px; font-weight: 500; color: var(--paper); background: var(--rose); border: 0; border-radius: 10px; padding: 10px 16px; min-height: 44px; text-decoration: none; cursor: pointer; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .notes { margin-top: 12px; padding-top: 18px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 14px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 4px 0 0; }
+  @media (max-width: 360px) { .tiles { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../">← hirund·AGE</a>
+    <span class="kicker">// outil · don du sang</span>
+  </div>
+  <h1>Où donner mon sang&nbsp;?</h1>
+  <div class="row">
+    <div>
+      <label for="search">Ma commune ou mon adresse</label>
+      <input id="search" class="fld" type="text" placeholder="Ex. Le Grand-Lucé" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="suggest">
+      <ul id="suggest" class="suggest" role="listbox" aria-label="Lieux proposés" hidden></ul>
+    </div>
+  </div>
+  <p class="status" id="status" role="status"></p>
+  <div>
+    <span class="lbl" id="km-lbl">Jusqu'à</span>
+    <div class="seg" role="group" aria-labelledby="km-lbl" id="km">
+      <button type="button" data-km="15" aria-pressed="false">15 km</button>
+      <button type="button" data-km="25" aria-pressed="true">25 km</button>
+      <button type="button" data-km="40" aria-pressed="false">40 km</button>
+    </div>
+  </div>
+
+  <section class="card" id="card" aria-live="polite" hidden>
+    <span class="kicker" id="when"></span>
+    <div class="verdict"><span id="verdict-icon"></span><strong id="verdict"></strong></div>
+    <p id="verdict-text"></p>
+    <p class="official" id="official"></p>
+  </section>
+
+  <ul class="list" id="collectes" hidden></ul>
+  <ul class="list" id="maisons" hidden></ul>
+
+  <footer class="notes">
+    <div>
+      <span class="kicker">// les collectes</span>
+      <p>Collectes publiques de l'Établissement français du sang (EFS), lues en direct sur son API ouverte (data.gouv.fr). Les dates et les places restantes changent tous les jours : la prise de rendez-vous se fait sur le site de l'EFS.</p>
+    </div>
+    <div>
+      <span class="kicker">// qui peut donner</span>
+      <p>De 18 à 70 ans, en bonne santé, au moins 50 kg. Pas à jeun : mangez avant de venir et pensez à une pièce d'identité. Un homme peut donner 6 fois par an, une femme 4 fois, avec 8 semaines entre deux dons de sang.</p>
+    </div>
+    <div>
+      <span class="kicker">// vie privée</span>
+      <p>Rien n'est enregistré. Le nom tapé part à l'IGN pour le trouver, puis sa position à l'EFS.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+  var JOURS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+  function esc(t) {
+    return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; });
+  }
+  function dateLongue(s) { var d = new Date(s); return d.getDate() + (d.getDate() === 1 ? "er" : "") + " " + MOIS[d.getMonth()] + " " + d.getFullYear(); }
+  function dateJour(s) { var d = new Date(s); return JOURS[d.getDay()] + " " + d.getDate() + (d.getDate() === 1 ? "er" : "") + " " + MOIS[d.getMonth()]; }
+  function distanceKm(a, b) {
+    var R = 6371, rad = Math.PI / 180;
+    var dLat = (b[1] - a[1]) * rad, dLon = (b[0] - a[0]) * rad;
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[1] * rad) * Math.cos(b[1] * rad) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+  // Champ de recherche avec suggestions (type : "address" pour une adresse, "municipality" pour une commune).
+  function recherche(input, list, type, onPick) {
+    var found = [], timer = null, q = 0;
+    function close() { list.hidden = true; input.setAttribute("aria-expanded", "false"); }
+    function pick(c) { input.value = c.label; close(); onPick(c); }
+    input.addEventListener("input", function () {
+      clearTimeout(timer);
+      var text = input.value.trim();
+      if (text.length < 3) { close(); return; }
+      timer = setTimeout(function () {
+        var n = ++q;
+        var url = "https://data.geopf.fr/geocodage/search?q=" + encodeURIComponent(text) + "&limit=6&lat=47.8&lon=0.45" + (type === "municipality" ? "&type=municipality" : "");
+        fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+          if (n !== q) return;
+          found = (j.features || []).map(function (f) {
+            var p = f.properties;
+            return { label: type === "municipality" ? (p.city || p.label) : p.label, id: p.id, citycode: p.citycode, city: p.city, ctx: p.context || "",
+              lon: f.geometry.coordinates[0], lat: f.geometry.coordinates[1], kind: p.type };
+          }).filter(function (c) { return c.citycode; });
+          if (!found.length) { close(); return; }
+          list.innerHTML = found.map(function (c, i) { return '<li role="option"><button type="button" data-i="' + i + '">' + esc(c.label) + "<small>" + esc(c.ctx) + "</small></button></li>"; }).join("");
+          list.hidden = false;
+          input.setAttribute("aria-expanded", "true");
+        }).catch(close);
+      }, 250);
+    });
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowDown" && !list.hidden) { e.preventDefault(); list.querySelector("button").focus(); }
+      if (e.key === "Enter" && !list.hidden && found.length) { e.preventDefault(); pick(found[0]); }
+      if (e.key === "Escape") close();
+    });
+    list.addEventListener("keydown", function (e) {
+      var btns = Array.prototype.slice.call(list.querySelectorAll("button"));
+      var i = btns.indexOf(document.activeElement);
+      if (e.key === "ArrowDown" && i < btns.length - 1) { e.preventDefault(); btns[i + 1].focus(); }
+      if (e.key === "ArrowUp") { e.preventDefault(); (i > 0 ? btns[i - 1] : input).focus(); }
+      if (e.key === "Escape") { close(); input.focus(); }
+    });
+    list.addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) pick(found[+b.dataset.i]); });
+    document.addEventListener("click", function (e) { if (e.target !== input && !list.contains(e.target)) close(); });
+  }
+  // Retrouve un lieu à partir des paramètres de l'adresse de la page (?lat=..&lon=..&nom=..&insee=..).
+  function lieuDepuisUrl() {
+    var u = new URLSearchParams(location.search), lat = parseFloat(u.get("lat")), lon = parseFloat(u.get("lon"));
+    if (!isFinite(lat) || !isFinite(lon)) return null;
+    return { lat: lat, lon: lon, label: u.get("nom") || "ce lieu", citycode: u.get("insee") || "", id: u.get("ban") || "" };
+  }
+  function lieuVersUrl(c) {
+    var u = new URLSearchParams();
+    u.set("lat", c.lat.toFixed(5)); u.set("lon", c.lon.toFixed(5)); u.set("nom", c.label);
+    if (c.citycode) u.set("insee", c.citycode);
+    if (c.id) u.set("ban", c.id);
+    try { history.replaceState(null, "", "?" + u.toString()); } catch (e) { /* rien */ }
+  }
+
+
+  var API = "https://oudonner.api.efs.sante.fr/carto-api/v3/samplingcollection/searchnearpoint";
+  var ICON_OK = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E2C47E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg>';
+  var lieu = null, rayon = 25, donnees = null, asked = 0;
+
+  function lien(u) { return !u ? "" : /^https?:/.test(u) ? u : "https://" + u; }
+  function heure(h) { return h ? h.slice(0, 5).replace(":00", "h").replace(":", "h") : ""; }
+  // « CHATEAU DU LOIR » → « Chateau du Loir »
+  function titre(t) {
+    return String(t || "").toLowerCase().split(/([\s-]+)/).map(function (w, i) {
+      return i > 0 && /^(du|de|des|la|le|les|sur|sous|lès|les|en|et|aux?)$/.test(w) ? w : w.charAt(0).toUpperCase() + w.slice(1);
+    }).join("");
+  }
+  function maj(t) { return t.charAt(0).toUpperCase() + t.slice(1); }
+
+  function afficher() {
+    if (!donnees || !lieu) return;
+    var auj = new Date(); auj.setHours(0, 0, 0, 0);
+    var col = [];
+    (donnees.samplingLocationCollections || []).forEach(function (l) {
+      var km = distanceKm([lieu.lon, lieu.lat], [l.longitude, l.latitude]);
+      if (km > rayon) return;
+      (l.collections || []).forEach(function (c) {
+        var d = new Date(c.date);
+        if (d >= auj) col.push({ d: d, c: c, l: l, km: km });
+      });
+    });
+    col.sort(function (a, b) { return a.d - b.d || a.km - b.km; });
+    $("card").hidden = false;
+    $("when").textContent = "// autour de " + lieu.label + " · " + rayon + " km";
+    $("verdict-icon").innerHTML = ICON_OK;
+    if (col.length) {
+      var p = col[0], j = Math.round((p.d - auj) / 86400000);
+      $("verdict").textContent = j === 0 ? "Aujourd'hui" : j === 1 ? "Demain" : maj(dateJour(p.d));
+      $("verdict-text").textContent = titre(p.l.city) + ", " + (p.l.name || "") + (p.c.afternoonStartTime || p.c.morningStartTime ? ", " + horaires(p.c) : "") + ".";
+      $("official").innerHTML = p.c.urlBlood ? '<a href="' + esc(lien(p.c.urlBlood)) + '" target="_blank" rel="noopener">Prendre rendez-vous sur le site de l\'EFS</a>' : "";
+    } else {
+      $("verdict").textContent = "Pas de collecte prévue";
+      $("verdict-text").textContent = "Aucune collecte n'est programmée pour le moment dans ce rayon. Élargissez la distance ou regardez les maisons du don ci-dessous, ouvertes toute l'année.";
+      $("official").innerHTML = "";
+    }
+    $("collectes").innerHTML = col.length > 1 ? '<li class="lbl">Les suivantes</li>' + col.slice(1, 10).map(function (x) {
+      var places = x.c.nbPlacesRestantesST;
+      return '<li class="item"><b>' + esc(maj(dateJour(x.d))) + " · " + esc(titre(x.l.city)) + '</b><p class="meta">' + esc(x.l.name || "") + " · " + esc(x.l.fullAddress || "") + " · à " + Math.round(x.km) + " km</p>" +
+        "<p>" + esc(horaires(x.c)) + (places != null ? ' <span class="pill ' + (places > 10 ? "green" : "amber") + '">' + places + " place" + (places > 1 ? "s" : "") + " libre" + (places > 1 ? "s" : "") + "</span>" : "") +
+        (x.c.urlBlood ? ' · <a href="' + esc(lien(x.c.urlBlood)) + '" target="_blank" rel="noopener">rendez-vous</a>' : "") + "</p></li>";
+    }).join("") : "";
+    $("collectes").hidden = col.length < 2;
+    var maisons = (donnees.samplingLocationEntities_SF || []).map(function (m) { m.km = distanceKm([lieu.lon, lieu.lat], [m.longitude, m.latitude]); return m; })
+      .sort(function (a, b) { return a.km - b.km; }).slice(0, 2);
+    $("maisons").innerHTML = maisons.length ? '<li class="lbl">Ouvertes toute l\'année (sang, plasma, plaquettes)</li>' + maisons.map(function (m) {
+      return '<li class="item"><b>' + esc(m.convocationLabel || m.name) + " · " + esc(m.ville || titre(m.city)) + '</b><p class="meta">' + esc(m.fullAddress) + " · à " + Math.round(m.km) + " km" + (m.phone ? " · " + esc(m.phone.trim()) : "") + "</p>" +
+        (m.horaires ? "<p style=\"white-space:pre-line\">" + esc(m.horaires) + "</p>" : "") + (m.urlBlood ? '<p><a href="' + esc(lien(m.urlBlood)) + '" target="_blank" rel="noopener">Prendre rendez-vous</a></p>' : "") + "</li>";
+    }).join("") : "";
+    $("maisons").hidden = !maisons.length;
+  }
+  function horaires(c) {
+    var m = c.morningStartTime ? heure(c.morningStartTime) + " à " + heure(c.morningEndTime) : "";
+    var a = c.afternoonStartTime ? heure(c.afternoonStartTime) + " à " + heure(c.afternoonEndTime) : "";
+    return [m, a].filter(Boolean).join(" et de ") ? "de " + [m, a].filter(Boolean).join(" et de ") : "";
+  }
+
+  function charger(c) {
+    lieu = c;
+    lieuVersUrl(c);
+    var n = ++asked;
+    $("status").textContent = "Recherche des collectes…";
+    // Carré d'environ 45 km de côté autour du lieu (le rayon choisi filtre ensuite).
+    var url = API + "?CenterLatitude=" + c.lat + "&CenterLongitude=" + c.lon + "&DiameterLatitude=0.8&DiameterLongitude=1.2&UserLatitude=" + c.lat + "&UserLongitude=" + c.lon;
+    fetch(url).then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); }).then(function (j) {
+      if (n !== asked) return;
+      $("status").textContent = "";
+      donnees = j;
+      afficher();
+    }).catch(function () { if (n === asked) $("status").textContent = "L'EFS ne répond pas pour le moment. Réessayez plus tard."; });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("#km button"), function (b) {
+    b.addEventListener("click", function () {
+      rayon = +b.dataset.km;
+      Array.prototype.forEach.call(document.querySelectorAll("#km button"), function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      afficher();
+    });
+  });
+  recherche($("search"), $("suggest"), "address", charger);
+  var depart = lieuDepuisUrl() || { lat: 47.7915, lon: 0.4122, label: "Loir-Lucé-Bercé" };
+  $("search").value = lieuDepuisUrl() ? depart.label : "";
+  charger(depart);
+
+})();
+</script>
+</body>
+</html>
