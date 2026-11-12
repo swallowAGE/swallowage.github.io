@@ -2440,6 +2440,37 @@ function lignesInfos(paires) {
     return l.length ? `<div class="popup-fiche-section">${l.map(([k, v]) => `<div class="popup-fiche-jour"><span>${echapperHtml(k)}</span><strong>${echapperHtml(v)}</strong></div>`).join("")}</div>` : "";
 }
 
+/* Collectes de sang de l'EFS (fetchDonDuSang) */
+function construirePopupDonSang(props) {
+    const couleur = "#C62D42";
+    const lien = u => !u ? "" : /^https?:/.test(u) ? u : "https://" + u;
+    const h = t => t ? t.slice(0, 5).replace(":00", "h").replace(":", "h") : "";
+    const plage = c => [c.matin, c.aprem].filter(x => x && x[0]).map(x => `${h(x[0])} à ${h(x[1])}`).join(" et ");
+    const titreVille = t => String(t || "").toLowerCase().replace(/(^|[\s-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase())
+        .replace(/ (Du|De|Des|La|Le|Les|Sur|Sous|En|Et|Aux?) /g, m => m.toLowerCase());
+    const jour = d => capitaliserPremiere(new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }));
+    const bouton = (u, texte) => u ? `<a class="popup-fiche-btn" href="${echapperHtml(lien(u))}" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;padding:6px 12px;border-radius:999px;background:${couleur};color:#fff;text-decoration:none;font-weight:600">${texte}</a>` : "";
+    let corps;
+    if (props.maison) {
+        corps = `<div class="popup-fiche-section"><div>Ouverte toute l'année : sang, plasma, plaquettes.</div>
+            ${props.horaires ? `<div style="white-space:pre-line;margin-top:4px">${echapperHtml(props.horaires)}</div>` : ""}
+            ${props.telephone ? `<div style="margin-top:4px">📞 ${echapperHtml(String(props.telephone).trim())}</div>` : ""}
+            ${bouton(props.rdv, "Prendre rendez-vous")}</div>`;
+    } else {
+        const c = props.collectes || [];
+        corps = `<div class="popup-fiche-section">${c.slice(0, 4).map((x, i) => `<div style="margin-top:${i ? 10 : 0}px">
+                <strong>${echapperHtml(jour(x.date))}</strong>${plage(x) ? `, de ${echapperHtml(plage(x))}` : ""}
+                ${x.places != null ? `<div style="font-size:13px;opacity:.8">${x.places} place${x.places > 1 ? "s" : ""} libre${x.places > 1 ? "s" : ""}</div>` : ""}
+                ${bouton(x.rdv, "Prendre rendez-vous")}</div>`).join("")}
+            ${c.length > 4 ? `<div style="margin-top:8px;font-size:13px;opacity:.8">et ${c.length - 4} autre${c.length - 4 > 1 ? "s" : ""} date${c.length - 4 > 1 ? "s" : ""}</div>` : ""}</div>`;
+    }
+    return `<div class="popup-fiche">
+        ${entetePopup(couleur, "fa-solid fa-droplet", props.maison ? "Maison du don" : "Collecte de sang", props.nom || "", String(props.adresse || "").replace(/(\d{5}) (.+)$/, (m, cp, v) => cp + " " + titreVille(v)))}
+        ${corps}
+        <div style="font-size:12px;opacity:.7;margin-top:6px">De 18 à 70 ans, au moins 50 kg, pas à jeun, avec une pièce d'identité. Source : Établissement français du sang.</div>
+    </div>`;
+}
+
 /* Chantiers sur les routes départementales (data.sarthe.fr) */
 function construirePopupChantier(props) {
     const { icon, color } = iconeChantier(props);
@@ -2591,6 +2622,7 @@ function construirePopup(feature, layerConf) {
     else if (layerConf.id === "vigieau") html = construirePopupVigieau(props);
     else if (layerConf.id === "chantiers") html = construirePopupChantier(props);
     else if (layerConf.id === "prsf") html = construirePopupPrsf(props);
+    else if (layerConf.id === "donSang") html = construirePopupDonSang(props);
     else if (layerConf.id === "ppr") html = construirePopupPpr(props);
     else if (layerConf.id === "parcellesForestieres") html = construirePopupParcelleForestiere(props);
     else if (layerConf.id === "pmi") html = construirePopupPmi(props);

@@ -912,6 +912,44 @@ function styleChantier(feature) {
     return { color: c, weight: 6, opacity: 0.85, lineCap: "round" };
 }
 
+/* Collectes de sang de l'EFS (API ouverte « oudonner », CORS ouvert), en
+   direct : un point par lieu qui a au moins une collecte à venir, plus les
+   maisons du don ouvertes toute l'année. Zone interrogée : le rectangle du
+   territoire élargi de 0,1° (une collecte juste à côté compte aussi). */
+const URL_EFS = "https://oudonner.api.efs.sante.fr/carto-api/v3/samplingcollection/searchnearpoint";
+function fetchDonDuSang() {
+    return contourTerritoire().then(contour => {
+        const b = (contour && bboxFeature(contour)) || [0.2, 47.6, 0.7, 47.95];
+        const m = 0.1, cLat = (b[1] + b[3]) / 2, cLon = (b[0] + b[2]) / 2;
+        const url = `${URL_EFS}?CenterLatitude=${cLat}&CenterLongitude=${cLon}` +
+            `&DiameterLatitude=${(b[3] - b[1] + 2 * m).toFixed(3)}&DiameterLongitude=${(b[2] - b[0] + 2 * m).toFixed(3)}` +
+            `&UserLatitude=${cLat}&UserLongitude=${cLon}`;
+        return fetch(url).then(r => {
+            if (!r.ok) throw new Error("Erreur HTTP " + r.status + " sur l'API de l'EFS");
+            return r.json();
+        });
+    }).then(j => {
+        const auj = new Date(new Date().toDateString());
+        const features = [];
+        (j.samplingLocationCollections || []).forEach(l => {
+            const collectes = (l.collections || []).filter(c => new Date(c.date) >= auj)
+                .sort((a, c) => new Date(a.date) - new Date(c.date))
+                .map(c => ({ date: c.date.slice(0, 10), matin: [c.morningStartTime, c.morningEndTime], aprem: [c.afternoonStartTime, c.afternoonEndTime],
+                    places: c.nbPlacesRestantesST, rdv: c.urlBlood || "" }));
+            if (!collectes.length || !l.longitude) return;
+            features.push({ type: "Feature", geometry: { type: "Point", coordinates: [l.longitude, l.latitude] },
+                properties: { nom: l.convocationLabel || l.name || "Collecte de sang", commune: l.city, adresse: l.fullAddress, collectes, maison: false } });
+        });
+        (j.samplingLocationEntities_SF || []).forEach(l => {
+            if (!l.longitude) return;
+            features.push({ type: "Feature", geometry: { type: "Point", coordinates: [l.longitude, l.latitude] },
+                properties: { nom: l.convocationLabel || l.name || "Maison du don", commune: l.ville || l.city, adresse: l.fullAddress,
+                    horaires: l.horaires, telephone: l.phone, rdv: l.urlBlood || "", collectes: [], maison: true } });
+        });
+        return { type: "FeatureCollection", features };
+    });
+}
+
 /* Zones réglementées des PPR (outils/build_ppr.py) : rouge pour les
    zones inconstructibles, bleu pour les zones constructibles sous
    conditions, comme sur les plans officiels. */
@@ -1784,6 +1822,16 @@ const LAYERS = [
         lazy: false, searchable: true, cluster: true,
         titleFields: ["code", "description"],
         subtitleFields: ["description", "commune"]
+    },
+    {
+        id: "donSang", group: "securite", label: "Collectes de don du sang",
+        /* Prochaines collectes de l'EFS, en direct (fetchDonDuSang), avec le
+           lien de prise de rendez-vous. */
+        fetchPersonnalise: fetchDonDuSang, type: "point",
+        icon: "fa-solid fa-droplet", color: "#C62D42",
+        lazy: true, searchable: true, cluster: false,
+        titleFields: ["nom"],
+        subtitleFields: ["commune"]
     },
     {
         id: "pmi", group: "famille", label: "Consultations PMI (puéricultrices)",
