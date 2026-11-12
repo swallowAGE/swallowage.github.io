@@ -1774,6 +1774,15 @@ const LAYERS = [
         zoomMin: 17, lazy: true, searchable: false, cluster: false
     },
     {
+        id: "cadastreSolaire", group: "urbanisme", label: "Cadastre solaire : ensoleillement des parcelles",
+        /* Chaque parcelle colorée selon la part du jour au soleil (21 décembre, 20 mars ou 21 juin), d'après le
+           LiDAR HD de l'IGN - voir js/ombres.js. Calculé dans la page, à partir du zoom 17. */
+        dessinDynamique: (map, groupe, onEtat) => dessinerCadastreSolaire(map, groupe, onEtat),
+        surDesactivation: () => masquerCadastreSolaire(),
+        type: "point", icon: "fa-solid fa-solar-panel", color: "#E8901C",
+        zoomMin: 17, lazy: true, searchable: false, cluster: false
+    },
+    {
         id: "dpe", group: "urbanisme", label: "Diagnostics énergétiques (DPE)",
         file: "couches/urbanisme/dpe_loir_luce_berce.geojson", type: "point",
         icon: "fa-solid fa-bolt", color: PALETTE.ardoise,
