@@ -2467,7 +2467,7 @@ function construirePopupDonSang(props) {
     return `<div class="popup-fiche">
         ${entetePopup(couleur, "fa-solid fa-droplet", props.maison ? "Maison du don" : "Collecte de sang", props.nom || "", String(props.adresse || "").replace(/(\d{5}) (.+)$/, (m, cp, v) => cp + " " + titreVille(v)))}
         ${corps}
-        <div style="font-size:12px;opacity:.7;margin-top:6px">De 18 à 70 ans, au moins 50 kg, pas à jeun, avec une pièce d'identité. Source : Établissement français du sang.</div>
+        <div class="popup-fiche-section" style="font-size:12px;color:var(--ardoise)">De 18 à 70 ans, au moins 50 kg, pas à jeun, avec une pièce d'identité. Source : Établissement français du sang.</div>
     </div>`;
 }
 
