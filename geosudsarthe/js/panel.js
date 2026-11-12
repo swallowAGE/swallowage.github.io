@@ -64,7 +64,7 @@ function construirePanneauCouches(map) {
                         retirerBadgeEtat();
                         if (conf.viewportOnly) {
                             actualiserCoucheViewport(conf, map);
-                        } else if (conf.fetchViewport) {
+                        } else if (conf.fetchViewport || conf.dessinDynamique) {
                             actualiserCoucheDynamique(conf, map, conf.surEtat);
                         } else if (coucheDoitEtreVisible(conf, map)) {
                             groupesLeaflet[conf.id].addTo(map);
@@ -86,6 +86,7 @@ function construirePanneauCouches(map) {
                     });
                 } else if (groupesLeaflet[conf.id]) {
                     map.removeLayer(groupesLeaflet[conf.id]);
+                    if (conf.surDesactivation) conf.surDesactivation();
                 }
             });
 
@@ -120,7 +121,7 @@ function construirePanneauCouches(map) {
 
             /* Couche interrogée en direct : une ligne d'état dit pourquoi la carte est vide (zoom trop faible),
                combien d'observations sont affichées, ou si la source ne répond pas. */
-            if (conf.fetchViewport) {
+            if (conf.fetchViewport && !conf.dessinDynamique) {
                 if (conf.periodes) {
                     const choix = document.createElement("label");
                     choix.className = "layer-periode";

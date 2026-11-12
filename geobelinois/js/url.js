@@ -20,7 +20,7 @@
         colis: "lockers", relais: "lockers", casier: "lockers",
         assmat: "petiteEnfance", assistante: "petiteEnfance", creche: "petiteEnfance",
         artisan: "artisans", commerce: "commerces", ecole: "education",
-        argile: "rga", argiles: "rga", chasse: "lotsChasse", defibrillateur: "dae"
+        argile: "rga", argiles: "rga", ombre: "ombres", soleil: "ombres", ensoleillement: "ombres", chasse: "lotsChasse", defibrillateur: "dae"
     };
 
     function normaliser(texte) {

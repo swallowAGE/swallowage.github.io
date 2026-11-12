@@ -313,7 +313,7 @@ function chargerCouche(layerConf, onReady, onError) {
 
     /* Couche interrogée en direct sur la zone affichée (layerConf.fetchViewport, ex : observations nature) :
        rien à charger ici, actualiserCoucheDynamique la remplit à chaque déplacement. */
-    if (layerConf.fetchViewport) {
+    if (layerConf.fetchViewport || layerConf.dessinDynamique) {
         groupesLeaflet[layerConf.id] = L.layerGroup();
         coucheChargee[layerConf.id] = true;
         if (onReady) onReady();
@@ -465,6 +465,8 @@ function actualiserCoucheViewport(conf, map) {
    la légende (conf.categoriesMasquees) sont conservées d'un rafraîchissement à l'autre. */
 const requeteDynamique = {};
 function actualiserCoucheDynamique(conf, map, onEtat) {
+    /* Couche qui dessine elle-même sur la carte (ex : ombres portées) : conf.dessinDynamique(map, groupe, onEtat). */
+    if (conf.dessinDynamique) { conf.dessinDynamique(map, groupesLeaflet[conf.id], onEtat); return; }
     const ancienne = groupesLeaflet[conf.id];
     if (!coucheDoitEtreVisible(conf, map)) {
         if (ancienne && map.hasLayer(ancienne)) map.removeLayer(ancienne);
@@ -517,7 +519,7 @@ function surveillerAffichageCouches(map) {
                     actualiserCoucheViewport(conf, map);
                     return;
                 }
-                if (conf.fetchViewport) {
+                if (conf.fetchViewport || conf.dessinDynamique) {
                     actualiserCoucheDynamique(conf, map, conf.surEtat);
                     return;
                 }
