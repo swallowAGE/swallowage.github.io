@@ -48,6 +48,7 @@ const TERRITOIRE = {
        liste n'est pas affichée. À compléter au fil des scripts de données. */
     fichiersDisponibles: [
         "couches/associations/associations.geojson",
+        "couches/chasse/parcelles_forestieres.geojson",
         "couches/commerces/artisans.geojson",
         "couches/commerces/banques.geojson",
         "couches/commerces/commerces.geojson",
@@ -62,6 +63,7 @@ const TERRITOIRE = {
         "couches/securite/ehpad.geojson",
         "couches/securite/gendarmerie.geojson",
         "couches/securite/pompiers.geojson",
+        "couches/securite/prsf.geojson",
         "couches/services/airesJeu.geojson",
         "couches/services/antennes.geojson",
         "couches/services/bal.geojson",

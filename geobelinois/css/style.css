@@ -995,3 +995,17 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
 .solaire-legende i { width: 22px; height: 12px; border-radius: 3px; flex-shrink: 0; border: 1px solid rgba(43, 34, 48, .15); }
 .solaire-legende em { margin-left: auto; font-style: normal; font-size: 11px; color: var(--soft); }
 @media (max-width: 700px) { #solaire-controle { left: 50%; transform: translateX(-50%); bottom: 84px; max-height: calc(100% - 200px); } }
+
+/* Étiquettes permanentes sur la carte (numéros de parcelles forestières) */
+.leaflet-tooltip.etiquette-carte {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    color: #2F4F24;
+    font-weight: 700;
+    font-size: 12px;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 2px #fff;
+}
+.leaflet-tooltip.etiquette-carte::before { display: none; }
+.etiquettes-masquees .leaflet-tooltip.etiquette-carte { display: none; }

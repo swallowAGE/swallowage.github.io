@@ -246,6 +246,15 @@ function construireCoucheDonnees(data, layerConf) {
             if (layerConf.type !== "point") {
                 ajouterAuIndex(feature, layer.getBounds ? layer.getBounds().getCenter() : null, layerConf, layer);
             }
+            /* layerConf.etiquette (facultatif) : petit texte permanent au
+               centre de l'objet (ex. numéro de parcelle forestière),
+               masqué en dessous du zoom 14 (classe posée par map.js). */
+            if (layerConf.etiquette) {
+                const texte = layerConf.etiquette(feature.properties || {});
+                if (texte !== undefined && texte !== null && texte !== "") {
+                    layer.bindTooltip(echapperHtml(String(texte)), { permanent: true, direction: "center", className: "etiquette-carte", interactive: false });
+                }
+            }
         }
 
     });
