@@ -1996,7 +1996,7 @@ const LAYERS = [
         lazy: true, searchable: false, cluster: false
     },
     {
-        id: "chantiers", group: "risques", label: "Chantiers sur les routes départementales",
+        id: "chantiers", group: "mobilite", label: "Chantiers sur les routes départementales",
         /* Chantiers en cours du Département (data.sarthe.fr), en direct :
            route barrée, déviation, dates. Marge de 0,05° (~4-5 km) autour
            du territoire : une route barrée juste à côté gêne aussi. */
