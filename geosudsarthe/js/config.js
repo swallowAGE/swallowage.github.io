@@ -1765,6 +1765,15 @@ const LAYERS = [
         subtitleFields: []
     },
     {
+        id: "ombres", group: "urbanisme", label: "Ensoleillement : ombres portées",
+        /* Simulation d'ombres (bâtiments, arbres, relief) à la date et l'heure choisies, d'après le LiDAR HD de
+           l'IGN - voir js/ombres.js. Calculé dans la page, à partir du zoom 17. */
+        dessinDynamique: (map, groupe, onEtat) => dessinerOmbres(map, groupe, onEtat),
+        surDesactivation: () => masquerOmbres(),
+        type: "point", icon: "fa-solid fa-sun", color: "#D5A35D",
+        zoomMin: 17, lazy: true, searchable: false, cluster: false
+    },
+    {
         id: "dpe", group: "urbanisme", label: "Diagnostics énergétiques (DPE)",
         file: "couches/urbanisme/dpe_loir_luce_berce.geojson", type: "point",
         icon: "fa-solid fa-bolt", color: PALETTE.ardoise,
