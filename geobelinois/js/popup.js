@@ -2554,6 +2554,42 @@ function construirePopupPmi(props) {
     </div>`;
 }
 
+/* Événements locaux (agendas des offices de tourisme, data.sarthe.fr) */
+function construirePopupEvenement(props) {
+    const type = TYPES_EVENEMENTS.find(t => t.id === categorieEvenement({ properties: props })) || TYPES_EVENEMENTS[0];
+    const h = t => t ? t.replace(":00", "h").replace(":", "h") : "";
+    const jour = (d, opts = { weekday: "long", day: "numeric", month: "long" }) =>
+        new Date(d + "T12:00:00").toLocaleDateString("fr-FR", opts);
+    const heures = p => p.heureDebut && p.heureFin && p.heureFin !== "23:59" ? `, de ${h(p.heureDebut)} à ${h(p.heureFin)}`
+        : p.heureDebut ? `, à partir de ${h(p.heureDebut)}` : "";
+    const ligne = p => p.debut === p.fin ? capitaliserPremiere(jour(p.debut)) + heures(p)
+        : `Du ${jour(p.debut, { day: "numeric", month: "long" })} au ${jour(p.fin, { day: "numeric", month: "long", year: "numeric" })}${heures(p)}`;
+    const periodes = props.periodes || [];
+    const sansBalises = t => String(t || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    const desc = String(props.descriptif || props.metadescription || "").trim();
+    const descCourte = desc.length > 420 ? desc.slice(0, 400).replace(/\s+\S*$/, "") + "…" : desc;
+    const tarif = props.tarifgratuit === "oui" || props.entreegratuite === "oui" ? "Gratuit" : sansBalises(props.tarifs);
+    const contacts = construireContacts(Object.assign({}, props, { tel: props.commtel || props.commmob }), { tel: "tel", email: "commmail", site: "commweb" });
+    const resa = props.urlresa && /^https?:/.test(props.urlresa)
+        ? `<a class="popup-fiche-btn" href="${echapperHtml(props.urlresa)}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:6px 12px;border-radius:999px;background:${type.color};color:#fff;text-decoration:none;font-weight:600">Réserver</a>` : "";
+    const visuel = props.visuel && /^https:/.test(props.visuel)
+        ? `<img src="${echapperHtml(props.visuel)}" alt="" loading="lazy" style="display:block;width:100%;max-height:150px;object-fit:cover;border-radius:8px;margin-top:8px" onerror="this.remove()">` : "";
+    const adresse = [props.adresse1, props.adresse1suite, props.adresse2].filter(Boolean)
+        .map(a => String(a).replace(/,?\s*\d{5}\b.*$/, "").trim()).filter(Boolean).join(", ");
+    return `<div class="popup-fiche">
+        ${entetePopup(type.color, type.icon, props.categories || "Événement", props.nomoffre || "Événement", [adresse, props.commune].filter(Boolean).join(" · "))}
+        ${visuel}
+        <div class="popup-fiche-section"><div class="popup-fiche-section-titre">Quand</div>
+            ${periodes.slice(0, 4).map(p => `<div class="popup-fiche-ligne">${echapperHtml(ligne(p))}</div>`).join("")}
+            ${periodes.length > 4 ? `<div class="popup-fiche-ligne" style="opacity:.8">et ${periodes.length - 4} autre${periodes.length > 5 ? "s" : ""} date${periodes.length > 5 ? "s" : ""}</div>` : ""}
+            ${tarif ? `<div class="popup-fiche-ligne" style="margin-top:4px"><strong>${echapperHtml(tarif)}</strong></div>` : ""}
+            ${resa}</div>
+        ${descCourte ? `<div class="popup-fiche-section"><div class="popup-fiche-ligne" style="white-space:pre-line">${echapperHtml(descCourte)}</div></div>` : ""}
+        ${contacts.length ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Contact</div><div class="popup-fiche-contacts">${contacts.join("")}</div></div>` : ""}
+        <div class="popup-fiche-section"><div class="popup-fiche-precision">Source : agendas des offices de tourisme de la Sarthe (data.sarthe.fr), mis à jour chaque jour. Pour qu'un événement apparaisse ici, il suffit de le déclarer à l'office de tourisme le plus proche.</div></div>
+    </div>`;
+}
+
 /* Aide au numérique (data.sarthe.fr) */
 function construirePopupNumerique(props) {
     const contacts = construireContacts(props, { tel: "telephone", email: "courriel", site: "site_web" });
@@ -2623,6 +2659,7 @@ function construirePopup(feature, layerConf) {
     else if (layerConf.id === "chantiers") html = construirePopupChantier(props);
     else if (layerConf.id === "prsf") html = construirePopupPrsf(props);
     else if (layerConf.id === "donSang") html = construirePopupDonSang(props);
+    else if (layerConf.id === "evenements") html = construirePopupEvenement(props);
     else if (layerConf.id === "ppr") html = construirePopupPpr(props);
     else if (layerConf.id === "parcellesForestieres") html = construirePopupParcelleForestiere(props);
     else if (layerConf.id === "pmi") html = construirePopupPmi(props);

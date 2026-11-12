@@ -20,7 +20,8 @@
         colis: "lockers", relais: "lockers", casier: "lockers",
         assmat: "petiteEnfance", assistante: "petiteEnfance", creche: "petiteEnfance",
         artisan: "artisans", commerce: "commerces", ecole: "education",
-        argile: "rga", argiles: "rga", ombre: "ombres", soleil: "ombres", solaire: "cadastreSolaire", cadastresolaire: "cadastreSolaire", ensoleillement: "ombres", chasse: "lotsChasse", defibrillateur: "dae"
+        argile: "rga", argiles: "rga", ombre: "ombres", soleil: "ombres", solaire: "cadastreSolaire", cadastresolaire: "cadastreSolaire", ensoleillement: "ombres", chasse: "lotsChasse", defibrillateur: "dae",
+        evenement: "evenements", agenda: "evenements", sortie: "evenements", sorties: "evenements", fete: "evenements", fetes: "evenements", manifestation: "evenements"
     };
 
     function normaliser(texte) {

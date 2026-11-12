@@ -39,7 +39,8 @@ const GROUPS = {
     tourisme: { label: "Nature & rando", icon: "fa-solid fa-person-hiking", color: PALETTE.feuille },
     patrimoine: { label: "Patrimoine", icon: "fa-solid fa-monument", color: "#8A7F78" },
     urbanisme: { label: "Habitat & urbanisme", icon: "fa-solid fa-house-chimney", color: PALETTE.ardoise },
-    risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#C2663A" }
+    risques: { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", color: "#C2663A" },
+    evenements: { label: "Sorties & événements", icon: "fa-solid fa-calendar-days", color: "#7B4B94" }
 };
 
 /* Retrait-gonflement des argiles : une teinte par niveau d'aléa (jaune
@@ -871,6 +872,87 @@ function fetchDonDuSang() {
                 properties: { nom: l.convocationLabel || l.name || "Maison du don", commune: l.ville || l.city, adresse: l.fullAddress,
                     horaires: l.horaires, telephone: l.phone, rdv: l.urlBlood || "", collectes: [], maison: true } });
         });
+        return { type: "FeatureCollection", features };
+    });
+}
+
+/* Événements locaux : agendas des offices de tourisme de la Sarthe
+   (Tourinsoft, jeu « Fêtes et manifestations en Sarthe » de
+   data.sarthe.fr, mis à jour chaque jour), lus en direct à chaque
+   ouverture de la carte. Marge de 0,03° (~3 km) autour du territoire.
+   datesfma liste toutes les périodes de l'événement, séparées par « ## »
+   (ex. un marché chaque mardi) : « jj/mm/aaaa||jj/mm/aaaa||...||hh:mm||hh:mm|| ».
+   On ne garde que les périodes pas encore finies, et on retire les
+   doublons saisis par deux offices (même commune, mêmes dates, un titre
+   contenu dans l'autre ou la moitié des mots en commun). Catégorie = quand a lieu la prochaine date. */
+const TYPES_EVENEMENTS = [
+    { id: "semaine", label: "En ce moment et dans les 7 jours", icon: "fa-solid fa-calendar-day", color: "#7B4B94" },
+    { id: "mois", label: "Dans le mois", icon: "fa-solid fa-calendar-days", color: "#A77BBF" },
+    { id: "plusTard", label: "Plus tard", icon: "fa-solid fa-calendar", color: "#9A8FA3" }
+];
+function periodesEvenement(props) {
+    const iso = d => d.split("/").reverse().join("-");
+    const periodes = String(props.datesfma || "").split("##").map(bloc => {
+        const dates = bloc.match(/\d{2}\/\d{2}\/\d{4}/g) || [];
+        const heures = bloc.match(/\d{2}:\d{2}/g) || [];
+        return dates.length ? { debut: iso(dates[0]), fin: iso(dates[1] || dates[0]), heureDebut: heures[0] || "", heureFin: heures[1] || "" } : null;
+    }).filter(Boolean);
+    if (!periodes.length && props.datedebut) {
+        periodes.push({ debut: String(props.datedebut).slice(0, 10), fin: String(props.datefin || props.datedebut).slice(0, 10),
+            heureDebut: props.heuredebut || "", heureFin: props.heurefin || "" });
+    }
+    return periodes;
+}
+function jourIso(decalage = 0) {
+    const d = new Date();
+    d.setDate(d.getDate() + decalage);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+function categorieEvenement(feature) {
+    const p = (feature.properties || {}).periodes || [];
+    const debut = p.length ? p[0].debut : "";
+    return debut <= jourIso(7) ? "semaine" : debut <= jourIso(31) ? "mois" : "plusTard";
+}
+function iconeEvenement(feature) {
+    const t = TYPES_EVENEMENTS.find(c => c.id === categorieEvenement(feature)) || TYPES_EVENEMENTS[0];
+    return { icon: t.icon, color: t.color };
+}
+function sousTitreEvenement(feature) {
+    const props = feature.properties || {};
+    const p = (props.periodes || [])[0];
+    if (!p) return props.commune || "";
+    const court = d => new Date(d + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+    const quand = p.debut === p.fin ? court(p.debut) : p.debut <= jourIso() ? "jusqu'au " + court(p.fin) : court(p.debut) + " → " + court(p.fin);
+    return [quand, props.commune].filter(Boolean).join(" · ");
+}
+/* Deux titres qui partagent au moins la moitié de leurs mots
+   (« Exposition photographies Envols » / « Exposition photographiques animalières Envols »). */
+function prochesMots(a, b) {
+    const ma = new Set(a.split(" ")), mb = new Set(b.split(" "));
+    const communs = [...ma].filter(m => mb.has(m)).length;
+    return communs / new Set([...ma, ...mb]).size >= 0.5;
+}
+function fetchEvenements() {
+    const normaliser = t => String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+    return fetchDataSarthe("227200029_fetes-et-manifestations-en-sarthe", 0.03).then(geo => {
+        const auj = jourIso();
+        const gardes = [];
+        geo.features.forEach(f => {
+            const props = f.properties || {};
+            const periodes = periodesEvenement(props).filter(p => p.fin >= auj).sort((a, b) => a.debut.localeCompare(b.debut));
+            if (!periodes.length) return;
+            const commune = String(props.commune || "").toLowerCase().replace(/(^|[\s-])(\p{L})/gu, (m, a, b) => a + b.toUpperCase())
+                .replace(/([\s-])(Du|De|Des|La|Le|Les|Sur|Sous|En|Et|Aux?)(?=[\s-])/g, (m, a, b) => a + b.toLowerCase());
+            const titre = normaliser(props.nomoffre);
+            const cle = normaliser(commune) + "|" + periodes[0].debut + "|" + periodes[0].fin;
+            const feature = { type: "Feature", geometry: f.geometry, properties: Object.assign({}, props, { commune, periodes }) };
+            const doublon = gardes.find(g => g.cle === cle && (g.titre.includes(titre) || titre.includes(g.titre) || prochesMots(g.titre, titre)));
+            /* Doublon : garder la fiche au titre le plus court (« Nouvelle revue : X » et « X » -> « X »). */
+            if (doublon) { if (titre.length < doublon.titre.length) Object.assign(doublon, { titre, feature }); return; }
+            gardes.push({ cle, titre, feature });
+        });
+        const features = gardes.map(g => g.feature)
+            .sort((a, b) => a.properties.periodes[0].debut.localeCompare(b.properties.periodes[0].debut));
         return { type: "FeatureCollection", features };
     });
 }
@@ -1778,6 +1860,20 @@ const LAYERS = [
         subtitleFields: ["service", "commune"]
     },
 
+    /* ---------- SORTIES & ÉVÉNEMENTS ---------- */
+    {
+        id: "evenements", group: "evenements", label: "Événements locaux",
+        /* Agendas des offices de tourisme (data.sarthe.fr), en direct :
+           voir fetchEvenements. Une case par période dans la légende. */
+        fetchPersonnalise: fetchEvenements, type: "point",
+        icon: "fa-solid fa-calendar-days", color: "#7B4B94",
+        iconePourFeature: iconeEvenement, sousTitrePourFeature: sousTitreEvenement,
+        legend: TYPES_EVENEMENTS, categoriser: categorieEvenement,
+        lazy: true, searchable: true, cluster: true,
+        titleFields: ["nomoffre"],
+        subtitleFields: ["commune"]
+    },
+
     /* ---------- PATRIMOINE ---------- */
     {
         id: "immeublesProteges", group: "patrimoine", label: "Monuments protégés",
@@ -2168,7 +2264,8 @@ const THEMES = [
     { label: "Mobilité", icon: "fa-solid fa-bus", groups: ["mobilite"] },
     { label: "Nature & rando", icon: "fa-solid fa-person-hiking", groups: ["tourisme", "patrimoine"] },
     { label: "Sécurité & santé", icon: "fa-solid fa-heart-pulse", groups: ["securite"] },
-    { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", groups: ["risques"] }
+    { label: "Risques & prévention", icon: "fa-solid fa-triangle-exclamation", groups: ["risques"] },
+    { label: "Sorties & événements", icon: "fa-solid fa-calendar-days", groups: ["evenements"] }
 ];
 
 /* =========================================================
