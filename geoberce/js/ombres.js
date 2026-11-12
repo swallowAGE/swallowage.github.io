@@ -130,9 +130,15 @@ function ombresFormaterDate(d) {
     return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
 
-function ombresChargerGrille(map) {
-    const b = map.getBounds().pad(0.15);
+function ombresChargerGrille(map, margeM) {
     const proj = L.CRS.EPSG3857;
+    let b;
+    if (margeM) {
+        /* Zone de l'écran élargie d'une marge en mètres au sol (pour que les obstacles proches des bords comptent). */
+        const v = map.getBounds(), c = Math.cos(v.getCenter().lat * Math.PI / 180);
+        const vsw = proj.project(v.getSouthWest()), vne = proj.project(v.getNorthEast()), m = margeM / c;
+        b = L.latLngBounds(proj.unproject(L.point(vsw.x - m, vsw.y - m)), proj.unproject(L.point(vne.x + m, vne.y + m)));
+    } else b = map.getBounds().pad(0.15);
     const sw = proj.project(b.getSouthWest()), ne = proj.project(b.getNorthEast());
     const latCentre = b.getCenter().lat, cosLat = Math.cos(latCentre * Math.PI / 180);
     const largeurSol = (ne.x - sw.x) * cosLat, hauteurSol = (ne.y - sw.y) * cosLat;
@@ -334,7 +340,9 @@ const SOLAIRE_SAISONS = {
     equinoxe: { label: "Équinoxe", date: "20 mars", mois: "03-20" },
     ete: { label: "Été", date: "21 juin", mois: "06-21" }
 };
-const solaire = { grille: null, saison: "hiver", requete: 0, resultats: {}, controle: null, couche: null, map: null, groupe: null };
+const solaire = { grille: null, saison: "hiver", requete: 0, controle: null, couches: {}, calculEnCours: false, map: null, groupe: null };
+const SOLAIRE_OBSTACLES_M = 100;   // distance jusqu'à laquelle les obstacles comptent autour d'une parcelle
+const SOLAIRE_SECURITE_M = 60;      // marge supplémentaire : une parcelle n'est calculée que si elle est bien à l'intérieur
 
 function solaireClasse(part) {
     return SOLAIRE_CLASSES.find(c => part < c.max) || SOLAIRE_CLASSES[SOLAIRE_CLASSES.length - 1];
@@ -386,25 +394,31 @@ function solaireEtat(texte) {
     if (el) el.textContent = texte || "";
 }
 
-/* Appelée par layers.js à l'activation de la couche puis à chaque déplacement de la carte. */
+/* Appelée par layers.js à l'activation de la couche puis à chaque déplacement de la carte.
+   La couleur d'une parcelle est calculée une seule fois par saison (mémorisée sur la parcelle) et seulement si la
+   parcelle est bien à l'intérieur de la zone de hauteurs chargée : elle ne change donc plus quand on déplace la carte. */
 function dessinerCadastreSolaire(map, groupe, onEtat) {
     solaire.map = map; solaire.groupe = groupe; solaire.surEtat = onEtat;
     if (!map.hasLayer(groupe)) groupe.addTo(map);
     solaireConstruireControle(map).hidden = false;
     if (map.getZoom() < OMBRES_ZOOM_MIN) {
-        if (solaire.couche) groupe.removeLayer(solaire.couche);
+        solaireVider();
         solaireEtat(`Zoomez (niveau ${OMBRES_ZOOM_MIN} ou plus) pour calculer l'ensoleillement des parcelles.`);
         if (onEtat) onEtat("zoom");
         return;
     }
     const g = solaire.grille;
-    if (g && g.zoom === map.getZoom() && g.limites.contains(map.getBounds())) { solaireCalculerEtAfficher(); return; }
+    if (g && g.zoom === map.getZoom() && g.sur.contains(map.getBounds())) { solaireCalculerEtAfficher(); return; }
     const numero = ++solaire.requete;
     solaireEtat("Chargement du relevé de hauteurs...");
     if (onEtat) onEtat("chargement");
-    ombresChargerGrille(map).then(grille => {
+    ombresChargerGrille(map, SOLAIRE_OBSTACLES_M + SOLAIRE_SECURITE_M).then(grille => {
         if (numero !== solaire.requete) return;
-        solaire.grille = grille; solaire.resultats = {};
+        // zone « sûre » : la grille moins la distance des obstacles ; seules les parcelles qui y tiennent entièrement sont calculées
+        const proj = L.CRS.EPSG3857, c = Math.cos(grille.centre.lat * Math.PI / 180), m = SOLAIRE_OBSTACLES_M / c;
+        const sw = proj.project(grille.limites.getSouthWest()), ne = proj.project(grille.limites.getNorthEast());
+        grille.sur = L.latLngBounds(proj.unproject(L.point(sw.x + m, sw.y + m)), proj.unproject(L.point(ne.x - m, ne.y - m)));
+        solaire.grille = grille;
         solaireCalculerEtAfficher();
     }).catch(err => {
         if (numero !== solaire.requete) return;
@@ -414,87 +428,108 @@ function dessinerCadastreSolaire(map, groupe, onEtat) {
     });
 }
 
+function solaireVider() {
+    Object.values(solaire.couches).forEach(c => solaire.groupe && solaire.groupe.removeLayer(c));
+    solaire.couches = {};
+}
+
 function masquerCadastreSolaire() {
     if (solaire.controle) solaire.controle.hidden = true;
     solaire.requete++;   // abandonne un calcul en cours
+    solaire.calculEnCours = false;
+    solaireVider();
 }
 
-function solaireParcellesDansGrille(g) {
+function solaireParcellesVisibles(map) {
     const conf = LAYERS.find(l => l.id === "cadastre");
     if (!conf) return Promise.resolve([]);
-    const filtrer = () => (donneesBrutes.cadastre || []).filter(f => bboxIntersecteVue(bboxFeature(f), g.limites));
+    const vue = map.getBounds();
+    const filtrer = () => (donneesBrutes.cadastre || []).filter(f => bboxIntersecteVue(bboxFeature(f), vue));
     if (coucheChargee.cadastre) return Promise.resolve(filtrer());
     return new Promise(resolve => chargerCouche(conf, () => resolve(filtrer()), () => resolve([])));
 }
 
+/* Position du soleil : toujours calculée au centre du territoire, pour que le résultat d'une parcelle ne dépende pas
+   de l'endroit où l'on a déplacé la carte. */
+function solaireRepere() {
+    const c = (typeof TERRITOIRE !== "undefined" && TERRITOIRE.centre) || [47.8, 0.4];
+    return { lat: c[0], lng: c[1] };
+}
+
+function solaireBboxDans(f, limites) {
+    const b = bboxFeature(f);
+    return b && b[0] >= limites.getWest() && b[2] <= limites.getEast() && b[1] >= limites.getSouth() && b[3] <= limites.getNorth();
+}
+
 function solaireCalculerEtAfficher() {
-    const g = solaire.grille, map = solaire.map, groupe = solaire.groupe;
+    const g = solaire.grille, map = solaire.map;
     if (!g || !map) return;
-    const saison = solaire.saison, cache = solaire.resultats[saison];
-    if (cache) { solaireAfficher(cache); return; }
-    const numero = ++solaire.requete;
-    solaireEtat("Chargement du cadastre...");
-    if (solaire.surEtat) solaire.surEtat("chargement");
-    solaireParcellesDansGrille(g).then(parcelles => {
+    const saison = solaire.saison, numero = ++solaire.requete;
+    solaireParcellesVisibles(map).then(visibles => {
         if (numero !== solaire.requete) return;
-        if (!parcelles.length) { solaireEtat("Pas de parcelles cadastrales sur cette zone."); return; }
-        const r = solaireReduire(g);
-        const proj = L.CRS.EPSG3857;
-        const sw = proj.project(g.limites.getSouthWest()), ne = proj.project(g.limites.getNorthEast());
-        const versPixel = c => { const m = proj.project(L.latLng(c[1], c[0])); return [(m.x - sw.x) / (ne.x - sw.x) * r.L, (ne.y - m.y) / (ne.y - sw.y) * r.H]; };
-        const annee = new Date().getFullYear(), mois = SOLAIRE_SAISONS[saison].mois;
-        const heures = new Float32Array(r.L * r.H);   // heures de soleil direct par point
-        let heuresJour = 0, t = 0;
-        const total = 24 / OMBRES_PAS_SOLAIRE;
-        const tranche = () => {
-            if (numero !== solaire.requete) return;
-            const debut = performance.now();
-            while (t <= 24 && performance.now() - debut < 40) {
-                const s = positionSoleil(parisVersUtc(`${annee}-${mois}`, t), g.centre.lat, g.centre.lng);
-                if (s.hauteur > 0.0087) {
-                    const masque = calculerOmbres(r.h, r.L, r.H, r.pixM, s.azimut, s.hauteur);
-                    for (let i = 0; i < masque.length; i++) if (!masque[i]) heures[i] += OMBRES_PAS_SOLAIRE;
-                    heuresJour += OMBRES_PAS_SOLAIRE;
-                }
-                t += OMBRES_PAS_SOLAIRE;
-            }
-            if (t <= 24) {
-                solaireEtat(`Calcul de l'ensoleillement... ${Math.round(t / 24 * 100)} %`);
-                setTimeout(tranche, 0);
-                return;
-            }
-            // moyenne des heures de soleil sur chaque parcelle (rasterisation de la parcelle par un canvas)
-            const cv = document.createElement("canvas"); cv.width = r.L; cv.height = r.H;
-            const cc = cv.getContext("2d", { willReadFrequently: true }); cc.fillStyle = "#000";
-            const sortie = [];
-            parcelles.forEach(f => {
-                const polys = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
-                const anneaux = polys.map(rings => rings.map(ring => ring.map(versPixel)));
-                const pts = anneaux.flat(2);
-                let x0 = Math.floor(Math.min(...pts.map(p => p[0]))), x1 = Math.ceil(Math.max(...pts.map(p => p[0])));
-                let y0 = Math.floor(Math.min(...pts.map(p => p[1]))), y1 = Math.ceil(Math.max(...pts.map(p => p[1])));
-                x0 = Math.max(0, x0); y0 = Math.max(0, y0); x1 = Math.min(r.L, x1); y1 = Math.min(r.H, y1);
-                const w = x1 - x0, h = y1 - y0;
-                if (w < 1 || h < 1) return;
-                cc.clearRect(x0, y0, w, h);
-                anneaux.forEach(rings => { cc.beginPath(); rings.forEach(ring => ring.forEach((p, i) => i ? cc.lineTo(p[0], p[1]) : cc.moveTo(p[0], p[1]))); cc.fill("evenodd"); });
-                const a = cc.getImageData(x0, y0, w, h).data;
-                let somme = 0, n = 0;
-                for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-                    if (a[(y * w + x) * 4 + 3] > 127) {
-                        const v = r.h[(y0 + y) * r.L + x0 + x];
-                        if (v > -500 && v < 3000) { somme += heures[(y0 + y) * r.L + x0 + x]; n++; }
-                    }
-                }
-                cc.clearRect(x0, y0, w, h);
-                if (n >= 2) sortie.push({ feature: f, heures: somme / n, part: heuresJour ? somme / n / heuresJour : 0, surface: Math.round(n * r.pixM * r.pixM) });
-            });
-            const resultat = { parcelles: sortie, heuresJour, saison };
-            solaire.resultats[saison] = resultat;
-            solaireAfficher(resultat);
-        };
-        setTimeout(tranche, 0);
+        if (!visibles.length) { solaireEtat("Pas de parcelles cadastrales sur cette zone."); return; }
+        const aCalculer = visibles.filter(f => !(f.__solaire && f.__solaire[saison]) && solaireBboxDans(f, g.sur));
+        if (!aCalculer.length) { solaireAfficher(visibles); return; }
+        solaireCalculer(g, saison, aCalculer, numero, () => solaireAfficher(visibles));
     });
+}
+
+function solaireCalculer(g, saison, parcelles, numero, fini) {
+    const r = solaireReduire(g);
+    const proj = L.CRS.EPSG3857;
+    const sw = proj.project(g.limites.getSouthWest()), ne = proj.project(g.limites.getNorthEast());
+    const versPixel = c => { const m = proj.project(L.latLng(c[1], c[0])); return [(m.x - sw.x) / (ne.x - sw.x) * r.L, (ne.y - m.y) / (ne.y - sw.y) * r.H]; };
+    const annee = new Date().getFullYear(), mois = SOLAIRE_SAISONS[saison].mois, repere = solaireRepere();
+    const heures = new Float32Array(r.L * r.H);   // heures de soleil direct par point
+    let heuresJour = 0, t = 0;
+    const tranche = () => {
+        if (numero !== solaire.requete) return;
+        const debut = performance.now();
+        while (t <= 24 && performance.now() - debut < 40) {
+            const s = positionSoleil(parisVersUtc(`${annee}-${mois}`, t), repere.lat, repere.lng);
+            if (s.hauteur > 0.0087) {
+                const masque = calculerOmbres(r.h, r.L, r.H, r.pixM, s.azimut, s.hauteur);
+                for (let i = 0; i < masque.length; i++) if (!masque[i]) heures[i] += OMBRES_PAS_SOLAIRE;
+                heuresJour += OMBRES_PAS_SOLAIRE;
+            }
+            t += OMBRES_PAS_SOLAIRE;
+        }
+        if (t <= 24) {
+            solaireEtat(`Calcul de l'ensoleillement... ${Math.round(t / 24 * 100)} %`);
+            setTimeout(tranche, 0);
+            return;
+        }
+        // moyenne des heures de soleil sur chaque parcelle (rasterisation de la parcelle par un canvas), mémorisée sur la parcelle
+        const cv = document.createElement("canvas"); cv.width = r.L; cv.height = r.H;
+        const cc = cv.getContext("2d", { willReadFrequently: true }); cc.fillStyle = "#000";
+        parcelles.forEach(f => {
+            const polys = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
+            const anneaux = polys.map(rings => rings.map(ring => ring.map(versPixel)));
+            const pts = anneaux.flat(2);
+            let x0 = Math.floor(Math.min(...pts.map(p => p[0]))), x1 = Math.ceil(Math.max(...pts.map(p => p[0])));
+            let y0 = Math.floor(Math.min(...pts.map(p => p[1]))), y1 = Math.ceil(Math.max(...pts.map(p => p[1])));
+            x0 = Math.max(0, x0); y0 = Math.max(0, y0); x1 = Math.min(r.L, x1); y1 = Math.min(r.H, y1);
+            const w = x1 - x0, h = y1 - y0;
+            if (w < 1 || h < 1) return;
+            cc.clearRect(x0, y0, w, h);
+            anneaux.forEach(rings => { cc.beginPath(); rings.forEach(ring => ring.forEach((p, i) => i ? cc.lineTo(p[0], p[1]) : cc.moveTo(p[0], p[1]))); cc.fill("evenodd"); });
+            const a = cc.getImageData(x0, y0, w, h).data;
+            let somme = 0, n = 0;
+            for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+                if (a[(y * w + x) * 4 + 3] > 127) {
+                    const v = r.h[(y0 + y) * r.L + x0 + x];
+                    if (v > -500 && v < 3000) { somme += heures[(y0 + y) * r.L + x0 + x]; n++; }
+                }
+            }
+            cc.clearRect(x0, y0, w, h);
+            if (n >= 2) {
+                f.__solaire = f.__solaire || {};
+                f.__solaire[saison] = { heures: somme / n, part: heuresJour ? somme / n / heuresJour : 0, surface: Math.round(n * r.pixM * r.pixM), heuresJour };
+            }
+        });
+        fini();
+    };
+    setTimeout(tranche, 0);
 }
 const OMBRES_PAS_SOLAIRE = 0.5;
 
@@ -503,15 +538,22 @@ function solaireDuree(heures) {
     return `${Math.floor(mn / 60)} h ${String(mn % 60).padStart(2, "0")}`;
 }
 
-function solaireAfficher(resultat) {
-    const { parcelles, heuresJour, saison } = resultat;
-    const groupe = solaire.groupe;
-    if (solaire.couche) groupe.removeLayer(solaire.couche);
-    const s = SOLAIRE_SAISONS[saison];
-    solaire.couche = L.layerGroup(parcelles.map(p => {
+/* Affiche les parcelles déjà calculées pour la saison choisie. Les polygones déjà posés restent en place (pas de
+   clignotement quand on déplace la carte) : on n'ajoute que les nouveaux. */
+function solaireAfficher(visibles) {
+    const saison = solaire.saison, groupe = solaire.groupe, s = SOLAIRE_SAISONS[saison];
+    const couches = solaire.couches[saison] || (solaire.couches[saison] = L.layerGroup().addTo(groupe));
+    Object.entries(solaire.couches).forEach(([k, c]) => { if (k !== saison && groupe.hasLayer(c)) groupe.removeLayer(c); });
+    if (!groupe.hasLayer(couches)) groupe.addLayer(couches);
+    let calculees = 0, jour = 0;
+    visibles.forEach(f => {
+        const p = f.__solaire && f.__solaire[saison];
+        if (!p) return;
+        calculees++; jour = p.heuresJour;
+        if (f.__couchesSolaire && f.__couchesSolaire[saison]) return;
         const classe = solaireClasse(p.part);
-        const ref = (p.feature.properties || {}).reference || "";
-        const couche = L.geoJSON(p.feature, { style: { color: "#fff", weight: 0.8, opacity: 0.8, fillColor: classe.couleur, fillOpacity: 0.62 } });
+        const ref = (f.properties || {}).reference || "";
+        const couche = L.geoJSON(f, { style: { color: "#fff", weight: 0.8, opacity: 0.8, fillColor: classe.couleur, fillOpacity: 0.62 } });
         couche.bindPopup(`<div class="popup-fiche">
             <div class="popup-fiche-entete">
                 <div class="popup-fiche-icon" style="background:${classe.couleur}"><i class="fa-solid fa-solar-panel"></i></div>
@@ -522,13 +564,16 @@ function solaireAfficher(resultat) {
                 </div>
             </div>
             <div class="popup-fiche-section">
-                <div class="popup-fiche-ligne"><i class="fa-solid fa-sun"></i> ${solaireDuree(p.heures)} de soleil direct le ${echapperHtml(s.date)} (${Math.round(p.part * 100)} % des ${solaireDuree(heuresJour)} de jour)</div>
+                <div class="popup-fiche-ligne"><i class="fa-solid fa-sun"></i> ${solaireDuree(p.heures)} de soleil direct le ${echapperHtml(s.date)} (${Math.round(p.part * 100)} % des ${solaireDuree(p.heuresJour)} de jour)</div>
                 <div class="popup-fiche-precision">Moyenne sur la parcelle, ciel dégagé. Les arbres et bâtiments d'après le relevé LiDAR de l'IGN.</div>
             </div>
         </div>`, OPTIONS_POPUP);
-        return couche;
-    }));
-    groupe.addLayer(solaire.couche);
-    solaireEtat(`${parcelles.length} parcelles · ${s.date} : ${solaireDuree(heuresJour)} de jour.`);
+        couche.addTo(couches);
+        f.__couchesSolaire = f.__couchesSolaire || {};
+        f.__couchesSolaire[saison] = couche;
+    });
+    const reste = visibles.length - calculees;
+    solaireEtat(`${calculees} parcelles · ${s.date}${jour ? " : " + solaireDuree(jour) + " de jour" : ""}.` +
+        (reste > 0 ? ` ${reste} parcelle${reste > 1 ? "s" : ""} près du bord de la zone, calculée${reste > 1 ? "s" : ""} en déplaçant la carte.` : ""));
     if (solaire.surEtat) solaire.surEtat("ok");
 }
