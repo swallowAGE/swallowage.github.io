@@ -17,7 +17,8 @@
 const OMBRES_ZOOM_MIN = 17;
 const OMBRES_COULEUR = [28, 34, 78];   // bleu nuit
 const OMBRES_OPACITE = 120;            // 0-255, ombre d'une journée claire
-const OMBRES_PIXELS_MAX = 900;         // côté maximal de la grille de hauteurs
+const OMBRES_PIXELS_MAX = 1000;        // côté maximal de la grille de hauteurs
+const OMBRES_PIXEL_MIN_M = 0.35;       // taille minimale d'un pixel au sol (le relevé est à 0,5 m)
 const OMBRES_URL = "https://data.geopf.fr/wms-r/wms?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&STYLES=&LAYERS=" +
     "IGNF_LIDAR-HD_MNS_ELEVATION.ELEVATIONGRIDCOVERAGE.LAMB93&CRS=EPSG:3857&FORMAT=" + encodeURIComponent("image/x-bil;bits=32");
 
@@ -60,17 +61,29 @@ function parisVersUtc(dateTexte, heures) {
 
 /* ---------- Calcul des ombres ---------- */
 
+const ombresSol = new WeakMap();
+let ombresTampon = null;
+
 /* h : hauteurs (m) en grille L x H (ligne 0 = nord, valeurs non numériques = pas de donnée).
-   pixM : taille d'un pixel au sol (m). Renvoie un masque : 1 = à l'ombre, 0 = au soleil. */
-function calculerOmbres(h, L, H, pixM, azimut, hauteurSoleil) {
+   pixM : taille d'un pixel au sol (m). Renvoie un masque : 1 = à l'ombre, 0 = au soleil.
+   profondeur (facultatif) : tableau rempli avec « hauteur de la droite de visée - hauteur du sol » en mètres, qui permet
+   d'adoucir les bords de l'ombre au dessin (valeur positive = à l'ombre). */
+function calculerOmbres(h, L, H, pixM, azimut, hauteurSoleil, profondeur) {
     const masque = new Uint8Array(L * H);
     if (hauteurSoleil <= 0.0087) { masque.fill(1); return masque; } // soleil sous l'horizon (ou à moins d'un demi-degré)
     const pente = Math.tan(hauteurSoleil);
     const ux = Math.sin(azimut), uy = -Math.cos(azimut);   // direction du soleil dans l'image (y vers le bas)
     const HAUT = -1e4;
-    const M = new Float32Array(L * H);                     // max(hauteur du sol, hauteur de la droite de visée)
-    const sol = new Float32Array(L * H);
-    for (let i = 0; i < sol.length; i++) { const v = h[i]; sol[i] = (v > -500 && v < 3000) ? v : HAUT; }
+    /* Hauteurs nettoyées calculées une seule fois par grille (le calcul est répété pour chaque heure de la
+       journée), tampon de travail réutilisé d'un appel à l'autre. */
+    let sol = ombresSol.get(h);
+    if (!sol) {
+        sol = new Float32Array(L * H);
+        for (let i = 0; i < sol.length; i++) { const v = h[i]; sol[i] = (v > -500 && v < 3000) ? v : HAUT; }
+        ombresSol.set(h, sol);
+    }
+    if (!ombresTampon || ombresTampon.length !== L * H) ombresTampon = new Float32Array(L * H);
+    const M = ombresTampon;                                // max(hauteur du sol, hauteur de la droite de visée)
     const lisser = (pos, n, depart, pas) => {       // valeur de M interpolée à la position pos le long d'une ligne
         let p = pos; if (p < 0) p = 0; else if (p > n - 1) p = n - 1;
         const i0 = Math.floor(p), t = p - i0, i1 = Math.min(n - 1, i0 + 1);
@@ -87,6 +100,7 @@ function calculerOmbres(h, L, H, pixM, azimut, hauteurSoleil) {
                 if (ny >= 0 && ny < H) ombre = lisser(x + fx, L, ny * L, 1) - chute;
                 const s = sol[i];
                 M[i] = s > ombre ? s : ombre;
+                if (profondeur) profondeur[i] = s > HAUT ? ombre - s : -9;
                 if (s > HAUT && ombre > s + 0.05) masque[i] = 1;
             }
         }
@@ -100,6 +114,7 @@ function calculerOmbres(h, L, H, pixM, azimut, hauteurSoleil) {
                 if (nx >= 0 && nx < L) ombre = lisser(y + fy, H, nx, L) - chute;
                 const s = sol[i];
                 M[i] = s > ombre ? s : ombre;
+                if (profondeur) profondeur[i] = s > HAUT ? ombre - s : -9;
                 if (s > HAUT && ombre > s + 0.05) masque[i] = 1;
             }
         }
@@ -109,19 +124,19 @@ function calculerOmbres(h, L, H, pixM, azimut, hauteurSoleil) {
 
 /* ---------- Données, affichage et commandes ---------- */
 
-const ombres = { grille: null, requete: 0, recouvrement: null, controle: null, date: null, heure: 12, enAttente: null };
+const ombres = { carte: null, groupe: null, modeParcelle: false, surligne: null, grille: null, requete: 0, recouvrement: null, controle: null, date: null, heure: 12, enAttente: null };
 
 function ombresFormaterDate(d) {
     return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
 
 function ombresChargerGrille(map) {
-    const b = map.getBounds().pad(0.25);
+    const b = map.getBounds().pad(0.15);
     const proj = L.CRS.EPSG3857;
     const sw = proj.project(b.getSouthWest()), ne = proj.project(b.getNorthEast());
     const latCentre = b.getCenter().lat, cosLat = Math.cos(latCentre * Math.PI / 180);
     const largeurSol = (ne.x - sw.x) * cosLat, hauteurSol = (ne.y - sw.y) * cosLat;
-    const pixM = Math.max(0.5, Math.max(largeurSol, hauteurSol) / OMBRES_PIXELS_MAX);
+    const pixM = Math.max(OMBRES_PIXEL_MIN_M, Math.max(largeurSol, hauteurSol) / OMBRES_PIXELS_MAX);
     const L_ = Math.max(8, Math.round(largeurSol / pixM)), H_ = Math.max(8, Math.round(hauteurSol / pixM));
     const url = `${OMBRES_URL}&BBOX=${sw.x},${sw.y},${ne.x},${ne.y}&WIDTH=${L_}&HEIGHT=${H_}`;
     return fetch(url).then(r => { if (!r.ok) throw new Error("IGN " + r.status); return r.arrayBuffer(); }).then(buf => {
@@ -144,18 +159,29 @@ function ombresDessiner(groupe) {
     if (!g) return;
     const instant = ombresInstant();
     const s = positionSoleil(instant, g.centre.lat, g.centre.lng);
-    const masque = calculerOmbres(g.h, g.L, g.H, g.pixM, s.azimut, s.hauteur);
+    if (!g.profondeur) g.profondeur = new Float32Array(g.L * g.H);
+    calculerOmbres(g.h, g.L, g.H, g.pixM, s.azimut, s.hauteur, g.profondeur);
     const canvas = document.createElement("canvas");
     canvas.width = g.L; canvas.height = g.H;
     const ctx = canvas.getContext("2d");
     const img = ctx.createImageData(g.L, g.H);
     const nuit = s.hauteur <= 0.0087;
-    for (let i = 0; i < masque.length; i++) {
-        if (masque[i]) {
-            const o = i * 4;
-            img.data[o] = OMBRES_COULEUR[0]; img.data[o + 1] = OMBRES_COULEUR[1]; img.data[o + 2] = OMBRES_COULEUR[2];
-            img.data[o + 3] = nuit ? 150 : OMBRES_OPACITE;
-        }
+    const opacite = nuit ? 150 : OMBRES_OPACITE;
+    const n = g.L * g.H;
+    if (!g.alpha) { g.alpha = new Float32Array(n); g.alpha2 = new Float32Array(n); }
+    for (let i = 0; i < n; i++) {
+        /* Bords adoucis : l'opacité monte progressivement quand l'obstacle dépasse la droite de visée de 0 à 0,5 m,
+           ce qui évite l'effet « escalier » d'un masque tout ou rien. */
+        const a = nuit ? 1 : (g.profondeur[i] + 0.2) / 0.5;
+        g.alpha[i] = a <= 0 ? 0 : (a > 1 ? 1 : a);
+    }
+    if (!nuit) ombresFlouter(g.alpha, g.alpha2, g.L, g.H);
+    for (let i = 0; i < n; i++) {
+        const a = g.alpha[i];
+        if (a <= 0.004) continue;
+        const o = i * 4;
+        img.data[o] = OMBRES_COULEUR[0]; img.data[o + 1] = OMBRES_COULEUR[1]; img.data[o + 2] = OMBRES_COULEUR[2];
+        img.data[o + 3] = Math.round(opacite * a);
     }
     ctx.putImageData(img, 0, 0);
     const url = canvas.toDataURL("image/png");
@@ -204,6 +230,8 @@ function ombresConstruireControle(map, groupe) {
             <button type="button" data-jour="03-20">Équinoxe</button>
             <button type="button" data-jour="06-21">Été</button>
         </div>
+        <button type="button" id="ombres-parcelle-bouton" class="ombres-bouton"><i class="fa-solid fa-hand-pointer"></i> Heures de soleil d'une parcelle</button>
+        <div id="ombres-parcelle" class="ombres-parcelle" hidden></div>
         <div id="ombres-soleil" class="ombres-note"></div>
         <div id="ombres-etat" class="ombres-note"></div>
         <div class="ombres-note">Bâtiments, arbres et relief d'après le relevé LiDAR HD de l'IGN. Les arbres sont comptés avec ou sans feuilles.</div>`;
@@ -225,6 +253,7 @@ function ombresConstruireControle(map, groupe) {
         el.querySelector("#ombres-heure").value = ombres.heure;
         replanifier();
     }));
+    el.querySelector("#ombres-parcelle-bouton").addEventListener("click", () => ombresBasculerModeParcelle(map));
     ombres.controle = el;
     return el;
 }
@@ -236,6 +265,7 @@ function ombresEtat(texte) {
 
 /* Appelée par layers.js à l'activation de la couche puis à chaque déplacement de la carte. */
 function dessinerOmbres(map, groupe, onEtat) {
+    ombres.carte = map; ombres.groupe = groupe;
     if (!map.hasLayer(groupe)) groupe.addTo(map);
     const controle = ombresConstruireControle(map, groupe);
     controle.hidden = false;
@@ -268,4 +298,206 @@ function dessinerOmbres(map, groupe, onEtat) {
 
 function masquerOmbres() {
     if (ombres.controle) ombres.controle.hidden = true;
+    ombresQuitterModeParcelle();
+    ombresEffacerParcelle();
+}
+
+
+/* ---------- Heures de soleil d'une parcelle ---------- */
+
+/* Flou de 3 x 3 pixels (deux passes de 3 points) : atténue le bruit de la grille de hauteurs, surtout quand le soleil
+   est bas et que l'ombre traverse de nombreux arbres. Le résultat revient dans a. */
+function ombresFlouter(a, tmp, L, H) {
+    for (let y = 0; y < H; y++) {
+        const o = y * L;
+        for (let x = 0; x < L; x++) {
+            const g = x > 0 ? a[o + x - 1] : a[o + x], d = x < L - 1 ? a[o + x + 1] : a[o + x];
+            tmp[o + x] = (g + a[o + x] + d) / 3;
+        }
+    }
+    for (let y = 0; y < H; y++) {
+        const o = y * L, h = y > 0 ? o - L : o, b = y < H - 1 ? o + L : o;
+        for (let x = 0; x < L; x++) a[o + x] = (tmp[h + x] + tmp[o + x] + tmp[b + x]) / 3;
+    }
+}
+
+const OMBRES_JOURS = [
+    { label: "21 décembre", mois: "12-21", court: "hiver" },
+    { label: "20 mars", mois: "03-20", court: "équinoxe" },
+    { label: "21 juin", mois: "06-21", court: "été" }
+];
+const OMBRES_PAS_HEURES = 0.5;       // pas de calcul : une demi-heure
+const OMBRES_MARGE_M = 150;          // obstacles pris en compte autour de la parcelle
+
+function ombresQuitterModeParcelle() {
+    if (!ombres.modeParcelle) return;
+    ombres.modeParcelle = false;
+    if (ombres.carte) {
+        ombres.carte.off("click", ombresClicParcelle);
+        ombres.carte.getContainer().style.cursor = "";
+    }
+    const b = document.getElementById("ombres-parcelle-bouton");
+    if (b) b.classList.remove("actif");
+}
+
+function ombresEffacerParcelle() {
+    if (ombres.surligne && ombres.groupe) ombres.groupe.removeLayer(ombres.surligne);
+    ombres.surligne = null;
+    const z = document.getElementById("ombres-parcelle");
+    if (z) { z.hidden = true; z.innerHTML = ""; }
+}
+
+function ombresBasculerModeParcelle(map) {
+    if (ombres.modeParcelle) { ombresQuitterModeParcelle(); ombresEtat(""); return; }
+    if (map.getZoom() < OMBRES_ZOOM_MIN || !ombres.grille) { ombresEtat(`Zoomez (niveau ${OMBRES_ZOOM_MIN} ou plus) sur la parcelle d'abord.`); return; }
+    ombres.modeParcelle = true;
+    map.on("click", ombresClicParcelle);
+    map.getContainer().style.cursor = "crosshair";
+    document.getElementById("ombres-parcelle-bouton").classList.add("actif");
+    ombresEtat("Cliquez sur la parcelle à étudier.");
+}
+
+/* Parcelle contenant le point cliqué (couche cadastre chargée à la demande), ou null. */
+function ombresTrouverParcelle(latlng) {
+    const conf = LAYERS.find(l => l.id === "cadastre");
+    if (!conf) return Promise.resolve(null);
+    const chercher = () => (donneesBrutes.cadastre || []).find(f => {
+        const g = f.geometry; if (!g) return false;
+        const polys = g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : [];
+        return polys.some(rings => {
+            let dedans = false;
+            rings.forEach((anneau, k) => {
+                let ici = false;
+                for (let i = 0, j = anneau.length - 1; i < anneau.length; j = i++) {
+                    const [xi, yi] = anneau[i], [xj, yj] = anneau[j];
+                    if ((yi > latlng.lat) !== (yj > latlng.lat) && latlng.lng < (xj - xi) * (latlng.lat - yi) / (yj - yi) + xi) ici = !ici;
+                }
+                if (ici) dedans = k === 0 ? true : false;   // premier anneau = contour, les suivants = trous
+            });
+            return dedans;
+        });
+    }) || null;
+    if (coucheChargee.cadastre) return Promise.resolve(chercher());
+    return new Promise(resolve => chargerCouche(conf, () => resolve(chercher()), () => resolve(null)));
+}
+
+function ombresClicParcelle(e) {
+    ombresQuitterModeParcelle();
+    ombresEtat("Recherche de la parcelle...");
+    ombresTrouverParcelle(e.latlng).then(parcelle => ombresCalculerParcelle(e.latlng, parcelle));
+}
+
+function ombresCalculerParcelle(clic, parcelle) {
+    const g = ombres.grille;
+    if (!g) return;
+    const proj = L.CRS.EPSG3857;
+    const sw = proj.project(g.limites.getSouthWest()), ne = proj.project(g.limites.getNorthEast());
+    const versPixel = ll => { const m = proj.project(L.latLng(ll[1], ll[0])); return [(m.x - sw.x) / (ne.x - sw.x) * g.L, (ne.y - m.y) / (ne.y - sw.y) * g.H]; };
+    // Contours de la parcelle en pixels de la grille (ou disque de 6 m autour du point si pas de parcelle)
+    let anneaux = [];
+    let latlngs = null;
+    if (parcelle) {
+        const polys = parcelle.geometry.type === "Polygon" ? [parcelle.geometry.coordinates] : parcelle.geometry.coordinates;
+        anneaux = polys.map(rings => rings.map(r => r.map(versPixel)));
+        latlngs = polys.map(rings => rings.map(r => r.map(c => [c[1], c[0]])));
+    } else {
+        const c = versPixel([clic.lng, clic.lat]), r = 6 / g.pixM, pts = [];
+        for (let k = 0; k < 24; k++) pts.push([c[0] + r * Math.cos(k * Math.PI / 12), c[1] + r * Math.sin(k * Math.PI / 12)]);
+        anneaux = [[pts]];
+    }
+    const tousPts = anneaux.flat(2);
+    let x0 = Math.min(...tousPts.map(p => p[0])), x1 = Math.max(...tousPts.map(p => p[0]));
+    let y0 = Math.min(...tousPts.map(p => p[1])), y1 = Math.max(...tousPts.map(p => p[1]));
+    const partielle = x0 < 0 || y0 < 0 || x1 > g.L || y1 > g.H;   // parcelle plus grande que la zone calculée : on étudie sa partie visible
+    x0 = Math.max(0, x0); y0 = Math.max(0, y0); x1 = Math.min(g.L, x1); y1 = Math.min(g.H, y1);
+    if (x1 - x0 < 2 || y1 - y0 < 2) { ombresEtat("Parcelle hors de la zone calculée : recentrez la carte dessus."); return; }
+    // Zone de calcul réduite : parcelle + marge (les obstacles plus loin sont ignorés)
+    const marge = Math.ceil(OMBRES_MARGE_M / g.pixM);
+    const cx0 = Math.max(0, Math.floor(x0) - marge), cy0 = Math.max(0, Math.floor(y0) - marge);
+    const cx1 = Math.min(g.L, Math.ceil(x1) + marge), cy1 = Math.min(g.H, Math.ceil(y1) + marge);
+    const w = cx1 - cx0, h = cy1 - cy0;
+    const sousH = new Float32Array(w * h);
+    for (let y = 0; y < h; y++) sousH.set(g.h.subarray((cy0 + y) * g.L + cx0, (cy0 + y) * g.L + cx0 + w), y * w);
+    // Masque de la parcelle (rasterisation par un canvas)
+    const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+    const cc = cv.getContext("2d"); cc.fillStyle = "#000";
+    anneaux.forEach(rings => {
+        cc.beginPath();
+        rings.forEach(r => r.forEach((p, i) => i ? cc.lineTo(p[0] - cx0, p[1] - cy0) : cc.moveTo(p[0] - cx0, p[1] - cy0)));
+        cc.fill("evenodd");
+    });
+    const alpha = cc.getImageData(0, 0, w, h).data;
+    const dansParcelle = [];
+    for (let i = 0; i < w * h; i++) if (alpha[i * 4 + 3] > 127 && sousH[i] > -500 && sousH[i] < 3000) dansParcelle.push(i);
+    if (dansParcelle.length < 3) { ombresEtat("Parcelle trop petite ou sans relevé pour ce calcul."); return; }
+    // Surbrillance de la parcelle
+    ombresEffacerParcelle();
+    if (latlngs) {
+        ombres.surligne = L.polygon(latlngs, { color: "#8A6D2B", weight: 3, fill: false, interactive: false });
+        ombres.groupe.addLayer(ombres.surligne);
+    }
+    const zone = document.getElementById("ombres-parcelle");
+    const surface = Math.round(dansParcelle.length * g.pixM * g.pixM);
+    const partielleTexte = partielle ? " (partie visible seulement)" : "";
+    const titre = parcelle ? `Parcelle ${echapperHtml((parcelle.properties || {}).reference || "")}` : "Autour du point cliqué (6 m)";
+    zone.hidden = false;
+    zone.innerHTML = `<div class="ombres-parcelle-titre">${titre}</div><div class="ombres-note" id="ombres-parcelle-progres">Calcul en cours...</div>`;
+    ombresEtat("");
+    // Calcul jour par jour, par tranches pour garder la page réactive
+    const annee = new Date().getFullYear();
+    const resultats = [];
+    let iJour = 0, t = 0;
+    const centre = g.centre;
+    const tranche = () => {
+        const debut = performance.now();
+        while (iJour < OMBRES_JOURS.length && performance.now() - debut < 40) {
+            const jour = OMBRES_JOURS[iJour];
+            if (!resultats[iJour]) resultats[iJour] = { jour, parts: [], heuresJour: 0, heuresSoleil: 0 };
+            const r = resultats[iJour];
+            if (t > 24) { iJour++; t = 0; continue; }
+            const sol = positionSoleil(parisVersUtc(`${annee}-${jour.mois}`, t), centre.lat, centre.lng);
+            if (sol.hauteur > 0.0087) {
+                const masque = calculerOmbres(sousH, w, h, g.pixM, sol.azimut, sol.hauteur);
+                let ensoleille = 0;
+                for (const i of dansParcelle) if (!masque[i]) ensoleille++;
+                const f = ensoleille / dansParcelle.length;
+                r.parts.push({ t, f });
+                r.heuresJour += OMBRES_PAS_HEURES; r.heuresSoleil += f * OMBRES_PAS_HEURES;
+            }
+            t += OMBRES_PAS_HEURES;
+        }
+        if (iJour < OMBRES_JOURS.length) {
+            const pct = Math.round(((iJour + t / 24) / OMBRES_JOURS.length) * 100);
+            const prog = document.getElementById("ombres-parcelle-progres"); if (prog) prog.textContent = `Calcul en cours... ${pct} %`;
+            setTimeout(tranche, 0);
+        } else {
+            ombresAfficherResultats(zone, titre + partielleTexte, surface, resultats);
+        }
+    };
+    setTimeout(tranche, 0);
+}
+
+function ombresDureeTexte(heures) {
+    const mn = Math.round(heures * 60 / 5) * 5;
+    return `${Math.floor(mn / 60)} h ${String(mn % 60).padStart(2, "0")}`;
+}
+
+function ombresAfficherResultats(zone, titre, surface, resultats) {
+    const ligne = r => {
+        // frise : une case par demi-heure de jour, jaune = soleil direct, bleu nuit = ombre (dégradé selon la part ensoleillée)
+        const cases = r.parts.map(p => {
+            const a = Math.round(p.f * 100) / 100;
+            return `<i style="background:rgba(213,163,93,${(0.15 + 0.85 * a).toFixed(2)})" title="${Math.floor(p.t)} h ${String(Math.round((p.t % 1) * 60)).padStart(2, "0")} : ${Math.round(p.f * 100)} % de la parcelle au soleil"></i>`;
+        }).join("");
+        const debut = r.parts.length ? r.parts[0].t : 0, fin = r.parts.length ? r.parts[r.parts.length - 1].t + OMBRES_PAS_HEURES : 0;
+        return `<div class="ombres-jour">
+            <div class="ombres-jour-ligne"><span>${r.jour.label} <em>(${r.jour.court})</em></span><strong>${ombresDureeTexte(r.heuresSoleil)}</strong></div>
+            <div class="ombres-frise">${cases}</div>
+            <div class="ombres-frise-axe"><span>${Math.floor(debut)} h</span><span>${ombresDureeTexte(r.heuresJour)} de jour</span><span>${Math.ceil(fin)} h</span></div>
+        </div>`;
+    };
+    zone.innerHTML = `<div class="ombres-parcelle-titre">${titre} <span class="ombres-note">· ${surface.toLocaleString("fr-FR")} m²</span></div>
+        <div class="ombres-note">Soleil direct reçu en moyenne sur la parcelle :</div>
+        ${resultats.map(ligne).join("")}
+        <div class="ombres-note">Estimation d'après le relevé LiDAR de l'IGN (arbres comptés avec feuilles), obstacles jusqu'à ${OMBRES_MARGE_M} m, pas d'une demi-heure. Ciel supposé dégagé : les nuages ne sont pas pris en compte.</div>`;
 }
