@@ -34,6 +34,15 @@ map.on("click", () => {
     if (Date.now() - dernierePopupOuverte > 400) map.closePopup();
 });
 
+/* Étiquettes permanentes (layerConf.etiquette, ex. numéros de parcelles
+   forestières) : illisibles et encombrantes de loin, masquées en CSS
+   sous le zoom 14. */
+function majClasseZoomEtiquettes() {
+    map.getContainer().classList.toggle("etiquettes-masquees", map.getZoom() < 14);
+}
+map.on("zoomend", majClasseZoomEtiquettes);
+majClasseZoomEtiquettes();
+
 L.control.zoom({ position: "topright" }).addTo(map);
 
 L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_33ph_1_a60cba5d2b6752f8d0e80255", {

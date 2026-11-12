@@ -2422,6 +2422,125 @@ function construirePopupPatrimoineRural(props) {
     </div>`;
 }
 
+/* ---------- Nouvelles couches data.gouv.fr (novembre 2026) ---------- */
+
+function entetePopup(couleur, icone, tag, titre, sousTitre, badge = "") {
+    return `<div class="popup-fiche-entete">
+            <div class="popup-fiche-icon" style="background:${couleur}"><i class="${icone}"></i></div>
+            <div class="popup-fiche-titre-wrap">
+                <div class="popup-fiche-tag" style="color:${couleur}">${echapperHtml(tag)}</div>
+                <div class="popup-fiche-titre">${echapperHtml(titre)}</div>
+                ${sousTitre ? `<div class="popup-fiche-adresse">${echapperHtml(sousTitre)}</div>` : ""}
+            </div>
+            ${badge}
+        </div>`;
+}
+function lignesInfos(paires) {
+    const l = paires.filter(([, v]) => v !== undefined && v !== null && v !== "");
+    return l.length ? `<div class="popup-fiche-section">${l.map(([k, v]) => `<div class="popup-fiche-jour"><span>${echapperHtml(k)}</span><strong>${echapperHtml(v)}</strong></div>`).join("")}</div>` : "";
+}
+
+/* Chantiers sur les routes départementales (data.sarthe.fr) */
+function construirePopupChantier(props) {
+    const { icon, color } = iconeChantier(props);
+    const route = (props.loc_txt || "").replace(/^72_D0*/, "RD ").replace(/\s*:\s*/, " · ");
+    const fin = props.date_fin ? new Date(props.date_fin + "T12:00:00") : null;
+    const enCours = fin && fin >= new Date(new Date().toDateString());
+    const badge = chantierBarre(props)
+        ? `<span class="popup-fiche-badge ferme"><span></span>Route barrée</span>`
+        : `<span class="popup-fiche-badge ouvert"><span></span>Circulation maintenue</span>`;
+    return `<div class="popup-fiche">
+        ${entetePopup(color, icon, "Chantier sur route départementale", props.nature_trvx || "Travaux", route, badge)}
+        ${lignesInfos([
+            ["Circulation", props.mode_exp],
+            ["Du", props.date_debut ? formaterDateSeule(props.date_debut) : null],
+            ["Au", props.date_fin ? formaterDateSeule(props.date_fin) : null],
+            ["Maître d'ouvrage", props.maitre_ouvrage],
+            ["Longueur", props.longueur ? `${(props.longueur / 1000).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} km` : null]
+        ])}
+        ${props.commentaires ? `<div class="popup-fiche-section"><div class="popup-fiche-precision">${echapperHtml(props.commentaires)}</div></div>` : ""}
+        ${fin && !enCours ? `<div class="popup-fiche-section"><div class="popup-fiche-precision">Date de fin dépassée : le chantier est peut-être terminé.</div></div>` : ""}
+        <div class="popup-fiche-section"><div class="popup-fiche-precision">Source : Département de la Sarthe, mis à jour en continu.</div></div>
+    </div>`;
+}
+
+/* Points de rencontre des secours en forêt (IGN / ONF) */
+function construirePopupPrsf(props) {
+    const couleur = "#B0413E";
+    /* Descriptions saisies en majuscules (« RTE FORESTIERE DU ROULLEAU »,
+       « RD 13 ») : les routes départementales gardent leur sigle. */
+    const desc = String(props.description || "").trim();
+    const titre = !desc ? "Point de rencontre"
+        : /^RD\s*\d+$/i.test(desc) ? desc.toUpperCase()
+        : capitaliserPremiere(desc.toLowerCase().replace(/^rte\b/, "route").replace(/\brd\s*(\d+)/g, "RD $1"));
+    return `<div class="popup-fiche">
+        ${entetePopup(couleur, "fa-solid fa-kit-medical", "Point de rencontre des secours", titre, props.commune ? capitaliserPremiere(String(props.commune).toLowerCase()) : "")}
+        <div class="popup-fiche-urgence">
+            <div class="popup-fiche-urgence-titre">🚨 Accident en forêt (chasse, chute, malaise)</div>
+            <div class="popup-fiche-urgence-etape"><span>📞</span><span>Appelez le 18 ou le 112.</span></div>
+            <div class="popup-fiche-urgence-etape"><span>📍</span><span>Donnez ce code : <strong>${echapperHtml(props.code || "")}</strong></span></div>
+            <div class="popup-fiche-urgence-etape"><span>🚗</span><span>Les secours viennent vous chercher ici : allez-y ou envoyez quelqu'un les attendre.</span></div>
+        </div>
+        ${lignesInfos([
+            ["Réseau téléphonique", props.reseau_tel],
+            ["Accessible aux véhicules", props.accessible],
+            ["Stationnement", props.stationnement],
+            ["Panneau sur place", props.panneau],
+            ["Carroyage DFCI", props.coord_dfci]
+        ])}
+    </div>`;
+}
+
+/* Zones réglementées des plans de prévention des risques (DDT 72) */
+function construirePopupPpr(props) {
+    const couleur = (typeof COULEURS_PPR !== "undefined" && COULEURS_PPR[props.type_reglement]) || PALETTE.ardoise;
+    const icone = props.risque === "Inondation" ? "fa-solid fa-house-flood-water" : "fa-solid fa-hill-rockslide";
+    return `<div class="popup-fiche">
+        ${entetePopup(couleur, icone, props.plan || "Plan de prévention des risques", props.code_zone || "Zone réglementée", props.libelle_reglement)}
+        ${props.nom && props.nom !== props.code_zone ? `<div class="popup-fiche-section"><div class="popup-fiche-precision">${echapperHtml(props.nom)}</div></div>` : ""}
+        ${lignesInfos([["Communes", props.communes]])}
+        ${props.reglement ? `<div class="popup-fiche-section"><a class="popup-fiche-contact popup-fiche-lien" href="${echapperHtml(props.reglement)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i>Lire le règlement de la zone</a></div>` : ""}
+        <div class="popup-fiche-section"><div class="popup-fiche-precision">Source : DDT de la Sarthe. Seul le plan officiel en mairie fait foi.</div></div>
+    </div>`;
+}
+
+/* Parcelles forestières publiques (ONF) */
+function construirePopupParcelleForestiere(props) {
+    return `<div class="popup-fiche">
+        ${entetePopup("#4F7A3A", "fa-solid fa-tree", "Parcelle forestière", `Parcelle ${props.parcelle || "?"}`, props.foret)}
+        <div class="popup-fiche-section"><div class="popup-fiche-precision">Les numéros des affiches de chasse de l'ONF sont ces numéros de parcelle. Source : ONF (2019).</div></div>
+    </div>`;
+}
+
+/* Consultations PMI (data.sarthe.fr) */
+function construirePopupPmi(props) {
+    const contacts = construireContacts(props, { tel: "telephone" });
+    return `<div class="popup-fiche">
+        ${entetePopup(PALETTE.terracotta, "fa-solid fa-baby", "Consultation de puéricultrice (PMI)", props.centres || "Consultation PMI", [props.adresses, props.ville].filter(Boolean).join(" · "))}
+        ${props.horaires ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Quand</div><div class="popup-fiche-ligne">${echapperHtml(props.horaires)}</div></div>` : ""}
+        ${contacts.length ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Contact</div><div class="popup-fiche-contacts">${contacts.join("")}</div></div>` : ""}
+        <div class="popup-fiche-section"><div class="popup-fiche-precision">Pesée, conseils, suivi du bébé : gratuit. Source : Département de la Sarthe.</div></div>
+    </div>`;
+}
+
+/* Aide au numérique (data.sarthe.fr) */
+function construirePopupNumerique(props) {
+    const contacts = construireContacts(props, { tel: "telephone", email: "courriel", site: "site_web" });
+    return `<div class="popup-fiche">
+        ${entetePopup(PALETTE.riviere, "fa-solid fa-laptop", props.service || "Aide au numérique", props.nom || "Aide au numérique", [props.adresse, props.commune].filter(Boolean).join(" · "))}
+        ${props.horaires ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Horaires</div><div class="popup-fiche-ligne">${echapperHtml(props.horaires)}</div></div>` : ""}
+        ${contacts.length ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Contact</div><div class="popup-fiche-contacts">${contacts.join("")}</div></div>` : ""}
+    </div>`;
+}
+
+/* Espaces naturels sensibles (data.sarthe.fr) */
+function construirePopupEns(props) {
+    return `<div class="popup-fiche">
+        ${entetePopup("#5E8C61", "fa-solid fa-leaf", "Espace naturel sensible", props.nom_site || "Espace naturel sensible", props.surface_ha ? `${props.surface_ha} ha` : "")}
+        <div class="popup-fiche-section"><div class="popup-fiche-precision">Site naturel protégé et géré par le Département de la Sarthe. Respectez les chemins et la tranquillité de la faune.</div></div>
+    </div>`;
+}
+
 function construirePopup(feature, layerConf) {
     const props = feature.properties || {};
     let html;
@@ -2470,6 +2589,13 @@ function construirePopup(feature, layerConf) {
     else if (layerConf.id === "zonagePLUi") html = construirePopupZonePLUi(props);
     else if (layerConf.id === "rga") html = construirePopupRga(props);
     else if (layerConf.id === "vigieau") html = construirePopupVigieau(props);
+    else if (layerConf.id === "chantiers") html = construirePopupChantier(props);
+    else if (layerConf.id === "prsf") html = construirePopupPrsf(props);
+    else if (layerConf.id === "ppr") html = construirePopupPpr(props);
+    else if (layerConf.id === "parcellesForestieres") html = construirePopupParcelleForestiere(props);
+    else if (layerConf.id === "pmi") html = construirePopupPmi(props);
+    else if (layerConf.id === "numerique") html = construirePopupNumerique(props);
+    else if (layerConf.id === "ens") html = construirePopupEns(props);
     else html = construirePopupGenerique(feature, layerConf);
     return injecterItineraire(html, feature);
 }

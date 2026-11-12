@@ -751,6 +751,84 @@ function geojsonDepuisFluxODS(data) {
 }
 
 /* =========================================================
+   OPEN DATA DU DÉPARTEMENT DE LA SARTHE (data.sarthe.fr)
+   Portail Opendatasoft du Conseil départemental, repris sur
+   data.gouv.fr : chantiers sur les routes départementales,
+   accès au numérique, consultations PMI, espaces naturels
+   sensibles. Interrogé en direct (CORS ouvert, vérifié le
+   12/11/2026) : l'export GeoJSON de chaque jeu couvre toute la
+   Sarthe, on ne garde que ce qui tombe dans le territoire
+   (contour de couches/epci.geojson), avec une marge facultative
+   en degrés (les chantiers juste à côté comptent aussi pour qui
+   prend la route).
+   ========================================================= */
+const URL_DATA_SARTHE = "https://data.sarthe.fr/api/explore/v2.1/catalog/datasets";
+let promesseContourTerritoire = null;
+function contourTerritoire() {
+    if (!promesseContourTerritoire) {
+        promesseContourTerritoire = fetch("couches/epci.geojson")
+            .then(r => r.json())
+            .then(d => (d.features || [])[0] || null)
+            .catch(() => null);
+    }
+    return promesseContourTerritoire;
+}
+function pointRepresentatif(feature) {
+    const g = feature.geometry;
+    if (!g) return null;
+    if (g.type === "Point") return g.coordinates;
+    return typeof centroideFeature === "function" ? centroideFeature(feature) : null;
+}
+function featureDansTerritoire(feature, contour, marge) {
+    const pt = pointRepresentatif(feature);
+    if (!pt) return false;
+    if (!contour) return true; /* contour indisponible : ne rien masquer */
+    if (!marge) return pointDansFeature(pt, contour);
+    const b = bboxFeature(contour);
+    return b && pt[0] >= b[0] - marge && pt[0] <= b[2] + marge && pt[1] >= b[1] - marge && pt[1] <= b[3] + marge;
+}
+function fetchDataSarthe(dataset, marge = 0) {
+    /* Un second essai après 2 s : le serveur coupe parfois une première connexion. */
+    const lire = () => fetch(`${URL_DATA_SARTHE}/${dataset}/exports/geojson`).then(r => {
+        if (!r.ok) throw new Error("Erreur HTTP " + r.status + " sur data.sarthe.fr (" + dataset + ")");
+        return r.json();
+    });
+    return Promise.all([
+        lire().catch(() => new Promise(ok => setTimeout(ok, 2000)).then(lire)),
+        contourTerritoire()
+    ]).then(([geo, contour]) => ({
+        type: "FeatureCollection",
+        features: (geo.features || []).filter(f => featureDansTerritoire(f, contour, marge))
+    }));
+}
+
+/* Chantiers : couleur selon la gêne (route barrée > circulation alternée
+   ou restreinte), mot-clé dans mode_exp plutôt qu'une valeur figée. */
+function chantierBarre(props) {
+    return /barr|ferm/i.test(props.mode_exp || "");
+}
+function iconeChantier(props) {
+    return chantierBarre(props)
+        ? { icon: "fa-solid fa-road-barrier", color: "#B5321C" }
+        : { icon: "fa-solid fa-person-digging", color: "#E0A030" };
+}
+
+/* Zones réglementées des PPR (outils/build_ppr.py) : rouge pour les
+   zones inconstructibles, bleu pour les zones constructibles sous
+   conditions, comme sur les plans officiels. */
+const COULEURS_PPR = { "01": "#7FA7D6", "02": "#3E7CB1", "03": "#D9534F", "04": "#9E1F1F", "05": "#5A1A1A" };
+function stylePpr(feature) {
+    const c = COULEURS_PPR[(feature.properties || {}).type_reglement] || PALETTE.ardoise;
+    return { color: c, weight: 1, opacity: 0.9, fillColor: c, fillOpacity: 0.35 };
+}
+
+/* Parcelles forestières ONF : simple contour, le numéro s'affiche au
+   centre à partir du zoom 14 (étiquette, voir layers.js). */
+function styleParcelleForestiere() {
+    return { color: "#4F7A3A", weight: 1, opacity: 0.8, fillColor: "#4F7A3A", fillOpacity: 0.05 };
+}
+
+/* =========================================================
    POINTS RELAIS & CASIERS COLIS (Mondial Relay, Amazon Locker, Vinted
    Go...)
    Pas de jeu de données dédié publié par un seul opérateur : ces points
@@ -1588,6 +1666,36 @@ const LAYERS = [
         titleFields: ["name", "operator"],
         subtitleFields: ["operator", "phone"]
     },
+    {
+        id: "prsf", group: "securite", label: "Points de rencontre des secours en forêt",
+        /* Points où les secours viennent chercher une personne en forêt
+           (IGN/ONF). Code à donner au 18 ou au 112. Construit par
+           outils/build_onf.py. */
+        file: "couches/securite/prsf.geojson", type: "point",
+        icon: "fa-solid fa-kit-medical", color: "#B0413E",
+        lazy: false, searchable: true, cluster: true,
+        titleFields: ["code", "description"],
+        subtitleFields: ["description", "commune"]
+    },
+    {
+        id: "pmi", group: "famille", label: "Consultations PMI (puéricultrices)",
+        /* Consultations de puéricultrices du Département (data.sarthe.fr), en direct. */
+        fetchPersonnalise: () => fetchDataSarthe("227200029_solidarite-consultations-puericultrices-pmi"),
+        type: "point", icon: "fa-solid fa-baby", color: PALETTE.terracotta,
+        lazy: true, searchable: true, cluster: true,
+        titleFields: ["centres"],
+        subtitleFields: ["adresses", "ville"]
+    },
+    {
+        id: "numerique", group: "services", label: "Aide au numérique",
+        /* Conseillers numériques, espaces publics numériques, ordinateurs
+           en libre-service, aide aux démarches en ligne (data.sarthe.fr). */
+        fetchPersonnalise: () => fetchDataSarthe("227200029_offres-acces-numerique-sarthe"),
+        type: "point", icon: "fa-solid fa-laptop", color: PALETTE.riviere,
+        lazy: true, searchable: true, cluster: true,
+        titleFields: ["nom"],
+        subtitleFields: ["service", "commune"]
+    },
 
     /* ---------- PATRIMOINE ---------- */
     {
@@ -1713,6 +1821,27 @@ const LAYERS = [
         lazy: false, searchable: false, cluster: false,
         titleFields: ["nom"],
         subtitleFields: []
+    },
+    {
+        id: "parcellesForestieres", group: "tourisme", label: "Parcelles forestières (ONF)",
+        /* Parcelles des forêts publiques qui touchent le territoire (ONF,
+           data.gouv.fr), avec leur numéro : ce sont les numéros des
+           affiches de chasse. Construit par outils/build_onf.py. */
+        file: "couches/chasse/parcelles_forestieres.geojson", type: "polygon",
+        color: "#4F7A3A", styleFn: styleParcelleForestiere,
+        etiquette: p => p.parcelle,
+        lazy: true, searchable: false, cluster: false,
+        titleFields: ["parcelle"],
+        subtitleFields: ["foret"]
+    },
+    {
+        id: "ens", group: "tourisme", label: "Espaces naturels sensibles",
+        /* Périmètres des ENS du Département (data.sarthe.fr), en direct. */
+        fetchPersonnalise: () => fetchDataSarthe("227200029_perimetre-des-espaces-naturels-sensibles-ens"),
+        type: "polygon", color: "#5E8C61",
+        lazy: true, searchable: false, cluster: false,
+        titleFields: ["nom_site"],
+        subtitleFields: ["classification"]
     },
 
     /* ---------- URBANISME (fichiers lourds => chargement différé) ---------- */
@@ -1865,6 +1994,28 @@ const LAYERS = [
         type: "polygon", color: "#F2994A",
         styleFn: couleurVigieau,
         lazy: true, searchable: false, cluster: false
+    },
+    {
+        id: "chantiers", group: "risques", label: "Chantiers sur les routes départementales",
+        /* Chantiers en cours du Département (data.sarthe.fr), en direct :
+           route barrée, déviation, dates. Marge de 0,05° (~4-5 km) autour
+           du territoire : une route barrée juste à côté gêne aussi. */
+        fetchPersonnalise: () => fetchDataSarthe("227200029_chantiers_routiers_points", 0.05),
+        type: "point", icon: "fa-solid fa-road-barrier", color: "#E0A030",
+        iconePourFeature: f => iconeChantier(f.properties || {}),
+        lazy: true, searchable: false, cluster: false,
+        titleFields: ["nature_trvx"],
+        subtitleFields: ["loc_txt"]
+    },
+    {
+        id: "ppr", group: "risques", label: "Plans de prévention des risques (inondation, mouvements de terrain)",
+        /* Zones réglementées des PPR naturels de la DDT 72, converties
+           depuis le flux WFS par outils/build_ppr.py. */
+        file: "couches/risques/ppr_zones.geojson", type: "polygon",
+        color: "#3E7CB1", styleFn: stylePpr,
+        lazy: true, searchable: false, cluster: false,
+        titleFields: ["code_zone"],
+        subtitleFields: ["plan"]
     },
     {
         id: "old", group: "risques", label: "Obligations légales de débroussaillement",
