@@ -813,99 +813,24 @@ function iconeChantier(props) {
         : { icon: "fa-solid fa-person-digging", color: "#E0A030" };
 }
 
-/* Tronçon en travaux : le Département ne publie qu'un point (milieu du
-   chantier) et une longueur. On retrouve la route dans la BD TOPO de l'IGN
-   (même numéro, autour du point) et on la suit de longueur/2 de chaque
-   côté du point. C'est une reconstitution, pas le tracé officiel : si la
-   route n'est pas trouvée, seul le point est affiché. */
-const URL_WFS_GEOPF = "https://data.geopf.fr/wfs/ows";
-function metresEntre(a, b) {
-    const k = Math.cos((a[1] + b[1]) / 2 * Math.PI / 180);
-    return Math.hypot((b[0] - a[0]) * k, b[1] - a[1]) * 111320;
-}
-function suivreRoute(lignes, depart, budget) {
-    /* lignes : tableaux de [lon, lat] ; depart : { i, j, q } = point q sur le
-       segment j de la ligne i. Renvoie deux demi-tracés (vers la fin de la
-       ligne, vers son début), chacun limité à "budget" mètres. */
-    const cle = c => c[0].toFixed(6) + "," + c[1].toFixed(6);
-    const noeuds = {};
-    lignes.forEach((l, i) => [0, l.length - 1].forEach(k => (noeuds[cle(l[k])] = noeuds[cle(l[k])] || []).push(i)));
-    function marcher(i, coords, vus) {
-        const trace = [coords[0]];
-        let reste = budget, prec = null;
-        for (;;) {
-            for (let k = 1; k < coords.length; k++) {
-                const a = coords[k - 1], b = coords[k], d = metresEntre(a, b);
-                if (d >= reste) {
-                    const t = d ? reste / d : 0;
-                    trace.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]);
-                    return trace;
-                }
-                trace.push(b); reste -= d; prec = a;
-            }
-            /* Bout de ligne : on continue sur le tronçon voisin qui prolonge le mieux la direction. */
-            const fin = coords[coords.length - 1];
-            const cap = Math.atan2(fin[1] - prec[1], fin[0] - prec[0]);
-            let mieux = null, ecart = Infinity;
-            (noeuds[cle(fin)] || []).forEach(n => {
-                if (vus.has(n)) return;
-                const l = cle(lignes[n][0]) === cle(fin) ? lignes[n] : lignes[n].slice().reverse();
-                let e = Math.abs(Math.atan2(l[1][1] - fin[1], l[1][0] - fin[0]) - cap);
-                if (e > Math.PI) e = 2 * Math.PI - e;
-                if (e < ecart) { ecart = e; mieux = { n, l }; }
-            });
-            if (!mieux || ecart > Math.PI / 2) return trace;
-            vus.add(mieux.n); i = mieux.n; coords = mieux.l;
-        }
-    }
-    const l = lignes[depart.i];
-    const avant = marcher(depart.i, [depart.q].concat(l.slice(depart.j + 1)), new Set([depart.i]));
-    const arriere = marcher(depart.i, [depart.q].concat(l.slice(0, depart.j + 1).reverse()), new Set([depart.i]));
-    return arriere.reverse().concat(avant.slice(1));
-}
-function tronconChantier(feature) {
-    const p = feature.properties || {}, g = feature.geometry;
-    const m = String(p.loc_txt || "").match(/^72_D0*(\d+\w*)/);
-    if (!m || !p.longueur || !g || g.type !== "Point") return Promise.resolve(null);
-    const [lon, lat] = g.coordinates, r = p.longueur / 2 + 300;
-    const dLat = r / 111320, dLon = r / (111320 * Math.cos(lat * Math.PI / 180));
-    const filtre = `cpx_numero='D${m[1]}' AND BBOX(geometrie,${lon - dLon},${lat - dLat},${lon + dLon},${lat + dLat},'EPSG:4326')`;
-    const url = `${URL_WFS_GEOPF}?service=WFS&version=2.0.0&request=GetFeature&typeNames=BDTOPO_V3:troncon_de_route` +
-        `&outputFormat=application/json&srsName=EPSG:4326&count=500&propertyName=geometrie,cpx_numero&cql_filter=${encodeURIComponent(filtre)}`;
-    return fetch(url).then(r => r.ok ? r.json() : null).then(j => {
-        const lignes = [];
-        ((j && j.features) || []).forEach(f => {
-            const gg = f.geometry || {};
-            (gg.type === "MultiLineString" ? gg.coordinates : gg.type === "LineString" ? [gg.coordinates] : [])
-                .forEach(l => lignes.push(l.map(c => [c[0], c[1]])));
-        });
-        if (!lignes.length) return null;
-        /* Point le plus proche du chantier sur la route. */
-        const k = Math.cos(lat * Math.PI / 180);
-        let best = null;
-        lignes.forEach((l, i) => {
-            for (let jj = 1; jj < l.length; jj++) {
-                const a = l[jj - 1], b = l[jj];
-                const ax = (b[0] - a[0]) * k, ay = b[1] - a[1], px = (lon - a[0]) * k, py = lat - a[1];
-                const t = Math.max(0, Math.min(1, (px * ax + py * ay) / ((ax * ax + ay * ay) || 1)));
-                const q = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
-                const d = metresEntre(q, [lon, lat]);
-                if (!best || d < best.d) best = { i, j: jj - 1, q, d };
-            }
-        });
-        if (!best || best.d > 150) return null;
-        const trace = suivreRoute(lignes, best, p.longueur / 2);
-        if (trace.length < 2) return null;
-        return { type: "Feature", properties: Object.assign({}, p, { _troncon: true }), geometry: { type: "LineString", coordinates: trace } };
-    }).catch(() => null);
-}
+/* Tronçons en travaux : le Département publie les mêmes chantiers en
+   points (227200029_chantiers_routiers_points, pour l'icône) et en lignes
+   (227200029_chantiers_routiers, tracé officiel). On garde les points du
+   territoire, et les lignes qui ont le même objectid, avec les propriétés
+   du point pour que la fiche soit identique. Si les lignes ne répondent
+   pas, seuls les points s'affichent. */
 function fetchChantiers() {
-    return fetchDataSarthe("227200029_chantiers_routiers_points", 0.05).then(geo =>
-        Promise.all(geo.features.map(tronconChantier)).then(lignes => ({
-            type: "FeatureCollection",
-            /* Les tracés d'abord, pour que les icônes restent par-dessus. */
-            features: lignes.filter(Boolean).concat(geo.features)
-        })));
+    const lignes = fetch(`${URL_DATA_SARTHE}/227200029_chantiers_routiers/exports/geojson`)
+        .then(r => r.ok ? r.json() : null).catch(() => null);
+    return Promise.all([fetchDataSarthe("227200029_chantiers_routiers_points", 0.05), lignes]).then(([geo, l]) => {
+        const parId = {};
+        geo.features.forEach(f => { parId[(f.properties || {}).objectid] = f.properties; });
+        const traces = ((l && l.features) || [])
+            .filter(f => f.geometry && parId[(f.properties || {}).objectid])
+            .map(f => ({ type: "Feature", geometry: f.geometry, properties: parId[f.properties.objectid] }));
+        /* Les tracés d'abord, pour que les icônes restent par-dessus. */
+        return { type: "FeatureCollection", features: traces.concat(geo.features) };
+    });
 }
 function styleChantier(feature) {
     const c = chantierBarre(feature.properties || {}) ? "#B5321C" : "#E0A030";
@@ -2156,7 +2081,7 @@ const LAYERS = [
         /* Chantiers en cours du Département (data.sarthe.fr), en direct :
            route barrée, déviation, dates. Marge de 0,05° (~4-5 km) autour
            du territoire : une route barrée juste à côté gêne aussi.
-           Le tronçon est reconstitué sur la BD TOPO (tronconChantier). */
+           Tracé officiel des tronçons : voir fetchChantiers. */
         fetchPersonnalise: fetchChantiers, styleFn: styleChantier,
         type: "point", icon: "fa-solid fa-road-barrier", color: "#E0A030",
         iconePourFeature: f => iconeChantier(f.properties || {}),
