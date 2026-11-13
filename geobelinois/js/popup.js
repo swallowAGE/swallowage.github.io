@@ -2554,6 +2554,28 @@ function construirePopupPmi(props) {
     </div>`;
 }
 
+/* Tarifs Tourinsoft : « libellé||min||max||précision », séparés par « ## »
+   (ex. « Tarif indiv. adulte||9,00||24,00||9€ pour 9 km##Tarif indiv. enfant||0,00||0,00|| »).
+   Un texte sans « || » est gardé tel quel. Au plus 4 lignes. */
+function lignesTarifsEvenement(tarifs) {
+    const texte = String(tarifs || "").replace(/<[^>]*>/g, " ").trim();
+    if (!texte) return [];
+    const prix = v => {
+        const n = parseFloat(String(v || "").replace(",", "."));
+        return isNaN(n) ? "" : n === 0 ? "gratuit" : n.toLocaleString("fr-FR", Number.isInteger(n) ? {} : { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+    };
+    const lignes = texte.split("##").map(bloc => {
+        if (!bloc.includes("||")) return bloc.replace(/\s+/g, " ").trim();
+        const [libelle, min, max, ...reste] = bloc.split("||").map(x => x.replace(/\s+/g, " ").trim());
+        const a = prix(min), b = prix(max);
+        const montant = a && b && a !== b ? (a === "gratuit" ? "gratuit à " + b : `${a.replace(" €", "")} à ${b}`) : a || b;
+        const nom = capitaliserPremiere(libelle.replace(/^tarifs?\s+(indiv\.?\s+)?/i, ""));
+        const precision = reste.filter(Boolean).join(" ");
+        return [nom && montant ? `${nom} : ${montant}` : nom || montant, precision && `(${precision})`].filter(Boolean).join(" ");
+    }).filter(Boolean);
+    return lignes.length > 4 ? lignes.slice(0, 4).concat(["…"]) : lignes;
+}
+
 /* Événements locaux (agendas des offices de tourisme, data.sarthe.fr) */
 function construirePopupEvenement(props) {
     const type = TYPES_EVENEMENTS.find(t => t.id === categorieEvenement({ properties: props })) || TYPES_EVENEMENTS[0];
@@ -2565,16 +2587,15 @@ function construirePopupEvenement(props) {
     const ligne = p => p.debut === p.fin ? capitaliserPremiere(jour(p.debut)) + heures(p)
         : `Du ${jour(p.debut, { day: "numeric", month: "long" })} au ${jour(p.fin, { day: "numeric", month: "long", year: "numeric" })}${heures(p)}`;
     const periodes = props.periodes || [];
-    const sansBalises = t => String(t || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
     const desc = String(props.descriptif || props.metadescription || "").trim();
     const descCourte = desc.length > 420 ? desc.slice(0, 400).replace(/\s+\S*$/, "") + "…" : desc;
-    const tarif = props.tarifgratuit === "oui" || props.entreegratuite === "oui" ? "Gratuit" : sansBalises(props.tarifs);
+    const tarifs = props.tarifgratuit === "oui" || props.entreegratuite === "oui" ? ["Gratuit"] : lignesTarifsEvenement(props.tarifs);
     const contacts = construireContacts(Object.assign({}, props, { tel: props.commtel || props.commmob }), { tel: "tel", email: "commmail", site: "commweb" });
     const resa = props.urlresa && /^https?:/.test(props.urlresa)
         ? `<a class="popup-fiche-btn" href="${echapperHtml(props.urlresa)}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:6px 12px;border-radius:999px;background:${type.color};color:#fff;text-decoration:none;font-weight:600">Réserver</a>` : "";
     const visuel = props.visuel && /^https:/.test(props.visuel)
         ? `<img src="${echapperHtml(props.visuel)}" alt="" loading="lazy" style="display:block;width:100%;max-height:150px;object-fit:cover;border-radius:8px;margin-top:8px" onerror="this.remove()">` : "";
-    const adresse = [props.adresse1, props.adresse1suite, props.adresse2].filter(Boolean)
+    const adresse = [props.lieu, props.adresse1, props.adresse1suite, props.adresse2].filter(Boolean)
         .map(a => String(a).replace(/,?\s*\d{5}\b.*$/, "").trim()).filter(Boolean).join(", ");
     return `<div class="popup-fiche">
         ${entetePopup(type.color, type.icon, props.categories || "Événement", props.nomoffre || "Événement", [adresse, props.commune].filter(Boolean).join(" · "))}
@@ -2582,11 +2603,13 @@ function construirePopupEvenement(props) {
         <div class="popup-fiche-section"><div class="popup-fiche-section-titre">Quand</div>
             ${periodes.slice(0, 4).map(p => `<div class="popup-fiche-ligne">${echapperHtml(ligne(p))}</div>`).join("")}
             ${periodes.length > 4 ? `<div class="popup-fiche-ligne" style="opacity:.8">et ${periodes.length - 4} autre${periodes.length > 5 ? "s" : ""} date${periodes.length > 5 ? "s" : ""}</div>` : ""}
-            ${tarif ? `<div class="popup-fiche-ligne" style="margin-top:4px"><strong>${echapperHtml(tarif)}</strong></div>` : ""}
+            ${tarifs.length ? `<div style="margin-top:6px">${tarifs.map(t => `<div class="popup-fiche-ligne"><strong>${echapperHtml(t)}</strong></div>`).join("")}</div>` : ""}
             ${resa}</div>
         ${descCourte ? `<div class="popup-fiche-section"><div class="popup-fiche-ligne" style="white-space:pre-line">${echapperHtml(descCourte)}</div></div>` : ""}
         ${contacts.length ? `<div class="popup-fiche-section"><div class="popup-fiche-section-titre">Contact</div><div class="popup-fiche-contacts">${contacts.join("")}</div></div>` : ""}
-        <div class="popup-fiche-section"><div class="popup-fiche-precision">Source : agendas des offices de tourisme de la Sarthe (data.sarthe.fr), mis à jour chaque jour. Pour qu'un événement apparaisse ici, il suffit de le déclarer à l'office de tourisme le plus proche.</div></div>
+        <div class="popup-fiche-section"><div class="popup-fiche-precision">${props.source
+            ? `Source : ${echapperHtml(props.source)}.${props.lieuApproximatif ? " Emplacement sur la carte approximatif : se fier au nom du lieu." : ""}`
+            : "Source : agendas des offices de tourisme de la Sarthe (data.sarthe.fr), mis à jour chaque jour. Pour qu'un événement apparaisse ici, il suffit de le déclarer à l'office de tourisme le plus proche."}</div></div>
     </div>`;
 }
 

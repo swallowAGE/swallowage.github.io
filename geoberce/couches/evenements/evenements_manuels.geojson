@@ -1,0 +1,168 @@
+{
+ "_lisezmoi": "Événements saisis à la main (annoncés seulement sur Facebook ou ailleurs, absents des agendas des offices de tourisme). Fusionnés avec l'agenda de data.sarthe.fr par fetchEvenements (js/config.js). Un événement passé disparaît tout seul de la carte : on peut le laisser ou le retirer. Format : voir le README, section « Événements locaux ».",
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.6215,
+     47.7495
+    ]
+   },
+   "properties": {
+    "nomoffre": "Journée portes ouvertes du tiers-lieu numérique LoirCoWork",
+    "lieu": "LoirCoWork, maison de l'économie et de l'innovation",
+    "commune": "Loir en Vallée",
+    "categories": "Portes ouvertes",
+    "descriptif": "",
+    "dates": [
+     {
+      "debut": "2026-11-13",
+      "fin": "2026-11-13",
+      "heureDebut": "",
+      "heureFin": ""
+     }
+    ],
+    "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme du week-end)",
+    "lieuApproximatif": true
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.418,
+     47.6945
+    ]
+   },
+   "properties": {
+    "nomoffre": "« Bienvenue sur les chemins de la littérature ado ! »",
+    "lieu": "Bibliothèque Ludothèque",
+    "commune": "Montval-sur-Loir",
+    "categories": "Lecture",
+    "descriptif": "",
+    "dates": [
+     {
+      "debut": "2026-11-14",
+      "fin": "2026-11-14",
+      "heureDebut": "10:30",
+      "heureFin": "12:00"
+     }
+    ],
+    "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme du week-end)",
+    "lieuApproximatif": true
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.4158,
+     47.6932
+    ]
+   },
+   "properties": {
+    "nomoffre": "Ateliers danse et improvisation par Zutano BaZar",
+    "lieu": "La Castélorienne",
+    "commune": "Montval-sur-Loir",
+    "categories": "Stages-Atelier-Jeux",
+    "descriptif": "",
+    "dates": [
+     {
+      "debut": "2026-11-14",
+      "fin": "2026-11-14",
+      "heureDebut": "14:30",
+      "heureFin": "17:30"
+     }
+    ],
+    "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme du week-end)",
+    "lieuApproximatif": true
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.509611,
+     47.710484
+    ]
+   },
+   "properties": {
+    "nomoffre": "Concert des trois harmonies de Marçon, Courdemanche et du Grand-Lucé",
+    "lieu": "Église",
+    "commune": "Marçon",
+    "categories": "Concert",
+    "descriptif": "",
+    "dates": [
+     {
+      "debut": "2026-11-14",
+      "fin": "2026-11-14",
+      "heureDebut": "20:30",
+      "heureFin": ""
+     }
+    ],
+    "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme du week-end)",
+    "lieuApproximatif": false
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.4575,
+     47.6918
+    ]
+   },
+   "properties": {
+    "nomoffre": "Thé dansant avec Brigitte Poussin",
+    "lieu": "Salle polyvalente La Vouvryonne, Vouvray-sur-Loir",
+    "commune": "Montval-sur-Loir",
+    "categories": "Bal",
+    "descriptif": "Goûter offert.",
+    "dates": [
+     {
+      "debut": "2026-11-15",
+      "fin": "2026-11-15",
+      "heureDebut": "14:00",
+      "heureFin": "19:00"
+     }
+    ],
+    "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme du week-end)",
+    "lieuApproximatif": true
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.62,
+     47.7488
+    ]
+   },
+   "properties": {
+    "nomoffre": "« Voyages intérieurs » par Le Trio",
+    "lieu": "Salle des fêtes, Ruillé-sur-Loir",
+    "commune": "Loir en Vallée",
+    "categories": "Lecture",
+    "descriptif": "Lectures de poèmes et piano.",
+    "dates": [
+     {
+      "debut": "2026-11-15",
+      "fin": "2026-11-15",
+      "heureDebut": "15:00",
+      "heureFin": ""
+     }
+    ],
+    "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme du week-end)",
+    "lieuApproximatif": true
+   }
+  }
+ ]
+}
