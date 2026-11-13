@@ -39,17 +39,17 @@
     ]
    },
    "properties": {
-    "nomoffre": "« Bienvenue sur les chemins de la littérature ado ! »",
+    "nomoffre": "Temps fort « Bienvenue sur les chemins de la littérature ado »",
     "lieu": "Bibliothèque Ludothèque",
     "commune": "Montval-sur-Loir",
     "categories": "Lecture",
-    "descriptif": "",
+    "descriptif": "Rencontre le samedi 14 novembre de 10h30 à 12h.",
     "dates": [
      {
-      "debut": "2026-11-14",
-      "fin": "2026-11-14",
-      "heureDebut": "10:30",
-      "heureFin": "12:00"
+      "debut": "2026-11-13",
+      "fin": "2026-12-05",
+      "heureDebut": "",
+      "heureFin": ""
      }
     ],
     "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme du week-end)",
@@ -161,6 +161,33 @@
      }
     ],
     "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme du week-end)",
+    "lieuApproximatif": true
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     0.575525,
+     47.727832
+    ]
+   },
+   "properties": {
+    "nomoffre": "Exposition « Sabbat – Songes électriques » d'Émilie Lagarde",
+    "lieu": "Galeries NOCOGO et La PhARTmacie",
+    "commune": "La Chartre-sur-le-Loir",
+    "categories": "Exposition",
+    "descriptif": "",
+    "dates": [
+     {
+      "debut": "2026-11-13",
+      "fin": "2026-11-29",
+      "heureDebut": "",
+      "heureFin": ""
+     }
+    ],
+    "source": "Facebook, Communauté de communes Loir-Lucé-Bercé (programme de la semaine)",
     "lieuApproximatif": true
    }
   }
