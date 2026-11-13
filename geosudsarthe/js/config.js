@@ -891,6 +891,8 @@ const TYPES_EVENEMENTS = [
     { id: "plusTard", label: "Plus tard", icon: "fa-solid fa-calendar", color: "#9A8FA3" }
 ];
 function periodesEvenement(props) {
+    /* Événement saisi à la main : les périodes sont déjà prêtes. */
+    if (Array.isArray(props.dates)) return props.dates.map(p => Object.assign({ heureDebut: "", heureFin: "" }, p, { fin: p.fin || p.debut }));
     const iso = d => d.split("/").reverse().join("-");
     const periodes = String(props.datesfma || "").split("##").map(bloc => {
         const dates = bloc.match(/\d{2}\/\d{2}\/\d{4}/g) || [];
@@ -934,10 +936,15 @@ function prochesMots(a, b) {
 }
 function fetchEvenements() {
     const normaliser = t => String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
-    return fetchDataSarthe("227200029_fetes-et-manifestations-en-sarthe", 0.03).then(geo => {
+    /* Événements saisis à la main (couches/evenements/evenements_manuels.geojson) : ceux qui ne
+       sont annoncés que sur Facebook. Fichier facultatif, et les saisies passent en premier,
+       pour qu'une fiche saisie à la main l'emporte sur son doublon de l'agenda. */
+    const manuels = fetch("couches/evenements/evenements_manuels.geojson")
+        .then(r => r.ok ? r.json() : null).catch(() => null);
+    return Promise.all([fetchDataSarthe("227200029_fetes-et-manifestations-en-sarthe", 0.03), manuels]).then(([geo, m]) => {
         const auj = jourIso();
         const gardes = [];
-        geo.features.forEach(f => {
+        ((m && m.features) || []).concat(geo.features).forEach(f => {
             const props = f.properties || {};
             const periodes = periodesEvenement(props).filter(p => p.fin >= auj).sort((a, b) => a.debut.localeCompare(b.debut));
             if (!periodes.length) return;
@@ -948,7 +955,7 @@ function fetchEvenements() {
             const feature = { type: "Feature", geometry: f.geometry, properties: Object.assign({}, props, { commune, periodes }) };
             const doublon = gardes.find(g => g.cle === cle && (g.titre.includes(titre) || titre.includes(g.titre) || prochesMots(g.titre, titre)));
             /* Doublon : garder la fiche au titre le plus court (« Nouvelle revue : X » et « X » -> « X »). */
-            if (doublon) { if (titre.length < doublon.titre.length) Object.assign(doublon, { titre, feature }); return; }
+            if (doublon) { if (titre.length < doublon.titre.length && !doublon.feature.properties.source) Object.assign(doublon, { titre, feature }); return; }
             gardes.push({ cle, titre, feature });
         });
         const features = gardes.map(g => g.feature)
