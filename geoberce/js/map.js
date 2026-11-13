@@ -382,7 +382,10 @@ document.getElementById("recherche-back").addEventListener("click", () => fermer
    l'ouverture de la popup (le contenu est du HTML, pas des éléments
    déjà attachés). */
 map.on("popupopen", event => {
-    const element = event.popup.getElement();
+    /* _contentNode plutôt que getElement() : sur mobile, le contenu est
+       déplacé dans le panneau du bas (voir fiche-mobile.js), hors de
+       l'élément de la popup. */
+    const element = event.popup._contentNode || event.popup.getElement();
     const bouton = element && element.querySelector(".commune-popup-bouton");
     if (!bouton) return;
     bouton.addEventListener("click", () => {

@@ -1009,3 +1009,38 @@ a.commune-badge-vigieau:hover { text-decoration: underline; }
 }
 .leaflet-tooltip.etiquette-carte::before { display: none; }
 .etiquettes-masquees .leaflet-tooltip.etiquette-carte { display: none; }
+
+/* ---------- FICHES EN PANNEAU BAS (mobile, voir js/fiche-mobile.js) ---------- */
+#fiche-mobile { display: none; }
+@media (max-width: 780px) {
+    /* La popup Leaflet reste ouverte (logique inchangée) mais invisible :
+       son contenu est affiché dans le panneau. */
+    .fiche-mobile-ouverte .leaflet-popup-pane { visibility: hidden; }
+
+    #fiche-mobile {
+        display: flex; flex-direction: column; position: absolute; left: 0; right: 0; bottom: 0; z-index: 1000;
+        background: #fff; border-radius: 18px 18px 0 0; box-shadow: 0 -6px 24px rgba(0,0,0,0.18);
+        transition: height .22s ease; cursor: auto;
+        animation: fiche-mobile-monte .22s ease;
+    }
+    #fiche-mobile[hidden] { display: none; }
+    #fiche-mobile.fiche-mobile-glisse { transition: none; }
+    @keyframes fiche-mobile-monte { from { transform: translateY(40%); opacity: .4; } to { transform: none; opacity: 1; } }
+
+    .fiche-mobile-poignee { flex: 0 0 auto; padding: 9px 0 7px; display: flex; justify-content: center; touch-action: none; cursor: grab; }
+    .fiche-mobile-poignee span { width: 42px; height: 5px; border-radius: 3px; background: #D5D3CE; }
+    .fiche-mobile-fermer {
+        position: absolute; top: 8px; right: 10px; z-index: 1; width: 32px; height: 32px; border: none; border-radius: 50%;
+        background: var(--fond); color: var(--ardoise); font-size: 15px; display: flex; align-items: center; justify-content: center;
+    }
+    .fiche-mobile-corps { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+
+    /* Les fiches ont une largeur fixe pensée pour la bulle : ici elles
+       prennent toute la largeur du panneau. */
+    .fiche-mobile-corps .leaflet-popup-content { width: auto !important; margin: 4px 16px 16px; font-size: 13px; line-height: 1.4; }
+    .fiche-mobile-corps .leaflet-popup-content:has(.popup-fiche),
+    .fiche-mobile-corps .leaflet-popup-content:has(.popup-carburant) { margin: 0 0 8px; }
+    .fiche-mobile-corps .popup-fiche, .fiche-mobile-corps .popup-carburant { width: auto; }
+    /* Place pour le bouton fermer à droite de l'en-tête. */
+    .fiche-mobile-corps .popup-fiche-entete, .fiche-mobile-corps .popup-carburant-entete { padding-right: 50px; padding-top: 4px; }
+}
