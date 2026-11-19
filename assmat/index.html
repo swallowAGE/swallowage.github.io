@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Combien payer mon assistante maternelle ? – Hirund AGE</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="Le salaire de l'assistante maternelle chaque mois : heures jour par jour, année complète ou incomplète, indemnités d'entretien, repas et kilomètres, cotisations, cases à remplir sur Pajemploi et bulletin de salaire détaillé. Gratuit, rien n'est envoyé.">
+<link rel="canonical" href="https://hirundage.fr/assmat/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="hirund·AGE">
+<meta property="og:title" content="Combien payer mon assistante maternelle ? – Hirund AGE">
+<meta property="og:description" content="Heures jour par jour, indemnités, cotisations, cases Pajemploi et bulletin de salaire détaillé. Gratuit, rien n&#x27;est envoyé.">
+<meta property="og:url" content="https://hirundage.fr/assmat/">
+<meta property="og:image" content="https://hirundage.fr/partage.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2B2230;
+    --soft: #6B5F5A;
+    --paper: #FAF6F0;
+    --raised: #F3ECE2;
+    --field: #FFFDF9;
+    --seg: #E8DED0;
+    --gold: #C9A85C;
+    --gold-ink: #8A6D2B;
+    --gold-hi: #E2C47E;
+    --rose: #8E4458;
+    --mauve: #9C7D8A;
+    --on-dark: #E5DCD6;
+    --on-dark-soft: #D3C8C2;
+    --rule: rgba(43, 34, 48, 0.12);
+    --line: rgba(43, 34, 48, 0.22);
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Jost", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--rose); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px 64px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+
+  /* ---------- En-tête ---------- */
+  .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding-top: 18px; }
+  .topbar a { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; min-height: 44px; display: inline-flex; align-items: center; }
+  .topbar a:hover { color: var(--rose); }
+  h1 { margin: 12px 0 0; font-size: clamp(32px, 5vw, 46px); line-height: 1.1; font-weight: 500; letter-spacing: -0.01em; }
+  .lede { margin: 10px 0 0; font-size: 18px; font-weight: 300; color: var(--soft); max-width: 66ch; }
+
+  /* ---------- Réglages ---------- */
+  .main { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; margin-top: 28px; }
+  .settings { flex: 1 1 400px; min-width: 0; background: var(--raised); border-radius: 18px; padding: 4px 24px; }
+  .step { border-bottom: 1px solid var(--rule); }
+  .step:last-child { border-bottom: 0; }
+  .step summary { list-style: none; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding: 18px 0; cursor: pointer; min-height: 44px; }
+  .step summary::-webkit-details-marker { display: none; }
+  .step summary::after { content: "›"; color: var(--rose); font-size: 20px; line-height: 1; margin-left: auto; transform: rotate(90deg); transition: transform 0.15s; }
+  .step[open] summary::after { transform: rotate(-90deg); }
+  .num { font-family: var(--mono); font-size: 13px; color: var(--gold-ink); }
+  .step-title { font-size: 19px; font-weight: 500; }
+  .step-sum { order: 3; flex-basis: 100%; padding-left: 28px; font-size: 14px; color: var(--soft); }
+  .step[open] .step-sum { display: none; }
+  .step-body { display: flex; flex-direction: column; gap: 14px; padding: 0 0 22px; }
+  label, .lbl { display: block; font-size: 13px; font-weight: 500; color: var(--soft); margin: 0 0 6px; }
+  .fld {
+    width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--field);
+    border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; min-height: 44px;
+  }
+  select.fld { padding-right: 6px; }
+  .hint { margin: 6px 0 0; font-size: 13px; color: var(--soft); }
+  .warn { margin: 6px 0 0; font-size: 13px; color: var(--rose); font-weight: 500; }
+  .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: end; }
+  .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: end; }
+  .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; background: var(--seg); border-radius: 12px; padding: 4px; }
+  .seg button { border: 0; border-radius: 9px; min-height: 40px; padding: 8px 6px; font: inherit; font-size: 15px; font-weight: 500; background: transparent; color: var(--soft); cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--field); color: var(--ink); box-shadow: 0 1px 2px rgba(43, 34, 48, 0.15); }
+  .week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+  .week label { text-align: center; margin: 0 0 4px; }
+  .week input { text-align: center; padding: 8px 2px; }
+  .check { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: var(--ink); font-weight: 400; margin: 0; cursor: pointer; }
+  .check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--rose); flex: none; }
+  .btn { border: 1px solid var(--line); background: var(--field); color: var(--ink); font: inherit; font-size: 15px; font-weight: 500; border-radius: 10px; min-height: 44px; padding: 8px 14px; cursor: pointer; }
+  .btn:hover { border-color: var(--rose); color: var(--rose); }
+  .btn.ghost { background: transparent; }
+
+  /* ---------- Calendrier du mois ---------- */
+  .month-nav { display: flex; align-items: center; gap: 8px; }
+  .month-nav .btn { width: 44px; padding: 0; font-size: 20px; color: var(--rose); }
+  .month-nav input { flex: 1; text-align: center; font-weight: 500; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--soft); }
+  .days { display: flex; flex-direction: column; gap: 4px; }
+  .day { display: grid; grid-template-columns: 62px 74px minmax(0, 1fr) 44px; gap: 6px; align-items: center; background: var(--field); border-radius: 10px; padding: 4px 6px 4px 10px; border-left: 4px solid transparent; }
+  .day.wk-start { margin-top: 8px; }
+  .day .dname { font-size: 14px; line-height: 1.2; }
+  .day .dname b { display: block; font-size: 16px; font-weight: 600; }
+  .day input[type="text"] { width: 100%; font: inherit; font-size: 16px; text-align: center; border: 1px solid var(--line); border-radius: 8px; padding: 6px 2px; min-height: 40px; background: #fff; color: var(--ink); }
+  .day input[type="text"]:disabled { background: transparent; border-color: transparent; color: var(--soft); }
+  .day select { width: 100%; font: inherit; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 4px; min-height: 40px; background: #fff; color: var(--ink); }
+  .day .meal { width: 44px; height: 40px; border: 1px solid var(--line); border-radius: 8px; background: #fff; cursor: pointer; display: grid; place-items: center; color: var(--soft); padding: 0; }
+  .day .meal[aria-pressed="true"] { background: var(--gold-hi); border-color: var(--gold); color: var(--ink); }
+  .day .meal:disabled { visibility: hidden; }
+  .day.s-accueil { border-left-color: var(--gold); }
+  .day.s-paye { border-left-color: var(--mauve); }
+  .day.s-deduit { border-left-color: var(--rose); }
+  .day.s-conge, .day.s-ferie { border-left-color: #B9AAB0; }
+  .day.s-off { background: transparent; }
+  .day.edited .dname b::after { content: " •"; color: var(--rose); }
+  .day .extra { grid-column: 2 / -1; font-size: 12px; color: var(--rose); margin-top: -2px; }
+
+  /* ---------- Résultat ---------- */
+  .result { flex: 999 1 420px; min-width: 0; background: var(--ink); color: var(--paper); border-radius: 18px; padding: 30px; display: flex; flex-direction: column; gap: 22px; }
+  @media (min-width: 900px) { .result { position: sticky; top: 16px; } }
+  .result .kicker { color: var(--gold); }
+  .big { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .big strong { font-size: clamp(48px, 8vw, 80px); line-height: 1; font-weight: 500; color: var(--gold-hi); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .big span { font-size: 20px; font-weight: 300; }
+  .sub { margin: 10px 0 0; font-size: 16px; font-weight: 300; color: var(--on-dark); }
+  .sub strong { font-weight: 600; color: var(--paper); }
+  .pj { display: flex; flex-direction: column; border-top: 1px solid rgba(250, 246, 240, 0.18); }
+  .pj-row { display: grid; grid-template-columns: minmax(0, 1fr) auto 40px; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(250, 246, 240, 0.1); }
+  .pj-row span { font-size: 15px; color: var(--on-dark); }
+  .pj-row small { display: block; font-size: 12px; color: var(--on-dark-soft); }
+  .pj-row b { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; color: var(--paper); }
+  .pj-row.empty b { color: var(--on-dark-soft); font-weight: 400; }
+  .copy { width: 40px; height: 40px; border: 0; border-radius: 8px; background: rgba(250, 246, 240, 0.08); color: var(--gold-hi); cursor: pointer; display: grid; place-items: center; }
+  .copy:hover { background: rgba(250, 246, 240, 0.16); }
+  .copy.ok { background: var(--gold-hi); color: var(--ink); }
+  .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .stat { background: rgba(250, 246, 240, 0.06); border-radius: 12px; padding: 12px 14px; }
+  .stat b { display: block; font-size: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13px; color: var(--on-dark-soft); }
+  .tip { border-top: 1px dashed rgba(250, 246, 240, 0.25); padding-top: 16px; display: flex; gap: 14px; align-items: flex-start; margin: 0; font-size: 15px; font-weight: 300; }
+  .tip strong { color: var(--gold-hi); font-weight: 600; }
+  .tip svg { flex: none; margin-top: 2px; }
+
+  /* ---------- Bulletin ---------- */
+  .detail { margin-top: 56px; }
+  .detail > h2 { margin: 6px 0 8px; font-size: 30px; font-weight: 500; }
+  .detail > .hint { font-size: 15px; margin-bottom: 18px; }
+  .bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+  .payslip { background: #fff; border: 1px solid rgba(43, 34, 48, 0.12); border-radius: 18px; padding: 26px; overflow-x: auto; }
+  .ps-head { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 18px; }
+  .ps-box { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+  .ps-box .lbl { margin: 0 0 4px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-ink); }
+  .ps-box p { margin: 0; }
+  .ps-title { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 14px; }
+  .ps-title h3 { margin: 0; font-size: 22px; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; min-width: 600px; font-size: 14px; }
+  th, td { padding: 7px 0; border-bottom: 1px dotted #B9AAB0; vertical-align: top; }
+  thead th { font-size: 12px; font-weight: 600; text-align: right; border-bottom: 1px solid var(--ink); text-transform: uppercase; letter-spacing: 0.04em; color: var(--soft); }
+  thead th:first-child { text-align: left; }
+  tbody th { text-align: left; font-weight: 400; }
+  tbody th small { display: block; color: var(--soft); font-size: 12px; }
+  td { text-align: right; padding-left: 12px; white-space: nowrap; }
+  tr.sec th { padding-top: 16px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold-ink); border-bottom: 1px solid var(--line); }
+  tr.total th, tr.total td { font-weight: 700; border-bottom: 1px solid var(--ink); }
+  tr.grand th, tr.grand td { font-weight: 700; font-size: 17px; border-bottom: 2px solid var(--ink); background: var(--raised); padding: 10px 8px; }
+  tr.muted th, tr.muted td { color: var(--soft); }
+  .ps-foot { margin-top: 14px; font-size: 12px; color: var(--soft); }
+  .ps-foot p { margin: 4px 0; }
+
+  /* ---------- Bilan ---------- */
+  .table-box { background: var(--field); border: 1px solid rgba(43, 34, 48, 0.1); border-radius: 18px; padding: 8px 22px; overflow-x: auto; }
+  .table-box table { min-width: 520px; }
+
+  /* ---------- Pied de page ---------- */
+  .notes { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; font-size: 14px; color: var(--soft); }
+  .notes p { margin: 6px 0 0; }
+  .notes ul { margin: 6px 0 0; padding-left: 18px; }
+
+  /* ---------- Téléphone ---------- */
+  .mobilebar { display: none; }
+  @media (max-width: 800px) {
+    .wrap { padding: 0 16px 96px; }
+    .result { padding: 22px; gap: 18px; }
+    .settings { padding: 0 14px; }
+    .stat b { font-size: 17px; }
+    .stat span { font-size: 12px; }
+    .detail > h2 { font-size: 24px; }
+    .payslip { padding: 16px; border-radius: 14px; }
+    table { min-width: 0; font-size: 13px; }
+    .ps-table .c-base { display: none; }
+    .table-box { padding: 6px 12px; }
+    .table-box table { min-width: 0; font-size: 13px; }
+    .mobilebar {
+      display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+      background: var(--ink); color: var(--paper); padding: 10px 16px;
+      justify-content: space-between; align-items: center; gap: 10px; transition: transform 0.2s;
+    }
+    .mobilebar.off { transform: translateY(110%); }
+    .mobilebar span { font-size: 14px; color: var(--on-dark); }
+    .mobilebar strong { font-size: 21px; font-weight: 500; color: var(--gold-hi); }
+    .mobilebar a { color: var(--gold-hi); font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; }
+  }
+  @media (max-width: 420px) {
+    .row3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .row3 > :last-child { grid-column: 1 / -1; }
+    .day { grid-template-columns: 52px 64px minmax(0, 1fr) 40px; gap: 5px; padding-left: 8px; }
+    .day .meal { width: 40px; }
+    .week { gap: 4px; }
+  }
+
+  /* ---------- Impression : le bulletin seul ---------- */
+  @media print {
+    @page { margin: 12mm; }
+    body { background: #fff; }
+    .wrap { max-width: none; padding: 0; }
+    .topbar, header, .main, .bar, .detail > .kicker, .detail > h2, .detail > .hint, #bilan, .notes, .mobilebar { display: none !important; }
+    .detail { margin: 0; }
+    .payslip { border: 0; padding: 0; }
+    table { min-width: 0; font-size: 11.5px; }
+    .ps-table .c-base, .ps-table .c-rate { display: table-cell !important; }
+    tr.grand th, tr.grand td { background: #eee; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../">← hirund·AGE</a>
+    <span class="kicker">// outil · assistante maternelle</span>
+  </div>
+  <header>
+    <h1>Combien payer mon assistante maternelle&nbsp;?</h1>
+    <p class="lede">Le contrat une fois pour toutes, puis les heures jour par jour chaque mois : le salaire, les indemnités, les cotisations, les cases à remplir sur Pajemploi et un bulletin de salaire détaillé à imprimer.</p>
+  </header>
+
+  <div class="main">
+    <form id="form" class="settings" autocomplete="off" onsubmit="return false" aria-label="Réglages">
+
+      <details class="step" id="step-contract" open>
+        <summary><span class="num">01</span><span class="step-title">Le contrat</span><span class="step-sum" id="sum-contract"></span></summary>
+        <div class="step-body">
+          <div>
+            <span class="lbl" id="year-title">Accueil sur</span>
+            <div class="seg" role="group" aria-labelledby="year-title">
+              <button type="button" data-year="complete" aria-pressed="true">Année complète</button>
+              <button type="button" data-year="incomplete" aria-pressed="false">Année incomplète</button>
+            </div>
+            <p class="hint" id="year-hint"></p>
+          </div>
+          <div id="weeks-box">
+            <label for="weeks">Semaines d'accueil programmées sur 12 mois</label>
+            <input id="weeks" class="fld" type="number" inputmode="numeric" min="1" max="46" step="1" value="42">
+          </div>
+          <div>
+            <span class="lbl">Heures d'accueil prévues par jour</span>
+            <div class="week" id="plan"></div>
+            <p class="hint" id="plan-hint"></p>
+          </div>
+          <div>
+            <span class="lbl" id="rate-title">Taux horaire</span>
+            <div class="row2">
+              <input id="rate" class="fld" type="number" inputmode="decimal" min="0" step="0.01" value="4.60" aria-labelledby="rate-title">
+              <div class="seg" role="group" aria-label="Le taux est en">
+                <button type="button" data-ratemode="brut" aria-pressed="true">brut</button>
+                <button type="button" data-ratemode="net" aria-pressed="false">net</button>
+              </div>
+            </div>
+            <p class="hint" id="rate-hint"></p>
+            <p class="warn" id="rate-warn" hidden></p>
+          </div>
+          <div class="row2">
+            <div>
+              <label for="maj">Majoration après 45 h/sem. (%)</label>
+              <input id="maj" class="fld" type="number" inputmode="decimal" min="10" step="1" value="10">
+            </div>
+            <div>
+              <label for="majhc">Majoration des heures complémentaires (%)</label>
+              <input id="majhc" class="fld" type="number" inputmode="decimal" min="0" step="1" value="0">
+            </div>
+          </div>
+          <p class="hint" style="margin-top: -6px">Au moins 10 % au-delà de 45 heures par semaine. Les heures complémentaires (au-delà du contrat, jusqu'à 45 h) ne sont majorées que si le contrat le prévoit.</p>
+          <div class="row2">
+            <div>
+              <label for="emp-name">Employeur (pour le bulletin)</label>
+              <input id="emp-name" class="fld" type="text" placeholder="Nom et prénom">
+            </div>
+            <div>
+              <label for="am-name">Assistante maternelle</label>
+              <input id="am-name" class="fld" type="text" placeholder="Nom et prénom">
+            </div>
+          </div>
+          <div class="row2">
+            <div>
+              <label for="child-name">Enfant accueilli</label>
+              <input id="child-name" class="fld" type="text" placeholder="Prénom">
+            </div>
+            <div>
+              <label for="start">Début du contrat</label>
+              <input id="start" class="fld" type="date">
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="step" id="step-fees" open>
+        <summary><span class="num">02</span><span class="step-title">Les indemnités</span><span class="step-sum" id="sum-fees"></span></summary>
+        <div class="step-body">
+          <div>
+            <span class="lbl" id="ent-title">Indemnité d'entretien</span>
+            <div class="seg" role="group" aria-labelledby="ent-title">
+              <button type="button" data-ent="min" aria-pressed="true">Le minimum</button>
+              <button type="button" data-ent="jour" aria-pressed="false">Par jour</button>
+              <button type="button" data-ent="heure" aria-pressed="false">Par heure</button>
+            </div>
+            <div id="ent-box" style="margin-top: 10px" hidden>
+              <label for="ent-val" id="ent-val-label">Montant prévu au contrat (€)</label>
+              <input id="ent-val" class="fld" type="number" inputmode="decimal" min="0" step="0.01" value="4.00">
+            </div>
+            <p class="hint" id="ent-hint"></p>
+          </div>
+          <div>
+            <label class="check"><input type="checkbox" id="meals-on"> L'assistante maternelle fournit les repas</label>
+            <div id="meals-box" style="margin-top: 10px" hidden>
+              <label for="meal-price">Prix par jour (repas et goûter, €)</label>
+              <input id="meal-price" class="fld" type="number" inputmode="decimal" min="0" step="0.01" value="3.50">
+              <p class="hint">Le montant est libre, fixé au contrat. Cochez ou décochez le repas jour par jour dans le mois.</p>
+            </div>
+          </div>
+          <div class="row2">
+            <div>
+              <label for="km-rate">Indemnité kilométrique (€/km)</label>
+              <input id="km-rate" class="fld" type="number" inputmode="decimal" min="0" step="0.001" value="0.636">
+            </div>
+            <div>
+              <label for="cv">Puissance du véhicule</label>
+              <select id="cv" class="fld">
+                <option value="0.529">3 CV et moins</option>
+                <option value="0.606">4 CV</option>
+                <option value="0.636" selected>5 CV</option>
+                <option value="0.665">6 CV</option>
+                <option value="0.697">7 CV et plus</option>
+              </select>
+            </div>
+          </div>
+          <p class="hint" style="margin-top: -6px">Seulement si vous demandez à l'assistante maternelle de transporter l'enfant avec sa voiture. Entre le barème de l'administration (minimum) et le barème fiscal (maximum, prérempli selon la puissance).</p>
+          <div>
+            <label class="check"><input type="checkbox" id="cmg-on" checked> Je touche le CMG de la CAF (cotisations prises en charge)</label>
+          </div>
+        </div>
+      </details>
+
+      <details class="step" id="step-month" open>
+        <summary><span class="num">03</span><span class="step-title">Le mois, jour par jour</span><span class="step-sum" id="sum-month"></span></summary>
+        <div class="step-body">
+          <div class="month-nav">
+            <button type="button" class="btn" id="prev" aria-label="Mois précédent">‹</button>
+            <input id="month" class="fld" type="month" aria-label="Mois">
+            <button type="button" class="btn" id="next" aria-label="Mois suivant">›</button>
+          </div>
+          <p class="hint" style="margin-top: -4px">Les jours sont préremplis avec le planning du contrat. Changez les heures réellement faites (8h30, 8:30 ou 8,5) ou le motif d'une absence. Les jours modifiés portent un point.</p>
+          <div class="legend" aria-hidden="true">
+            <span><span style="color: var(--gold)">▌</span> accueil</span>
+            <span><span style="color: var(--mauve)">▌</span> absence payée</span>
+            <span><span style="color: var(--rose)">▌</span> absence déduite</span>
+            <span><span style="color: #B9AAB0">▌</span> congé, férié</span>
+            <span id="legend-meal" hidden>🍽 repas</span>
+          </div>
+          <div class="days" id="days"></div>
+          <div class="row2">
+            <div>
+              <label for="km">Kilomètres faits avec l'enfant ce mois-ci</label>
+              <input id="km" class="fld" type="number" inputmode="decimal" min="0" step="1" value="0">
+            </div>
+            <div>
+              <label for="other">Autre somme non soumise (€)</label>
+              <input id="other" class="fld" type="number" inputmode="decimal" step="0.01" value="0">
+            </div>
+          </div>
+          <div id="cp-box">
+            <span class="lbl">Congés payés versés ce mois-ci (année incomplète)</span>
+            <div class="row2">
+              <div>
+                <label for="cp-days">Jours ouvrables</label>
+                <input id="cp-days" class="fld" type="number" inputmode="numeric" min="0" step="1" value="0">
+              </div>
+              <div>
+                <label for="cp-amount">Montant brut (€)</label>
+                <input id="cp-amount" class="fld" type="number" inputmode="decimal" min="0" step="0.01" value="0">
+              </div>
+            </div>
+            <p class="hint" id="cp-hint"></p>
+          </div>
+          <div class="bar" style="margin: 0">
+            <button type="button" class="btn ghost" id="reset-month">Remettre ce mois au planning</button>
+          </div>
+        </div>
+      </details>
+    </form>
+
+    <section class="result" id="result" aria-label="Résultat" aria-live="polite">
+      <span class="kicker" id="res-kicker">// à verser pour le mois</span>
+      <div>
+        <div class="big"><strong id="total">–</strong><span>à verser</span></div>
+        <p class="sub" id="total-sub"></p>
+      </div>
+      <div>
+        <span class="kicker" style="display: block; margin-bottom: 6px">// les cases à remplir sur pajemploi</span>
+        <div class="pj" id="pj"></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="st-brut">–</b><span>salaire brut</span></div>
+        <div class="stat"><b id="st-cost">–</b><span id="st-cost-lbl">coût pour vous avant CMG</span></div>
+        <div class="stat"><b id="st-done">–</b><span>heures réellement faites</span></div>
+        <div class="stat"><b id="st-days">–</b><span>jours de présence de l'enfant</span></div>
+      </div>
+      <p class="tip">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E2C47E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        <span id="tip-text"></span>
+      </p>
+    </section>
+  </div>
+
+  <section class="detail" id="bulletin" aria-labelledby="detail-title">
+    <span class="kicker">// le bulletin détaillé</span>
+    <h2 id="detail-title">Le bulletin de salaire du mois</h2>
+    <p class="hint">Plus détaillé que celui de Pajemploi : chaque ligne de salaire, chaque cotisation avec son taux, la part employeur et les indemnités. À imprimer ou à enregistrer en PDF pour vous et pour l'assistante maternelle.</p>
+    <div class="bar">
+      <button type="button" class="btn" id="print">Imprimer ou enregistrer en PDF</button>
+    </div>
+    <div class="payslip" id="payslip"></div>
+  </section>
+
+  <section class="detail" id="bilan" aria-labelledby="bilan-title">
+    <span class="kicker">// le bilan des mois enregistrés</span>
+    <h2 id="bilan-title">Mois après mois</h2>
+    <p class="hint">Utile pour la régularisation à la date anniversaire du contrat (année incomplète) et pour la fin du contrat : les heures payées face aux heures faites.</p>
+    <div class="table-box">
+      <table>
+        <thead><tr><th scope="col">Mois</th><th scope="col">Heures payées</th><th scope="col">Heures faites</th><th scope="col">Salaire net</th><th scope="col">Indemnités</th></tr></thead>
+        <tbody id="bilan-rows"></tbody>
+      </table>
+    </div>
+    <div class="bar" style="margin-top: 16px">
+      <button type="button" class="btn ghost" id="export">Exporter mes données</button>
+      <label class="btn ghost" style="display: inline-flex; align-items: center; margin: 0; color: var(--ink); font-size: 15px">Importer<input type="file" id="import" accept="application/json" hidden></label>
+      <button type="button" class="btn ghost" id="wipe">Tout effacer</button>
+    </div>
+    <p class="hint" id="save-hint">Vos réglages et vos mois restent sur cet appareil, dans ce navigateur. Rien n'est envoyé.</p>
+  </section>
+
+  <footer class="notes">
+    <div>
+      <span class="kicker">// les règles</span>
+      <p>Convention collective des particuliers employeurs et de l'emploi à domicile (IDCC 3239). Année complète : heures par semaine × 52 ÷ 12, congés payés compris. Année incomplète (46 semaines ou moins) : heures × semaines programmées ÷ 12, congés payés en plus (10 % du brut de la période ou maintien du salaire, le plus favorable), versés en juin, au congé principal ou au fil des congés selon le contrat. Absence déduite : salaire mensualisé × heures d'absence ÷ heures qui auraient dû être faites dans le mois.</p>
+    </div>
+    <div>
+      <span class="kicker">// les montants retenus</span>
+      <p>Au 1er juin 2026 : Smic 12,31 € brut de l'heure, minimum garanti 4,35 €. Salaire minimum légal 3,46 € brut par heure et par enfant (0,281 Smic), minimum conventionnel 4,20 € brut (3,28 € net). Indemnité d'entretien : 90 % du minimum garanti pour 9 heures, soit 3,92 € (0,435 € de l'heure), jamais moins de 2,65 € par jour d'accueil. Cotisations salariales 21,88 % (net = brut × 0,7812), cotisations patronales 42,83 %, selon les taux publiés par Pajemploi.</p>
+    </div>
+    <div>
+      <span class="kicker">// les sources</span>
+      <ul>
+        <li><a href="https://pays-de-la-loire.dreets.gouv.fr/sites/pays-de-la-loire.dreets.gouv.fr/IMG/pdf/fiche_remu_indemnites_frais_au_12062026.pdf" target="_blank" rel="noopener">DREETS Pays de la Loire, rémunération et indemnités au 12/06/2026</a></li>
+        <li><a href="https://www.pajemploi.urssaf.fr/pajewebinfo/cms/sites/pajewebinfo/accueil/employeur-dassistante-maternelle/je-minforme/le-cout-de-la-garde.html" target="_blank" rel="noopener">Pajemploi, le coût de la garde (taux de cotisations)</a></li>
+        <li><a href="https://code.travail.gouv.fr/convention-collective/3239-particuliers-employeurs-et-emploi-a-domicile" target="_blank" rel="noopener">Convention collective IDCC 3239 (code du travail numérique)</a></li>
+        <li><a href="https://occitanie.dreets.gouv.fr/sites/occitanie.dreets.gouv.fr/IMG/pdf/2023-01-19-fiche-accueil-en-annee-incomplete-version-definitive.pdf" target="_blank" rel="noopener">DREETS Occitanie, accueil en année incomplète</a></li>
+        <li><a href="https://www.lachapellesurerdre.fr/sites/default/files/declaration_pajemploi.pdf" target="_blank" rel="noopener">Relais petite enfance, remplir la déclaration Pajemploi</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="kicker">// à vérifier</span>
+      <p>C'est une aide au calcul, pas un document officiel : Pajemploi calcule les cotisations exactes et édite l'attestation d'emploi. Pajemploi n'accepte que des heures et des jours entiers : l'outil arrondit à l'unité supérieure, le salaire restant calculé sur les heures exactes. Les semaines à cheval sur deux mois sont complétées avec le mois voisin enregistré, sinon avec le planning. Calcul pour un seul enfant ; faites un calcul par enfant. Rien n'est envoyé : tout se passe sur votre appareil.</p>
+    </div>
+  </footer>
+</div>
+
+<div class="mobilebar off" id="mobilebar" aria-hidden="true">
+  <span>À verser <strong id="mb-total">–</strong></span>
+  <a href="#result">Cases Pajemploi ↑</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- Barèmes (sources en pied de page) ----------
+  var SMIC = 12.31;              // € brut de l'heure, au 1er juin 2026
+  var MG = 4.35;                 // minimum garanti, au 1er juin 2026
+  var MIN_LEGAL = 3.46;          // 0,281 × Smic, par heure et par enfant (art. D.423-9 CASF)
+  var MIN_CONV = 4.20;           // minimum conventionnel brut (IDCC 3239)
+  var ENT_9H = 3.92;             // 90 % du MG pour une journée de 9 h (art. 114-1 CCN)
+  var ENT_HOUR = 0.435;          // soit par heure
+  var ENT_FLOOR = 2.65;          // minimum par jour d'accueil, quelle que soit la durée
+  var CSG_BASE = 0.9825;         // assiette CSG/CRDS
+  var EMPLOYEE = [               // cotisations salariales, assistant maternel (Pajemploi)
+    { label: "CSG déductible", rate: 6.80, csg: true },
+    { label: "CSG non déductible et CRDS", rate: 2.90, csg: true },
+    { label: "Assurance vieillesse plafonnée", rate: 6.90 },
+    { label: "Assurance vieillesse déplafonnée", rate: 0.40 },
+    { label: "Retraite complémentaire Ircem, tranche 1", rate: 3.15 },
+    { label: "Contribution d'équilibre général (CEG)", rate: 0.86 },
+    { label: "Prévoyance Ircem", rate: 1.04 }
+  ];
+  var EMPLOYER = [               // cotisations patronales, assistant maternel (Pajemploi)
+    { label: "Maladie, maternité, invalidité, solidarité", rate: 13.00 },
+    { label: "Assurance vieillesse plafonnée", rate: 8.55 },
+    { label: "Assurance vieillesse déplafonnée", rate: 1.90 },
+    { label: "Allocations familiales", rate: 5.25 },
+    { label: "Accidents du travail", rate: 0.95 },
+    { label: "Contribution solidarité autonomie", rate: 0.30 },
+    { label: "Fnal (aide au logement)", rate: 0.10 },
+    { label: "Assurance chômage", rate: 4.05 },
+    { label: "Retraite complémentaire Ircem, tranche 1", rate: 4.72 },
+    { label: "Contribution d'équilibre général (CEG)", rate: 1.29 },
+    { label: "Prévoyance Ircem", rate: 2.15 },
+    { label: "Formation professionnelle", rate: 0.55 },
+    { label: "Contribution au dialogue social", rate: 0.016 }
+  ];
+  var NET_RATIO = 1 - EMPLOYEE.reduce(function (s, c) { return s + c.rate * (c.csg ? CSG_BASE : 1); }, 0) / 100; // 0,7812
+  var HS_REDUCTION = 11.31;      // réduction de cotisations salariales sur heures complémentaires et majorées
+
+  var DAYS = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+  var MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+  var STATUS = {
+    accueil: "Accueil",
+    paye: "Absent, payé",
+    deduit: "Absence déduite",
+    conge: "Congé / non programmé",
+    ferie: "Férié chômé",
+    off: "Pas d'accueil"
+  };
+  var STORE = "assmat-v1";
+
+  var $ = function (id) { return document.getElementById(id); };
+  var all = function (sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); };
+  var eur = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var num2 = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
+  var pct = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 3 });
+  var r2 = function (x) { return Math.round((x + 1e-9) * 100) / 100; };
+  var ceilInt = function (x) { return Math.ceil(x - 0.005); };
+  var esc = function (s) { return String(s || "").replace(/[&<>"']/g, function (c) { return "&#" + c.charCodeAt(0) + ";"; }); };
+
+  // ---------- État et sauvegarde ----------
+  var state = {
+    c: {
+      year: "complete", weeks: 42, plan: [9, 9, 0, 9, 9, 0, 0], rate: 4.60, rateMode: "brut",
+      maj: 10, majhc: 0, ent: "min", entVal: 4, mealsOn: false, mealPrice: 3.5, kmRate: 0.636, cv: "0.636",
+      cmg: true, emp: "", am: "", child: "", start: ""
+    },
+    months: {}
+  };
+  var canSave = true;
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORE) || "null");
+    if (saved && saved.c) { Object.assign(state.c, saved.c); state.months = saved.months || {}; }
+  } catch (e) { canSave = false; }
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(state)); canSave = true; } catch (e) { canSave = false; }
+  }
+
+  var today = new Date();
+  var cur = { y: today.getFullYear(), m: today.getMonth() };
+  var key = function (y, m) { return y + "-" + String(m + 1).padStart(2, "0"); };
+
+  // ---------- Jours fériés ----------
+  var holidayCache = {};
+  function holidays(y) {
+    if (holidayCache[y]) return holidayCache[y];
+    var a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4;
+    var f = Math.floor((b + 8) / 25), g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7, m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var month = Math.floor((h + l - 7 * m + 114) / 31) - 1, day = ((h + l - 7 * m + 114) % 31) + 1;
+    var easter = new Date(y, month, day);
+    var plus = function (n) { var x = new Date(easter); x.setDate(x.getDate() + n); return x; };
+    var list = [new Date(y, 0, 1), plus(1), new Date(y, 4, 1), new Date(y, 4, 8), plus(39), plus(50),
+      new Date(y, 6, 14), new Date(y, 7, 15), new Date(y, 10, 1), new Date(y, 10, 11), new Date(y, 11, 25)];
+    var names = ["Jour de l'an", "Lundi de Pâques", "1er mai", "8 mai", "Ascension", "Lundi de Pentecôte",
+      "14 juillet", "15 août", "Toussaint", "11 novembre", "Noël"];
+    var out = {};
+    list.forEach(function (dt, n) { out[dt.getMonth() + "-" + dt.getDate()] = names[n]; });
+    return (holidayCache[y] = out);
+  }
+
+  // Un jour : planning du contrat, sauf si on l'a modifié.
+  function dayData(date) {
+    var y = date.getFullYear(), m = date.getMonth(), d = date.getDate();
+    var wd = (date.getDay() + 6) % 7;
+    var p = +state.c.plan[wd] || 0;
+    var hol = holidays(y)[m + "-" + d] || "";
+    var def = { s: p > 0 ? (hol ? "ferie" : "accueil") : "off", h: p, r: !!state.c.mealsOn && p > 0 && !hol };
+    var mo = state.months[key(y, m)];
+    var ov = mo && mo.days && mo.days[d];
+    var out = ov ? { s: ov.s, h: ov.h, r: ov.r } : def;
+    out.p = p; out.hol = hol; out.wd = wd; out.edited = !!ov; out.date = date;
+    if (out.s !== "accueil") out.h = out.s === "off" ? 0 : p;
+    return out;
+  }
+  function month(y, m, create) {
+    var k = key(y, m);
+    if (!state.months[k] && create) state.months[k] = { days: {}, km: 0, other: 0, cpDays: 0, cpAmount: 0 };
+    return state.months[k] || { days: {}, km: 0, other: 0, cpDays: 0, cpAmount: 0 };
+  }
+
+  // Heures payées par le contrat (a) et heures du contrat (c) pour un jour.
+  function workHours(dd) {
+    if (dd.s === "accueil") return { a: dd.h, c: dd.p };
+    if (dd.s === "paye" || dd.s === "ferie") return { a: dd.p, c: dd.p };
+    return { a: 0, c: 0 };
+  }
+
+  function parseHours(s) {
+    s = String(s || "").trim().toLowerCase().replace(/\s/g, "");
+    if (!s) return 0;
+    var m = s.match(/^(\d{1,2})(?:[h:](\d{0,2}))?$/);
+    if (m && (s.indexOf("h") > -1 || s.indexOf(":") > -1)) return +m[1] + (m[2] ? +m[2] / 60 : 0);
+    var v = parseFloat(s.replace(",", "."));
+    return isFinite(v) && v > 0 ? Math.min(24, v) : 0;
+  }
+  function fmtH(h) {
+    if (!h) return "";
+    var hh = Math.floor(h + 1e-9), mm = Math.round((h - hh) * 60);
+    if (mm === 60) { hh++; mm = 0; }
+    return hh + "h" + (mm ? String(mm).padStart(2, "0") : "");
+  }
+  function fmtHours(h) { return num2.format(r2(h)) + " h"; }
+
+  // ---------- Calcul du mois ----------
+  function compute(y, m) {
+    var c = state.c;
+    var rate = c.rateMode === "net" ? c.rate / NET_RATIO : c.rate;
+    var H = c.plan.reduce(function (s, x) { return s + (+x || 0); }, 0);
+    var daysWeek = c.plan.filter(function (x) { return +x > 0; }).length;
+    var W = c.year === "complete" ? 52 : Math.min(46, Math.max(1, c.weeks));
+    var normalWeek = Math.min(H, 45), contractMajWeek = Math.max(0, H - 45);
+    var mensNormal = normalWeek * W / 12, mensMaj = contractMajWeek * W / 12;
+    var majRate = rate * (1 + Math.max(10, c.maj) / 100);
+    var base = mensNormal * rate + mensMaj * majRate;
+
+    var n = new Date(y, m + 1, 0).getDate();
+    var list = [];
+    for (var d = 1; d <= n; d++) list.push(dayData(new Date(y, m, d)));
+
+    var hDed = 0, dDed = 0, hShould = 0, hDone = 0, presence = 0, meals = 0, ent = 0, entDays = [];
+    list.forEach(function (dd) {
+      if (dd.s === "deduit") { hDed += dd.p; dDed += dd.p > 0 ? 1 : 0; }
+      if (dd.s === "accueil" || dd.s === "paye" || dd.s === "deduit") hShould += dd.p;
+      if (dd.s === "accueil" && dd.h > 0) {
+        hDone += dd.h; presence++;
+        if (dd.r && c.mealsOn) meals++;
+        var min = Math.max(ENT_FLOOR, r2(ENT_9H / 9 * dd.h));
+        var v = c.ent === "jour" ? c.entVal : c.ent === "heure" ? c.entVal * dd.h : min;
+        entDays.push({ h: dd.h, v: r2(Math.max(min, v)), under: v < min - 0.004 });
+        ent += r2(Math.max(min, v));
+      }
+    });
+    var deduction = hShould > 0 ? base * hDed / hShould : 0;
+
+    // Heures en plus, semaine par semaine (lundi → dimanche), semaines voisines comprises.
+    var comp = 0, majExtra = 0;
+    var first = new Date(y, m, 1);
+    var monday = new Date(y, m, 1 - ((first.getDay() + 6) % 7));
+    while (monday <= new Date(y, m, n)) {
+      var A = 0, C = 0, extraIn = 0, extraAll = 0;
+      for (var i = 0; i < 7; i++) {
+        var dt = new Date(monday); dt.setDate(monday.getDate() + i);
+        var dd = dayData(dt), w = workHours(dd);
+        A += w.a; C += w.c;
+        var ex = Math.max(0, w.a - w.c);
+        extraAll += ex;
+        if (dt.getMonth() === m) extraIn += ex;
+      }
+      var extra = Math.max(0, A - C);
+      var over = Math.max(0, A - Math.max(45, C));
+      var share = extraAll > 0 ? extraIn / extraAll : 0;
+      majExtra += Math.min(extra, over) * share;
+      comp += (extra - Math.min(extra, over)) * share;
+      monday.setDate(monday.getDate() + 7);
+    }
+    var compRate = rate * (1 + Math.max(0, c.majhc) / 100);
+    var compPay = comp * compRate, majPay = majExtra * majRate;
+
+    var mo = month(y, m);
+    var cpAmount = c.year === "incomplete" ? (+mo.cpAmount || 0) : 0;
+    var cpDays = c.year === "incomplete" ? (+mo.cpDays || 0) : 0;
+
+    var brut = r2(base - deduction + compPay + majPay + cpAmount);
+    var lines = EMPLOYEE.map(function (x) {
+      var b = x.csg ? r2(brut * CSG_BASE) : brut;
+      return { label: x.label, base: b, rate: x.rate, amount: r2(b * x.rate / 100) };
+    });
+    var cotis = lines.reduce(function (s, l) { return s + l.amount; }, 0);
+    var net = r2(brut - cotis);
+    var pLines = EMPLOYER.map(function (x) { return { label: x.label, base: brut, rate: x.rate, amount: r2(brut * x.rate / 100) }; });
+    var pCotis = pLines.reduce(function (s, l) { return s + l.amount; }, 0);
+    var hsReduction = r2((compPay + majPay) * HS_REDUCTION / 100);
+
+    var km = +mo.km || 0, kmPay = r2(km * c.kmRate);
+    var mealPay = r2(meals * c.mealPrice);
+    var other = +mo.other || 0;
+    ent = r2(ent);
+
+    return {
+      y: y, m: m, rate: rate, H: H, W: W, daysWeek: daysWeek, list: list,
+      mensNormal: mensNormal, mensMaj: mensMaj, majRate: majRate, base: base,
+      hDed: hDed, dDed: dDed, hShould: hShould, deduction: deduction,
+      comp: comp, compRate: compRate, compPay: compPay, majExtra: majExtra, majPay: majPay,
+      cpAmount: cpAmount, cpDays: cpDays, brut: brut, lines: lines, cotis: r2(cotis), net: net,
+      pLines: pLines, pCotis: r2(pCotis), hsReduction: hsReduction,
+      hDone: hDone, presence: presence, ent: ent, entDays: entDays, meals: meals, mealPay: mealPay,
+      km: km, kmPay: kmPay, other: other,
+      fees: r2(ent + mealPay + kmPay + other),
+      pjHours: Math.max(0, ceilInt(mensNormal - Math.min(hDed, mensNormal))),
+      pjDays: Math.max(0, ceilInt(daysWeek * W / 12) - dDed),
+      pjComp: ceilInt(comp), pjMaj: ceilInt(mensMaj + majExtra)
+    };
+  }
+
+  // ---------- Affichage du calendrier ----------
+  var mealIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 1-3 4-3 7h3v11"></path></svg>';
+  function drawDays() {
+    var y = cur.y, m = cur.m, n = new Date(y, m + 1, 0).getDate();
+    var html = "";
+    var opts = Object.keys(STATUS).map(function (k) { return '<option value="' + k + '">' + STATUS[k] + "</option>"; }).join("");
+    for (var d = 1; d <= n; d++) {
+      var dd = dayData(new Date(y, m, d));
+      html += '<div class="day s-' + dd.s + (dd.edited ? " edited" : "") + (dd.wd === 0 && d > 1 ? " wk-start" : "") + '" data-d="' + d + '">' +
+        '<div class="dname">' + DAYS[dd.wd] + "<b>" + d + "</b></div>" +
+        '<input type="text" inputmode="decimal" aria-label="Heures le ' + d + '" value="' + fmtH(dd.h) + '"' + (dd.s === "accueil" || dd.s === "off" ? "" : " disabled") + ' placeholder="–">' +
+        '<select aria-label="Le ' + d + '">' + opts.replace('value="' + dd.s + '"', 'value="' + dd.s + '" selected') + "</select>" +
+        '<button type="button" class="meal" aria-label="Repas le ' + d + '" aria-pressed="' + (dd.r && dd.s === "accueil") + '"' + (state.c.mealsOn && dd.s === "accueil" ? "" : " disabled") + ">" + mealIcon + "</button>" +
+        (dd.hol ? '<div class="extra">' + dd.hol + "</div>" : dd.s === "accueil" && dd.h > dd.p ? '<div class="extra">+' + fmtH(dd.h - dd.p) + " par rapport au planning</div>" : "") +
+        "</div>";
+    }
+    $("days").innerHTML = html;
+    $("month").value = key(y, m);
+    var mo = month(y, m);
+    $("km").value = mo.km || 0;
+    $("other").value = mo.other || 0;
+    $("cp-days").value = mo.cpDays || 0;
+    $("cp-amount").value = mo.cpAmount || 0;
+  }
+
+  function setDay(d, patch) {
+    var mo = month(cur.y, cur.m, true);
+    var dd = dayData(new Date(cur.y, cur.m, d));
+    var next = { s: dd.s, h: dd.s === "accueil" ? dd.h : dd.p, r: dd.r };
+    Object.assign(next, patch);
+    if (next.s === "accueil" && patch.s && !next.h) next.h = dd.p;
+    mo.days[d] = next;
+  }
+
+  $("days").addEventListener("change", function (e) {
+    var row = e.target.closest(".day"); if (!row) return;
+    var d = +row.dataset.d;
+    if (e.target.tagName === "SELECT") setDay(d, { s: e.target.value });
+    else if (e.target.tagName === "INPUT") {
+      var h = parseHours(e.target.value);
+      setDay(d, h > 0 ? { s: "accueil", h: h } : { s: "off", h: 0 });
+    }
+    save(); drawDays(); render();
+  });
+  $("days").addEventListener("click", function (e) {
+    var b = e.target.closest(".meal"); if (!b) return;
+    var d = +b.closest(".day").dataset.d;
+    setDay(d, { r: b.getAttribute("aria-pressed") !== "true" });
+    save(); drawDays(); render();
+  });
+
+  // ---------- Rendu ----------
+  function pjRow(label, value, hint, copyVal) {
+    var empty = value === "" || value === null;
+    return '<div class="pj-row' + (empty ? " empty" : "") + '"><span>' + label + (hint ? "<small>" + hint + "</small>" : "") + "</span><b>" +
+      (empty ? "vide" : value) + "</b>" +
+      (empty ? "<span></span>" : '<button type="button" class="copy" data-copy="' + esc(copyVal) + '" aria-label="Copier ' + esc(label) + '"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg></button>') +
+      "</div>";
+  }
+  var dec = function (x) { return num2.format(r2(x)); };
+
+  function render() {
+    var c = state.c;
+    var r = compute(cur.y, cur.m);
+    var mname = MONTHS[r.m] + " " + r.y;
+
+    // Contrat
+    all("[data-year]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.year === c.year)); });
+    all("[data-ratemode]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.ratemode === c.rateMode)); });
+    all("[data-ent]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.ent === c.ent)); });
+    $("weeks-box").hidden = c.year !== "incomplete";
+    $("cp-box").hidden = c.year !== "incomplete";
+    $("year-hint").textContent = c.year === "complete"
+      ? "L'enfant est accueilli toute l'année, en dehors des 5 semaines de congés de l'assistante maternelle : salaire sur 52 semaines, congés payés compris."
+      : "L'enfant n'est pas accueilli certaines semaines (vacances des parents) : salaire sur les semaines programmées, congés payés versés en plus.";
+    $("plan-hint").textContent = num2.format(r.H) + " h par semaine sur " + r.daysWeek + " jour" + (r.daysWeek > 1 ? "s" : "") +
+      " · " + dec(r.mensNormal + r.mensMaj) + " h payées chaque mois (" + num2.format(r.H) + " × " + r.W + " ÷ 12)" +
+      (r.H > 45 ? " · " + dec(r.mensMaj) + " h majorées au-delà de 45 h" : "");
+    $("rate-hint").textContent = c.rateMode === "brut"
+      ? "Soit " + eur.format(r2(r.rate * NET_RATIO)) + " net de l'heure."
+      : "Soit " + eur.format(r2(r.rate)) + " brut de l'heure.";
+    var warn = r.rate < MIN_LEGAL - 0.004
+      ? "En dessous du minimum légal (" + eur.format(MIN_LEGAL) + " brut de l'heure)."
+      : r.rate < MIN_CONV - 0.004 ? "En dessous du minimum de la convention collective (" + eur.format(MIN_CONV) + " brut, " + eur.format(3.28) + " net)." : "";
+    $("rate-warn").textContent = warn; $("rate-warn").hidden = !warn;
+    $("ent-box").hidden = c.ent === "min";
+    $("ent-val-label").textContent = c.ent === "heure" ? "Montant par heure d'accueil (€)" : "Montant par jour d'accueil (€)";
+    var under = r.entDays.some(function (x) { return x.under; });
+    $("ent-hint").textContent = (c.ent === "min"
+      ? "Minimum de la convention : " + eur.format(ENT_9H) + " pour 9 heures, au prorata des heures, jamais moins de " + eur.format(ENT_FLOOR) + " par jour. Rien n'est dû quand l'enfant est absent."
+      : "Payée seulement les jours où l'enfant est présent.") +
+      (under ? " Certains jours, votre montant est sous le minimum : l'outil retient le minimum." : "");
+    $("meals-box").hidden = !c.mealsOn;
+    $("legend-meal").hidden = !c.mealsOn;
+    var acq = Math.min(30, Math.ceil(r.W / 4 * 2.5));
+    $("cp-hint").innerHTML = "Sur " + r.W + " semaines, l'assistante maternelle acquiert environ " + acq +
+      " jours ouvrables de congés (2,5 jours par 4 semaines). Le 10e d'une année de salaire de base fait " + eur.format(r2(r.base * 1.2)) +
+      ' : comparez avec le maintien de salaire et gardez le plus favorable. <a href="#" id="cp-fill">Mettre ' + eur.format(r2(r.base * 1.2)) + "</a>";
+
+    $("sum-contract").textContent = (c.year === "complete" ? "Année complète" : "Année incomplète, " + r.W + " semaines") +
+      " · " + num2.format(r.H) + " h/sem · " + eur.format(r.rate) + " brut/h";
+    $("sum-fees").textContent = "Entretien " + (c.ent === "min" ? "au minimum" : eur.format(c.entVal) + (c.ent === "heure" ? "/h" : "/jour")) +
+      (c.mealsOn ? " · repas " + eur.format(c.mealPrice) : "") + (c.cmg ? " · CMG" : "");
+    $("sum-month").textContent = mname + " · " + fmtHours(r.hDone) + " faites · " + r.presence + " jours de présence";
+
+    // Résultat
+    var total = r2(r.net + r.fees);
+    $("res-kicker").textContent = "// " + mname + ", à verser à l'assistante maternelle";
+    $("total").textContent = eur.format(total);
+    $("mb-total").textContent = eur.format(total);
+    $("total-sub").innerHTML = "<strong>" + eur.format(r.net) + "</strong> de salaire net et <strong>" + eur.format(r.fees) + "</strong> d'indemnités (entretien" +
+      (r.meals ? ", repas" : "") + (r.km ? ", kilomètres" : "") + ").";
+    $("pj").innerHTML =
+      pjRow("Nombre d'heures normales", r.pjHours, dec(r.mensNormal) + " h mensualisées" + (r.hDed ? " − " + dec(r.hDed) + " h d'absence déduite" : "") + ", arrondi", r.pjHours) +
+      pjRow("Heures complémentaires", r.pjComp || "", r.comp ? dec(r.comp) + " h au-delà du contrat, jusqu'à 45 h/sem." : "", r.pjComp) +
+      pjRow("Heures majorées", r.pjMaj || "", r.mensMaj + r.majExtra ? dec(r.mensMaj + r.majExtra) + " h au-delà de 45 h/sem." : "", r.pjMaj) +
+      pjRow("Salaire net total", eur.format(r.net), "salaire, heures en plus et congés payés compris", dec(r.net)) +
+      pjRow("Nombre de jours d'activité", r.pjDays, r.daysWeek + " j × " + r.W + " sem. ÷ 12" + (r.dDed ? " − " + r.dDed + " j déduits" : "") + ", arrondi", r.pjDays) +
+      (c.year === "incomplete" ? pjRow("Nombre de jours de congés payés", r.cpDays || "", r.cpDays ? "congés versés ce mois-ci" : "seulement le mois où ils sont versés", r.cpDays) : "") +
+      pjRow("Indemnités d'entretien", eur.format(r.ent), r.presence + " jours de présence réelle", dec(r.ent)) +
+      pjRow("Indemnités de repas", r.mealPay ? eur.format(r.mealPay) : "", r.meals ? r.meals + " × " + eur.format(c.mealPrice) : "", dec(r.mealPay)) +
+      pjRow("Indemnités kilométriques", r.kmPay ? eur.format(r.kmPay) : "", r.km ? num2.format(r.km) + " km × " + c.kmRate.toLocaleString("fr-FR", { maximumFractionDigits: 3 }) + " €" : "", dec(r.kmPay));
+
+    $("st-brut").textContent = eur.format(r.brut);
+    var cost = r2(r.brut + r.pCotis + r.fees);
+    $("st-cost").textContent = eur.format(c.cmg ? r2(r.net + r.fees) : cost);
+    $("st-cost-lbl").textContent = c.cmg ? "coût avant la part du CMG (cotisations prises en charge)" : "coût total pour vous, cotisations comprises";
+    $("st-done").textContent = fmtHours(r.hDone);
+    $("st-days").textContent = r.presence;
+    var nextM = MONTHS[(r.m + 1) % 12];
+    $("tip-text").innerHTML = "À déclarer sur Pajemploi <strong>entre le 25 " + MONTHS[r.m] + " et le 5 " + nextM + "</strong>. " +
+      (c.cmg ? "Avec le CMG, la CAF paie toutes les cotisations (" + eur.format(r2(r.cotis + r.pCotis)) + " ce mois-ci) et une partie du salaire." : "Sans CMG, Pajemploi vous prélève " + eur.format(r2(r.cotis + r.pCotis)) + " de cotisations.");
+
+    drawPayslip(r);
+    drawBilan();
+    $("save-hint").textContent = canSave
+      ? "Vos réglages et vos mois restent sur cet appareil, dans ce navigateur. Rien n'est envoyé."
+      : "Ce navigateur n'enregistre rien (navigation privée ?) : exportez vos données pour les garder.";
+  }
+
+  function drawPayslip(r) {
+    var c = state.c;
+    var row = function (label, base, rate, amount, cls, small) {
+      return "<tr" + (cls ? ' class="' + cls + '"' : "") + '><th scope="row">' + label + (small ? "<small>" + small + "</small>" : "") + '</th><td class="c-base">' + (base || "") +
+        '</td><td class="c-rate">' + (rate || "") + "</td><td>" + (amount === "" ? "" : amount) + "</td></tr>";
+    };
+    var sec = function (t) { return '<tr class="sec"><th scope="rowgroup" colspan="4">' + t + "</th></tr>"; };
+    var minus = function (x) { return "−" + eur.format(x); };
+    var mname = MONTHS[r.m] + " " + r.y;
+    var last = new Date(r.y, r.m + 1, 0).getDate();
+
+    var h = '<div class="ps-title"><h3>Bulletin de salaire · ' + mname + "</h3><span class=\"kicker\">du 1er au " + last + " " + MONTHS[r.m] + "</span></div>" +
+      '<div class="ps-head">' +
+      '<div class="ps-box"><p class="lbl">Employeur</p><p>' + (esc(c.emp) || "—") + "</p><p>Particulier employeur, déclaration Pajemploi</p></div>" +
+      '<div class="ps-box"><p class="lbl">Salariée</p><p>' + (esc(c.am) || "—") + "</p><p>Assistante maternelle agréée" + (c.start ? ", depuis le " + new Date(c.start).toLocaleDateString("fr-FR") : "") + "</p></div>" +
+      '<div class="ps-box"><p class="lbl">Contrat</p><p>' + (c.year === "complete" ? "Année complète (52 semaines)" : "Année incomplète (" + r.W + " semaines)") +
+      "</p><p>" + num2.format(r.H) + " h/sem. · " + eur.format(r.rate) + " brut/h" + (c.child ? " · " + esc(c.child) : "") + "</p><p>Convention collective IDCC 3239</p></div>" +
+      "</div>" +
+      '<table class="ps-table"><thead><tr><th scope="col">Rubrique</th><th scope="col" class="c-base">Base</th><th scope="col" class="c-rate">Taux</th><th scope="col">Montant</th></tr></thead><tbody>';
+
+    h += sec("Salaire");
+    h += row("Salaire mensualisé", dec(r.mensNormal) + " h", eur.format(r.rate), eur.format(r2(r.mensNormal * r.rate)), "",
+      num2.format(Math.min(r.H, 45)) + " h × " + r.W + " semaines ÷ 12");
+    if (r.mensMaj) h += row("Heures majorées prévues au contrat", dec(r.mensMaj) + " h", eur.format(r2(r.majRate)), eur.format(r2(r.mensMaj * r.majRate)), "", "au-delà de 45 h/sem., +" + c.maj + " %");
+    if (r.deduction) h += row("Absence déduite", dec(r.hDed) + " h / " + dec(r.hShould) + " h", "", minus(r2(r.deduction)), "", "salaire mensualisé × heures d'absence ÷ heures prévues dans le mois");
+    if (r.comp) h += row("Heures complémentaires", dec(r.comp) + " h", eur.format(r2(r.compRate)), eur.format(r2(r.compPay)), "", "au-delà du contrat, jusqu'à 45 h/sem.");
+    if (r.majExtra) h += row("Heures majorées", dec(r.majExtra) + " h", eur.format(r2(r.majRate)), eur.format(r2(r.majPay)), "", "au-delà de 45 h/sem., +" + c.maj + " %");
+    if (r.cpAmount) h += row("Congés payés", r.cpDays + " j", "", eur.format(r.cpAmount), "", "10 % ou maintien de salaire, le plus favorable");
+    h += row("Salaire brut", "", "", eur.format(r.brut), "total");
+
+    h += sec("Cotisations salariales");
+    r.lines.forEach(function (l) { h += row(l.label, eur.format(l.base), pct.format(l.rate) + " %", minus(l.amount)); });
+    h += row("Total des cotisations salariales", "", num2.format(r.brut ? r.cotis / r.brut * 100 : 21.88) + " %", minus(r.cotis), "total");
+    h += row("Salaire net", "", "", eur.format(r.net), "total");
+
+    h += sec("Indemnités non soumises à cotisations");
+    h += row("Indemnité d'entretien", r.presence + " j", c.ent === "min" ? "minimum" : eur.format(c.entVal) + (c.ent === "heure" ? "/h" : "/j"), eur.format(r.ent), "", "jours de présence réelle de l'enfant");
+    if (c.mealsOn) h += row("Indemnité de repas", r.meals + " j", eur.format(c.mealPrice), eur.format(r.mealPay));
+    if (r.km) h += row("Indemnités kilométriques", num2.format(r.km) + " km", c.kmRate.toLocaleString("fr-FR", { maximumFractionDigits: 3 }) + " €", eur.format(r.kmPay));
+    if (r.other) h += row("Autre somme", "", "", eur.format(r.other));
+    h += row("Net à payer", "", "", eur.format(r2(r.net + r.fees)), "grand");
+
+    h += sec("Cotisations patronales, pour information");
+    r.pLines.forEach(function (l) { h += row(l.label, eur.format(l.base), pct.format(l.rate) + " %", eur.format(l.amount), "muted"); });
+    h += row("Total des cotisations patronales", "", num2.format(r.brut ? r.pCotis / r.brut * 100 : 42.83) + " %", eur.format(r.pCotis), "total");
+    if (c.cmg) h += row("Prises en charge par le CMG (CAF)", "", "", minus(r2(r.pCotis + r.cotis)), "", "cotisations salariales et patronales");
+    h += row(c.cmg ? "Coût employeur, cotisations prises en charge" : "Coût total employeur", "", "", eur.format(c.cmg ? r2(r.net + r.fees) : r2(r.brut + r.pCotis + r.fees)), "total", c.cmg ? "avant la part de salaire versée par le CMG" : "");
+    h += "</tbody></table>";
+
+    h += '<div class="ps-foot">' +
+      "<p>Heures faites dans le mois : " + fmtHours(r.hDone) + " sur " + r.presence + " jours de présence. Heures payées : " + dec(r.mensNormal + r.mensMaj - Math.min(r.hDed, r.mensNormal) + r.comp + r.majExtra) + " h.</p>" +
+      (r.hsReduction ? "<p>Heures complémentaires et majorées : Pajemploi applique une réduction de cotisations salariales (jusqu'à " + pct.format(HS_REDUCTION) + " %, ici environ " + eur.format(r.hsReduction) + ") et ces heures sont exonérées d'impôt dans la limite légale.</p>" : "") +
+      "<p>Les assistantes maternelles ont un régime fiscal propre (abattement sur les sommes perçues) : le net imposable n'est pas calculé ici. Taux de cotisations publiés par Pajemploi ; Pajemploi calcule les montants exacts et édite l'attestation d'emploi officielle.</p>" +
+      "<p>Calculé avec hirundage.fr/assmat le " + new Date().toLocaleDateString("fr-FR") + ".</p></div>";
+    $("payslip").innerHTML = h;
+  }
+
+  function drawBilan() {
+    var keys = Object.keys(state.months).sort();
+    var curKey = key(cur.y, cur.m);
+    if (keys.indexOf(curKey) < 0) keys.push(curKey), keys.sort();
+    var tot = { paid: 0, done: 0, net: 0, fees: 0 };
+    var rows = keys.map(function (k) {
+      var y = +k.slice(0, 4), m = +k.slice(5) - 1;
+      var r = compute(y, m);
+      var paid = r.mensNormal + r.mensMaj - Math.min(r.hDed, r.mensNormal) + r.comp + r.majExtra;
+      tot.paid += paid; tot.done += r.hDone; tot.net += r.net; tot.fees += r.fees;
+      return "<tr" + (k === curKey ? ' style="font-weight: 600"' : "") + '><th scope="row">' + MONTHS[m] + " " + y + "</th><td>" + dec(paid) + " h</td><td>" + dec(r.hDone) + " h</td><td>" + eur.format(r.net) + "</td><td>" + eur.format(r.fees) + "</td></tr>";
+    });
+    rows.push('<tr class="total"><th scope="row">Total</th><td>' + dec(tot.paid) + " h</td><td>" + dec(tot.done) + " h</td><td>" + eur.format(r2(tot.net)) + "</td><td>" + eur.format(r2(tot.fees)) + "</td></tr>");
+    $("bilan-rows").innerHTML = rows.join("");
+  }
+
+  // ---------- Saisie ----------
+  function drawPlan() {
+    $("plan").innerHTML = DAYS.map(function (d, i) {
+      return '<div><label for="plan-' + i + '">' + d + '</label><input id="plan-' + i + '" class="fld" type="text" inputmode="decimal" value="' + fmtH(+state.c.plan[i] || 0) + '" placeholder="–" data-plan="' + i + '"></div>';
+    }).join("");
+  }
+  function fillForm() {
+    var c = state.c;
+    $("weeks").value = c.weeks; $("rate").value = c.rate; $("maj").value = c.maj; $("majhc").value = c.majhc;
+    $("ent-val").value = c.entVal; $("meals-on").checked = c.mealsOn; $("meal-price").value = c.mealPrice;
+    $("km-rate").value = c.kmRate; $("cv").value = c.cv; $("cmg-on").checked = c.cmg;
+    $("emp-name").value = c.emp; $("am-name").value = c.am; $("child-name").value = c.child; $("start").value = c.start;
+    drawPlan();
+  }
+  var numVal = function (id, min) { var v = parseFloat(String($(id).value).replace(",", ".")); return isFinite(v) ? Math.max(min || 0, v) : 0; };
+
+  $("form").addEventListener("change", function (e) {
+    var t = e.target, c = state.c;
+    if (t.closest("#days")) return;
+    if (t.dataset.plan !== undefined) { c.plan[+t.dataset.plan] = parseHours(t.value); drawPlan(); drawDays(); }
+    else if (t.id === "weeks") c.weeks = Math.min(46, Math.max(1, Math.round(numVal("weeks", 1))));
+    else if (t.id === "rate") c.rate = numVal("rate");
+    else if (t.id === "maj") c.maj = numVal("maj");
+    else if (t.id === "majhc") c.majhc = numVal("majhc");
+    else if (t.id === "ent-val") c.entVal = numVal("ent-val");
+    else if (t.id === "meals-on") { c.mealsOn = t.checked; drawDays(); }
+    else if (t.id === "meal-price") c.mealPrice = numVal("meal-price");
+    else if (t.id === "km-rate") c.kmRate = numVal("km-rate");
+    else if (t.id === "cv") { c.cv = t.value; c.kmRate = +t.value; $("km-rate").value = c.kmRate; }
+    else if (t.id === "cmg-on") c.cmg = t.checked;
+    else if (t.id === "emp-name") c.emp = t.value;
+    else if (t.id === "am-name") c.am = t.value;
+    else if (t.id === "child-name") c.child = t.value;
+    else if (t.id === "start") c.start = t.value;
+    else if (t.id === "month") {
+      var v = t.value.split("-"); if (v.length === 2) { cur = { y: +v[0], m: +v[1] - 1 }; drawDays(); }
+    } else if (["km", "other", "cp-days", "cp-amount"].indexOf(t.id) > -1) {
+      var mo = month(cur.y, cur.m, true);
+      var f = { km: "km", other: "other", "cp-days": "cpDays", "cp-amount": "cpAmount" }[t.id];
+      var x = parseFloat(String(t.value).replace(",", "."));
+      mo[f] = isFinite(x) ? (t.id === "other" ? x : Math.max(0, x)) : 0;
+    }
+    if (t.id !== "month") save();
+    render();
+  });
+  $("rate").addEventListener("input", function () { state.c.rate = numVal("rate"); save(); render(); });
+
+  function pick(attr, fn) {
+    all("[data-" + attr + "]").forEach(function (b) {
+      b.addEventListener("click", function () { fn(b.dataset[attr]); save(); drawDays(); render(); });
+    });
+  }
+  pick("year", function (v) { state.c.year = v; });
+  pick("ent", function (v) { state.c.ent = v; });
+  pick("ratemode", function (v) {
+    var c = state.c; if (c.rateMode === v) return;
+    c.rate = r2(v === "net" ? c.rate * NET_RATIO : c.rate / NET_RATIO);
+    c.rateMode = v; $("rate").value = c.rate;
+  });
+
+  function shift(n) { var d = new Date(cur.y, cur.m + n, 1); cur = { y: d.getFullYear(), m: d.getMonth() }; drawDays(); render(); }
+  $("prev").addEventListener("click", function () { shift(-1); });
+  $("next").addEventListener("click", function () { shift(1); });
+  $("reset-month").addEventListener("click", function () {
+    var mo = month(cur.y, cur.m, true); mo.days = {}; save(); drawDays(); render();
+  });
+  document.addEventListener("click", function (e) {
+    if (e.target.id === "cp-fill") {
+      e.preventDefault();
+      var r = compute(cur.y, cur.m), mo = month(cur.y, cur.m, true);
+      mo.cpAmount = r2(r.base * 1.2); save(); drawDays(); render();
+    }
+    var cp = e.target.closest(".copy");
+    if (cp) {
+      var done = function () { cp.classList.add("ok"); setTimeout(function () { cp.classList.remove("ok"); }, 1200); };
+      try { navigator.clipboard.writeText(cp.dataset.copy).then(done, function () {}); } catch (err) { /* rien */ }
+    }
+  });
+  $("print").addEventListener("click", function () { window.print(); });
+
+  $("export").addEventListener("click", function () {
+    var blob = new Blob([JSON.stringify(state, null, 1)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "assistante-maternelle-" + key(cur.y, cur.m) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  $("import").addEventListener("change", function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function () {
+      try {
+        var data = JSON.parse(rd.result);
+        if (data && data.c) { Object.assign(state.c, data.c); state.months = data.months || {}; save(); fillForm(); drawDays(); render(); }
+      } catch (err) { $("save-hint").textContent = "Ce fichier n'a pas pu être lu."; }
+    };
+    rd.readAsText(f);
+  });
+  var wipeArmed = false;
+  $("wipe").addEventListener("click", function () {
+    if (!wipeArmed) { wipeArmed = true; $("wipe").textContent = "Confirmer : tout effacer"; setTimeout(function () { wipeArmed = false; $("wipe").textContent = "Tout effacer"; }, 4000); return; }
+    try { localStorage.removeItem(STORE); } catch (err) { /* rien */ }
+    location.reload();
+  });
+
+  // ---------- Démarrage ----------
+  var hasSaved = false;
+  try { hasSaved = !!localStorage.getItem(STORE); } catch (e) { hasSaved = false; }
+  var q = new URLSearchParams(location.search).get("mois");
+  if (q && /^\d{4}-\d{2}$/.test(q)) cur = { y: +q.slice(0, 4), m: +q.slice(5) - 1 };
+  if (hasSaved) { $("step-contract").open = false; $("step-fees").open = false; }
+  if (window.matchMedia("(max-width: 800px)").matches && hasSaved) { $("step-month").open = true; }
+  fillForm();
+  drawDays();
+  render();
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      $("mobilebar").classList.toggle("off", entries[0].isIntersecting || window.scrollY < 200);
+    }).observe($("result"));
+  }
+})();
+</script>
+</body>
+</html>
