@@ -462,8 +462,9 @@
   // ---------- Choix : commune, puis commune déléguée et secteur s'il le faut ----------
   var choice = { commune: null, part: null, sector: null };
 
-  function currentCommune() { return COMMUNES[+$("commune").value]; }
+  function currentCommune() { var v = $("commune").value; return v === "" ? null : COMMUNES[+v]; }
   function partOf(c) {
+    if (!c) return null;
     if (!c.parts) return c;
     for (var i = 0; i < c.parts.length; i++) if (c.parts[i].name === choice.part) return c.parts[i];
     return null;
@@ -598,6 +599,13 @@
     var c = currentCommune(), p = partOf(c);
     var body = $("card-body"), title = $("card-title"), pick = $("pick"), chosen = $("chosen");
 
+    // Pas encore de commune choisie : on attend.
+    if (!c) {
+      chosen.hidden = true; pick.hidden = true; pick.innerHTML = "";
+      showMain(false);
+      return;
+    }
+
     // Rappel du choix fait, avec « Changer ».
     var detail = c.parts && p ? p.name : "";
     if (p && p.smvl && p.smvl.sectors && choice.sector) {
@@ -709,11 +717,12 @@
       .sort(function (a, b) { return a.c.name.localeCompare(b.c.name, "fr"); })
       .map(function (x) { return '<option value="' + x.i + '">' + x.c.name + "</option>"; }).join("");
   }
-  $("commune").innerHTML = '<optgroup label="SYVALORM">' + options(SYV) + "</optgroup>" +
+  $("commune").innerHTML = '<option value="" disabled>Choisissez votre commune…</option>' +
+    '<optgroup label="SYVALORM">' + options(SYV) + "</optgroup>" +
     '<optgroup label="Syndicat du Val de Loir">' + options(SMVL) + "</optgroup>" +
     '<optgroup label="Orée de Bercé-Bélinois">' + options(CCOBB_ID) + "</optgroup>";
 
-  // Choix de départ : le lien, sinon ce qui a été retenu sur l'appareil, sinon La Chartre.
+  // Choix de départ : le lien, sinon ce qui a été retenu sur l'appareil, sinon aucune commune.
   var params = new URLSearchParams(location.search), saved = null;
   try { saved = JSON.parse(localStorage.getItem("poubelle-choix") || "null"); } catch (e) { saved = null; }
   if (!saved) { try { saved = { commune: localStorage.getItem("poubelle-commune") }; } catch (e) { saved = {}; } }
@@ -722,9 +731,12 @@
   }
   saved = saved || {};
   var idx = COMMUNES.findIndex(function (c) { return c.name === saved.commune; });
-  if (idx < 0) idx = COMMUNES.findIndex(function (c) { return c.name === "La Chartre-sur-le-Loir"; });
-  $("commune").value = String(idx);
-  choice = { commune: COMMUNES[idx].name, part: saved.part || null, sector: saved.sector === "A" || saved.sector === "B" ? saved.sector : null };
+  if (idx < 0) {
+    $("commune").value = "";
+  } else {
+    $("commune").value = String(idx);
+    choice = { commune: COMMUNES[idx].name, part: saved.part || null, sector: saved.sector === "A" || saved.sector === "B" ? saved.sector : null };
+  }
 
   $("commune").addEventListener("change", function () {
     choice = { commune: currentCommune().name, part: null, sector: null };
