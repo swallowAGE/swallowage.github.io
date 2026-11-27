@@ -17,7 +17,7 @@
 window.DOMAINES = [
 {
   id: "eco",
-  nom: "Économie de la santé",
+  nom: "Comptabilité analytique",
   sousTitre: "Analyser les coûts en établissement de santé",
   teinte: "#5b7cfa",
   fiches: [
