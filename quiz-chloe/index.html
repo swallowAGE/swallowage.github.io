@@ -149,6 +149,30 @@ a { color: inherit; }
 
 .tile.mix { --t: #ff8a5c; }
 
+/* Quiz express : en haut de l'accueil, un geste pour lancer 20 questions */
+.express { border-radius: var(--r-l); padding: 18px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; }
+.express::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(135deg, color-mix(in srgb, #ffb36b 26%, transparent), color-mix(in srgb, #ff7aa8 18%, transparent) 55%, transparent); }
+.express > * { position: relative; }
+.express-head { display: flex; align-items: center; gap: 12px; }
+.express-head .badge { --t: #ff8a4c; width: 46px; height: 46px; border-radius: 14px; }
+.express-head .badge svg { width: 24px; height: 24px; }
+.express-title { font-family: var(--font-round); font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+.express-sub { color: var(--ink-2); font-size: 14px; }
+.go-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.go {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 64px;
+  padding: 12px 14px; border-radius: var(--r-m); cursor: pointer; text-align: left;
+  border: 1px solid var(--glass-edge); background: var(--glass-strong); color: var(--ink);
+  transition: transform .15s ease;
+}
+.go:active { transform: scale(0.97); }
+.go:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.go strong { font-size: 15.5px; font-weight: 650; line-height: 1.25; }
+.go small { font-size: 12.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.go.main { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; background: var(--accent); color: var(--accent-ink); border-color: transparent; box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 38%, transparent); }
+.go.main small { color: inherit; opacity: .8; }
+.go.main .go-text { display: flex; flex-direction: column; gap: 2px; }
+
 .files { border-radius: var(--r-l); padding: 6px; display: flex; flex-direction: column; }
 .file { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: var(--r-m); text-decoration: none; }
 .file:active { background: var(--hairline); }
@@ -288,7 +312,15 @@ a { color: inherit; }
       <p>Choisis un domaine, réponds, et lis l'explication après chaque question. Tes erreurs sont gardées pour que tu puisses les revoir.</p>
     </header>
 
-    <div class="section-title">Quiz</div>
+    <div class="express glass" id="express">
+      <div class="express-head">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H12L11 22l8.5-11.5H12z"/></svg></span>
+        <div><div class="express-title">Quiz express</div><div class="express-sub">20 questions, environ 5 minutes</div></div>
+      </div>
+      <div class="go-grid" id="express-list"></div>
+    </div>
+
+    <div class="section-title">Quiz détaillé</div>
     <div class="stack" id="domain-list"></div>
 
     <div class="section-title">Tes fiches de révision</div>
@@ -451,7 +483,28 @@ a { color: inherit; }
       '<span class="tile-sub" style="display:block">' + esc(dom.sousTitre || "") + '</span>' +
       '<span class="tile-meta">' + meta + '</span></span>' + CHEV;
   }
+  function renderExpress() {
+    var box = $("express-list");
+    box.innerHTML = "";
+    var choices = (DOMAINES.length > 1 ? [MIX] : []).concat(DOMAINES);
+    choices.forEach(function (dom, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      var main = dom.id === "tout" || choices.length === 1;
+      b.className = "go" + (main ? " main" : "");
+      var label = dom.id === "tout" ? "Tout mélangé" : dom.nom;
+      var sub = dom.id === "tout" ? "20 questions de tous tes cours" : "20 questions";
+      b.innerHTML = main
+        ? '<span class="go-text"><strong>' + esc(label) + '</strong><small>' + sub + '</small></span>' + '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>'
+        : '<strong>' + esc(label) + '</strong><small>' + sub + '</small>';
+      b.setAttribute("aria-label", "Quiz express : " + label + ", 20 questions");
+      b.addEventListener("click", function () { startExpress(dom); });
+      box.appendChild(b);
+    });
+  }
+  function startExpress(dom) { start(shuffle(poolOf(dom)).slice(0, 20), dom, false, true); }
   function renderHome() {
+    renderExpress();
     var list = $("domain-list");
     list.innerHTML = "";
     DOMAINES.concat(DOMAINES.length > 1 ? [MIX] : []).forEach(function (dom) {
@@ -544,9 +597,9 @@ a { color: inherit; }
 
   /* ---------- Quiz ---------- */
   var run = null;
-  function start(list, dom, errorsOnly) {
+  function start(list, dom, errorsOnly, express) {
     if (!list.length) return;
-    run = { list: list, i: 0, good: 0, answers: [], dom: dom, errorsOnly: !!errorsOnly };
+    run = { list: list, i: 0, good: 0, answers: [], dom: dom, errorsOnly: !!errorsOnly, express: !!express };
     try { history.pushState({ quiz: 1 }, ""); } catch (e) {}
     show("quiz");
     renderQ();
@@ -617,10 +670,10 @@ a { color: inherit; }
     else finish();
   });
   $("btn-quit").addEventListener("click", function () {
-    if (run && run.answers.length) finish(); else show("setup");
+    if (run && run.answers.length) finish(); else show(run && run.express ? "home" : "setup");
   });
   window.addEventListener("popstate", function () {
-    if (!$("v-quiz").hidden) { if (run && run.answers.length) finish(); else show("setup"); }
+    if (!$("v-quiz").hidden) { if (run && run.answers.length) finish(); else show(run && run.express ? "home" : "setup"); }
     else if (!$("v-result").hidden || !$("v-setup").hidden) show("home");
   });
 
@@ -662,10 +715,11 @@ a { color: inherit; }
         '<div class="body"><span class="ans">' + nb(esc(a.goodText)) + '</span><span>' + nb(a.item.raw.e) + '</span></div></details>';
     }).join("");
     run.missList = miss.map(function (a) { return a.item; });
+    $("btn-again").textContent = run.express ? "Encore 20 questions" : "Nouveau quiz";
     show("result");
   }
   $("btn-redo-miss").addEventListener("click", function () { start(shuffle(run.missList), run.dom, true); });
-  $("btn-again").addEventListener("click", function () { openSetup(run.dom); });
+  $("btn-again").addEventListener("click", function () { if (run.express) startExpress(run.dom); else openSetup(run.dom); });
 
   renderHome();
 })();
