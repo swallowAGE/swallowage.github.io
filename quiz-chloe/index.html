@@ -404,8 +404,8 @@ a { color: inherit; }
     <div class="panel glass">
       <h3>Nombre de questions</h3>
       <div class="seg" id="setup-len" role="group" aria-label="Nombre de questions">
-        <button type="button" data-len="10" aria-pressed="false">10</button>
-        <button type="button" data-len="20" aria-pressed="true">20</button>
+        <button type="button" data-len="30" aria-pressed="true">30</button>
+        <button type="button" data-len="50" aria-pressed="false">50</button>
         <button type="button" data-len="0" aria-pressed="false">Toutes</button>
       </div>
       <p class="hint" id="setup-hint"></p>
@@ -601,7 +601,7 @@ a { color: inherit; }
   }
 
   /* ---------- Réglages ---------- */
-  var setup = { dom: null, groups: [], picked: {}, len: 20 };
+  var setup = { dom: null, groups: [], picked: {}, len: 30 };
   function openSetup(dom) {
     setup.dom = dom;
     setup.picked = {};
@@ -642,7 +642,9 @@ a { color: inherit; }
     var pool = setupPool();
     var n = setup.len ? Math.min(setup.len, pool.length) : pool.length;
     $("btn-start").disabled = !pool.length;
-    $("setup-hint").textContent = pool.length ? n + " questions tirées au hasard parmi " + pool.length + "." : "Choisis au moins un chapitre.";
+    $("setup-hint").textContent = !pool.length ? "Choisis au moins un chapitre."
+      : n < pool.length ? n + " questions tirées au hasard parmi " + pool.length + ". Compte environ " + Math.max(5, Math.round(n / 4 / 5) * 5) + " minutes."
+      : "Les " + pool.length + " questions de ta sélection, dans le désordre. Compte environ " + Math.max(5, Math.round(pool.length / 4 / 5) * 5) + " minutes.";
     var miss = missedIn(poolOf(setup.dom));
     $("btn-errors").hidden = !miss.length;
     $("btn-errors").textContent = "Revoir mes " + miss.length + " erreur" + (miss.length > 1 ? "s" : "");
