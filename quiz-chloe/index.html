@@ -293,6 +293,59 @@ a { color: inherit; }
   .hello h1 { font-size: 40px; }
   .qtext { font-size: 22px; }
 }
+
+/* ---------- Colonnes : empilées sur téléphone, côte à côte sur ordinateur ---------- */
+.col, .home-grid, .result-grid, .setup-grid { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.kbd { display: none; font: 600 11.5px/1 var(--font); padding: 4px 6px; border-radius: 6px; border: 1px solid currentColor; opacity: .7; }
+.keys { display: none; margin: 0; text-align: center; font-size: 13px; color: var(--ink-3); }
+.keys .kbd { display: inline-block; color: var(--ink-2); }
+
+@media (hover: hover) and (pointer: fine) {
+  .tile:hover, .go:hover, .opt:not([disabled]):hover { transform: translateY(-2px); }
+  .tile:hover { box-shadow: 0 16px 40px rgba(60, 64, 120, 0.2); }
+  .file:hover { background: var(--hairline); }
+  .icon-btn:hover, .btn.soft:hover { filter: brightness(1.04); }
+  .opt:not([disabled]):hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+  .chip:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+  .keys { display: block; }
+  .btn.primary .kbd { display: inline-block; margin-left: 4px; }
+}
+
+@media (min-width: 900px) {
+  .app { max-width: 1120px; padding-top: calc(env(safe-area-inset-top, 0px) + 44px); padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); }
+  .view { gap: 22px; }
+  .hello { padding: 8px 4px 6px; }
+  .hello h1 { font-size: 52px; }
+  .hello p { font-size: 17px; }
+  .home-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+  .col-side { position: sticky; top: 24px; }
+  .express { padding: 24px; gap: 18px; }
+  .go-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .go.main { min-height: 72px; padding: 16px 20px; }
+  .go.main strong { font-size: 18px; }
+  #domain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  #domain-list .tile { height: 100%; align-items: flex-start; flex-wrap: wrap; }
+  #domain-list .tile .chev { display: none; }
+  #domain-list .tile.mix { grid-column: 1 / -1; align-items: center; }
+
+  #v-setup, #v-quiz { max-width: 780px; margin: 0 auto; width: 100%; }
+  .setup-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+  .setup-actions { flex-direction: row-reverse; }
+  .setup-actions .btn { flex: 1; }
+
+  .qcard { padding: 30px 32px; gap: 18px; }
+  .qtext { font-size: 26px; }
+  .opts:not(.vf) { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .opt { padding: 16px; font-size: 16.5px; }
+  .explain { padding: 22px 28px; }
+  .explain p { font-size: 17px; line-height: 1.55; }
+  .dock { position: static; display: flex; justify-content: flex-end; }
+  .dock .btn { width: auto; min-width: 280px; }
+
+  .result-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 28px; align-items: start; }
+  .result-grid > .col-main { position: sticky; top: 24px; }
+  .score { padding: 30px 24px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .blob, .view, .explain, .opt.bad.just { animation: none !important; }
   .bar i, .ring .val { transition: none; }
@@ -312,6 +365,8 @@ a { color: inherit; }
       <p>Choisis un domaine, réponds, et lis l'explication après chaque question. Tes erreurs sont gardées pour que tu puisses les revoir.</p>
     </header>
 
+    <div class="home-grid">
+    <div class="col col-main">
     <div class="express glass" id="express">
       <div class="express-head">
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13.5H12L11 22l8.5-11.5H12z"/></svg></span>
@@ -322,11 +377,15 @@ a { color: inherit; }
 
     <div class="section-title">Quiz détaillé</div>
     <div class="stack" id="domain-list"></div>
+    </div>
 
+    <aside class="col col-side">
     <div class="section-title">Tes fiches de révision</div>
     <div class="files glass" id="file-list"></div>
 
     <p class="foot">Les questions viennent uniquement de tes cours. Ajoute la page à ton écran d'accueil pour l'ouvrir comme une appli.</p>
+    </aside>
+    </div>
   </section>
 
   <!-- RÉGLAGES -->
@@ -336,6 +395,7 @@ a { color: inherit; }
       <h2 id="setup-title"></h2>
     </div>
 
+    <div class="setup-grid">
     <div class="panel glass">
       <h3 id="setup-chap-label">Chapitres</h3>
       <div class="chips" id="setup-chips"></div>
@@ -350,8 +410,9 @@ a { color: inherit; }
       </div>
       <p class="hint" id="setup-hint"></p>
     </div>
+    </div>
 
-    <div class="stack">
+    <div class="stack setup-actions">
       <button class="btn primary" type="button" id="btn-start">Commencer</button>
       <button class="btn soft glass redo" type="button" id="btn-errors" hidden></button>
     </div>
@@ -377,12 +438,15 @@ a { color: inherit; }
     <div class="explain glass" id="q-explain" hidden aria-live="polite"></div>
 
     <div class="dock" id="q-dock" hidden>
-      <button class="btn primary" type="button" id="btn-next">Question suivante</button>
+      <button class="btn primary" type="button" id="btn-next">Question suivante <kbd class="kbd">Entrée</kbd></button>
     </div>
+    <p class="keys" id="q-keys">Au clavier : <kbd class="kbd">A</kbd> à <kbd class="kbd">D</kbd> pour répondre, <kbd class="kbd">Entrée</kbd> pour continuer, <kbd class="kbd">Échap</kbd> pour arrêter.</p>
   </section>
 
   <!-- BILAN -->
   <section class="view" id="v-result" hidden>
+    <div class="result-grid">
+    <div class="col col-main">
     <div class="score glass">
       <div class="ring">
         <svg viewBox="0 0 120 120" aria-hidden="true">
@@ -395,17 +459,20 @@ a { color: inherit; }
       <h2 id="r-title"></h2>
       <p id="r-text"></p>
     </div>
+    <div class="stack result-actions">
+      <button class="btn primary" type="button" id="btn-redo-miss">Refaire mes erreurs</button>
+      <button class="btn soft glass" type="button" id="btn-again">Nouveau quiz</button>
+      <button class="btn soft glass" type="button" data-go="home">Accueil</button>
+    </div>
+    </div>
 
+    <div class="col col-side">
     <div class="section-title">Par chapitre</div>
     <div class="chapters glass" id="r-chapters"></div>
 
     <div class="section-title" id="r-miss-title">À revoir</div>
     <div class="miss glass" id="r-miss"></div>
-
-    <div class="stack">
-      <button class="btn primary" type="button" id="btn-redo-miss">Refaire mes erreurs</button>
-      <button class="btn soft glass" type="button" id="btn-again">Nouveau quiz</button>
-      <button class="btn soft glass" type="button" data-go="home">Accueil</button>
+    </div>
     </div>
   </section>
 </main>
@@ -622,6 +689,9 @@ a { color: inherit; }
     tag.textContent = (run.dom.id === "tout" ? item.dom.nom + " · " : "") + ch.nom;
     $("q-text").innerHTML = nb(esc(q.q));
     $("q-kind").textContent = p.kind === "vf" ? "Vrai ou faux ?" : "Une seule bonne réponse";
+    $("q-keys").innerHTML = p.kind === "vf"
+      ? 'Au clavier : <kbd class="kbd">V</kbd> ou <kbd class="kbd">F</kbd> pour répondre, <kbd class="kbd">Entrée</kbd> pour continuer, <kbd class="kbd">Échap</kbd> pour arrêter.'
+      : 'Au clavier : <kbd class="kbd">A</kbd> à <kbd class="kbd">D</kbd> pour répondre, <kbd class="kbd">Entrée</kbd> pour continuer, <kbd class="kbd">Échap</kbd> pour arrêter.';
     var box = $("q-opts");
     box.className = "opts" + (p.kind === "vf" ? " vf" : "");
     box.innerHTML = "";
@@ -655,7 +725,7 @@ a { color: inherit; }
       (ok ? "" : '<div class="answer-line">Réponse : <b>' + nb(esc(p.opts[p.good])) + '</b></div>') +
       '<p>' + nb(item.raw.e) + '</p>';
     ex.hidden = false;
-    $("btn-next").textContent = run.i + 1 < run.list.length ? "Question suivante" : "Voir mon bilan";
+    $("btn-next").innerHTML = (run.i + 1 < run.list.length ? "Question suivante" : "Voir mon bilan") + ' <kbd class="kbd">Entrée</kbd>';
     $("q-dock").hidden = false;
     $("q-bar").style.width = ((run.i + 1) / run.list.length * 100) + "%";
     $("q-good").textContent = run.good + " juste" + (run.good > 1 ? "s" : "");
@@ -720,6 +790,25 @@ a { color: inherit; }
   }
   $("btn-redo-miss").addEventListener("click", function () { start(shuffle(run.missList), run.dom, true); });
   $("btn-again").addEventListener("click", function () { if (run.express) startExpress(run.dom); else openSetup(run.dom); });
+
+  /* ---------- Clavier (ordinateur) ---------- */
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key;
+    if (!$("v-quiz").hidden && run) {
+      if (k === "Escape") { e.preventDefault(); $("btn-quit").click(); return; }
+      if (!run.locked) {
+        var idx = -1, low = k.toLowerCase();
+        if (run.cur.kind === "vf") { if (low === "v" || k === "1") idx = 0; if (low === "f" || k === "2") idx = 1; }
+        else { idx = "abcd".indexOf(low); if (idx < 0 && /^[1-4]$/.test(k)) idx = +k - 1; }
+        if (idx >= 0 && idx < run.cur.opts.length) { e.preventDefault(); answer(idx); }
+      } else if (k === "Enter" || k === "ArrowRight" || k === " ") {
+        if (document.activeElement && document.activeElement.tagName === "BUTTON" && document.activeElement.id !== "btn-next" && k !== "ArrowRight") return;
+        e.preventDefault(); $("btn-next").click();
+      }
+    } else if (!$("v-result").hidden && k === "Escape") { show("home"); }
+    else if (!$("v-setup").hidden && k === "Escape") { show("home"); }
+  });
 
   renderHome();
 })();
