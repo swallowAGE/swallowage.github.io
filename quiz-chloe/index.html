@@ -346,7 +346,81 @@ a { color: inherit; }
   .result-grid > .col-main { position: sticky; top: 24px; }
   .score { padding: 30px 24px; }
 }
+/* ---------- Autres façons de réviser ---------- */
+.tools { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tool { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px; }
+.tool .badge { width: 42px; height: 42px; border-radius: 13px; }
+.tool .badge svg { width: 22px; height: 22px; }
+.tool .tile-title { font-size: 16px; }
+.tool .tile-sub { font-size: 13px; }
+.tool .tile-meta { margin-top: 6px; }
+.lead { margin: 0 4px; color: var(--ink-2); }
+
+/* Examen blanc : réponse choisie sans correction immédiate */
+.opt.picked { background: color-mix(in srgb, var(--accent) 16%, transparent); border-color: color-mix(in srgb, var(--accent) 60%, transparent); }
+.opt.picked .key { background: var(--accent); color: var(--accent-ink); }
+.timer { display: inline-flex; align-items: center; gap: 5px; }
+.timer.low { color: var(--bad); }
+.miss summary .x.blank { background: var(--hairline); color: var(--ink-3); }
+
+/* Cartes mémo */
+.flash {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  width: 100%; min-height: 330px; padding: 26px 22px; border-radius: var(--r-l); cursor: pointer; text-align: center;
+  transition: transform .16s ease-in, opacity .16s;
+}
+.flash.turn { transform: rotateY(90deg) scale(.97); opacity: .4; }
+.flash .qtag { position: absolute; top: 16px; left: 16px; }
+.flash-side { position: absolute; top: 19px; right: 18px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.flash-text { display: block; font-size: 22px; line-height: 1.35; font-weight: 650; letter-spacing: -0.01em; text-wrap: balance; margin-top: 18px; }
+.flash.back .flash-text { font-size: 17.5px; font-weight: 450; line-height: 1.5; text-wrap: pretty; }
+.flash.back .flash-text b { font-weight: 700; }
+.flash-hint { display: block; font-size: 13px; color: var(--ink-3); }
+.flash-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn.ok { background: var(--good); color: #fff; box-shadow: 0 8px 22px color-mix(in srgb, var(--good) 35%, transparent); }
+.done-actions { width: 100%; max-width: 420px; }
+
+/* Cas pratiques */
+.panel p { margin: 0; }
+.panel ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+.situation { font-size: 16.5px; line-height: 1.55; }
+textarea.draft {
+  width: 100%; min-height: 190px; resize: vertical; padding: 14px; border-radius: var(--r-m);
+  border: 1px solid var(--hairline); background: var(--glass-strong); color: var(--ink);
+  font: 16px/1.5 var(--font);
+}
+textarea.draft:focus { outline: 3px solid color-mix(in srgb, var(--accent) 50%, transparent); outline-offset: 1px; }
+.grid-list { display: flex; flex-direction: column; gap: 8px; }
+.grid-list .chip { border-radius: 14px; width: 100%; align-items: flex-start; }
+.grid-list .chip .dot { margin-top: 1px; }
+.corrige { display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.55; }
+.corrige p, .corrige ul, .corrige ol { margin: 0; }
+.case-grid { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+
+/* Points faibles */
+.chap .row small { color: var(--ink-3); font-weight: 500; }
+.chap.weak .row span:first-child { font-weight: 650; }
+.empty { text-align: center; color: var(--ink-2); padding: 6px 0; }
+
+@media (hover: hover) and (pointer: fine) {
+  .flash:hover { box-shadow: 0 16px 40px rgba(60, 64, 120, 0.2); }
+  .flash-actions .kbd { display: inline-block; margin-left: 4px; }
+}
+@media (min-width: 900px) {
+  .tools { gap: 14px; }
+  .tool { height: 100%; flex-direction: row; align-items: flex-start; gap: 14px; padding: 18px; }
+  #v-pick, #v-cards, #v-weak, #v-cases { max-width: 780px; margin: 0 auto; width: 100%; }
+  #pick-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  #pick-list .tile.mix { grid-column: 1 / -1; }
+  #pick-list .tile .chev { display: none; }
+  .flash { min-height: 380px; padding: 40px 48px; }
+  .flash-text { font-size: 28px; }
+  .flash.back .flash-text { font-size: 20px; }
+  .case-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+  .case-grid > .col:last-child { position: sticky; top: 24px; }
+}
 @media (prefers-reduced-motion: reduce) {
+  .flash { transition: none; }
   .blob, .view, .explain, .opt.bad.just { animation: none !important; }
   .bar i, .ring .val { transition: none; }
 }
@@ -377,6 +451,9 @@ a { color: inherit; }
 
     <div class="section-title">Quiz détaillé</div>
     <div class="stack" id="domain-list"></div>
+
+    <div class="section-title">Autres façons de réviser</div>
+    <div class="tools" id="tool-list"></div>
     </div>
 
     <aside class="col col-side">
@@ -475,14 +552,115 @@ a { color: inherit; }
     </div>
     </div>
   </section>
+  <!-- CHOIX DU DOMAINE (examen blanc, cartes mémo) -->
+  <section class="view" id="v-pick" hidden>
+    <div class="topbar">
+      <button class="icon-btn glass" type="button" data-go="home" aria-label="Retour à l'accueil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <h2 id="pick-title"></h2>
+    </div>
+    <p class="lead" id="pick-lead"></p>
+    <div class="stack" id="pick-list"></div>
+  </section>
+
+  <!-- CARTES MÉMO -->
+  <section class="view" id="v-cards" hidden>
+    <div class="topbar">
+      <button class="icon-btn glass" type="button" data-go="home" aria-label="Retour à l'accueil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="progress">
+        <div class="row"><span id="c-count"></span><span id="c-left"></span></div>
+        <div class="bar"><i id="c-bar"></i></div>
+      </div>
+    </div>
+    <div class="stack" id="c-play">
+      <button class="flash glass" type="button" id="c-card"><span class="qtag" id="c-tag"></span><span class="flash-side" id="c-side"></span><span class="flash-text" id="c-text"></span><span class="flash-hint" id="c-hint"></span></button>
+      <div class="flash-actions" id="c-actions" hidden>
+        <button class="btn soft glass redo" type="button" id="c-again">À revoir <kbd class="kbd">←</kbd></button>
+        <button class="btn ok" type="button" id="c-know">Je savais <kbd class="kbd">→</kbd></button>
+      </div>
+      <p class="keys">Au clavier : <kbd class="kbd">Espace</kbd> pour retourner la carte, <kbd class="kbd">←</kbd> à revoir, <kbd class="kbd">→</kbd> je savais.</p>
+    </div>
+    <div class="score glass" id="c-done" hidden>
+      <h2 id="c-done-title"></h2>
+      <p id="c-done-text"></p>
+      <div class="stack done-actions">
+        <button class="btn primary" type="button" id="c-redo">Revoir les cartes ratées</button>
+        <button class="btn soft glass" type="button" id="c-restart">Refaire tout le paquet</button>
+        <button class="btn soft glass" type="button" data-go="home">Accueil</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAS PRATIQUES : LISTE -->
+  <section class="view" id="v-cases" hidden>
+    <div class="topbar">
+      <button class="icon-btn glass" type="button" data-go="home" aria-label="Retour à l'accueil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <h2>Cas pratiques</h2>
+    </div>
+    <p class="lead">Lis la situation, rédige ta réponse comme à l'examen, puis compare-la au corrigé type et coche les points de la grille que tu avais.</p>
+    <div class="stack" id="cases-list"></div>
+  </section>
+
+  <!-- CAS PRATIQUE -->
+  <section class="view" id="v-case" hidden>
+    <div class="topbar">
+      <button class="icon-btn glass" type="button" data-go="cases" aria-label="Retour aux cas pratiques"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <h2 id="k-title"></h2>
+    </div>
+    <div class="case-grid">
+    <div class="col">
+      <div class="panel glass">
+        <span class="qtag" id="k-tag"></span>
+        <h3>La situation</h3>
+        <p class="situation" id="k-situation"></p>
+      </div>
+      <div class="panel glass">
+        <h3>Ce qu'on te demande</h3>
+        <ol id="k-consignes"></ol>
+      </div>
+    </div>
+    <div class="col">
+      <div class="panel glass">
+        <h3><label for="k-draft">Ta réponse</label></h3>
+        <textarea class="draft" id="k-draft" placeholder="Écris ta réponse ici, au brouillon. Elle est gardée sur cet appareil."></textarea>
+      </div>
+      <button class="btn primary" type="button" id="k-show">Voir le corrigé</button>
+      <div class="panel glass" id="k-grid-panel" hidden>
+        <h3>Grille : coche ce que tu avais</h3>
+        <div class="grid-list" id="k-grid"></div>
+        <p class="hint" id="k-score"></p>
+      </div>
+      <div class="panel glass" id="k-corr-panel" hidden>
+        <h3>Corrigé type</h3>
+        <div class="corrige" id="k-corr"></div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- POINTS FAIBLES -->
+  <section class="view" id="v-weak" hidden>
+    <div class="topbar">
+      <button class="icon-btn glass" type="button" data-go="home" aria-label="Retour à l'accueil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <h2>Mes points faibles</h2>
+    </div>
+    <p class="lead" id="w-lead"></p>
+    <div class="stack">
+      <button class="btn primary" type="button" id="w-start"></button>
+    </div>
+    <div class="section-title">Tous tes chapitres</div>
+    <div class="chapters glass" id="w-list"></div>
+  </section>
 </main>
 
 <script src="domaines.js"></script>
+<script src="revisions.js"></script>
 <script>
 (function () {
   "use strict";
   var DOMAINES = window.DOMAINES || [];
-  var MIX = { id: "tout", nom: "Tous les domaines", sousTitre: "Questions mélangées de tous tes cours", teinte: "#ff8a5c" };
+  var MIX = { id: "tout", nom: "Tous les domaines", sousTitre: "Questions mélangées de tous tes cours", teinte: "#ff8a5c", mix: true };
+  var WEAK = { id: "faibles", nom: "Mes points faibles", teinte: "#7a6cf0", mix: true };
+  var CARTES = window.CARTES || {}, CAS = window.CAS || {};
 
   /* ---------- Données ---------- */
   var ALL = [];           // toutes les questions, avec id stable
@@ -498,7 +676,14 @@ a { color: inherit; }
 
   /* ---------- Mémoire (dans ce navigateur seulement) ---------- */
   var KEY = "quiz-chloe-v1";
-  function load() { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === "object") return { missed: s.missed || {}, last: s.last || {} }; } catch (e) {} return { missed: {}, last: {} }; }
+  // missed : questions ratées · last : dernier score par domaine · stats : réussite par chapitre
+  // drafts : brouillons des cas pratiques · cases : points de grille obtenus
+  function load() {
+    var s = null;
+    try { s = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+    if (!s || typeof s !== "object") s = {};
+    return { missed: s.missed || {}, last: s.last || {}, stats: s.stats || {}, drafts: s.drafts || {}, cases: s.cases || {} };
+  }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} }
   var store = load();
 
@@ -520,16 +705,24 @@ a { color: inherit; }
   var OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" stroke-width="2"/><path d="M7.5 12.5l3 3 6-6.5"/></svg>';
   var KO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-width="2"/><path d="M9 9l6 6M15 9l-6 6"/></svg>';
 
+  function bump(chap, ok) {
+    var st = store.stats[chap] || (store.stats[chap] = { ok: 0, n: 0 });
+    st.n++; if (ok) st.ok++;
+    if (st.n >= 30) { st.n = 15; st.ok = Math.round(st.ok / 2); } // les réponses récentes comptent plus
+  }
   function missedIn(list) { return list.filter(function (q) { return store.missed[q.id]; }); }
   function poolOf(dom) { return dom.id === "tout" ? ALL : ALL.filter(function (q) { return q.dom === dom; }); }
 
   /* ---------- Navigation ---------- */
-  var views = ["home", "setup", "quiz", "result"];
+  var views = ["home", "setup", "quiz", "result", "pick", "cards", "cases", "case", "weak"];
   function show(name) {
     views.forEach(function (v) { $("v-" + v).hidden = v !== name; });
+    var a = document.activeElement; if (a && a !== document.body && a.blur) a.blur(); // le focus ne reste pas sur un bouton caché
     window.scrollTo(0, 0);
     if (name === "home") renderHome();
+    if (name === "cases") renderCases();
   }
+  function enter(name) { try { history.pushState({ v: name }, ""); } catch (e) {} show(name); }
   document.addEventListener("click", function (e) {
     var g = e.target.closest("[data-go]");
     if (g) show(g.getAttribute("data-go"));
@@ -583,6 +776,7 @@ a { color: inherit; }
       b.addEventListener("click", function () { openSetup(dom); });
       list.appendChild(b);
     });
+    renderTools();
     var files = $("file-list");
     files.innerHTML = "";
     DOMAINES.forEach(function (dom) {
@@ -665,13 +859,34 @@ a { color: inherit; }
   });
 
   /* ---------- Quiz ---------- */
-  var run = null;
-  function start(list, dom, errorsOnly, express) {
+  // mode : "quiz" (détaillé), "express", "errors", "exam" (examen blanc), "weak" (points faibles)
+  var run = null, timer = null;
+  function start(list, dom, errorsOnly, express, mode) {
     if (!list.length) return;
-    run = { list: list, i: 0, good: 0, answers: [], dom: dom, errorsOnly: !!errorsOnly, express: !!express };
+    stopTimer();
+    mode = mode || (errorsOnly ? "errors" : express ? "express" : "quiz");
+    run = { list: list, i: 0, good: 0, answers: [], dom: dom, mode: mode, errorsOnly: mode === "errors" || mode === "weak", express: mode === "express", exam: mode === "exam", picks: [], preps: [] };
+    if (run.exam) {
+      run.minutes = list.length;
+      run.t0 = Date.now();
+      run.deadline = run.t0 + run.minutes * 60000;
+      timer = setInterval(tick, 1000);
+    }
     try { history.pushState({ quiz: 1 }, ""); } catch (e) {}
     show("quiz");
     renderQ();
+  }
+  function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
+  function mmss(ms) { var s = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(s / 60) + ":" + ("0" + s % 60).slice(-2); }
+  var CLOCK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg>';
+  function tick() {
+    if (!run || !run.exam) return stopTimer();
+    var left = run.deadline - Date.now();
+    var el = $("q-good");
+    el.className = "timer" + (left < 5 * 60000 ? " low" : "");
+    el.innerHTML = CLOCK + mmss(left);
+    el.setAttribute("aria-label", "Temps restant " + mmss(left));
+    if (left <= 0) { run.timeUp = true; finishExam(); }
   }
   function prep(item) {
     var q = item.raw;
@@ -679,21 +894,29 @@ a { color: inherit; }
     var order = shuffle(q.o.map(function (_, i) { return i; }));
     return { kind: "qcm", opts: order.map(function (i) { return q.o[i]; }), good: order.indexOf(0) };
   }
+  function keysHTML(kind) {
+    var pick = kind === "vf" ? '<kbd class="kbd">V</kbd> ou <kbd class="kbd">F</kbd>' : '<kbd class="kbd">A</kbd> à <kbd class="kbd">D</kbd>';
+    return 'Au clavier : ' + pick + (run.exam ? ' pour choisir, <kbd class="kbd">Entrée</kbd> pour valider, ' : ' pour répondre, <kbd class="kbd">Entrée</kbd> pour continuer, ') + '<kbd class="kbd">Échap</kbd> pour arrêter.';
+  }
+  function nextLabel() {
+    var last = run.i + 1 >= run.list.length;
+    if (run.exam) return last ? "Rendre ma copie" : run.picks[run.i] == null ? "Passer cette question" : "Question suivante";
+    return last ? "Voir mon bilan" : "Question suivante";
+  }
   function renderQ() {
     var item = run.list[run.i], q = item.raw, ch = CHAP[item.chap];
-    var p = run.cur = prep(item);
+    var p = run.cur = run.preps[run.i] = prep(item);
     run.locked = false;
     $("q-count").textContent = "Question " + (run.i + 1) + " sur " + run.list.length;
-    $("q-good").textContent = run.i ? run.good + " juste" + (run.good > 1 ? "s" : "") : "";
+    if (run.exam) tick();
+    else { $("q-good").className = ""; $("q-good").removeAttribute("aria-label"); $("q-good").textContent = run.i ? run.good + " juste" + (run.good > 1 ? "s" : "") : ""; }
     $("q-bar").style.width = (run.i / run.list.length * 100) + "%";
     var tag = $("q-tag");
     tag.style.setProperty("--t", item.dom.teinte);
-    tag.textContent = (run.dom.id === "tout" ? item.dom.nom + " · " : "") + ch.nom;
+    tag.textContent = (run.dom.mix ? item.dom.nom + " · " : "") + ch.nom;
     $("q-text").innerHTML = nb(esc(q.q));
-    $("q-kind").textContent = p.kind === "vf" ? "Vrai ou faux ?" : "Une seule bonne réponse";
-    $("q-keys").innerHTML = p.kind === "vf"
-      ? 'Au clavier : <kbd class="kbd">V</kbd> ou <kbd class="kbd">F</kbd> pour répondre, <kbd class="kbd">Entrée</kbd> pour continuer, <kbd class="kbd">Échap</kbd> pour arrêter.'
-      : 'Au clavier : <kbd class="kbd">A</kbd> à <kbd class="kbd">D</kbd> pour répondre, <kbd class="kbd">Entrée</kbd> pour continuer, <kbd class="kbd">Échap</kbd> pour arrêter.';
+    $("q-kind").textContent = (p.kind === "vf" ? "Vrai ou faux ?" : "Une seule bonne réponse") + (run.exam ? " · correction à la fin" : "");
+    $("q-keys").innerHTML = keysHTML(p.kind);
     var box = $("q-opts");
     box.className = "opts" + (p.kind === "vf" ? " vf" : "");
     box.innerHTML = "";
@@ -705,9 +928,16 @@ a { color: inherit; }
       box.appendChild(b);
     });
     $("q-explain").hidden = true;
-    $("q-dock").hidden = true;
+    $("btn-next").innerHTML = nextLabel() + ' <kbd class="kbd">Entrée</kbd>';
+    $("q-dock").hidden = !run.exam;
   }
   function answer(i) {
+    if (run.exam) {
+      run.picks[run.i] = i;
+      [].forEach.call($("q-opts").children, function (b, k) { b.classList.toggle("picked", k === i); b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+      $("btn-next").innerHTML = nextLabel() + ' <kbd class="kbd">Entrée</kbd>';
+      return;
+    }
     if (run.locked) return;
     run.locked = true;
     var item = run.list[run.i], p = run.cur, ok = i === p.good;
@@ -720,6 +950,7 @@ a { color: inherit; }
     });
     if (ok) { run.good++; delete store.missed[item.id]; }
     else { store.missed[item.id] = 1; try { navigator.vibrate && navigator.vibrate(30); } catch (e) {} }
+    bump(item.chap, ok);
     save();
     run.answers.push({ item: item, ok: ok, goodText: p.opts[p.good] });
     var ex = $("q-explain");
@@ -727,7 +958,7 @@ a { color: inherit; }
       (ok ? "" : '<div class="answer-line">Réponse : <b>' + nb(esc(p.opts[p.good])) + '</b></div>') +
       '<p>' + nb(item.raw.e) + '</p>';
     ex.hidden = false;
-    $("btn-next").innerHTML = (run.i + 1 < run.list.length ? "Question suivante" : "Voir mon bilan") + ' <kbd class="kbd">Entrée</kbd>';
+    $("btn-next").innerHTML = nextLabel() + ' <kbd class="kbd">Entrée</kbd>';
     $("q-dock").hidden = false;
     $("q-bar").style.width = ((run.i + 1) / run.list.length * 100) + "%";
     $("q-good").textContent = run.good + " juste" + (run.good > 1 ? "s" : "");
@@ -739,21 +970,45 @@ a { color: inherit; }
   $("btn-next").addEventListener("click", function () {
     run.i++;
     if (run.i < run.list.length) { renderQ(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+    else if (run.exam) finishExam();
     else finish();
   });
-  $("btn-quit").addEventListener("click", function () {
-    if (run && run.answers.length) finish(); else show(run && run.express ? "home" : "setup");
-  });
+  function quit() {
+    if (run && run.exam) { if (run.picks.some(function (x) { return x != null; })) finishExam(); else { stopTimer(); show("pick"); } return; }
+    if (run && run.answers.length) finish();
+    else show(run && run.mode === "weak" ? "weak" : run && run.express ? "home" : "setup");
+  }
+  $("btn-quit").addEventListener("click", quit);
   window.addEventListener("popstate", function () {
-    if (!$("v-quiz").hidden) { if (run && run.answers.length) finish(); else show(run && run.express ? "home" : "setup"); }
-    else if (!$("v-result").hidden || !$("v-setup").hidden) show("home");
+    if (!$("v-quiz").hidden) quit();
+    else if (!$("v-case").hidden) show("cases");
+    else if ($("v-home").hidden) show("home");
   });
+
+  /* ---------- Examen blanc ---------- */
+  function startExam(dom) { start(shuffle(poolOf(dom)).slice(0, 30), dom, false, false, "exam"); }
+  // On corrige tout à la fin : une question sans réponse compte comme fausse.
+  function finishExam() {
+    stopTimer();
+    run.used = Math.min(Date.now(), run.deadline) - run.t0;
+    run.answers = run.list.map(function (item, k) {
+      var p = run.preps[k] || prep(item), pick = run.picks[k];
+      var ok = pick === p.good, blank = pick == null;
+      if (ok) delete store.missed[item.id]; else store.missed[item.id] = 1;
+      if (!blank || k < run.i) bump(item.chap, ok);
+      return { item: item, ok: ok, blank: blank, goodText: p.opts[p.good], pickText: blank ? "" : p.opts[pick] };
+    });
+    save();
+    finish();
+  }
 
   /* ---------- Bilan ---------- */
   function finish() {
+    stopTimer();
     var n = run.answers.length, good = run.answers.filter(function (a) { return a.ok; }).length;
     var note = n ? good / n * 20 : 0;
-    if (!run.errorsOnly) { store.last[run.dom.id] = { note: Math.round(note * 10) / 10, date: Date.now() }; save(); }
+    var lastKey = run.exam ? "exam:" + run.dom.id : run.mode === "weak" ? null : run.dom.id;
+    if (!run.errorsOnly && lastKey) { store.last[lastKey] = { note: Math.round(note * 10) / 10, date: Date.now() }; save(); }
     $("r-note").textContent = fr(note);
     var ring = $("r-ring");
     ring.style.strokeDashoffset = 326.7;
@@ -764,6 +1019,12 @@ a { color: inherit; }
     else if (note >= 12) { t = "Bonne base"; txt = "Il reste quelques points à consolider. Relis les explications ci-dessous, puis refais tes erreurs."; }
     else if (note >= 8) { t = "Les bases sont là"; txt = "Les erreurs ci-dessous sont exactement ce qu'il faut revoir. Refais-les jusqu'à ce qu'elles passent au vert."; }
     else { t = "On reprend tranquillement"; txt = "Chaque erreur faite ici est une erreur de moins à l'examen. Lis les explications, ouvre la fiche du chapitre, puis refais tes erreurs."; }
+    if (run.exam) {
+      var blanks = run.answers.filter(function (a) { return a.blank; }).length;
+      var sec = Math.round(run.used / 1000), m = Math.floor(sec / 60);
+      txt = "Examen blanc : " + (run.timeUp ? "temps écoulé. " : "copie rendue en " + (m ? m + " min " + ("0" + sec % 60).slice(-2) : sec + " s") + ". ") +
+        (blanks ? blanks + " question" + (blanks > 1 ? "s" : "") + " sans réponse, comptée" + (blanks > 1 ? "s" : "") + " comme fausse" + (blanks > 1 ? "s" : "") + ". " : "") + txt;
+    }
     $("r-title").textContent = good + " bonne" + (good > 1 ? "s" : "") + " réponse" + (good > 1 ? "s" : "") + " sur " + n + " · " + t;
     $("r-text").textContent = txt;
 
@@ -775,41 +1036,307 @@ a { color: inherit; }
     $("r-chapters").innerHTML = order.map(function (k) {
       var c = by[k], pct = c.ok / c.n, ch = CHAP[k];
       var col = pct >= 0.75 ? "var(--good)" : pct >= 0.5 ? "#e7a43a" : "var(--bad)";
-      return '<div class="chap"><div class="row"><span>' + esc((run.dom.id === "tout" ? ch.dom.nom + " · " : "") + ch.nom) + '</span><span>' + c.ok + '/' + c.n + '</span></div>' +
+      return '<div class="chap"><div class="row"><span>' + esc((run.dom.mix ? ch.dom.nom + " · " : "") + ch.nom) + '</span><span>' + c.ok + '/' + c.n + '</span></div>' +
         '<div class="bar" style="--c:' + col + '"><i style="width:' + Math.max(pct * 100, 3) + '%"></i></div></div>';
     }).join("");
 
     var miss = run.answers.filter(function (a) { return !a.ok; });
     $("r-miss-title").hidden = $("r-miss").hidden = !miss.length;
+    $("r-miss-title").textContent = run.exam ? "Correction" : "À revoir";
     $("btn-redo-miss").hidden = !miss.length;
     $("r-miss").innerHTML = miss.map(function (a) {
-      return '<details><summary><span class="x">✕</span><span>' + nb(esc(a.item.raw.q)) + '</span></summary>' +
-        '<div class="body"><span class="ans">' + nb(esc(a.goodText)) + '</span><span>' + nb(a.item.raw.e) + '</span></div></details>';
+      var mine = run.exam ? '<span>' + (a.blank ? "Tu n'as pas répondu." : "Ta réponse : " + nb(esc(a.pickText))) + '</span>' : "";
+      return '<details><summary><span class="x' + (a.blank ? " blank" : "") + '">' + (a.blank ? "–" : "✕") + '</span><span>' + nb(esc(a.item.raw.q)) + '</span></summary>' +
+        '<div class="body">' + mine + '<span class="ans">' + nb(esc(a.goodText)) + '</span><span>' + nb(a.item.raw.e) + '</span></div></details>';
     }).join("");
     run.missList = miss.map(function (a) { return a.item; });
-    $("btn-again").textContent = run.express ? "Encore 20 questions" : "Nouveau quiz";
+    $("btn-again").textContent = run.express ? "Encore 20 questions" : run.exam ? "Nouvel examen blanc" : run.mode === "weak" ? "Encore mes points faibles" : "Nouveau quiz";
     show("result");
   }
   $("btn-redo-miss").addEventListener("click", function () { start(shuffle(run.missList), run.dom, true); });
-  $("btn-again").addEventListener("click", function () { if (run.express) startExpress(run.dom); else openSetup(run.dom); });
+  $("btn-again").addEventListener("click", function () {
+    if (run.express) startExpress(run.dom);
+    else if (run.exam) startExam(run.dom);
+    else if (run.mode === "weak") startWeak();
+    else openSetup(run.dom);
+  });
+
+  /* ---------- Autres façons de réviser (accueil) ---------- */
+  var TICON = {
+    exam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 2M9.5 2.5h5M19 6l1.5-1.5"/></svg>',
+    cards: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="14" height="14" rx="2.5"/><path d="M7 3h11.5A2.5 2.5 0 0 1 21 5.5V17"/></svg>',
+    cases: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>',
+    weak: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>'
+  };
+  function count(obj) { return DOMAINES.reduce(function (n, d) { return n + ((obj[d.id] || []).length); }, 0); }
+  function renderTools() {
+    var weak = weakChapters();
+    var tools = [
+      { id: "exam", t: "#ef5a7a", nom: "Examen blanc", sub: "30 questions en 30 minutes, comme le jour J", meta: store.last["exam:tout"] ? "Dernier " + fr(store.last["exam:tout"].note) + "/20" : "", go: function () { openPick("exam"); } },
+      { id: "cards", t: "#22a99a", nom: "Cartes mémo", sub: "Une notion au recto, la réponse au verso", meta: count(CARTES) + " cartes", go: function () { openPick("cards"); } },
+      { id: "cases", t: "#e99a2c", nom: "Cas pratiques", sub: "Une situation, ta réponse, le corrigé type", meta: count(CAS) + " cas", go: function () { enter("cases"); } },
+      { id: "weak", t: "#7a6cf0", nom: "Mes points faibles", sub: "20 questions sur tes chapitres fragiles", meta: weak.length ? weak.length + " à renforcer" : "", warn: weak.length > 0, go: openWeak }
+    ];
+    var box = $("tool-list");
+    box.innerHTML = "";
+    tools.forEach(function (x) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "tile tool glass";
+      b.innerHTML = '<span class="badge" style="--t:' + x.t + '">' + TICON[x.id] + '</span><span class="tile-body"><span class="tile-title" style="display:block">' + esc(x.nom) +
+        '</span><span class="tile-sub" style="display:block">' + esc(x.sub) + '</span>' + (x.meta ? '<span class="tile-meta"><span class="pill' + (x.warn ? " warn" : "") + '">' + esc(x.meta) + '</span></span>' : "") + '</span>';
+      b.addEventListener("click", x.go);
+      box.appendChild(b);
+    });
+  }
+
+  /* ---------- Choix du domaine (examen blanc, cartes) ---------- */
+  function openPick(kind) {
+    var exam = kind === "exam";
+    $("pick-title").textContent = exam ? "Examen blanc" : "Cartes mémo";
+    $("pick-lead").textContent = exam
+      ? "Comme le jour de l'examen : 30 questions, 30 minutes, et aucune correction avant la fin. Une question sans réponse compte comme fausse. Tu peux rendre ta copie avant la fin du temps."
+      : "Lis le recto, cherche la réponse dans ta tête, puis retourne la carte. Les cartes que tu ne savais pas reviennent à la fin du paquet.";
+    var box = $("pick-list");
+    box.innerHTML = "";
+    var choices = (DOMAINES.length > 1 ? [MIX] : []).concat(DOMAINES).filter(function (d) { return exam || d.id === "tout" || (CARTES[d.id] || []).length; });
+    choices.forEach(function (dom) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "tile glass" + (dom.id === "tout" ? " mix" : "");
+      var n = exam ? Math.min(30, poolOf(dom).length) : deckOf(dom).length;
+      var last = exam && store.last["exam:" + dom.id];
+      var meta = '<span class="pill">' + (exam ? n + " questions · " + n + " min" : n + " cartes") + '</span>' +
+        (last ? '<span class="pill ' + (last.note >= 10 ? "ok" : "") + '">Dernier examen ' + fr(last.note) + '/20</span>' : "");
+      b.innerHTML = '<span class="badge" style="--t:' + dom.teinte + '">' + (ICON[dom.id] || ICON.def) + '</span>' +
+        '<span class="tile-body"><span class="tile-title" style="display:block">' + esc(dom.nom) + '</span>' +
+        '<span class="tile-sub" style="display:block">' + esc(dom.sousTitre || "") + '</span><span class="tile-meta">' + meta + '</span></span>' + CHEV;
+      b.addEventListener("click", function () { if (exam) startExam(dom); else startCards(deckOf(dom), dom); });
+      box.appendChild(b);
+    });
+    enter("pick");
+  }
+
+  /* ---------- Cartes mémo ---------- */
+  function deckOf(dom) {
+    var out = [];
+    DOMAINES.forEach(function (d) {
+      if (dom.id !== "tout" && d !== dom) return;
+      (CARTES[d.id] || []).forEach(function (c) { out.push({ dom: d, r: c.r, v: c.v }); });
+    });
+    return out;
+  }
+  var deck = null;
+  function startCards(cards, dom) {
+    if (!cards.length) return;
+    deck = { all: cards, dom: dom, queue: shuffle(cards), done: 0, missed: [], back: false };
+    $("c-play").hidden = false; $("c-done").hidden = true;
+    if ($("v-cards").hidden) { show("cards"); }
+    renderCard();
+  }
+  function renderCard() {
+    var c = deck.queue[0], card = $("c-card");
+    var total = deck.all.length;
+    $("c-count").textContent = "Carte " + Math.min(deck.done + 1, total) + " sur " + total;
+    $("c-left").textContent = deck.missed.length ? deck.missed.length + " à revoir" : "";
+    $("c-bar").style.width = (deck.done / total * 100) + "%";
+    var tag = $("c-tag");
+    tag.style.setProperty("--t", c.dom.teinte);
+    tag.textContent = c.dom.nom;
+    card.classList.toggle("back", deck.back);
+    $("c-side").textContent = deck.back ? "Verso" : "Recto";
+    $("c-text").innerHTML = deck.back ? nb(c.v) : nb(esc(c.r));
+    $("c-hint").textContent = deck.back ? "" : "Touche la carte pour la retourner";
+    $("c-hint").hidden = deck.back;
+    card.setAttribute("aria-label", deck.back ? "Verso de la carte" : "Recto de la carte. Retourner la carte.");
+    $("c-actions").hidden = !deck.back;
+  }
+  function flip() {
+    if (!deck || deck.turning) return;
+    var card = $("c-card");
+    deck.turning = true;
+    card.classList.add("turn");
+    setTimeout(function () {
+      deck.back = !deck.back;
+      renderCard();
+      card.classList.remove("turn");
+      deck.turning = false;
+    }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 160);
+  }
+  function rate(knew) {
+    if (!deck || !deck.back) return;
+    var c = deck.queue.shift();
+    if (knew) deck.done++;
+    else { if (deck.missed.indexOf(c) < 0) deck.missed.push(c); deck.queue.push(c); }
+    deck.back = false;
+    if (!deck.queue.length) return cardsDone();
+    renderCard();
+  }
+  function cardsDone() {
+    var n = deck.all.length, m = deck.missed.length;
+    $("c-bar").style.width = "100%";
+    $("c-count").textContent = n + " cartes sur " + n;
+    $("c-left").textContent = "";
+    $("c-play").hidden = true; $("c-done").hidden = false;
+    $("c-done-title").textContent = m ? "Paquet terminé" : "Paquet terminé, sans faute";
+    $("c-done-text").textContent = m
+      ? "Tu connaissais " + (n - m) + " carte" + (n - m > 1 ? "s" : "") + " sur " + n + " du premier coup. Repasse les " + m + " autres une fois de plus pour les fixer."
+      : "Tu connaissais les " + n + " cartes du premier coup. Passe à un examen blanc pour vérifier en conditions réelles.";
+    $("c-redo").hidden = !m;
+    $("c-redo").textContent = "Revoir les " + m + " carte" + (m > 1 ? "s" : "") + " ratée" + (m > 1 ? "s" : "");
+  }
+  $("c-card").addEventListener("click", flip);
+  $("c-again").addEventListener("click", function () { rate(false); });
+  $("c-know").addEventListener("click", function () { rate(true); });
+  $("c-redo").addEventListener("click", function () { startCards(deck.missed.slice(), deck.dom); });
+  $("c-restart").addEventListener("click", function () { startCards(deck.all, deck.dom); });
+
+  /* ---------- Cas pratiques ---------- */
+  function caseList() {
+    var out = [];
+    DOMAINES.forEach(function (d) { (CAS[d.id] || []).forEach(function (c, i) { out.push({ key: d.id + ":" + (i + 1), dom: d, c: c }); }); });
+    return out;
+  }
+  function renderCases() {
+    var box = $("cases-list");
+    box.innerHTML = "";
+    var all = caseList();
+    DOMAINES.forEach(function (d) {
+      var mine = all.filter(function (k) { return k.dom === d; });
+      if (!mine.length) return;
+      var h = document.createElement("div");
+      h.className = "section-title"; h.textContent = d.nom;
+      box.appendChild(h);
+      mine.forEach(function (k) {
+        var res = store.cases[k.key];
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "tile glass";
+        b.innerHTML = '<span class="badge" style="--t:' + d.teinte + '">' + TICON.cases + '</span><span class="tile-body"><span class="tile-title" style="display:block">' + nb(esc(k.c.titre)) +
+          '</span><span class="tile-sub" style="display:block">' + esc(k.c.theme) + '</span>' +
+          (res ? '<span class="tile-meta"><span class="pill ' + (res.pts / res.of >= 0.75 ? "ok" : "") + '">' + res.pts + "/" + res.of + ' points de la grille</span></span>' :
+            store.drafts[k.key] ? '<span class="tile-meta"><span class="pill">Brouillon commencé</span></span>' : "") + '</span>' + CHEV;
+        b.addEventListener("click", function () { openCase(k); });
+        box.appendChild(b);
+      });
+    });
+  }
+  var curCase = null;
+  function openCase(k) {
+    curCase = k;
+    var c = k.c;
+    $("k-title").textContent = c.titre;
+    $("k-tag").style.setProperty("--t", k.dom.teinte);
+    $("k-tag").textContent = c.theme;
+    $("k-situation").innerHTML = nb(c.situation);
+    $("k-consignes").innerHTML = c.consignes.map(function (x) { return "<li>" + nb(x) + "</li>"; }).join("");
+    $("k-draft").value = store.drafts[k.key] || "";
+    var res = store.cases[k.key];
+    $("k-grid").innerHTML = "";
+    c.grille.forEach(function (g, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip";
+      b.setAttribute("aria-pressed", res && res.got && res.got[i] ? "true" : "false");
+      b.innerHTML = '<span class="dot"></span><span>' + nb(esc(g)) + '</span>';
+      b.addEventListener("click", function () { b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true"); scoreCase(); });
+      $("k-grid").appendChild(b);
+    });
+    $("k-corr").innerHTML = nb(c.corrige);
+    reveal(!!res);
+    if (res) scoreCase(true);
+    if ($("v-case").hidden) enter("case");
+  }
+  function reveal(on) {
+    $("k-show").hidden = on;
+    $("k-grid-panel").hidden = $("k-corr-panel").hidden = !on;
+  }
+  function scoreCase(silent) {
+    var chips = [].slice.call($("k-grid").children);
+    var got = chips.map(function (b) { return b.getAttribute("aria-pressed") === "true"; });
+    var pts = got.filter(Boolean).length, of = got.length;
+    $("k-score").textContent = pts + " point" + (pts > 1 ? "s" : "") + " sur " + of + (pts === of ? ". Tout y est, bravo." : pts >= of / 2 ? ". Relis le corrigé pour les points manquants." : ". Relis le corrigé, puis réessaie dans quelques jours.");
+    if (!silent) { store.cases[curCase.key] = { pts: pts, of: of, got: got }; save(); }
+  }
+  $("k-show").addEventListener("click", function () {
+    reveal(true); scoreCase();
+    setTimeout(function () { $("k-grid-panel").scrollIntoView({ behavior: "smooth", block: "start" }); }, 30);
+  });
+  $("k-draft").addEventListener("input", function () {
+    if (!curCase) return;
+    var v = this.value;
+    if (v.trim()) store.drafts[curCase.key] = v; else delete store.drafts[curCase.key];
+    save();
+  });
+
+  /* ---------- Mes points faibles ---------- */
+  // Un chapitre est fragile quand on y a répondu au moins 3 fois avec moins de 80 % de réussite.
+  function weakChapters() {
+    return Object.keys(CHAP).filter(function (k) { var s = store.stats[k]; return s && s.n >= 3 && s.ok / s.n < 0.8; })
+      .sort(function (a, b) { var x = store.stats[a], y = store.stats[b]; return x.ok / x.n - y.ok / y.n || y.n - x.n; })
+      .slice(0, 3);
+  }
+  function weakPool() {
+    var w = weakChapters();
+    var pool = w.length ? ALL.filter(function (q) { return w.indexOf(q.chap) >= 0; }) : missedIn(ALL);
+    var miss = shuffle(pool.filter(function (q) { return store.missed[q.id]; }));
+    var rest = shuffle(pool.filter(function (q) { return !store.missed[q.id]; }));
+    return shuffle(miss.concat(rest).slice(0, 20));
+  }
+  function startWeak() { start(weakPool(), WEAK, false, false, "weak"); }
+  function openWeak() {
+    var w = weakChapters(), answered = Object.keys(store.stats).length, miss = missedIn(ALL).length;
+    var names = w.map(function (k) { return CHAP[k].nom; });
+    $("w-lead").textContent = w.length
+      ? "Tes chapitres les plus fragiles en ce moment : " + names.join(", ") + ". Le quiz pioche 20 questions dedans, en commençant par celles que tu as déjà ratées."
+      : miss ? "Aucun chapitre n'est sous 80 % de réussite. Il te reste " + miss + " question" + (miss > 1 ? "s" : "") + " ratée" + (miss > 1 ? "s" : "") + " : on commence par là."
+      : answered ? "Aucun chapitre n'est sous 80 % de réussite pour l'instant. Continue les quiz : la liste se met à jour à chaque réponse."
+      : "Fais d'abord un quiz express ou un quiz détaillé : il faut quelques réponses par chapitre pour repérer tes points faibles.";
+    var btn = $("w-start");
+    btn.disabled = !w.length && !miss;
+    btn.hidden = btn.disabled;
+    btn.textContent = w.length ? "Travailler mes points faibles" : "Revoir mes erreurs";
+    var keys = Object.keys(CHAP).sort(function (a, b) {
+      var x = store.stats[a], y = store.stats[b];
+      if (!x || !y) return (x ? 0 : 1) - (y ? 0 : 1);
+      return x.ok / x.n - y.ok / y.n;
+    });
+    $("w-list").innerHTML = keys.map(function (k) {
+      var s = store.stats[k], ch = CHAP[k];
+      var label = '<span>' + esc(ch.nom) + ' <small>· ' + esc(ch.dom.nom) + '</small></span>';
+      if (!s) return '<div class="chap"><div class="row">' + label + '<span style="color:var(--ink-3);font-weight:500">pas encore travaillé</span></div><div class="bar"><i style="width:0"></i></div></div>';
+      var pct = s.ok / s.n, col = pct >= 0.8 ? "var(--good)" : pct >= 0.5 ? "#e7a43a" : "var(--bad)";
+      return '<div class="chap' + (w.indexOf(k) >= 0 ? " weak" : "") + '"><div class="row">' + label + '<span><small>' + s.n + ' réponse' + (s.n > 1 ? "s" : "") + ' · </small>' + Math.round(pct * 100) + ' %</span></div>' +
+        '<div class="bar" style="--c:' + col + '"><i style="width:' + Math.max(pct * 100, 3) + '%"></i></div></div>';
+    }).join("");
+    enter("weak");
+  }
+  $("w-start").addEventListener("click", startWeak);
 
   /* ---------- Clavier (ordinateur) ---------- */
+  function typing() { var a = document.activeElement; return a && (a.tagName === "TEXTAREA" || a.tagName === "INPUT"); }
   document.addEventListener("keydown", function (e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     var k = e.key;
     if (!$("v-quiz").hidden && run) {
-      if (k === "Escape") { e.preventDefault(); $("btn-quit").click(); return; }
-      if (!run.locked) {
-        var idx = -1, low = k.toLowerCase();
-        if (run.cur.kind === "vf") { if (low === "v" || k === "1") idx = 0; if (low === "f" || k === "2") idx = 1; }
-        else { idx = "abcd".indexOf(low); if (idx < 0 && /^[1-4]$/.test(k)) idx = +k - 1; }
-        if (idx >= 0 && idx < run.cur.opts.length) { e.preventDefault(); answer(idx); }
-      } else if (k === "Enter" || k === "ArrowRight" || k === " ") {
-        if (document.activeElement && document.activeElement.tagName === "BUTTON" && document.activeElement.id !== "btn-next" && k !== "ArrowRight") return;
+      if (k === "Escape") { e.preventDefault(); quit(); return; }
+      var idx = -1, low = k.toLowerCase();
+      if (run.cur.kind === "vf") { if (low === "v" || k === "1") idx = 0; if (low === "f" || k === "2") idx = 1; }
+      else { idx = "abcd".indexOf(low); if (idx < 0 && /^[1-4]$/.test(k)) idx = +k - 1; }
+      if ((run.exam || !run.locked) && idx >= 0 && idx < run.cur.opts.length) { e.preventDefault(); answer(idx); return; }
+      if ((run.exam || run.locked) && (k === "Enter" || k === "ArrowRight" || k === " ")) {
+        var a = document.activeElement;
+        if (a && a.tagName === "BUTTON" && a.id !== "btn-next" && k !== "ArrowRight" && !(run.exam && a.classList.contains("opt"))) return;
         e.preventDefault(); $("btn-next").click();
       }
-    } else if (!$("v-result").hidden && k === "Escape") { show("home"); }
-    else if (!$("v-setup").hidden && k === "Escape") { show("home"); }
+      return;
+    }
+    if (!$("v-cards").hidden && deck && !$("c-play").hidden) {
+      if (k === " " || k === "Enter" || k === "ArrowUp" || k === "ArrowDown") { if (document.activeElement && document.activeElement.tagName === "BUTTON" && document.activeElement.id !== "c-card") return; e.preventDefault(); flip(); return; }
+      if (k === "ArrowRight") { e.preventDefault(); if (deck.back) rate(true); else flip(); return; }
+      if (k === "ArrowLeft") { e.preventDefault(); if (deck.back) rate(false); else flip(); return; }
+    }
+    if (k === "Escape" && !typing()) {
+      if (!$("v-case").hidden) show("cases");
+      else if ($("v-home").hidden) show("home");
+    }
   });
 
   renderHome();
